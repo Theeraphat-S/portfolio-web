@@ -45,15 +45,20 @@ export const Navbar: React.FC = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo / Brand */}
+          {/* Logo / Brand with Profile Avatar */}
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 group-hover:border-emerald-400/80 transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-              <Smartphone className="w-5 h-5" />
+            <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-emerald-500/40 group-hover:border-emerald-400 transition-all shadow-[0_0_15px_rgba(16,185,129,0.25)] shrink-0">
+              <img 
+                src="/profile.jpg" 
+                alt={portfolioData.personal.nameEn} 
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-emerald-500/10 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-sm sm:text-base text-zinc-100 tracking-tight flex items-center gap-1.5">
                 Theeraphat.S
-                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981] animate-pulse" />
               </span>
               <span className="text-[10px] font-mono text-zinc-400 -mt-0.5">
                 Mobile Dev &bull; Flutter
