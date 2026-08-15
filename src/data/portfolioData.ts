@@ -50,9 +50,6 @@ export const portfolioData = {
     taglineEn: 'Passionate Mobile Developer specialized in Flutter, Bloc Architecture, and high-stability REST APIs, dedicated to building performant and human-centric applications.',
     statusTh: 'พร้อมเริ่มงานทันที (Open to Work)',
     statusEn: 'Available for Hire / Open to Work',
-    expectedSalaryTh: '20,000 - 25,000 บาท/เดือน',
-    expectedSalaryEn: '20,000 - 25,000 THB / Month',
-    phone: '064-770-0893',
     email: 'theeraphat.sm@gmail.com',
     github: 'https://github.com/Theeraphat-S',
     githubUsername: 'Theeraphat-S',
@@ -65,14 +62,6 @@ export const portfolioData = {
       universityEn: 'Maejo University (Faculty of Science)',
       yearsTh: '2565 - 2569 (จบการศึกษา)',
       yearsEn: '2022 - 2026 (Graduating)',
-    },
-    reference: {
-      nameTh: 'อาจารย์ ดร. จักกฤช เตโช',
-      nameEn: 'Dr. Jakkrit Taecho',
-      positionTh: 'อาจารย์ประจำสาขาวิชาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้',
-      positionEn: 'Lecturer in Information Technology, Faculty of Science, Maejo University',
-      phone: '088-267-2285',
-      email: 'jakkrit@gmaejo.mju.ac.th',
     }
   },
 

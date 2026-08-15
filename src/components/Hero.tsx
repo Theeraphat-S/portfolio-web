@@ -42,17 +42,6 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 flex flex-col items-start space-y-6"
           >
-            {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-emerald-500/30 text-xs font-medium text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.15)] backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span>{lang === 'th' ? personal.statusTh : personal.statusEn}</span>
-              <span className="text-zinc-600">&bull;</span>
-              <span className="text-zinc-400 font-mono text-[11px]">{personal.expectedSalaryTh}</span>
-            </div>
-
             {/* Main Name & Title */}
             <div className="space-y-2">
               <p className="text-sm font-mono text-zinc-400 uppercase tracking-widest flex items-center gap-2">

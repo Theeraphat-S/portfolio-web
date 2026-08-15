@@ -4,7 +4,6 @@ import {
   Briefcase, 
   Terminal, 
   MapPin, 
-  Banknote, 
   Award, 
   CheckCircle
 } from 'lucide-react';
@@ -36,10 +35,10 @@ export const AboutBento: React.FC = () => {
           </p>
         </div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        {/* Bento Grid Layout (Balanced 2 Rows x 3 Columns on lg) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           
-          {/* Card 1: Core Bio & Mindset (Spans 2 cols) */}
+          {/* Card 1: Core Bio & Philosophy (Spans 2 cols on lg) */}
           <div className="md:col-span-2 lg:col-span-2">
             <SpotlightCard
               spotlightColor="rgba(16, 185, 129, 0.15)"
@@ -76,8 +75,8 @@ export const AboutBento: React.FC = () => {
             </SpotlightCard>
           </div>
 
-          {/* Card 2: Education (Maejo University) */}
-          <div className="md:col-span-1 lg:col-span-2">
+          {/* Card 2: Education (Maejo University) (Spans 1 col on lg) */}
+          <div className="md:col-span-1 lg:col-span-1">
             <SpotlightCard
               spotlightColor="rgba(6, 182, 212, 0.15)"
               className="h-full flex flex-col justify-between"
@@ -116,37 +115,7 @@ export const AboutBento: React.FC = () => {
             </SpotlightCard>
           </div>
 
-          {/* Card 3: Expected Salary & Availability */}
-          <div className="md:col-span-1 lg:col-span-1">
-            <SpotlightCard
-              spotlightColor="rgba(234, 179, 8, 0.15)"
-              className="h-full flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-2 text-amber-400 mb-2">
-                  <Banknote className="w-4 h-4" />
-                  <span className="text-xs font-mono uppercase tracking-wider font-semibold">
-                    {t('เงินเดือนที่คาดหวัง', 'Expected Salary')}
-                  </span>
-                </div>
-                <h4 className="text-xl font-black font-mono text-white mt-1">
-                  {personal.expectedSalaryTh}
-                </h4>
-                <p className="text-xs text-zinc-400 mt-1">
-                  {t('ต่อรองได้ตามโครงสร้างองค์กรและสวัสดิการ', 'Negotiable based on package & role scope')}
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-zinc-800">
-                <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  {t('พร้อมเริ่มงานทันที', 'Immediate Availability')}
-                </span>
-              </div>
-            </SpotlightCard>
-          </div>
-
-          {/* Card 4: Leadership & Academic Roles */}
+          {/* Card 3: Leadership & Academic Roles (Spans 2 cols on lg) */}
           <div className="md:col-span-2 lg:col-span-2">
             <SpotlightCard
               spotlightColor="rgba(168, 85, 247, 0.15)"
@@ -177,7 +146,7 @@ export const AboutBento: React.FC = () => {
             </SpotlightCard>
           </div>
 
-          {/* Card 5: Work Style & Location */}
+          {/* Card 4: Work Style & Location (Spans 1 col on lg) */}
           <div className="md:col-span-1 lg:col-span-1">
             <SpotlightCard
               spotlightColor="rgba(59, 130, 246, 0.15)"

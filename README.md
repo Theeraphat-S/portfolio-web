@@ -56,7 +56,7 @@
   - **Pinto Application**: ฟีเจอร์ WebView & ระบบ Gamification Chat Streaks (ประสบการณ์ฝึกงาน)
   - **POS & Store Management System**: ระบบบริหารจัดการหน้าร้าน จุดขาย และสต็อกสินค้า
 - 🎯 **Skill Proficiency & Timeline**: แสดงระดับความเชี่ยวชาญในแต่ละ Stack (Mobile, Frontend/Backend, Tools & Architecture) พร้อมไทม์ไลน์ประสบการณ์การทำงาน
-- 📬 **Interactive Contact & Quick Actions**: ฟอร์มติดต่อ พร้อมฟังก์ชันคลิกคัดลอกอีเมล/เบอร์โทรศัพท์ พร้อมเอฟเฟกต์ Confetti ฉลอง
+- 📬 **Interactive Direct Contact & Quick Actions**: ช่องทางติดต่อโดยตรง (Email & GitHub) พร้อมฟังก์ชันคลิกคัดลอกอีเมลและเอฟเฟกต์ Confetti ฉลอง
 
 ---
 
@@ -164,7 +164,6 @@ portfolio-Web/
 - 💼 **สถานะการทำงาน**: พร้อมเริ่มงานทันที (Open to Work / Available for Hire)
 - 📍 **พื้นที่ทำงาน**: Onsite / Hybrid / Remote
 - 📧 **Email**: [theeraphat.sm@gmail.com](mailto:theeraphat.sm@gmail.com)
-- 📞 **Phone**: 064-770-0893
 - 🐙 **GitHub**: [@Theeraphat-S](https://github.com/Theeraphat-S)
 
 ---
