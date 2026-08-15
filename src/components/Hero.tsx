@@ -41,22 +41,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 flex flex-col items-start space-y-6"
           >
-            {/* Status Pill & Avatar */}
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 backdrop-blur-md shadow-inner">
-                <div className="relative w-6 h-6 rounded-full overflow-hidden border border-emerald-500/50 shrink-0">
-                  <img 
-                    src="/profile.jpg" 
-                    alt={personal.nameEn} 
-                    className="w-full h-full object-cover object-top" 
-                  />
-                  <span className="absolute bottom-0 right-0 w-1.5 h-1.5 rounded-full bg-emerald-400 ring-1 ring-zinc-950" />
-                </div>
-                <span className="text-xs font-mono text-zinc-300 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Mobile App Engineer &bull; <span className="text-emerald-400 font-semibold">{t('พร้อมรับงานทันที', 'Open to Work')}</span>
-                </span>
-              </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
                 <DecryptedText

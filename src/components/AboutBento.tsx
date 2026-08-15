@@ -55,13 +55,8 @@ export const AboutBento: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent pointer-events-none" />
               <div className="absolute inset-0 bg-emerald-950/10 mix-blend-overlay pointer-events-none" />
 
-              {/* Top Floating Badges */}
-              <div className="relative z-10 p-4 sm:p-5 flex items-center justify-between pointer-events-none">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-950/80 border border-emerald-500/40 text-[11px] font-mono text-emerald-300 backdrop-blur-md shadow-lg">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
-                  {lang === 'th' ? 'พร้อมเริ่มงาน' : 'Open to Work'}
-                </span>
-                
+              {/* Top Floating Badge */}
+              <div className="relative z-10 p-4 sm:p-5 flex items-center justify-end pointer-events-none">
                 <span className="px-2.5 py-1 rounded-lg bg-zinc-950/80 border border-zinc-800 text-[11px] font-mono text-zinc-300 backdrop-blur-md">
                   {personal.nickname} ({lang === 'th' ? 'โอเว่น' : 'Oven'})
                 </span>
@@ -82,7 +77,7 @@ export const AboutBento: React.FC = () => {
                 <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-300 font-mono">
                   <span className="flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-                    {lang === 'th' ? 'เชียงใหม่ / ทั่วไทย' : 'Chiang Mai, TH'}
+                    {lang === 'th' ? 'เชียงใหม่' : 'Chiang Mai'}
                   </span>
                   <span className="text-[11px] text-cyan-300 bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800/40">
                     Maejo IT #2569
@@ -225,12 +220,9 @@ export const AboutBento: React.FC = () => {
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-zinc-800 flex items-center justify-between">
+              <div className="pt-3 border-t border-zinc-800 flex items-center">
                 <span className="text-[11px] font-mono text-blue-300">
                   Agile & Scrum Ready
-                </span>
-                <span className="text-[11px] font-mono text-emerald-400">
-                  Open to Work
                 </span>
               </div>
             </SpotlightCard>

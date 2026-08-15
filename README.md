@@ -161,7 +161,6 @@ portfolio-Web/
 *Mobile Application Developer (Flutter & Dart Specialist)*
 
 - 🎓 **การศึกษา**: วท.บ. สาขาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ (Graduating 2026)
-- 💼 **สถานะการทำงาน**: พร้อมเริ่มงานทันที (Open to Work / Available for Hire)
 - 📍 **พื้นที่ทำงาน**: Onsite / Hybrid / Remote
 - 📧 **Email**: [theeraphat.sm@gmail.com](mailto:theeraphat.sm@gmail.com)
 - 🐙 **GitHub**: [@Theeraphat-S](https://github.com/Theeraphat-S)

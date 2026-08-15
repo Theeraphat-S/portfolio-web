@@ -135,12 +135,8 @@ export const ContactSection: React.FC = () => {
 
           </div>
 
-          {/* Status and Location Footer */}
-          <div className="mt-6 pt-4 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-400">
-            <span className="flex items-center gap-2 text-emerald-400 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              {lang === 'th' ? personal.statusTh : personal.statusEn}
-            </span>
+          {/* Location Footer */}
+          <div className="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-center text-xs text-zinc-400">
             <span className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-rose-400" />
               {lang === 'th' ? personal.locationTh : personal.locationEn}

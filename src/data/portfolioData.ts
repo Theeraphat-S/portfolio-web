@@ -48,8 +48,6 @@ export const portfolioData = {
     titleEn: 'Mobile Developer (Flutter & Dart)',
     taglineTh: 'นักพัฒนาโมบายแอปพลิเคชันที่เชี่ยวชาญ Flutter, Bloc Architecture และการเชื่อมต่อระบบ API ความเสถียรสูง มุ่งมั่นสร้างสรรค์แอปที่ตอบโจทย์ผู้ใช้งานจริง',
     taglineEn: 'Passionate Mobile Developer specialized in Flutter, Bloc Architecture, and high-stability REST APIs, dedicated to building performant and human-centric applications.',
-    statusTh: 'พร้อมเริ่มงานทันที (Open to Work)',
-    statusEn: 'Available for Hire / Open to Work',
     email: 'theeraphat.sm@gmail.com',
     github: 'https://github.com/Theeraphat-S',
     githubUsername: 'Theeraphat-S',
