@@ -2,6 +2,17 @@
 
 <div align="center">
 
+  <!-- Production Live Badge -->
+  <a href="https://theeraphat-portfolio.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀_Live_Demo-theeraphat--portfolio.vercel.app-00DC82?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+  </a>
+  <a href="https://github.com/Theeraphat-S/Portfolio-Web">
+    <img src="https://img.shields.io/badge/GitHub-Portfolio--Web-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo" />
+  </a>
+
+  <br />
+  <br />
+
   [![Vite](https://img.shields.io/badge/Vite-6.1.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
   [![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -14,21 +25,43 @@
   </p>
 
   <p align="center">
-    <a href="https://github.com/Theeraphat-S/Portfolio-Web"><strong>Explore the docs »</strong></a>
+    <a href="https://theeraphat-portfolio.vercel.app/"><strong>🌐 เข้าชมเว็บไซต์จริง (Live Demo) »</strong></a>
     <br />
     <br />
-    <a href="#-features">Key Features</a>
+    <a href="#-live-demo--interactive-showcase-จุดเด่นสำหรับผู้เข้าชมและตัวอย่างโปรเจกต์">Live Demo & Showcase</a>
     ·
-    <a href="#-tech-stack">Tech Stack</a>
+    <a href="#-key-features-ฟีเจอร์เด่น">Key Features</a>
     ·
-    <a href="#-getting-started">Getting Started</a>
+    <a href="#-tech-stack-เทคโนโลยีที่ใช้">Tech Stack</a>
     ·
-    <a href="#-project-structure">Project Structure</a>
+    <a href="#-getting-started-วิธีติดตั้งและเปิดใช้งานในเครื่อง">Getting Started</a>
     ·
-    <a href="#-contact">Contact</a>
+    <a href="#-developer-profile-ข้อมูลผู้พัฒนา">Contact</a>
   </p>
 
 </div>
+
+---
+
+> [!TIP]
+> ### 🌟 **Production Website / Live Demo**
+> 🔗 **Website URL:** [**https://theeraphat-portfolio.vercel.app/**](https://theeraphat-portfolio.vercel.app/)  
+> 💡 *สามารถคลิกลิงก์ด้านบนเพื่อทดลองเล่น Interactive Components, สลับภาษา Real-time (TH/EN), และสัมผัสประสบการณ์ใช้งานแบบ 60 FPS บนโปรดักชันจริง*
+
+---
+
+## 🌐 Live Demo & Interactive Showcase (จุดเด่นสำหรับผู้เข้าชมและตัวอย่างโปรเจกต์)
+
+สำหรับผู้ที่เข้ามาดู Repository เพื่อเป็นแนวทาง หรือ Recruiter/ผู้ว่าจ้างที่ต้องการทดลองใช้งาน ขอแนะนำจุดเด่นที่สามารถเข้าไปลองเล่นบน [Live Demo](https://theeraphat-portfolio.vercel.app/) ได้ดังนี้:
+
+| ฟีเจอร์ / ไฮไลต์ | รายละเอียด | สิ่งที่น่าสนใจในการนำไปปรับใช้ |
+| :--- | :--- | :--- |
+| 📱 **Interactive Mobile Simulator** | จำลองหน้าจอมือถือบน Hero Section | สามารถกดสลับหน้าจอ (Preview Screens) จำลองการใช้งานแอปจริงได้ |
+| 🌐 **Real-time Bilingual (TH / EN)** | สลับภาษาไทย-อังกฤษได้ทันทีทั้งหน้าเว็บ | จัดการข้อความผ่าน `portfolioData.ts` แบบ Single Source of Truth |
+| 🎨 **Reactbits Micro-Interactions** | เอฟเฟกต์ถอดรหัสตัวอักษร, Particles Canvas, 3D Tilted Cards | เพิ่มความดึงดูดสายตาและการมีส่วนร่วมของผู้ใช้ (High Engagement) |
+| 🍱 **Modern Bento Grid Layout** | จัดเรียงประวัติ, การศึกษา, และเป้าหมายการทำงาน | สไตล์ Glassmorphism และ Dark Mode ระดับพรีเมียม |
+| 📂 **Interactive Project Showcase** | การ์ดผลงานและ Modal เจาะลึกสถาปัตยกรรม | แสดงภาพรวมสถาปัตยกรรม (Bloc, Clean Architecture), Features, Tech Stacks |
+| 📬 **Instant Contact & Confetti** | ปุ่ม Copy Email ด่วนและช่องทางติดต่อ | มีฟังก์ชัน Copy to clipboard อัตโนมัติพร้อมเอฟเฟกต์พลุ Confetti |
 
 ---
 
@@ -162,6 +195,7 @@ portfolio-Web/
 
 - 🎓 **การศึกษา**: วท.บ. สาขาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ (Graduating 2026)
 - 📍 **พื้นที่ทำงาน**: Onsite / Hybrid / Remote
+- 🌐 **Portfolio**: [https://theeraphat-portfolio.vercel.app/](https://theeraphat-portfolio.vercel.app/)
 - 📧 **Email**: [theeraphat.sm@gmail.com](mailto:theeraphat.sm@gmail.com)
 - 🐙 **GitHub**: [@Theeraphat-S](https://github.com/Theeraphat-S)
 
