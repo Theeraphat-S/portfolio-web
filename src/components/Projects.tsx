@@ -94,6 +94,7 @@ export const Projects: React.FC = () => {
                 spotlightColor={project.color === '#10b981' ? 'rgba(16, 185, 129, 0.18)' : project.color === '#06b6d4' ? 'rgba(6, 182, 212, 0.18)' : 'rgba(59, 130, 246, 0.18)'}
                 className="h-full flex flex-col justify-between group cursor-pointer border-zinc-800 hover:border-zinc-700"
                 onClick={() => setSelectedProject(project)}
+                data-cursor-text="Explore"
               >
                 <div>
                   {/* Top Bar: Icon + Badge + Year */}
@@ -160,6 +161,7 @@ export const Projects: React.FC = () => {
                       e.stopPropagation();
                       setSelectedProject(project);
                     }}
+                    data-cursor-text="Open"
                     className="w-full py-2.5 rounded-xl bg-zinc-800/80 group-hover:bg-emerald-500 group-hover:text-zinc-950 text-zinc-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
                   >
                     <span>{t('ดูรายละเอียดสถาปัตยกรรม & ฟีเจอร์', 'View Architecture & Specs')}</span>

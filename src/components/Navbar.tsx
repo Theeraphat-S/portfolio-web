@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { portfolioData } from '../data/portfolioData';
+import { Magnet } from './reactbits/Magnet';
 
 export const Navbar: React.FC = () => {
   const { lang, toggleLang, t } = useLanguage();
@@ -82,35 +83,44 @@ export const Navbar: React.FC = () => {
           {/* Right Action Group (Lang Toggle + GitHub + CTA) */}
           <div className="flex items-center gap-2.5">
             {/* Language Switcher */}
-            <button
-              onClick={toggleLang}
-              aria-label="Toggle language"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-700/70 hover:border-emerald-500/50 text-xs font-mono text-zinc-200 transition-all hover:bg-zinc-850 cursor-pointer"
-            >
-              <Globe className="w-3.5 h-3.5 text-emerald-400" />
-              <span className={lang === 'th' ? 'text-emerald-400 font-bold' : 'text-zinc-400'}>TH</span>
-              <span className="text-zinc-600">/</span>
-              <span className={lang === 'en' ? 'text-emerald-400 font-bold' : 'text-zinc-400'}>EN</span>
-            </button>
+            <Magnet padding={20} magnetStrength={0.25}>
+              <button
+                onClick={toggleLang}
+                aria-label="Toggle language"
+                data-cursor-text="Language"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-700/70 hover:border-emerald-500/50 text-xs font-mono text-zinc-200 transition-all hover:bg-zinc-850 cursor-pointer"
+              >
+                <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                <span className={lang === 'th' ? 'text-emerald-400 font-bold' : 'text-zinc-400'}>TH</span>
+                <span className="text-zinc-600">/</span>
+                <span className={lang === 'en' ? 'text-emerald-400 font-bold' : 'text-zinc-400'}>EN</span>
+              </button>
+            </Magnet>
 
             {/* GitHub Profile Button */}
-            <a
-              href={portfolioData.personal.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full bg-zinc-900 border border-zinc-700/70 hover:border-zinc-500 text-zinc-300 hover:text-white transition-colors"
-              title="GitHub Profile"
-            >
-              <Github className="w-4 h-4" />
-            </a>
+            <Magnet padding={20} magnetStrength={0.3}>
+              <a
+                href={portfolioData.personal.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor-text="GitHub"
+                className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full bg-zinc-900 border border-zinc-700/70 hover:border-zinc-500 text-zinc-300 hover:text-white transition-colors"
+                title="GitHub Profile"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+            </Magnet>
 
             {/* Direct Contact / Resume CTA */}
-            <a
-              href="#contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <span>{t('ติดต่อฉัน', 'Hire Me')}</span>
-            </a>
+            <Magnet padding={20} magnetStrength={0.3}>
+              <a
+                href="#contact"
+                data-cursor-text="Hire Me"
+                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span>{t('ติดต่อฉัน', 'Hire Me')}</span>
+              </a>
+            </Magnet>
 
             {/* Mobile Menu Hamburger */}
             <button

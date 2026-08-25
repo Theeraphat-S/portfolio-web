@@ -91,6 +91,7 @@ export const Hero: React.FC = () => {
               <Magnet padding={40} magnetStrength={0.3}>
                 <button
                   onClick={() => scrollToSection('projects')}
+                  data-cursor-text="Projects"
                   className="px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-sm flex items-center gap-2 shadow-[0_0_25px_rgba(16,185,129,0.35)] transition-all active:scale-95 cursor-pointer"
                 >
                   <span>{t('สำรวจผลงานโปรเจกต์', 'Explore Projects')}</span>
@@ -101,6 +102,7 @@ export const Hero: React.FC = () => {
               <Magnet padding={40} magnetStrength={0.3}>
                 <button
                   onClick={() => scrollToSection('contact')}
+                  data-cursor-text="Contact"
                   className="px-6 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 text-zinc-200 border border-zinc-700 hover:border-zinc-500 font-semibold text-sm flex items-center gap-2 transition-all active:scale-95 shadow-lg backdrop-blur-md cursor-pointer"
                 >
                   <Mail className="w-4 h-4 text-emerald-400" />
@@ -108,15 +110,18 @@ export const Hero: React.FC = () => {
                 </button>
               </Magnet>
 
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
-                title="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
+              <Magnet padding={30} magnetStrength={0.3}>
+                <a
+                  href={personal.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor-text="GitHub"
+                  className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors flex items-center justify-center"
+                  title="GitHub"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+              </Magnet>
             </div>
 
             {/* Quick Stats Grid */}

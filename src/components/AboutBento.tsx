@@ -42,7 +42,7 @@ export const AboutBento: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           
           {/* Card 1: Featured Portrait Profile Card (Spans 1 col on lg) */}
-          <div className="md:col-span-1 lg:col-span-1">
+          <div className="md:col-span-1 lg:col-span-1" data-cursor-text="Oven">
             <div className="group relative h-full min-h-[380px] sm:min-h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-950/90 shadow-2xl flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-500">
               {/* Profile Background Image with Smooth Hover Zoom */}
               <img 
@@ -92,6 +92,7 @@ export const AboutBento: React.FC = () => {
             <SpotlightCard
               spotlightColor="rgba(16, 185, 129, 0.15)"
               className="h-full flex flex-col justify-between"
+              data-cursor-text="Philosophy"
             >
               <div>
                 <div className="flex items-center gap-2.5 text-emerald-400 mb-3">
@@ -133,6 +134,7 @@ export const AboutBento: React.FC = () => {
             <SpotlightCard
               spotlightColor="rgba(6, 182, 212, 0.15)"
               className="h-full flex flex-col justify-between"
+              data-cursor-text="Maejo IT"
             >
               <div>
                 <div className="flex items-center gap-2.5 text-cyan-400 mb-3">
@@ -173,6 +175,7 @@ export const AboutBento: React.FC = () => {
             <SpotlightCard
               spotlightColor="rgba(168, 85, 247, 0.15)"
               className="h-full flex flex-col justify-between"
+              data-cursor-text="TA & Speaker"
             >
               <div>
                 <div className="flex items-center gap-2 text-indigo-400 mb-2">
@@ -204,6 +207,7 @@ export const AboutBento: React.FC = () => {
             <SpotlightCard
               spotlightColor="rgba(59, 130, 246, 0.15)"
               className="h-full flex flex-col justify-between"
+              data-cursor-text="Available"
             >
               <div>
                 <div className="flex items-center gap-2 text-blue-400 mb-2">

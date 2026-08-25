@@ -81,7 +81,8 @@ export const ContactSection: React.FC = () => {
               <div className="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
                 <button
                   onClick={() => copyEmailToClipboard(personal.email)}
-                  className="flex-1 py-2 px-3.5 rounded-xl bg-zinc-800 hover:bg-emerald-500 hover:text-zinc-950 text-xs font-semibold text-zinc-200 transition-all flex items-center justify-center gap-1.5"
+                  data-cursor-text="Copy"
+                  className="flex-1 py-2 px-3.5 rounded-xl bg-zinc-800 hover:bg-emerald-500 hover:text-zinc-950 text-xs font-semibold text-zinc-200 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   {copiedEmail ? (
                     <>
@@ -98,6 +99,7 @@ export const ContactSection: React.FC = () => {
 
                 <a
                   href={`mailto:${personal.email}`}
+                  data-cursor-text="Send"
                   className="py-2 px-3.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition-all flex items-center justify-center gap-1"
                 >
                   <span>{t('ส่งอีเมล', 'Send')}</span>
@@ -125,6 +127,7 @@ export const ContactSection: React.FC = () => {
                   href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-cursor-text="GitHub"
                   className="w-full py-2 px-3.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition-colors flex items-center justify-center gap-1.5"
                 >
                   <span>{t('เข้าชมโปรไฟล์ GitHub', 'Visit GitHub Profile')}</span>
