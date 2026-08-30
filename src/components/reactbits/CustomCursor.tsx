@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export const CustomCursor: React.FC = () => {
@@ -10,14 +10,17 @@ export const CustomCursor: React.FC = () => {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth spring physics
-  const springConfig = { damping: 25, stiffness: 250, mass: 0.15 };
+  // Smooth spring physics optimized for high refresh rates
+  const springConfig = { damping: 28, stiffness: 300, mass: 0.12 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
-  const dotConfig = { damping: 40, stiffness: 600, mass: 0.05 };
+  const dotConfig = { damping: 45, stiffness: 700, mass: 0.04 };
   const dotX = useSpring(mouseX, dotConfig);
   const dotY = useSpring(mouseY, dotConfig);
+
+  const lastTargetRef = useRef<EventTarget | null>(null);
+  const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Check for touch / mobile screen
@@ -28,26 +31,37 @@ export const CustomCursor: React.FC = () => {
     }
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+      const clientX = e.clientX;
+      const clientY = e.clientY;
+      const target = e.target;
 
-      // Check hovered element
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const interactiveEl = target.closest(
-        'a, button, [role="button"], input, textarea, [data-cursor-text], [data-cursor="pointer"], .interactive'
-      ) as HTMLElement | null;
-
-      if (interactiveEl) {
-        setIsHovered(true);
-        const text = interactiveEl.getAttribute('data-cursor-text');
-        setCursorText(text || null);
-      } else {
-        setIsHovered(false);
-        setCursorText(null);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
       }
+
+      rafIdRef.current = requestAnimationFrame(() => {
+        mouseX.set(clientX);
+        mouseY.set(clientY);
+
+        if (!isVisible) setIsVisible(true);
+
+        // Only query DOM if target element actually changed
+        if (target !== lastTargetRef.current && target instanceof HTMLElement) {
+          lastTargetRef.current = target;
+          const interactiveEl = target.closest(
+            'a, button, [role="button"], input, textarea, [data-cursor-text], [data-cursor="pointer"], .interactive'
+          ) as HTMLElement | null;
+
+          if (interactiveEl) {
+            const text = interactiveEl.getAttribute('data-cursor-text');
+            setIsHovered(true);
+            setCursorText(text || null);
+          } else {
+            setIsHovered(false);
+            setCursorText(null);
+          }
+        }
+      });
     };
 
     const handleMouseLeave = () => {
@@ -58,11 +72,14 @@ export const CustomCursor: React.FC = () => {
       setIsVisible(true);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
@@ -72,7 +89,7 @@ export const CustomCursor: React.FC = () => {
   if (isTouchDevice || !isVisible) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden transform-gpu">
       {/* Outer Follower / Context Badge */}
       <motion.div
         style={{
@@ -85,8 +102,8 @@ export const CustomCursor: React.FC = () => {
           scale: cursorText ? 1 : isHovered ? 1.5 : 1,
           opacity: isVisible ? 1 : 0,
         }}
-        transition={{ duration: 0.2 }}
-        className="fixed top-0 left-0 flex items-center justify-center pointer-events-none"
+        transition={{ duration: 0.15 }}
+        className="fixed top-0 left-0 flex items-center justify-center pointer-events-none will-change-transform"
       >
         {cursorText ? (
           <motion.div
@@ -117,7 +134,7 @@ export const CustomCursor: React.FC = () => {
             translateX: '-50%',
             translateY: '-50%',
           }}
-          className="fixed top-0 left-0 pointer-events-none"
+          className="fixed top-0 left-0 pointer-events-none will-change-transform"
         >
           <div
             className={`rounded-full transition-all duration-200 ${
@@ -131,3 +148,4 @@ export const CustomCursor: React.FC = () => {
     </div>
   );
 };
+

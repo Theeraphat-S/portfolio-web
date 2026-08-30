@@ -3,20 +3,15 @@ import React, { useEffect, useRef } from 'react';
 interface ParticlesProps {
   particleColors?: string[];
   particleCount?: number;
-  particleSpread?: number;
   speed?: number;
   particleBaseSize?: number;
-  sizeRandomness?: number;
-  moveParticlesOnHover?: boolean;
-  alphaParticles?: boolean;
-  disableRotation?: boolean;
   className?: string;
 }
 
 export const Particles: React.FC<ParticlesProps> = ({
   particleColors = ['#10b981', '#06b6d4', '#64748b'],
-  particleCount = 50,
-  speed = 0.5,
+  particleCount = 45,
+  speed = 0.4,
   particleBaseSize = 1.5,
   className = '',
 }) => {
@@ -26,20 +21,29 @@ export const Particles: React.FC<ParticlesProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let isRunning = true;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    const handleResize = () => {
+    const resizeCanvas = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.resetTransform?.();
+      ctx.scale(dpr, dpr);
     };
 
-    window.addEventListener('resize', handleResize);
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
@@ -48,47 +52,52 @@ export const Particles: React.FC<ParticlesProps> = ({
       vy: (Math.random() - 0.5) * speed,
       size: Math.random() * particleBaseSize + 0.8,
       color: particleColors[Math.floor(Math.random() * particleColors.length)],
-      alpha: Math.random() * 0.5 + 0.2,
+      alpha: Math.random() * 0.4 + 0.2,
     }));
 
+    const maxDist = 110;
+    const maxDistSq = maxDist * maxDist;
+
     const render = () => {
+      if (!isRunning) return;
+
       ctx.clearRect(0, 0, width, height);
 
-      particles.forEach((p) => {
+      // 1. Draw and update particles
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
 
         if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
+        else if (p.x > width) p.x = 0;
         if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
+        else if (p.y > height) p.y = 0;
 
-        ctx.save();
         ctx.globalAlpha = p.alpha;
         ctx.fillStyle = p.color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
-        ctx.restore();
-      });
+      }
 
-      // Connect nearby particles with subtle lines
+      // 2. Connect nearby particles in batched paths
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 0.5;
+
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < 120) {
-            ctx.save();
-            ctx.globalAlpha = (1 - dist / 120) * 0.15;
-            ctx.strokeStyle = '#10b981';
-            ctx.lineWidth = 0.5;
+          if (distSq < maxDistSq) {
+            const dist = Math.sqrt(distSq);
+            ctx.globalAlpha = (1 - dist / maxDist) * 0.12;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
-            ctx.restore();
           }
         }
       }
@@ -96,10 +105,46 @@ export const Particles: React.FC<ParticlesProps> = ({
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    // Pause animation when tab is inactive or not visible
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isRunning = false;
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        if (!isRunning) {
+          isRunning = true;
+          animationFrameId = requestAnimationFrame(render);
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Auto-pause when canvas is out of viewport using IntersectionObserver
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          if (!isRunning && !document.hidden) {
+            isRunning = true;
+            animationFrameId = requestAnimationFrame(render);
+          }
+        } else {
+          isRunning = false;
+          cancelAnimationFrame(animationFrameId);
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(canvas);
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      isRunning = false;
+      window.removeEventListener('resize', resizeCanvas);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, [particleColors, particleCount, speed, particleBaseSize]);
@@ -107,7 +152,8 @@ export const Particles: React.FC<ParticlesProps> = ({
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none z-0 ${className}`}
+      className={`fixed inset-0 pointer-events-none z-0 transform-gpu ${className}`}
     />
   );
 };
+

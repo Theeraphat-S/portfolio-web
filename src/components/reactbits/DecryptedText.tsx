@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 interface DecryptedTextProps {
@@ -6,8 +6,6 @@ interface DecryptedTextProps {
   speed?: number;
   maxIterations?: number;
   sequential?: boolean;
-  revealDirection?: 'start' | 'end' | 'center';
-  useOriginalCharsOnly?: boolean;
   characters?: string;
   className?: string;
   encryptedClassName?: string;
@@ -17,7 +15,7 @@ interface DecryptedTextProps {
 
 export const DecryptedText: React.FC<DecryptedTextProps> = ({
   text,
-  speed = 50,
+  speed = 40,
   maxIterations = 10,
   sequential = true,
   characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+',
@@ -31,60 +29,14 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
   const containerRef = useRef<HTMLSpanElement>(null);
+  const rafRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    let interval: any;
-    let currentIteration = 0;
-
-    const getNextChar = (originalChar: string) => {
-      if (originalChar === ' ') return ' ';
-      return characters[Math.floor(Math.random() * characters.length)];
-    };
-
-    if (isScrambling) {
-      interval = setInterval(() => {
-        setDisplayText(() => {
-          return text
-            .split('')
-            .map((char, index) => {
-              if (char === ' ') return ' ';
-              if (revealedIndices.has(index)) return text[index];
-              return getNextChar(char);
-            })
-            .join('');
-        });
-
-        currentIteration++;
-
-        if (sequential) {
-          if (revealedIndices.size < text.length) {
-            const unrevealed = text
-              .split('')
-              .map((_, i) => i)
-              .filter((i) => !revealedIndices.has(i));
-            if (unrevealed.length > 0) {
-              const nextIndex = unrevealed[0];
-              setRevealedIndices((prev) => new Set([...prev, nextIndex]));
-            }
-          } else {
-            setIsScrambling(false);
-            setDisplayText(text);
-            clearInterval(interval);
-          }
-        } else {
-          if (currentIteration >= maxIterations) {
-            setIsScrambling(false);
-            setDisplayText(text);
-            clearInterval(interval);
-          }
-        }
-      }, speed);
-    } else {
-      setDisplayText(text);
+  const triggerAnimation = useCallback(() => {
+    if (!isScrambling) {
+      setRevealedIndices(new Set());
+      setIsScrambling(true);
     }
-
-    return () => clearInterval(interval);
-  }, [isScrambling, text, speed, maxIterations, sequential, characters, revealedIndices]);
+  }, [isScrambling]);
 
   useEffect(() => {
     setRevealedIndices(new Set());
@@ -92,12 +44,72 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
     setHasAnimated(true);
   }, [text]);
 
-  const triggerAnimation = () => {
+  useEffect(() => {
     if (!isScrambling) {
-      setRevealedIndices(new Set());
-      setIsScrambling(true);
+      setDisplayText(text);
+      return;
     }
-  };
+
+    let lastTime = performance.now();
+    let currentIteration = 0;
+    let localRevealed = new Set<number>(revealedIndices);
+
+    const getNextChar = (originalChar: string) => {
+      if (originalChar === ' ') return ' ';
+      return characters[Math.floor(Math.random() * characters.length)];
+    };
+
+    const loop = (time: number) => {
+      if (time - lastTime >= speed) {
+        lastTime = time;
+
+        if (sequential) {
+          if (localRevealed.size < text.length) {
+            const unrevealed: number[] = [];
+            for (let i = 0; i < text.length; i++) {
+              if (!localRevealed.has(i)) unrevealed.push(i);
+            }
+            if (unrevealed.length > 0) {
+              localRevealed.add(unrevealed[0]);
+              setRevealedIndices(new Set(localRevealed));
+            }
+          } else {
+            setIsScrambling(false);
+            setDisplayText(text);
+            return;
+          }
+        } else {
+          currentIteration++;
+          if (currentIteration >= maxIterations) {
+            setIsScrambling(false);
+            setDisplayText(text);
+            return;
+          }
+        }
+
+        setDisplayText(
+          text
+            .split('')
+            .map((char, index) => {
+              if (char === ' ') return ' ';
+              if (localRevealed.has(index)) return text[index];
+              return getNextChar(char);
+            })
+            .join('')
+        );
+      }
+
+      rafRef.current = requestAnimationFrame(loop);
+    };
+
+    rafRef.current = requestAnimationFrame(loop);
+
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [isScrambling, text, speed, maxIterations, sequential, characters]);
 
   return (
     <motion.span

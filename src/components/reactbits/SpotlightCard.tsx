@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useCallback } from 'react';
 
 interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -10,39 +10,51 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
   spotlightColor = 'rgba(16, 185, 129, 0.15)',
+  onMouseMove,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onBlur,
   ...props
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current || isFocused) return;
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (divRef.current) {
+      const rect = divRef.current.getBoundingClientRect();
+      divRef.current.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      divRef.current.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    }
+    onMouseMove?.(e);
+  }, [onMouseMove]);
 
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
+  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (divRef.current) {
+      divRef.current.style.setProperty('--spotlight-opacity', '1');
+    }
+    onMouseEnter?.(e);
+  }, [onMouseEnter]);
 
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
+  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (divRef.current) {
+      divRef.current.style.setProperty('--spotlight-opacity', '0');
+    }
+    onMouseLeave?.(e);
+  }, [onMouseLeave]);
 
-  const handleFocus = () => {
-    setIsFocused(true);
-    setOpacity(1);
-  };
+  const handleFocus = useCallback((e: React.FocusEvent<HTMLDivElement>) => {
+    if (divRef.current) {
+      divRef.current.style.setProperty('--spotlight-opacity', '1');
+    }
+    onFocus?.(e);
+  }, [onFocus]);
 
-  const handleBlur = () => {
-    setIsFocused(false);
-    setOpacity(0);
-  };
-
-  const handleMouseEnter = () => {
-    setOpacity(1);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
-  };
+  const handleBlur = useCallback((e: React.FocusEvent<HTMLDivElement>) => {
+    if (divRef.current) {
+      divRef.current.style.setProperty('--spotlight-opacity', '0');
+    }
+    onBlur?.(e);
+  }, [onBlur]);
 
   return (
     <div
@@ -52,17 +64,18 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6 backdrop-blur-xl transition-all duration-300 hover:border-zinc-700/80 ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6 backdrop-blur-xl transition-all duration-300 hover:border-zinc-700/80 transform-gpu ${className}`}
       {...props}
     >
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
+          opacity: 'var(--spotlight-opacity, 0)',
+          background: `radial-gradient(600px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), ${spotlightColor}, transparent 40%)`,
         }}
       />
       <div className="relative z-10">{children}</div>
     </div>
   );
 };
+
