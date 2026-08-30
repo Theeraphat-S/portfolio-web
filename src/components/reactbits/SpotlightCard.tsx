@@ -18,43 +18,53 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   ...props
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+
+  const setOpacity = useCallback((val: string) => {
+    if (divRef.current) {
+      divRef.current.style.setProperty('--spotlight-opacity', val);
+    }
+  }, []);
+
+  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (divRef.current) {
+      rectRef.current = divRef.current.getBoundingClientRect();
+    }
+    setOpacity('1');
+    onMouseEnter?.(e);
+  }, [onMouseEnter, setOpacity]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (divRef.current) {
-      const rect = divRef.current.getBoundingClientRect();
+    if (!rectRef.current && divRef.current) {
+      rectRef.current = divRef.current.getBoundingClientRect();
+    }
+    if (rectRef.current && divRef.current) {
+      const rect = rectRef.current;
       divRef.current.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
       divRef.current.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     }
     onMouseMove?.(e);
   }, [onMouseMove]);
 
-  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (divRef.current) {
-      divRef.current.style.setProperty('--spotlight-opacity', '1');
-    }
-    onMouseEnter?.(e);
-  }, [onMouseEnter]);
-
   const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (divRef.current) {
-      divRef.current.style.setProperty('--spotlight-opacity', '0');
-    }
+    rectRef.current = null;
+    setOpacity('0');
     onMouseLeave?.(e);
-  }, [onMouseLeave]);
+  }, [onMouseLeave, setOpacity]);
 
   const handleFocus = useCallback((e: React.FocusEvent<HTMLDivElement>) => {
     if (divRef.current) {
-      divRef.current.style.setProperty('--spotlight-opacity', '1');
+      rectRef.current = divRef.current.getBoundingClientRect();
     }
+    setOpacity('1');
     onFocus?.(e);
-  }, [onFocus]);
+  }, [onFocus, setOpacity]);
 
   const handleBlur = useCallback((e: React.FocusEvent<HTMLDivElement>) => {
-    if (divRef.current) {
-      divRef.current.style.setProperty('--spotlight-opacity', '0');
-    }
+    rectRef.current = null;
+    setOpacity('0');
     onBlur?.(e);
-  }, [onBlur]);
+  }, [onBlur, setOpacity]);
 
   return (
     <div
@@ -78,4 +88,5 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
     </div>
   );
 };
+
 

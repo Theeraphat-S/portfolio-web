@@ -81,9 +81,11 @@ export const Particles: React.FC<ParticlesProps> = ({
         ctx.fill();
       }
 
-      // 2. Connect nearby particles in batched paths
+      // 2. Connect nearby particles in a single batched stroke path
       ctx.strokeStyle = '#10b981';
       ctx.lineWidth = 0.5;
+      ctx.globalAlpha = 0.12;
+      ctx.beginPath();
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -92,15 +94,12 @@ export const Particles: React.FC<ParticlesProps> = ({
           const distSq = dx * dx + dy * dy;
 
           if (distSq < maxDistSq) {
-            const dist = Math.sqrt(distSq);
-            ctx.globalAlpha = (1 - dist / maxDist) * 0.12;
-            ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
           }
         }
       }
+      ctx.stroke();
 
       animationFrameId = requestAnimationFrame(render);
     };

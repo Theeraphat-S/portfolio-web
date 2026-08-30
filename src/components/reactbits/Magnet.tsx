@@ -33,7 +33,6 @@ export const Magnet: React.FC<MagnetProps> = ({
     if (ref.current) {
       rectRef.current = ref.current.getBoundingClientRect();
     }
-    setIsHovered(true);
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -50,15 +49,18 @@ export const Magnet: React.FC<MagnetProps> = ({
     const distanceX = e.clientX - centerX;
     const distanceY = e.clientY - centerY;
 
-    if (
+    const isInside =
       Math.abs(distanceX) < width / 2 + padding &&
-      Math.abs(distanceY) < height / 2 + padding
-    ) {
+      Math.abs(distanceY) < height / 2 + padding;
+
+    if (isInside) {
       x.set(distanceX * magnetStrength);
       y.set(distanceY * magnetStrength);
+      setIsHovered(true);
     } else {
       x.set(0);
       y.set(0);
+      setIsHovered(false);
     }
   }, [disabled, padding, magnetStrength, x, y]);
 
@@ -84,4 +86,5 @@ export const Magnet: React.FC<MagnetProps> = ({
     </motion.div>
   );
 };
+
 
