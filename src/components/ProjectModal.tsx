@@ -5,7 +5,12 @@ import {
   Github, 
   Layers, 
   CheckCircle2, 
-  Sparkles
+  Sparkles,
+  AlertCircle,
+  Cpu,
+  Scale,
+  Search,
+  TrendingUp
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { ProjectItem } from '../data/portfolioData';
@@ -117,6 +122,80 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 </div>
               ))}
             </div>
+
+            {/* Engineering Decisions & Case Study Analysis */}
+            {(project.problemTh || project.problemEn) && (
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                    <Cpu className="w-3.5 h-3.5" />
+                    {t('การตัดสินใจเชิงวิศวกรรม & ผลกระทบ', 'Engineering Decisions & Impact Analysis')}
+                  </h4>
+                  <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                    Product Sense
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {/* 1. Problem & Context */}
+                  <div className="p-3.5 rounded-2xl bg-zinc-950/70 border border-rose-900/40 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-rose-400">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      <span>{t('1. ปัญหาตั้งต้นหน้างาน (The Real Problem)', '1. The Real Problem')}</span>
+                    </div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      {lang === 'th' ? project.problemTh : project.problemEn}
+                    </p>
+                  </div>
+
+                  {/* 2. Key Decision & Rationale */}
+                  <div className="p-3.5 rounded-2xl bg-zinc-950/70 border border-sky-900/40 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-sky-400">
+                      <Cpu className="w-3.5 h-3.5 shrink-0" />
+                      <span>{t('2. การตัดสินใจเชิงเทคนิค (Architectural Decision)', '2. Key Decision & Rationale')}</span>
+                    </div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      {lang === 'th' ? project.decisionRationaleTh : project.decisionRationaleEn}
+                    </p>
+                  </div>
+
+                  {/* 3. Trade-offs */}
+                  <div className="p-3.5 rounded-2xl bg-zinc-950/70 border border-amber-900/40 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-amber-400">
+                      <Scale className="w-3.5 h-3.5 shrink-0" />
+                      <span>{t('3. การยอมแลก (Key Trade-offs)', '3. Key Trade-offs')}</span>
+                    </div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      {lang === 'th' ? project.tradeOffsTh : project.tradeOffsEn}
+                    </p>
+                  </div>
+
+                  {/* 4. Evidence & Usability Pivot */}
+                  <div className="p-3.5 rounded-2xl bg-zinc-950/70 border border-purple-900/40 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-purple-400">
+                      <Search className="w-3.5 h-3.5 shrink-0" />
+                      <span>{t('4. สิ่งที่ค้นพบจากการทดสอบ (Field Evidence)', '4. Evidence & Usability Insight')}</span>
+                    </div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      {lang === 'th' ? project.evidenceTh : project.evidenceEn}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 5. Measured Outcome & Business Impact */}
+                {(project.outcomeTh || project.outcomeEn) && (
+                  <div className="p-3.5 rounded-2xl bg-emerald-950/20 border border-emerald-800/40 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-400">
+                      <TrendingUp className="w-3.5 h-3.5 shrink-0" />
+                      <span>{t('5. ผลลัพธ์ที่พิสูจน์ได้จริง (Measured Outcome & Impact)', '5. Proven Outcome & Impact')}</span>
+                    </div>
+                    <p className="text-xs text-emerald-200/90 leading-relaxed">
+                      {lang === 'th' ? project.outcomeTh : project.outcomeEn}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Key Technical Highlights */}
             <div>
