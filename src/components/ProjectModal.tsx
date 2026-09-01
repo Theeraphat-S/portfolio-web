@@ -27,12 +27,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
+    
+    const lenis = (window as unknown as { __lenis?: { stop: () => void; start: () => void } }).__lenis;
+
     if (project) {
       document.body.style.overflow = 'hidden';
+      lenis?.stop();
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => {
       document.body.style.overflow = 'auto';
+      lenis?.start();
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [project, onClose]);
@@ -41,7 +46,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div 
+        data-lenis-prevent
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-hidden"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -53,6 +61,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
         {/* Modal Container */}
         <motion.div
+          data-lenis-prevent
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -96,7 +105,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* Modal Scrollable Content */}
-          <div className="flex-1 overflow-y-auto py-6 space-y-6 pr-1 custom-scrollbar">
+          <div 
+            data-lenis-prevent
+            className="flex-1 overflow-y-auto overscroll-contain py-6 space-y-6 pr-1 custom-scrollbar"
+          >
             
             {/* Overview Description */}
             <div>
