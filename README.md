@@ -66,7 +66,9 @@
 ---
 
 > [!TIP]
+>
 > ### ⚡ **Instant Live Production Website**
+>
 > 🔗 **Direct URL:** [**https://theeraphat-portfolio.vercel.app/**](https://theeraphat-portfolio.vercel.app/)  
 > Experience real-time bilingual switching (TH/EN), 60 FPS Lenis smooth scrolling, interactive phone simulator, and fluid micro-animations.
 
@@ -75,21 +77,23 @@
 ## 🌟 Executive Summary & Key Highlights
 
 ### 🇺🇸 English
+
 This repository hosts the modern web portfolio of **Theeraphat Srimontha (Oven)** — a **Mobile Application Developer** specialized in **Flutter, Dart, BLoC State Management, and Clean Architecture**. The site is crafted with modern web engineering standards, zero-lag animations, and interactive simulators to provide recruiters and engineering leads with a tangible preview of mobile apps and engineering practices.
 
 ### 🇹🇭 ภาษาไทย
+
 เว็บพอร์ตโฟลิโอส่วนตัวระดับพรีเมียมของ **นายธีรภัทร ศรีมณฑา (โอเว่น / Oven)** — **Mobile Application Developer** ผู้เชี่ยวชาญด้าน **Flutter & Dart, BLoC Architecture, Clean Architecture** และการเชื่อมต่อระบบ **REST API** ความเสถียรสูง พัฒนาขึ้นเพื่อนำเสนอผลงานระดับโปรดักชัน ทักษะทางเทคนิค และประสบการณ์วิชาการแก่องค์กรและผู้ว่าจ้าง
 
 ### 🎯 Key Interactive Features / ไฮไลต์เด่นของระบบ
 
-| Feature / ฟีเจอร์ | Technical Description (EN) | คำอธิบายและจุดเด่น (TH) |
-| :--- | :--- | :--- |
-| 📱 **Interactive Mobile Simulator** | Dynamic smartphone frame with switchable preview screens and interactive flows | จำลองการใช้งานแอปพลิเคชันบนหน้าจอมือถือจริง พร้อมปุ่มสลับหน้าจอพรีวิวแบบ Real-time |
-| 🌐 **Real-time Bilingual Engine** | Single-source-of-truth bilingual architecture (`portfolioData.ts`) with zero hydration lag | สลับภาษาไทย-อังกฤษได้ทันทีทั่วทั้งหน้าเว็บ โดยไม่มีการรีโหลดหน้า |
-| ⚡ **60 FPS Lenis Smooth Scroll** | Inertia-based momentum scrolling integrated with React 19 lifecycle | การเลื่อนหน้าจอที่นุ่มนวลระดับ 60 FPS ด้วย Lenis Scroll Engine |
-| 🍱 **Responsive Bento Grid** | Glassmorphism dark-mode cards with spotlight and tilt effects | การจัดวางประวัติ การศึกษา และสถิติในรูปแบบ Bento Grid สไตล์พรีเมียม |
-| 📂 **Deep-dive Project Modals** | Architectural breakdown, feature lists, impact metrics, and repo links | หน้าต่างเจาะลึกรายละเอียดโปรเจกต์ สถาปัตยกรรม ซอร์สโค้ด และผลลัพธ์เชิงตัวเลข |
-| 📬 **Instant Contact & Confetti** | Clipboard API integration with festive canvas confetti feedback | ปุ่มคัดลอกอีเมลลง Clipboard ในคลิกเดียว พร้อมเอฟเฟกต์พลุเฉลิมฉลอง |
+| Feature / ฟีเจอร์                   | Technical Description (EN)                                                                 | คำอธิบายและจุดเด่น (TH)                                                            |
+| :---------------------------------- | :----------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
+| 📱 **Interactive Mobile Simulator** | Dynamic smartphone frame with switchable preview screens and interactive flows             | จำลองการใช้งานแอปพลิเคชันบนหน้าจอมือถือจริง พร้อมปุ่มสลับหน้าจอพรีวิวแบบ Real-time |
+| 🌐 **Real-time Bilingual Engine**   | Single-source-of-truth bilingual architecture (`portfolioData.ts`) with zero hydration lag | สลับภาษาไทย-อังกฤษได้ทันทีทั่วทั้งหน้าเว็บ โดยไม่มีการรีโหลดหน้า                   |
+| ⚡ **60 FPS Lenis Smooth Scroll**   | Inertia-based momentum scrolling integrated with React 19 lifecycle                        | การเลื่อนหน้าจอที่นุ่มนวลระดับ 60 FPS ด้วย Lenis Scroll Engine                     |
+| 🍱 **Responsive Bento Grid**        | Glassmorphism dark-mode cards with spotlight and tilt effects                              | การจัดวางประวัติ การศึกษา และสถิติในรูปแบบ Bento Grid สไตล์พรีเมียม                |
+| 📂 **Deep-dive Project Modals**     | Architectural breakdown, feature lists, impact metrics, and repo links                     | หน้าต่างเจาะลึกรายละเอียดโปรเจกต์ สถาปัตยกรรม ซอร์สโค้ด และผลลัพธ์เชิงตัวเลข       |
+| 📬 **Instant Contact & Confetti**   | Clipboard API integration with festive canvas confetti feedback                            | ปุ่มคัดลอกอีเมลลง Clipboard ในคลิกเดียว พร้อมเอฟเฟกต์พลุเฉลิมฉลอง                  |
 
 ---
 
@@ -149,6 +153,7 @@ flowchart TD
 ```
 
 ### Core Engineering Principles
+
 1. **Separation of Concerns**: UI components remain completely agnostic of networking and data persistence layers.
 2. **Predictable State Flow**: Unidirectional data flow through BLoC ensures robust error handling and reproducible UI states.
 3. **Resilient Networking**: Built-in interceptors, token refresh flows, and offline-tolerant caching mechanisms.
@@ -158,7 +163,8 @@ flowchart TD
 ## 🚀 Featured Projects & Metrics
 
 ### 1. 🏥 NCDs Risk Screening Mobile Application
-*Senior Capstone Project — Maejo University (แอปพลิเคชันคัดกรองความเสี่ยงโรคไม่ติดต่อเรื้อรัง)*
+
+_Senior Capstone Project — Maejo University (แอปพลิเคชันคัดกรองความเสี่ยงโรคไม่ติดต่อเรื้อรัง)_
 
 - **Domain**: Healthcare & Community Medicine (Medical screening for Diabetes, Hypertension, Heart Disease, and Obesity).
 - **Stack**: `Flutter` • `Dart` • `BLoC Architecture` • `MySQL` • `REST API` • `Clean Architecture`
@@ -171,7 +177,8 @@ flowchart TD
 ---
 
 ### 2. 📦 Pinto Application — Hybrid WebView & Gamified Streaks
-*Commercial Internship at Fakduay Logistics & Digital Platform (บริษัท ฝากด้วย โลจิสติกส์ แอนด์ ดิจิทัล แพลตฟอร์ม จำกัด)*
+
+_Commercial Internship at Fakduay Logistics & Digital Platform (บริษัท ฝากด้วย โลจิสติกส์ แอนด์ ดิจิทัล แพลตฟอร์ม จำกัด)_
 
 - **Domain**: Logistics, E-commerce & Customer Engagement.
 - **Stack**: `Flutter` • `Dart` • `State Management` • `Hybrid WebView Bridge` • `Profile API` • `Agile/Scrum`
@@ -183,7 +190,8 @@ flowchart TD
 ---
 
 ### 3. 💳 Point of Sale (POS) & Store Management System
-*Enterprise Retail Management System (ระบบจัดการ ณ จุดขายและสต็อกสินค้า)*
+
+_Enterprise Retail Management System (ระบบจัดการ ณ จุดขายและสต็อกสินค้า)_
 
 - **Domain**: Retail Inventory, Order Processing & Payment Checkout.
 - **Stack**: `React` / `Flutter` • `TypeScript` / `Dart` • `REST API` • `MySQL` • `State Management`
@@ -210,11 +218,12 @@ flowchart TD
 ```
 
 ### 👥 Leadership & Communication
+
 - **3x Teaching Assistant (TA)**: Mentored 100+ undergraduate students across 3 core semesters at Maejo University:
-  - *Client-Side Web Programming* (HTML/CSS/JS/React)
-  - *Database Systems* (Relational DB Design, SQL Normalization)
-  - *Logic and Programming Techniques* (Algorithms & Problem Solving)
-- **Keynote Instructor**: Invited keynote speaker on *"Smart AI for Education & Ethical Programming"* for M.4 Gifted Computer students at Jakkhumkhanathorn School, Lamphun.
+  - _Client-Side Web Programming_ (HTML/CSS/JS/React)
+  - _Database Systems_ (Relational DB Design, SQL Normalization)
+  - _Logic and Programming Techniques_ (Algorithms & Problem Solving)
+- **Keynote Instructor**: Invited keynote speaker on _"Smart AI for Education & Ethical Programming"_ for M.4 Gifted Computer students at Jakkhumkhanathorn School, Lamphun.
 
 ---
 
@@ -256,6 +265,7 @@ portfolio-Web/
 ## 💻 Getting Started & Local Development
 
 ### Prerequisites
+
 - [Node.js](https://nodejs.org/) (Version `>= 18.0.0`, LTS recommended)
 - [npm](https://www.npmjs.com/) (or `pnpm` / `yarn`)
 - [Git](https://git-scm.com/)
@@ -263,23 +273,28 @@ portfolio-Web/
 ### Installation & Run
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/Theeraphat-S/Portfolio-Web.git
    cd Portfolio-Web
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Start the local development server:**
+
    ```bash
    npm run dev
    ```
+
    Open your browser at [http://localhost:5173](http://localhost:5173) to view the application.
 
 4. **Build for production:**
+
    ```bash
    npm run build
    ```
@@ -296,8 +311,9 @@ portfolio-Web/
 <div align="center">
 
 ### **Theeraphat Srimontha (ธีรภัทร ศรีมณฑา)**
+
 **Mobile Application Developer (Flutter & Dart Specialist)**  
-*B.Sc. in Information Technology, Maejo University (Class of 2026)*
+_B.Sc. in Information Technology, Maejo University (Class of 2026)_
 
 [![Website](https://img.shields.io/badge/🌐_Website-theeraphat--portfolio.vercel.app-00DC82?style=for-the-badge&logo=vercel&logoColor=white)](https://theeraphat-portfolio.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Theeraphat--S-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Theeraphat-S)

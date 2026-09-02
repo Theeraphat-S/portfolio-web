@@ -1,5 +1,5 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React, { useRef, useState, useCallback } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface MagnetProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ interface MagnetProps {
 
 export const Magnet: React.FC<MagnetProps> = ({
   children,
-  className = '',
+  className = "",
   padding = 50,
   disabled = false,
   magnetStrength = 0.35,
@@ -35,34 +35,37 @@ export const Magnet: React.FC<MagnetProps> = ({
     }
   }, []);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (disabled || !ref.current) return;
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (disabled || !ref.current) return;
 
-    if (!rectRef.current) {
-      rectRef.current = ref.current.getBoundingClientRect();
-    }
+      if (!rectRef.current) {
+        rectRef.current = ref.current.getBoundingClientRect();
+      }
 
-    const { left, top, width, height } = rectRef.current;
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
+      const { left, top, width, height } = rectRef.current;
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
 
-    const distanceX = e.clientX - centerX;
-    const distanceY = e.clientY - centerY;
+      const distanceX = e.clientX - centerX;
+      const distanceY = e.clientY - centerY;
 
-    const isInside =
-      Math.abs(distanceX) < width / 2 + padding &&
-      Math.abs(distanceY) < height / 2 + padding;
+      const isInside =
+        Math.abs(distanceX) < width / 2 + padding &&
+        Math.abs(distanceY) < height / 2 + padding;
 
-    if (isInside) {
-      x.set(distanceX * magnetStrength);
-      y.set(distanceY * magnetStrength);
-      setIsHovered(true);
-    } else {
-      x.set(0);
-      y.set(0);
-      setIsHovered(false);
-    }
-  }, [disabled, padding, magnetStrength, x, y]);
+      if (isInside) {
+        x.set(distanceX * magnetStrength);
+        y.set(distanceY * magnetStrength);
+        setIsHovered(true);
+      } else {
+        x.set(0);
+        y.set(0);
+        setIsHovered(false);
+      }
+    },
+    [disabled, padding, magnetStrength, x, y],
+  );
 
   const handleMouseLeave = useCallback(() => {
     rectRef.current = null;
@@ -79,12 +82,10 @@ export const Magnet: React.FC<MagnetProps> = ({
       onMouseLeave={handleMouseLeave}
       style={{ x: springX, y: springY }}
       animate={{ scale: isHovered ? activeScale : 1 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={`inline-block transform-gpu will-change-transform ${className}`}
     >
       {children}
     </motion.div>
   );
 };
-
-

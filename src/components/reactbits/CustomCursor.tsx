@@ -1,11 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React, { useEffect, useState, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export const CustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [cursorText, setCursorText] = useState<string | null>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return (
+      window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window
+    );
+  });
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -23,12 +28,7 @@ export const CustomCursor: React.FC = () => {
   const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Check for touch / mobile screen
-    const isTouch = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
-    if (isTouch) {
-      setIsTouchDevice(true);
-      return;
-    }
+    if (isTouchDevice) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const clientX = e.clientX;
@@ -49,11 +49,11 @@ export const CustomCursor: React.FC = () => {
         if (target !== lastTargetRef.current && target instanceof HTMLElement) {
           lastTargetRef.current = target;
           const interactiveEl = target.closest(
-            'a, button, [role="button"], input, textarea, [data-cursor-text], [data-cursor="pointer"], .interactive'
+            'a, button, [role="button"], input, textarea, [data-cursor-text], [data-cursor="pointer"], .interactive',
           ) as HTMLElement | null;
 
           if (interactiveEl) {
-            const text = interactiveEl.getAttribute('data-cursor-text');
+            const text = interactiveEl.getAttribute("data-cursor-text");
             setIsHovered(true);
             setCursorText(text || null);
           } else {
@@ -72,19 +72,19 @@ export const CustomCursor: React.FC = () => {
       setIsVisible(true);
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
       if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current);
       }
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [isVisible, mouseX, mouseY]);
+  }, [isVisible, mouseX, mouseY, isTouchDevice]);
 
   if (isTouchDevice || !isVisible) return null;
 
@@ -95,8 +95,8 @@ export const CustomCursor: React.FC = () => {
         style={{
           x: cursorX,
           y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
+          translateX: "-50%",
+          translateY: "-50%",
         }}
         animate={{
           scale: cursorText ? 1 : isHovered ? 1.5 : 1,
@@ -118,8 +118,8 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`rounded-full transition-all duration-300 border ${
               isHovered
-                ? 'w-11 h-11 border-emerald-400/80 bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.35)] backdrop-blur-[1px]'
-                : 'w-8 h-8 border-emerald-500/30 bg-emerald-500/5'
+                ? "w-11 h-11 border-emerald-400/80 bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.35)] backdrop-blur-[1px]"
+                : "w-8 h-8 border-emerald-500/30 bg-emerald-500/5"
             }`}
           />
         )}
@@ -131,16 +131,16 @@ export const CustomCursor: React.FC = () => {
           style={{
             x: dotX,
             y: dotY,
-            translateX: '-50%',
-            translateY: '-50%',
+            translateX: "-50%",
+            translateY: "-50%",
           }}
           className="fixed top-0 left-0 pointer-events-none will-change-transform"
         >
           <div
             className={`rounded-full transition-all duration-200 ${
               isHovered
-                ? 'w-2 h-2 bg-emerald-300 shadow-[0_0_8px_#34d399]'
-                : 'w-1.5 h-1.5 bg-emerald-400 shadow-[0_0_6px_#10b981]'
+                ? "w-2 h-2 bg-emerald-300 shadow-[0_0_8px_#34d399]"
+                : "w-1.5 h-1.5 bg-emerald-400 shadow-[0_0_6px_#10b981]"
             }`}
           />
         </motion.div>
@@ -148,4 +148,3 @@ export const CustomCursor: React.FC = () => {
     </div>
   );
 };
-

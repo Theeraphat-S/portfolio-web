@@ -1,5 +1,5 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useRef, useState, useCallback } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 interface TiltedCardProps {
   children: React.ReactNode;
@@ -12,8 +12,8 @@ interface TiltedCardProps {
 
 export const TiltedCard: React.FC<TiltedCardProps> = ({
   children,
-  className = '',
-  containerClassName = '',
+  className = "",
+  containerClassName = "",
   rotateAmplitude = 12,
   scaleOnHover = 1.02,
   glareEffect = true,
@@ -28,11 +28,19 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
   const mouseXSpring = useSpring(x, { stiffness: 180, damping: 22 });
   const mouseYSpring = useSpring(y, { stiffness: 180, damping: 22 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [rotateAmplitude, -rotateAmplitude]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-rotateAmplitude, rotateAmplitude]);
+  const rotateX = useTransform(
+    mouseYSpring,
+    [-0.5, 0.5],
+    [rotateAmplitude, -rotateAmplitude],
+  );
+  const rotateY = useTransform(
+    mouseXSpring,
+    [-0.5, 0.5],
+    [-rotateAmplitude, rotateAmplitude],
+  );
 
-  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ['0%', '100%']);
-  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ['0%', '100%']);
+  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
 
   const handleMouseEnter = useCallback(() => {
     if (ref.current) {
@@ -41,22 +49,25 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
     setIsHovered(true);
   }, []);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!rectRef.current && ref.current) {
-      rectRef.current = ref.current.getBoundingClientRect();
-    }
-    if (!rectRef.current) return;
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!rectRef.current && ref.current) {
+        rectRef.current = ref.current.getBoundingClientRect();
+      }
+      if (!rectRef.current) return;
 
-    const { width, height, left, top } = rectRef.current;
-    const mouseX = e.clientX - left;
-    const mouseY = e.clientY - top;
+      const { width, height, left, top } = rectRef.current;
+      const mouseX = e.clientX - left;
+      const mouseY = e.clientY - top;
 
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
+      const xPct = mouseX / width - 0.5;
+      const yPct = mouseY / height - 0.5;
 
-    x.set(xPct);
-    y.set(yPct);
-  }, [x, y]);
+      x.set(xPct);
+      y.set(yPct);
+    },
+    [x, y],
+  );
 
   const handleMouseLeave = useCallback(() => {
     rectRef.current = null;
@@ -78,12 +89,12 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
         style={{
           rotateX,
           rotateY,
-          transformStyle: 'preserve-3d',
+          transformStyle: "preserve-3d",
         }}
         animate={{
           scale: isHovered ? scaleOnHover : 1,
         }}
-        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
         className={`relative overflow-hidden rounded-2xl will-change-transform ${className}`}
       >
         {children}
@@ -99,4 +110,3 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
     </div>
   );
 };
-

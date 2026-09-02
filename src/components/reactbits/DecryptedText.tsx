@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 
 interface DecryptedTextProps {
   text: string;
@@ -10,7 +10,7 @@ interface DecryptedTextProps {
   className?: string;
   encryptedClassName?: string;
   parentClassName?: string;
-  animateOn?: 'view' | 'hover';
+  animateOn?: "view" | "hover";
 }
 
 export const DecryptedText: React.FC<DecryptedTextProps> = ({
@@ -18,18 +18,29 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
   speed = 40,
   maxIterations = 10,
   sequential = true,
-  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+',
-  className = '',
-  encryptedClassName = 'text-emerald-400 opacity-80',
-  parentClassName = '',
-  animateOn = 'view',
+  characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+",
+  className = "",
+  encryptedClassName = "text-emerald-400 opacity-80",
+  parentClassName = "",
+  animateOn = "view",
 }) => {
   const [displayText, setDisplayText] = useState<string>(text);
   const [isScrambling, setIsScrambling] = useState<boolean>(false);
-  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
+  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(
+    new Set(),
+  );
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
   const containerRef = useRef<HTMLSpanElement>(null);
   const rafRef = useRef<number | null>(null);
+
+  const [prevText, setPrevText] = useState<string>(text);
+  if (text !== prevText) {
+    setPrevText(text);
+    setDisplayText(text);
+    setIsScrambling(true);
+    setRevealedIndices(new Set());
+    setHasAnimated(true);
+  }
 
   const triggerAnimation = useCallback(() => {
     if (!isScrambling) {
@@ -39,23 +50,16 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
   }, [isScrambling]);
 
   useEffect(() => {
-    setRevealedIndices(new Set());
-    setIsScrambling(true);
-    setHasAnimated(true);
-  }, [text]);
-
-  useEffect(() => {
     if (!isScrambling) {
-      setDisplayText(text);
       return;
     }
 
     let lastTime = performance.now();
     let currentIteration = 0;
-    let localRevealed = new Set<number>(revealedIndices);
+    const localRevealed = new Set<number>();
 
     const getNextChar = (originalChar: string) => {
-      if (originalChar === ' ') return ' ';
+      if (originalChar === " ") return " ";
       return characters[Math.floor(Math.random() * characters.length)];
     };
 
@@ -89,13 +93,13 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
 
         setDisplayText(
           text
-            .split('')
+            .split("")
             .map((char, index) => {
-              if (char === ' ') return ' ';
+              if (char === " ") return " ";
               if (localRevealed.has(index)) return text[index];
               return getNextChar(char);
             })
-            .join('')
+            .join(""),
         );
       }
 
@@ -116,20 +120,21 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
       ref={containerRef}
       className={`inline-block whitespace-pre-wrap ${parentClassName}`}
       onMouseEnter={() => {
-        if (animateOn === 'hover') {
+        if (animateOn === "hover") {
           triggerAnimation();
         }
       }}
       onViewportEnter={() => {
-        if (animateOn === 'view' && !hasAnimated) {
+        if (animateOn === "view" && !hasAnimated) {
           triggerAnimation();
           setHasAnimated(true);
         }
       }}
     >
       <span className={className}>
-        {displayText.split('').map((char, index) => {
-          const isDecrypted = revealedIndices.has(index) || !isScrambling || char === ' ';
+        {displayText.split("").map((char, index) => {
+          const isDecrypted =
+            revealedIndices.has(index) || !isScrambling || char === " ";
           return (
             <span
               key={index}

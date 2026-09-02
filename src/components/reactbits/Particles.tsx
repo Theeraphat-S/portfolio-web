@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 interface ParticlesProps {
   particleColors?: string[];
@@ -9,11 +9,11 @@ interface ParticlesProps {
 }
 
 export const Particles: React.FC<ParticlesProps> = ({
-  particleColors = ['#10b981', '#06b6d4', '#64748b'],
+  particleColors = ["#10b981", "#06b6d4", "#64748b"],
   particleCount = 45,
   speed = 0.4,
   particleBaseSize = 1.5,
-  className = '',
+  className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -21,7 +21,7 @@ export const Particles: React.FC<ParticlesProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d', { alpha: true });
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -43,7 +43,7 @@ export const Particles: React.FC<ParticlesProps> = ({
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
@@ -82,7 +82,7 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
 
       // 2. Connect nearby particles in a single batched stroke path
-      ctx.strokeStyle = '#10b981';
+      ctx.strokeStyle = "#10b981";
       ctx.lineWidth = 0.5;
       ctx.globalAlpha = 0.12;
       ctx.beginPath();
@@ -117,7 +117,7 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     // Auto-pause when canvas is out of viewport using IntersectionObserver
     const observer = new IntersectionObserver(
@@ -133,7 +133,7 @@ export const Particles: React.FC<ParticlesProps> = ({
           cancelAnimationFrame(animationFrameId);
         }
       },
-      { threshold: 0.05 }
+      { threshold: 0.05 },
     );
 
     observer.observe(canvas);
@@ -141,8 +141,8 @@ export const Particles: React.FC<ParticlesProps> = ({
 
     return () => {
       isRunning = false;
-      window.removeEventListener('resize', resizeCanvas);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener("resize", resizeCanvas);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       observer.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
@@ -155,4 +155,3 @@ export const Particles: React.FC<ParticlesProps> = ({
     />
   );
 };
-
