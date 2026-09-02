@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <!-- Status & Deploy Badges -->
+  <!-- Badges -->
   <a href="https://theeraphat-portfolio.vercel.app/">
     <img src="https://img.shields.io/badge/🚀_Live_Demo-theeraphat--portfolio.vercel.app-00DC82?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
   </a>
@@ -16,49 +16,34 @@
   <br />
   <br />
 
-  <!-- Core Stacks Badges -->
-  <a href="https://flutter.dev/">
-    <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
-  </a>
-  <a href="https://dart.dev/">
-    <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
-  </a>
-  <a href="https://react.dev/">
-    <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" />
-  </a>
-  <a href="https://www.typescriptlang.org/">
-    <img src="https://img.shields.io/badge/TypeScript_5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  </a>
-  <a href="https://tailwindcss.com/">
-    <img src="https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  </a>
-  <a href="https://vitejs.dev/">
-    <img src="https://img.shields.io/badge/Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
-  </a>
+  <!-- Core Stacks -->
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
+  <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
 
   <br />
   <br />
 
   <p align="center">
-    <strong>🌟 High-Performance, Interactive & Bilingual Web Portfolio</strong><br>
-    Showcasing Mobile Application Development expertise in <b>Flutter, Dart, Clean Architecture, and BLoC State Management</b>.<br>
-    <i>เว็บพอร์ตโฟลิโอส่วนตัวระดับมืออาชีพ นำเสนอผลงาน ประสบการณ์ และสถาปัตยกรรมโมบายแอปพลิเคชัน</i>
+    <strong>🌟 High-Performance, Interactive & Bilingual Web Portfolio</strong><br />
+    Showcasing production-ready Mobile Engineering in <b>Flutter, Dart, Clean Architecture, and BLoC</b>.
   </p>
 
   <p align="center">
     <a href="https://theeraphat-portfolio.vercel.app/"><strong>🌐 Launch Live Demo »</strong></a>
     &nbsp;•&nbsp;
-    <a href="#-executive-summary--key-highlights">Executive Summary</a>
+    <a href="#-key-features">Features</a>
     &nbsp;•&nbsp;
-    <a href="#-mobile-engineering--clean-architecture">Architecture</a>
+    <a href="#-featured-projects">Projects</a>
     &nbsp;•&nbsp;
-    <a href="#-featured-projects--metrics">Projects</a>
+    <a href="#-technical-skills">Skills</a>
     &nbsp;•&nbsp;
-    <a href="#-technical-skills--competencies">Skills</a>
+    <a href="#-getting-started">Setup</a>
     &nbsp;•&nbsp;
-    <a href="#-getting-started--local-development">Setup Guide</a>
-    &nbsp;•&nbsp;
-    <a href="#-developer-profile--contact">Contact</a>
+    <a href="#-contact">Contact</a>
   </p>
 
 </div>
@@ -66,55 +51,67 @@
 ---
 
 > [!TIP]
->
-> ### ⚡ **Instant Live Production Website**
->
-> 🔗 **Direct URL:** [**https://theeraphat-portfolio.vercel.app/**](https://theeraphat-portfolio.vercel.app/)  
-> Experience real-time bilingual switching (TH/EN), 60 FPS Lenis smooth scrolling, interactive phone simulator, and fluid micro-animations.
+> **Experience the Live Web App:** [**theeraphat-portfolio.vercel.app**](https://theeraphat-portfolio.vercel.app/)  
+> Features real-time bilingual switching (TH/EN), 60 FPS Lenis smooth scrolling, an interactive phone simulator, and reactive micro-animations.
 
 ---
 
-## 🌟 Executive Summary & Key Highlights
+## ⚡ Overview & Key Highlights
 
-### 🇺🇸 English
+This repository contains the source code for the personal web portfolio of **Theeraphat Srimontha (Oven)** — a **Mobile Application Developer** focused on building resilient, scalable cross-platform apps with **Flutter, Dart, BLoC, and Clean Architecture**.
 
-This repository hosts the modern web portfolio of **Theeraphat Srimontha (Oven)** — a **Mobile Application Developer** specialized in **Flutter, Dart, BLoC State Management, and Clean Architecture**. The site is crafted with modern web engineering standards, zero-lag animations, and interactive simulators to provide recruiters and engineering leads with a tangible preview of mobile apps and engineering practices.
+### 🎯 Key Features
 
-### 🇹🇭 ภาษาไทย
-
-เว็บพอร์ตโฟลิโอส่วนตัวระดับพรีเมียมของ **นายธีรภัทร ศรีมณฑา (โอเว่น / Oven)** — **Mobile Application Developer** ผู้เชี่ยวชาญด้าน **Flutter & Dart, BLoC Architecture, Clean Architecture** และการเชื่อมต่อระบบ **REST API** ความเสถียรสูง พัฒนาขึ้นเพื่อนำเสนอผลงานระดับโปรดักชัน ทักษะทางเทคนิค และประสบการณ์วิชาการแก่องค์กรและผู้ว่าจ้าง
-
-### 🎯 Key Interactive Features / ไฮไลต์เด่นของระบบ
-
-| Feature / ฟีเจอร์                   | Technical Description (EN)                                                                 | คำอธิบายและจุดเด่น (TH)                                                            |
-| :---------------------------------- | :----------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
-| 📱 **Interactive Mobile Simulator** | Dynamic smartphone frame with switchable preview screens and interactive flows             | จำลองการใช้งานแอปพลิเคชันบนหน้าจอมือถือจริง พร้อมปุ่มสลับหน้าจอพรีวิวแบบ Real-time |
-| 🌐 **Real-time Bilingual Engine**   | Single-source-of-truth bilingual architecture (`portfolioData.ts`) with zero hydration lag | สลับภาษาไทย-อังกฤษได้ทันทีทั่วทั้งหน้าเว็บ โดยไม่มีการรีโหลดหน้า                   |
-| ⚡ **60 FPS Lenis Smooth Scroll**   | Inertia-based momentum scrolling integrated with React 19 lifecycle                        | การเลื่อนหน้าจอที่นุ่มนวลระดับ 60 FPS ด้วย Lenis Scroll Engine                     |
-| 🍱 **Responsive Bento Grid**        | Glassmorphism dark-mode cards with spotlight and tilt effects                              | การจัดวางประวัติ การศึกษา และสถิติในรูปแบบ Bento Grid สไตล์พรีเมียม                |
-| 📂 **Deep-dive Project Modals**     | Architectural breakdown, feature lists, impact metrics, and repo links                     | หน้าต่างเจาะลึกรายละเอียดโปรเจกต์ สถาปัตยกรรม ซอร์สโค้ด และผลลัพธ์เชิงตัวเลข       |
-| 📬 **Instant Contact & Confetti**   | Clipboard API integration with festive canvas confetti feedback                            | ปุ่มคัดลอกอีเมลลง Clipboard ในคลิกเดียว พร้อมเอฟเฟกต์พลุเฉลิมฉลอง                  |
+- 📱 **Interactive Mobile Simulator**: Dynamic smartphone mockup with screen-toggle interactions to test app previews live.
+- 🌐 **Real-time Bilingual Engine**: Instant Thai/English localization powered by a single-source-of-truth state without hydration lag.
+- ⚡ **60 FPS Lenis Smooth Scrolling**: Inertia-based momentum scrolling harmonized with the React 19 lifecycle.
+- 🍱 **Glassmorphic Bento Grid**: Dark-mode spotlight cards organizing technical achievements, education, and credentials.
+- 📬 **One-Click Contact & Confetti**: Clipboard API integration coupled with festive canvas confetti feedback.
 
 ---
 
-## 🏗️ Mobile Engineering & Clean Architecture
+## 🚀 Featured Projects
 
-As a Mobile Developer, my applications follow **Clean Architecture** principles decoupled with the **BLoC (Business Logic Component)** pattern to ensure high testability, maintainability, and scalability.
+| Project | Stack & Highlights | Links |
+| :--- | :--- | :--- |
+| **🏥 NCDs Screening App**<br>*(Senior Capstone)* | • **Stack:** `Flutter`, `Dart`, `BLoC`, `Clean Architecture`, `REST API`, `MySQL`<br>• Risk assessment engine for 4 chronic diseases (Diabetes, Hypertension, Heart, Obesity)<br>• Multi-role UX (Doctor, Health Volunteer, Citizen) with 100% field validation accuracy | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
+| **📦 Pinto Logistics App**<br>*(Commercial Internship)* | • **Stack:** `Flutter`, `Dart`, `Hybrid WebView Bridge`, `Agile/Scrum`<br>• Engineered bi-directional WebView bridge for seamless hybrid page transitions<br>• Implemented gamified daily chat streaks and rewards, boosting daily retention | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
+| **💳 POS & Store Management**<br>*(Enterprise System)* | • **Stack:** `React`, `TypeScript`, `REST API`, `MySQL`, `State Management`<br>• 99.9% data consistency with optimistic UI updates and resilient offline retries<br>• Supports instant QR PromptPay and Cash transactions with receipt printing | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
 
-### Architecture Flow Diagram
+---
+
+## 🛠️ Technical Skills
+
+- **Mobile Development**: Flutter (Advanced), Dart, BLoC & Cubit, Clean Architecture, Provider, Android Studio, Native Builds (Android/iOS)
+- **Web & Fullstack**: React 19, TypeScript, Vite, Tailwind CSS v4, Next.js, Java / Spring Boot, Go (Golang)
+- **Databases & Tooling**: MySQL, Oracle DB, RESTful APIs, Postman, Git / GitHub Workflows, Antigravity IDE
+- **Leadership & Teaching**:
+  - **3x University Teaching Assistant (TA)** at Maejo University: *Client-Side Web Programming*, *Database Systems*, and *Logic & Programming Techniques*.
+  - **Keynote Speaker**: Invited instructor on *"Smart AI for Education & Ethical Programming"* for Gifted Computer students at Jakkhumkhanathorn School.
+
+---
+
+## 🏗️ Architecture & Codebase Details
+
+<details>
+<summary><b>📐 Click to expand: Mobile Clean Architecture Diagram & Principles</b></summary>
+
+<br />
+
+My mobile applications follow **Clean Architecture** decoupled with **BLoC** for strict unidirectional data flow and testability:
 
 ```mermaid
 flowchart TD
     subgraph UI_Layer["🎨 Presentation Layer (Flutter UI & BLoC)"]
         direction TB
-        V[Mobile Screens & Widgets] -->|Dispatch Events| B[BLoC / Cubit State Controller]
+        V[Mobile Screens & Widgets] -->|Dispatch Events| B[BLoC / Cubit Controller]
         B -->|Emit States| V
     end
 
     subgraph Domain_Layer["🧠 Domain Layer (Pure Dart / Business Logic)"]
         direction TB
         UC[Use Cases / Interactors]
-        E[Entities / Business Models]
+        E[Entities / Models]
         IR[Repository Interfaces]
         UC --- E
         UC --- IR
@@ -124,7 +121,7 @@ flowchart TD
         direction TB
         R[Repository Implementations]
         RDS[Remote Data Source - REST API / Dio]
-        LDS[Local Data Source - SQLite / SharedPreferences]
+        LDS[Local Data Source - SQLite / SecureStorage]
         R --> RDS
         R --> LDS
     end
@@ -135,7 +132,7 @@ flowchart TD
         SEC[(Secure Local Storage)]
     end
 
-    %% Layer Connections
+    %% Connections
     B -->|Calls| UC
     IR -.->|Implemented by| R
     RDS -->|HTTP Requests| API
@@ -152,177 +149,84 @@ flowchart TD
     class External ext;
 ```
 
-### Core Engineering Principles
+### Core Principles
+1. **Separation of Concerns**: UI is completely independent from networking and storage.
+2. **Predictable State Flow**: Single-direction state transitions guarantee deterministic UI.
+3. **Resilient Networking**: Automatic token refreshes, interceptors, and offline fallbacks.
 
-1. **Separation of Concerns**: UI components remain completely agnostic of networking and data persistence layers.
-2. **Predictable State Flow**: Unidirectional data flow through BLoC ensures robust error handling and reproducible UI states.
-3. **Resilient Networking**: Built-in interceptors, token refresh flows, and offline-tolerant caching mechanisms.
+</details>
 
----
+<details>
+<summary><b>📂 Click to expand: Repository Directory Tree</b></summary>
 
-## 🚀 Featured Projects & Metrics
-
-### 1. 🏥 NCDs Risk Screening Mobile Application
-
-_Senior Capstone Project — Maejo University (แอปพลิเคชันคัดกรองความเสี่ยงโรคไม่ติดต่อเรื้อรัง)_
-
-- **Domain**: Healthcare & Community Medicine (Medical screening for Diabetes, Hypertension, Heart Disease, and Obesity).
-- **Stack**: `Flutter` • `Dart` • `BLoC Architecture` • `MySQL` • `REST API` • `Clean Architecture`
-- **Key Achievements**:
-  - **4 Major Disease Models**: Implemented risk scoring algorithms according to official public health guidelines.
-  - **Multi-Persona UX**: Tailored interfaces for Doctors, Village Health Volunteers (อสม.), and Citizens.
-  - **100% Form Accuracy**: Automated validation engine preventing data omission during field health screenings.
-  - **Field Tested**: Deployed for hands-on trials with real healthcare personnel and volunteers.
-
----
-
-### 2. 📦 Pinto Application — Hybrid WebView & Gamified Streaks
-
-_Commercial Internship at Fakduay Logistics & Digital Platform (บริษัท ฝากด้วย โลจิสติกส์ แอนด์ ดิจิทัล แพลตฟอร์ม จำกัด)_
-
-- **Domain**: Logistics, E-commerce & Customer Engagement.
-- **Stack**: `Flutter` • `Dart` • `State Management` • `Hybrid WebView Bridge` • `Profile API` • `Agile/Scrum`
-- **Key Achievements**:
-  - **Seamless Hybrid WebView**: Engineered a robust Flutter WebView bridge controller for smooth menu transitions.
-  - **Gamification Engine**: Implemented daily **Chat Streaks** logic and loyalty reward redemption, boosting daily active engagement.
-  - **Agile Delivery**: Shipped production-ready features within bi-weekly sprint timelines using Git/GitHub workflows.
-
----
-
-### 3. 💳 Point of Sale (POS) & Store Management System
-
-_Enterprise Retail Management System (ระบบจัดการ ณ จุดขายและสต็อกสินค้า)_
-
-- **Domain**: Retail Inventory, Order Processing & Payment Checkout.
-- **Stack**: `React` / `Flutter` • `TypeScript` / `Dart` • `REST API` • `MySQL` • `State Management`
-- **Key Achievements**:
-  - **99.9% Data Consistency**: High-throughput REST API integration with optimistic client UI updates.
-  - **Multi-Channel Checkout**: Supports instant QR Code PromptPay and Cash transactions with receipt generation.
-  - **Offline-Tolerant UI**: Resilient request retry mechanism preventing double billing or lost carts during transient network drops.
-
----
-
-## 🎯 Technical Skills & Competencies
-
-```
-┌───────────────────────────────┬─────────────────────────────────┬───────────────────────────────┐
-│ 📱 Mobile App Mastery         │ 💻 Languages & Web Stack        │ 🛠️ Databases & Dev Tools      │
-├───────────────────────────────┼─────────────────────────────────┼───────────────────────────────┤
-│ • Flutter (Advanced / Core)   │ • Dart (Advanced / Core)        │ • MySQL (Advanced Queries)    │
-│ • BLoC & Cubit State Mgmt     │ • JavaScript / TypeScript (ES6+)│ • Oracle Database & SQL       │
-│ • Clean Architecture          │ • React 19 & Next.js Ecosystem  │ • Git & GitHub Workflows      │
-│ • Provider State Management   │ • Java & Spring Boot            │ • REST API & Postman Testing  │
-│ • Android Studio & Emulators  │ • HTML5, CSS3, Tailwind CSS v4  │ • VS Code, Android Studio     │
-│ • iOS/Android Native Builds   │ • Go (Golang) Foundation        │ • Antigravity IDE             │
-└───────────────────────────────┴─────────────────────────────────┴───────────────────────────────┘
-```
-
-### 👥 Leadership & Communication
-
-- **3x Teaching Assistant (TA)**: Mentored 100+ undergraduate students across 3 core semesters at Maejo University:
-  - _Client-Side Web Programming_ (HTML/CSS/JS/React)
-  - _Database Systems_ (Relational DB Design, SQL Normalization)
-  - _Logic and Programming Techniques_ (Algorithms & Problem Solving)
-- **Keynote Instructor**: Invited keynote speaker on _"Smart AI for Education & Ethical Programming"_ for M.4 Gifted Computer students at Jakkhumkhanathorn School, Lamphun.
-
----
-
-## ⚡ Web Portfolio Technical Stack & Architecture
-
-This portfolio website was designed and engineered as a modern, high-performance Single Page Application (SPA):
+<br />
 
 ```
 portfolio-Web/
-├── public/                     # Static assets (Favicons, preview images)
+├── public/                 # Static assets & favicons
 ├── src/
-│   ├── components/             # Modular UI Components
-│   │   ├── reactbits/          # Micro-animations (DecryptedText, Particles, TiltedCard, Magnet)
-│   │   ├── AboutBento.tsx      # Bento Grid layout for bio, stats, and education
-│   │   ├── ContactSection.tsx  # Direct contact cards with Clipboard API & Confetti
-│   │   ├── ExperienceTimeline.tsx # Interactive career & academic timeline
-│   │   ├── Hero.tsx            # High-impact Hero with live status and bio
-│   │   ├── MobileMockup.tsx    # Interactive phone simulator with screen toggle
-│   │   ├── Navbar.tsx          # Floating sticky navigation bar with language toggle
-│   │   ├── ProjectModal.tsx    # Architectural deep-dive modal
-│   │   ├── Projects.tsx        # Project showcase grid with live filters
-│   │   ├── Skills.tsx          # Technical proficiency breakdown
-│   │   └── SmoothScroll.tsx    # Lenis smooth scroll engine wrapper
-│   ├── context/                # Language Context (TH / EN state)
-│   ├── data/
-│   │   └── portfolioData.ts    # Single Source of Truth for all portfolio content
-│   ├── lib/
-│   │   └── utils.ts            # Class merge utilities (clsx + tailwind-merge)
-│   ├── App.tsx                 # Main application structure
-│   ├── index.css               # Tailwind CSS v4 directives & typography tokens
-│   └── main.tsx                # React 19 root entry point
+│   ├── components/         # Modular React components
+│   │   ├── reactbits/      # Micro-animations (Particles, DecryptedText, Magnet)
+│   │   ├── AboutBento.tsx  # Bento grid layout
+│   │   ├── MobileMockup.tsx# Interactive smartphone simulator
+│   │   ├── Projects.tsx    # Project showcase cards & modal triggers
+│   │   └── SmoothScroll.tsx# Lenis smooth scroll provider
+│   ├── context/            # Language & theme state providers
+│   ├── data/               # Single-source-of-truth portfolio datasets
+│   ├── App.tsx             # Root layout & composition
+│   ├── index.css           # Tailwind CSS v4 design tokens
+│   └── main.tsx            # React 19 entry point
 ├── package.json
-├── tsconfig.json
 └── vite.config.ts
+```
+
+</details>
+
+---
+
+## 💻 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) `>= 18.0.0`
+- [npm](https://www.npmjs.com/) (or `pnpm` / `yarn`)
+
+### Quick Start
+
+```bash
+# 1. Clone repository
+git clone https://github.com/Theeraphat-S/Portfolio-Web.git
+cd Portfolio-Web
+
+# 2. Install dependencies
+npm install
+
+# 3. Launch local dev server
+npm run dev
+```
+
+Build for production:
+```bash
+npm run build
+npm run preview
 ```
 
 ---
 
-## 💻 Getting Started & Local Development
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (Version `>= 18.0.0`, LTS recommended)
-- [npm](https://www.npmjs.com/) (or `pnpm` / `yarn`)
-- [Git](https://git-scm.com/)
-
-### Installation & Run
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/Theeraphat-S/Portfolio-Web.git
-   cd Portfolio-Web
-   ```
-
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Start the local development server:**
-
-   ```bash
-   npm run dev
-   ```
-
-   Open your browser at [http://localhost:5173](http://localhost:5173) to view the application.
-
-4. **Build for production:**
-
-   ```bash
-   npm run build
-   ```
-
-5. **Preview production build:**
-   ```bash
-   npm run preview
-   ```
-
----
-
-## 👤 Developer Profile & Contact
+## 👤 Contact & Developer Profile
 
 <div align="center">
 
-### **Theeraphat Srimontha (ธีรภัทร ศรีมณฑา)**
-
+### **Theeraphat Srimontha (Oven)**
 **Mobile Application Developer (Flutter & Dart Specialist)**  
-_B.Sc. in Information Technology, Maejo University (Class of 2026)_
+*B.Sc. in Information Technology, Maejo University*
 
 [![Website](https://img.shields.io/badge/🌐_Website-theeraphat--portfolio.vercel.app-00DC82?style=for-the-badge&logo=vercel&logoColor=white)](https://theeraphat-portfolio.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Theeraphat--S-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Theeraphat-S)
 [![Email](https://img.shields.io/badge/Email-theeraphat.sm%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:theeraphat.sm@gmail.com)
 
-<br />
-
-📍 **Location:** Chiang Mai, Thailand (Open to **Onsite / Hybrid / Remote** roles)  
-💼 **Availability:** Open for Full-time Mobile Developer positions
+📍 **Location:** Chiang Mai, Thailand (Open to **Onsite / Hybrid / Remote**)  
+💼 **Status:** Open for Full-time Mobile Developer opportunities
 
 </div>
 
@@ -330,8 +234,4 @@ _B.Sc. in Information Technology, Maejo University (Class of 2026)_
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE) — you are welcome to explore and use the codebase for inspiration.
-
-<div align="center">
-  <sub>Crafted with ❤️ and an engineering-first mindset by <b>Theeraphat Srimontha</b></sub>
-</div>
+This project is licensed under the [MIT License](LICENSE).
