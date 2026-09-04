@@ -5,7 +5,6 @@ import { portfolioData } from "../../../data";
 import { SpotlightCard } from "../../reactbits/SpotlightCard";
 import { ContactEmailCard } from "./ContactEmailCard";
 import { ContactGitHubCard } from "./ContactGitHubCard";
-import { FAQAccordion } from "./FAQAccordion";
 
 export const ContactSection: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -154,9 +153,6 @@ export const ContactSection: React.FC = () => {
             </span>
           </div>
         </div>
-
-        {/* Clean FAQ Accordion */}
-        <FAQAccordion />
       </div>
     </section>
   );
