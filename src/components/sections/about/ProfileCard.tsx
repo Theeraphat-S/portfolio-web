@@ -12,7 +12,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ personal }) => {
 
   return (
     <div className="md:col-span-1 lg:col-span-1" data-cursor-text="Oven">
-      <div className="group relative h-full min-h-[380px] sm:min-h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-950/90 shadow-2xl flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-500">
+      <div className="group relative h-full min-h-[380px] sm:min-h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-950/90 shadow-2xl flex flex-col justify-between hover:border-cyan-500/50 transition-all duration-500">
         {/* Profile Background Image with Smooth Hover Zoom */}
         <img
           src="/profile.jpg"
@@ -22,7 +22,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ personal }) => {
 
         {/* Glassmorphic Cyberpunk Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-emerald-950/10 mix-blend-overlay pointer-events-none" />
+        <div className="absolute inset-0 bg-cyan-950/10 mix-blend-overlay pointer-events-none" />
 
         {/* Top Floating Badge */}
         <div className="relative z-10 p-4 sm:p-5 flex items-center justify-end pointer-events-none">
@@ -37,7 +37,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ personal }) => {
             <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight drop-shadow-md">
               {lang === "th" ? personal.nameTh : personal.nameEn}
             </h3>
-            <p className="text-xs sm:text-sm font-semibold font-mono text-emerald-400 flex items-center gap-1.5">
+            <p className="text-xs sm:text-sm font-semibold font-mono text-cyan-400 flex items-center gap-1.5">
               <Code2 className="w-3.5 h-3.5" />
               {lang === "th" ? personal.titleTh : personal.titleEn}
             </p>

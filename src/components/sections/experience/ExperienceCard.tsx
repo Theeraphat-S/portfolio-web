@@ -27,19 +27,19 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
   const getTypeIcon = (type: string) => {
     switch (type) {
       case "internship":
-        return <Briefcase className="w-4 h-4 text-emerald-400" />;
+        return <Briefcase className="w-4 h-4 text-cyan-400" />;
       case "ta":
-        return <GraduationCap className="w-4 h-4 text-cyan-400" />;
+        return <GraduationCap className="w-4 h-4 text-sky-400" />;
       case "speaker":
         return <Award className="w-4 h-4 text-amber-400" />;
       default:
-        return <Briefcase className="w-4 h-4 text-emerald-400" />;
+        return <Briefcase className="w-4 h-4 text-cyan-400" />;
     }
   };
 
   const getSpotlightColor = (type: string) => {
-    if (type === "internship") return "rgba(16, 185, 129, 0.15)";
-    if (type === "ta") return "rgba(6, 182, 212, 0.15)";
+    if (type === "internship") return "rgba(6, 182, 212, 0.15)";
+    if (type === "ta") return "rgba(56, 189, 248, 0.15)";
     return "rgba(245, 158, 11, 0.15)";
   };
 
@@ -54,7 +54,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
       }`}
     >
       {/* Timeline Center Node */}
-      <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-emerald-400 flex items-center justify-center shadow-[0_0_15px_#10b981] z-10">
+      <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_#06b6d4] z-10">
         {getTypeIcon(experience.type)}
       </div>
 
@@ -76,10 +76,10 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
           </div>
 
           {/* Role & Company */}
-          <h3 className="text-lg font-bold text-white mt-1">
+          <h3 className="text-xl font-bold text-white tracking-tight">
             {lang === "th" ? experience.roleTh : experience.roleEn}
           </h3>
-          <p className="text-xs sm:text-sm font-medium text-cyan-300">
+          <p className="text-xs sm:text-sm font-semibold font-mono text-cyan-400 mt-0.5">
             {lang === "th" ? experience.companyTh : experience.companyEn}
           </p>
 
@@ -89,25 +89,26 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
           </div>
 
           {/* Description */}
-          <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm text-zinc-300 mt-3 leading-relaxed">
             {lang === "th"
               ? experience.descriptionTh
               : experience.descriptionEn}
           </p>
 
-          {/* Bullet Highlights */}
-          <div className="space-y-2 border-t border-zinc-800/80 pt-3 mb-4">
-            {(lang === "th" ? experience.bulletsTh : experience.bulletsEn).map(
-              (bullet, bIdx) => (
-                <div
-                  key={bIdx}
-                  className="flex items-start gap-2 text-xs text-zinc-300"
-                >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>{bullet}</span>
-                </div>
-              ),
-            )}
+          {/* Key Achievements / Bullets */}
+          <div className="mt-4 space-y-1.5 border-t border-zinc-800/80 pt-3">
+            {(lang === "th"
+              ? experience.bulletsTh
+              : experience.bulletsEn
+            ).map((bullet, aIdx) => (
+              <div
+                key={aIdx}
+                className="flex items-start gap-2 text-xs text-zinc-400"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
+                <span>{bullet}</span>
+              </div>
+            ))}
           </div>
 
           {/* Skills Tags */}

@@ -13,7 +13,7 @@ export const ExperienceTimeline: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-16 text-center max-w-2xl mx-auto">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800/60">
+          <span className="text-xs font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/60">
             {t("เส้นทางและประสบการณ์", "Experience & Milestones")}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 tracking-tight">
@@ -33,7 +33,7 @@ export const ExperienceTimeline: React.FC = () => {
         {/* Vertical Timeline */}
         <div className="relative max-w-4xl mx-auto">
           {/* Vertical Line */}
-          <div className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-emerald-500 via-cyan-500 to-indigo-500/30" />
+          <div className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-cyan-500 via-sky-500 to-blue-600/30" />
 
           <div className="space-y-12">
             {experiences.map((exp: ExperienceItem, idx: number) => (

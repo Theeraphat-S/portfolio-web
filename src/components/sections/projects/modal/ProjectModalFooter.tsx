@@ -34,7 +34,7 @@ export const ProjectModalFooter: React.FC<ProjectModalFooterProps> = ({
         )}
         <button
           onClick={onClose}
-          className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 text-xs font-bold transition-all cursor-pointer"
+          className="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-xs font-bold transition-all cursor-pointer shadow-md"
         >
           {t("ปิดหน้าต่าง", "Close")}
         </button>

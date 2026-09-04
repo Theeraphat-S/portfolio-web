@@ -19,22 +19,21 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
       case "smartphone":
-        return <Smartphone className="w-5 h-5 text-emerald-400" />;
+        return <Smartphone className="w-5 h-5 text-cyan-400" />;
       case "code":
-        return <Code2 className="w-5 h-5 text-cyan-400" />;
+        return <Code2 className="w-5 h-5 text-sky-400" />;
       case "database":
         return <Database className="w-5 h-5 text-blue-400" />;
       case "users":
         return <Users className="w-5 h-5 text-indigo-400" />;
       default:
-        return <Terminal className="w-5 h-5 text-emerald-400" />;
+        return <Terminal className="w-5 h-5 text-cyan-400" />;
     }
   };
 
   const getSpotlightColor = (color: string) => {
     switch (color) {
       case "emerald":
-        return "rgba(16, 185, 129, 0.15)";
       case "cyan":
         return "rgba(6, 182, 212, 0.15)";
       case "blue":

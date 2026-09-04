@@ -33,10 +33,10 @@ export const App: React.FC = () => {
           {/* Theme-Aware Interactive Click Sparks */}
           <ClickSpark />
 
-          <div className="relative min-h-screen bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100 overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-500 transition-colors duration-300">
+          <div className="relative min-h-screen bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-400 transition-colors duration-300">
             {/* React Bits Interactive Particle Background */}
             <Particles
-              particleColors={["#10b981", "#06b6d4", "#64748b"]}
+              particleColors={["#0284c7", "#06b6d4", "#38bdf8"]}
               particleCount={40}
               speed={0.35}
               particleBaseSize={1.5}

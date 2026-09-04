@@ -16,7 +16,7 @@ export const ProjectModalTechDetails: React.FC<
     <>
       {/* Overview Description */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-2 flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5" />
           {t("ภาพรวมโครงการ", "Project Overview")}
         </h4>
@@ -41,7 +41,7 @@ export const ProjectModalTechDetails: React.FC<
                 key={idx}
                 className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-950/40 border border-zinc-800/60 text-xs sm:text-sm text-zinc-300"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
                 <span>{hl}</span>
               </div>
             ),

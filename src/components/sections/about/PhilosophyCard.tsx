@@ -9,12 +9,12 @@ export const PhilosophyCard: React.FC = () => {
   return (
     <div className="md:col-span-1 lg:col-span-2">
       <SpotlightCard
-        spotlightColor="rgba(16, 185, 129, 0.15)"
+        spotlightColor="rgba(6, 182, 212, 0.15)"
         className="h-full flex flex-col justify-between"
         data-cursor-text="Philosophy"
       >
         <div>
-          <div className="flex items-center gap-2.5 text-emerald-400 mb-3">
+          <div className="flex items-center gap-2.5 text-cyan-400 mb-3">
             <Terminal className="w-5 h-5" />
             <span className="text-xs font-mono uppercase tracking-wider font-semibold">
               {t("ความมุ่งมั่นและตัวตน", "Core Philosophy")}
@@ -34,7 +34,7 @@ export const PhilosophyCard: React.FC = () => {
         </div>
 
         <div className="pt-4 mt-4 border-t border-zinc-800 flex flex-wrap items-center gap-2">
-          <span className="text-xs font-mono text-emerald-300 bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-700/50 flex items-center gap-1">
+          <span className="text-xs font-mono text-cyan-300 bg-cyan-950/80 px-2.5 py-1 rounded-md border border-cyan-700/50 flex items-center gap-1">
             <CheckCircle className="w-3.5 h-3.5" />
             Flutter & Bloc Specialist
           </span>

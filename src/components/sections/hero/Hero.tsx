@@ -91,7 +91,7 @@ export const Hero: React.FC = () => {
                   rel="noopener noreferrer"
                   aria-label="GitHub"
                   data-cursor-text="GitHub"
-                  className="flex items-center justify-center p-2 rounded-full bg-zinc-100/90 dark:bg-zinc-900/90 text-zinc-700 dark:text-zinc-300 hover:text-emerald-500 border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:scale-110 shadow-md"
+                  className="flex items-center justify-center p-2 rounded-full bg-zinc-100/90 dark:bg-zinc-900/90 text-zinc-700 dark:text-zinc-300 hover:text-cyan-500 border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:scale-110 shadow-md"
                 >
                   <Github className="w-5 h-5" />
                 </a>
@@ -122,7 +122,7 @@ export const Hero: React.FC = () => {
                   onClick={scrollToContact}
                   data-cursor-text="Email"
                   aria-label="Contact Email"
-                  className="flex items-center justify-center p-2 rounded-full bg-zinc-100/90 dark:bg-zinc-900/90 text-zinc-700 dark:text-zinc-300 hover:text-emerald-500 border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
+                  className="flex items-center justify-center p-2 rounded-full bg-zinc-100/90 dark:bg-zinc-900/90 text-zinc-700 dark:text-zinc-300 hover:text-cyan-500 border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
                 >
                   <Mail className="w-5 h-5" />
                 </button>
@@ -141,8 +141,8 @@ export const Hero: React.FC = () => {
                 <span>FLUT</span>
                 {/* Embedded Phone Icon Pill */}
                 <span className="inline-flex items-center justify-center mx-[0.03em] relative group/icon cursor-pointer">
-                  <span className="p-2 sm:p-3 md:p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 group-hover/icon:bg-emerald-500/20 group-hover/icon:border-emerald-400 transition-all duration-300">
-                    <Smartphone className="w-[0.55em] h-[0.55em] text-emerald-500 group-hover/icon:scale-110 transition-transform duration-300" />
+                  <span className="p-2 sm:p-3 md:p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 group-hover/icon:bg-cyan-500/20 group-hover/icon:border-cyan-400 transition-all duration-300">
+                    <Smartphone className="w-[0.55em] h-[0.55em] text-cyan-500 group-hover/icon:scale-110 transition-transform duration-300" />
                   </span>
                 </span>
                 <span>TER</span>
@@ -190,7 +190,7 @@ export const Hero: React.FC = () => {
           <div className="flex items-center justify-between gap-4 sm:gap-6 border-t border-zinc-200 dark:border-zinc-800/80 pt-6">
             {/* Location & Year */}
             <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono font-bold tracking-[0.25em] text-zinc-500 dark:text-zinc-400 uppercase">
-              <MapPin className="w-3.5 h-3.5 text-emerald-500" />
+              <MapPin className="w-3.5 h-3.5 text-cyan-500" />
               <span>CHIANG MAI, TH — 2026</span>
             </div>
 

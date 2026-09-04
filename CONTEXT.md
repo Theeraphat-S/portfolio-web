@@ -23,8 +23,12 @@ A persistent or section-level engineering metrics display reflecting live local 
 _Avoid_: Generic stats counter, random progress bars
 
 **Atmospheric Backdrop**:
-A layered visual canvas combining a geometric dot-matrix grid, angled directional light beams (sheen gradients), and theme-aware click particle sparks with dual Dark/Light mode support.
+A layered visual canvas combining a geometric dot-matrix grid, angled directional light beams (dual Cyan/Sky sheen gradients), and theme-aware click particle sparks with dual Dark/Light mode support.
 _Avoid_: Flat solid background, loud video loop
+
+**Brand Identity Palette (Cyan to Electric Blue Dual Gradient)**:
+A high-impact signature color system reflecting Flutter & Dart engineering mastery (`#06b6d4`, `#38bdf8`, `#0284c7`, `#2563eb`), applied across buttons, glassmorphic hover borders, custom context cursor, and typography glows, while preserving standard Emerald indicators for live system availability/telemetry heartbeat.
+_Avoid_: Monochromatic green defaults, generic purple gradients
 
 **Resume Pill**:
 A compact magnetic/expandable action element that smoothly expands on hover and directs recruiters directly to the PDF resume.

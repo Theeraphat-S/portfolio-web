@@ -18,7 +18,7 @@ export const ProjectModalHeader: React.FC<ProjectModalHeaderProps> = ({
     <div className="flex items-start justify-between gap-4 pb-4 border-b border-zinc-800 shrink-0">
       <div>
         <div className="flex items-center gap-2 flex-wrap mb-1.5">
-          <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-zinc-800 text-emerald-400 border border-zinc-700">
+          <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-zinc-800 text-cyan-400 border border-zinc-700">
             {project.tag}
           </span>
           <span className="text-xs font-mono text-zinc-400">

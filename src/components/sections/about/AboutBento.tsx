@@ -17,7 +17,7 @@ export const AboutBento: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 text-center max-w-2xl mx-auto">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800/60 inline-flex items-center gap-1.5">
+          <span className="text-xs font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/60 inline-flex items-center gap-1.5">
             <Sparkles className="w-3 h-3" />
             {t("ประวัติและความเชี่ยวชาญ", "About & Profile")}
           </span>

@@ -45,7 +45,7 @@ export const TelemetryDeck: React.FC = () => {
       label: t("เวลาท้องถิ่น", "LOCAL TIME (TH)"),
       value: localTime || "12:00:00",
       subtext: "GMT+7 (Asia/Bangkok)",
-      icon: <Clock className="w-4 h-4 text-emerald-500" />,
+      icon: <Clock className="w-4 h-4 text-cyan-500" />,
       valueClass:
         "text-2xl sm:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-tight",
     },
@@ -81,7 +81,7 @@ export const TelemetryDeck: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500">
+            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-500">
               <Terminal className="w-4 h-4" />
             </div>
             <div>

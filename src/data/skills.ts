@@ -5,7 +5,7 @@ export const skillCategoriesData: SkillCategory[] = [
     nameTh: "Mobile App Mastery",
     nameEn: "Mobile App Mastery",
     icon: "smartphone",
-    color: "emerald",
+    color: "cyan",
     skills: [
       {
         name: "Flutter",

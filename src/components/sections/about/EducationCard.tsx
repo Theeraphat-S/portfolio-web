@@ -53,7 +53,7 @@ export const EducationCard: React.FC<EducationCardProps> = ({ personal }) => {
             <MapPin className="w-3.5 h-3.5 text-rose-400" />
             เชียงใหม่ (Chiang Mai)
           </span>
-          <span className="text-emerald-400 font-mono font-medium">
+          <span className="text-cyan-400 font-mono font-medium">
             Class 2565-2569
           </span>
         </div>

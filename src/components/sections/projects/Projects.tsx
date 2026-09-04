@@ -27,7 +27,7 @@ export const Projects: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-3xl">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-500/30 dark:border-emerald-800/60 inline-flex items-center gap-1.5">
+            <span className="text-xs font-mono uppercase tracking-widest text-cyan-500 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30 dark:border-cyan-800/60 inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
               {t(
                 "ผลงานและสถาปัตยกรรมเด่น",
@@ -52,14 +52,14 @@ export const Projects: React.FC = () => {
         {/* 1. Flagship Centerpiece: Hybrid Interactive Mobile Showcase */}
         <div className="mb-20 rounded-3xl border border-zinc-200 dark:border-zinc-800/90 bg-zinc-100/70 dark:bg-zinc-950/80 p-6 sm:p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden">
           {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/5 blur-3xl pointer-events-none rounded-full" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 dark:bg-cyan-500/5 blur-3xl pointer-events-none rounded-full" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left: Interactive Briefing & Metrics */}
             <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider">
+                  <span className="px-2.5 py-1 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-mono text-xs font-semibold uppercase tracking-wider">
                     {t("ผลงานเด่นอันดับ 1", "FEATURED FLAGSHIP")}
                   </span>
                   <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
@@ -83,7 +83,7 @@ export const Projects: React.FC = () => {
               {/* Key Architecture Bullets */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <div className="p-3.5 rounded-xl bg-white/80 dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800/80">
-                  <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold block mb-1">
+                  <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold block mb-1">
                     CLIENT-SIDE BLoC ENGINE
                   </span>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400">
@@ -141,7 +141,7 @@ export const Projects: React.FC = () => {
             <div className="lg:col-span-5 flex flex-col items-center justify-center">
               <div className="text-center mb-3">
                 <span className="text-[11px] font-mono text-zinc-600 dark:text-zinc-400 bg-white/80 dark:bg-zinc-900/90 px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 shadow-sm inline-flex items-center gap-1.5">
-                  <Smartphone className="w-3.5 h-3.5 text-emerald-500" />
+                  <Smartphone className="w-3.5 h-3.5 text-cyan-500" />
                   {t(
                     "แตะแถบเมนูด้านล่างของมือถือเพื่อเล่นหน้าจอสด",
                     "Interactive simulation — tap bottom tabs inside device",
@@ -158,30 +158,47 @@ export const Projects: React.FC = () => {
         {/* 2. Secondary Projects Section Header & Filter Pills */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div className="flex items-center gap-2">
-            <Code2 className="w-4 h-4 text-emerald-500" />
+            <Code2 className="w-4 h-4 text-cyan-500" />
             <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white">
               {t("ผลงานและโปรเจกต์อื่นๆ ทั้งหมด", "All Applications & Systems")}
             </h3>
           </div>
 
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 self-start md:self-auto">
-            {(["all", "mobile", "system"] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setFilter(tab)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer ${
-                  filter === tab
-                    ? "bg-emerald-500 text-zinc-950 font-bold shadow-sm"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-                }`}
-              >
-                {tab === "all"
-                  ? t("ทั้งหมด", "All")
-                  : tab === "mobile"
-                    ? t("Mobile Apps", "Mobile Apps")
-                    : t("ระบบหลังบ้าน & POS", "Systems & POS")}
-              </button>
-            ))}
+          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-zinc-900/80 border border-zinc-800 self-start md:self-auto flex-wrap">
+            <button
+              onClick={() => setFilter("all")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
+                filter === "all"
+                  ? "bg-cyan-500 text-zinc-950 font-bold shadow-lg shadow-cyan-500/30"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              {t("ทั้งหมด", "All Systems")} ({portfolioData.projects.length})
+            </button>
+            <button
+              onClick={() => setFilter("mobile")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
+                filter === "mobile"
+                  ? "bg-cyan-500 text-zinc-950 font-bold shadow-lg shadow-cyan-500/30"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              {t("แอปมือถือ", "Mobile Apps")} (
+              {portfolioData.projects.filter((p) => p.category === "mobile").length}
+              )
+            </button>
+            <button
+              onClick={() => setFilter("system")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
+                filter === "system"
+                  ? "bg-cyan-500 text-zinc-950 font-bold shadow-lg shadow-cyan-500/30"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              {t("ระบบ & ฟูลสแตก", "Fullstack / Systems")} (
+              {portfolioData.projects.filter((p) => p.category === "system").length}
+              )
+            </button>
           </div>
         </div>
 

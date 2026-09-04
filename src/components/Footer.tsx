@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Brand & Copyright */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-emerald-400">
+          <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-cyan-400">
             <Smartphone className="w-4 h-4" />
           </div>
           <div>
@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
           <span>&bull;</span>
           <span className="text-zinc-300 font-mono">Tailwind CSS</span>
           <span>&bull;</span>
-          <span className="text-emerald-400 font-mono font-medium">
+          <span className="text-cyan-400 font-mono font-medium">
             React Bits
           </span>
         </div>

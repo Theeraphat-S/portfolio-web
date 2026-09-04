@@ -33,16 +33,16 @@ export const MobileMockup: React.FC = () => {
   return (
     <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[370px]">
       {/* Background Glow Orb */}
-      <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/15 to-blue-500/20 blur-2xl -z-10 animate-pulse-subtle" />
+      <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-sky-500/15 to-blue-600/20 blur-2xl -z-10 animate-pulse-subtle" />
 
       {/* Floating Badges */}
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-4 -right-4 z-20 hidden sm:flex items-center gap-2 rounded-xl bg-zinc-900/90 border border-emerald-500/40 px-3 py-2 shadow-xl backdrop-blur-md"
+        className="absolute -top-4 -right-4 z-20 hidden sm:flex items-center gap-2 rounded-xl bg-zinc-900/90 border border-cyan-500/40 px-3 py-2 shadow-xl backdrop-blur-md"
       >
         <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-        <span className="text-xs font-semibold text-emerald-300 font-mono">
+        <span className="text-xs font-semibold text-cyan-300 font-mono">
           Flutter 3.x + Bloc
         </span>
       </motion.div>
@@ -55,16 +55,16 @@ export const MobileMockup: React.FC = () => {
           ease: "easeInOut",
           delay: 1,
         }}
-        className="absolute -bottom-4 -left-4 z-20 hidden sm:flex items-center gap-2 rounded-xl bg-zinc-900/90 border border-cyan-500/40 px-3 py-2 shadow-xl backdrop-blur-md"
+        className="absolute -bottom-4 -left-4 z-20 hidden sm:flex items-center gap-2 rounded-xl bg-zinc-900/90 border border-blue-500/40 px-3 py-2 shadow-xl backdrop-blur-md"
       >
-        <ShieldCheck className="w-4 h-4 text-cyan-400" />
-        <span className="text-xs font-semibold text-cyan-300 font-mono">
+        <ShieldCheck className="w-4 h-4 text-blue-400" />
+        <span className="text-xs font-semibold text-blue-300 font-mono">
           Clean Architecture
         </span>
       </motion.div>
 
       {/* Outer Phone Shell */}
-      <div className="relative rounded-[44px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900 p-[3px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_40px_rgba(16,185,129,0.15)] ring-1 ring-white/10">
+      <div className="relative rounded-[44px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900 p-[3px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_40px_rgba(6,182,212,0.18)] ring-1 ring-white/10">
         {/* Inner Bezel */}
         <div className="relative h-[660px] w-full overflow-hidden rounded-[41px] bg-zinc-950 flex flex-col justify-between border border-zinc-800/80">
           {/* Top Status Bar & Dynamic Island */}
@@ -93,7 +93,7 @@ export const MobileMockup: React.FC = () => {
                 onClick={() => setActiveScreen("ncds")}
                 className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 ${
                   activeScreen === "ncds"
-                    ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm font-semibold"
+                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-sm font-semibold"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
@@ -104,7 +104,7 @@ export const MobileMockup: React.FC = () => {
                 onClick={() => setActiveScreen("pinto")}
                 className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 ${
                   activeScreen === "pinto"
-                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-sm font-semibold"
+                    ? "bg-sky-500/20 text-sky-300 border border-sky-500/30 shadow-sm font-semibold"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
@@ -236,7 +236,7 @@ export const MobileMockup: React.FC = () => {
                   </div>
 
                   {/* Action Button */}
-                  <button className="w-full py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-zinc-950 font-bold text-xs shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-1.5 transition-colors">
+                  <button className="w-full py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-950/50 flex items-center justify-center gap-1.5 transition-colors">
                     <TrendingUp className="w-3.5 h-3.5" />
                     {t(
                       "ออกรายงานผลตรวจ (Medical PDF)",

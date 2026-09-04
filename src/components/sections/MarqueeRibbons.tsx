@@ -37,10 +37,10 @@ export const MarqueeRibbons: React.FC = () => {
           {[...CORE_TECH_STACK_TICKER, ...CORE_TECH_STACK_TICKER].map(
             (item, idx) => (
               <div key={idx} className="flex items-center gap-4 group">
-                <span className="group-hover:text-emerald-500 transition-colors">
+                <span className="group-hover:text-cyan-500 transition-colors">
                   {item}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 group-hover:bg-emerald-400 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/50 group-hover:bg-cyan-400 shrink-0" />
               </div>
             ),
           )}

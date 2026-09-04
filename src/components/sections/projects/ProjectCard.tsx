@@ -28,19 +28,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const getProjectIcon = (id: string) => {
     switch (id) {
       case "ncds-screening":
-        return <Activity className="w-5 h-5 text-emerald-400" />;
+        return <Activity className="w-5 h-5 text-cyan-400" />;
       case "pinto-app":
-        return <Flame className="w-5 h-5 text-cyan-400" />;
+        return <Flame className="w-5 h-5 text-sky-400" />;
       case "pos-system":
         return <ShoppingBag className="w-5 h-5 text-blue-400" />;
       default:
-        return <Smartphone className="w-5 h-5 text-emerald-400" />;
+        return <Smartphone className="w-5 h-5 text-cyan-400" />;
     }
   };
 
   const getSpotlightColor = (color: string) => {
-    if (color === "#10b981") return "rgba(16, 185, 129, 0.18)";
-    if (color === "#06b6d4") return "rgba(6, 182, 212, 0.18)";
+    if (color === "#10b981" || color === "emerald") return "rgba(6, 182, 212, 0.18)";
+    if (color === "#06b6d4" || color === "cyan") return "rgba(6, 182, 212, 0.18)";
     return "rgba(59, 130, 246, 0.18)";
   };
 
@@ -75,9 +75,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
 
           {/* Title & Subtitle */}
-          <h3 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors flex items-center justify-between gap-2">
+          <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors flex items-center justify-between gap-2">
             <span>{lang === "th" ? project.titleTh : project.titleEn}</span>
-            <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-emerald-400 shrink-0" />
+            <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-cyan-400 shrink-0" />
           </h3>
 
           <p className="text-xs text-zinc-400 font-mono mt-1">
