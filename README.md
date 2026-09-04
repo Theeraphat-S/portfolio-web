@@ -72,11 +72,11 @@ This repository contains the source code for the personal web portfolio of **The
 
 ## 🚀 Featured Projects
 
-| Project | Stack & Highlights | Links |
-| :--- | :--- | :--- |
-| **🏥 NCDs Screening App**<br>*(Senior Capstone)* | • **Stack:** `Flutter`, `Dart`, `BLoC`, `Clean Architecture`, `REST API`, `MySQL`<br>• Risk assessment engine for 4 chronic diseases (Diabetes, Hypertension, Heart, Obesity)<br>• Multi-role UX (Doctor, Health Volunteer, Citizen) with 100% field validation accuracy | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
-| **📦 Pinto Logistics App**<br>*(Commercial Internship)* | • **Stack:** `Flutter`, `Dart`, `Hybrid WebView Bridge`, `Agile/Scrum`<br>• Engineered bi-directional WebView bridge for seamless hybrid page transitions<br>• Implemented gamified daily chat streaks and rewards, boosting daily retention | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
-| **💳 POS & Store Management**<br>*(Enterprise System)* | • **Stack:** `React`, `TypeScript`, `REST API`, `MySQL`, `State Management`<br>• 99.9% data consistency with optimistic UI updates and resilient offline retries<br>• Supports instant QR PromptPay and Cash transactions with receipt printing | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
+| Project                                                 | Stack & Highlights                                                                                                                                                                                                                                                       | Links                                                 |
+| :------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------- |
+| **🏥 NCDs Screening App**<br>_(Senior Capstone)_        | • **Stack:** `Flutter`, `Dart`, `BLoC`, `Clean Architecture`, `REST API`, `MySQL`<br>• Risk assessment engine for 4 chronic diseases (Diabetes, Hypertension, Heart, Obesity)<br>• Multi-role UX (Doctor, Health Volunteer, Citizen) with 100% field validation accuracy | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
+| **📦 Pinto Logistics App**<br>_(Commercial Internship)_ | • **Stack:** `Flutter`, `Dart`, `Hybrid WebView Bridge`, `Agile/Scrum`<br>• Engineered bi-directional WebView bridge for seamless hybrid page transitions<br>• Implemented gamified daily chat streaks and rewards, boosting daily retention                             | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
+| **💳 POS & Store Management**<br>_(Enterprise System)_  | • **Stack:** `React`, `TypeScript`, `REST API`, `MySQL`, `State Management`<br>• 99.9% data consistency with optimistic UI updates and resilient offline retries<br>• Supports instant QR PromptPay and Cash transactions with receipt printing                          | [Live Demo](https://theeraphat-portfolio.vercel.app/) |
 
 ---
 
@@ -86,8 +86,8 @@ This repository contains the source code for the personal web portfolio of **The
 - **Web & Fullstack**: React 19, TypeScript, Vite, Tailwind CSS v4, Next.js, Java / Spring Boot, Go (Golang)
 - **Databases & Tooling**: MySQL, Oracle DB, RESTful APIs, Postman, Git / GitHub Workflows, Antigravity IDE
 - **Leadership & Teaching**:
-  - **3x University Teaching Assistant (TA)** at Maejo University: *Client-Side Web Programming*, *Database Systems*, and *Logic & Programming Techniques*.
-  - **Keynote Speaker**: Invited instructor on *"Smart AI for Education & Ethical Programming"* for Gifted Computer students at Jakkhumkhanathorn School.
+  - **3x University Teaching Assistant (TA)** at Maejo University: _Client-Side Web Programming_, _Database Systems_, and _Logic & Programming Techniques_.
+  - **Keynote Speaker**: Invited instructor on _"Smart AI for Education & Ethical Programming"_ for Gifted Computer students at Jakkhumkhanathorn School.
 
 ---
 
@@ -150,6 +150,7 @@ flowchart TD
 ```
 
 ### Core Principles
+
 1. **Separation of Concerns**: UI is completely independent from networking and storage.
 2. **Predictable State Flow**: Single-direction state transitions guarantee deterministic UI.
 3. **Resilient Networking**: Automatic token refreshes, interceptors, and offline fallbacks.
@@ -206,6 +207,7 @@ npm run dev
 ```
 
 Build for production:
+
 ```bash
 npm run build
 npm run preview
@@ -218,8 +220,9 @@ npm run preview
 <div align="center">
 
 ### **Theeraphat Srimontha (Oven)**
+
 **Mobile Application Developer (Flutter & Dart Specialist)**  
-*B.Sc. in Information Technology, Maejo University*
+_B.Sc. in Information Technology, Maejo University_
 
 [![Website](https://img.shields.io/badge/🌐_Website-theeraphat--portfolio.vercel.app-00DC82?style=for-the-badge&logo=vercel&logoColor=white)](https://theeraphat-portfolio.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Theeraphat--S-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Theeraphat-S)

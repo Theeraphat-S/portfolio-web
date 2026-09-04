@@ -4,3 +4,5 @@ export * from "./projects";
 export * from "./skills";
 export * from "./experience";
 export * from "./contact";
+export * from "./TelemetryDeck";
+export * from "./MarqueeRibbons";

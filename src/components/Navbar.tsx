@@ -10,13 +10,16 @@ import {
   Mail,
   User,
   Github,
+  Sun,
+  Moon,
 } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage, useTheme } from "../context";
 import { portfolioData } from "../data/portfolioData";
 import { Magnet } from "./reactbits/Magnet";
 
 export const Navbar: React.FC = () => {
   const { lang, toggleLang, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -61,7 +64,7 @@ export const Navbar: React.FC = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800/80 py-3 shadow-2xl shadow-black/40"
+            ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800/80 py-3 shadow-xl dark:shadow-black/40"
             : "bg-transparent py-5"
         }`}
       >
@@ -77,54 +80,75 @@ export const Navbar: React.FC = () => {
               <div className="absolute inset-0 bg-emerald-500/10 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-sm sm:text-base text-zinc-100 tracking-tight flex items-center gap-1.5">
+              <span className="font-bold text-sm sm:text-base text-zinc-900 dark:text-zinc-100 tracking-tight flex items-center gap-1.5">
                 Theeraphat.S
-                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981] animate-pulse" />
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
               </span>
-              <span className="text-[10px] font-mono text-zinc-400 -mt-0.5">
+              <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 -mt-0.5">
                 Mobile Dev &bull; Flutter
               </span>
             </div>
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-zinc-900/60 border border-zinc-800/80 rounded-full px-4 py-1.5 backdrop-blur-md shadow-inner">
+          <nav className="hidden md:flex items-center gap-1 bg-zinc-100/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 rounded-full px-4 py-1.5 backdrop-blur-md shadow-inner">
             {navLinks.map((link, idx) => (
               <a
                 key={idx}
                 href={link.href}
-                className="px-3.5 py-1.5 text-xs font-medium text-zinc-300 hover:text-emerald-400 transition-colors rounded-full hover:bg-zinc-800/50"
+                className="px-3.5 py-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800/50"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* Right Action Group (Lang Toggle + GitHub + CTA) */}
-          <div className="flex items-center gap-2.5">
+          {/* Right Action Group (Theme + Lang Toggle + GitHub + CTA) */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Theme Switcher */}
+            <Magnet padding={16} magnetStrength={0.25}>
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                data-cursor-text="Theme"
+                className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700/70 hover:border-emerald-500/50 text-zinc-700 dark:text-zinc-200 transition-all hover:scale-105 cursor-pointer"
+                title={
+                  theme === "dark"
+                    ? "Switch to Light Mode"
+                    : "Switch to Dark Mode"
+                }
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-4 h-4 text-amber-400" />
+                ) : (
+                  <Moon className="w-4 h-4 text-slate-700" />
+                )}
+              </button>
+            </Magnet>
+
             {/* Language Switcher */}
-            <Magnet padding={20} magnetStrength={0.25}>
+            <Magnet padding={16} magnetStrength={0.25}>
               <button
                 onClick={toggleLang}
                 aria-label="Toggle language"
                 data-cursor-text="Language"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-700/70 hover:border-emerald-500/50 text-xs font-mono text-zinc-200 transition-all hover:bg-zinc-850 cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700/70 hover:border-emerald-500/50 text-xs font-mono text-zinc-700 dark:text-zinc-200 transition-all cursor-pointer"
               >
-                <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                <Globe className="w-3.5 h-3.5 text-emerald-500" />
                 <span
                   className={
                     lang === "th"
-                      ? "text-emerald-400 font-bold"
+                      ? "text-emerald-600 dark:text-emerald-400 font-bold"
                       : "text-zinc-400"
                   }
                 >
                   TH
                 </span>
-                <span className="text-zinc-600">/</span>
+                <span className="text-zinc-400 dark:text-zinc-600">/</span>
                 <span
                   className={
                     lang === "en"
-                      ? "text-emerald-400 font-bold"
+                      ? "text-emerald-600 dark:text-emerald-400 font-bold"
                       : "text-zinc-400"
                   }
                 >
@@ -134,13 +158,13 @@ export const Navbar: React.FC = () => {
             </Magnet>
 
             {/* GitHub Profile Button */}
-            <Magnet padding={20} magnetStrength={0.3}>
+            <Magnet padding={16} magnetStrength={0.3}>
               <a
                 href={portfolioData.personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-text="GitHub"
-                className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full bg-zinc-900 border border-zinc-700/70 hover:border-zinc-500 text-zinc-300 hover:text-white transition-colors"
+                className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700/70 hover:border-zinc-400 dark:hover:border-zinc-500 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors"
                 title="GitHub Profile"
               >
                 <Github className="w-4 h-4" />
@@ -148,7 +172,7 @@ export const Navbar: React.FC = () => {
             </Magnet>
 
             {/* Direct Contact / Resume CTA */}
-            <Magnet padding={20} magnetStrength={0.3}>
+            <Magnet padding={16} magnetStrength={0.3}>
               <a
                 href="#contact"
                 data-cursor-text="Hire Me"
