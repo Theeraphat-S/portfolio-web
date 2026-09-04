@@ -27,7 +27,7 @@ export const ContactSection: React.FC = () => {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
     );
-    window.open(`mailto:${personal.email}?subject=${subject}&body=${body}`);
+    window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
     setFormSubmitted(true);
   };
 

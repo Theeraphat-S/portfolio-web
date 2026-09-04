@@ -15,4 +15,4 @@ The user requested aligning the portfolio's visual design, atmospheric layout, a
 3. **Preloader Sequence**: Integrate a handwriting SVG cursive "hello" preloader with an unmasking curtain transition.
 4. **Theme & Atmosphere**: Support dual Dark/Light mode theme switching with dot-matrix backdrop, angled sheen beam overlays, and click spark particles.
 5. **Telemetry Deck & Ticker Marquee**: Display Chiang Mai local time, engineering status metrics, and dual running marquee banners.
-6. **Clean Contact**: Maintain a high-contrast contact form with FAQ accordion, omitting any floating AI chatbot widget as explicitly requested.
+6. **Clean Contact**: Maintain a high-contrast direct message contact form and direct contact cards, omitting both FAQ accordion (per user request) and floating AI chatbot widget.
