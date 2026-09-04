@@ -107,13 +107,13 @@ export const Projects: React.FC = () => {
 
               {/* Metrics Row */}
               <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-zinc-200 dark:border-zinc-800/70">
-                {flagshipProject.metrics.map((m, idx) => (
+                {flagshipProject.metrics.map((metric, idx) => (
                   <div key={idx} className="flex flex-col">
                     <span className="text-xl sm:text-2xl font-black font-mono text-zinc-900 dark:text-white">
-                      {m.value}
+                      {metric.value}
                     </span>
                     <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-                      {lang === "th" ? m.labelTh : m.labelEn}
+                      {lang === "th" ? metric.labelTh : metric.labelEn}
                     </span>
                   </div>
                 ))}

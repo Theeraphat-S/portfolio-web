@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
+import { Magnet } from "../../reactbits/Magnet";
 
 export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -194,23 +195,25 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Expandable Resume Pill Button */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Resume"
-              data-cursor-text="Resume"
-              className="group flex items-center"
-            >
-              <div className="relative flex items-center bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 h-12 w-12 group-hover:w-44 rounded-full transition-all duration-500 ease-[0.23,1,0.32,1] overflow-hidden shadow-xl border border-zinc-700/60 dark:border-zinc-300">
-                <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:delay-150 text-[11px] font-black uppercase tracking-widest pl-5 pr-10">
-                  {t("ดูเรซูเม่", "View Resume")}
-                </span>
-                <div className="absolute right-0 flex items-center justify-center size-12 group-hover:rotate-45 transition-transform duration-500">
-                  <ArrowUpRight className="w-5 h-5" />
+            <Magnet padding={24} magnetStrength={0.25}>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Resume"
+                data-cursor-text="Resume"
+                className="group flex items-center"
+              >
+                <div className="relative flex items-center bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 h-12 w-12 group-hover:w-44 rounded-full transition-all duration-500 ease-[0.23,1,0.32,1] overflow-hidden shadow-xl border border-zinc-700/60 dark:border-zinc-300">
+                  <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:delay-150 text-[11px] font-black uppercase tracking-widest pl-5 pr-10">
+                    {t("ดูเรซูเม่", "View Resume")}
+                  </span>
+                  <div className="absolute right-0 flex items-center justify-center size-12 group-hover:rotate-45 transition-transform duration-500">
+                    <ArrowUpRight className="w-5 h-5" />
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </Magnet>
           </div>
         </div>
       </div>

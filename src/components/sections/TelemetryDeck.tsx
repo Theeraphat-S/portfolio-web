@@ -119,20 +119,20 @@ export const TelemetryDeck: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 4: Academic & Engineering Reliability */}
+          {/* Card 4: Build & Deployment Telemetry */}
           <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 mb-3">
               <span className="text-[11px] font-mono uppercase tracking-wider">
-                {t("เกรดเฉลี่ยสะสม", "ACADEMIC GPA")}
+                {t("เวอร์ชัน & ระบบจัดการ", "BUILD & VCS")}
               </span>
               <ShieldCheck className="w-4 h-4 text-purple-500" />
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
-                3.83
+              <div className="text-xl sm:text-2xl font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+                MAIN: STABLE
               </div>
-              <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
-                Maejo University (IT)
+              <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">
+                Production Ready &bull; Clean Tree
               </span>
             </div>
           </div>

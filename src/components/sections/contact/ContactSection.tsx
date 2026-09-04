@@ -1,5 +1,5 @@
-import React from "react";
-import { MapPin, Sparkles } from "lucide-react";
+import React, { useState } from "react";
+import { MapPin, Sparkles, Send, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { SpotlightCard } from "../../reactbits/SpotlightCard";
@@ -10,6 +10,27 @@ import { FAQAccordion } from "./FAQAccordion";
 export const ContactSection: React.FC = () => {
   const { lang, t } = useLanguage();
   const { personal } = portfolioData;
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    // Trigger direct mailto client with pre-filled content
+    const subject = encodeURIComponent(
+      `Portfolio Inquiry from ${formData.name}`,
+    );
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+    );
+    window.open(`mailto:${personal.email}?subject=${subject}&body=${body}`);
+    setFormSubmitted(true);
+  };
 
   return (
     <section id="contact" className="py-24 relative">
@@ -28,17 +49,95 @@ export const ContactSection: React.FC = () => {
           </h2>
           <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-2">
             {t(
-              "หากต้องการติดต่อสอบถาม แลกเปลี่ยนไอเดีย หรือสนใจร่วมงาน สามารถติดต่อได้โดยตรงผ่านช่องทางด้านล่าง",
-              "Feel free to reach out directly via Email or connect on GitHub for opportunities and collaboration.",
+              "หากต้องการติดต่อสอบถาม แลกเปลี่ยนไอเดีย หรือสนใจร่วมงาน สามารถส่งข้อความหรือติดต่อผ่านช่องทางด้านล่าง",
+              "Feel free to send a direct message or reach out via Email/GitHub for opportunities and collaboration.",
             )}
           </p>
         </div>
 
-        {/* Centered Direct Contact Hub */}
-        <SpotlightCard
-          spotlightColor="rgba(16, 185, 129, 0.15)"
-          className="p-6 sm:p-8"
-        >
+        {/* High-Contrast Message Form & Quick Contact Deck */}
+        <div className="space-y-6">
+          <SpotlightCard
+            spotlightColor="rgba(16, 185, 129, 0.15)"
+            className="p-6 sm:p-8"
+          >
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
+                    {t("ชื่อของคุณ", "Your Name")}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder={
+                      lang === "th" ? "เช่น สมชาย ใจดี" : "e.g. Alex Smith"
+                    }
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
+                    {t("อีเมลของคุณ", "Your Email")}
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="name@company.com"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
+                  {t("ข้อความของคุณ", "Message")}
+                </label>
+                <textarea
+                  rows={4}
+                  required
+                  placeholder={
+                    lang === "th"
+                      ? "รายละเอียดโปรเจกต์ หรือตำแหน่งงานที่ต้องการพูดคุย..."
+                      : "Tell me about your project, opportunities, or ideas..."
+                  }
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+                />
+              </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <button
+                  type="submit"
+                  data-cursor-text="Send"
+                  className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs sm:text-sm inline-flex items-center gap-2 shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>{t("ส่งข้อความ", "Send Message")}</span>
+                </button>
+
+                {formSubmitted && (
+                  <span className="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                    <CheckCircle2 className="w-4 h-4" />
+                    {t("เปิดหน้าส่งอีเมลเรียบร้อย!", "Opening email client!")}
+                  </span>
+                )}
+              </div>
+            </form>
+          </SpotlightCard>
+
+          {/* Direct Cards Hub */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <ContactEmailCard email={personal.email} />
             <ContactGitHubCard
@@ -48,13 +147,13 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Location Footer */}
-          <div className="mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-xs text-zinc-500 dark:text-zinc-400">
+          <div className="pt-2 flex items-center justify-center text-xs text-zinc-500 dark:text-zinc-400">
             <span className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-rose-500" />
               {lang === "th" ? personal.locationTh : personal.locationEn}
             </span>
           </div>
-        </SpotlightCard>
+        </div>
 
         {/* Clean FAQ Accordion */}
         <FAQAccordion />
