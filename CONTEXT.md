@@ -23,7 +23,7 @@ A persistent or section-level engineering metrics display reflecting live local 
 _Avoid_: Generic stats counter, random progress bars
 
 **Atmospheric Backdrop**:
-A layered visual canvas combining a geometric dot-matrix grid, angled directional light beams (dual Cyan/Sky sheen gradients), and theme-aware click particle sparks with dual Dark/Light mode support.
+A layered visual canvas combining a geometric dot-matrix grid, angled directional light beams (dual Cyan/Sky sheen gradients), and theme-aware click particle sparks with automatic system preference-aware Dark/Light theme detection.
 _Avoid_: Flat solid background, loud video loop
 
 **Brand Identity Palette (Cyan to Electric Blue Dual Gradient)**:

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Theme, ThemeContext } from "./ThemeContextInstance";
 
+const COLOR_SCHEME_QUERY = "(prefers-color-scheme: light)";
+
 const getSystemTheme = (): Theme => {
   if (typeof window === "undefined" || !window.matchMedia) return "dark";
-  return window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
+  return window.matchMedia(COLOR_SCHEME_QUERY).matches ? "light" : "dark";
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -19,13 +19,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
     if (typeof window === "undefined" || !window.matchMedia) return;
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+    const mediaQuery = window.matchMedia(COLOR_SCHEME_QUERY);
     const handleChange = (e: MediaQueryListEvent) => {
       setThemeState(e.matches ? "light" : "dark");
     };
 
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    } else {
+      mediaQuery.addListener(handleChange);
+      return () => mediaQuery.removeListener(handleChange);
+    }
   }, []);
 
   useEffect(() => {
