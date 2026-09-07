@@ -3,9 +3,11 @@ import { Theme, ThemeContext } from "./ThemeContextInstance";
 
 const COLOR_SCHEME_QUERY = "(prefers-color-scheme: light)";
 
+const resolveTheme = (isLight: boolean): Theme => (isLight ? "light" : "dark");
+
 const getSystemTheme = (): Theme => {
   if (typeof window === "undefined" || !window.matchMedia) return "dark";
-  return window.matchMedia(COLOR_SCHEME_QUERY).matches ? "light" : "dark";
+  return resolveTheme(window.matchMedia(COLOR_SCHEME_QUERY).matches);
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -15,22 +17,21 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     // Clear stale persisted theme so OS preference is always respected
-    localStorage.removeItem("portfolio-theme");
+    try {
+      localStorage.removeItem("portfolio-theme");
+    } catch {
+      // Ignore errors in storage-restricted environments
+    }
 
     if (typeof window === "undefined" || !window.matchMedia) return;
 
     const mediaQuery = window.matchMedia(COLOR_SCHEME_QUERY);
     const handleChange = (e: MediaQueryListEvent) => {
-      setThemeState(e.matches ? "light" : "dark");
+      setThemeState(resolveTheme(e.matches));
     };
 
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    } else {
-      mediaQuery.addListener(handleChange);
-      return () => mediaQuery.removeListener(handleChange);
-    }
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   useEffect(() => {
