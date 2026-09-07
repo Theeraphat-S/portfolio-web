@@ -10,16 +10,13 @@ import {
   Mail,
   User,
   Github,
-  Sun,
-  Moon,
 } from "lucide-react";
-import { useLanguage, useTheme } from "../context";
+import { useLanguage } from "../context";
 import { portfolioData } from "../data/portfolioData";
 import { Magnet } from "./reactbits/Magnet";
 
 export const Navbar: React.FC = () => {
   const { lang, toggleLang, t } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -106,29 +103,8 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* Utility Controls: Theme Toggle & Language & Direct CTA */}
+          {/* Utility Controls: Language & Direct CTA */}
           <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Theme Switcher */}
-            <Magnet padding={16} magnetStrength={0.25}>
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                data-cursor-text="Theme"
-                className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700/70 hover:border-cyan-500/50 text-zinc-700 dark:text-zinc-200 transition-all hover:scale-105 cursor-pointer"
-                title={
-                  theme === "dark"
-                    ? "Switch to Light Mode"
-                    : "Switch to Dark Mode"
-                }
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-4 h-4 text-amber-400" />
-                ) : (
-                  <Moon className="w-4 h-4 text-slate-700" />
-                )}
-              </button>
-            </Magnet>
-
             {/* Language Switcher */}
             <Magnet padding={16} magnetStrength={0.25}>
               <button
