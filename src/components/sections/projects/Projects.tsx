@@ -52,7 +52,9 @@ export const Projects: React.FC = () => {
         {/* 1. Flagship Centerpiece: Hybrid Interactive Mobile Showcase with Ambient Border Beam */}
         <div className="mb-20 rounded-3xl border border-zinc-200 dark:border-zinc-800/90 bg-zinc-100/70 dark:bg-zinc-950/80 p-6 sm:p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden border-beam-container">
           {/* Animated Ambient Border Beam */}
-          <div className="border-beam-glow" />
+          <div className="border-beam-wrapper">
+            <div className="border-beam-glow" />
+          </div>
 
           {/* Subtle background glow */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 dark:bg-cyan-500/5 blur-3xl pointer-events-none rounded-full" />

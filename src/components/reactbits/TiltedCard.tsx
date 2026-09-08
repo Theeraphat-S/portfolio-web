@@ -1,5 +1,16 @@
-import React, { useRef, useState, useCallback } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React, {
+  useRef,
+  useState,
+  useCallback,
+  useSyncExternalStore,
+} from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 
 interface TiltedCardProps {
   children: React.ReactNode;
@@ -9,6 +20,23 @@ interface TiltedCardProps {
   scaleOnHover?: number;
   glareEffect?: boolean;
 }
+
+const subscribeTouch = (callback: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  const mql = window.matchMedia("(pointer: coarse)");
+  mql.addEventListener("change", callback);
+  return () => mql.removeEventListener("change", callback);
+};
+
+const getTouchSnapshot = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(pointer: coarse)").matches ||
+    !window.matchMedia("(hover: hover)").matches
+  );
+};
+
+const getTouchServerSnapshot = () => false;
 
 export const TiltedCard: React.FC<TiltedCardProps> = ({
   children,
@@ -21,6 +49,12 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
   const ref = useRef<HTMLDivElement>(null);
   const rectRef = useRef<DOMRect | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const isTouchDevice = useSyncExternalStore(
+    subscribeTouch,
+    getTouchSnapshot,
+    getTouchServerSnapshot,
+  );
+  const shouldReduceMotion = useReducedMotion();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -28,29 +62,33 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
   const mouseXSpring = useSpring(x, { stiffness: 180, damping: 22 });
   const mouseYSpring = useSpring(y, { stiffness: 180, damping: 22 });
 
+  const isMotionDisabled = isTouchDevice || shouldReduceMotion;
+
   const rotateX = useTransform(
     mouseYSpring,
     [-0.5, 0.5],
-    [rotateAmplitude, -rotateAmplitude],
+    isMotionDisabled ? [0, 0] : [rotateAmplitude, -rotateAmplitude],
   );
   const rotateY = useTransform(
     mouseXSpring,
     [-0.5, 0.5],
-    [-rotateAmplitude, rotateAmplitude],
+    isMotionDisabled ? [0, 0] : [-rotateAmplitude, rotateAmplitude],
   );
 
   const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
   const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
 
   const handleMouseEnter = useCallback(() => {
+    if (isMotionDisabled) return;
     if (ref.current) {
       rectRef.current = ref.current.getBoundingClientRect();
     }
     setIsHovered(true);
-  }, []);
+  }, [isMotionDisabled]);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
+      if (isMotionDisabled) return;
       if (!rectRef.current && ref.current) {
         rectRef.current = ref.current.getBoundingClientRect();
       }
@@ -66,7 +104,7 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
       x.set(xPct);
       y.set(yPct);
     },
-    [x, y],
+    [x, y, isMotionDisabled],
   );
 
   const handleMouseLeave = useCallback(() => {
@@ -92,13 +130,13 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
           transformStyle: "preserve-3d",
         }}
         animate={{
-          scale: isHovered ? scaleOnHover : 1,
+          scale: isHovered && !isMotionDisabled ? scaleOnHover : 1,
         }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
         className={`relative overflow-hidden rounded-2xl will-change-transform ${className}`}
       >
         {children}
-        {glareEffect && isHovered && (
+        {glareEffect && isHovered && !isMotionDisabled && (
           <motion.div
             className="pointer-events-none absolute inset-0 z-50 mix-blend-overlay"
             style={{

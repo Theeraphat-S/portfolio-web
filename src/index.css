@@ -257,8 +257,11 @@
 
 /* Animated Flagship Border Beam */
 @keyframes border-beam-spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
   100% {
-    transform: rotate(1turn);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -267,21 +270,12 @@
   isolation: isolate;
 }
 
-.border-beam-glow {
+.border-beam-wrapper {
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: inherit;
-  padding: 1.5px;
-  background: conic-gradient(
-    from 0deg at 50% 50%,
-    transparent 0deg,
-    transparent 60deg,
-    #06b6d4 120deg,
-    #38bdf8 180deg,
-    #2563eb 240deg,
-    transparent 300deg,
-    transparent 360deg
-  );
+  overflow: hidden;
+  pointer-events: none;
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -290,7 +284,27 @@
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: border-beam-spin 10s linear infinite;
+  padding: 1.5px;
+}
+
+.border-beam-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    transparent 70deg,
+    #06b6d4 110deg,
+    #38bdf8 140deg,
+    #2563eb 175deg,
+    transparent 220deg,
+    transparent 360deg
+  );
+  animation: border-beam-spin 12s linear infinite;
   pointer-events: none;
 }
 
@@ -304,4 +318,5 @@
     );
   }
 }
+
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView, animate } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   Activity,
   Clock,
@@ -9,6 +9,7 @@ import {
   Terminal,
 } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
+import { KineticCounter } from "../reactbits/KineticCounter";
 
 interface TelemetryMetric {
   label: string;
@@ -17,31 +18,6 @@ interface TelemetryMetric {
   icon: React.ReactNode;
   valueClass?: string;
 }
-
-const AnimatedLatency: React.FC<{ targetValue: number }> = ({ targetValue }) => {
-  const [currentValue, setCurrentValue] = useState(0);
-  const spanRef = useRef<HTMLSpanElement>(null);
-  const prevValueRef = useRef(0);
-  const isInView = useInView(spanRef, { once: true });
-
-  useEffect(() => {
-    if (!isInView) return;
-    const from = prevValueRef.current;
-    const controls = animate(from, targetValue, {
-      duration: from === 0 ? 1.2 : 0.6,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (latest) => {
-        const rounded = Math.round(latest);
-        prevValueRef.current = rounded;
-        setCurrentValue(rounded);
-      },
-    });
-
-    return () => controls.stop();
-  }, [isInView, targetValue]);
-
-  return <span ref={spanRef}>~{currentValue}ms</span>;
-};
 
 export const TelemetryDeck: React.FC = () => {
   const { t } = useLanguage();
@@ -98,7 +74,14 @@ export const TelemetryDeck: React.FC = () => {
     },
     {
       label: t("ความเร็วเชื่อมต่อ", "SYSTEM LATENCY"),
-      value: <AnimatedLatency targetValue={latency} />,
+      value: (
+        <KineticCounter
+          value={latency}
+          prefix="~"
+          suffix="ms"
+          duration={1.2}
+        />
+      ),
       subtext: "Optimized REST • Fast I/O",
       icon: <Activity className="w-4 h-4 text-amber-500" />,
       valueClass:
