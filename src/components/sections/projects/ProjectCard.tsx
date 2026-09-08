@@ -58,7 +58,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <TiltedCard
         rotateAmplitude={8}
         scaleOnHover={1.015}
-        glareEffect={false}
+        glareEffect={true}
         className="h-full"
         containerClassName="h-full"
       >

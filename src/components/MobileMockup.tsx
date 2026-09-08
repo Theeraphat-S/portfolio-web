@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import confetti from "canvas-confetti";
 import {
   Activity,
@@ -16,9 +16,21 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
-const SCREEN_INDEX_MAP: Record<string, number> = { ncds: 0, pinto: 1, pos: 2 };
+type ScreenKey = "ncds" | "pinto" | "pos";
 
-const screenVariants = {
+const SCREEN_INDEX_MAP: Record<ScreenKey, number> = {
+  ncds: 0,
+  pinto: 1,
+  pos: 2,
+};
+
+const SCREEN_THEME_MAP: Record<ScreenKey, { ping: string; dot: string }> = {
+  ncds: { ping: "bg-emerald-400", dot: "bg-emerald-500" },
+  pinto: { ping: "bg-amber-400", dot: "bg-amber-500" },
+  pos: { ping: "bg-blue-400", dot: "bg-blue-500" },
+};
+
+const screenVariants: Variants = {
   enter: (dir: number) => ({
     x: dir > 0 ? 90 : -90,
     opacity: 0,
@@ -29,24 +41,34 @@ const screenVariants = {
     x: 0,
     opacity: 1,
     scale: 1,
+    transition: {
+      x: { type: "spring" as const, stiffness: 320, damping: 30 },
+      opacity: { duration: 0.2 },
+      scale: { duration: 0.2 },
+    },
   },
   exit: (dir: number) => ({
     zIndex: 0,
     x: dir < 0 ? 90 : -90,
     opacity: 0,
     scale: 0.98,
+    transition: {
+      x: { type: "spring" as const, stiffness: 320, damping: 30 },
+      opacity: { duration: 0.2 },
+      scale: { duration: 0.2 },
+    },
   }),
 };
 
 export const MobileMockup: React.FC = () => {
   const { t } = useLanguage();
   const [[activeScreen, direction], setActiveScreen] = useState<
-    ["ncds" | "pinto" | "pos", number]
+    [ScreenKey, number]
   >(["ncds", 0]);
   const [streakCount, setStreakCount] = useState(7);
   const [isStreaked, setIsStreaked] = useState(false);
 
-  const changeScreen = (newScreen: "ncds" | "pinto" | "pos") => {
+  const changeScreen = (newScreen: ScreenKey) => {
     if (newScreen === activeScreen) return;
     const dir =
       SCREEN_INDEX_MAP[newScreen] > SCREEN_INDEX_MAP[activeScreen] ? 1 : -1;
@@ -123,23 +145,11 @@ export const MobileMockup: React.FC = () => {
               className="h-5 w-24 rounded-full bg-black border border-zinc-800 flex items-center justify-between px-2 gap-1.5 shadow-inner"
             >
               <span
-                className={`w-1.5 h-1.5 rounded-full animate-ping ${
-                  activeScreen === "ncds"
-                    ? "bg-emerald-400"
-                    : activeScreen === "pinto"
-                      ? "bg-amber-400"
-                      : "bg-blue-400"
-                }`}
+                className={`w-1.5 h-1.5 rounded-full animate-ping ${SCREEN_THEME_MAP[activeScreen].ping}`}
               />
               <div className="w-2.5 h-2.5 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
                 <div
-                  className={`w-1 h-1 rounded-full ${
-                    activeScreen === "ncds"
-                      ? "bg-emerald-500"
-                      : activeScreen === "pinto"
-                        ? "bg-amber-500"
-                        : "bg-blue-500"
-                  }`}
+                  className={`w-1 h-1 rounded-full ${SCREEN_THEME_MAP[activeScreen].dot}`}
                 />
               </div>
             </motion.div>
@@ -202,11 +212,6 @@ export const MobileMockup: React.FC = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{
-                    x: { type: "spring", stiffness: 320, damping: 30 },
-                    opacity: { duration: 0.2 },
-                    scale: { duration: 0.2 },
-                  }}
                   className="space-y-3"
                 >
                   {/* Header Badge */}
@@ -233,7 +238,7 @@ export const MobileMockup: React.FC = () => {
                       transition={{
                         duration: 3,
                         repeat: Infinity,
-                        ease: "linear",
+                        ease: [0.4, 0, 0.2, 1],
                       }}
                       className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-400/70 to-transparent pointer-events-none"
                     />
@@ -339,11 +344,6 @@ export const MobileMockup: React.FC = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{
-                    x: { type: "spring", stiffness: 320, damping: 30 },
-                    opacity: { duration: 0.2 },
-                    scale: { duration: 0.2 },
-                  }}
                   className="space-y-3"
                 >
                   <div className="flex items-center justify-between">
@@ -443,11 +443,6 @@ export const MobileMockup: React.FC = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{
-                    x: { type: "spring", stiffness: 320, damping: 30 },
-                    opacity: { duration: 0.2 },
-                    scale: { duration: 0.2 },
-                  }}
                   className="space-y-3"
                 >
                   <div className="flex items-center justify-between">
