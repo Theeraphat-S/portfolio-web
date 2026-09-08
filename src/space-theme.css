@@ -1,0 +1,298 @@
+/* Visual identity is independent of the system-driven color mode. */
+.visual-theme-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.5rem;
+  min-height: 36px;
+  border: 1px solid #d4d4d8;
+  border-radius: 999px;
+  background: #f4f4f5;
+  color: #0e7490;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.visual-theme-selector:hover {
+  border-color: #06b6d4;
+}
+
+.dark .visual-theme-selector {
+  background: #18181b;
+  border-color: #3f3f46;
+  color: #7dd3fc;
+}
+
+.dark .visual-theme-selector:hover {
+  border-color: rgba(6, 182, 212, 0.6);
+}
+
+.visual-theme-selector select {
+  width: 5rem;
+  background: transparent;
+  color: inherit;
+  font: 500 0.75rem var(--font-sans);
+  cursor: pointer;
+}
+
+.visual-theme-selector:focus-within {
+  outline: 2px solid #0284c7;
+  outline-offset: 3px;
+}
+
+.visual-theme-selector option {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dark .visual-theme-selector option {
+  background: #0b1729;
+  color: #e0f2fe;
+}
+
+[data-visual-theme="space"] {
+  --space-bg: #eff6fc;
+  --space-surface: rgb(255 255 255 / 82%);
+  --space-border: rgb(74 130 172 / 28%);
+  --space-ink: #152c43;
+  --space-muted: #4b647b;
+  --space-shadow: rgb(33 88 130 / 10%);
+}
+
+[data-visual-theme="space"].dark {
+  --space-bg: #030811;
+  --space-surface: rgb(10 24 42 / 78%);
+  --space-border: rgb(125 194 238 / 22%);
+  --space-ink: #edf7ff;
+  --space-muted: #a4b8ce;
+  --space-shadow: rgb(0 0 0 / 35%);
+}
+
+[data-visual-theme="space"] body,
+[data-visual-theme="space"] .portfolio-shell {
+  background: var(--space-bg);
+  color: var(--space-ink);
+}
+
+.space-stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 85% 40%, rgb(56 149 221 / 9%), transparent 60%),
+    radial-gradient(ellipse at 5% 85%, rgb(87 178 218 / 8%), transparent 50%);
+}
+
+.space-stars::before,
+.space-stars::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 23px 38px, #9ab5cc 95%, transparent),
+    radial-gradient(1px 1px at 157px 107px, #9ab5cc 95%, transparent),
+    radial-gradient(1.5px 1.5px at 89px 197px, #9ab5cc 95%, transparent);
+  background-size: 307px 263px;
+  opacity: 0.45;
+  animation: star-shimmer 9s ease-in-out infinite alternate;
+}
+
+.space-stars::after {
+  transform: rotate(180deg);
+  background-size: 439px 397px;
+  animation-delay: -5s;
+}
+
+.space-horizon {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateY(var(--orbit-offset, 0px));
+  mask-image: linear-gradient(#000 70%, transparent 100%);
+}
+
+.space-horizon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 65%;
+  opacity: 0.85;
+  animation: orbital-drift 45s ease-in-out infinite alternate;
+}
+
+.space-horizon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(3 8 17 / 10%),
+    rgb(3 8 17 / 38%) 45%,
+    rgb(3 8 17 / 65%) 100%
+  );
+}
+
+.light .space-horizon {
+  mask-image: linear-gradient(transparent 15%, #000 60%, transparent 100%);
+}
+
+.light .space-horizon img {
+  opacity: 0.3;
+  mix-blend-mode: luminosity;
+}
+
+.light .space-horizon::after {
+  background: linear-gradient(
+    180deg,
+    #eff6fc 10%,
+    rgb(239 246 252 / 45%) 75%,
+    #eff6fc
+  );
+}
+
+[data-visual-theme="space"]
+  .portfolio-hero
+  :is(.dot-matrix-bg, .sheen-beam-left, .sheen-beam-right) {
+  display: none;
+}
+
+[data-visual-theme="space"] .text-shiny {
+  background-image: linear-gradient(110deg, #b5e1ff, #fff 40%, #7dd3fc 85%);
+  animation: none;
+}
+
+[data-visual-theme="space"].light .text-shiny {
+  background-image: linear-gradient(110deg, #0d2942, #24577e 45%, #0e7490);
+}
+
+[data-visual-theme="space"]
+  :is(.space-surface, .glass-panel, .glass-panel-subtle) {
+  background:
+    linear-gradient(135deg, rgb(125 211 252 / 6%), transparent 65%),
+    var(--space-surface);
+  border-color: var(--space-border);
+  box-shadow:
+    inset 0 1px 0 rgb(186 230 253 / 15%),
+    0 16px 48px -24px var(--space-shadow);
+  backdrop-filter: blur(18px);
+}
+
+[data-visual-theme="space"] :is(.space-surface, .glass-panel-hover):hover {
+  border-color: rgb(56 189 248 / 48%);
+}
+
+[data-visual-theme="space"] .portfolio-navbar {
+  background: var(--space-surface);
+  border-bottom: 1px solid var(--space-border);
+  backdrop-filter: blur(18px);
+}
+
+[data-visual-theme="space"] :is(.visual-theme-selector, input, textarea) {
+  background: var(--space-surface);
+  border-color: var(--space-border);
+  color: var(--space-ink);
+}
+
+[data-visual-theme="space"] :is(button, a)[class*="from-cyan-"] {
+  background-image: linear-gradient(120deg, #0369a1, #1d4ed8);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 25%),
+    0 4px 20px rgb(14 165 233 / 20%);
+  color: #fff;
+}
+
+[data-visual-theme="space"]
+  :is(main > section:not(.portfolio-hero), main > div, footer) {
+  background-color: transparent;
+  border-color: var(--space-border);
+}
+
+/* Legacy cards use fixed dark utilities; scope their light treatment to Space. */
+[data-visual-theme="space"].light
+  :is(
+    #about,
+    #skills,
+    #experience,
+    #contact,
+    footer,
+    #mobile-navigation,
+    .space-project-card,
+    .space-project-modal
+  )
+  :is(
+    .text-white:not(button, a),
+    .text-zinc-100,
+    .text-zinc-200,
+    .text-zinc-300
+  ) {
+  color: var(--space-ink);
+}
+
+[data-visual-theme="space"].light :is(.text-zinc-400, .text-zinc-500) {
+  color: var(--space-muted);
+}
+
+[data-visual-theme="space"].light
+  :is(
+    #about,
+    #skills,
+    #experience,
+    #contact,
+    footer,
+    #mobile-navigation,
+    .space-project-card,
+    .space-project-modal
+  )
+  :is([class*="bg-zinc-8"], [class*="bg-zinc-9"]) {
+  background-color: rgb(221 235 247 / 65%);
+  border-color: var(--space-border);
+}
+
+[data-visual-theme="space"].light
+  :is(#about, #skills, #experience, #contact)
+  :is(.text-cyan-400, .text-sky-400, .text-blue-400) {
+  color: #0369a1;
+}
+
+@keyframes star-shimmer {
+  to {
+    opacity: 0.2;
+  }
+}
+
+@keyframes orbital-drift {
+  from {
+    transform: scale(1.02) translateY(0);
+  }
+  to {
+    transform: scale(1.06) translateY(8px);
+  }
+}
+
+@media (max-width: 639px) {
+  [data-visual-theme="space"] .portfolio-hero h1 {
+    font-size: clamp(2rem, 10.5vw, 4rem);
+  }
+
+  .visual-theme-selector {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-stars::before,
+  .space-stars::after,
+  .space-horizon img,
+  [data-visual-theme="space"] .animate-pulse,
+  [data-visual-theme="space"] .animate-ping,
+  [data-visual-theme="space"] .animate-marquee,
+  [data-visual-theme="space"] .animate-marquee-reverse {
+    animation: none;
+  }
+
+  .space-horizon {
+    transform: none;
+  }
+}

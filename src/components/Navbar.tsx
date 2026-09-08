@@ -14,6 +14,7 @@ import {
 import { useLanguage } from "../context";
 import { portfolioData } from "../data/portfolioData";
 import { Magnet } from "./reactbits/Magnet";
+import { VisualThemeSelector } from "./VisualThemeSelector";
 
 export const Navbar: React.FC = () => {
   const { lang, toggleLang, t } = useLanguage();
@@ -59,7 +60,7 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`portfolio-navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800/80 py-3 shadow-xl dark:shadow-black/40"
             : "bg-transparent py-5"
@@ -76,7 +77,7 @@ export const Navbar: React.FC = () => {
               />
               <div className="absolute inset-0 bg-cyan-500/10 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
             </div>
-            <div className="flex flex-col">
+            <div className="hidden min-[400px]:flex flex-col">
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-sm text-zinc-900 dark:text-zinc-100 tracking-tight">
                   Theeraphat S.
@@ -90,7 +91,7 @@ export const Navbar: React.FC = () => {
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden xl:flex items-center gap-1">
             {navLinks.map((link, idx) => (
               <a
                 key={idx}
@@ -105,6 +106,11 @@ export const Navbar: React.FC = () => {
 
           {/* Utility Controls: Language & Direct CTA */}
           <div className="flex items-center gap-2 sm:gap-2.5">
+            <Magnet padding={16} magnetStrength={0.25}>
+              <div>
+                <VisualThemeSelector />
+              </div>
+            </Magnet>
             {/* Language Switcher */}
             <Magnet padding={16} magnetStrength={0.25}>
               <button
@@ -150,8 +156,10 @@ export const Navbar: React.FC = () => {
             {/* Mobile Menu Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white"
+              className="xl:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white"
               aria-label="Toggle Mobile Menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? (
                 <X className="w-5 h-5" />
@@ -167,11 +175,12 @@ export const Navbar: React.FC = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[60px] z-40 bg-zinc-950/95 border-b border-zinc-800 backdrop-blur-2xl p-6 md:hidden shadow-2xl"
+            className="space-surface fixed inset-x-0 top-[80px] z-40 bg-zinc-950/95 border-b border-zinc-800 backdrop-blur-2xl p-6 xl:hidden shadow-2xl"
           >
             <div className="flex flex-col gap-3">
               {navLinks.map((link, idx) => (

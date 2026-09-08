@@ -50,7 +50,7 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* 1. Flagship Centerpiece: Hybrid Interactive Mobile Showcase */}
-        <div className="mb-20 rounded-3xl border border-zinc-200 dark:border-zinc-800/90 bg-zinc-100/70 dark:bg-zinc-950/80 p-6 sm:p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+        <div className="space-surface mb-20 rounded-3xl border border-zinc-200 dark:border-zinc-800/90 bg-zinc-100/70 dark:bg-zinc-950/80 p-6 sm:p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden">
           {/* Subtle background glow */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 dark:bg-cyan-500/5 blur-3xl pointer-events-none rounded-full" />
 
@@ -164,7 +164,7 @@ export const Projects: React.FC = () => {
             </h3>
           </div>
 
-          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-zinc-900/80 border border-zinc-800 self-start md:self-auto flex-wrap">
+          <div className="space-surface flex items-center gap-2 p-1.5 rounded-2xl bg-zinc-900/80 border border-zinc-800 self-start md:self-auto flex-wrap">
             <button
               onClick={() => setFilter("all")}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
@@ -184,7 +184,10 @@ export const Projects: React.FC = () => {
               }`}
             >
               {t("แอปมือถือ", "Mobile Apps")} (
-              {portfolioData.projects.filter((p) => p.category === "mobile").length}
+              {
+                portfolioData.projects.filter((p) => p.category === "mobile")
+                  .length
+              }
               )
             </button>
             <button
@@ -196,7 +199,10 @@ export const Projects: React.FC = () => {
               }`}
             >
               {t("ระบบ & ฟูลสแตก", "Fullstack / Systems")} (
-              {portfolioData.projects.filter((p) => p.category === "system").length}
+              {
+                portfolioData.projects.filter((p) => p.category === "system")
+                  .length
+              }
               )
             </button>
           </div>

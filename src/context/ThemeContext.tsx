@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Theme, ThemeContext } from "./ThemeContextInstance";
+import { Theme, ThemeContext, VisualTheme } from "./ThemeContextInstance";
 
 const COLOR_SCHEME_QUERY = "(prefers-color-scheme: light)";
+const VISUAL_THEME_KEY = "portfolio-visual-theme";
+
+const getVisualTheme = (): VisualTheme => {
+  try {
+    return localStorage.getItem(VISUAL_THEME_KEY) === "space"
+      ? "space"
+      : "original";
+  } catch {
+    return "original";
+  }
+};
 
 const resolveTheme = (isLight: boolean): Theme => (isLight ? "light" : "dark");
 
@@ -14,6 +25,21 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [theme, setThemeState] = useState<Theme>(getSystemTheme);
+  const [visualTheme, setVisualThemeState] =
+    useState<VisualTheme>(getVisualTheme);
+
+  const setVisualTheme = (nextTheme: VisualTheme) => {
+    setVisualThemeState(nextTheme);
+    try {
+      localStorage.setItem(VISUAL_THEME_KEY, nextTheme);
+    } catch {
+      // Keep the selector usable when browser storage is unavailable.
+    }
+  };
+
+  useEffect(() => {
+    document.documentElement.dataset.visualTheme = visualTheme;
+  }, [visualTheme]);
 
   useEffect(() => {
     // Clear stale persisted theme so OS preference is always respected
@@ -48,6 +74,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, visualTheme, setVisualTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
 };

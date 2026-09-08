@@ -61,7 +61,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-3xl rounded-3xl bg-zinc-900/95 border border-zinc-700/80 p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col my-auto"
+          className="space-surface space-project-modal relative w-full max-w-3xl rounded-3xl bg-zinc-900/95 border border-zinc-700/80 p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col my-auto"
         >
           {/* Top Decorative Border Highlight */}
           <div

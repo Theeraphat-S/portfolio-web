@@ -14,7 +14,7 @@ export const ContactGitHubCard: React.FC<ContactGitHubCardProps> = ({
   const { t } = useLanguage();
 
   return (
-    <div className="flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-cyan-500/40 transition-all gap-4">
+    <div className="space-surface flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-cyan-500/40 transition-all gap-4">
       <div className="flex items-start gap-3.5">
         <div className="w-11 h-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-200 shrink-0">
           <Github className="w-5 h-5" />
