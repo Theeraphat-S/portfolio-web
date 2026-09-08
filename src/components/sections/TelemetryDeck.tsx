@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   Activity,
   Clock,
@@ -20,6 +21,7 @@ interface TelemetryMetric {
 export const TelemetryDeck: React.FC = () => {
   const { t } = useLanguage();
   const [localTime, setLocalTime] = useState<string>("");
+  const [latency, setLatency] = useState<number>(12);
 
   useEffect(() => {
     const updateTime = () => {
@@ -38,6 +40,18 @@ export const TelemetryDeck: React.FC = () => {
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Subtle live ping jitter simulation (11ms - 14ms) reflecting active network node
+  useEffect(() => {
+    const jitterInterval = setInterval(() => {
+      const jitterValues = [11, 12, 13, 14, 12];
+      const next =
+        jitterValues[Math.floor(Math.random() * jitterValues.length)];
+      setLatency(next);
+    }, 3500);
+
+    return () => clearInterval(jitterInterval);
   }, []);
 
   const metrics: TelemetryMetric[] = [
@@ -59,11 +73,11 @@ export const TelemetryDeck: React.FC = () => {
     },
     {
       label: t("ความเร็วเชื่อมต่อ", "SYSTEM LATENCY"),
-      value: "~12ms",
+      value: `~${latency}ms`,
       subtext: "Optimized REST • Fast I/O",
       icon: <Activity className="w-4 h-4 text-amber-500" />,
       valueClass:
-        "text-2xl sm:text-3xl font-mono font-bold text-emerald-600 dark:text-emerald-400 tracking-tight",
+        "text-2xl sm:text-3xl font-mono font-bold text-emerald-600 dark:text-emerald-400 tracking-tight transition-all duration-300",
     },
     {
       label: t("เวอร์ชัน & ระบบจัดการ", "BUILD & VCS"),
@@ -106,12 +120,16 @@ export const TelemetryDeck: React.FC = () => {
           </div>
         </div>
 
-        {/* Telemetry Metrics Deck Grid */}
+        {/* Telemetry Metrics Deck Grid with Staggered Entrance */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {metrics.map((m, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 shadow-sm flex flex-col justify-between"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: idx * 0.08 }}
+              className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 shadow-sm flex flex-col justify-between hover:border-cyan-500/40 transition-colors"
             >
               <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 mb-3">
                 <span className="text-[11px] font-mono uppercase tracking-wider">
@@ -125,7 +143,7 @@ export const TelemetryDeck: React.FC = () => {
                   {m.subtext}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

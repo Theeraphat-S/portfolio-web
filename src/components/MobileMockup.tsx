@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
 import {
   Activity,
   Heart,
@@ -15,18 +16,60 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
+const SCREEN_INDEX_MAP: Record<string, number> = { ncds: 0, pinto: 1, pos: 2 };
+
+const screenVariants = {
+  enter: (dir: number) => ({
+    x: dir > 0 ? 90 : -90,
+    opacity: 0,
+    scale: 0.98,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+    scale: 1,
+  },
+  exit: (dir: number) => ({
+    zIndex: 0,
+    x: dir < 0 ? 90 : -90,
+    opacity: 0,
+    scale: 0.98,
+  }),
+};
+
 export const MobileMockup: React.FC = () => {
   const { t } = useLanguage();
-  const [activeScreen, setActiveScreen] = useState<"ncds" | "pinto" | "pos">(
-    "ncds",
-  );
+  const [[activeScreen, direction], setActiveScreen] = useState<
+    ["ncds" | "pinto" | "pos", number]
+  >(["ncds", 0]);
   const [streakCount, setStreakCount] = useState(7);
   const [isStreaked, setIsStreaked] = useState(false);
 
-  const handleStreakClick = () => {
+  const changeScreen = (newScreen: "ncds" | "pinto" | "pos") => {
+    if (newScreen === activeScreen) return;
+    const dir =
+      SCREEN_INDEX_MAP[newScreen] > SCREEN_INDEX_MAP[activeScreen] ? 1 : -1;
+    setActiveScreen([newScreen, dir]);
+  };
+
+  const handleStreakClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!isStreaked) {
       setStreakCount((prev) => prev + 1);
       setIsStreaked(true);
+
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+      confetti({
+        particleCount: 36,
+        spread: 60,
+        origin: { x, y },
+        colors: ["#f59e0b", "#38bdf8", "#06b6d4", "#10b981"],
+        disableForReducedMotion: true,
+        zIndex: 2000,
+        scalar: 0.85,
+      });
     }
   };
 
@@ -71,12 +114,35 @@ export const MobileMockup: React.FC = () => {
           <div className="relative z-30 pt-3 px-6 pb-2 flex items-center justify-between text-[11px] font-medium text-zinc-400">
             <span>09:41</span>
 
-            {/* Dynamic Island */}
-            <div className="h-5 w-24 rounded-full bg-black border border-zinc-800 flex items-center justify-end px-2 gap-1.5 shadow-inner">
+            {/* Dynamic Island with Reactive State Pulse */}
+            <motion.div
+              key={`island-${activeScreen}`}
+              initial={{ scale: 0.92 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 450, damping: 25 }}
+              className="h-5 w-24 rounded-full bg-black border border-zinc-800 flex items-center justify-between px-2 gap-1.5 shadow-inner"
+            >
+              <span
+                className={`w-1.5 h-1.5 rounded-full animate-ping ${
+                  activeScreen === "ncds"
+                    ? "bg-emerald-400"
+                    : activeScreen === "pinto"
+                      ? "bg-amber-400"
+                      : "bg-blue-400"
+                }`}
+              />
               <div className="w-2.5 h-2.5 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
-                <div className="w-1 h-1 rounded-full bg-emerald-500" />
+                <div
+                  className={`w-1 h-1 rounded-full ${
+                    activeScreen === "ncds"
+                      ? "bg-emerald-500"
+                      : activeScreen === "pinto"
+                        ? "bg-amber-500"
+                        : "bg-blue-500"
+                  }`}
+                />
               </div>
-            </div>
+            </motion.div>
 
             <div className="flex items-center gap-1.5 font-mono text-[10px]">
               <span>5G</span>
@@ -90,8 +156,8 @@ export const MobileMockup: React.FC = () => {
           <div className="px-4 py-2 bg-zinc-900/80 border-b border-zinc-800/80 backdrop-blur-md z-20">
             <div className="grid grid-cols-3 gap-1 p-1 bg-zinc-950 rounded-xl border border-zinc-800 text-[11px] font-medium">
               <button
-                onClick={() => setActiveScreen("ncds")}
-                className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 ${
+                onClick={() => changeScreen("ncds")}
+                className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 cursor-pointer ${
                   activeScreen === "ncds"
                     ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-sm font-semibold"
                     : "text-zinc-400 hover:text-zinc-200"
@@ -101,8 +167,8 @@ export const MobileMockup: React.FC = () => {
                 NCDs
               </button>
               <button
-                onClick={() => setActiveScreen("pinto")}
-                className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 ${
+                onClick={() => changeScreen("pinto")}
+                className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 cursor-pointer ${
                   activeScreen === "pinto"
                     ? "bg-sky-500/20 text-sky-300 border border-sky-500/30 shadow-sm font-semibold"
                     : "text-zinc-400 hover:text-zinc-200"
@@ -112,8 +178,8 @@ export const MobileMockup: React.FC = () => {
                 Pinto
               </button>
               <button
-                onClick={() => setActiveScreen("pos")}
-                className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 ${
+                onClick={() => changeScreen("pos")}
+                className={`py-1.5 rounded-lg transition-all text-center flex items-center justify-center gap-1 cursor-pointer ${
                   activeScreen === "pos"
                     ? "bg-blue-500/20 text-blue-300 border border-blue-500/30 shadow-sm font-semibold"
                     : "text-zinc-400 hover:text-zinc-200"
@@ -127,14 +193,20 @@ export const MobileMockup: React.FC = () => {
 
           {/* Interactive Screen Content Area */}
           <div className="flex-1 overflow-y-auto px-4 py-3 text-zinc-100 relative">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" custom={direction}>
               {activeScreen === "ncds" && (
                 <motion.div
                   key="ncds"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
+                  custom={direction}
+                  variants={screenVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 320, damping: 30 },
+                    opacity: { duration: 0.2 },
+                    scale: { duration: 0.2 },
+                  }}
                   className="space-y-3"
                 >
                   {/* Header Badge */}
@@ -148,16 +220,26 @@ export const MobileMockup: React.FC = () => {
                         <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
                       </h4>
                     </div>
-                    <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-medium">
+                    <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       VHV Active
                     </span>
                   </div>
 
-                  {/* Vitals Summary Card */}
-                  <div className="rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-900/90 border border-zinc-800 p-3 shadow-inner">
+                  {/* Vitals Summary Card with Animated Heartbeat Glow */}
+                  <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-900/90 border border-zinc-800 p-3 shadow-inner">
+                    <motion.div
+                      animate={{ x: ["-100%", "200%"] }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-400/70 to-transparent pointer-events-none"
+                    />
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-zinc-300 flex items-center gap-1">
-                        <Heart className="w-3.5 h-3.5 text-rose-500" />
+                      <span className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
+                        <Heart className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
                         {t("ผลการประเมินความเสี่ยง", "Risk Assessment")}
                       </span>
                       <span className="text-[11px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-700/50">
@@ -235,24 +317,33 @@ export const MobileMockup: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Action Button */}
-                  <button className="w-full py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-950/50 flex items-center justify-center gap-1.5 transition-colors">
+                  {/* Action Button with Spring Tap */}
+                  <motion.button
+                    whileTap={{ scale: 0.96 }}
+                    className="w-full py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-950/50 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  >
                     <TrendingUp className="w-3.5 h-3.5" />
                     {t(
                       "ออกรายงานผลตรวจ (Medical PDF)",
                       "Generate Medical Report",
                     )}
-                  </button>
+                  </motion.button>
                 </motion.div>
               )}
 
               {activeScreen === "pinto" && (
                 <motion.div
                   key="pinto"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
+                  custom={direction}
+                  variants={screenVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 320, damping: 30 },
+                    opacity: { duration: 0.2 },
+                    scale: { duration: 0.2 },
+                  }}
                   className="space-y-3"
                 >
                   <div className="flex items-center justify-between">
@@ -289,9 +380,10 @@ export const MobileMockup: React.FC = () => {
                       )}
                     </p>
 
-                    <button
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
                       onClick={handleStreakClick}
-                      className={`w-full py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                      className={`w-full py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                         isStreaked
                           ? "bg-zinc-800 text-emerald-400 border border-emerald-500/30"
                           : "bg-amber-500 hover:bg-amber-400 text-zinc-950 shadow-md shadow-amber-950/50"
@@ -304,7 +396,7 @@ export const MobileMockup: React.FC = () => {
                             "กดรับแต้มประจำวัน (+50 Pts)",
                             "Claim Daily Streak (+50 Pts)",
                           )}
-                    </button>
+                    </motion.button>
                   </div>
 
                   {/* Profile API Points */}
@@ -346,10 +438,16 @@ export const MobileMockup: React.FC = () => {
               {activeScreen === "pos" && (
                 <motion.div
                   key="pos"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
+                  custom={direction}
+                  variants={screenVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 320, damping: 30 },
+                    opacity: { duration: 0.2 },
+                    scale: { duration: 0.2 },
+                  }}
                   className="space-y-3"
                 >
                   <div className="flex items-center justify-between">
@@ -407,13 +505,16 @@ export const MobileMockup: React.FC = () => {
                     </div>
                   </div>
 
-                  <button className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 flex items-center justify-center gap-1.5 transition-colors">
+                  <motion.button
+                    whileTap={{ scale: 0.96 }}
+                    className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  >
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     {t(
                       "ยืนยันการรับชำระเงิน (Sync API)",
                       "Complete Transaction (Sync API)",
                     )}
-                  </button>
+                  </motion.button>
                 </motion.div>
               )}
             </AnimatePresence>

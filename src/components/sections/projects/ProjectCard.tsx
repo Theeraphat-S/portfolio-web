@@ -11,6 +11,7 @@ import {
 import { useLanguage } from "../../../context/LanguageContext";
 import { ProjectItem } from "../../../types";
 import { SpotlightCard } from "../../reactbits/SpotlightCard";
+import { TiltedCard } from "../../reactbits/TiltedCard";
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -54,12 +55,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="flex flex-col h-full"
     >
-      <SpotlightCard
-        spotlightColor={getSpotlightColor(project.color)}
-        className="h-full flex flex-col justify-between group cursor-pointer border-zinc-800 hover:border-zinc-700"
-        onClick={() => onSelect(project)}
-        data-cursor-text="Explore"
+      <TiltedCard
+        rotateAmplitude={8}
+        scaleOnHover={1.015}
+        glareEffect={false}
+        className="h-full"
+        containerClassName="h-full"
       >
+        <SpotlightCard
+          spotlightColor={getSpotlightColor(project.color)}
+          className="h-full flex flex-col justify-between group cursor-pointer border-zinc-800 hover:border-zinc-700"
+          onClick={() => onSelect(project)}
+          data-cursor-text="Explore"
+        >
         <div>
           {/* Top Bar: Icon + Badge + Year */}
           <div className="flex items-center justify-between mb-4">
@@ -143,6 +151,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </button>
         </div>
       </SpotlightCard>
+      </TiltedCard>
     </motion.div>
   );
 };

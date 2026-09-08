@@ -53,10 +53,14 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
         isEven ? "md:flex-row-reverse" : ""
       }`}
     >
-      {/* Timeline Center Node */}
-      <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_#06b6d4] z-10">
+      {/* Timeline Center Node with Tactile Hover Spring */}
+      <motion.div
+        whileHover={{ scale: 1.25 }}
+        transition={{ type: "spring", stiffness: 350, damping: 20 }}
+        className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_#06b6d4] z-10 cursor-pointer"
+      >
         {getTypeIcon(experience.type)}
-      </div>
+      </motion.div>
 
       {/* Content Box */}
       <div className="ml-12 md:ml-0 md:w-1/2 md:px-8 w-full">

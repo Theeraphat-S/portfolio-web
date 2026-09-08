@@ -33,3 +33,16 @@ _Avoid_: Monochromatic green defaults, generic purple gradients
 **Resume Pill**:
 A compact magnetic/expandable action element that smoothly expands on hover and directs recruiters directly to the PDF resume.
 _Avoid_: Plain text download link
+
+**Tactile Motion Dynamics**:
+A physics-driven animation framework utilizing Framer Motion spring physics, 3D card tilt gestures, and hardware-accelerated transforms, balancing visceral tactile feedback with high-performance 60-120fps responsiveness.
+_Avoid_: Jarring linear ease, heavy 3D canvas libraries, distracting continuous wiggle loops
+
+**Kinetic Telemetry Counters**:
+Numerical readouts that animate smoothly from zero to target values upon entering the viewport with simulated real-time telemetry jitter, reinforcing the engineering persona.
+_Avoid_: Static frozen metric numbers, abrupt value swaps
+
+**Mobile Gesture Simulation**:
+Micro-interaction behaviors within the Interactive Showcase Frame that mimic native mobile OS experiences (spring-tab transitions, simulated haptics/burst on streak click, dynamic island active pulse).
+_Avoid_: Plain web tab switching without transitional motion
+

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { ExperienceItem } from "../../../types";
@@ -7,6 +8,12 @@ import { ExperienceCard } from "./ExperienceCard";
 export const ExperienceTimeline: React.FC = () => {
   const { t } = useLanguage();
   const { experiences } = portfolioData;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 70%", "end 70%"],
+  });
 
   return (
     <section id="experience" className="py-24 relative">
@@ -31,9 +38,15 @@ export const ExperienceTimeline: React.FC = () => {
         </div>
 
         {/* Vertical Timeline */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Vertical Line */}
-          <div className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-cyan-500 via-sky-500 to-blue-600/30" />
+        <div ref={containerRef} className="relative max-w-4xl mx-auto">
+          {/* Background Track Line */}
+          <div className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-zinc-800/70" />
+
+          {/* Scroll-Linked Dynamic Filling Line */}
+          <motion.div
+            style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
+            className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-cyan-500 via-sky-400 to-blue-600 shadow-[0_0_12px_rgba(6,182,212,0.6)]"
+          />
 
           <div className="space-y-12">
             {experiences.map((exp: ExperienceItem, idx: number) => (
