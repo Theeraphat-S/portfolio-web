@@ -26,6 +26,42 @@ export const SCREEN_THEME_MAP: Record<ScreenKey, { ping: string; dot: string; la
   },
 };
 
+export interface BlueprintData {
+  cubit: string;
+  state: string;
+  repository: string;
+  engineFps: string;
+  frameTime: string;
+  layer: string;
+}
+
+export const SCREEN_BLUEPRINT_MAP: Record<ScreenKey, BlueprintData> = {
+  ncds: {
+    cubit: "HealthRiskCubit",
+    state: "RiskCalculated(Score: 12, Level: Moderate)",
+    repository: "NcdsOfflineRepository (Drift SQLite)",
+    engineFps: "120.0 FPS",
+    frameTime: "1.1 ms",
+    layer: "Presentation -> Domain -> OfflineData",
+  },
+  pinto: {
+    cubit: "OrderCartBloc",
+    state: "CartUpdated(Items: 3, Total: ฿320)",
+    repository: "DeliveryGateway (REST + WebSockets)",
+    engineFps: "119.8 FPS",
+    frameTime: "1.4 ms",
+    layer: "Clean Bloc Pattern -> StreamTransformers",
+  },
+  pos: {
+    cubit: "PosCheckoutBloc",
+    state: "TransactionCommitted(Receipt #8921)",
+    repository: "ReceiptPrinterService (ESC/POS Driver)",
+    engineFps: "120.0 FPS",
+    frameTime: "0.9 ms",
+    layer: "Offline Sync Engine -> Local Storage",
+  },
+};
+
 export const screenVariants: Variants = {
   enter: (dir: number) => ({
     x: dir > 0 ? 90 : -90,

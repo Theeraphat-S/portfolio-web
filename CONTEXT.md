@@ -46,3 +46,15 @@ _Avoid_: Static frozen metric numbers, abrupt value swaps
 Micro-interaction behaviors within the Interactive Showcase Frame that mimic native mobile OS experiences (spring-tab transitions, simulated haptics/burst on streak click, dynamic island active pulse).
 _Avoid_: Plain web tab switching without transitional motion
 
+**The Lens Stage (Interactive Spotlight Reveal)**:
+A cursor-bound dynamic radial mask (`clip-path: circle()`) equipped with a tactile lens ring and telemetry coordinate pill (inspired by Norrly), unmasking the Flutter BLoC state stream, widget hierarchy blueprint, and engineering telemetry beneath the surface of the Interactive Showcase Frame and Project Cards.
+_Avoid_: Static overlays, intrusive modal popups for quick architectural preview
+
+**Fluid Ambient Mesh & Specular Border Beams**:
+Multi-layered breathing gradient lighting and dynamic conic border rays (inspired by GetLayers AI), producing organic cyan-to-electric-blue atmospheric illumination and specular card edge glints on hover while preserving 60–120fps hardware acceleration.
+_Avoid_: Flat borders, heavy WebGL canvas instances that cause mobile frame drops
+
+**Kinetic UI Suite**:
+A triad of micro-interaction components (inspired by AnimMaster Lib) comprising metallic shimmer gradient sweeps on key editorial headings, flip-rotating engineering role pills, and luminous CTA buttons with orbiting conic border beams (`btn--shine`).
+_Avoid_: Static monotone text, generic flat button hover states
+

@@ -11,6 +11,7 @@ import {
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { Magnet } from "../../reactbits/Magnet";
+import { RotatingRoleBadge } from "../../reactbits/RotatingRoleBadge";
 
 export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -63,6 +64,16 @@ export const Hero: React.FC = () => {
 
       {/* 4. Main Editorial Display Container */}
       <div className="relative z-10 max-w-[105rem] w-full mx-auto px-4 sm:px-8 md:px-12 lg:px-20 flex flex-col justify-center flex-1">
+        {/* AnimMaster Kinetic Rotating Role Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-4 sm:mb-6 self-start md:self-center"
+        >
+          <RotatingRoleBadge />
+        </motion.div>
+
         <div className="flex flex-col gap-2 sm:gap-4 md:items-center w-full justify-center">
           {/* Line 1: Bio Lead + MOBILE & APP + Floating GitHub */}
           <div className="md:flex gap-6 lg:gap-10 items-center relative">
@@ -204,7 +215,7 @@ export const Hero: React.FC = () => {
                 data-cursor-text="Resume"
                 className="group flex items-center"
               >
-                <div className="relative flex items-center bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 h-12 w-12 group-hover:w-44 rounded-full transition-all duration-500 ease-[0.23,1,0.32,1] overflow-hidden shadow-xl border border-zinc-700/60 dark:border-zinc-300">
+                <div className="relative flex items-center bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 h-12 w-12 group-hover:w-44 rounded-full transition-all duration-500 ease-[0.23,1,0.32,1] overflow-hidden shadow-xl border border-zinc-700/60 dark:border-zinc-300 btn--shine">
                   <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:delay-150 text-[11px] font-black uppercase tracking-widest pl-5 pr-10">
                     {t("ดูเรซูเม่", "View Resume")}
                   </span>

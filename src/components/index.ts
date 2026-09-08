@@ -4,5 +4,8 @@ export * from "./MobileMockup";
 export * from "./SmoothScroll";
 export * from "./ScrollProgressBar";
 export * from "./reactbits/KineticCounter";
+export * from "./reactbits/LensStage";
+export * from "./reactbits/RotatingRoleBadge";
+export * from "./reactbits/FluidAmbientMesh";
 export * from "./sections";
 

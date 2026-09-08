@@ -5,10 +5,12 @@ import {
   NcdsScreen,
   PintoScreen,
   PosScreen,
+  BlueprintScreen,
   type ScreenKey,
   SCREEN_INDEX_MAP,
   SCREEN_THEME_MAP,
 } from "./mobile-mockup";
+import { LensStage } from "./reactbits/LensStage";
 
 export const MobileMockup: React.FC = () => {
   const [[activeScreen, direction], setActiveScreen] = useState<[ScreenKey, number]>(["ncds", 0]);
@@ -126,8 +128,15 @@ export const MobileMockup: React.FC = () => {
             </div>
           </div>
 
-          {/* Interactive Screen Content Area */}
-          <div className="flex-1 overflow-y-auto px-4 py-3 text-zinc-100 relative">
+          {/* Interactive Screen Content with Norrly-style Lens Reveal */}
+          <LensStage
+            radius={85}
+            label="FLUTTER ARCHITECTURE"
+            activeBorderColor="rgba(6, 182, 212, 0.9)"
+            containerClassName="flex-1 overflow-hidden"
+            className="h-full overflow-y-auto px-4 py-3 text-zinc-100 relative"
+            revealContent={<BlueprintScreen activeScreen={activeScreen} />}
+          >
             <AnimatePresence mode="wait" custom={direction}>
               {activeScreen === "ncds" && (
                 <NcdsScreen key="ncds" direction={direction} />
@@ -139,7 +148,7 @@ export const MobileMockup: React.FC = () => {
                 <PosScreen key="pos" direction={direction} />
               )}
             </AnimatePresence>
-          </div>
+          </LensStage>
 
           {/* Bottom Home Indicator */}
           <div className="p-3 bg-zinc-950/90 border-t border-zinc-900 flex justify-center">

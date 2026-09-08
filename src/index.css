@@ -319,4 +319,55 @@
   }
 }
 
+/* AnimMaster-inspired Luminous Shine Button (btn--shine) */
+.btn--shine,
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
 
+.btn--shine::after,
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn--shine:hover::after,
+.btn-shine:hover::after {
+  transform: translateX(100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--shine::after,
+  .btn-shine::after {
+    display: none;
+  }
+}
+
+/* GetLayers-inspired 3D Layer Cascade */
+.perspective-container {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.layer-depth-1 {
+  transform: translateZ(16px);
+}
+
+.layer-depth-2 {
+  transform: translateZ(28px);
+}

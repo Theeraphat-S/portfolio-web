@@ -6,6 +6,7 @@ import { ProjectItem } from "../../../types";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectModal } from "./modal/ProjectModal";
 import { MobileMockup } from "../../MobileMockup";
+import { FluidAmbientMesh } from "../../reactbits/FluidAmbientMesh";
 
 export const Projects: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -56,8 +57,8 @@ export const Projects: React.FC = () => {
             <div className="border-beam-glow" />
           </div>
 
-          {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 dark:bg-cyan-500/5 blur-3xl pointer-events-none rounded-full" />
+          {/* GetLayers-inspired Fluid Ambient Mesh Glow */}
+          <FluidAmbientMesh intensity="medium" speed="slow" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left: Interactive Briefing & Metrics */}
@@ -129,7 +130,7 @@ export const Projects: React.FC = () => {
                 <button
                   onClick={() => setSelectedProject(flagshipProject)}
                   data-cursor-text="Details"
-                  className="px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs inline-flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs inline-flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md cursor-pointer btn--shine"
                 >
                   <Layers className="w-4 h-4" />
                   <span>
