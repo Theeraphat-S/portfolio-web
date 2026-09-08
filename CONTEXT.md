@@ -6,26 +6,6 @@ Personal showcase and professional identity platform for Theeraphat Srimontha (O
 
 ### Visual & Architecture Concepts
 
-**Visual Theme**:
-The visitor-selectable visual identity of the portfolio: Original (เดิม), the established portfolio appearance, or Space (อวกาศ), an appearance inspired by outer space. Visual Theme is independent of Color Mode.
-_Avoid_: Color mode, dark/light theme
-
-**Color Mode**:
-The portfolio's light or dark appearance, determined by the visitor's system preference for either Visual Theme.
-_Avoid_: Visual theme, space mode
-
-**Space Theme**:
-The Visual Theme with a cinematic, realistic outer-space identity: dimensional planets, fine stars, blue horizon light, translucent glass-like cards, and gentle, slow motion. It extends across backgrounds, cards, buttons, and decorative elements while preserving the portfolio's content layout and navigation.
-_Avoid_: Space background, space exploration navigation
-
-**Space Light Appearance**:
-The Space Theme in Light Color Mode, with a blue-tinted white backdrop, softly lit planets and atmosphere, pale glass-like cards, and dark text.
-_Avoid_: Separate light theme
-
-**Space Dark Appearance**:
-The Space Theme in Dark Color Mode, with a deep-black outer-space backdrop and cinematic planetary lighting.
-_Avoid_: Separate dark theme
-
 **Editorial Display**:
 A brutalist-inspired typography system using fluid clamp font scaling, high-contrast headings, and embedded inline micro-badges representing engineering domains (`MOBILE & APP`, `FLUT [📱] TER`, `DEV [⚡] ELOPER`).
 _Avoid_: Generic hero banner, template heading

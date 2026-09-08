@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useTheme } from "../../context";
-import { useReducedMotion } from "framer-motion";
 
 interface Spark {
   x: number;
@@ -16,13 +15,11 @@ interface Spark {
 
 export const ClickSpark: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const { theme, visualTheme } = useTheme();
-  const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
   const sparksRef = useRef<Spark[]>([]);
   const animFrameId = useRef<number | null>(null);
 
   useEffect(() => {
-    if (reducedMotion || visualTheme === "space") return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -99,11 +96,8 @@ export const ClickSpark: React.FC = () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointerdown", handleClick);
       if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
-      sparksRef.current = [];
     };
-  }, [theme, visualTheme, reducedMotion]);
-
-  if (reducedMotion || visualTheme === "space") return null;
+  }, [theme]);
 
   return (
     <canvas

@@ -97,17 +97,18 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
 
           {/* Key Achievements / Bullets */}
           <div className="mt-4 space-y-1.5 border-t border-zinc-800/80 pt-3">
-            {(lang === "th" ? experience.bulletsTh : experience.bulletsEn).map(
-              (bullet, aIdx) => (
-                <div
-                  key={aIdx}
-                  className="flex items-start gap-2 text-xs text-zinc-400"
-                >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
-                  <span>{bullet}</span>
-                </div>
-              ),
-            )}
+            {(lang === "th"
+              ? experience.bulletsTh
+              : experience.bulletsEn
+            ).map((bullet, aIdx) => (
+              <div
+                key={aIdx}
+                className="flex items-start gap-2 text-xs text-zinc-400"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
+                <span>{bullet}</span>
+              </div>
+            ))}
           </div>
 
           {/* Skills Tags */}

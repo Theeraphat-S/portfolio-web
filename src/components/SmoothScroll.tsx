@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import Lenis from "lenis";
-import { useReducedMotion } from "framer-motion";
 
 interface SmoothScrollProps {
   children: React.ReactNode;
 }
 
 export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
-  const reducedMotion = useReducedMotion();
   useEffect(() => {
-    if (reducedMotion) return;
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -37,7 +34,7 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
       lenis.destroy();
       delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
-  }, [reducedMotion]);
+  }, []);
 
   return <>{children}</>;
 };

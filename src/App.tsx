@@ -1,7 +1,7 @@
 import React from "react";
 import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { AtmosphericBackdrop } from "./components/SpaceBackdrop";
+import { Particles } from "./components/reactbits/Particles";
 import { CustomCursor } from "./components/reactbits/CustomCursor";
 import { ClickSpark } from "./components/reactbits/ClickSpark";
 import { Preloader } from "./components/Preloader";
@@ -33,9 +33,14 @@ export const App: React.FC = () => {
           {/* Theme-Aware Interactive Click Sparks */}
           <ClickSpark />
 
-          <div className="portfolio-shell relative min-h-screen bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-400 transition-colors duration-300">
+          <div className="relative min-h-screen bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-400 transition-colors duration-300">
             {/* React Bits Interactive Particle Background */}
-            <AtmosphericBackdrop />
+            <Particles
+              particleColors={["#0284c7", "#06b6d4", "#38bdf8"]}
+              particleCount={40}
+              speed={0.35}
+              particleBaseSize={1.5}
+            />
 
             {/* Global Floating Navbar */}
             <Navbar />

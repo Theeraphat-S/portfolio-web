@@ -39,10 +39,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   const getSpotlightColor = (color: string) => {
-    if (color === "#10b981" || color === "emerald")
-      return "rgba(6, 182, 212, 0.18)";
-    if (color === "#06b6d4" || color === "cyan")
-      return "rgba(6, 182, 212, 0.18)";
+    if (color === "#10b981" || color === "emerald") return "rgba(6, 182, 212, 0.18)";
+    if (color === "#06b6d4" || color === "cyan") return "rgba(6, 182, 212, 0.18)";
     return "rgba(59, 130, 246, 0.18)";
   };
 
@@ -56,7 +54,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       <SpotlightCard
         spotlightColor={getSpotlightColor(project.color)}
-        className="space-project-card h-full flex flex-col justify-between group cursor-pointer border-zinc-800 hover:border-zinc-700"
+        className="h-full flex flex-col justify-between group cursor-pointer border-zinc-800 hover:border-zinc-700"
         onClick={() => onSelect(project)}
         data-cursor-text="Explore"
       >

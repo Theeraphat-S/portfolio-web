@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@import "./space-theme.css";
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {

@@ -11,7 +11,6 @@ import {
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { Magnet } from "../../reactbits/Magnet";
-import { SpaceHorizon } from "../../SpaceBackdrop";
 
 export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -23,8 +22,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="portfolio-hero relative min-h-[92vh] flex flex-col justify-center pt-32 sm:pt-36 pb-16 overflow-hidden select-none">
-      <SpaceHorizon />
+    <section className="relative min-h-[92vh] flex flex-col justify-center pt-32 sm:pt-36 pb-16 overflow-hidden select-none">
       {/* 1. Atmospheric Backdrop: Dot Grid Matrix */}
       <div className="absolute inset-0 z-0 dot-matrix-bg pointer-events-none" />
 
