@@ -184,7 +184,10 @@ export const Projects: React.FC = () => {
               }`}
             >
               {t("แอปมือถือ", "Mobile Apps")} (
-              {portfolioData.projects.filter((p) => p.category === "mobile").length}
+              {
+                portfolioData.projects.filter((p) => p.category === "mobile")
+                  .length
+              }
               )
             </button>
             <button
@@ -196,7 +199,10 @@ export const Projects: React.FC = () => {
               }`}
             >
               {t("ระบบ & ฟูลสแตก", "Fullstack / Systems")} (
-              {portfolioData.projects.filter((p) => p.category === "system").length}
+              {
+                portfolioData.projects.filter((p) => p.category === "system")
+                  .length
+              }
               )
             </button>
           </div>

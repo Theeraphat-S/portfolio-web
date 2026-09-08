@@ -19,6 +19,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     // Clear stale persisted theme so OS preference is always respected
     try {
       localStorage.removeItem("portfolio-theme");
+      localStorage.removeItem("portfolio-visual-theme");
+      delete document.documentElement.dataset.visualTheme;
     } catch {
       // Ignore errors in storage-restricted environments
     }

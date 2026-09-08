@@ -39,8 +39,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   const getSpotlightColor = (color: string) => {
-    if (color === "#10b981" || color === "emerald") return "rgba(6, 182, 212, 0.18)";
-    if (color === "#06b6d4" || color === "cyan") return "rgba(6, 182, 212, 0.18)";
+    if (color === "#10b981" || color === "emerald")
+      return "rgba(6, 182, 212, 0.18)";
+    if (color === "#06b6d4" || color === "cyan")
+      return "rgba(6, 182, 212, 0.18)";
     return "rgba(59, 130, 246, 0.18)";
   };
 
