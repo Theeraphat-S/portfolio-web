@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LanguageContext } from "./LanguageContextInstance";
 import { Language } from "./types";
 
@@ -9,6 +9,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
     const saved = localStorage.getItem("portfolio_lang");
     return saved === "th" || saved === "en" ? saved : "th";
   });
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const setLang = (newLang: Language) => {
     setLangState(newLang);

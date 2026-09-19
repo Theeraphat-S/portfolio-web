@@ -3,7 +3,8 @@
 @layer base {
   :root {
     --font-sans:
-      "Outfit", "Prompt", -apple-system, BlinkMacSystemFont, sans-serif;
+      "Outfit", "IBM Plex Sans Thai", -apple-system, BlinkMacSystemFont,
+      sans-serif;
     --font-mono: "JetBrains Mono", monospace;
   }
 
@@ -30,9 +31,30 @@
 
   body {
     font-family: var(--font-sans);
+    line-height: 1.625;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-wrap: pretty;
     transition:
       background-color 0.3s ease,
       color 0.3s ease;
+  }
+
+  /* Optimize Thai typography rendering when active */
+  html[lang="th"] body,
+  :lang(th) {
+    letter-spacing: normal;
+    word-break: break-word;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.3;
+    overflow-wrap: break-word;
   }
 
   html.dark body {
