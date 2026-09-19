@@ -57,4 +57,3 @@ _Avoid_: Flat borders, heavy WebGL canvas instances that cause mobile frame drop
 **Kinetic UI Suite**:
 A triad of micro-interaction components (inspired by AnimMaster Lib) comprising metallic shimmer gradient sweeps on key editorial headings, flip-rotating engineering role pills, and luminous CTA buttons with orbiting conic border beams (`btn--shine`).
 _Avoid_: Static monotone text, generic flat button hover states
-

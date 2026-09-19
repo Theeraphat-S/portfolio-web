@@ -10,7 +10,7 @@ import {
   useSpring,
   useTransform,
   useReducedMotion,
-} from "framer-motion";
+} from "motion/react";
 
 interface TiltedCardProps {
   children: React.ReactNode;

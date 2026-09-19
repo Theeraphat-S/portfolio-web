@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Smartphone,
   ArrowUpRight,
@@ -87,11 +87,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   </span>
                 </div>
                 <p className="text-[11px] text-zinc-300 leading-relaxed my-auto line-clamp-4">
-                  {lang === "th" ? project.architectureTh : project.architectureEn}
+                  {lang === "th"
+                    ? project.architectureTh
+                    : project.architectureEn}
                 </p>
                 <div className="border-t border-cyan-500/30 pt-2 flex items-center justify-between text-[10px] text-zinc-400">
                   <span>{project.technologies.slice(0, 3).join(" • ")}</span>
-                  <span className="text-cyan-400 font-bold">{project.metrics[0]?.value ?? "100%"}</span>
+                  <span className="text-cyan-400 font-bold">
+                    {project.metrics[0]?.value ?? "100%"}
+                  </span>
                 </div>
               </div>
             }

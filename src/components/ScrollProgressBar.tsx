@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
 
 interface ScrollProgressBarProps {
   className?: string;

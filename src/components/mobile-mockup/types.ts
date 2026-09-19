@@ -1,4 +1,4 @@
-import type { Variants } from "framer-motion";
+import type { Variants } from "motion/react";
 
 export type ScreenKey = "ncds" | "pinto" | "pos";
 
@@ -8,7 +8,10 @@ export const SCREEN_INDEX_MAP: Record<ScreenKey, number> = {
   pos: 2,
 };
 
-export const SCREEN_THEME_MAP: Record<ScreenKey, { ping: string; dot: string; label: string }> = {
+export const SCREEN_THEME_MAP: Record<
+  ScreenKey,
+  { ping: string; dot: string; label: string }
+> = {
   ncds: {
     ping: "bg-emerald-400",
     dot: "bg-emerald-500",

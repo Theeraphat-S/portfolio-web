@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import confetti from "canvas-confetti";
 import { Flame, Sparkles, Layers } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";

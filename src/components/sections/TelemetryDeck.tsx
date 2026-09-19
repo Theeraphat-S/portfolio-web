@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Activity,
   Clock,
@@ -75,12 +75,7 @@ export const TelemetryDeck: React.FC = () => {
     {
       label: t("ความเร็วเชื่อมต่อ", "SYSTEM LATENCY"),
       value: (
-        <KineticCounter
-          value={latency}
-          prefix="~"
-          suffix="ms"
-          duration={1.2}
-        />
+        <KineticCounter value={latency} prefix="~" suffix="ms" duration={1.2} />
       ),
       subtext: "Optimized REST • Fast I/O",
       icon: <Activity className="w-4 h-4 text-amber-500" />,

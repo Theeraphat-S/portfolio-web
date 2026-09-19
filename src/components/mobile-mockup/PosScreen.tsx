@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ShoppingBag, QrCode, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import { screenVariants } from "./types";
@@ -77,7 +77,10 @@ export const PosScreen: React.FC<PosScreenProps> = ({ direction }) => {
         className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
       >
         <CheckCircle2 className="w-3.5 h-3.5" />
-        {t("ยืนยันการรับชำระเงิน (Sync API)", "Complete Transaction (Sync API)")}
+        {t(
+          "ยืนยันการรับชำระเงิน (Sync API)",
+          "Complete Transaction (Sync API)",
+        )}
       </motion.button>
     </motion.div>
   );

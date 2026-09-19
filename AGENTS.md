@@ -24,6 +24,6 @@ Single-context repository layout (`CONTEXT.md` and `docs/adr/`). See [`docs/agen
 
 ## Project Overview
 
-- **Stack**: React, TypeScript, Vite, Tailwind CSS, Lucide React, Framer Motion
+- **Stack**: React, TypeScript, Vite, Tailwind CSS, Lucide React, Motion (Motion for React)
 - **Entry Points**: [`src/App.tsx`](file:///c:/Work/portfolio-Web/src/App.tsx), [`src/main.tsx`](file:///c:/Work/portfolio-Web/src/main.tsx)
 - **Components**: [`src/components/`](file:///c:/Work/portfolio-Web/src/components)

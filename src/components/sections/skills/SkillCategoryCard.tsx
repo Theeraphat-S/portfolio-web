@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Smartphone, Code2, Database, Users, Terminal } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { SkillCategory } from "../../../types";

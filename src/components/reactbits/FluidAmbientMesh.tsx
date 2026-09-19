@@ -58,7 +58,9 @@ export const FluidAmbientMesh: React.FC<FluidAmbientMeshProps> = ({
       />
 
       {/* Orb 3: Accent Sheen */}
-      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full ${accentBg} blur-[80px] mix-blend-screen`} />
+      <div
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full ${accentBg} blur-[80px] mix-blend-screen`}
+      />
     </div>
   );
 };

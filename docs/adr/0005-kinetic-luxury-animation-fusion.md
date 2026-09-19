@@ -7,11 +7,13 @@ Accepted
 ## Context
 
 Following an architecture and motion review referencing three industry-leading design platforms:
+
 1. **AnimMaster Lib** (`animmasterlib.dev`): Kinetic typography, rotating role badges, and luminous CTA buttons with conic border beams (`btn--shine`).
 2. **GetLayers AI** (`getlayers.ai`): Organic cyan/electric-blue ambient mesh glow backdrops, 3D card elevation cascades, and specular glare bevels.
 3. **Norrly** (`norrly.io`): Interactive cursor-bound lens unmasking (`clip-path: circle()`) and telemetry ring indicators.
 
 Alternatives considered:
+
 1. **Full 3D WebGL / Three.js / Shader Canvas**: Highly cinematic, but introduces >600KB bundle overhead, degrades mobile responsiveness, and incurs significant GPU battery drain.
 2. **Selective Static Polish**: Minimal CSS tweaks without interactive tactile depth.
 3. **Tactile Luxury & Micro-Interactions Hybrid (Chosen)**: Hardware-accelerated CSS GPU transforms (`transform-gpu`, `will-change`, CSS `clip-path`) and Framer Motion spring physics, maintaining a strict 60–120fps budget while providing responsive mobile touch fallbacks.

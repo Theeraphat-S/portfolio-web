@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useInView, animate, useReducedMotion } from "framer-motion";
+import { useInView, animate, useReducedMotion } from "motion/react";
 
 export interface KineticCounterProps {
   value: number;
   prefix?: string;
   suffix?: string;
   duration?: number;
-  ease?: [number, number, number, number] | "linear" | "easeIn" | "easeOut" | "easeInOut";
+  ease?:
+    | [number, number, number, number]
+    | "linear"
+    | "easeIn"
+    | "easeOut"
+    | "easeInOut";
   className?: string;
 }
 

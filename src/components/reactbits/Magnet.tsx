@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
 interface MagnetProps {
   children: React.ReactNode;

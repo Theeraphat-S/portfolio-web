@@ -9,6 +9,7 @@ Accepted
 To make the portfolio website more engaging and distinctly communicate the engineer's specialization in mobile engineering (Flutter & Dart), enhanced motion and interactivity were requested.
 
 Alternatives considered:
+
 1. **Full 3D WebGL (Three.js / React Three Fiber)**: Allows interactive 3D model rotation, but adds ~500KB+ to bundle size, increases GPU memory overhead on mobile devices, and risks dropping frame rates below 60fps.
 2. **Pure Framer Motion (v12) + CSS GPU Acceleration**: Leverages existing dependencies (`framer-motion`, `lenis`, `canvas-confetti`), achieves 60–120fps via hardware-accelerated transforms (`transform-gpu`, `will-change`), respects accessibility (`prefers-reduced-motion`), and preserves Lighthouse performance score 95+.
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 interface LensStageProps {
   children: React.ReactNode;
@@ -53,7 +53,8 @@ export const LensStage: React.FC<LensStageProps> = ({
     setCoords(null);
   };
 
-  const showLens = isHovered && coords !== null && !isTouchDevice && !prefersReducedMotion;
+  const showLens =
+    isHovered && coords !== null && !isTouchDevice && !prefersReducedMotion;
 
   return (
     <div

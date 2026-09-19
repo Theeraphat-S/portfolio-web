@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Activity, MessageSquare, ShoppingBag, ShieldCheck } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  Activity,
+  MessageSquare,
+  ShoppingBag,
+  ShieldCheck,
+} from "lucide-react";
 import {
   NcdsScreen,
   PintoScreen,
@@ -13,7 +18,9 @@ import {
 import { LensStage } from "./reactbits/LensStage";
 
 export const MobileMockup: React.FC = () => {
-  const [[activeScreen, direction], setActiveScreen] = useState<[ScreenKey, number]>(["ncds", 0]);
+  const [[activeScreen, direction], setActiveScreen] = useState<
+    [ScreenKey, number]
+  >(["ncds", 0]);
 
   const changeScreen = (newScreen: ScreenKey) => {
     if (newScreen === activeScreen) return;

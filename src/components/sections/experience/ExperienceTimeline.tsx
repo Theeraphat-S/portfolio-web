@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll } from "motion/react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { ExperienceItem } from "../../../types";

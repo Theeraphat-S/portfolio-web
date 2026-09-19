@@ -6,7 +6,9 @@ interface BlueprintScreenProps {
   activeScreen: ScreenKey;
 }
 
-export const BlueprintScreen: React.FC<BlueprintScreenProps> = ({ activeScreen }) => {
+export const BlueprintScreen: React.FC<BlueprintScreenProps> = ({
+  activeScreen,
+}) => {
   const details = SCREEN_BLUEPRINT_MAP[activeScreen] ?? {
     cubit: "AppLifecycleCubit",
     state: "RunningState",
@@ -40,7 +42,10 @@ export const BlueprintScreen: React.FC<BlueprintScreenProps> = ({ activeScreen }
           </span>
         </div>
         <p className="text-[10px] text-zinc-400 mt-1">
-          Target: <span className="text-white font-bold">{activeScreen.toUpperCase()} MODULE</span>
+          Target:{" "}
+          <span className="text-white font-bold">
+            {activeScreen.toUpperCase()} MODULE
+          </span>
         </p>
       </div>
 
@@ -70,7 +75,9 @@ export const BlueprintScreen: React.FC<BlueprintScreenProps> = ({ activeScreen }
             <GitBranch className="w-3 h-3 text-sky-400" />
             Clean Architecture
           </span>
-          <span className="text-cyan-300 text-[9px] font-semibold">{details.layer}</span>
+          <span className="text-cyan-300 text-[9px] font-semibold">
+            {details.layer}
+          </span>
         </div>
       </div>
 

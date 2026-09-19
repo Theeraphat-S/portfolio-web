@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Sparkles, Heart, TrendingUp, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import { screenVariants } from "./types";
@@ -77,9 +77,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
             </span>
             <span className="text-sm font-bold font-mono text-cyan-400">
               122/80{" "}
-              <span className="text-[9px] text-zinc-400 font-normal">
-                mmHg
-              </span>
+              <span className="text-[9px] text-zinc-400 font-normal">mmHg</span>
             </span>
           </div>
         </div>
