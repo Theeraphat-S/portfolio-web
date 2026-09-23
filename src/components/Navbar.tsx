@@ -42,7 +42,7 @@ export const Navbar: React.FC = () => {
             <img
               src="/profile.jpg"
               alt="Theeraphat Srimontha"
-              className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-300"
+              className="w-full h-full object-cover object-[55%_35%] transition-transform duration-300 group-hover:scale-110"
             />
           </div>
           <div className="flex flex-col">

@@ -184,7 +184,7 @@ export const Hero: React.FC = () => {
                 <img
                   src="/profile.jpg"
                   alt={personal.nameEn}
-                  className="w-full h-full object-cover grayscale contrast-110 hover:grayscale-0 transition-all duration-300"
+                  className="w-full h-full object-cover object-[55%_35%] transition-transform duration-300 hover:scale-105"
                 />
               </motion.div>
               <div className="space-y-1 text-xs">
