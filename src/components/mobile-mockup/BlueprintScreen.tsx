@@ -58,7 +58,7 @@ export const BlueprintScreen: React.FC<BlueprintScreenProps> = ({
           </div>
           <div className="pl-4 text-[10px] space-y-1 text-zinc-300">
             <p className="text-cyan-400 font-bold">&gt; {details.cubit}</p>
-            <p className="text-emerald-400">&bull; {details.state}</p>
+            <p className="text-sky-400">&bull; {details.state}</p>
           </div>
         </div>
 
@@ -83,7 +83,7 @@ export const BlueprintScreen: React.FC<BlueprintScreenProps> = ({
 
       {/* Frame Telemetry Bar */}
       <div className="relative z-10 border-t border-cyan-500/40 pt-3 flex items-center justify-between text-[10px]">
-        <div className="flex items-center gap-1 text-emerald-400 font-bold">
+        <div className="flex items-center gap-1 text-sky-400 font-bold">
           <Zap className="w-3 h-3 text-amber-400" />
           <span>{details.engineFps}</span>
         </div>

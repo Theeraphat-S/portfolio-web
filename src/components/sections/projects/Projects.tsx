@@ -34,8 +34,8 @@ export const Projects: React.FC = () => {
   });
 
   return (
-    <section id="projects" className="py-20 border-b border-zinc-200 dark:border-[#243b30]">
-      {/* Section Subtitle & Heading with Karolina's Counter Bracket */}
+    <section id="projects" className="py-20 border-b border-slate-200 dark:border-slate-800">
+      {/* Section Subtitle & Heading with Counter Bracket */}
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -43,10 +43,10 @@ export const Projects: React.FC = () => {
         transition={{ duration: 0.4 }}
         className="flex items-center gap-3 mb-10"
       >
-        <span className="text-xs font-mono text-[#18231d] dark:text-[#bfdb39] uppercase tracking-widest font-semibold">
+        <span className="text-xs font-mono text-slate-900 dark:text-sky-400 uppercase tracking-widest font-semibold">
           02 // {t("ผลงานเด่น", "SELECTED WORKS")} [{String(portfolioData.projects.length).padStart(2, "0")}]
         </span>
-        <div className="h-px bg-zinc-200 dark:bg-[#243b30] flex-1" />
+        <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
       </motion.div>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -57,20 +57,20 @@ export const Projects: React.FC = () => {
           transition={{ duration: 0.45 }}
           className="space-y-4 max-w-2xl"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#18231d] dark:text-[#fafafa]">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
             {lang === "th"
               ? "ผลงานคัดสรรระดับ Production (Selected Works)"
               : "Selected Works & Production Systems"}
           </h2>
-          <p className="text-zinc-600 dark:text-[#c2c2c2] text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
             {lang === "th"
               ? "งานพัฒนาแอปพลิเคชันที่สร้างขึ้นจากความต้องการจริง เน้นความเสถียรในสภาวะ Offline-First และสถาปัตยกรรมที่ดูแลรักษาง่าย"
               : "Custom mobile engineering designed from real requirements, focusing on zero-latency offline workflows and scalable state architecture."}
           </p>
         </motion.div>
 
-        {/* Category Filter Tabs with Karolina-style Spring */}
-        <div className="flex items-center gap-1.5 p-1 bg-zinc-100 dark:bg-[#121e17] border border-zinc-200 dark:border-[#243b30] rounded-xl text-xs font-mono">
+        {/* Category Filter Tabs with Spring */}
+        <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-mono">
           {(
             [
               { key: "all", label: `${t("ทั้งหมด", "All")} [0${portfolioData.projects.length}]` },
@@ -85,14 +85,14 @@ export const Projects: React.FC = () => {
                 onClick={() => setFilter(tab.key)}
                 className={`relative px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer ${
                   isActive
-                    ? "text-[#18231d] font-bold"
-                    : "text-zinc-500 dark:text-[#969696] hover:text-[#18231d] dark:hover:text-[#fafafa]"
+                    ? "text-slate-950 font-bold"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="active-project-tab"
-                    className="absolute inset-0 bg-[#bfdb39] rounded-lg shadow-xs"
+                    className="absolute inset-0 bg-sky-400 rounded-lg shadow-xs"
                     transition={{ type: "spring", stiffness: 450, damping: 30 }}
                   />
                 )}
@@ -119,35 +119,35 @@ export const Projects: React.FC = () => {
                 exit={{ opacity: 0, y: -10 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, ease: "easeOut" }}
-                className="border-t border-zinc-200 dark:border-[#243b30] pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+                className="border-t border-slate-200 dark:border-slate-800 pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
               >
                 {/* Left Column: Case Study Details */}
                 <div className="lg:col-span-7 space-y-6">
                   {/* Meta Header */}
                   <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                    <span className="text-2xl font-bold text-[#18231d] dark:text-[#bfdb39] font-mono">
+                    <span className="text-2xl font-bold text-slate-900 dark:text-sky-400 font-mono">
                       [{projectNum}]
                     </span>
-                    <span className="text-zinc-400 dark:text-zinc-600">/</span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-[#121e17] text-zinc-700 dark:text-[#e9e8e8] border border-zinc-200 dark:border-[#243b30] uppercase tracking-wider text-[11px] font-medium">
+                    <span className="text-slate-400 dark:text-slate-600">/</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-[#111827] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 uppercase tracking-wider text-[11px] font-medium">
                       {project.tag}
                     </span>
-                    <span className="text-zinc-400 dark:text-zinc-600">&bull;</span>
-                    <span className="text-zinc-500 dark:text-[#969696]">{project.year}</span>
+                    <span className="text-slate-400 dark:text-slate-600">&bull;</span>
+                    <span className="text-slate-500 dark:text-slate-400">{project.year}</span>
                   </div>
 
                   {/* Title & Subtitle */}
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-[#18231d] dark:text-[#fafafa] tracking-tight">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                       {lang === "th" ? project.titleTh : project.titleEn}
                     </h3>
-                    <p className="text-[#bfdb39] text-xs sm:text-sm font-mono mt-1 font-medium">
+                    <p className="text-sky-400 text-xs sm:text-sm font-mono mt-1 font-medium">
                       {lang === "th" ? project.subtitleTh : project.subtitleEn}
                     </p>
                   </div>
 
                   {/* Executive Summary */}
-                  <p className="text-zinc-700 dark:text-[#c2c2c2] text-sm sm:text-base leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                     {lang === "th" ? project.descriptionTh : project.descriptionEn}
                   </p>
 
@@ -157,12 +157,12 @@ export const Projects: React.FC = () => {
                       {project.metrics.map((metric, mIdx) => (
                         <div
                           key={mIdx}
-                          className="p-3 rounded-lg border border-zinc-200 dark:border-[#243b30] bg-white dark:bg-[#121e17] font-mono hover:border-[#bfdb39]/50 transition-colors"
+                          className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] font-mono hover:border-sky-500/50 transition-colors"
                         >
-                          <p className="text-[10px] text-zinc-500 dark:text-[#969696] uppercase tracking-wider">
+                          <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                             {lang === "th" ? metric.labelTh : metric.labelEn}
                           </p>
-                          <p className="text-base font-bold text-[#18231d] dark:text-[#fafafa] mt-1">
+                          <p className="text-base font-bold text-slate-900 dark:text-slate-100 mt-1">
                             {metric.value}
                           </p>
                         </div>
@@ -175,7 +175,7 @@ export const Projects: React.FC = () => {
                     {project.technologies.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2.5 py-1 text-xs font-mono text-zinc-700 dark:text-[#e9e8e8] bg-zinc-100 dark:bg-[#121e17] border border-zinc-200 dark:border-[#243b30] rounded-md"
+                        className="px-2.5 py-1 text-xs font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-md"
                       >
                         {tech}
                       </span>
@@ -187,7 +187,7 @@ export const Projects: React.FC = () => {
                     <motion.button
                       whileTap={{ scale: 0.98 }}
                       onClick={() => toggleExpand(project.id)}
-                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-lg border border-[#bfdb39] bg-[#bfdb39]/10 text-[#18231d] dark:text-[#bfdb39] hover:bg-[#bfdb39] hover:text-[#18231d] transition-all cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-lg border border-sky-400/40 bg-sky-500/10 text-sky-500 dark:text-sky-400 hover:bg-sky-400 hover:text-slate-950 transition-all cursor-pointer"
                     >
                       <span>
                         {isExpanded
@@ -209,7 +209,7 @@ export const Projects: React.FC = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-[#969696] hover:text-[#18231d] dark:hover:text-[#fafafa] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400 hover:text-sky-400 dark:hover:text-sky-400 transition-colors"
                       >
                         <Github className="w-3.5 h-3.5" />
                         <span>{t("ซอร์สโค้ด", "Source Code")}</span>
@@ -227,7 +227,7 @@ export const Projects: React.FC = () => {
                         transition={{ duration: 0.35, ease: "easeOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-6 border-t border-zinc-200 dark:border-[#243b30] space-y-6 text-xs sm:text-sm">
+                        <div className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-6 text-xs sm:text-sm">
                           {/* Problem Statement */}
                           {project.problemTh && (
                             <div className="space-y-1.5">
@@ -235,7 +235,7 @@ export const Projects: React.FC = () => {
                                 <AlertCircle className="w-4 h-4" />
                                 <span>{t("ปัญหาหน้างานจริง (The Real-World Problem)", "The Real-World Problem")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
+                              <p className="text-slate-600 dark:text-slate-300 leading-relaxed pl-5">
                                 {lang === "th" ? project.problemTh : project.problemEn}
                               </p>
                             </div>
@@ -244,11 +244,11 @@ export const Projects: React.FC = () => {
                           {/* Architecture Decision Rationale */}
                           {project.decisionRationaleTh && (
                             <div className="space-y-1.5">
-                              <div className="flex items-center gap-1.5 font-mono font-semibold text-[#18231d] dark:text-[#bfdb39]">
+                              <div className="flex items-center gap-1.5 font-mono font-semibold text-slate-900 dark:text-sky-400">
                                 <Lightbulb className="w-4 h-4" />
                                 <span>{t("การตัดสินใจเชิงสถาปัตยกรรม (Architecture Decision)", "Architecture Decision & Solution")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
+                              <p className="text-slate-600 dark:text-slate-300 leading-relaxed pl-5">
                                 {lang === "th" ? project.decisionRationaleTh : project.decisionRationaleEn}
                               </p>
                             </div>
@@ -261,7 +261,7 @@ export const Projects: React.FC = () => {
                                 <Terminal className="w-4 h-4" />
                                 <span>{t("การชั่งน้ำหนักข้อดีข้อเสีย (Engineering Trade-offs)", "Engineering Trade-offs")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
+                              <p className="text-slate-600 dark:text-slate-300 leading-relaxed pl-5">
                                 {lang === "th" ? project.tradeOffsTh : project.tradeOffsEn}
                               </p>
                             </div>
@@ -274,7 +274,7 @@ export const Projects: React.FC = () => {
                                 <CheckCircle2 className="w-4 h-4" />
                                 <span>{t("การทดสอบภาคสนาม (Field Testing Evidence)", "Usability Testing & Evidence")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
+                              <p className="text-slate-600 dark:text-slate-300 leading-relaxed pl-5">
                                 {lang === "th" ? project.evidenceTh : project.evidenceEn}
                               </p>
                             </div>
@@ -282,15 +282,15 @@ export const Projects: React.FC = () => {
 
                           {/* Key Highlights */}
                           {project.highlightsTh && (
-                            <div className="space-y-2 pt-2 border-t border-zinc-200 dark:border-[#243b30]/60">
-                              <p className="font-mono text-zinc-600 dark:text-[#969696] font-semibold">
+                            <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/80">
+                              <p className="font-mono text-slate-500 dark:text-slate-400 font-semibold">
                                 {t("สิ่งที่ส่งมอบ (Key Deliverables):", "Key Deliverables:")}
                               </p>
                               <ul className="space-y-1.5 pl-2">
                                 {(lang === "th" ? project.highlightsTh : project.highlightsEn).map(
                                   (hl, hIdx) => (
-                                    <li key={hIdx} className="flex items-start gap-2 text-zinc-700 dark:text-[#c2c2c2]">
-                                      <span className="text-[#bfdb39] font-mono mt-0.5">&bull;</span>
+                                    <li key={hIdx} className="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                      <span className="text-sky-400 font-mono mt-0.5">&bull;</span>
                                       <span>{hl}</span>
                                     </li>
                                   ),
@@ -304,18 +304,18 @@ export const Projects: React.FC = () => {
                   </AnimatePresence>
                 </div>
 
-                {/* Right Column: Clean Device Screen Frame with Karolina Styling */}
+                {/* Right Column: Clean Device Screen Frame */}
                 <div className="lg:col-span-5 flex justify-center">
                   <motion.div
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full max-w-[320px] rounded-2xl border border-zinc-300 dark:border-[#243b30] bg-white dark:bg-[#121e17] p-3 shadow-md dark:shadow-none hover:border-[#bfdb39]/50 transition-colors"
+                    className="w-full max-w-[320px] rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] p-3 shadow-md dark:shadow-none hover:border-sky-500/50 transition-colors"
                   >
                     {/* Subtle Top Status Bar */}
-                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 dark:text-[#969696] pb-2 mb-2 border-b border-zinc-200 dark:border-[#243b30]">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400 pb-2 mb-2 border-b border-slate-200 dark:border-slate-800">
                       <span>{project.id.toUpperCase()}</span>
-                      <span className="flex items-center gap-1 text-[#bfdb39] font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#bfdb39] animate-pulse" />
+                      <span className="flex items-center gap-1 text-sky-400 font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                         INTERACTIVE PREVIEW
                       </span>
                     </div>

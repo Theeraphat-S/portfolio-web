@@ -29,16 +29,16 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
           </p>
           <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
             NCDs Health Screener
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <Sparkles className="w-3.5 h-3.5 text-sky-400" />
           </h4>
         </div>
-        <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="text-[10px] bg-sky-500/10 text-sky-400 border border-sky-500/30 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
           VHV Active
         </span>
       </div>
 
-      {/* Vitals Summary Card with Animated Heartbeat Glow */}
+      {/* Vitals Summary Card with Animated Glow */}
       <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-900/90 border border-zinc-800 p-3 shadow-inner">
         <motion.div
           animate={{ x: ["-100%", "200%"] }}
@@ -47,14 +47,14 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
             repeat: Infinity,
             ease: [0.4, 0, 0.2, 1],
           }}
-          className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-400/70 to-transparent pointer-events-none"
+          className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-sky-400/70 to-transparent pointer-events-none"
         />
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
             <Heart className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
             {t("ผลการประเมินความเสี่ยง", "Risk Assessment")}
           </span>
-          <span className="text-[11px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-700/50">
+          <span className="text-[11px] font-bold text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded-md border border-sky-700/50">
             {t("ความเสี่ยงต่ำ", "Low Risk")}
           </span>
         </div>
@@ -64,7 +64,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
             <span className="text-[10px] text-zinc-400 block">
               {t("น้ำตาลในเลือด", "Blood Sugar")}
             </span>
-            <span className="text-sm font-bold font-mono text-emerald-400">
+            <span className="text-sm font-bold font-mono text-sky-400">
               108{" "}
               <span className="text-[9px] text-zinc-400 font-normal">
                 mg/dL
@@ -94,7 +94,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
             {
               title: t("เบาหวาน", "Diabetes"),
               status: "Normal",
-              color: "emerald",
+              color: "sky",
             },
             {
               title: t("ความดันโลหิต", "Hypertension"),
@@ -104,7 +104,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
             {
               title: t("โรคหัวใจ", "Heart Disease"),
               status: "Safe",
-              color: "emerald",
+              color: "sky",
             },
             {
               title: t("โรคอ้วน", "Obesity"),
@@ -119,8 +119,8 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
               <span className="text-[11px] text-zinc-300 font-medium">
                 {item.title}
               </span>
-              <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-0.5">
-                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              <span className="text-[10px] font-mono text-sky-400 flex items-center gap-0.5">
+                <CheckCircle2 className="w-3 h-3 text-sky-400" />
               </span>
             </div>
           ))}

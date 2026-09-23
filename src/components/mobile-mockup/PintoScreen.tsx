@@ -83,7 +83,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({ direction }) => {
           onClick={handleStreakClick}
           className={`w-full py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
             isStreaked
-              ? "bg-zinc-800 text-emerald-400 border border-emerald-500/30"
+              ? "bg-zinc-800 text-sky-400 border border-sky-500/30"
               : "bg-amber-500 hover:bg-amber-400 text-zinc-950 shadow-md shadow-amber-950/50"
           }`}
         >
@@ -116,7 +116,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({ direction }) => {
             <Layers className="w-3 h-3 text-cyan-400" />
             WebView Bridge Menu
           </span>
-          <span className="text-[9px] text-emerald-400">Synced</span>
+          <span className="text-[9px] text-sky-400">Synced</span>
         </div>
         <p className="text-[10px] text-zinc-400">
           {t(

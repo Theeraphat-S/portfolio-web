@@ -16,7 +16,7 @@ export const App: React.FC = () => {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="min-h-screen bg-[#f7f7f6] text-[#18231d] dark:bg-[#18231d] dark:text-[#e9e8e8] selection:bg-[#bfdb39]/30 selection:text-[#bfdb39] transition-colors duration-200 flex flex-col font-sans">
+        <div className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#0b0f19] dark:text-slate-100 selection:bg-sky-500/25 selection:text-sky-400 transition-colors duration-200 flex flex-col font-sans">
           {/* Crisp Top Navigation Header */}
           <Navbar />
 

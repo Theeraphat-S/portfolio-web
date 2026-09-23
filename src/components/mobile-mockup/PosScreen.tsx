@@ -54,7 +54,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({ direction }) => {
           <span className="text-xs text-zinc-300">
             {t("ยอดชำระสุทธิ", "Total Amount")}
           </span>
-          <span className="text-base font-bold font-mono text-emerald-400">
+          <span className="text-base font-bold font-mono text-sky-400">
             ฿420.00
           </span>
         </div>

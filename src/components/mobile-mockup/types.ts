@@ -13,8 +13,8 @@ export const SCREEN_THEME_MAP: Record<
   { ping: string; dot: string; label: string }
 > = {
   ncds: {
-    ping: "bg-emerald-400",
-    dot: "bg-emerald-500",
+    ping: "bg-sky-400",
+    dot: "bg-sky-500",
     label: "NCDs Screener",
   },
   pinto: {

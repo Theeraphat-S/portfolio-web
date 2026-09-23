@@ -39,7 +39,7 @@ export const AboutBento: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 border-b border-zinc-200 dark:border-[#243b30]">
+    <section id="about" className="py-20 border-b border-slate-200 dark:border-slate-800">
       {/* Section Subtitle & Heading */}
       <motion.div
         initial={{ opacity: 0, x: -10 }}
@@ -48,13 +48,13 @@ export const AboutBento: React.FC = () => {
         transition={{ duration: 0.4 }}
         className="flex items-center gap-3 mb-8"
       >
-        <span className="text-xs font-mono text-[#18231d] dark:text-[#bfdb39] uppercase tracking-widest font-semibold">
+        <span className="text-xs font-mono text-slate-900 dark:text-sky-400 uppercase tracking-widest font-semibold">
           01 // {t("แนวคิดและตัวตน", "APPROACH & VALUES")}
         </span>
-        <div className="h-px bg-zinc-200 dark:bg-[#243b30] flex-1" />
+        <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
       </motion.div>
 
-      {/* Main Karolina-Style Intro */}
+      {/* Main Intro */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -62,19 +62,19 @@ export const AboutBento: React.FC = () => {
         transition={{ duration: 0.45 }}
         className="space-y-4 mb-14"
       >
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#18231d] dark:text-[#fafafa] leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 leading-tight">
           {lang === "th"
             ? "ทุ่มเทและหลงใหลในการพัฒนา Mobile Application ตั้งแต่ปี 2565"
             : "Living and breathing mobile engineering since 2022"}
         </h2>
-        <p className="text-zinc-600 dark:text-[#c2c2c2] max-w-3xl text-base sm:text-lg leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-400 max-w-3xl text-base sm:text-lg leading-relaxed">
           {lang === "th"
             ? "โค้ดที่ดีไม่ใช่แค่ทำงานได้ แต่คือระบบของการตัดสินใจที่อยู่บนพื้นฐานของตรรกะ สถาปัตยกรรมที่ยั่งยืน และความเข้าอกเข้าใจผู้ใช้งานจริง"
             : "Good software isn't just syntax. It's a system of thoughtful decisions rooted in logic, architecture, and genuine empathy for the humans using it."}
         </p>
       </motion.div>
 
-      {/* 3 Numbered Approach Cards (Karolina Hess Style) */}
+      {/* 3 Numbered Approach Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         {approachPillars.map((pillar, idx) => (
           <motion.div
@@ -84,21 +84,21 @@ export const AboutBento: React.FC = () => {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, delay: idx * 0.1 }}
             whileHover={{ y: -4 }}
-            className="p-6 rounded-xl border border-zinc-200 dark:border-[#243b30] bg-white dark:bg-[#121e17] shadow-xs dark:shadow-none hover:border-[#bfdb39]/60 transition-all flex flex-col justify-between"
+            className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs dark:shadow-none hover:border-sky-500/50 transition-all flex flex-col justify-between"
           >
             <div className="space-y-4">
-              <span className="text-2xl font-bold font-mono text-[#18231d] dark:text-[#bfdb39] block">
+              <span className="text-2xl font-bold font-mono text-slate-900 dark:text-sky-400 block">
                 [{pillar.num}]
               </span>
-              <h3 className="text-lg font-bold text-[#18231d] dark:text-[#fafafa] leading-snug">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">
                 {lang === "th" ? pillar.titleTh : pillar.titleEn}
               </h3>
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-[#c2c2c2] leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 {lang === "th" ? pillar.descTh : pillar.descEn}
               </p>
             </div>
-            <div className="pt-4 mt-4 border-t border-zinc-100 dark:border-[#243b30]/60">
-              <span className="text-[11px] font-mono text-[#bfdb39] font-medium">
+            <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/80">
+              <span className="text-[11px] font-mono text-sky-400 font-medium">
                 Pillar {pillar.num} &bull; Core Value
               </span>
             </div>
@@ -114,9 +114,9 @@ export const AboutBento: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="md:col-span-8 p-6 rounded-xl border border-zinc-200 dark:border-[#243b30] bg-white dark:bg-[#121e17] space-y-4"
+          className="md:col-span-8 p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] space-y-4"
         >
-          <div className="flex items-center gap-2 text-[#bfdb39]">
+          <div className="flex items-center gap-2 text-sky-400">
             <GraduationCap className="w-4 h-4" />
             <h3 className="text-xs font-mono uppercase tracking-wider font-bold">
               {t("ประวัติการศึกษาและการถ่ายทอดความรู้", "Education & Departmental Leadership")}
@@ -125,21 +125,21 @@ export const AboutBento: React.FC = () => {
 
           <div className="space-y-3">
             <div>
-              <p className="font-bold text-base text-[#18231d] dark:text-[#fafafa]">
+              <p className="font-bold text-base text-slate-900 dark:text-slate-100">
                 {lang === "th" ? personal.education.universityTh : personal.education.universityEn}
               </p>
-              <p className="text-xs sm:text-sm text-zinc-700 dark:text-[#c2c2c2]">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 {lang === "th" ? personal.education.degreeTh : personal.education.degreeEn} &bull; {personal.education.yearsEn}
               </p>
             </div>
 
-            <div className="pt-3 border-t border-zinc-100 dark:border-[#243b30] grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
-                <p className="font-bold text-[#18231d] dark:text-[#fafafa] flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-[#bfdb39]" />
+                <p className="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 text-sky-400" />
                   <span>{t("ผู้ช่วยสอน (TA 3 ภาคการศึกษา)", "3x Teaching Assistant")}</span>
                 </p>
-                <p className="text-zinc-600 dark:text-[#969696] mt-1 leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                   {t(
                     "ดูแลรายวิชา Web Programming, Database Systems และ Computer Logic",
                     "Mentored 100+ students in Web, Relational Databases, and Algorithmic Logic.",
@@ -148,11 +148,11 @@ export const AboutBento: React.FC = () => {
               </div>
 
               <div>
-                <p className="font-bold text-[#18231d] dark:text-[#fafafa] flex items-center gap-1.5">
-                  <Briefcase className="w-3.5 h-3.5 text-[#bfdb39]" />
+                <p className="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                  <Briefcase className="w-3.5 h-3.5 text-sky-400" />
                   <span>{t("วิทยากรบรรยายด้าน AI", "Guest AI Keynote Speaker")}</span>
                 </p>
-                <p className="text-zinc-600 dark:text-[#969696] mt-1 leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                   {t(
                     "บรรยายแก่นักเรียน ม.4 ห้อง Gifted Computer โรงเรียนจักรคำคณาทร",
                     "Delivered workshop on Generative AI & Developer Tooling for Gifted students.",
@@ -170,37 +170,37 @@ export const AboutBento: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: 0.1 }}
-            className="md:col-span-4 p-6 rounded-xl border border-zinc-200 dark:border-[#243b30] bg-white dark:bg-[#121e17] space-y-3 flex flex-col justify-between"
+            className="md:col-span-4 p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] space-y-3 flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-[#bfdb39]">
+              <div className="flex items-center gap-2 text-sky-400">
                 <UserCheck className="w-4 h-4" />
                 <h4 className="text-xs font-mono uppercase tracking-wider font-bold">
                   {t("บุคคลอ้างอิงทางวิชาการ", "Academic Reference")}
                 </h4>
               </div>
-              <p className="font-bold text-sm text-[#18231d] dark:text-[#fafafa]">
+              <p className="font-bold text-sm text-slate-900 dark:text-slate-100">
                 {lang === "th" ? personal.reference.nameTh : personal.reference.nameEn}
               </p>
-              <p className="text-xs text-zinc-600 dark:text-[#969696] leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 {lang === "th" ? personal.reference.roleTh : personal.reference.roleEn}
               </p>
             </div>
 
-            <div className="pt-3 border-t border-zinc-100 dark:border-[#243b30] space-y-1 text-xs font-mono">
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1 text-xs font-mono">
               <a
                 href={`tel:${personal.reference.phone.replace(/[^0-9]/g, "")}`}
-                className="text-zinc-700 dark:text-[#c2c2c2] hover:text-[#bfdb39] flex items-center gap-1"
+                className="text-slate-600 dark:text-slate-300 hover:text-sky-400 flex items-center gap-1"
               >
                 <span>Tel: {personal.reference.phone}</span>
-                <ArrowUpRight className="w-3 h-3 text-zinc-400" />
+                <ArrowUpRight className="w-3 h-3 text-slate-400" />
               </a>
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="text-zinc-700 dark:text-[#c2c2c2] hover:text-[#bfdb39] flex items-center gap-1 break-all"
+                className="text-slate-600 dark:text-slate-300 hover:text-sky-400 flex items-center gap-1 break-all"
               >
                 <span>{personal.reference.email}</span>
-                <ArrowUpRight className="w-3 h-3 text-zinc-400" />
+                <ArrowUpRight className="w-3 h-3 text-slate-400" />
               </a>
             </div>
           </motion.div>
