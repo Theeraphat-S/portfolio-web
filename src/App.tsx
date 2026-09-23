@@ -2,6 +2,7 @@ import React from "react";
 import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { Navbar } from "./components/Navbar";
+import { Preloader } from "./components/Preloader";
 import {
   Hero,
   AboutBento,
@@ -16,6 +17,9 @@ export const App: React.FC = () => {
   return (
     <ThemeProvider>
       <LanguageProvider>
+        {/* Preloader Sequence - animated handwriting followed by curtain lift */}
+        <Preloader />
+
         <div className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#0b0f19] dark:text-slate-100 selection:bg-sky-500/25 selection:text-sky-400 transition-colors duration-200 flex flex-col font-sans">
           {/* Crisp Top Navigation Header */}
           <Navbar />
@@ -39,4 +43,3 @@ export const App: React.FC = () => {
 };
 
 export default App;
-

@@ -8,3 +8,4 @@ export * from "./reactbits/LensStage";
 export * from "./reactbits/RotatingRoleBadge";
 export * from "./reactbits/FluidAmbientMesh";
 export * from "./sections";
+export * from "./Preloader";
