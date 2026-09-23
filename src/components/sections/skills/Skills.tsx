@@ -61,7 +61,7 @@ export const Skills: React.FC = () => {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.4, delay: idx * 0.08 }}
             whileHover={{ y: -3 }}
-            className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] rounded-xl p-6 space-y-4 shadow-xs dark:shadow-none hover:border-sky-500/50 transition-all"
+            className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] rounded-xl p-5 sm:p-6 space-y-4 shadow-xs dark:shadow-none hover:border-sky-500/50 transition-all"
           >
             {/* Domain Header */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
@@ -77,22 +77,24 @@ export const Skills: React.FC = () => {
             </div>
 
             {/* Skills List */}
-            <div className="space-y-3">
+            <div className="space-y-3.5">
               {category.skills.map((skill, sIdx) => (
                 <div
                   key={sIdx}
-                  className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs group"
+                  className="pb-3 border-b border-slate-100 dark:border-slate-800/60 last:border-0 last:pb-0 space-y-1 group"
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 group-hover:scale-125 transition-transform" />
-                    <span className="font-semibold text-slate-800 dark:text-slate-100">
-                      {skill.name}
-                    </span>
-                    <span className="text-[10px] font-mono text-sky-600 dark:text-sky-400 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20 font-medium">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 group-hover:scale-125 transition-transform" />
+                      <span className="font-semibold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">
+                        {skill.name}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono text-sky-600 dark:text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20 font-medium whitespace-nowrap shrink-0">
                       {skill.level}
                     </span>
                   </div>
-                  <p className="text-slate-500 dark:text-slate-400 text-[11px] sm:text-right pl-3.5 sm:pl-0">
+                  <p className="text-slate-500 dark:text-slate-400 text-[11px] leading-relaxed pl-3.5">
                     {skill.desc}
                   </p>
                 </div>
