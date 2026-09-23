@@ -34,8 +34,8 @@ export const Projects: React.FC = () => {
   });
 
   return (
-    <section id="projects" className="py-20 border-b border-zinc-200 dark:border-zinc-900">
-      {/* Section Subtitle & Heading */}
+    <section id="projects" className="py-20 border-b border-zinc-200 dark:border-[#243b30]">
+      {/* Section Subtitle & Heading with Karolina's Counter Bracket */}
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -43,10 +43,10 @@ export const Projects: React.FC = () => {
         transition={{ duration: 0.4 }}
         className="flex items-center gap-3 mb-10"
       >
-        <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
-          02 // {t("ผลงานเชิงวิศวกรรม", "ENGINEERING PROJECTS")}
+        <span className="text-xs font-mono text-[#18231d] dark:text-[#bfdb39] uppercase tracking-widest font-semibold">
+          02 // {t("ผลงานเด่น", "SELECTED WORKS")} [{String(portfolioData.projects.length).padStart(2, "0")}]
         </span>
-        <div className="h-px bg-zinc-200 dark:bg-zinc-800 flex-1" />
+        <div className="h-px bg-zinc-200 dark:bg-[#243b30] flex-1" />
       </motion.div>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -57,23 +57,23 @@ export const Projects: React.FC = () => {
           transition={{ duration: 0.45 }}
           className="space-y-4 max-w-2xl"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#18231d] dark:text-[#fafafa]">
             {lang === "th"
-              ? "ผลงานและกรณีศึกษาเชิงวิศวกรรม (Production Case Studies)"
-              : "Production Case Studies & Architectural Systems"}
+              ? "ผลงานคัดสรรระดับ Production (Selected Works)"
+              : "Selected Works & Production Systems"}
           </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-600 dark:text-[#c2c2c2] text-sm sm:text-base leading-relaxed">
             {lang === "th"
-              ? "การออกแบบและพัฒนาซอฟต์แวร์ที่เน้นแก้ปัญหาหน้างานจริง ความเสถียรในสภาวะ Offline และการจัดวางสถาปัตยกรรมที่ดูแลรักษาง่าย"
-              : "Real-world mobile engineering focused on zero-latency offline workflows, reactive state machines, and resilient API contracts."}
+              ? "งานพัฒนาแอปพลิเคชันที่สร้างขึ้นจากความต้องการจริง เน้นความเสถียรในสภาวะ Offline-First และสถาปัตยกรรมที่ดูแลรักษาง่าย"
+              : "Custom mobile engineering designed from real requirements, focusing on zero-latency offline workflows and scalable state architecture."}
           </p>
         </motion.div>
 
-        {/* Category Filter Tabs with Layout Spring */}
-        <div className="flex items-center gap-1.5 p-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs font-mono">
+        {/* Category Filter Tabs with Karolina-style Spring */}
+        <div className="flex items-center gap-1.5 p-1 bg-zinc-100 dark:bg-[#121e17] border border-zinc-200 dark:border-[#243b30] rounded-xl text-xs font-mono">
           {(
             [
-              { key: "all", label: `${t("ทั้งหมด", "All")} (${portfolioData.projects.length})` },
+              { key: "all", label: `${t("ทั้งหมด", "All")} [0${portfolioData.projects.length}]` },
               { key: "mobile", label: "Mobile Apps" },
               { key: "system", label: "Systems" },
             ] as const
@@ -83,16 +83,16 @@ export const Projects: React.FC = () => {
               <button
                 key={tab.key}
                 onClick={() => setFilter(tab.key)}
-                className={`relative px-3 py-1.5 rounded transition-colors cursor-pointer ${
+                className={`relative px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer ${
                   isActive
-                    ? "text-zinc-900 dark:text-zinc-100 font-semibold"
-                    : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
+                    ? "text-[#18231d] font-bold"
+                    : "text-zinc-500 dark:text-[#969696] hover:text-[#18231d] dark:hover:text-[#fafafa]"
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="active-project-tab"
-                    className="absolute inset-0 bg-white dark:bg-zinc-800 rounded shadow-xs"
+                    className="absolute inset-0 bg-[#bfdb39] rounded-lg shadow-xs"
                     transition={{ type: "spring", stiffness: 450, damping: 30 }}
                   />
                 )}
@@ -118,36 +118,36 @@ export const Projects: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-                className="border-t border-zinc-200 dark:border-zinc-800/80 pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+                transition={{ duration: 0.45, ease: "easeOut" }}
+                className="border-t border-zinc-200 dark:border-[#243b30] pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
               >
                 {/* Left Column: Case Study Details */}
                 <div className="lg:col-span-7 space-y-6">
                   {/* Meta Header */}
                   <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                    <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 font-mono">
-                      {projectNum}
+                    <span className="text-2xl font-bold text-[#18231d] dark:text-[#bfdb39] font-mono">
+                      [{projectNum}]
                     </span>
                     <span className="text-zinc-400 dark:text-zinc-600">/</span>
-                    <span className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 uppercase tracking-wider">
+                    <span className="px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-[#121e17] text-zinc-700 dark:text-[#e9e8e8] border border-zinc-200 dark:border-[#243b30] uppercase tracking-wider text-[11px] font-medium">
                       {project.tag}
                     </span>
                     <span className="text-zinc-400 dark:text-zinc-600">&bull;</span>
-                    <span className="text-zinc-500 dark:text-zinc-400">{project.year}</span>
+                    <span className="text-zinc-500 dark:text-[#969696]">{project.year}</span>
                   </div>
 
                   {/* Title & Subtitle */}
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#18231d] dark:text-[#fafafa] tracking-tight">
                       {lang === "th" ? project.titleTh : project.titleEn}
                     </h3>
-                    <p className="text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-mono mt-1">
+                    <p className="text-[#bfdb39] text-xs sm:text-sm font-mono mt-1 font-medium">
                       {lang === "th" ? project.subtitleTh : project.subtitleEn}
                     </p>
                   </div>
 
                   {/* Executive Summary */}
-                  <p className="text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
+                  <p className="text-zinc-700 dark:text-[#c2c2c2] text-sm sm:text-base leading-relaxed">
                     {lang === "th" ? project.descriptionTh : project.descriptionEn}
                   </p>
 
@@ -157,12 +157,12 @@ export const Projects: React.FC = () => {
                       {project.metrics.map((metric, mIdx) => (
                         <div
                           key={mIdx}
-                          className="p-3 rounded border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/30 font-mono hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+                          className="p-3 rounded-lg border border-zinc-200 dark:border-[#243b30] bg-white dark:bg-[#121e17] font-mono hover:border-[#bfdb39]/50 transition-colors"
                         >
-                          <p className="text-[11px] text-zinc-500 uppercase tracking-wider">
+                          <p className="text-[10px] text-zinc-500 dark:text-[#969696] uppercase tracking-wider">
                             {lang === "th" ? metric.labelTh : metric.labelEn}
                           </p>
-                          <p className="text-base font-bold text-zinc-900 dark:text-zinc-100 mt-1">
+                          <p className="text-base font-bold text-[#18231d] dark:text-[#fafafa] mt-1">
                             {metric.value}
                           </p>
                         </div>
@@ -175,7 +175,7 @@ export const Projects: React.FC = () => {
                     {project.technologies.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2.5 py-1 text-xs font-mono text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded"
+                        className="px-2.5 py-1 text-xs font-mono text-zinc-700 dark:text-[#e9e8e8] bg-zinc-100 dark:bg-[#121e17] border border-zinc-200 dark:border-[#243b30] rounded-md"
                       >
                         {tech}
                       </span>
@@ -187,12 +187,12 @@ export const Projects: React.FC = () => {
                     <motion.button
                       whileTap={{ scale: 0.98 }}
                       onClick={() => toggleExpand(project.id)}
-                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-medium rounded border border-emerald-300 dark:border-emerald-800/70 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-lg border border-[#bfdb39] bg-[#bfdb39]/10 text-[#18231d] dark:text-[#bfdb39] hover:bg-[#bfdb39] hover:text-[#18231d] transition-all cursor-pointer"
                     >
                       <span>
                         {isExpanded
-                          ? t("ปิดบันทึกเชิงสถาปัตยกรรม", "Collapse Engineering Analysis")
-                          : t("อ่านบันทึกเชิงสถาปัตยกรรม", "Read Engineering Analysis")}
+                          ? t("ปิดบันทึกเชิงสถาปัตยกรรม", "Collapse Engineering Breakdown")
+                          : t("อ่านบันทึกเชิงสถาปัตยกรรม", "Read Engineering Breakdown")}
                       </span>
                       <motion.span
                         animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -209,7 +209,7 @@ export const Projects: React.FC = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-[#969696] hover:text-[#18231d] dark:hover:text-[#fafafa] transition-colors"
                       >
                         <Github className="w-3.5 h-3.5" />
                         <span>{t("ซอร์สโค้ด", "Source Code")}</span>
@@ -224,10 +224,10 @@ export const Projects: React.FC = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800/80 space-y-6 text-xs sm:text-sm">
+                        <div className="pt-6 border-t border-zinc-200 dark:border-[#243b30] space-y-6 text-xs sm:text-sm">
                           {/* Problem Statement */}
                           {project.problemTh && (
                             <div className="space-y-1.5">
@@ -235,7 +235,7 @@ export const Projects: React.FC = () => {
                                 <AlertCircle className="w-4 h-4" />
                                 <span>{t("ปัญหาหน้างานจริง (The Real-World Problem)", "The Real-World Problem")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed pl-5">
+                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
                                 {lang === "th" ? project.problemTh : project.problemEn}
                               </p>
                             </div>
@@ -244,11 +244,11 @@ export const Projects: React.FC = () => {
                           {/* Architecture Decision Rationale */}
                           {project.decisionRationaleTh && (
                             <div className="space-y-1.5">
-                              <div className="flex items-center gap-1.5 font-mono font-semibold text-emerald-600 dark:text-emerald-400">
+                              <div className="flex items-center gap-1.5 font-mono font-semibold text-[#18231d] dark:text-[#bfdb39]">
                                 <Lightbulb className="w-4 h-4" />
                                 <span>{t("การตัดสินใจเชิงสถาปัตยกรรม (Architecture Decision)", "Architecture Decision & Solution")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed pl-5">
+                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
                                 {lang === "th" ? project.decisionRationaleTh : project.decisionRationaleEn}
                               </p>
                             </div>
@@ -261,7 +261,7 @@ export const Projects: React.FC = () => {
                                 <Terminal className="w-4 h-4" />
                                 <span>{t("การชั่งน้ำหนักข้อดีข้อเสีย (Engineering Trade-offs)", "Engineering Trade-offs")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed pl-5">
+                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
                                 {lang === "th" ? project.tradeOffsTh : project.tradeOffsEn}
                               </p>
                             </div>
@@ -270,11 +270,11 @@ export const Projects: React.FC = () => {
                           {/* Usability Testing & Evidence */}
                           {project.evidenceTh && (
                             <div className="space-y-1.5">
-                              <div className="flex items-center gap-1.5 font-mono font-semibold text-sky-600 dark:text-cyan-400">
+                              <div className="flex items-center gap-1.5 font-mono font-semibold text-sky-600 dark:text-sky-400">
                                 <CheckCircle2 className="w-4 h-4" />
                                 <span>{t("การทดสอบภาคสนาม (Field Testing Evidence)", "Usability Testing & Evidence")}</span>
                               </div>
-                              <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed pl-5">
+                              <p className="text-zinc-700 dark:text-[#c2c2c2] leading-relaxed pl-5">
                                 {lang === "th" ? project.evidenceTh : project.evidenceEn}
                               </p>
                             </div>
@@ -282,15 +282,15 @@ export const Projects: React.FC = () => {
 
                           {/* Key Highlights */}
                           {project.highlightsTh && (
-                            <div className="space-y-2 pt-2 border-t border-zinc-200 dark:border-zinc-800/60">
-                              <p className="font-mono text-zinc-600 dark:text-zinc-400 font-semibold">
+                            <div className="space-y-2 pt-2 border-t border-zinc-200 dark:border-[#243b30]/60">
+                              <p className="font-mono text-zinc-600 dark:text-[#969696] font-semibold">
                                 {t("สิ่งที่ส่งมอบ (Key Deliverables):", "Key Deliverables:")}
                               </p>
                               <ul className="space-y-1.5 pl-2">
                                 {(lang === "th" ? project.highlightsTh : project.highlightsEn).map(
                                   (hl, hIdx) => (
-                                    <li key={hIdx} className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300">
-                                      <span className="text-emerald-500 font-mono mt-0.5">&bull;</span>
+                                    <li key={hIdx} className="flex items-start gap-2 text-zinc-700 dark:text-[#c2c2c2]">
+                                      <span className="text-[#bfdb39] font-mono mt-0.5">&bull;</span>
                                       <span>{hl}</span>
                                     </li>
                                   ),
@@ -304,23 +304,23 @@ export const Projects: React.FC = () => {
                   </AnimatePresence>
                 </div>
 
-                {/* Right Column: Clean Device Screen Frame with Subtle Hover */}
+                {/* Right Column: Clean Device Screen Frame with Karolina Styling */}
                 <div className="lg:col-span-5 flex justify-center">
                   <motion.div
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full max-w-[320px] rounded-2xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-3 shadow-md dark:shadow-none hover:border-emerald-500/40 dark:hover:border-emerald-500/40 transition-colors"
+                    className="w-full max-w-[320px] rounded-2xl border border-zinc-300 dark:border-[#243b30] bg-white dark:bg-[#121e17] p-3 shadow-md dark:shadow-none hover:border-[#bfdb39]/50 transition-colors"
                   >
                     {/* Subtle Top Status Bar */}
-                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 pb-2 mb-2 border-b border-zinc-200 dark:border-zinc-900">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 dark:text-[#969696] pb-2 mb-2 border-b border-zinc-200 dark:border-[#243b30]">
                       <span>{project.id.toUpperCase()}</span>
-                      <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                      <span className="flex items-center gap-1 text-[#bfdb39] font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#bfdb39] animate-pulse" />
                         INTERACTIVE PREVIEW
                       </span>
                     </div>
 
-                    {/* Render Screen Simulation */}
+                    {/* Render Screen Simulation via Map */}
                     <div className="min-h-[380px] flex flex-col justify-center">
                       {SCREEN_MAP[project.id] ?? null}
                     </div>
