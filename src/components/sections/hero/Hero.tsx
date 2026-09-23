@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { ArrowUpRight, Github, Mail, MapPin, Terminal, CheckCircle2, FileText } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -7,13 +8,38 @@ export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
   const { personal } = portfolioData;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 14 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: "easeOut" as const },
+    },
+  };
+
   return (
     <section className="py-16 md:py-24 border-b border-zinc-200 dark:border-zinc-900">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
-        {/* Left Column: Asymmetrical Editorial Narrative */}
-        <div className="lg:col-span-7 flex flex-col space-y-6">
+        {/* Left Column: Asymmetrical Editorial Narrative with Stagger */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="lg:col-span-7 flex flex-col space-y-6"
+        >
           {/* Status & Category Tag */}
-          <div className="flex items-center gap-3">
+          <motion.div variants={itemVariants} className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 rounded">
               <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
               {t("เปิดรับงานใหม่อย่างเป็นทางการ", "Available for Opportunities")}
@@ -21,10 +47,10 @@ export const Hero: React.FC = () => {
             <span className="text-xs font-mono text-zinc-500">
               Chiang Mai / Bangkok / Remote
             </span>
-          </div>
+          </motion.div>
 
           {/* Headline / Title */}
-          <div className="space-y-2">
+          <motion.div variants={itemVariants} className="space-y-2">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.1]">
               {lang === "th" ? (
                 <>
@@ -42,15 +68,21 @@ export const Hero: React.FC = () => {
                 </>
               )}
             </h1>
-          </div>
+          </motion.div>
 
           {/* Clear Subtitle & Focus */}
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-xl leading-relaxed">
+          <motion.p
+            variants={itemVariants}
+            className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-xl leading-relaxed"
+          >
             {lang === "th" ? personal.taglineTh : personal.taglineEn}
-          </p>
+          </motion.p>
 
           {/* Key Engineering Pillars */}
-          <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+          <motion.div
+            variants={itemVariants}
+            className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono text-zinc-600 dark:text-zinc-400"
+          >
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
               <span>Flutter, Dart & BLoC Pattern</span>
@@ -67,51 +99,64 @@ export const Hero: React.FC = () => {
               <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
               <span>RESTful APIs & Backend Integration</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Action Links */}
-          <div className="pt-4 flex flex-wrap items-center gap-4">
-            <a
+          <motion.div variants={itemVariants} className="pt-4 flex flex-wrap items-center gap-4">
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               href="#projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-sm rounded transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-sm rounded transition-colors shadow-sm cursor-pointer"
             >
               <span>{t("สำรวจผลงานและเคสทดสอบ", "Explore Case Studies")}</span>
               <ArrowUpRight className="w-4 h-4" />
-            </a>
+            </motion.a>
 
-            <a
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 text-sm font-mono rounded transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 text-sm font-mono rounded transition-colors cursor-pointer"
             >
               <FileText className="w-4 h-4 text-emerald-500" />
               <span>{t("ดาวน์โหลดเรซูเม่", "Resume PDF")}</span>
-            </a>
+            </motion.a>
 
-            <a
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               href={personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 text-sm font-mono rounded transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 text-sm font-mono rounded transition-colors cursor-pointer"
             >
               <Github className="w-4 h-4" />
               <span>GitHub</span>
-            </a>
+            </motion.a>
 
-            <a
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               href={`mailto:${personal.email}`}
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 text-sm font-mono rounded transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 text-sm font-mono rounded transition-colors cursor-pointer"
             >
               <Mail className="w-4 h-4" />
               <span>Email</span>
-            </a>
-          </div>
-        </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
 
         {/* Right Column: Architectural Developer Spec Sheet & Photo */}
-        <div className="lg:col-span-5 flex flex-col space-y-4">
-          <div className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 rounded-lg p-5 shadow-xs dark:shadow-none">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" as const }}
+          className="lg:col-span-5 flex flex-col space-y-4"
+        >
+          <div className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 rounded-lg p-5 shadow-xs dark:shadow-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
             {/* Header of spec sheet */}
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-zinc-200 dark:border-zinc-800/80 text-xs font-mono text-zinc-500 dark:text-zinc-400">
               <div className="flex items-center gap-1.5">
@@ -123,13 +168,17 @@ export const Hero: React.FC = () => {
 
             {/* Profile Photo and Quick Coordinates */}
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-20 h-24 rounded border border-zinc-300 dark:border-zinc-700 overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.2 }}
+                className="w-20 h-24 rounded border border-zinc-300 dark:border-zinc-700 overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0 shadow-xs"
+              >
                 <img
                   src="/profile.jpg"
                   alt={personal.nameEn}
-                  className="w-full h-full object-cover grayscale contrast-110"
+                  className="w-full h-full object-cover grayscale contrast-110 hover:grayscale-0 transition-all duration-300"
                 />
-              </div>
+              </motion.div>
               <div className="space-y-1 text-xs">
                 <p className="font-semibold text-zinc-900 dark:text-zinc-100">
                   {lang === "th" ? personal.nameTh : personal.nameEn}
@@ -185,8 +234,10 @@ export const Hero: React.FC = () => {
               : "Stability and human usability in real-world environments define good mobile engineering."}
             &rdquo;
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
+
+export default Hero;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "motion/react";
 import { Github, MapPin, Copy, Check, Send, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -35,16 +36,28 @@ export const ContactSection: React.FC = () => {
   return (
     <section id="contact" className="py-20">
       {/* Section Subtitle & Heading */}
-      <div className="flex items-center gap-3 mb-10">
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center gap-3 mb-10"
+      >
         <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
           05 // {t("ช่องทางการติดต่อ", "GET IN TOUCH")}
         </span>
         <div className="h-px bg-zinc-200 dark:bg-zinc-800 flex-1" />
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left Column: Direct Invitation & Coordinates */}
-        <div className="lg:col-span-6 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.45 }}
+          className="lg:col-span-6 space-y-6"
+        >
           <div className="space-y-3">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
               {lang === "th"
@@ -59,7 +72,11 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Quick Copy Email Card */}
-          <div className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg space-y-2 shadow-xs dark:shadow-none">
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.2 }}
+            className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg space-y-2 shadow-xs dark:shadow-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+          >
             <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
               {t("อีเมลติดต่อหลัก", "Direct Email")}
             </span>
@@ -70,7 +87,8 @@ export const ContactSection: React.FC = () => {
               >
                 {personal.email}
               </a>
-              <button
+              <motion.button
+                whileTap={{ scale: 0.92 }}
                 onClick={copyEmail}
                 className="p-1.5 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 rounded transition-colors shrink-0 cursor-pointer"
                 aria-label="Copy email address"
@@ -81,27 +99,32 @@ export const ContactSection: React.FC = () => {
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}
-              </button>
+              </motion.button>
             </div>
             {copied && (
-              <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 block">
+              <motion.span
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 block"
+              >
                 {t("คัดลอกอีเมลเรียบร้อยแล้ว", "Copied to clipboard!")}
-              </span>
+              </motion.span>
             )}
-          </div>
+          </motion.div>
 
           {/* Additional Coordinates */}
           <div className="space-y-3 text-xs font-mono text-zinc-600 dark:text-zinc-400 pt-2">
-            <a
+            <motion.a
+              whileHover={{ x: 3 }}
               href={personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+              className="inline-flex items-center gap-2 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
             >
               <Github className="w-4 h-4 text-zinc-500" />
               <span>github.com/{personal.githubUsername}</span>
               <ArrowUpRight className="w-3 h-3 text-zinc-400 dark:text-zinc-600" />
-            </a>
+            </motion.a>
 
             <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">
               <MapPin className="w-4 h-4 text-zinc-500" />
@@ -110,10 +133,16 @@ export const ContactSection: React.FC = () => {
               </span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Column: Clean Minimalist Message Form */}
-        <div className="lg:col-span-6 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/20 rounded-lg p-6 shadow-xs dark:shadow-none">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.45, delay: 0.15 }}
+          className="lg:col-span-6 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/20 rounded-lg p-6 shadow-xs dark:shadow-none"
+        >
           <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-zinc-800 dark:text-zinc-200 mb-4 pb-2 border-b border-zinc-200 dark:border-zinc-800">
             {t("ส่งข้อความถึงผม (Direct Message)", "Send a Message")}
           </h3>
@@ -179,13 +208,15 @@ export const ContactSection: React.FC = () => {
               />
             </div>
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono rounded transition-colors cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono rounded transition-colors cursor-pointer shadow-xs"
             >
               <Send className="w-3.5 h-3.5" />
               <span>{t("เปิดโปรแกรมเมลเพื่อส่งข้อความ", "Send Inquiry via Email")}</span>
-            </button>
+            </motion.button>
 
             {formSubmitted && (
               <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 text-center pt-1">
@@ -196,7 +227,7 @@ export const ContactSection: React.FC = () => {
               </p>
             )}
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

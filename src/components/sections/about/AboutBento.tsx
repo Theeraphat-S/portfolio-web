@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { GraduationCap, Award, Briefcase, Check } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -10,16 +11,28 @@ export const AboutBento: React.FC = () => {
   return (
     <section id="about" className="py-20 border-b border-zinc-200 dark:border-zinc-900">
       {/* Section Subtitle & Heading */}
-      <div className="flex items-center gap-3 mb-8">
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center gap-3 mb-8"
+      >
         <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
           01 // {t("ประวัติและตัวตน", "ABOUT & BACKGROUND")}
         </span>
         <div className="h-px bg-zinc-200 dark:bg-zinc-800 flex-1" />
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left Column: Narrative Biography */}
-        <div className="lg:col-span-7 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="lg:col-span-7 space-y-6"
+        >
           <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight leading-snug">
             {lang === "th"
               ? "สร้างสรรค์แอปพลิเคชันจากความต้องการจริง สู่โค้ดที่ดูแลรักษาได้ในระยะยาว"
@@ -70,12 +83,22 @@ export const AboutBento: React.FC = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Column: Structured Specs & Credentials */}
-        <div className="lg:col-span-5 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="lg:col-span-5 space-y-6"
+        >
           {/* Education Block */}
-          <div className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg p-5 space-y-3 shadow-xs dark:shadow-none">
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.2 }}
+            className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg p-5 space-y-3 shadow-xs dark:shadow-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+          >
             <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
               <GraduationCap className="w-4 h-4" />
               <h3 className="text-xs font-mono uppercase tracking-wider font-semibold">
@@ -106,10 +129,14 @@ export const AboutBento: React.FC = () => {
                 "Focused on Data Structures, Algorithms, Software Engineering methodologies, and Client/Server architecture.",
               )}
             </p>
-          </div>
+          </motion.div>
 
           {/* Academic Leadership Block */}
-          <div className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg p-5 space-y-3 shadow-xs dark:shadow-none">
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.2 }}
+            className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg p-5 space-y-3 shadow-xs dark:shadow-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+          >
             <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
               <Award className="w-4 h-4" />
               <h3 className="text-xs font-mono uppercase tracking-wider font-semibold">
@@ -146,10 +173,14 @@ export const AboutBento: React.FC = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Work Mode & Readiness */}
-          <div className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg p-5 space-y-2 shadow-xs dark:shadow-none">
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.2 }}
+            className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg p-5 space-y-2 shadow-xs dark:shadow-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+          >
             <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
               <Briefcase className="w-4 h-4" />
               <h3 className="text-xs font-mono uppercase tracking-wider font-semibold">
@@ -165,8 +196,8 @@ export const AboutBento: React.FC = () => {
             <p className="text-[11px] font-mono text-zinc-500 pt-1">
               Agile / Scrum &bull; Git & GitHub Workflow &bull; English Professional Reading
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

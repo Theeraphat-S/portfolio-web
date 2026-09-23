@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { Smartphone, Code, Database, Wrench } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -18,14 +19,26 @@ export const Skills: React.FC = () => {
   return (
     <section id="skills" className="py-20 border-b border-zinc-200 dark:border-zinc-900">
       {/* Section Subtitle & Heading */}
-      <div className="flex items-center gap-3 mb-10">
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center gap-3 mb-10"
+      >
         <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
           03 // {t("ทักษะและความเชี่ยวชาญ", "TECHNICAL MATRIX")}
         </span>
         <div className="h-px bg-zinc-200 dark:bg-zinc-800 flex-1" />
-      </div>
+      </motion.div>
 
-      <div className="space-y-4 mb-12">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45 }}
+        className="space-y-4 mb-12"
+      >
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
           {lang === "th"
             ? "ชุดทักษะเชิงเทคนิคและความเชี่ยวชาญ (Technical Arsenal)"
@@ -36,14 +49,19 @@ export const Skills: React.FC = () => {
             ? "มุ่งเน้นสถาปัตยกรรม Mobile Cross-Platform ด้วย Flutter เป็นแกนหลัก ควบคู่ความเข้าใจด้าน Backend, ฐานข้อมูล และการควบคุมคุณภาพโค้ด"
             : "Core focus on cross-platform mobile architecture with Flutter, supported by enterprise backend foundations, relational databases, and collaborative tooling."}
         </p>
-      </div>
+      </motion.div>
 
       {/* Domain Matrix Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {skillCategories.map((category: SkillCategory, idx: number) => (
-          <div
+          <motion.div
             key={idx}
-            className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/20 rounded-lg p-6 space-y-4 shadow-xs dark:shadow-none"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.4, delay: idx * 0.08 }}
+            whileHover={{ y: -3 }}
+            className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/20 rounded-lg p-6 space-y-4 shadow-xs dark:shadow-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
           >
             {/* Domain Header */}
             <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
@@ -63,10 +81,10 @@ export const Skills: React.FC = () => {
               {category.skills.map((skill, sIdx) => (
                 <div
                   key={sIdx}
-                  className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs"
+                  className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs group"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 group-hover:scale-125 transition-transform" />
                     <span className="font-semibold text-zinc-800 dark:text-zinc-200">
                       {skill.name}
                     </span>
@@ -80,7 +98,7 @@ export const Skills: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

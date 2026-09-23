@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -11,14 +12,26 @@ export const ExperienceTimeline: React.FC = () => {
   return (
     <section id="experience" className="py-20 border-b border-zinc-200 dark:border-zinc-900">
       {/* Section Subtitle & Heading */}
-      <div className="flex items-center gap-3 mb-10">
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center gap-3 mb-10"
+      >
         <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
           04 // {t("เส้นทางและประสบการณ์", "EXPERIENCE & IMPACT")}
         </span>
         <div className="h-px bg-zinc-200 dark:bg-zinc-800 flex-1" />
-      </div>
+      </motion.div>
 
-      <div className="space-y-4 mb-14">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45 }}
+        className="space-y-4 mb-14"
+      >
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
           {lang === "th"
             ? "ประสบการณ์ทำงานและบทบาททางวิชาการ (Career & Milestones)"
@@ -29,14 +42,18 @@ export const ExperienceTimeline: React.FC = () => {
             ? "จากการฝึกงานสร้างฟีเจอร์ Production ในบริษัทจริง สู่บทบาทผู้ช่วยสอน 3 เทอม และวิทยากรบรรยายพิเศษ"
             : "From engineering production features during commercial software internships to 3 terms of undergraduate mentorship and guest AI keynote speaking."}
         </p>
-      </div>
+      </motion.div>
 
       {/* Chronological Ledger */}
       <div className="divide-y divide-zinc-200 dark:divide-zinc-800/80">
         {experiences.map((exp: ExperienceItem, idx: number) => (
-          <div
+          <motion.div
             key={idx}
-            className="py-10 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.45, delay: idx * 0.08 }}
+            className="py-10 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-6 items-start group"
           >
             {/* Left: Period & Type */}
             <div className="md:col-span-4 space-y-2">
@@ -55,7 +72,7 @@ export const ExperienceTimeline: React.FC = () => {
             {/* Right: Role, Company & Bullet Impact */}
             <div className="md:col-span-8 space-y-4">
               <div>
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                   {lang === "th" ? exp.roleTh : exp.roleEn}
                 </h3>
                 <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400 mt-0.5">
@@ -93,7 +110,7 @@ export const ExperienceTimeline: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
