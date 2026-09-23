@@ -36,22 +36,22 @@ export const ContactSection: React.FC = () => {
     <section id="contact" className="py-20">
       {/* Section Subtitle & Heading */}
       <div className="flex items-center gap-3 mb-10">
-        <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">
+        <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
           05 // {t("ช่องทางการติดต่อ", "GET IN TOUCH")}
         </span>
-        <div className="h-px bg-zinc-800 flex-1" />
+        <div className="h-px bg-zinc-200 dark:bg-zinc-800 flex-1" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left Column: Direct Invitation & Coordinates */}
         <div className="lg:col-span-6 space-y-6">
           <div className="space-y-3">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-100">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
               {lang === "th"
                 ? "พร้อมร่วมงานและสร้างสรรค์ผลงานใหม่ไปด้วยกัน"
                 : "Let's connect and build reliable mobile software."}
             </h2>
-            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
               {lang === "th"
                 ? "ผมกำลังมองหาโอกาสร่วมงานในตำแหน่ง Mobile Developer (Flutter & Dart) หากมีคำถาม โครงการที่ต้องการปรึกษา หรือต้องการสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้โดยตรงครับ"
                 : "Currently open to full-time Mobile Developer (Flutter & Dart) positions and high-impact engineering projects. Feel free to reach out directly."}
@@ -59,51 +59,51 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Quick Copy Email Card */}
-          <div className="p-4 border border-zinc-800 bg-zinc-900/30 rounded-lg space-y-2">
+          <div className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 rounded-lg space-y-2 shadow-xs dark:shadow-none">
             <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
               {t("อีเมลติดต่อหลัก", "Direct Email")}
             </span>
             <div className="flex items-center justify-between gap-3">
               <a
                 href={`mailto:${personal.email}`}
-                className="text-sm sm:text-base font-mono font-medium text-emerald-400 hover:underline break-all"
+                className="text-sm sm:text-base font-mono font-medium text-emerald-600 dark:text-emerald-400 hover:underline break-all"
               >
                 {personal.email}
               </a>
               <button
                 onClick={copyEmail}
-                className="p-1.5 text-zinc-400 hover:text-zinc-100 border border-zinc-800 hover:border-zinc-700 bg-zinc-900 rounded transition-colors shrink-0"
+                className="p-1.5 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 rounded transition-colors shrink-0 cursor-pointer"
                 aria-label="Copy email address"
                 title="Copy to clipboard"
               >
                 {copied ? (
-                  <Check className="w-4 h-4 text-emerald-400" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}
               </button>
             </div>
             {copied && (
-              <span className="text-[11px] font-mono text-emerald-400 block">
+              <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 block">
                 {t("คัดลอกอีเมลเรียบร้อยแล้ว", "Copied to clipboard!")}
               </span>
             )}
           </div>
 
           {/* Additional Coordinates */}
-          <div className="space-y-3 text-xs font-mono text-zinc-400 pt-2">
+          <div className="space-y-3 text-xs font-mono text-zinc-600 dark:text-zinc-400 pt-2">
             <a
               href={personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-zinc-200 transition-colors"
+              className="flex items-center gap-2 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
             >
-              <Github className="w-4 h-4 text-zinc-400" />
+              <Github className="w-4 h-4 text-zinc-500" />
               <span>github.com/{personal.githubUsername}</span>
-              <ArrowUpRight className="w-3 h-3 text-zinc-600" />
+              <ArrowUpRight className="w-3 h-3 text-zinc-400 dark:text-zinc-600" />
             </a>
 
-            <div className="flex items-center gap-2 text-zinc-400">
+            <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">
               <MapPin className="w-4 h-4 text-zinc-500" />
               <span>
                 {lang === "th" ? personal.locationTh : personal.locationEn}
@@ -113,8 +113,8 @@ export const ContactSection: React.FC = () => {
         </div>
 
         {/* Right Column: Clean Minimalist Message Form */}
-        <div className="lg:col-span-6 border border-zinc-800 bg-zinc-900/20 rounded-lg p-6">
-          <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-zinc-200 mb-4 pb-2 border-b border-zinc-800">
+        <div className="lg:col-span-6 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/20 rounded-lg p-6 shadow-xs dark:shadow-none">
+          <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-zinc-800 dark:text-zinc-200 mb-4 pb-2 border-b border-zinc-200 dark:border-zinc-800">
             {t("ส่งข้อความถึงผม (Direct Message)", "Send a Message")}
           </h3>
 
@@ -122,7 +122,7 @@ export const ContactSection: React.FC = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-xs font-mono text-zinc-400 mb-1"
+                className="block text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-1"
               >
                 {t("ชื่อของคุณ / องค์กร", "Your Name / Organization")}
               </label>
@@ -135,14 +135,14 @@ export const ContactSection: React.FC = () => {
                   setFormData({ ...formData, name: e.target.value })
                 }
                 placeholder="e.g. John Doe / Tech Company"
-                className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono"
+                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-xs text-zinc-900 dark:text-zinc-200 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono"
               />
             </div>
 
             <div>
               <label
                 htmlFor="email"
-                className="block text-xs font-mono text-zinc-400 mb-1"
+                className="block text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-1"
               >
                 {t("อีเมลติดต่อกลับ", "Your Email")}
               </label>
@@ -155,14 +155,14 @@ export const ContactSection: React.FC = () => {
                   setFormData({ ...formData, email: e.target.value })
                 }
                 placeholder="e.g. contact@example.com"
-                className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono"
+                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-xs text-zinc-900 dark:text-zinc-200 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono"
               />
             </div>
 
             <div>
               <label
                 htmlFor="message"
-                className="block text-xs font-mono text-zinc-400 mb-1"
+                className="block text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-1"
               >
                 {t("ข้อความ", "Message")}
               </label>
@@ -175,7 +175,7 @@ export const ContactSection: React.FC = () => {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 placeholder="Write your inquiry or project details here..."
-                className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono resize-none"
+                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-xs text-zinc-900 dark:text-zinc-200 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono resize-none"
               />
             </div>
 
@@ -188,7 +188,7 @@ export const ContactSection: React.FC = () => {
             </button>
 
             {formSubmitted && (
-              <p className="text-[11px] font-mono text-emerald-400 text-center pt-1">
+              <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 text-center pt-1">
                 {t(
                   "กำลังเปิดโปรแกรมเมลของคุณเพื่อส่งข้อความ...",
                   "Opening your mail client...",
