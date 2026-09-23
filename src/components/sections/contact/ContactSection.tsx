@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Github, MapPin, Copy, Check, Send, ArrowUpRight } from "lucide-react";
+import { Github, MapPin, Copy, Check, Send, ArrowUpRight, Phone } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 
@@ -126,10 +126,24 @@ export const ContactSection: React.FC = () => {
               <ArrowUpRight className="w-3 h-3 text-zinc-400 dark:text-zinc-600" />
             </motion.a>
 
-            <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">
-              <MapPin className="w-4 h-4 text-zinc-500" />
+            {personal.phone && (
+              <motion.a
+                whileHover={{ x: 3 }}
+                href={`tel:${personal.phone.replace(/[^0-9]/g, "")}`}
+                className="flex items-center gap-2 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              >
+                <Phone className="w-4 h-4 text-emerald-500" />
+                <span>{personal.phone}</span>
+                <span className="text-[11px] text-zinc-400">({t("โทรติดต่อได้โดยตรง", "Direct call")})</span>
+              </motion.a>
+            )}
+
+            <div className="flex items-start gap-2 text-zinc-600 dark:text-zinc-400">
+              <MapPin className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
               <span>
-                {lang === "th" ? personal.locationTh : personal.locationEn}
+                {lang === "th"
+                  ? (personal.addressTh ?? personal.locationTh)
+                  : (personal.addressEn ?? personal.locationEn)}
               </span>
             </div>
           </div>

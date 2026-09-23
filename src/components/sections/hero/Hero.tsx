@@ -223,6 +223,14 @@ export const Hero: React.FC = () => {
                   Onsite / Hybrid / Remote
                 </dd>
               </div>
+              {personal.expectedSalaryEn && (
+                <div className="flex justify-between pt-2">
+                  <dt className="text-zinc-500">{t("เงินเดือนที่คาดหวัง", "Expected Salary")}</dt>
+                  <dd className="text-emerald-600 dark:text-emerald-400 font-semibold text-right">
+                    {lang === "th" ? personal.expectedSalaryTh : personal.expectedSalaryEn}
+                  </dd>
+                </div>
+              )}
             </dl>
           </div>
 

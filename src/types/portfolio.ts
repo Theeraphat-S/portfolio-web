@@ -68,6 +68,15 @@ export interface EducationInfo {
   yearsEn: string;
 }
 
+export interface ReferenceInfo {
+  nameTh: string;
+  nameEn: string;
+  roleTh: string;
+  roleEn: string;
+  phone: string;
+  email: string;
+}
+
 export interface PersonalInfo {
   nameTh: string;
   nameEn: string;
@@ -77,11 +86,17 @@ export interface PersonalInfo {
   taglineTh: string;
   taglineEn: string;
   email: string;
+  phone: string;
+  expectedSalaryTh?: string;
+  expectedSalaryEn?: string;
+  addressTh?: string;
+  addressEn?: string;
   github: string;
   githubUsername: string;
   locationTh: string;
   locationEn: string;
   education: EducationInfo;
+  reference?: ReferenceInfo;
 }
 
 export interface StatItem {
