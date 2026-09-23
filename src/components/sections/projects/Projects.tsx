@@ -1,237 +1,264 @@
 import React, { useState } from "react";
-import { Smartphone, Sparkles, Layers, Code2 } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Github,
+  CheckCircle2,
+  Terminal,
+  AlertCircle,
+  Lightbulb,
+} from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { ProjectItem } from "../../../types";
-import { ProjectCard } from "./ProjectCard";
-import { ProjectModal } from "./modal/ProjectModal";
-import { MobileMockup } from "../../MobileMockup";
-import { FluidAmbientMesh } from "../../reactbits/FluidAmbientMesh";
+import { NcdsScreen, PintoScreen, PosScreen } from "../../mobile-mockup";
 
 export const Projects: React.FC = () => {
   const { lang, t } = useLanguage();
-  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
-    null,
-  );
-  const [filter, setFilter] = useState<"all" | "mobile" | "system">("all");
+  const [expandedProjectId, setExpandedProjectId] = useState<string | null>("ncds-screening");
 
-  const flagshipProject = portfolioData.projects[0]; // NCDs Screening / POLABDC
+  const toggleExpand = (id: string) => {
+    setExpandedProjectId(expandedProjectId === id ? null : id);
+  };
 
-  const filteredProjects = portfolioData.projects.filter((p: ProjectItem) => {
-    if (filter === "all") return true;
-    return p.category === filter;
-  });
+  const renderScreen = (id: string) => {
+    switch (id) {
+      case "ncds-screening":
+        return <NcdsScreen direction={1} />;
+      case "pinto-app":
+        return <PintoScreen direction={1} />;
+      case "pos-system":
+        return <PosScreen direction={1} />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-3xl">
-            <span className="text-xs font-mono uppercase tracking-widest text-cyan-500 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30 dark:border-cyan-800/60 inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
-              {t(
-                "ผลงานและสถาปัตยกรรมเด่น",
-                "PORTFOLIO & FLAGSHIP ARCHITECTURE",
-              )}
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 dark:text-white mt-4 tracking-tight">
-              {t(
-                "ผลงานแอปพลิเคชัน & สถาปัตยกรรมระดับ Production",
-                "Proven Mobile Systems & Architecture",
-              )}
-            </h2>
-            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-2">
-              {t(
-                "ผสมผสานการออกแบบสถาปัตยกรรม BLoC, การทำงานแบบ Offline-First และการเชื่อมโยงระบบนิเวศภายนอกอย่างปลอดภัย",
-                "Combining reactive BLoC state machines, offline-first data synchronization, and resilient enterprise RESTful API integrations.",
-              )}
-            </p>
-          </div>
-        </div>
-
-        {/* 1. Flagship Centerpiece: Hybrid Interactive Mobile Showcase with Ambient Border Beam */}
-        <div className="mb-20 rounded-3xl border border-zinc-200 dark:border-zinc-800/90 bg-zinc-100/70 dark:bg-zinc-950/80 p-6 sm:p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden border-beam-container">
-          {/* Animated Ambient Border Beam */}
-          <div className="border-beam-wrapper">
-            <div className="border-beam-glow" />
-          </div>
-
-          {/* GetLayers-inspired Fluid Ambient Mesh Glow */}
-          <FluidAmbientMesh intensity="medium" speed="slow" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Left: Interactive Briefing & Metrics */}
-            <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-mono text-xs font-semibold uppercase tracking-wider">
-                    {t("ผลงานเด่นอันดับ 1", "FEATURED FLAGSHIP")}
-                  </span>
-                  <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-                    2568 &bull; HEALTHCARE CAPSTONE
-                  </span>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
-                  {lang === "th"
-                    ? flagshipProject.titleTh
-                    : flagshipProject.titleEn}
-                </h3>
-
-                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                  {lang === "th"
-                    ? flagshipProject.descriptionTh
-                    : flagshipProject.descriptionEn}
-                </p>
-              </div>
-
-              {/* Key Architecture Bullets */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                <div className="p-3.5 rounded-xl bg-white/80 dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800/80">
-                  <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold block mb-1">
-                    CLIENT-SIDE BLoC ENGINE
-                  </span>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                    {lang === "th"
-                      ? "คำนวณคะแนนความเสี่ยงโรค NCDs บนเครื่องทันที Zero-Latency แม้ไม่มีอินเทอร์เน็ต"
-                      : "Instant zero-latency risk score computation fully operating in offline environments."}
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-white/80 dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800/80">
-                  <span className="text-xs font-mono text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                    REAL-WORLD FIELD TESTING
-                  </span>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                    {lang === "th"
-                      ? "ทดสอบร่วมกับบุคลากรทางการแพทย์และ อสม. จริง ลดเวลาตรวจลงกว่า 60%"
-                      : "Validated by healthcare volunteers in field tests, reducing screening time by >60%."}
-                  </p>
-                </div>
-              </div>
-
-              {/* Metrics Row */}
-              <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-zinc-200 dark:border-zinc-800/70">
-                {flagshipProject.metrics.map((metric, idx) => (
-                  <div key={idx} className="flex flex-col">
-                    <span className="text-xl sm:text-2xl font-black font-mono text-zinc-900 dark:text-white">
-                      {metric.value}
-                    </span>
-                    <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-                      {lang === "th" ? metric.labelTh : metric.labelEn}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Modal Trigger Action */}
-              <div className="pt-2">
-                <button
-                  onClick={() => setSelectedProject(flagshipProject)}
-                  data-cursor-text="Details"
-                  className="px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs inline-flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md cursor-pointer btn--shine"
-                >
-                  <Layers className="w-4 h-4" />
-                  <span>
-                    {t(
-                      "อ่านสถาปัตยกรรมเชิงลึก (Deep Dive)",
-                      "Read Architecture Deep Dive",
-                    )}
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* Right: Live Interactive 3D Phone Mockup */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center">
-              <div className="text-center mb-3">
-                <span className="text-[11px] font-mono text-zinc-600 dark:text-zinc-400 bg-white/80 dark:bg-zinc-900/90 px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 shadow-sm inline-flex items-center gap-1.5">
-                  <Smartphone className="w-3.5 h-3.5 text-cyan-500" />
-                  {t(
-                    "แตะแถบเมนูด้านล่างของมือถือเพื่อเล่นหน้าจอสด",
-                    "Interactive simulation — tap bottom tabs inside device",
-                  )}
-                </span>
-              </div>
-              <div className="w-full max-w-[340px] sm:max-w-[360px]">
-                <MobileMockup />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 2. Secondary Projects Section Header & Filter Pills */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-          <div className="flex items-center gap-2">
-            <Code2 className="w-4 h-4 text-cyan-500" />
-            <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white">
-              {t("ผลงานและโปรเจกต์อื่นๆ ทั้งหมด", "All Applications & Systems")}
-            </h3>
-          </div>
-
-          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-zinc-900/80 border border-zinc-800 self-start md:self-auto flex-wrap">
-            <button
-              onClick={() => setFilter("all")}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
-                filter === "all"
-                  ? "bg-cyan-500 text-zinc-950 font-bold shadow-lg shadow-cyan-500/30"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              {t("ทั้งหมด", "All Systems")} ({portfolioData.projects.length})
-            </button>
-            <button
-              onClick={() => setFilter("mobile")}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
-                filter === "mobile"
-                  ? "bg-cyan-500 text-zinc-950 font-bold shadow-lg shadow-cyan-500/30"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              {t("แอปมือถือ", "Mobile Apps")} (
-              {
-                portfolioData.projects.filter((p) => p.category === "mobile")
-                  .length
-              }
-              )
-            </button>
-            <button
-              onClick={() => setFilter("system")}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
-                filter === "system"
-                  ? "bg-cyan-500 text-zinc-950 font-bold shadow-lg shadow-cyan-500/30"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              {t("ระบบ & ฟูลสแตก", "Fullstack / Systems")} (
-              {
-                portfolioData.projects.filter((p) => p.category === "system")
-                  .length
-              }
-              )
-            </button>
-          </div>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredProjects.map((project: ProjectItem, idx: number) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={idx}
-              onSelect={setSelectedProject}
-            />
-          ))}
-        </div>
+    <section id="projects" className="py-20 border-b border-zinc-900">
+      {/* Section Subtitle & Heading */}
+      <div className="flex items-center gap-3 mb-10">
+        <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">
+          02 // {t("ผลงานเชิงวิศวกรรม", "ENGINEERING PROJECTS")}
+        </span>
+        <div className="h-px bg-zinc-800 flex-1" />
       </div>
 
-      {/* Deep Dive Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      <div className="space-y-4 mb-14">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-100">
+          {lang === "th"
+            ? "ผลงานและกรณีศึกษาเชิงวิศวกรรม (Production Case Studies)"
+            : "Production Case Studies & Architectural Systems"}
+        </h2>
+        <p className="text-zinc-400 max-w-2xl text-sm sm:text-base leading-relaxed">
+          {lang === "th"
+            ? "การออกแบบและพัฒนาซอฟต์แวร์ที่เน้นแก้ปัญหาหน้างานจริง ความเสถียรในสภาวะ Offline และการจัดวางสถาปัตยกรรมที่ดูแลรักษาง่าย"
+            : "Real-world mobile engineering focused on zero-latency offline workflows, reactive state machines, and resilient API contracts."}
+        </p>
+      </div>
+
+      {/* Case Studies List */}
+      <div className="space-y-16">
+        {portfolioData.projects.map((project: ProjectItem, index: number) => {
+          const isExpanded = expandedProjectId === project.id;
+          const projectNum = String(index + 1).padStart(2, "0");
+
+          return (
+            <article
+              key={project.id}
+              className="border-t border-zinc-800/80 pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+            >
+              {/* Left Column: Case Study Details */}
+              <div className="lg:col-span-7 space-y-6">
+                {/* Meta Header */}
+                <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
+                  <span className="text-2xl font-bold text-emerald-400 font-mono">
+                    {projectNum}
+                  </span>
+                  <span className="text-zinc-500">/</span>
+                  <span className="px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800 uppercase tracking-wider">
+                    {project.tag}
+                  </span>
+                  <span className="text-zinc-500">&bull;</span>
+                  <span className="text-zinc-400">{project.year}</span>
+                </div>
+
+                {/* Title & Subtitle */}
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight">
+                    {lang === "th" ? project.titleTh : project.titleEn}
+                  </h3>
+                  <p className="text-emerald-400 text-xs sm:text-sm font-mono mt-1">
+                    {lang === "th" ? project.subtitleTh : project.subtitleEn}
+                  </p>
+                </div>
+
+                {/* Executive Summary */}
+                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                  {lang === "th" ? project.descriptionTh : project.descriptionEn}
+                </p>
+
+                {/* Metrics Grid */}
+                {project.metrics && project.metrics.length > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
+                    {project.metrics.map((metric, mIdx) => (
+                      <div
+                        key={mIdx}
+                        className="p-3 rounded border border-zinc-800/80 bg-zinc-900/30 font-mono"
+                      >
+                        <p className="text-[11px] text-zinc-500 uppercase tracking-wider">
+                          {lang === "th" ? metric.labelTh : metric.labelEn}
+                        </p>
+                        <p className="text-base font-bold text-zinc-100 mt-1">
+                          {metric.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {project.technologies.map((tech, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="px-2.5 py-1 text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Actions: Expand Deep Dive & Links */}
+                <div className="pt-2 flex flex-wrap items-center gap-4">
+                  <button
+                    onClick={() => toggleExpand(project.id)}
+                    className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-medium rounded border border-emerald-800/70 bg-emerald-950/30 text-emerald-300 hover:bg-emerald-900/40 transition-colors cursor-pointer"
+                  >
+                    <span>
+                      {isExpanded
+                        ? t("ปิดบันทึกเชิงสถาปัตยกรรม", "Collapse Engineering Analysis")
+                        : t("อ่านบันทึกเชิงสถาปัตยกรรม", "Read Engineering Analysis")}
+                    </span>
+                    {isExpanded ? (
+                      <ChevronUp className="w-3.5 h-3.5" />
+                    ) : (
+                      <ChevronDown className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      <span>{t("ซอร์สโค้ด", "Source Code")}</span>
+                    </a>
+                  )}
+                </div>
+
+                {/* Expandable Engineering Deep Dive */}
+                {isExpanded && (
+                  <div className="pt-6 border-t border-zinc-800/80 space-y-6 text-xs sm:text-sm animate-fadeIn">
+                    {/* Problem Statement */}
+                    {project.problemTh && (
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-1.5 font-mono font-semibold text-rose-400">
+                          <AlertCircle className="w-4 h-4" />
+                          <span>{t("ปัญหาหน้างานจริง (The Real-World Problem)", "The Real-World Problem")}</span>
+                        </div>
+                        <p className="text-zinc-300 leading-relaxed pl-5">
+                          {lang === "th" ? project.problemTh : project.problemEn}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Architecture Decision Rationale */}
+                    {project.decisionRationaleTh && (
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-1.5 font-mono font-semibold text-emerald-400">
+                          <Lightbulb className="w-4 h-4" />
+                          <span>{t("การตัดสินใจเชิงสถาปัตยกรรม (Architecture Decision)", "Architecture Decision & Solution")}</span>
+                        </div>
+                        <p className="text-zinc-300 leading-relaxed pl-5">
+                          {lang === "th" ? project.decisionRationaleTh : project.decisionRationaleEn}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Trade-Offs */}
+                    {project.tradeOffsTh && (
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-1.5 font-mono font-semibold text-amber-400">
+                          <Terminal className="w-4 h-4" />
+                          <span>{t("การชั่งน้ำหนักข้อดีข้อเสีย (Engineering Trade-offs)", "Engineering Trade-offs")}</span>
+                        </div>
+                        <p className="text-zinc-300 leading-relaxed pl-5">
+                          {lang === "th" ? project.tradeOffsTh : project.tradeOffsEn}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Usability Testing & Evidence */}
+                    {project.evidenceTh && (
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-1.5 font-mono font-semibold text-cyan-400">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <span>{t("การทดสอบภาคสนาม (Field Testing Evidence)", "Usability Testing & Evidence")}</span>
+                        </div>
+                        <p className="text-zinc-300 leading-relaxed pl-5">
+                          {lang === "th" ? project.evidenceTh : project.evidenceEn}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Key Highlights */}
+                    {project.highlightsTh && (
+                      <div className="space-y-2 pt-2 border-t border-zinc-800/60">
+                        <p className="font-mono text-zinc-400 font-semibold">
+                          {t("สิ่งที่ส่งมอบ (Key Deliverables):", "Key Deliverables:")}
+                        </p>
+                        <ul className="space-y-1.5 pl-2">
+                          {(lang === "th" ? project.highlightsTh : project.highlightsEn).map(
+                            (hl, hIdx) => (
+                              <li key={hIdx} className="flex items-start gap-2 text-zinc-300">
+                                <span className="text-emerald-500 font-mono mt-0.5">&bull;</span>
+                                <span>{hl}</span>
+                              </li>
+                            ),
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: Clean Device Screen Frame */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="w-full max-w-[320px] rounded-2xl border border-zinc-800 bg-zinc-950 p-3 shadow-lg">
+                  {/* Subtle Top Status Bar */}
+                  <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 pb-2 mb-2 border-b border-zinc-900">
+                    <span>{project.id.toUpperCase()}</span>
+                    <span className="flex items-center gap-1 text-emerald-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      LIVE UI
+                    </span>
+                  </div>
+
+                  {/* Render Screen Simulation */}
+                  <div className="min-h-[380px] flex flex-col justify-center">
+                    {renderScreen(project.id)}
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </section>
   );
 };

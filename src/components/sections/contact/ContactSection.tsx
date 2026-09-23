@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { MapPin, Sparkles, Send, CheckCircle2 } from "lucide-react";
+import { Github, MapPin, Copy, Check, Send, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
-import { SpotlightCard } from "../../reactbits/SpotlightCard";
-import { ContactEmailCard } from "./ContactEmailCard";
-import { ContactGitHubCard } from "./ContactGitHubCard";
 
 export const ContactSection: React.FC = () => {
   const { lang, t } = useLanguage();
   const { personal } = portfolioData;
+  const [copied, setCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -16,14 +14,17 @@ export const ContactSection: React.FC = () => {
     message: "",
   });
 
+  const copyEmail = () => {
+    navigator.clipboard.writeText(personal.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
-    // Trigger direct mailto client with pre-filled content
-    const subject = encodeURIComponent(
-      `Portfolio Inquiry from ${formData.name}`,
-    );
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
     );
@@ -32,136 +33,169 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mb-12 text-center max-w-2xl mx-auto">
-          <span className="text-xs font-mono uppercase tracking-widest text-cyan-500 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30 dark:border-cyan-800/60 inline-flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" />
-            {t("ติดต่อและร่วมงาน", "Get in Touch")}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white mt-3 tracking-tight">
-            {t(
-              "สนใจร่วมงานหรือพูดคุยเกี่ยวกับโปรเจกต์",
-              "Let's Connect & Build Great Apps",
+    <section id="contact" className="py-20">
+      {/* Section Subtitle & Heading */}
+      <div className="flex items-center gap-3 mb-10">
+        <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">
+          05 // {t("ช่องทางการติดต่อ", "GET IN TOUCH")}
+        </span>
+        <div className="h-px bg-zinc-800 flex-1" />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Left Column: Direct Invitation & Coordinates */}
+        <div className="lg:col-span-6 space-y-6">
+          <div className="space-y-3">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-100">
+              {lang === "th"
+                ? "พร้อมร่วมงานและสร้างสรรค์ผลงานใหม่ไปด้วยกัน"
+                : "Let's connect and build reliable mobile software."}
+            </h2>
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+              {lang === "th"
+                ? "ผมกำลังมองหาโอกาสร่วมงานในตำแหน่ง Mobile Developer (Flutter & Dart) หากมีคำถาม โครงการที่ต้องการปรึกษา หรือต้องการสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้โดยตรงครับ"
+                : "Currently open to full-time Mobile Developer (Flutter & Dart) positions and high-impact engineering projects. Feel free to reach out directly."}
+            </p>
+          </div>
+
+          {/* Quick Copy Email Card */}
+          <div className="p-4 border border-zinc-800 bg-zinc-900/30 rounded-lg space-y-2">
+            <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+              {t("อีเมลติดต่อหลัก", "Direct Email")}
+            </span>
+            <div className="flex items-center justify-between gap-3">
+              <a
+                href={`mailto:${personal.email}`}
+                className="text-sm sm:text-base font-mono font-medium text-emerald-400 hover:underline break-all"
+              >
+                {personal.email}
+              </a>
+              <button
+                onClick={copyEmail}
+                className="p-1.5 text-zinc-400 hover:text-zinc-100 border border-zinc-800 hover:border-zinc-700 bg-zinc-900 rounded transition-colors shrink-0"
+                aria-label="Copy email address"
+                title="Copy to clipboard"
+              >
+                {copied ? (
+                  <Check className="w-4 h-4 text-emerald-400" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
+              </button>
+            </div>
+            {copied && (
+              <span className="text-[11px] font-mono text-emerald-400 block">
+                {t("คัดลอกอีเมลเรียบร้อยแล้ว", "Copied to clipboard!")}
+              </span>
             )}
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-2">
-            {t(
-              "หากต้องการติดต่อสอบถาม แลกเปลี่ยนไอเดีย หรือสนใจร่วมงาน สามารถส่งข้อความหรือติดต่อผ่านช่องทางด้านล่าง",
-              "Feel free to send a direct message or reach out via Email/GitHub for opportunities and collaboration.",
-            )}
-          </p>
+          </div>
+
+          {/* Additional Coordinates */}
+          <div className="space-y-3 text-xs font-mono text-zinc-400 pt-2">
+            <a
+              href={personal.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-zinc-200 transition-colors"
+            >
+              <Github className="w-4 h-4 text-zinc-400" />
+              <span>github.com/{personal.githubUsername}</span>
+              <ArrowUpRight className="w-3 h-3 text-zinc-600" />
+            </a>
+
+            <div className="flex items-center gap-2 text-zinc-400">
+              <MapPin className="w-4 h-4 text-zinc-500" />
+              <span>
+                {lang === "th" ? personal.locationTh : personal.locationEn}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* High-Contrast Message Form & Quick Contact Deck */}
-        <div className="space-y-6">
-          <SpotlightCard
-            spotlightColor="rgba(6, 182, 212, 0.15)"
-            className="p-6 sm:p-8"
-          >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
-                    {t("ชื่อของคุณ", "Your Name")}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder={
-                      lang === "th" ? "เช่น สมชาย ใจดี" : "e.g. Alex Smith"
-                    }
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
-                    {t("อีเมลของคุณ", "Your Email")}
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="name@company.com"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 transition-colors"
-                  />
-                </div>
-              </div>
+        {/* Right Column: Clean Minimalist Message Form */}
+        <div className="lg:col-span-6 border border-zinc-800 bg-zinc-900/20 rounded-lg p-6">
+          <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-zinc-200 mb-4 pb-2 border-b border-zinc-800">
+            {t("ส่งข้อความถึงผม (Direct Message)", "Send a Message")}
+          </h3>
 
-              <div>
-                <label className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
-                  {t("ข้อความหรือรายละเอียดงาน", "Your Message")}
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  placeholder={
-                    lang === "th"
-                      ? "รายละเอียดโปรเจกต์ โอกาสร่วมงาน หรือหัวข้อที่ต้องการปรึกษา..."
-                      : "Briefly explain the role, opportunity, or collaboration idea..."
-                  }
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                />
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-xs font-mono text-zinc-400 mb-1"
+              >
+                {t("ชื่อของคุณ / องค์กร", "Your Name / Organization")}
+              </label>
+              <input
+                id="name"
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                placeholder="e.g. John Doe / Tech Company"
+                className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono"
+              />
+            </div>
 
-              <div className="flex items-center justify-between gap-4 pt-2">
-                {formSubmitted ? (
-                  <span className="text-xs font-mono text-cyan-500 flex items-center gap-1.5 animate-fade-in">
-                    <CheckCircle2 className="w-4 h-4" />
-                    {t(
-                      "เปิดโปรแกรมส่งอีเมลเรียบร้อยแล้ว!",
-                      "Mail client launched!",
-                    )}
-                  </span>
-                ) : (
-                  <span className="text-[11px] font-mono text-zinc-500">
-                    {t(
-                      "* ส่งตรงไปยังกล่องจดหมายอีเมลส่วนตัว",
-                      "* Opens direct mail client to inbox",
-                    )}
-                  </span>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-xs font-mono text-zinc-400 mb-1"
+              >
+                {t("อีเมลติดต่อกลับ", "Your Email")}
+              </label>
+              <input
+                id="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                placeholder="e.g. contact@example.com"
+                className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-xs font-mono text-zinc-400 mb-1"
+              >
+                {t("ข้อความ", "Message")}
+              </label>
+              <textarea
+                id="message"
+                required
+                rows={4}
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+                placeholder="Write your inquiry or project details here..."
+                className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono resize-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono rounded transition-colors cursor-pointer"
+            >
+              <Send className="w-3.5 h-3.5" />
+              <span>{t("เปิดโปรแกรมเมลเพื่อส่งข้อความ", "Send Inquiry via Email")}</span>
+            </button>
+
+            {formSubmitted && (
+              <p className="text-[11px] font-mono text-emerald-400 text-center pt-1">
+                {t(
+                  "กำลังเปิดโปรแกรมเมลของคุณเพื่อส่งข้อความ...",
+                  "Opening your mail client...",
                 )}
-
-                <button
-                  type="submit"
-                  data-cursor-text="Send"
-                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>{t("ส่งข้อความ", "Send Message")}</span>
-                </button>
-              </div>
-            </form>
-          </SpotlightCard>
-
-          {/* Direct Cards Hub */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <ContactEmailCard email={personal.email} />
-            <ContactGitHubCard
-              githubUrl={personal.github}
-              githubUsername={personal.githubUsername}
-            />
-          </div>
-
-          {/* Location Footer */}
-          <div className="pt-2 flex items-center justify-center text-xs text-zinc-500 dark:text-zinc-400">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-rose-500" />
-              {lang === "th" ? personal.locationTh : personal.locationEn}
-            </span>
-          </div>
+              </p>
+            )}
+          </form>
         </div>
       </div>
     </section>
