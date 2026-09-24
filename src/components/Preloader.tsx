@@ -31,9 +31,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     document.body.style.overflow = "hidden";
 
     // Timing breakdown:
-    // Stroke 1: 0s - 0.5s
-    // Stroke 2: 0.3s - 1.3s (total write: ~1.3s)
-    // Pause / Linger: ~0.3s (until 1.6s)
+    // Stroke 1: 0s - 0.55s
+    // Stroke 2: 0.3s - 1.35s (total write: ~1.35s)
+    // Pause / Linger: ~0.25s (until 1.6s)
     // Soft Dissolve Fade Out: 0.7s (total: ~2.3s)
     const timer = setTimeout(() => {
       setIsFinished(true);

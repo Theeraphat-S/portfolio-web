@@ -15,7 +15,7 @@ An interactive 3D/2.5D device viewport simulating live mobile application interf
 _Avoid_: Static screenshot carousel, plain image mockup
 
 **Preloader Sequence**:
-An intro entrance state executing an animated stroke-dashoffset handwriting signature followed by a smooth curtain unmask into the main interface.
+An intro entrance state executing an animated stroke-dashoffset handwriting signature followed by a smooth soft dissolve fade out into the main interface.
 _Avoid_: Loading spinner, skeleton loader
 
 **Telemetry Deck**:
