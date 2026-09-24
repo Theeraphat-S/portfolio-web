@@ -17,7 +17,7 @@ export const App: React.FC = () => {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        {/* Preloader Sequence - animated handwriting followed by curtain lift */}
+        {/* Preloader Sequence - animated handwriting followed by soft dissolve fade out */}
         <Preloader />
 
         <div className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#0b0f19] dark:text-slate-100 selection:bg-sky-500/25 selection:text-sky-400 transition-colors duration-200 flex flex-col font-sans">
