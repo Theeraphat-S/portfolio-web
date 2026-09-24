@@ -31,8 +31,10 @@ export const personalData: PersonalInfo = {
   reference: {
     nameTh: "อาจารย์ ดร. จักกฤช เตโช",
     nameEn: "Dr. Jakkrit Techo",
-    roleTh: "อาจารย์ประจำสาขาวิชาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้",
-    roleEn: "Faculty Member, Department of Information Technology, Maejo University",
+    roleTh:
+      "อาจารย์ประจำสาขาวิชาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้",
+    roleEn:
+      "Faculty Member, Department of Information Technology, Maejo University",
     phone: "088-267-2285",
     email: "jakkrit@gmaejo.mju.ac.th",
   },
