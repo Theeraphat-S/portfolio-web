@@ -40,7 +40,15 @@ export interface ProjectItem {
 
 export type ExperienceType = "internship" | "academic" | "speaker" | "ta";
 
+export interface ExperienceContribution {
+  labelTh: string;
+  labelEn: string;
+  descTh: string;
+  descEn: string;
+}
+
 export interface ExperienceItem {
+  year: string;
   periodTh: string;
   periodEn: string;
   roleTh: string;
@@ -52,8 +60,11 @@ export interface ExperienceItem {
   type: ExperienceType;
   badgeTh: string;
   badgeEn: string;
+  subBadgeTh?: string;
+  subBadgeEn?: string;
   descriptionTh: string;
   descriptionEn: string;
+  contributions?: ExperienceContribution[];
   bulletsTh: string[];
   bulletsEn: string[];
   skills: string[];
