@@ -35,7 +35,7 @@ export const AboutBento: React.FC = () => {
         className="flex items-center justify-between pb-8 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
-          02 // IDENTITY & PHILOSOPHY
+          01 // IDENTITY & PHILOSOPHY
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           ENGINEERING PERSPECTIVE

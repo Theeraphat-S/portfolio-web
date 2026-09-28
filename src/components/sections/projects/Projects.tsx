@@ -32,7 +32,7 @@ export const Projects: React.FC = () => {
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06]">
           <span className="editorial-eyebrow text-[#64b5f6]">
-            01 // SELECTED PRODUCTION SYSTEMS
+            02 // SELECTED PRODUCTION SYSTEMS
           </span>
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
             ENGINEERED CASE STUDIES
