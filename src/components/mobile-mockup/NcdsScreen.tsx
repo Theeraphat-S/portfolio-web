@@ -1,141 +1,178 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Sparkles, Heart, TrendingUp, CheckCircle2 } from "lucide-react";
+import {
+  Heart,
+  TrendingUp,
+  CheckCircle2,
+  ShieldCheck,
+  Wifi,
+  Battery,
+} from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
-import { screenVariants } from "./types";
 
 interface NcdsScreenProps {
-  direction: number;
+  direction?: number;
 }
 
-export const NcdsScreen: React.FC<NcdsScreenProps> = ({ direction }) => {
+export const NcdsScreen: React.FC<NcdsScreenProps> = () => {
   const { t } = useLanguage();
+  const [isCalculated, setIsCalculated] = useState(true);
 
   return (
-    <motion.div
-      key="ncds"
-      custom={direction}
-      variants={screenVariants}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      className="space-y-3"
-    >
-      {/* Header Badge */}
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col h-full min-h-[500px] bg-[#070b10] text-zinc-100 select-none">
+      {/* 1. Realistic Mobile Status Bar */}
+      <div className="px-5 pt-3 pb-1 flex items-center justify-between text-[11px] font-mono text-zinc-400 border-b border-white/[0.04]">
+        <span className="font-semibold text-zinc-200">09:41</span>
+        <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+          <span className="w-1 h-1 rounded-full bg-emerald-500/80 animate-pulse" />
+        </div>
+        <div className="flex items-center gap-1.5 text-zinc-400">
+          <Wifi className="w-3 h-3 text-zinc-300" />
+          <Battery className="w-3.5 h-3.5 text-zinc-300" />
+        </div>
+      </div>
+
+      {/* 2. App Bar */}
+      <div className="px-4 py-2.5 flex items-center justify-between border-b border-white/[0.06] bg-[#0b1017]/90 backdrop-blur-md">
         <div>
-          <p className="text-[10px] text-zinc-400 uppercase tracking-wider font-mono">
-            MJU Senior Project
-          </p>
-          <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
-            NCDs Health Screener
-            <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+          <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase block">
+            MAEJO UNIVERSITY &bull; CAPSTONE
+          </span>
+          <h4 className="text-xs font-bold text-white flex items-center gap-1">
+            <span>NCDs Risk Screener</span>
+            <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20">
+              OFFLINE READY
+            </span>
           </h4>
         </div>
-        <span className="text-[10px] bg-sky-500/10 text-sky-400 border border-sky-500/30 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-          VHV Active
+        <span className="text-[9px] font-mono bg-sky-950/60 text-sky-400 px-2 py-0.5 rounded border border-sky-800/40">
+          VHV Mode
         </span>
       </div>
 
-      {/* Vitals Summary Card with Animated Glow */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-900/90 border border-zinc-800 p-3 shadow-inner">
-        <motion.div
-          animate={{ x: ["-100%", "200%"] }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: [0.4, 0, 0.2, 1],
-          }}
-          className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-sky-400/70 to-transparent pointer-events-none"
-        />
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
-            <Heart className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
-            {t("ผลการประเมินความเสี่ยง", "Risk Assessment")}
-          </span>
-          <span className="text-[11px] font-bold text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded-md border border-sky-700/50">
-            {t("ความเสี่ยงต่ำ", "Low Risk")}
-          </span>
-        </div>
-
-        <div className="grid grid-cols-2 gap-2 mt-2">
-          <div className="bg-zinc-950/60 rounded-lg p-2 border border-zinc-800">
-            <span className="text-[10px] text-zinc-400 block">
-              {t("น้ำตาลในเลือด", "Blood Sugar")}
+      {/* 3. Screen Body */}
+      <div className="flex-1 p-3.5 flex flex-col justify-between space-y-3">
+        {/* Vitals Summary Card */}
+        <div className="p-3.5 rounded-xl bg-gradient-to-br from-[#0e1724] to-[#0a0f18] border border-white/[0.08] shadow-md">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-semibold text-zinc-200 flex items-center gap-1.5">
+              <Heart className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
+              {t("ผลการประเมินความเสี่ยง", "Risk Score Engine")}
             </span>
-            <span className="text-sm font-bold font-mono text-sky-400">
-              108{" "}
-              <span className="text-[9px] text-zinc-400 font-normal">
-                mg/dL
-              </span>
+            <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-600/40">
+              LOW RISK (3/15)
             </span>
           </div>
-          <div className="bg-zinc-950/60 rounded-lg p-2 border border-zinc-800">
-            <span className="text-[10px] text-zinc-400 block">
-              {t("ความดันโลหิต", "Blood Pressure")}
-            </span>
-            <span className="text-sm font-bold font-mono text-cyan-400">
-              122/80{" "}
-              <span className="text-[9px] text-zinc-400 font-normal">mmHg</span>
-            </span>
-          </div>
-        </div>
-      </div>
 
-      {/* 4 Disease Module Checkers */}
-      <div className="space-y-1.5">
-        <span className="text-[10px] text-zinc-400 font-mono tracking-wider">
-          {t("ระบบคัดกรอง 4 กลุ่มโรค", "4 Targeted Diseases")}
-        </span>
-
-        <div className="grid grid-cols-2 gap-1.5">
-          {[
-            {
-              title: t("เบาหวาน", "Diabetes"),
-              status: "Normal",
-              color: "sky",
-            },
-            {
-              title: t("ความดันโลหิต", "Hypertension"),
-              status: "Optimal",
-              color: "cyan",
-            },
-            {
-              title: t("โรคหัวใจ", "Heart Disease"),
-              status: "Safe",
-              color: "sky",
-            },
-            {
-              title: t("โรคอ้วน", "Obesity"),
-              status: "BMI 22.4",
-              color: "cyan",
-            },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/60 border border-zinc-800/80"
-            >
-              <span className="text-[11px] text-zinc-300 font-medium">
-                {item.title}
+          <div className="grid grid-cols-2 gap-2 mt-2">
+            <div className="bg-black/40 rounded-lg p-2 border border-white/[0.06]">
+              <span className="text-[9px] font-mono text-zinc-400 block uppercase">
+                {t("น้ำตาลในเลือด", "Blood Glucose")}
               </span>
-              <span className="text-[10px] font-mono text-sky-400 flex items-center gap-0.5">
-                <CheckCircle2 className="w-3 h-3 text-sky-400" />
+              <span className="text-sm font-bold font-mono text-sky-400">
+                108{" "}
+                <span className="text-[9px] text-zinc-400 font-normal">
+                  mg/dL
+                </span>
               </span>
             </div>
-          ))}
+            <div className="bg-black/40 rounded-lg p-2 border border-white/[0.06]">
+              <span className="text-[9px] font-mono text-zinc-400 block uppercase">
+                {t("ความดันโลหิต", "Blood Pressure")}
+              </span>
+              <span className="text-sm font-bold font-mono text-emerald-400">
+                122/80{" "}
+                <span className="text-[9px] text-zinc-400 font-normal">
+                  mmHg
+                </span>
+              </span>
+            </div>
+          </div>
         </div>
+
+        {/* 4 Disease Module Checkers */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+            <span className="tracking-wider uppercase">
+              {t("ระบบคัดกรอง 4 กลุ่มโรค", "4 Targeted Disease Checks")}
+            </span>
+            <span className="text-emerald-400 flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3" /> All Evaluated
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-1.5">
+            {[
+              {
+                title: t("เบาหวาน", "Diabetes"),
+                status: "Normal",
+                color: "emerald",
+              },
+              {
+                title: t("ความดันโลหิต", "Hypertension"),
+                status: "Optimal",
+                color: "emerald",
+              },
+              {
+                title: t("โรคหัวใจ", "Heart Disease"),
+                status: "Low Risk",
+                color: "sky",
+              },
+              {
+                title: t("โรคอ้วน", "Obesity"),
+                status: "BMI 22.4",
+                color: "emerald",
+              },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/70 border border-white/[0.06]"
+              >
+                <div>
+                  <p className="text-[11px] text-zinc-200 font-medium">
+                    {item.title}
+                  </p>
+                  <p className="text-[9px] font-mono text-zinc-400">
+                    {item.status}
+                  </p>
+                </div>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Real-time Field Telemetry */}
+        <div className="p-2.5 rounded-lg bg-zinc-900/50 border border-white/[0.04] space-y-1 text-[10px] font-mono">
+          <div className="flex items-center justify-between text-zinc-400">
+            <span>Offline Local Storage</span>
+            <span className="text-sky-400 font-bold">Encrypted SQLite</span>
+          </div>
+          <div className="flex items-center justify-between text-zinc-400">
+            <span>Calculation Latency</span>
+            <span className="text-emerald-400 font-bold">&lt; 1.2ms</span>
+          </div>
+        </div>
+
+        {/* Generate Report Button */}
+        <motion.button
+          whileTap={{ scale: 0.96 }}
+          onClick={() => setIsCalculated(true)}
+          className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-sky-600 hover:from-emerald-500 hover:to-sky-500 text-white font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+        >
+          <TrendingUp className="w-3.5 h-3.5" />
+          {isCalculated
+            ? t("ออกรายงานผลตรวจ (Export PDF)", "Export Medical Report (PDF)")
+            : t("ประมวลผลความเสี่ยง", "Calculate Risk Score")}
+        </motion.button>
       </div>
 
-      {/* Action Button with Spring Tap */}
-      <motion.button
-        whileTap={{ scale: 0.96 }}
-        className="w-full py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-950/50 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-      >
-        <TrendingUp className="w-3.5 h-3.5" />
-        {t("ออกรายงานผลตรวจ (Medical PDF)", "Generate Medical Report")}
-      </motion.button>
-    </motion.div>
+      {/* 4. Simulated Bottom Bar */}
+      <div className="px-4 py-2 border-t border-white/[0.04] bg-[#0b1017] flex flex-col items-center">
+        <div className="w-24 h-1 bg-white/20 rounded-full my-0.5" />
+      </div>
+    </div>
   );
 };
 

@@ -5,22 +5,27 @@ export const CustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [cursorText, setCursorText] = useState<string | null>(null);
-  const [isTouchDevice] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return (
-      window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window
-    );
+
+  const [isDisabled] = useState(() => {
+    if (typeof window === "undefined") return true;
+    const isTouch =
+      window.matchMedia("(pointer: coarse)").matches ||
+      "ontouchstart" in window;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    return isTouch || prefersReducedMotion;
   });
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth spring physics optimized for high refresh rates
-  const springConfig = { damping: 28, stiffness: 300, mass: 0.12 };
+  // High performance spring physics
+  const springConfig = { damping: 28, stiffness: 320, mass: 0.1 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
-  const dotConfig = { damping: 45, stiffness: 700, mass: 0.04 };
+  const dotConfig = { damping: 45, stiffness: 800, mass: 0.03 };
   const dotX = useSpring(mouseX, dotConfig);
   const dotY = useSpring(mouseY, dotConfig);
 
@@ -28,7 +33,7 @@ export const CustomCursor: React.FC = () => {
   const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (isTouchDevice) return;
+    if (isDisabled) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const clientX = e.clientX;
@@ -45,7 +50,6 @@ export const CustomCursor: React.FC = () => {
 
         if (!isVisible) setIsVisible(true);
 
-        // Only query DOM if target element actually changed
         if (target !== lastTargetRef.current && target instanceof HTMLElement) {
           lastTargetRef.current = target;
           const interactiveEl = target.closest(
@@ -84,12 +88,12 @@ export const CustomCursor: React.FC = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [isVisible, mouseX, mouseY, isTouchDevice]);
+  }, [isVisible, mouseX, mouseY, isDisabled]);
 
-  if (isTouchDevice || !isVisible) return null;
+  if (isDisabled || !isVisible) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden transform-gpu">
+    <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden transform-gpu select-none">
       {/* Outer Follower / Context Badge */}
       <motion.div
         style={{
@@ -99,18 +103,18 @@ export const CustomCursor: React.FC = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: cursorText ? 1 : isHovered ? 1.5 : 1,
+          scale: cursorText ? 1 : isHovered ? 1.4 : 1,
           opacity: isVisible ? 1 : 0,
         }}
-        transition={{ duration: 0.15 }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
         className="fixed top-0 left-0 flex items-center justify-center pointer-events-none will-change-transform"
       >
         {cursorText ? (
           <motion.div
-            initial={{ scale: 0.6, opacity: 0 }}
+            initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.6, opacity: 0 }}
-            className="px-3.5 py-1.5 rounded-full bg-cyan-500/95 text-zinc-950 font-bold text-xs shadow-lg shadow-cyan-500/30 backdrop-blur-md flex items-center gap-1.5 whitespace-nowrap tracking-wide border border-cyan-300/40 select-none"
+            exit={{ scale: 0.7, opacity: 0 }}
+            className="px-3 py-1 rounded-full bg-[#00f0ff] text-[#07080c] font-mono font-bold text-[10px] tracking-widest shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 whitespace-nowrap uppercase border border-cyan-300"
           >
             <span>{cursorText}</span>
           </motion.div>
@@ -118,14 +122,14 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`rounded-full transition-all duration-300 border ${
               isHovered
-                ? "w-11 h-11 border-cyan-400/80 bg-cyan-500/10 shadow-[0_0_20px_rgba(6,182,212,0.35)] backdrop-blur-[1px]"
-                : "w-8 h-8 border-cyan-500/30 bg-cyan-500/5"
+                ? "w-10 h-10 border-cyan-400/80 bg-cyan-400/10 shadow-[0_0_20px_rgba(0,240,255,0.35)]"
+                : "w-7 h-7 border-white/20 dark:border-white/15 bg-white/5"
             }`}
           />
         )}
       </motion.div>
 
-      {/* Center Pinpoint Glowing Dot (Hidden when text is displayed) */}
+      {/* Center Pinpoint Dot (Hidden when text label is present) */}
       {!cursorText && (
         <motion.div
           style={{
@@ -139,8 +143,8 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`rounded-full transition-all duration-200 ${
               isHovered
-                ? "w-2 h-2 bg-cyan-300 shadow-[0_0_8px_#38bdf8]"
-                : "w-1.5 h-1.5 bg-cyan-400 shadow-[0_0_6px_#06b6d4]"
+                ? "w-1.5 h-1.5 bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]"
+                : "w-1.5 h-1.5 bg-white dark:bg-white"
             }`}
           />
         </motion.div>
@@ -148,3 +152,5 @@ export const CustomCursor: React.FC = () => {
     </div>
   );
 };
+
+export default CustomCursor;

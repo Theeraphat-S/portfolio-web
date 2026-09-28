@@ -1,88 +1,151 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
-import { ShoppingBag, QrCode, CheckCircle2 } from "lucide-react";
+import {
+  QrCode,
+  CheckCircle2,
+  Receipt,
+  Wifi,
+  Battery,
+  Store,
+} from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
-import { screenVariants } from "./types";
 
 interface PosScreenProps {
-  direction: number;
+  direction?: number;
 }
 
-export const PosScreen: React.FC<PosScreenProps> = ({ direction }) => {
+export const PosScreen: React.FC<PosScreenProps> = () => {
   const { t } = useLanguage();
+  const [isCompleted, setIsCompleted] = useState(false);
 
   return (
-    <motion.div
-      key="pos"
-      custom={direction}
-      variants={screenVariants}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      className="space-y-3"
-    >
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col h-full min-h-[500px] bg-[#070b12] text-zinc-100 select-none">
+      {/* 1. Status Bar */}
+      <div className="px-5 pt-3 pb-1 flex items-center justify-between text-[11px] font-mono text-zinc-400 border-b border-white/[0.04]">
+        <span className="font-semibold text-zinc-200">09:41</span>
+        <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+          <span className="w-1 h-1 rounded-full bg-blue-500/80 animate-pulse" />
+        </div>
+        <div className="flex items-center gap-1.5 text-zinc-400">
+          <Wifi className="w-3 h-3 text-zinc-300" />
+          <Battery className="w-3.5 h-3.5 text-zinc-300" />
+        </div>
+      </div>
+
+      {/* 2. App Bar */}
+      <div className="px-4 py-2.5 flex items-center justify-between border-b border-white/[0.06] bg-[#0c101a]/90 backdrop-blur-md">
         <div>
-          <p className="text-[10px] text-zinc-400 uppercase tracking-wider font-mono">
-            Retail Module
-          </p>
-          <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
-            POS Express Checkout
-            <ShoppingBag className="w-3.5 h-3.5 text-blue-400" />
+          <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase block">
+            RETAIL POINT OF SALE
+          </span>
+          <h4 className="text-xs font-bold text-white flex items-center gap-1">
+            <Store className="w-3.5 h-3.5 text-[#2196f3]" />
+            <span>POS Register #04</span>
           </h4>
         </div>
-        <span className="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded-full font-mono font-medium">
-          API Online
+        <span className="text-[9px] font-mono bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20">
+          ONLINE SYNC
         </span>
       </div>
 
-      {/* Cart Summary */}
-      <div className="space-y-1.5">
-        <div className="flex justify-between items-center text-[11px] text-zinc-300 bg-zinc-900/60 p-2 rounded-lg border border-zinc-800">
-          <span>Premium Arabica Beans (250g)</span>
-          <span className="font-mono font-bold text-blue-300">฿250</span>
-        </div>
-        <div className="flex justify-between items-center text-[11px] text-zinc-300 bg-zinc-900/60 p-2 rounded-lg border border-zinc-800">
-          <span>Ceramic Drip Cup x1</span>
-          <span className="font-mono font-bold text-blue-300">฿170</span>
-        </div>
-      </div>
-
-      {/* Total & QR PromptPay */}
-      <div className="p-3 rounded-xl bg-gradient-to-br from-blue-950/40 to-zinc-900 border border-blue-500/30">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-xs text-zinc-300">
-            {t("ยอดชำระสุทธิ", "Total Amount")}
-          </span>
-          <span className="text-base font-bold font-mono text-sky-400">
-            ฿420.00
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2 p-2 bg-zinc-950 rounded-lg border border-zinc-800 text-[11px]">
-          <QrCode className="w-6 h-6 text-blue-400 shrink-0" />
-          <div>
-            <span className="font-semibold text-zinc-200 block">
-              PromptPay QR Code
+      {/* 3. Screen Body */}
+      <div className="flex-1 p-3.5 flex flex-col justify-between space-y-3">
+        {/* Cart Items List */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+            <span className="uppercase tracking-wider">
+              {t("รายการสินค้าในตะกร้า", "Cart Order (2 Items)")}
             </span>
-            <span className="text-[9px] text-zinc-400 font-mono">
-              Ref: INV-256903-88
-            </span>
+            <span className="text-zinc-500">INV-256903-88</span>
+          </div>
+
+          <div className="p-2.5 rounded-lg bg-zinc-900/70 border border-white/[0.06] flex justify-between items-center text-[11px]">
+            <div>
+              <p className="font-semibold text-zinc-200">
+                Premium Arabica (250g)
+              </p>
+              <p className="text-[9px] font-mono text-zinc-500">
+                SKU: COF-8812 &bull; Qty: 1
+              </p>
+            </div>
+            <span className="font-mono font-bold text-blue-300">฿250.00</span>
+          </div>
+
+          <div className="p-2.5 rounded-lg bg-zinc-900/70 border border-white/[0.06] flex justify-between items-center text-[11px]">
+            <div>
+              <p className="font-semibold text-zinc-200">
+                Ceramic Drip Tumbler
+              </p>
+              <p className="text-[9px] font-mono text-zinc-500">
+                SKU: ACC-1044 &bull; Qty: 1
+              </p>
+            </div>
+            <span className="font-mono font-bold text-blue-300">฿170.00</span>
           </div>
         </div>
+
+        {/* Pricing & QR PromptPay Card */}
+        <div className="p-3 rounded-xl bg-gradient-to-br from-[#0c1626] to-[#090d16] border border-blue-500/25 space-y-2.5 shadow-md">
+          <div className="flex justify-between items-baseline border-b border-white/[0.06] pb-2">
+            <span className="text-[10px] font-mono text-zinc-400 uppercase">
+              {t("ยอดชำระสุทธิ", "Net Payable Amount")}
+            </span>
+            <span className="text-base font-bold font-mono text-sky-400">
+              ฿420.00
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2.5 p-2 rounded-lg bg-black/40 border border-white/[0.06]">
+            <QrCode className="w-8 h-8 text-[#2196f3] shrink-0" />
+            <div className="text-[10px] font-mono">
+              <span className="font-bold text-zinc-200 block">
+                PromptPay QR Instant
+              </span>
+              <span className="text-zinc-500 text-[9px]">
+                Auto-reconciliation ready
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Resilience Telemetry */}
+        <div className="p-2.5 rounded-lg bg-zinc-900/50 border border-white/[0.04] space-y-1 text-[10px] font-mono">
+          <div className="flex items-center justify-between text-zinc-400">
+            <span>Idempotency Key</span>
+            <span className="text-zinc-300 font-bold">uuid_v4_valid</span>
+          </div>
+          <div className="flex items-center justify-between text-zinc-400">
+            <span>Retry Queue Engine</span>
+            <span className="text-emerald-400 font-bold">0 Pending (Idle)</span>
+          </div>
+        </div>
+
+        {/* Action Button */}
+        <motion.button
+          whileTap={{ scale: 0.96 }}
+          onClick={() => setIsCompleted(!isCompleted)}
+          className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+        >
+          {isCompleted ? (
+            <>
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
+              <span>{t("พิมพ์ใบเสร็จเรียบร้อย", "Receipt Printed (Success)")}</span>
+            </>
+          ) : (
+            <>
+              <Receipt className="w-3.5 h-3.5" />
+              <span>{t("ยืนยันการชำระเงิน (Sync API)", "Commit Transaction (Sync API)")}</span>
+            </>
+          )}
+        </motion.button>
       </div>
 
-      <motion.button
-        whileTap={{ scale: 0.96 }}
-        className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-      >
-        <CheckCircle2 className="w-3.5 h-3.5" />
-        {t(
-          "ยืนยันการรับชำระเงิน (Sync API)",
-          "Complete Transaction (Sync API)",
-        )}
-      </motion.button>
-    </motion.div>
+      {/* 4. Simulated Bottom Bar */}
+      <div className="px-4 py-2 border-t border-white/[0.04] bg-[#0c101a] flex flex-col items-center">
+        <div className="w-24 h-1 bg-white/20 rounded-full my-0.5" />
+      </div>
+    </div>
   );
 };
 

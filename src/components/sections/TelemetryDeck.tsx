@@ -1,33 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "motion/react";
-import {
-  Activity,
-  Clock,
-  Cpu,
-  Radio,
-  ShieldCheck,
-  Terminal,
-} from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { Radio, Activity } from "lucide-react";
 import { KineticCounter } from "../reactbits/KineticCounter";
 
-interface TelemetryMetric {
-  label: string;
-  value: React.ReactNode;
-  subtext: string;
-  icon: React.ReactNode;
-  valueClass?: string;
-}
-
 export const TelemetryDeck: React.FC = () => {
-  const { t } = useLanguage();
   const [localTime, setLocalTime] = useState<string>("");
   const [latency, setLatency] = useState<number>(12);
 
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      // Format time in Asia/Bangkok (Chiang Mai timezone)
       const formatted = new Intl.DateTimeFormat("en-US", {
         timeZone: "Asia/Bangkok",
         hour: "2-digit",
@@ -43,111 +24,72 @@ export const TelemetryDeck: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Subtle live ping jitter simulation (11ms - 14ms) reflecting active network node
   useEffect(() => {
     const jitterInterval = setInterval(() => {
       const jitterValues = [11, 12, 13, 14, 12];
       const next =
         jitterValues[Math.floor(Math.random() * jitterValues.length)];
       setLatency(next);
-    }, 3500);
+    }, 4000);
 
     return () => clearInterval(jitterInterval);
   }, []);
 
-  const metrics: TelemetryMetric[] = [
-    {
-      label: t("เวลาท้องถิ่น", "LOCAL TIME (TH)"),
-      value: localTime || "12:00:00",
-      subtext: "GMT+7 (Asia/Bangkok)",
-      icon: <Clock className="w-4 h-4 text-cyan-500" />,
-      valueClass:
-        "text-2xl sm:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-tight",
-    },
-    {
-      label: t("สภาพแวดล้อม", "CORE STACK"),
-      value: "FLUTTER • DART",
-      subtext: "Bloc • Clean Architecture",
-      icon: <Cpu className="w-4 h-4 text-sky-500" />,
-      valueClass:
-        "text-xl sm:text-2xl font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-tight",
-    },
-    {
-      label: t("ความเร็วเชื่อมต่อ", "SYSTEM LATENCY"),
-      value: (
-        <KineticCounter value={latency} prefix="~" suffix="ms" duration={1.2} />
-      ),
-      subtext: "Optimized REST • Fast I/O",
-      icon: <Activity className="w-4 h-4 text-amber-500" />,
-      valueClass:
-        "text-2xl sm:text-3xl font-mono font-bold text-emerald-600 dark:text-emerald-400 tracking-tight transition-all duration-300",
-    },
-    {
-      label: t("เวอร์ชัน & ระบบจัดการ", "BUILD & VCS"),
-      value: "MAIN: STABLE",
-      subtext: "Production Ready • Clean Tree",
-      icon: <ShieldCheck className="w-4 h-4 text-purple-500" />,
-      valueClass:
-        "text-xl sm:text-2xl font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-tight",
-    },
-  ];
-
   return (
-    <section className="py-16 relative overflow-hidden border-t border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/60 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-500">
-              <Terminal className="w-4 h-4" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <h3 className="text-xs font-mono font-bold tracking-[0.25em] text-zinc-900 dark:text-zinc-100 uppercase">
-                  {t(
-                    "ข้อมูลสถานะระบบ & เทเลเมทรี",
-                    "SYSTEM METRICS & TELEMETRY",
-                  )}
-                </h3>
-              </div>
-              <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mt-0.5">
-                CHIANG MAI NODE &bull; REAL-TIME STATUS
-              </p>
-            </div>
+    <section className="py-8 relative overflow-hidden border-b border-white/[0.08]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 py-3 px-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+        {/* Left: Node Identity */}
+        <div className="flex items-center gap-3">
+          <div className="w-2 h-2 rounded-full bg-[#00f0ff] animate-pulse" />
+          <span className="text-xs font-mono font-bold tracking-widest text-zinc-300 uppercase">
+            CHIANG MAI NODE (GMT+7)
+          </span>
+          <span className="text-zinc-600 font-mono text-xs">/</span>
+          <span className="text-xs font-mono text-[#00f0ff] font-semibold">
+            {localTime || "12:00:00"}
+          </span>
+        </div>
+
+        {/* Center: System Telemetry metrics */}
+        <div className="flex flex-wrap items-center gap-6 sm:gap-10 text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <span className="text-zinc-500 uppercase tracking-wider">
+              LATENCY:
+            </span>
+            <span className="text-white font-bold flex items-center gap-1">
+              <KineticCounter
+                value={latency}
+                prefix="~"
+                suffix="ms"
+                duration={1.2}
+              />
+              <Activity className="w-3 h-3 text-[#00f0ff]" />
+            </span>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono self-start sm:self-auto">
-            <Radio className="w-3.5 h-3.5 animate-pulse" />
-            <span>STATUS: READY FOR OPPORTUNITIES</span>
+          <div className="flex items-center gap-2">
+            <span className="text-zinc-500 uppercase tracking-wider">
+              ENGINE:
+            </span>
+            <span className="text-white font-bold">FLUTTER 3.x / DART 3.x</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-zinc-500 uppercase tracking-wider">
+              TREE:
+            </span>
+            <span className="text-[#00f0ff] font-bold">
+              STABLE &bull; PRODUCTION READY
+            </span>
           </div>
         </div>
 
-        {/* Telemetry Metrics Deck Grid with Staggered Entrance */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {metrics.map((m, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: idx * 0.08 }}
-              className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 shadow-sm flex flex-col justify-between hover:border-cyan-500/40 transition-colors"
-            >
-              <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 mb-3">
-                <span className="text-[11px] font-mono uppercase tracking-wider">
-                  {m.label}
-                </span>
-                {m.icon}
-              </div>
-              <div>
-                <div className={m.valueClass}>{m.value}</div>
-                <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
-                  {m.subtext}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+        {/* Right: Availability beacon */}
+        <div className="flex items-center gap-2 self-start md:self-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/25 text-[#00f0ff] text-[11px] font-mono font-medium">
+            <Radio className="w-3 h-3 animate-pulse" />
+            <span>OPEN TO HIRE</span>
+          </span>
         </div>
       </div>
     </section>

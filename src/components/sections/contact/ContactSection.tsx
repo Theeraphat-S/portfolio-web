@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import {
   Github,
-  MapPin,
+  Phone,
   Copy,
   Check,
   Send,
   ArrowUpRight,
-  Phone,
-  Mail,
-  Sparkles,
+  MapPin,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 
 export const ContactSection: React.FC = () => {
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
   const { personal } = portfolioData;
   const [copied, setCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -45,237 +43,246 @@ export const ContactSection: React.FC = () => {
     setFormSubmitted(true);
   };
 
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
-    <section id="contact" className="py-16 sm:py-24">
-      {/* Editorial Giant Typographic CTA */}
+    <section id="contact" className="py-24 sm:py-36">
+      {/* Section Eyebrow */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-14"
+        variants={fadeIn}
+        className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
-        <span className="eyebrow-pill text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 ring-1 ring-cyan-500/25 mb-4 inline-flex">
-          <Sparkles className="w-3 h-3 text-cyan-400" strokeWidth={1.5} />
-          <span>{t("เริ่มงานด้วยกัน", "CONTACT & COLLABORATION")}</span>
+        <span className="editorial-eyebrow text-[#00f0ff]">
+          05 // INITIATE COLLABORATION
         </span>
-        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-slate-100 leading-[1.02]">
-          {lang === "th" ? (
-            <>
-              ร่วมงานกัน{" "}
-              <span className="text-shiny block font-light">
-                สร้างสรรค์แอปที่ดี
-              </span>
-            </>
-          ) : (
-            <>
-              Let’s work{" "}
-              <span className="text-shiny block font-light">
-                together.
-              </span>
-            </>
-          )}
+        <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
+          START A PROJECT OR ROLE
+        </span>
+      </motion.div>
+
+      {/* Monumental Headline */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        className="mb-16 sm:mb-20"
+      >
+        <h2 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tighter leading-[0.92] text-white">
+          <span className="block text-zinc-400">
+            {lang === "th" ? "มาร่วมสร้างสรรค์" : "LET'S BUILD"}
+          </span>
+          <span className="block text-white">
+            {lang === "th" ? "ผลิตภัณฑ์ดิจิทัล" : "SOMETHING"}
+          </span>
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-[#38bdf8] to-[#0284c7]">
+            {lang === "th" ? "ที่ยอดเยี่ยมด้วยกัน." : "EXCEPTIONAL."}
+          </span>
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Direct Invitation & Coordinates */}
+      {/* Grid: Coordinates & Message Form */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* Left Column: Direct Coordinates (6 Cols) */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-6 space-y-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="lg:col-span-6 space-y-8"
         >
-          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl">
+          <p className="text-lg sm:text-xl text-zinc-300 font-light leading-relaxed">
             {lang === "th"
-              ? "ผมกำลังมองหาโอกาสร่วมงานในตำแหน่ง Mobile Developer (Flutter & Dart) พร้อมเริ่มงานทันทีทั้ง Onsite (กรุงเทพฯ/เชียงใหม่), Hybrid หรือ Remote หากมีโปรเจกต์ที่น่าสนใจ สามารถติดต่อได้โดยตรงครับ"
-              : "Currently open to full-time Mobile Developer (Flutter & Dart) positions and high-impact digital products. Based in Chiang Mai, Thailand. Open to Bangkok relocation, Hybrid, or Worldwide Remote."}
+              ? "ผมพร้อมสำหรับการร่วมงานในตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite (กรุงเทพฯ / เชียงใหม่), Hybrid และ Remote พร้อมส่งมอบคุณค่าและสถาปัตยกรรมที่เสถียรตั้งแต่วันแรก"
+              : "Open for full-time Mobile Developer positions and high-impact digital ventures. Based in Chiang Mai, Thailand (GMT+7) with full flexibility for Bangkok relocation, Hybrid, or Worldwide Remote."}
           </p>
 
-          {/* Quick Copy Email Bento Card (Doppelrand Double-Bezel) */}
-          <div className="doppelrand-shell">
-            <div className="doppelrand-core p-6 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <Mail className="w-3.5 h-3.5 text-cyan-400" strokeWidth={1.5} />
-                <span>{t("ส่งอีเมลถึงผมโดยตรง", "Drop me an email:")}</span>
-              </div>
-              <div className="flex items-center justify-between gap-3 pt-1">
-                <a
-                  href={`mailto:${personal.email}`}
-                  className="text-base sm:text-xl font-mono font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-400 transition-colors break-all"
-                >
-                  {personal.email}
-                </a>
-                <motion.button
-                  whileTap={{ scale: 0.92 }}
-                  onClick={copyEmail}
-                  className="p-2.5 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white ring-1 ring-slate-200 dark:ring-white/10 hover:ring-cyan-400 bg-slate-100 dark:bg-[#05070d] rounded-xl transition-all shrink-0 cursor-pointer shadow-xs"
-                  aria-label="Copy email address"
-                  title="Copy to clipboard"
-                >
-                  {copied ? (
-                    <Check className="w-4 h-4 text-emerald-400" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
-                </motion.button>
-              </div>
-              {copied && (
-                <motion.span
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-xs font-mono text-emerald-400 block font-medium"
-                >
-                  {t("คัดลอกอีเมลเรียบร้อยแล้ว!", "Copied to clipboard!")}
-                </motion.span>
-              )}
+          {/* Quick Copy Email Card */}
+          <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-colors space-y-4">
+            <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">
+              PRIMARY COMMUNICATION CHANNEL
+            </span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <span className="text-base sm:text-xl font-mono font-bold text-white tracking-tight break-all">
+                {personal.email}
+              </span>
+              <button
+                onClick={copyEmail}
+                data-cursor-text="COPY"
+                className="btn-editorial btn-editorial-primary text-xs py-2 px-4 cursor-pointer self-start sm:self-auto shrink-0"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-[#07080c]" />
+                    <span>COPIED!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-[#07080c]" />
+                    <span>COPY EMAIL</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
-          {/* Coordinates Deck (Doppelrand Double-Bezel) */}
-          <div className="doppelrand-shell">
-            <div className="doppelrand-core p-6 space-y-3.5 text-xs font-mono text-slate-600 dark:text-slate-400">
-              {personal.phone && (
-                <motion.a
-                  whileHover={{ x: 3 }}
-                  href={`tel:${personal.phone.replace(/[^0-9]/g, "")}`}
-                  className="flex items-center justify-between hover:text-cyan-400 transition-colors py-1 border-b border-slate-100 dark:border-white/[0.05]"
-                >
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-cyan-400" strokeWidth={1.5} />
-                    <span className="font-semibold text-slate-900 dark:text-slate-200">
-                      {personal.phone}
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-slate-400">Direct Call</span>
-                </motion.a>
-              )}
+          {/* Technical Metadata Coordinate Blocks */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00f0ff]/30 transition-colors space-y-1">
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase">
+                <Phone className="w-3.5 h-3.5 text-[#00f0ff]" />
+                <span>DIRECT LINE</span>
+              </div>
+              <a
+                href={`tel:${personal.phone}`}
+                className="text-sm font-mono font-bold text-white hover:text-[#00f0ff] transition-colors block"
+              >
+                {personal.phone}
+              </a>
+            </div>
 
-              <motion.a
-                whileHover={{ x: 3 }}
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00f0ff]/30 transition-colors space-y-1">
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase">
+                <Github className="w-3.5 h-3.5 text-[#00f0ff]" />
+                <span>GITHUB PROFILE</span>
+              </div>
+              <a
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between hover:text-cyan-400 transition-colors py-1 border-b border-slate-100 dark:border-white/[0.05]"
+                data-cursor-text="VISIT"
+                className="text-sm font-mono font-bold text-white hover:text-[#00f0ff] transition-colors flex items-center gap-1"
               >
-                <div className="flex items-center gap-2">
-                  <Github className="w-4 h-4 text-cyan-400" strokeWidth={1.5} />
-                  <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    github.com/{personal.githubUsername}
-                  </span>
-                </div>
-                <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
-              </motion.a>
+                <span>github.com/{personal.githubUsername}</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
 
-              <div className="flex items-start gap-2 pt-1 text-slate-600 dark:text-slate-400">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span>
-                  {lang === "th"
-                    ? (personal.addressTh ?? personal.locationTh)
-                    : (personal.addressEn ?? personal.locationEn)}
-                </span>
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00f0ff]/30 transition-colors space-y-1 sm:col-span-2">
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase">
+                <MapPin className="w-3.5 h-3.5 text-[#00f0ff]" />
+                <span>BASE & AVAILABILITY</span>
               </div>
+              <span className="text-sm font-mono text-zinc-300 block">
+                {lang === "th" ? personal.locationTh : personal.locationEn}
+              </span>
             </div>
           </div>
         </motion.div>
 
-        {/* Right Column: Clean Minimalist Message Form (Doppelrand Double-Bezel) */}
+        {/* Right Column: Direct Dispatch Form (6 Cols) */}
         <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
-          className="lg:col-span-6 doppelrand-shell"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="lg:col-span-6"
         >
-          <div className="doppelrand-core p-6 sm:p-8">
-            <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 mb-5 pb-3 border-b border-slate-200/80 dark:border-white/[0.07]">
-              {t("ส่งข้อความถึงผม (Direct Message)", "Send an Instant Message")}
-            </h3>
+          <div className="p-6 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md space-y-6">
+            <div className="space-y-1">
+              <h3 className="text-xl font-bold text-white">
+                {lang === "th" ? "ส่งข้อความโดยตรง" : "Direct Dispatch"}
+              </h3>
+              <p className="text-xs font-mono text-zinc-400">
+                {lang === "th"
+                  ? "ระบุรายละเอียดโปรเจกต์หรือตำแหน่งงานเพื่อเริ่มต้นการสนทนา"
+                  : "Drop project specifications or role inquiries directly to my inbox."}
+              </p>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1.5"
-                >
-                  {t("ชื่อของคุณ / องค์กร", "Your Name / Organization")}
+              <div className="space-y-1.5">
+                <label className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">
+                  {lang === "th"
+                    ? "ชื่อของคุณ / องค์กร"
+                    : "Your Name / Organization"}
                 </label>
                 <input
-                  id="name"
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  placeholder="e.g. John Doe / Tech Studio"
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#05070d] ring-1 ring-slate-200 dark:ring-white/[0.08] focus:ring-cyan-400 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none transition-all font-mono"
+                  placeholder={
+                    lang === "th"
+                      ? "เช่น บริษัท เอบีซี จำกัด"
+                      : "e.g. Acme Studio"
+                  }
+                  className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] focus:border-[#00f0ff] text-sm text-white placeholder-zinc-600 outline-none transition-colors font-mono"
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1.5"
-                >
-                  {t("อีเมลติดต่อกลับ", "Your Email Address")}
+              <div className="space-y-1.5">
+                <label className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">
+                  {lang === "th" ? "อีเมลติดต่อกลับ" : "Your Email"}
                 </label>
                 <input
-                  id="email"
                   type="email"
                   required
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  placeholder="e.g. recruiter@company.com"
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#05070d] ring-1 ring-slate-200 dark:ring-white/[0.08] focus:ring-cyan-400 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none transition-all font-mono"
+                  placeholder="contact@domain.com"
+                  className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] focus:border-[#00f0ff] text-sm text-white placeholder-zinc-600 outline-none transition-colors font-mono"
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1.5"
-                >
-                  {t("ข้อความ", "Message")}
+              <div className="space-y-1.5">
+                <label className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">
+                  {lang === "th"
+                    ? "ข้อความ / รายละเอียดงาน"
+                    : "Message / Project Scope"}
                 </label>
                 <textarea
-                  id="message"
-                  required
                   rows={4}
+                  required
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  placeholder="Tell me about your mobile project, stack, or career opportunity..."
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#05070d] ring-1 ring-slate-200 dark:ring-white/[0.08] focus:ring-cyan-400 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none transition-all font-mono resize-none"
+                  placeholder={
+                    lang === "th"
+                      ? "รายละเอียดโปรเจกต์ หรือตำแหน่งงาน..."
+                      : "Brief us on your timeline, architecture requirements, or role..."
+                  }
+                  className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] focus:border-[#00f0ff] text-sm text-white placeholder-zinc-600 outline-none transition-colors font-mono resize-none"
                 />
               </div>
 
-              {/* Nested Island Submit Button */}
-              <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-3 py-3 px-6 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 font-bold text-xs font-mono rounded-full transition-all cursor-pointer shadow-[0_12px_28px_-6px_rgba(6,182,212,0.4)] mt-2 group"
-              >
-                <span>
-                  {t("เปิดโปรแกรมเมลเพื่อส่งข้อความ", "Send Inquiry via Email")}
-                </span>
-                <span className="w-6 h-6 rounded-full bg-slate-950/15 flex items-center justify-center group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform">
-                  <Send className="w-3.5 h-3.5 text-slate-950" />
-                </span>
-              </motion.button>
-
-              {formSubmitted && (
-                <p className="text-[11px] font-mono text-cyan-400 text-center pt-1 font-medium">
-                  {t(
-                    "กำลังเปิดโปรแกรมเมลของคุณเพื่อส่งข้อความ...",
-                    "Opening your mail client...",
-                  )}
-                </p>
+              {formSubmitted ? (
+                <div className="p-4 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-center space-y-1">
+                  <span className="text-xs font-mono font-bold text-[#00f0ff] block">
+                    {lang === "th" ? "ส่งข้อความสำเร็จ!" : "INQUIRY DISPATCHED"}
+                  </span>
+                  <span className="text-xs text-zinc-300">
+                    {lang === "th"
+                      ? "เปิดไคลเอนต์อีเมลของคุณเรียบร้อยแล้ว ขอบคุณที่ติดต่อครับ"
+                      : "Email client launched. Looking forward to speaking with you!"}
+                  </span>
+                </div>
+              ) : (
+                <button
+                  type="submit"
+                  data-cursor-text="SEND"
+                  className="w-full btn-editorial btn-editorial-primary py-3.5 cursor-pointer flex items-center justify-center gap-2 group"
+                >
+                  <span>
+                    {lang === "th" ? "ส่งข้อความ" : "DISPATCH INQUIRY"}
+                  </span>
+                  <Send className="w-3.5 h-3.5 text-[#07080c] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </button>
               )}
             </form>
           </div>

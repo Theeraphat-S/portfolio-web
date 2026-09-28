@@ -16,7 +16,7 @@ export const ProjectModalTechDetails: React.FC<
     <>
       {/* Overview Description */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-2 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-[#00f0ff] mb-2 flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5" />
           {t("ภาพรวมโครงการ", "Project Overview")}
         </h4>
@@ -27,7 +27,7 @@ export const ProjectModalTechDetails: React.FC<
 
       {/* Key Technical Highlights */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-3 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-[#00f0ff] mb-3 flex items-center gap-1.5">
           <CheckCircle2 className="w-3.5 h-3.5" />
           {t(
             "ฟีเจอร์หลักและการพัฒนาเชิงลึก",
@@ -41,7 +41,7 @@ export const ProjectModalTechDetails: React.FC<
                 key={idx}
                 className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-950/40 border border-zinc-800/60 text-xs sm:text-sm text-zinc-300"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] mt-2 shrink-0" />
                 <span>{hl}</span>
               </div>
             ),
@@ -51,11 +51,11 @@ export const ProjectModalTechDetails: React.FC<
 
       {/* System Architecture */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-[#38bdf8] mb-2 flex items-center gap-1.5">
           <Layers className="w-3.5 h-3.5" />
           {t("สถาปัตยกรรมระบบ (Architecture)", "System Architecture")}
         </h4>
-        <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-indigo-300">
+        <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-[#38bdf8]">
           {lang === "th" ? project.architectureTh : project.architectureEn}
         </div>
       </div>

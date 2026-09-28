@@ -1,22 +1,61 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from "motion/react";
 import {
   ArrowUpRight,
-  Github,
   FileText,
-  Phone,
-  Layers,
-  Database,
+  ArrowDown,
+  Terminal,
+  Activity,
+  Radio,
   Cpu,
-  ShieldCheck,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
-import { portfolioData } from "../../../data";
-import { MobileMockup } from "../../MobileMockup";
+import { useTelemetry } from "../../../hooks/useTelemetry";
 
 export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
-  const { personal } = portfolioData;
+  const { localTime, latency } = useTelemetry();
+  const shouldReduceMotion = useReducedMotion();
+
+  const heroRef = useRef<HTMLElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 30, stiffness: 200 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  // Restrained parallax transforms for visual anchor (disabled if reduced motion)
+  const rotateX = useTransform(
+    smoothY,
+    [-0.5, 0.5],
+    shouldReduceMotion ? [0, 0] : [5, -5],
+  );
+  const rotateY = useTransform(
+    smoothX,
+    [-0.5, 0.5],
+    shouldReduceMotion ? [0, 0] : [-6, 6],
+  );
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (shouldReduceMotion || !heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -24,238 +63,231 @@ export const Hero: React.FC = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.08,
-        delayChildren: 0.05,
+        delayChildren: 0.1,
       },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 18 },
+  const lineVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: shouldReduceMotion ? 0.01 : 0.8,
         ease: [0.16, 1, 0.3, 1] as const,
       },
     },
   };
 
-  const pillars = [
-    {
-      icon: <Layers className="w-3.5 h-3.5 text-cyan-400" strokeWidth={1.5} />,
-      label: "Flutter & Dart • BLoC Pattern",
-    },
-    {
-      icon: <Database className="w-3.5 h-3.5 text-cyan-400" strokeWidth={1.5} />,
-      label: "Offline-First • Local SQLite & Hive",
-    },
-    {
-      icon: <Cpu className="w-3.5 h-3.5 text-cyan-400" strokeWidth={1.5} />,
-      label: "Clean Architecture • Domain Driven",
-    },
-    {
-      icon: <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" strokeWidth={1.5} />,
-      label: "RESTful APIs • WebView Bridge",
-    },
-  ];
-
-  const roles = [
-    "Mobile Systems Architect",
-    "Flutter & Dart Engineer",
-    "Offline-First Specialist",
-  ];
-  const [roleIndex, setRoleIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [roles.length]);
-
   return (
-    <section className="relative pt-4 sm:pt-8 pb-12 sm:pb-20 border-b border-slate-200/80 dark:border-white/[0.07]">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-        {/* Left Column: Bold Broadsheet Typography & Manifesto (7 Cols) */}
+    <section
+      ref={heroRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative pt-6 sm:pt-14 pb-16 sm:pb-24 border-b border-white/[0.08]"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col space-y-10 sm:space-y-14"
+      >
+        {/* Top Identity & Integrated Telemetry Bar */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="lg:col-span-7 flex flex-col space-y-6 sm:space-y-7"
+          variants={lineVariants}
+          className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06]"
         >
-          {/* Eyebrow Status Pill & Kinetic Rotating Role Badge */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center gap-3"
-          >
-            <span className="eyebrow-pill text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 ring-1 ring-emerald-500/25">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              {t("เปิดรับงานใหม่อย่างเป็นทางการ", "Available for Opportunities")}
+          {/* Identity & Domain */}
+          <div className="flex items-center gap-3">
+            <span className="editorial-eyebrow text-[#00f0ff]">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
+              THEERAPHAT SRIMONTHA
             </span>
+            <span className="text-zinc-600 font-mono text-xs hidden sm:inline">
+              /
+            </span>
+            <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
+              MOBILE SYSTEMS ARCHITECT
+            </span>
+          </div>
 
-            {/* Kinetic UI Suite: Flip-Rotating Role Pill (CONTEXT.md #58) */}
-            <div className="inline-flex items-center gap-2 h-7 px-3 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 ring-1 ring-cyan-500/25 text-xs font-mono overflow-hidden">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          {/* Real-time Geographic & System Telemetry with Emerald status indicators */}
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="text-zinc-400">CHIANG MAI, TH (GMT+7)</span>
+              <span className="text-zinc-600">&bull;</span>
+              <span className="text-white font-semibold">
+                {localTime || "12:00:00"}
+              </span>
+            </div>
+
+            <div className="hidden md:flex items-center gap-2 text-zinc-400">
+              <Activity className="w-3 h-3 text-emerald-400" />
+              <span>~{latency}ms</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[11px] font-medium">
+                <Radio className="w-2.5 h-2.5 animate-pulse text-emerald-400" />
+                <span>{t("พร้อมเริ่มงานทันที", "OPEN FOR ROLES")}</span>
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Monumental Asymmetric Editorial Headline */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-9 space-y-3">
+            <h1 className="text-4xl xs:text-5xl sm:text-7xl lg:text-8xl xl:text-[6.5rem] font-extrabold tracking-tighter leading-[0.92] text-white">
               <motion.span
-                key={roles[roleIndex]}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25 }}
-                className="font-semibold whitespace-nowrap"
+                variants={lineVariants}
+                className="block text-zinc-300"
               >
-                {roles[roleIndex]}
+                {lang === "th" ? "สถาปัตยกรรมโมบาย" : "ARCHITECTING"}
               </motion.span>
+              <motion.span variants={lineVariants} className="block text-white">
+                {lang === "th" ? "ระดับ PRODUCTION" : "HIGH-PERFORMANCE"}
+              </motion.span>
+              <motion.span
+                variants={lineVariants}
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-[#38bdf8] to-[#0284c7]"
+              >
+                {lang === "th" ? "ด้วย FLUTTER & DART." : "MOBILE SYSTEMS."}
+              </motion.span>
+            </h1>
+          </div>
+
+          {/* Asymmetric Technical Telemetry Deck Anchor */}
+          <motion.div
+            variants={lineVariants}
+            style={{ rotateX, rotateY, transformPerspective: 1000 }}
+            className="lg:col-span-3 flex flex-col justify-end"
+          >
+            <div className="p-5 rounded-2xl bg-white/[0.025] border border-white/[0.08] backdrop-blur-md space-y-4 hover:border-[#00f0ff]/40 transition-colors group">
+              <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+                <span className="flex items-center gap-1.5 text-zinc-300">
+                  <Terminal className="w-3.5 h-3.5 text-[#00f0ff]" />
+                  SPECS // 01
+                </span>
+                <span className="text-[#00f0ff] font-bold">60-120 FPS</span>
+              </div>
+              <p className="text-xs font-mono text-zinc-400 leading-relaxed">
+                Dart 3.x native concurrency, deterministic BLoC state streams,
+                and offline-first SQLite synchronization.
+              </p>
+              <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                <span className="flex items-center gap-1">
+                  <Cpu className="w-3 h-3 text-zinc-400" />
+                  MAEJO IT
+                </span>
+                <span className="text-white font-bold">2022-2026</span>
+              </div>
             </div>
           </motion.div>
+        </div>
 
-          {/* Headline strictly conforming to 2-Line Iron Rule with Inline Domain Badge (CONTEXT.md #10) */}
-          <motion.div variants={itemVariants} className="max-w-4xl space-y-2">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-slate-50 leading-[1.05]">
+        {/* Supporting Narrative & Strategic Positioning */}
+        <motion.div
+          variants={lineVariants}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2"
+        >
+          <div className="lg:col-span-7">
+            <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed font-light">
               {lang === "th" ? (
                 <>
-                  {personal.nameTh}
-                  <span className="text-shiny block text-2xl sm:text-4xl lg:text-5xl font-light tracking-tight mt-1.5">
-                    Mobile Application Developer
-                    <span className="inline-flex items-center gap-1 align-middle px-2.5 py-0.5 rounded-md bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 ring-1 ring-cyan-400/30 text-xs sm:text-sm font-mono tracking-wider font-semibold ml-2 -translate-y-0.5">
-                      FLUTTER
-                    </span>
-                  </span>
+                  บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้
+                  ผู้เชี่ยวชาญการออกแบบและพัฒนา Cross-platform Mobile
+                  Application ด้วย{" "}
+                  <strong className="text-white font-semibold underline decoration-[#00f0ff]/50 decoration-2 underline-offset-4">
+                    Flutter, Dart & BLoC
+                  </strong>{" "}
+                  มีประสบการณ์ส่งมอบโปรเจกต์ใช้งานจริงระดับ Production
+                  ทั้งระบบคัดกรองโรค (NCDs), ฟีเจอร์แอปพลิเคชัน Pinto และระบบ
+                  POS ร้านค้า
                 </>
               ) : (
                 <>
-                  Theeraphat S.
-                  <span className="text-shiny block text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-1.5">
-                    Mobile Application Developer
-                    <span className="inline-flex items-center gap-1 align-middle px-2.5 py-0.5 rounded-md bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 ring-1 ring-cyan-400/30 text-xs sm:text-sm font-mono tracking-wider font-semibold ml-2 -translate-y-0.5">
-                      FLUTTER
-                    </span>
-                  </span>
+                  Recent IT graduate from Maejo University specialized in
+                  engineering high-end cross-platform mobile products with{" "}
+                  <strong className="text-white font-semibold underline decoration-[#00f0ff]/50 decoration-2 underline-offset-4">
+                    Flutter, Dart & BLoC
+                  </strong>
+                  . Proven experience shipping mission-critical systems from
+                  healthcare screening (NCDs) to commercial logistics (Pinto)
+                  and retail POS architectures.
                 </>
               )}
-            </h1>
-          </motion.div>
-
-          {/* Manifesto & Purpose */}
-          <motion.div variants={itemVariants} className="space-y-3">
-            <p className="text-lg sm:text-xl font-medium text-cyan-600 dark:text-cyan-400 leading-snug tracking-tight">
-              &ldquo;
-              {lang === "th"
-                ? "ผมสร้างแอปพลิเคชันด้วยความใส่ใจ ไม่มีเทมเพลต ไม่มีทางลัด"
-                : "Crafting robust mobile systems. No templates, no shortcuts."}
-              &rdquo;
             </p>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
-              {lang === "th" ? personal.taglineTh : personal.taglineEn}
-            </p>
-          </motion.div>
+          </div>
 
-          {/* High-Precision Engineering Hardware Pillars */}
-          <motion.div
-            variants={itemVariants}
-            className="pt-1 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-mono text-slate-700 dark:text-slate-300"
-          >
-            {pillars.map((pillar, idx) => (
-              <div
-                key={idx}
-                className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.03] ring-1 ring-slate-200/80 dark:ring-white/[0.08] hover:ring-cyan-400/50 hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-all duration-300 shadow-xs"
-              >
-                <div className="p-1 rounded-lg bg-cyan-500/10 shrink-0">
-                  {pillar.icon}
-                </div>
-                <span className="truncate font-medium">{pillar.label}</span>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Nested CTA & Island Button Architecture */}
-          <motion.div
-            variants={itemVariants}
-            className="pt-3 flex flex-wrap items-center gap-3 sm:gap-4"
-          >
-            {/* Primary Island CTA with Button-in-Button Trailing Icon & Luminous Shine */}
-            <motion.a
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+          {/* Action CTAs with Magnetic feel */}
+          <div className="lg:col-span-5 flex flex-wrap items-center gap-3 lg:justify-end">
+            <a
               href="#projects"
-              className="btn--shine inline-flex items-center gap-3 pl-6 pr-2.5 py-2.5 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 font-bold text-sm rounded-full transition-all shadow-[0_12px_28px_-6px_rgba(6,182,212,0.45)] group cursor-pointer"
+              data-cursor-text="EXPLORE"
+              className="btn-editorial btn-editorial-primary group"
             >
-              <span>
-                {t("สำรวจผลงานและเคสทดสอบ", "Explore Selected Works")}
-              </span>
-              <span className="w-7 h-7 rounded-full bg-slate-950/15 flex items-center justify-center group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">
-                <ArrowUpRight className="w-4 h-4 text-slate-950" strokeWidth={2} />
-              </span>
-            </motion.a>
+              <span>{t("สำรวจผลงาน", "EXPLORE CASE STUDIES")}</span>
+              <ArrowDown className="w-4 h-4 text-[#07080c] group-hover:translate-y-0.5 transition-transform" />
+            </a>
 
-            {/* Secondary: Expandable Resume Pill (CONTEXT.md #33-36) */}
-            <motion.a
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
+            <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-white/[0.04] hover:bg-slate-50 dark:hover:bg-white/[0.08] text-slate-800 dark:text-slate-200 ring-1 ring-slate-200 dark:ring-white/[0.08] hover:ring-cyan-400/60 text-sm font-mono rounded-full transition-all shadow-xs cursor-pointer group"
+              data-cursor-text="RESUME"
+              className="btn-editorial btn-editorial-outline group"
             >
-              <FileText className="w-4 h-4 text-cyan-500 dark:text-cyan-400 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-              <span>{t("ดาวน์โหลด CV", "Resume CV")}</span>
-              <span className="max-w-0 overflow-hidden group-hover:max-w-[40px] transition-all duration-300 text-[11px] text-cyan-400 opacity-0 group-hover:opacity-100 whitespace-nowrap">
-                (PDF)
-              </span>
-            </motion.a>
-
-            {/* Secondary: GitHub */}
-            <motion.a
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              href={personal.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-white/[0.04] hover:bg-slate-50 dark:hover:bg-white/[0.08] text-slate-800 dark:text-slate-200 ring-1 ring-slate-200 dark:ring-white/[0.08] hover:ring-cyan-400/60 text-sm font-mono rounded-full transition-all shadow-xs cursor-pointer"
-            >
-              <Github className="w-4 h-4" strokeWidth={1.5} />
-              <span>GitHub</span>
-            </motion.a>
-
-            {personal.phone && (
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href={`tel:${personal.phone.replace(/[^0-9]/g, "")}`}
-                className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-white/[0.04] hover:bg-slate-50 dark:hover:bg-white/[0.08] text-slate-800 dark:text-slate-200 ring-1 ring-slate-200 dark:ring-white/[0.08] hover:ring-cyan-400/60 text-sm font-mono rounded-full transition-all shadow-xs cursor-pointer"
-              >
-                <Phone className="w-4 h-4 text-cyan-500 dark:text-cyan-400" strokeWidth={1.5} />
-                <span>{personal.phone}</span>
-              </motion.a>
-            )}
-          </motion.div>
+              <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
+              <span>{t("ดาวน์โหลด CV", "RESUME / CV")}</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </a>
+          </div>
         </motion.div>
 
-        {/* Right Column: Interactive Hardware Mobile Simulator (5 Cols) */}
+        {/* Technical Specification Ribbon */}
         <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            duration: 0.7,
-            delay: 0.15,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="lg:col-span-5 flex flex-col items-center justify-center relative"
+          variants={lineVariants}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/[0.06]"
         >
-          {/* Subtle Concentric Glare Aura */}
-          <div
-            aria-hidden="true"
-            className="absolute -inset-6 rounded-full bg-radial from-cyan-500/15 via-blue-500/5 to-transparent blur-3xl pointer-events-none -z-10"
-          />
+          <div className="space-y-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
+              PRIMARY ARCHITECTURE
+            </span>
+            <span className="text-sm font-mono font-bold text-white block">
+              BLoC / Clean Architecture
+            </span>
+          </div>
 
-          {/* Interactive Mobile Device Hardware */}
-          <MobileMockup />
+          <div className="space-y-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
+              DATA INTEGRITY
+            </span>
+            <span className="text-sm font-mono font-bold text-white block">
+              Offline-First / REST & SQLite
+            </span>
+          </div>
+
+          <div className="space-y-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
+              LEADERSHIP & MENTORSHIP
+            </span>
+            <span className="text-sm font-mono font-bold text-white block">
+              Teaching Assistant (3 Terms)
+            </span>
+          </div>
+
+          <div className="space-y-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
+              COMMERCIAL FOCUS
+            </span>
+            <span className="text-sm font-mono font-bold text-[#00f0ff] block">
+              Production-Grade Mobile
+            </span>
+          </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
