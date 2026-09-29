@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowDown, Menu, X } from "lucide-react";
 import { useLanguage } from "../context";
@@ -19,22 +19,22 @@ export const Navbar: React.FC = () => {
       href: "#about",
     },
     {
-      id: "projects",
+      id: "work",
       num: "02",
       label: t("ผลงาน", "WORK"),
-      href: "#projects",
+      href: "#work",
     },
     {
-      id: "skills",
+      id: "capabilities",
       num: "03",
       label: t("ทักษะ", "CAPABILITIES"),
-      href: "#skills",
+      href: "#capabilities",
     },
     {
-      id: "experience",
+      id: "timeline",
       num: "04",
       label: t("เส้นทาง", "TIMELINE"),
-      href: "#experience",
+      href: "#timeline",
     },
     {
       id: "contact",
@@ -45,66 +45,93 @@ export const Navbar: React.FC = () => {
   ];
 
   // Dynamic scroll offset calculation
-  const getNavOffset = () => {
-    const navHeight = navContainerRef.current?.offsetHeight || 64;
-    return navHeight + 24; // navbar height + comfortable editorial spacing
-  };
+  const getNavOffset = useCallback(() => {
+    const navHeight = navContainerRef.current?.offsetHeight || 56;
+    return navHeight + 20; // navbar height + comfortable editorial spacing
+  }, []);
 
-  const scrollToSection = (sectionId: string, e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    const el = document.getElementById(sectionId);
-    if (!el) return;
+  const scrollToSection = useCallback(
+    (sectionId: string, e?: React.MouseEvent) => {
+      if (e) e.preventDefault();
+      // Support aliases: work <-> projects, capabilities <-> skills, timeline <-> experience
+      const targetElement =
+        document.getElementById(sectionId) ||
+        (sectionId === "work" ? document.getElementById("projects") : null) ||
+        (sectionId === "capabilities"
+          ? document.getElementById("skills")
+          : null) ||
+        (sectionId === "timeline"
+          ? document.getElementById("experience")
+          : null);
 
-    const offset = getNavOffset();
-    const targetPosition =
-      el.getBoundingClientRect().top + window.pageYOffset - offset;
+      if (!targetElement) return;
 
-    const lenis = (
-      window as unknown as {
-        __lenis?: {
-          scrollTo: (target: number, opts: { duration?: number }) => void;
-        };
+      const offset = getNavOffset();
+      const targetPosition =
+        targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      const lenis = (
+        window as unknown as {
+          __lenis?: {
+            scrollTo: (target: number, opts: { duration?: number }) => void;
+          };
+        }
+      ).__lenis;
+      if (lenis) {
+        lenis.scrollTo(targetPosition, { duration: 1.0 });
+      } else {
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: "smooth",
+        });
       }
-    ).__lenis;
-    if (lenis) {
-      lenis.scrollTo(targetPosition, { duration: 1.1 });
-    } else {
-      window.scrollTo({
-        top: Math.max(0, targetPosition),
-        behavior: "smooth",
-      });
-    }
 
-    setActiveSection(sectionId);
-    setMobileMenuOpen(false);
+      setActiveSection(sectionId);
+      setMobileMenuOpen(false);
 
-    // Update URL hash without causing an instant browser jump
-    if (window.history.pushState) {
-      window.history.pushState(null, "", `#${sectionId}`);
-    }
-  };
+      // Update URL hash without causing an instant browser jump
+      if (window.history.pushState) {
+        window.history.pushState(null, "", `#${sectionId}`);
+      }
+    },
+    [getNavOffset],
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 25);
+      setScrolled(window.scrollY > 20);
 
-      const sectionIds = [
-        "about",
-        "projects",
-        "skills",
-        "experience",
-        "contact",
+      // Bottom of page threshold: activate contact immediately if scrolled to the end
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 60
+      ) {
+        setActiveSection("contact");
+        return;
+      }
+
+      const sectionMappings: [string, string[]][] = [
+        ["about", ["about"]],
+        ["work", ["work", "projects"]],
+        ["capabilities", ["capabilities", "skills"]],
+        ["timeline", ["timeline", "experience"]],
+        ["contact", ["contact"]],
       ];
-      const offset = getNavOffset() + 40;
+      const offset = getNavOffset() + 32;
       const scrollPos = window.scrollY + offset;
 
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const id = sectionIds[i];
-        const el = document.getElementById(id);
+      for (let i = sectionMappings.length - 1; i >= 0; i--) {
+        const [canonicalId, candidateIds] = sectionMappings[i];
+        let el: HTMLElement | null = null;
+        for (const cid of candidateIds) {
+          el = document.getElementById(cid);
+          if (el) break;
+        }
         if (el) {
-          const top = el.offsetTop;
+          // Use absolute document position instead of offsetTop to be robust against relative parents
+          const top = el.getBoundingClientRect().top + window.scrollY;
           if (scrollPos >= top) {
-            setActiveSection(id);
+            setActiveSection(canonicalId);
             break;
           }
         }
@@ -113,8 +140,21 @@ export const Navbar: React.FC = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
+
+    // Initial hash scroll resolution on page load/mount
+    if (window.location.hash) {
+      const hashId = window.location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        scrollToSection(hashId);
+      }, 500);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [scrollToSection, getNavOffset]);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -128,16 +168,16 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-6 pointer-events-none">
+    <header className="fixed top-2.5 sm:top-4 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-6 pointer-events-none">
       <motion.div
         ref={navContainerRef}
         initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
         className={`pointer-events-auto w-full max-w-5xl rounded-full transition-all duration-300 flex items-center justify-between ${
           scrolled
-            ? "bg-[#07080c]/90 backdrop-blur-xl border border-[#00f0ff]/20 shadow-[0_16px_36px_rgba(0,0,0,0.7),0_0_20px_rgba(0,240,255,0.03)] py-1.5 px-3 sm:px-4"
-            : "bg-[#07080c]/60 backdrop-blur-md border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.35)] py-2 px-3 sm:px-5"
+            ? "bg-[#07080c]/85 backdrop-blur-xl border border-white/[0.08] shadow-[0_12px_32px_rgba(0,0,0,0.65)] py-1.5 px-3 sm:px-4"
+            : "bg-[#07080c]/60 backdrop-blur-md border border-white/[0.06] shadow-[0_6px_24px_rgba(0,0,0,0.25)] py-1.5 px-3 sm:px-4"
         }`}
       >
         {/* Left: Brand Lockup */}
@@ -205,19 +245,25 @@ export const Navbar: React.FC = () => {
                 aria-current={isActive ? "page" : undefined}
                 className={`relative px-2.5 lg:px-3 py-1 text-[11px] font-mono tracking-wider transition-colors duration-200 inline-flex items-center gap-1 group rounded-full focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                   isActive
-                    ? "text-[#00f0ff] font-semibold"
-                    : "text-zinc-400 hover:text-white"
+                    ? "text-[#00f0ff] font-medium bg-white/[0.03]"
+                    : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
                 {isActive && (
                   <motion.div
-                    layoutId="active-nav-pill"
-                    className="absolute inset-0 bg-[#00f0ff]/[0.09] border border-[#00f0ff]/30 rounded-full shadow-[0_0_12px_rgba(0,240,255,0.12)]"
+                    layoutId="active-nav-indicator"
+                    className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-[#00f0ff]/90 rounded-full"
                     transition={{ type: "spring", stiffness: 450, damping: 35 }}
                   />
                 )}
-                <span className="relative z-10 transition-transform duration-200 group-hover:-translate-y-[1px]">
-                  <span className="text-zinc-500 font-mono group-hover:text-zinc-400 transition-colors">
+                <span className="relative z-10 transition-transform duration-200">
+                  <span
+                    className={`font-mono transition-colors ${
+                      isActive
+                        ? "text-[#00f0ff]/70"
+                        : "text-zinc-500 group-hover:text-zinc-400"
+                    }`}
+                  >
                     {link.num}
                   </span>
                   <span className="mx-0.5 text-zinc-600">/</span>
@@ -235,12 +281,12 @@ export const Navbar: React.FC = () => {
             onClick={toggleLang}
             data-cursor-text="LANG"
             aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-            className="hidden xs:inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono text-zinc-400 hover:text-white bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.08] hover:border-white/20 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-white/20 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff]/80 shadow-[0_0_4px_rgba(0,240,255,0.5)] shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_6px_rgba(0,240,255,0.7)] shrink-0" />
             <span
               className={
-                lang === "th" ? "text-white font-semibold" : "text-zinc-500"
+                lang === "th" ? "text-[#00f0ff] font-bold" : "text-zinc-400 hover:text-zinc-200"
               }
             >
               TH
@@ -248,7 +294,7 @@ export const Navbar: React.FC = () => {
             <span className="text-zinc-600 text-[10px]">/</span>
             <span
               className={
-                lang === "en" ? "text-white font-semibold" : "text-zinc-500"
+                lang === "en" ? "text-[#00f0ff] font-bold" : "text-zinc-400 hover:text-zinc-200"
               }
             >
               EN
@@ -306,18 +352,20 @@ export const Navbar: React.FC = () => {
                     onClick={(e) => scrollToSection(link.id, e)}
                     className={`py-2 px-3 rounded-lg transition-colors flex items-center justify-between ${
                       isActive
-                        ? "bg-[#00f0ff]/10 text-[#00f0ff] font-semibold border border-[#00f0ff]/20"
-                        : "text-zinc-300 hover:bg-white/[0.05] hover:text-white"
+                        ? "bg-white/[0.04] text-[#00f0ff] font-medium border-l-2 border-[#00f0ff]"
+                        : "text-zinc-300 hover:bg-white/[0.03] hover:text-white"
                     }`}
                   >
                     <div className="flex items-center gap-2">
-                      <span className="text-zinc-500 font-mono text-[11px]">
+                      <span
+                        className={`font-mono text-[11px] ${isActive ? "text-[#00f0ff]/70" : "text-zinc-500"}`}
+                      >
                         {link.num} /
                       </span>
                       <span>{link.label}</span>
                     </div>
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_6px_#00f0ff]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff]" />
                     )}
                   </a>
                 );

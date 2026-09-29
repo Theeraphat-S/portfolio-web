@@ -4,11 +4,8 @@ import {
   GraduationCap,
   Layers,
   ShieldCheck,
-  Users,
-  Activity,
-  Sparkles,
-  Cpu,
-  CheckCircle2,
+  Zap,
+  Presentation,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 
@@ -16,23 +13,23 @@ export const AboutBento: React.FC = () => {
   const { lang, t } = useLanguage();
 
   const fadeIn = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 18 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
   return (
-    <section id="about" className="py-20 sm:py-28 border-b border-white/[0.08]">
-      {/* Section Eyebrow */}
+    <section id="about" className="py-16 sm:py-24 border-b border-white/[0.08]">
+      {/* 1. Section Eyebrow */}
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeIn}
-        className="flex items-center justify-between pb-8 mb-12 border-b border-white/[0.06]"
+        className="flex items-center justify-between pb-6 mb-10 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
           01 // IDENTITY & PHILOSOPHY
@@ -42,27 +39,28 @@ export const AboutBento: React.FC = () => {
         </span>
       </motion.div>
 
-      {/* Main Statement Typography */}
+      {/* 2. Main Statement (Reduced ~15-20% for faster scanability) */}
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeIn}
-        className="space-y-6 mb-16"
+        className="space-y-4 mb-10"
       >
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08] max-w-5xl">
+        <h2 className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl">
           {lang === "th" ? (
             <>
-              ซอฟต์แวร์ที่ดีไม่ใช่แค่เรื่องของโค้ด{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#38bdf8]">
-                แต่คือสถาปัตยกรรมการตัดสินใจ
+              ซอฟต์แวร์ที่ดีไม่ใช่เรื่องบังเอิญ{" "}
+              <span className="text-[#00f0ff]">
+                แต่คือสถาปัตยกรรมที่ตั้งใจออกแบบ
               </span>{" "}
-              ที่สร้างบนตรรกะ ความเสถียร และความเข้าใจผู้ใช้งานจริง
+              บนระเบียบ State ที่แน่นอน การทำงานแบบ Offline-first
+              และความเข้าใจผู้ใช้งานจริง
             </>
           ) : (
             <>
               Good software is rarely an accident.{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#38bdf8]">
+              <span className="text-[#00f0ff]">
                 It is a deliberate architecture
               </span>{" "}
               built on strict state discipline, offline resilience, and human
@@ -70,201 +68,196 @@ export const AboutBento: React.FC = () => {
             </>
           )}
         </h2>
+
+        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl">
+          {lang === "th"
+            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ ผู้เริ่มต้นพัฒนาโมบายแอปพลิเคชันอย่างเข้มข้นตั้งแต่ปี 2565 มุ่งเน้นการเปลี่ยนหลักการทางวิศวกรรมซอฟต์แวร์ให้เป็นระบบที่เสถียร รองรับผู้ใช้งานจริงระดับ Production ทั้งการเชื่อมต่อ WebView Bridge ไปจนถึงระบบ Offline Database ที่มีข้อผิดพลาดเป็นศูนย์"
+            : "Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to zero-error offline clinical databases."}
+        </p>
       </motion.div>
 
-      {/* Asymmetrical Editorial Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Deep Narrative & Telemetry Proof (7 Columns) */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          className="lg:col-span-7 space-y-8"
-        >
-          <div className="space-y-5 text-base sm:text-lg text-zinc-300 leading-relaxed font-light">
-            <p>
-              {lang === "th" ? (
-                <>
-                  ผมเป็น Mobile Developer
-                  ที่เริ่มต้นสร้างสรรค์ผลงานอย่างเข้มข้นตั้งแต่ปี 2565
-                  ในระหว่างศึกษาที่สาขาวิชาเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้
-                  จากความหลงใหลในความรวดเร็วและประสิทธิภาพของ Flutter & Dart
-                  ผมได้ผลักดันขอบเขตการเรียนรู้ด้วยการสร้างระบบที่แก้ปัญหาจริงในสังคม
-                </>
-              ) : (
-                <>
-                  I am a mobile systems engineer who began building software in
-                  2022 during my Information Technology degree at Maejo
-                  University. Captivated by the performance, declarative
-                  rendering, and expressive power of Flutter & Dart, I focused
-                  on turning theoretical software engineering principles into
-                  reliable production applications.
-                </>
-              )}
-            </p>
-            <p>
-              {lang === "th" ? (
-                <>
-                  ประสบการณ์จากการฝึกงานจริงที่บริษัท Fakduay Logistics
-                  ทำให้ผมเข้าใจความท้าทายของการผสานระบบ WebView เข้ากับ Native
-                  Experience เพื่อรักษาความต่อเนื่องของแอปพลิเคชัน
-                  ในขณะที่โปรเจกต์จบอย่างระบบคัดกรองโรคเรื้อรัง (NCDs)
-                  ได้พิสูจน์การออกแบบระบบ Offline-first ที่ขจัด Human Error
-                  ของอาสาสมัครสาธารณสุขได้ 100%
-                </>
-              ) : (
-                <>
-                  During my internship at Fakduay Logistics, I engineered
-                  production features bridging high-performance Flutter native
-                  screens with hybrid WebView menus and gamified loyalty
-                  mechanics. For my capstone project, I designed a clinical NCDs
-                  risk-screening platform that eliminated medical calculation
-                  errors to zero while functioning seamlessly in
-                  zero-connectivity rural clinics.
-                </>
-              )}
-            </p>
-          </div>
-
-          {/* Integrated Telemetry & Impact Stats Deck */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-white/[0.025] border border-white/[0.08]">
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono uppercase text-zinc-400 block">
-                {t("ความแม่นยำ NCDs", "NCDs ACCURACY")}
-              </span>
-              <span className="text-base sm:text-lg font-mono font-bold text-[#00f0ff] flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                100%
-              </span>
+      {/* 3. Engineering Principles (3 clean columns, no heavy bloated cards) */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        className="mb-12"
+      >
+        <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-4">
+          {t("หลักการทางวิศวกรรม", "ENGINEERING PRINCIPLES")}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Principle 01 */}
+          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+              <span className="text-zinc-500">01</span>
+              <Layers className="w-3.5 h-3.5 text-zinc-400" />
             </div>
-
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono uppercase text-zinc-400 block">
-                {t("นศ. ที่ให้คำปรึกษา", "STUDENTS TAUGHT")}
-              </span>
-              <span className="text-base sm:text-lg font-mono font-bold text-white flex items-center gap-1">
-                <Users className="w-3.5 h-3.5 text-[#00f0ff]" />
-                100+
-              </span>
-            </div>
-
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono uppercase text-zinc-400 block">
-                {t("วาระผู้ช่วยสอน", "TEACHING TERMS")}
-              </span>
-              <span className="text-base sm:text-lg font-mono font-bold text-white flex items-center gap-1">
-                <Activity className="w-3.5 h-3.5 text-[#00f0ff]" />3 TERMS
-              </span>
-            </div>
-
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono uppercase text-zinc-400 block">
-                {t("เป้าหมายความลื่นไหล", "FRAME BUDGET")}
-              </span>
-              <span className="text-base sm:text-lg font-mono font-bold text-[#00f0ff] flex items-center gap-1">
-                <Cpu className="w-3.5 h-3.5 text-[#00f0ff]" />
-                60-120 FPS
-              </span>
-            </div>
-          </div>
-
-          {/* Academic & Mentorship Block */}
-          <div className="p-6 rounded-2xl bg-white/[0.025] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-colors space-y-4">
-            <div className="flex items-center gap-3 text-xs font-mono text-[#00f0ff] uppercase tracking-wider">
-              <Users className="w-4 h-4 text-[#00f0ff]" />
-              <span>ACADEMIC LEADERSHIP & TEACHING</span>
-            </div>
-            <p className="text-sm text-zinc-300 leading-relaxed font-light">
+            <h3 className="text-sm font-bold text-white font-mono">
+              {lang === "th" ? "Deterministic State" : "Deterministic State"}
+            </h3>
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
               {lang === "th"
-                ? "ทำหน้าที่ผู้ช่วยสอน (Teaching Assistant) ประจำสาขาวิชาเทคโนโลยีสารสนเทศต่อเนื่อง 3 ภาคการศึกษา ถ่ายทอดความรู้และให้คำปรึกษาแก่นักศึกษากว่า 100+ คนในวิชาการเขียนโปรแกรมและการแก้ปัญหาเชิงอัลกอริทึม พร้อมได้รับเกียรติเป็นวิทยากรบรรยายพิเศษหัวข้อการประยุกต์ใช้ AI"
-                : "Served as University Teaching Assistant for 3 consecutive terms at Maejo University, mentoring 100+ undergraduate students through data structures, OOP, and algorithmic problem-solving. Invited as a keynote guest speaker on AI application in modern software engineering."}
+                ? "สถาปัตยกรรม Unidirectional Data Flow และการแปลง Event เป็น State ด้วย BLoC ช่วยกำจัด Race Condition และควบคุม State ได้แม่นยำ"
+                : "Unidirectional data flows and discrete event-to-state transformations with BLoC that eliminate race conditions and ensure testable state transitions."}
             </p>
           </div>
-        </motion.div>
 
-        {/* Right Column: Architectural Principles & Key Data (5 Columns) */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          className="lg:col-span-5 space-y-4"
-        >
-          {/* Principle 1: BLoC & Determinism */}
-          <div className="p-6 rounded-2xl bg-white/[0.025] border border-white/[0.08] hover:border-[#00f0ff]/35 transition-colors group">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
-                PRINCIPLE // 01
-              </span>
-              <Layers className="w-4 h-4 text-[#00f0ff] group-hover:scale-110 transition-transform" />
+          {/* Principle 02 */}
+          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+              <span className="text-zinc-500">02</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
             </div>
-            <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#00f0ff] transition-colors">
-              Deterministic State via BLoC
+            <h3 className="text-sm font-bold text-white font-mono">
+              {lang === "th"
+                ? "Offline-First Resilience"
+                : "Offline-First Resilience"}
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed font-mono">
-              Unidirectional data flows and discrete event-to-state
-              transformations that eliminate edge-case race conditions and
-              ensure full regression testability.
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+              {lang === "th"
+                ? "การจัดเก็บข้อมูลผ่าน Local SQLite ร่วมกับคิวทำงานแบบ Idempotent Retry ทำให้การทำงานราบรื่นแม้ในพื้นที่ไม่มีสัญญาณเครือข่าย"
+                : "Local SQLite database persistence paired with idempotent retry queues ensuring operations never fail during field network dropouts."}
             </p>
           </div>
 
-          {/* Principle 2: Offline-First Reliability */}
-          <div className="p-6 rounded-2xl bg-white/[0.025] border border-white/[0.08] hover:border-[#00f0ff]/35 transition-colors group">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
-                PRINCIPLE // 02
-              </span>
-              <ShieldCheck className="w-4 h-4 text-[#00f0ff] group-hover:scale-110 transition-transform" />
+          {/* Principle 03 */}
+          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+              <span className="text-zinc-500">03</span>
+              <Zap className="w-3.5 h-3.5 text-zinc-400" />
             </div>
-            <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#00f0ff] transition-colors">
-              Offline-First Resilience
+            <h3 className="text-sm font-bold text-white font-mono">
+              {lang === "th" ? "Fluid Performance" : "Fluid Performance"}
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed font-mono">
-              Local database caching (SQLite/Hive) and idempotent background
-              synchronization queues ensure zero data loss during network
-              dropouts.
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+              {lang === "th"
+                ? "ควบคุม Frame Budget ภายใน 16ms กำหนด Rebuild Boundary อย่างแม่นยำ และตรวจสอบ Memory Leaks เพื่อความลื่นไหลระดับ 60-120 FPS"
+                : "Strict 16ms frame-budget adherence, isolated rebuild boundaries, and memory leak profiling for seamless 60-120 FPS interaction."}
             </p>
           </div>
+        </div>
+      </motion.div>
 
-          {/* Principle 3: Micro-Interactions & 60-120fps */}
-          <div className="p-6 rounded-2xl bg-white/[0.025] border border-white/[0.08] hover:border-[#00f0ff]/35 transition-colors group">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
-                PRINCIPLE // 03
-              </span>
-              <Activity className="w-4 h-4 text-[#00f0ff] group-hover:scale-110 transition-transform" />
-            </div>
-            <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#00f0ff] transition-colors">
-              Fluid Frame-Rate Obsession
-            </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed font-mono">
-              Constraining layout rebuilds, leveraging GPU-accelerated shaders,
-              and tuning spring physics to achieve buttery 60-120fps interaction
-              fidelity.
-            </p>
-          </div>
-
-          {/* Academic Anchor Badge */}
-          <div className="p-5 rounded-2xl bg-[#00f0ff]/[0.03] border border-[#00f0ff]/25 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <GraduationCap className="w-5 h-5 text-[#00f0ff]" />
-              <div>
-                <span className="text-xs font-mono font-bold text-white block">
-                  B.Sc. in Information Technology
-                </span>
-                <span className="text-[11px] font-mono text-zinc-400">
-                  Maejo University (2022 - 2026)
-                </span>
-              </div>
-            </div>
-            <span className="text-xs font-mono font-bold text-[#00f0ff] flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-[#00f0ff]" />
-              RECENT GRAD
+      {/* 4. Real Data Metrics (Restrained typography, cyan only for values) */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        className="mb-12 p-4 sm:p-5 rounded-xl bg-white/[0.015] border border-white/[0.08]"
+      >
+        <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-3">
+          {t("ตัวชี้วัดความเสถียรของระบบ", "VERIFIED SYSTEM METRICS")}
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
+          <div className="space-y-0.5 pt-2 md:pt-0 md:pr-4">
+            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
+              {t("ความแม่นยำ NCDs", "NCDS ACCURACY")}
+            </span>
+            <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
+              100%
+            </span>
+            <span className="text-[10px] font-mono text-zinc-400 block">
+              {t("คำนวณสูตรแม่นยำ 100%", "Zero calculation error")}
             </span>
           </div>
-        </motion.div>
-      </div>
+
+          <div className="space-y-0.5 pt-2 md:pt-0 md:px-4">
+            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
+              {t("นศ. ที่ให้คำปรึกษา", "STUDENTS TAUGHT")}
+            </span>
+            <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
+              100+
+            </span>
+            <span className="text-[10px] font-mono text-zinc-400 block">
+              {t("ให้คำปรึกษาระดับปริญญาตรี", "Undergraduate mentorship")}
+            </span>
+          </div>
+
+          <div className="space-y-0.5 pt-2 md:pt-0 md:px-4">
+            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
+              {t("วาระผู้ช่วยสอน", "TEACHING TERMS")}
+            </span>
+            <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
+              3
+            </span>
+            <span className="text-[10px] font-mono text-zinc-400 block">
+              {t("3 ภาคการศึกษาต่อเนื่อง", "Consecutive terms")}
+            </span>
+          </div>
+
+          <div className="space-y-0.5 pt-2 md:pt-0 md:pl-4">
+            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
+              {t("เป้าหมายความลื่นไหล", "FRAME BUDGET")}
+            </span>
+            <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
+              60-120 FPS
+            </span>
+            <span className="text-[10px] font-mono text-zinc-400 block">
+              {t("ประมวลผลบน UI Thread", "UI thread execution")}
+            </span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* 5. Impact & Academic Background (Compact supporting cards) */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+      >
+        <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-3.5">
+          <GraduationCap className="w-5 h-5 text-zinc-400 shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-bold text-white uppercase">
+                {t("วุฒิการศึกษา", "ACADEMIC CREDENTIALS")}
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
+                2022 - 2026
+              </span>
+            </div>
+            <p className="text-sm font-sans font-medium text-zinc-200">
+              {lang === "th"
+                ? "วท.บ. สาขาวิชาเทคโนโลยีสารสนเทศ"
+                : "B.Sc. in Information Technology"}
+            </p>
+            <p className="text-xs text-zinc-400 font-mono">
+              {lang === "th"
+                ? "มหาวิทยาลัยแม่โจ้ • วิศวกรรมซอฟต์แวร์และระบบโมบาย"
+                : "Maejo University • Software Engineering & Mobile Systems"}
+            </p>
+          </div>
+        </div>
+
+        <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-3.5">
+          <Presentation className="w-5 h-5 text-zinc-400 shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-bold text-white uppercase">
+                {t("บทบาทผู้นำและการสอน", "LEADERSHIP & MENTORSHIP")}
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
+                {t("3 เทอมการศึกษา", "3 SEMESTERS")}
+              </span>
+            </div>
+            <p className="text-sm font-sans font-medium text-zinc-200">
+              {lang === "th"
+                ? "ผู้ช่วยสอนประจำภาควิชา & วิทยากรรับเชิญ"
+                : "Undergraduate Teaching Assistant & Guest Speaker"}
+            </p>
+            <p className="text-xs text-zinc-400 font-mono">
+              {lang === "th"
+                ? "ดูแลและให้คำปรึกษานักศึกษา 100+ คน ด้าน Frontend, ฐานข้อมูล และตรรกะโปรแกรม"
+                : "Mentored 100+ students across Frontend, Database, and Algorithmic Logic"}
+            </p>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 };

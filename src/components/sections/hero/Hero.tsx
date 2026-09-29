@@ -10,10 +10,8 @@ import {
   ArrowUpRight,
   FileText,
   ArrowDown,
-  Terminal,
   Activity,
   Radio,
-  Cpu,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { useTelemetry } from "../../../hooks/useTelemetry";
@@ -158,30 +156,38 @@ export const Hero: React.FC = () => {
             </h1>
           </div>
 
-          {/* Asymmetric Technical Telemetry Deck Anchor */}
+          {/* Asymmetric Technical Specs Card */}
           <motion.div
             variants={lineVariants}
             style={{ rotateX, rotateY, transformPerspective: 1000 }}
             className="lg:col-span-3 flex flex-col justify-end"
           >
-            <div className="p-5 rounded-2xl bg-white/[0.025] border border-white/[0.08] backdrop-blur-md space-y-4 hover:border-[#00f0ff]/40 transition-colors group">
+            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] space-y-3.5 hover:border-white/20 transition-colors">
               <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                <span className="flex items-center gap-1.5 text-zinc-300">
-                  <Terminal className="w-3.5 h-3.5 text-[#00f0ff]" />
-                  SPECS // 01
+                <span className="tracking-wider uppercase text-[11px] text-zinc-400">
+                  SYSTEM SPECS
                 </span>
-                <span className="text-[#00f0ff] font-bold">60-120 FPS</span>
+                <span className="text-[#00f0ff] font-bold text-xs">
+                  60-120 FPS
+                </span>
               </div>
-              <p className="text-xs font-mono text-zinc-400 leading-relaxed">
-                Dart 3.x native concurrency, deterministic BLoC state streams,
-                and offline-first SQLite synchronization.
-              </p>
+              <div className="space-y-1.5 text-xs font-mono text-zinc-300">
+                <div className="flex items-center justify-between border-b border-white/[0.04] pb-1">
+                  <span className="text-zinc-500">ENGINE</span>
+                  <span>Flutter 3.x / Dart</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-white/[0.04] pb-1">
+                  <span className="text-zinc-500">STATE</span>
+                  <span>BLoC / Cubit</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-zinc-500">SYNC</span>
+                  <span>Offline SQLite</span>
+                </div>
+              </div>
               <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                <span className="flex items-center gap-1">
-                  <Cpu className="w-3 h-3 text-zinc-400" />
-                  MAEJO IT
-                </span>
-                <span className="text-white font-bold">2022-2026</span>
+                <span className="text-zinc-500">TRACK</span>
+                <span className="text-zinc-200">Production Systems</span>
               </div>
             </div>
           </motion.div>
@@ -193,13 +199,13 @@ export const Hero: React.FC = () => {
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2"
         >
           <div className="lg:col-span-7">
-            <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-light">
               {lang === "th" ? (
                 <>
                   บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้
                   ผู้เชี่ยวชาญการออกแบบและพัฒนา Cross-platform Mobile
                   Application ด้วย{" "}
-                  <strong className="text-white font-semibold underline decoration-[#00f0ff]/50 decoration-2 underline-offset-4">
+                  <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
                     Flutter, Dart & BLoC
                   </strong>{" "}
                   มีประสบการณ์ส่งมอบโปรเจกต์ใช้งานจริงระดับ Production
@@ -208,27 +214,27 @@ export const Hero: React.FC = () => {
                 </>
               ) : (
                 <>
-                  Recent IT graduate from Maejo University specialized in
-                  engineering high-end cross-platform mobile products with{" "}
-                  <strong className="text-white font-semibold underline decoration-[#00f0ff]/50 decoration-2 underline-offset-4">
+                  IT graduate from Maejo University specialized in engineering
+                  reliable cross-platform mobile systems with{" "}
+                  <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
                     Flutter, Dart & BLoC
                   </strong>
-                  . Proven experience shipping mission-critical systems from
-                  healthcare screening (NCDs) to commercial logistics (Pinto)
-                  and retail POS architectures.
+                  . Proven track record shipping production applications across
+                  preventive healthcare screening (NCDs), commercial logistics
+                  (Pinto), and offline-capable retail POS architectures.
                 </>
               )}
             </p>
           </div>
 
-          {/* Action CTAs with Magnetic feel */}
+          {/* Action CTAs */}
           <div className="lg:col-span-5 flex flex-wrap items-center gap-3 lg:justify-end">
             <a
-              href="#projects"
+              href="#work"
               data-cursor-text="EXPLORE"
               className="btn-editorial btn-editorial-primary group"
             >
-              <span>{t("สำรวจผลงาน", "EXPLORE CASE STUDIES")}</span>
+              <span>{t("สำรวจผลงาน", "EXPLORE WORK")}</span>
               <ArrowDown className="w-4 h-4 text-[#07080c] group-hover:translate-y-0.5 transition-transform" />
             </a>
 

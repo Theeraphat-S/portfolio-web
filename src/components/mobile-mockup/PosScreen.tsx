@@ -130,12 +130,19 @@ export const PosScreen: React.FC<PosScreenProps> = () => {
           {isCompleted ? (
             <>
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
-              <span>{t("พิมพ์ใบเสร็จเรียบร้อย", "Receipt Printed (Success)")}</span>
+              <span>
+                {t("พิมพ์ใบเสร็จเรียบร้อย", "Receipt Printed (Success)")}
+              </span>
             </>
           ) : (
             <>
               <Receipt className="w-3.5 h-3.5" />
-              <span>{t("ยืนยันการชำระเงิน (Sync API)", "Commit Transaction (Sync API)")}</span>
+              <span>
+                {t(
+                  "ยืนยันการชำระเงิน (Sync API)",
+                  "Commit Transaction (Sync API)",
+                )}
+              </span>
             </>
           )}
         </motion.button>

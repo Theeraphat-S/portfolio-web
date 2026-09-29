@@ -7,7 +7,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [lang, setLangState] = useState<Language>(() => {
     const saved = localStorage.getItem("portfolio_lang");
-    return saved === "th" || saved === "en" ? saved : "th";
+    return saved === "th" || saved === "en" ? saved : "en";
   });
 
   useEffect(() => {

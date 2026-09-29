@@ -138,6 +138,16 @@
     0 0 30px -10px rgba(0, 240, 255, 0.08);
 }
 
+/* Fixed Navbar Offset Globally for all section anchors */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+@media (min-width: 640px) {
+  section[id] {
+    scroll-margin-top: 7rem;
+  }
+}
+
 /* Editorial Button with Magnetic feel */
 .btn-editorial {
   position: relative;
@@ -145,39 +155,39 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  padding: 0.875rem 1.75rem;
+  padding: 0.8125rem 1.625rem;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 9999px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .btn-editorial-primary {
   background: #00f0ff;
   color: #07080c;
-  box-shadow: 0 0 25px -5px rgba(0, 240, 255, 0.45);
+  box-shadow: 0 4px 20px -4px rgba(0, 240, 255, 0.28);
 }
 
 .btn-editorial-primary:hover {
   background: #38bdf8;
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 0 35px -5px rgba(0, 240, 255, 0.65);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px -4px rgba(0, 240, 255, 0.4);
 }
 
 .btn-editorial-outline {
   background: transparent;
   color: #f1f5f9;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .btn-editorial-outline:hover {
-  border-color: #00f0ff;
+  border-color: rgba(0, 240, 255, 0.4);
   color: #00f0ff;
-  background: rgba(0, 240, 255, 0.05);
+  background: rgba(0, 240, 255, 0.04);
   transform: translateY(-1px);
 }
 

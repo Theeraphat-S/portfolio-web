@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "motion/react";
-import { Smartphone, Code, Database, Users, Layers } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { SkillCategory } from "../../../types";
@@ -9,26 +8,26 @@ const CATEGORY_META = [
   {
     index: "01",
     label: "MOBILE SYSTEMS",
-    icon: Smartphone,
-    desc: "Cross-platform mobile applications, state engines, and reactive UI architecture.",
+    tagline:
+      "Cross-platform mobile applications, state engines, and reactive UI architecture.",
   },
   {
     index: "02",
     label: "LANGUAGES & WEB",
-    icon: Code,
-    desc: "Core enterprise programming languages, web standards, and API backends.",
+    tagline:
+      "Core enterprise programming languages, web standards, and API backends.",
   },
   {
     index: "03",
     label: "DATA & TOOLING",
-    icon: Database,
-    desc: "Relational persistence, API testing tools, version control, and development workflows.",
+    tagline:
+      "Relational persistence, API testing tools, version control, and development workflows.",
   },
   {
     index: "04",
     label: "LEADERSHIP & MINDSET",
-    icon: Users,
-    desc: "Mentorship impact, university teaching assistantship, and Agile sprint execution.",
+    tagline:
+      "Mentorship impact, university teaching assistantship, and Agile sprint execution.",
   },
 ];
 
@@ -37,19 +36,22 @@ export const Skills: React.FC = () => {
   const { skillCategories } = portfolioData;
 
   const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 18 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
   return (
     <section
-      id="skills"
-      className="py-20 sm:py-28 border-b border-white/[0.08]"
+      id="capabilities"
+      className="relative py-20 sm:py-28 border-b border-white/[0.08]"
     >
+      {/* Anchor Alias for backwards compatibility */}
+      <div id="skills" className="absolute -top-24 pointer-events-none" />
+
       {/* Section Eyebrow */}
       <motion.div
         initial="hidden"
@@ -59,10 +61,10 @@ export const Skills: React.FC = () => {
         className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
-          03 // TECHNICAL ARSENAL
+          03 // CAPABILITIES & SYSTEMS
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          CAPABILITY MATRIX
+          ENGINEERING TREE MATRIX
         </span>
       </motion.div>
 
@@ -86,16 +88,14 @@ export const Skills: React.FC = () => {
         </p>
       </motion.div>
 
-      {/* Editorial Matrix Grid (4 Category Blocks) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+      {/* Clean Monospace Tree Layout (2 Columns with Hairline Separation) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-12 lg:gap-y-14">
         {skillCategories.map((category: SkillCategory, catIdx: number) => {
           const meta = CATEGORY_META[catIdx] || {
             index: String(catIdx + 1).padStart(2, "0"),
             label: "CAPABILITY",
-            icon: Layers,
-            desc: "",
+            tagline: "",
           };
-          const IconComponent = meta.icon;
 
           return (
             <motion.div
@@ -104,54 +104,61 @@ export const Skills: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
               variants={fadeIn}
-              className="p-6 sm:p-8 rounded-3xl bg-white/[0.015] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all duration-300 flex flex-col justify-between"
+              className="space-y-5"
             >
-              {/* Category Header */}
-              <div className="pb-5 mb-5 border-b border-white/[0.06] flex items-start justify-between gap-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#00f0ff]">
+              {/* Category Tree Root Header */}
+              <div className="pb-3 border-b border-white/[0.08] space-y-1">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#00f0ff] font-semibold tracking-wider">
                     <span>{meta.index} //</span>
-                    <span className="font-bold tracking-wider">
-                      {meta.label}
-                    </span>
+                    <span>{meta.label}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-white tracking-tight">
-                    {lang === "th" ? category.nameTh : category.nameEn}
-                  </h3>
-                  <p className="text-xs font-mono text-zinc-400">{meta.desc}</p>
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase">
+                    {category.skills.length} MODULES
+                  </span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-[#00f0ff] shrink-0">
-                  <IconComponent className="w-5 h-5" />
-                </div>
+                <h3 className="text-xl font-bold text-white tracking-tight">
+                  {lang === "th" ? category.nameTh : category.nameEn}
+                </h3>
+                <p className="text-xs font-mono text-zinc-400">
+                  {meta.tagline}
+                </p>
               </div>
 
-              {/* De-pilled Structured Skill Rows */}
-              <div className="space-y-1.5">
-                {category.skills.map((skill, sIdx) => (
-                  <div
-                    key={sIdx}
-                    data-cursor-text="SKILL"
-                    className="group/row p-3 rounded-xl hover:bg-white/[0.03] border border-transparent hover:border-white/[0.08] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-2 cursor-default"
-                  >
-                    <div className="flex items-start sm:items-center gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-600 group-hover/row:bg-[#00f0ff] group-hover/row:scale-125 transition-all mt-1.5 sm:mt-0 shrink-0" />
-                      <div className="space-y-0.5">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-mono font-bold text-white group-hover/row:text-[#00f0ff] group-hover/row:translate-x-0.5 transition-all">
+              {/* Monospace Tree Branches */}
+              <div className="font-mono text-xs space-y-2.5 pl-1 sm:pl-2">
+                {category.skills.map((skill, sIdx) => {
+                  const isLast = sIdx === category.skills.length - 1;
+                  const connector = isLast ? "└─" : "├─";
+
+                  return (
+                    <div
+                      key={sIdx}
+                      data-cursor-text="SKILL"
+                      className="group/node flex items-start justify-between gap-3 py-1.5 px-2 rounded-lg hover:bg-white/[0.02] transition-colors cursor-default"
+                    >
+                      {/* Left: Monospace Connector + Name + Short Desc */}
+                      <div className="flex items-start gap-2.5 min-w-0">
+                        <span className="text-zinc-600 select-none font-bold group-hover/node:text-[#00f0ff] transition-colors shrink-0">
+                          {connector}
+                        </span>
+                        <div className="space-y-0.5 min-w-0">
+                          <span className="font-medium text-zinc-200 group-hover/node:text-white transition-colors block truncate">
                             {skill.name}
                           </span>
+                          <span className="text-[11px] text-zinc-500 font-sans font-light block truncate">
+                            {skill.desc}
+                          </span>
                         </div>
-                        <p className="text-xs text-zinc-400 font-light">
-                          {skill.desc}
-                        </p>
                       </div>
-                    </div>
 
-                    <span className="self-start sm:self-auto shrink-0 text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-400 border border-white/[0.08] group-hover/row:border-[#00f0ff]/40 group-hover/row:text-[#00f0ff] transition-colors">
-                      {skill.level}
-                    </span>
-                  </div>
-                ))}
+                      {/* Right: Muted Skill Level Badge */}
+                      <span className="text-[9px] uppercase tracking-wider text-zinc-400 group-hover/node:text-[#00f0ff] shrink-0 pt-0.5 transition-colors select-none font-medium">
+                        [{skill.level.split("/")[0].trim().toUpperCase()}]
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           );

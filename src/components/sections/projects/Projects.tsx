@@ -19,9 +19,12 @@ export const Projects: React.FC = () => {
 
   return (
     <section
-      id="projects"
-      className="py-20 sm:py-28 border-b border-white/[0.08]"
+      id="work"
+      className="relative py-20 sm:py-28 border-b border-white/[0.08]"
     >
+      {/* Anchor Alias for backwards compatibility */}
+      <div id="projects" className="absolute -top-24 pointer-events-none" />
+
       {/* Section Eyebrow & Headline */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -31,8 +34,8 @@ export const Projects: React.FC = () => {
         className="space-y-6 mb-16"
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06]">
-          <span className="editorial-eyebrow text-[#64b5f6]">
-            02 // SELECTED PRODUCTION SYSTEMS
+          <span className="editorial-eyebrow text-[#00f0ff]">
+            02 // SELECTED WORK
           </span>
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
             ENGINEERED CASE STUDIES
@@ -54,39 +57,39 @@ export const Projects: React.FC = () => {
           </div>
 
           {/* Minimalist Segmented Filter */}
-          <div className="flex items-center gap-1 p-1 bg-[#0a0d14] border border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs">
+          <div className="flex items-center gap-1 p-1 bg-white/[0.02] border border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs">
             <button
               onClick={() => setFilter("all")}
               data-cursor-text="FILTER"
               className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${
                 filter === "all"
-                  ? "bg-[#2196f3]/20 text-[#64b5f6] border border-[#2196f3]/40 font-bold shadow-xs"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
+                  : "text-zinc-400 hover:text-white border border-transparent"
               }`}
             >
-              {t("ทั้งหมด", "ALL (3)")}
+              {t("ทั้งหมด (3)", "ALL (3)")}
             </button>
             <button
               onClick={() => setFilter("mobile")}
               data-cursor-text="FILTER"
               className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${
                 filter === "mobile"
-                  ? "bg-[#2196f3]/20 text-[#64b5f6] border border-[#2196f3]/40 font-bold shadow-xs"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
+                  : "text-zinc-400 hover:text-white border border-transparent"
               }`}
             >
-              {t("โมบาย", "MOBILE (2)")}
+              {t("โมบาย (2)", "MOBILE (2)")}
             </button>
             <button
               onClick={() => setFilter("system")}
               data-cursor-text="FILTER"
               className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${
                 filter === "system"
-                  ? "bg-[#2196f3]/20 text-[#64b5f6] border border-[#2196f3]/40 font-bold shadow-xs"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
+                  : "text-zinc-400 hover:text-white border border-transparent"
               }`}
             >
-              {t("ระบบองค์กร", "ENTERPRISE (1)")}
+              {t("ระบบองค์กร (1)", "ENTERPRISE (1)")}
             </button>
           </div>
         </div>
