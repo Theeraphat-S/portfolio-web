@@ -95,7 +95,9 @@ export const AboutBento: React.FC = () => {
               <Layers className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono">
-              {lang === "th" ? "Deterministic State" : "Deterministic State"}
+              {lang === "th"
+                ? "Deterministic State (การจัดการ State ที่แน่นอน)"
+                : "Deterministic State"}
             </h3>
             <p className="text-xs text-zinc-400 font-sans leading-relaxed">
               {lang === "th"
@@ -112,7 +114,7 @@ export const AboutBento: React.FC = () => {
             </div>
             <h3 className="text-sm font-bold text-white font-mono">
               {lang === "th"
-                ? "Offline-First Resilience"
+                ? "Offline-First Resilience (ความทนทานแบบออฟไลน์)"
                 : "Offline-First Resilience"}
             </h3>
             <p className="text-xs text-zinc-400 font-sans leading-relaxed">
@@ -129,7 +131,9 @@ export const AboutBento: React.FC = () => {
               <Zap className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono">
-              {lang === "th" ? "Fluid Performance" : "Fluid Performance"}
+              {lang === "th"
+                ? "Fluid Performance (ประสิทธิภาพที่ลื่นไหล)"
+                : "Fluid Performance"}
             </h3>
             <p className="text-xs text-zinc-400 font-sans leading-relaxed">
               {lang === "th"

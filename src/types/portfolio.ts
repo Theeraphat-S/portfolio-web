@@ -51,6 +51,8 @@ export interface ExperienceContribution {
 
 export interface ExperienceItem {
   year: string;
+  yearTh?: string;
+  yearEn?: string;
   periodTh: string;
   periodEn: string;
   roleTh: string;

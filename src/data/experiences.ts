@@ -3,6 +3,8 @@ import { ExperienceItem } from "../types";
 export const experiencesData: ExperienceItem[] = [
   {
     year: "2026",
+    yearTh: "2569",
+    yearEn: "2026",
     periodTh: "พ.ย. 2568 — มี.ค. 2569",
     periodEn: "NOV 2025 — MAR 2026",
     roleTh: "Mobile Developer Intern (นักศึกษาฝึกงาน)",
@@ -58,6 +60,8 @@ export const experiencesData: ExperienceItem[] = [
   },
   {
     year: "2024 — 2025",
+    yearTh: "2567 — 2568",
+    yearEn: "2024 — 2025",
     periodTh: "2567 — 2568",
     periodEn: "2024 — 2025",
     subBadgeTh: "3 เทอมการศึกษา",
@@ -121,6 +125,8 @@ export const experiencesData: ExperienceItem[] = [
   },
   {
     year: "2025",
+    yearTh: "2568",
+    yearEn: "2025",
     periodTh: "กันยายน 2568",
     periodEn: "September 2025",
     roleTh: "วิทยากรโครงการพิเศษ (Keynote Instructor)",

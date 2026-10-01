@@ -101,8 +101,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              onClose();
+            }
+          }}
           data-lenis-prevent
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-hidden"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-hidden cursor-default"
         >
           {/* Backdrop */}
           <motion.div
@@ -111,6 +116,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             exit={{ opacity: 0 }}
             onClick={onClose}
             className="fixed inset-0 bg-[#07080c]/85 backdrop-blur-xl -z-10"
+            aria-hidden="true"
           />
 
           {/* Modal Container */}
@@ -121,6 +127,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             aria-modal="true"
             aria-labelledby="project-modal-title"
             data-lenis-prevent
+            onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}

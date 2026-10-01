@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowDown, Menu, X } from "lucide-react";
 import { useLanguage } from "../context";
-import { getLenis, scrollToTop } from "../lib/lenis";
+import { scrollToTop, scrollToElement } from "../lib/lenis";
 
 export const Navbar: React.FC = () => {
   const { lang, toggleLang, t } = useLanguage();
@@ -68,18 +68,7 @@ export const Navbar: React.FC = () => {
       if (!targetElement) return;
 
       const offset = getNavOffset();
-      const targetPosition =
-        targetElement.getBoundingClientRect().top + window.scrollY - offset;
-
-      const lenis = getLenis();
-      if (lenis) {
-        lenis.scrollTo(targetPosition, { duration: 1.0 });
-      } else {
-        window.scrollTo({
-          top: Math.max(0, targetPosition),
-          behavior: "smooth",
-        });
-      }
+      scrollToElement(targetElement, offset);
 
       setActiveSection(sectionId);
       setMobileMenuOpen(false);
@@ -238,7 +227,7 @@ export const Navbar: React.FC = () => {
               />
             </div>
             <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline-block leading-tight mt-1">
-              MOBILE ENGINEER
+              {lang === "th" ? "วิศวกรระบบโมบาย" : "MOBILE SYSTEMS ARCHITECT"}
             </span>
           </div>
         </a>

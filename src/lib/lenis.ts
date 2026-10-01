@@ -20,3 +20,26 @@ export function scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
+
+export function scrollToElement(
+  target: string | HTMLElement,
+  offset: number = 80,
+): void {
+  if (typeof window === "undefined") return;
+  const el =
+    typeof target === "string" ? document.getElementById(target) : target;
+  if (!el) return;
+
+  const targetPosition =
+    el.getBoundingClientRect().top + window.scrollY - offset;
+
+  const lenis = getLenis();
+  if (lenis) {
+    lenis.scrollTo(targetPosition, { duration: 1.0 });
+  } else {
+    window.scrollTo({
+      top: Math.max(0, targetPosition),
+      behavior: "smooth",
+    });
+  }
+}

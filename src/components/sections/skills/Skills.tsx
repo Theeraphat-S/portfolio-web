@@ -7,27 +7,38 @@ import { SkillCategory } from "../../../types";
 const CATEGORY_META = [
   {
     index: "01",
-    label: "MOBILE SYSTEMS",
-    tagline:
+    labelEn: "MOBILE SYSTEMS",
+    labelTh: "ระบบโมบาย",
+    taglineEn:
       "Cross-platform mobile applications, state engines, and reactive UI architecture.",
+    taglineTh:
+      "สถาปัตยกรรมแอปพลิเคชันโมบายข้ามแพลตฟอร์ม โครงสร้าง State และ UI แบบ Reactive",
   },
   {
     index: "02",
-    label: "LANGUAGES & WEB",
-    tagline:
+    labelEn: "LANGUAGES & WEB",
+    labelTh: "ภาษาและเว็บ",
+    taglineEn:
       "Core enterprise programming languages, web standards, and API backends.",
+    taglineTh: "ภาษาโปรแกรมหลักระดับองค์กร มาตรฐานเว็บ และสถาปัตยกรรม REST API",
   },
   {
     index: "03",
-    label: "DATA & TOOLING",
-    tagline:
+    labelEn: "DATA & TOOLING",
+    labelTh: "ข้อมูลและเครื่องมือ",
+    taglineEn:
       "Relational persistence, API testing tools, version control, and development workflows.",
+    taglineTh:
+      "ฐานข้อมูลเชิงสัมพันธ์ เครื่องมือทดสอบ API ระบบ Version Control และกระบวนการพัฒนา",
   },
   {
     index: "04",
-    label: "LEADERSHIP & MINDSET",
-    tagline:
+    labelEn: "LEADERSHIP & MINDSET",
+    labelTh: "ความเป็นผู้นำและการสอน",
+    taglineEn:
       "Mentorship impact, university teaching assistantship, and Agile sprint execution.",
+    taglineTh:
+      "การเป็นผู้ช่วยสอนประจำภาควิชา ให้คำปรึกษานักศึกษารุ่นน้อง และการทำงานแบบ Agile",
   },
 ];
 
@@ -93,8 +104,10 @@ export const Skills: React.FC = () => {
         {skillCategories.map((category: SkillCategory, catIdx: number) => {
           const meta = CATEGORY_META[catIdx] || {
             index: String(catIdx + 1).padStart(2, "0"),
-            label: "CAPABILITY",
-            tagline: "",
+            labelEn: "CAPABILITY",
+            labelTh: "ความสามารถ",
+            taglineEn: "",
+            taglineTh: "",
           };
 
           return (
@@ -111,7 +124,7 @@ export const Skills: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs font-mono text-[#00f0ff] font-semibold tracking-wider">
                     <span>{meta.index} //</span>
-                    <span>{meta.label}</span>
+                    <span>{lang === "th" ? meta.labelTh : meta.labelEn}</span>
                   </div>
                   <span className="text-[10px] font-mono text-zinc-400 uppercase">
                     {category.skills.length} MODULES
@@ -121,7 +134,7 @@ export const Skills: React.FC = () => {
                   {lang === "th" ? category.nameTh : category.nameEn}
                 </h3>
                 <p className="text-xs font-mono text-zinc-400">
-                  {meta.tagline}
+                  {lang === "th" ? meta.taglineTh : meta.taglineEn}
                 </p>
               </div>
 

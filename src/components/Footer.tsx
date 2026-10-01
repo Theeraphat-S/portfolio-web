@@ -20,13 +20,17 @@ export const Footer: React.FC = () => {
           </span>
           <span className="hidden sm:inline text-zinc-600">&bull;</span>
           <span className="font-mono text-[11px] text-zinc-400">
-            Chiang Mai, Thailand &bull; Available Worldwide
+            {lang === "th"
+              ? "เชียงใหม่, ประเทศไทย • พร้อมร่วมงานทุกรูปแบบ"
+              : "Chiang Mai, Thailand • Available Worldwide"}
           </span>
         </div>
 
         {/* Center: Engineering Stack */}
         <div className="font-mono text-[11px] text-zinc-400 text-center">
-          <span>Architected with </span>
+          <span>
+            {lang === "th" ? "พัฒนาและออกแบบด้วย " : "Architected with "}
+          </span>
           <span className="text-zinc-300 font-medium">
             React, Vite & Tailwind CSS
           </span>

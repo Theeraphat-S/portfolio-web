@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { useTelemetry } from "../../../hooks/useTelemetry";
+import { scrollToElement } from "../../../lib/lenis";
 
 export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -231,6 +232,10 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-5 flex flex-wrap items-center gap-3 lg:justify-end">
             <a
               href="#work"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToElement("work", 76);
+              }}
               data-cursor-text="EXPLORE"
               className="btn-editorial btn-editorial-primary group"
             >

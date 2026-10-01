@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import Lenis from "lenis";
 
-declare global {
-  interface Window {
-    __lenis?: Lenis;
-  }
-}
-
 interface SmoothScrollProps {
   children: React.ReactNode;
 }

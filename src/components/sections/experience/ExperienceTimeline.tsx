@@ -134,13 +134,16 @@ export const ExperienceTimeline: React.FC = () => {
             const isActive = idx === 0;
             const isAcademic = exp.type === "ta" || exp.type === "academic";
 
+            const displayYear =
+              lang === "th" ? exp.yearTh || exp.year : exp.yearEn || exp.year;
+
             // Format year label with semester note to eliminate line-wrap bugs
             const formattedYearHeader =
               exp.subBadgeEn && exp.year.includes("2024")
                 ? lang === "th"
-                  ? "2024 — 2025 / 3 เทอมการศึกษา"
-                  : "2024 — 2025 / 3 SEMESTERS"
-                : exp.year;
+                  ? `${displayYear} / 3 เทอมการศึกษา`
+                  : `${displayYear} / 3 SEMESTERS`
+                : displayYear;
 
             return (
               <motion.article

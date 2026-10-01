@@ -57,11 +57,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 }) => {
   const { lang, t } = useLanguage();
   const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("tracking");
-  const [isAutoPaused, setIsAutoPaused] = useState(false);
+  const [isManualPaused, setIsManualPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Auto-switch Pinto state every 5 seconds unless manually paused or hovered
+  // Auto-switch Pinto state every 5 seconds unless explicitly paused by user or hovered
   React.useEffect(() => {
-    if (project.id !== "pinto-app" || isAutoPaused) return;
+    if (project.id !== "pinto-app" || isManualPaused || isHovered) return;
 
     const tabs: PintoState[] = ["tracking", "streak", "webview"];
     const interval = setInterval(() => {
@@ -72,11 +73,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [project.id, isAutoPaused]);
+  }, [project.id, isManualPaused, isHovered]);
 
   const handleTabClick = (tab: PintoState) => {
     setPintoActiveTab(tab);
-    setIsAutoPaused(true);
+    setIsManualPaused(true);
   };
 
   const projectNum = String(index + 1).padStart(2, "0");
@@ -151,8 +152,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const renderDeviceMockup = () => {
     return (
       <div
-        onMouseEnter={() => setIsAutoPaused(true)}
-        onMouseLeave={() => setIsAutoPaused(false)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px] flex flex-col items-center"
       >
         {/* State Switcher Pills for Pinto Application */}
@@ -220,20 +221,20 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             </span>
             <button
               type="button"
-              onClick={() => setIsAutoPaused((prev) => !prev)}
+              onClick={() => setIsManualPaused((prev) => !prev)}
               aria-label={
-                isAutoPaused ? "Resume auto rotation" : "Pause auto rotation"
+                isManualPaused ? "Resume auto rotation" : "Pause auto rotation"
               }
               title={
-                isAutoPaused ? "Resume auto rotation" : "Pause auto rotation"
+                isManualPaused ? "Resume auto rotation" : "Pause auto rotation"
               }
               className={`px-1.5 py-1 rounded transition-all cursor-pointer text-[9px] ${
-                !isAutoPaused
+                !isManualPaused
                   ? "text-[#00f0ff] bg-[#00f0ff]/10"
-                  : "text-zinc-500 hover:text-zinc-300"
+                  : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
-              {!isAutoPaused ? "AUTO ⟳" : "PAUSED"}
+              {!isManualPaused ? "AUTO ⟳" : "PAUSED"}
             </button>
           </div>
         )}
