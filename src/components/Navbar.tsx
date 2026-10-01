@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowDown, Menu, X } from "lucide-react";
 import { useLanguage } from "../context";
+import { getLenis, scrollToTop } from "../lib/lenis";
 
 export const Navbar: React.FC = () => {
   const { lang, toggleLang, t } = useLanguage();
@@ -68,15 +69,9 @@ export const Navbar: React.FC = () => {
 
       const offset = getNavOffset();
       const targetPosition =
-        targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        targetElement.getBoundingClientRect().top + window.scrollY - offset;
 
-      const lenis = (
-        window as unknown as {
-          __lenis?: {
-            scrollTo: (target: number, opts: { duration?: number }) => void;
-          };
-        }
-      ).__lenis;
+      const lenis = getLenis();
       if (lenis) {
         lenis.scrollTo(targetPosition, { duration: 1.0 });
       } else {
@@ -156,6 +151,8 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollToSection, getNavOffset]);
 
+  const mobileMenuRef = useRef<HTMLElement>(null);
+
   // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
@@ -166,6 +163,38 @@ export const Navbar: React.FC = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Close mobile menu on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  // Close mobile menu on click outside
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (
+        navContainerRef.current &&
+        !navContainerRef.current.contains(e.target as Node) &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(e.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <header className="fixed top-2.5 sm:top-4 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-6 pointer-events-none">
@@ -185,21 +214,7 @@ export const Navbar: React.FC = () => {
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            const lenis = (
-              window as unknown as {
-                __lenis?: {
-                  scrollTo: (
-                    target: number,
-                    opts: { duration?: number },
-                  ) => void;
-                };
-              }
-            ).__lenis;
-            if (lenis) {
-              lenis.scrollTo(0, { duration: 1.1 });
-            } else {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
+            scrollToTop();
           }}
           data-cursor-text="TOP"
           aria-label="Theeraphat Srimontha - Back to top"
@@ -230,7 +245,6 @@ export const Navbar: React.FC = () => {
 
         {/* Center: Desktop Technical Navigation Menu */}
         <nav
-          role="navigation"
           aria-label="Primary navigation"
           className="hidden md:flex items-center gap-0.5 lg:gap-1 bg-white/[0.03] p-1 rounded-full border border-white/[0.06]"
         >
@@ -278,6 +292,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Language Switch: ◉ TH / EN */}
           <button
+            type="button"
             onClick={toggleLang}
             data-cursor-text="LANG"
             aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
@@ -286,7 +301,9 @@ export const Navbar: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_6px_rgba(0,240,255,0.7)] shrink-0" />
             <span
               className={
-                lang === "th" ? "text-[#00f0ff] font-bold" : "text-zinc-400 hover:text-zinc-200"
+                lang === "th"
+                  ? "text-[#00f0ff] font-bold"
+                  : "text-zinc-400 hover:text-zinc-200"
               }
             >
               TH
@@ -294,7 +311,9 @@ export const Navbar: React.FC = () => {
             <span className="text-zinc-600 text-[10px]">/</span>
             <span
               className={
-                lang === "en" ? "text-[#00f0ff] font-bold" : "text-zinc-400 hover:text-zinc-200"
+                lang === "en"
+                  ? "text-[#00f0ff] font-bold"
+                  : "text-zinc-400 hover:text-zinc-200"
               }
             >
               EN
@@ -316,9 +335,11 @@ export const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
             className="md:hidden flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono font-medium text-zinc-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 rounded-full transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
           >
             <span>MENU</span>
@@ -334,7 +355,10 @@ export const Navbar: React.FC = () => {
       {/* Mobile Navigation Dropdown */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
+          <motion.nav
+            ref={mobileMenuRef}
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0, y: -8, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
@@ -358,7 +382,7 @@ export const Navbar: React.FC = () => {
                   >
                     <div className="flex items-center gap-2">
                       <span
-                        className={`font-mono text-[11px] ${isActive ? "text-[#00f0ff]/70" : "text-zinc-500"}`}
+                        className={`font-mono text-[11px] ${isActive ? "text-[#00f0ff]/70" : "text-zinc-400"}`}
                       >
                         {link.num} /
                       </span>
@@ -376,6 +400,7 @@ export const Navbar: React.FC = () => {
             <div className="pt-2.5 border-t border-white/[0.08] flex items-center justify-between">
               {/* Language Switch */}
               <button
+                type="button"
                 onClick={toggleLang}
                 aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
                 className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-zinc-300 bg-white/[0.04] border border-white/10 rounded-full cursor-pointer hover:bg-white/[0.08]"
@@ -383,7 +408,7 @@ export const Navbar: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff]" />
                 <span
                   className={
-                    lang === "th" ? "text-white font-bold" : "text-zinc-500"
+                    lang === "th" ? "text-white font-bold" : "text-zinc-400"
                   }
                 >
                   TH
@@ -391,7 +416,7 @@ export const Navbar: React.FC = () => {
                 <span className="text-zinc-600">/</span>
                 <span
                   className={
-                    lang === "en" ? "text-white font-bold" : "text-zinc-500"
+                    lang === "en" ? "text-white font-bold" : "text-zinc-400"
                   }
                 >
                   EN
@@ -409,7 +434,7 @@ export const Navbar: React.FC = () => {
                 <span>CV (RESUME)</span>
               </a>
             </div>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </header>

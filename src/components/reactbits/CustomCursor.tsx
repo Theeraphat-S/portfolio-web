@@ -48,7 +48,7 @@ export const CustomCursor: React.FC = () => {
         mouseX.set(clientX);
         mouseY.set(clientY);
 
-        if (!isVisible) setIsVisible(true);
+        setIsVisible((v) => (v ? v : true));
 
         if (target !== lastTargetRef.current && target instanceof HTMLElement) {
           lastTargetRef.current = target;
@@ -88,7 +88,7 @@ export const CustomCursor: React.FC = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [isVisible, mouseX, mouseY, isDisabled]);
+  }, [mouseX, mouseY, isDisabled]);
 
   if (isDisabled || !isVisible) return null;
 

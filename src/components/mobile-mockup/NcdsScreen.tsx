@@ -36,12 +36,12 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = () => {
       {/* 2. App Bar */}
       <div className="px-4 py-2.5 flex items-center justify-between border-b border-white/[0.06] bg-[#0b1017]/90 backdrop-blur-md">
         <div>
-          <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase block">
+          <span className="text-[9px] font-mono tracking-widest text-zinc-400 uppercase block">
             MAEJO UNIVERSITY &bull; CAPSTONE
           </span>
           <h4 className="text-xs font-bold text-white flex items-center gap-1">
             <span>NCDs Risk Screener</span>
-            <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20">
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20">
               OFFLINE READY
             </span>
           </h4>
@@ -157,9 +157,13 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = () => {
 
         {/* Generate Report Button */}
         <motion.button
+          type="button"
           whileTap={{ scale: 0.96 }}
-          onClick={() => setIsCalculated(true)}
-          className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-sky-600 hover:from-emerald-500 hover:to-sky-500 text-white font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+          onClick={() => setIsCalculated((prev) => !prev)}
+          aria-label={
+            isCalculated ? "Export medical report PDF" : "Calculate risk score"
+          }
+          className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-sky-600 hover:from-emerald-500 hover:to-sky-500 text-white font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070b10]"
         >
           <TrendingUp className="w-3.5 h-3.5" />
           {isCalculated

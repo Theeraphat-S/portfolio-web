@@ -14,6 +14,8 @@ export interface ProjectItem {
   subtitleEn: string;
   category: ProjectCategory;
   year: string;
+  yearTh?: string;
+  yearEn?: string;
   tag: string;
   descriptionTh: string;
   descriptionEn: string;

@@ -80,6 +80,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   };
 
   const projectNum = String(index + 1).padStart(2, "0");
+  const displayYear =
+    lang === "th"
+      ? project.yearTh || project.year
+      : project.yearEn || project.year;
 
   // Split title if it contains a dash/hyphen
   const rawTitle = lang === "th" ? project.titleTh : project.titleEn;
@@ -154,45 +158,72 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         {/* State Switcher Pills for Pinto Application */}
         {project.id === "pinto-app" && (
           <div className="mb-3.5 flex items-center gap-1.5 p-1 rounded-lg bg-[#0a0d14] border border-white/[0.08] shadow-sm font-mono text-[10px]">
-            <button
-              type="button"
-              onClick={() => handleTabClick("tracking")}
-              className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
-                pintoActiveTab === "tracking"
-                  ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
+            <div
+              role="tablist"
+              aria-label="Pinto feature screens"
+              className="flex items-center gap-1.5"
             >
-              01 TRACKING
-            </button>
-            <span className="text-zinc-700">&bull;</span>
-            <button
-              type="button"
-              onClick={() => handleTabClick("streak")}
-              className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
-                pintoActiveTab === "streak"
-                  ? "bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              02 CHAT STREAK
-            </button>
-            <span className="text-zinc-700">&bull;</span>
-            <button
-              type="button"
-              onClick={() => handleTabClick("webview")}
-              className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
-                pintoActiveTab === "webview"
-                  ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              03 WEBVIEW
-            </button>
-            <span className="text-zinc-700">&bull;</span>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={pintoActiveTab === "tracking"}
+                aria-controls={`screen-panel-${project.id}`}
+                aria-label="Screen 01: Order tracking"
+                onClick={() => handleTabClick("tracking")}
+                className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
+                  pintoActiveTab === "tracking"
+                    ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                01 TRACKING
+              </button>
+              <span className="text-zinc-700" aria-hidden="true">
+                &bull;
+              </span>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={pintoActiveTab === "streak"}
+                aria-controls={`screen-panel-${project.id}`}
+                aria-label="Screen 02: Chat streak gamification"
+                onClick={() => handleTabClick("streak")}
+                className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
+                  pintoActiveTab === "streak"
+                    ? "bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                02 CHAT STREAK
+              </button>
+              <span className="text-zinc-700" aria-hidden="true">
+                &bull;
+              </span>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={pintoActiveTab === "webview"}
+                aria-controls={`screen-panel-${project.id}`}
+                aria-label="Screen 03: Hybrid WebView menu"
+                onClick={() => handleTabClick("webview")}
+                className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
+                  pintoActiveTab === "webview"
+                    ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                03 WEBVIEW
+              </button>
+            </div>
+            <span className="text-zinc-700" aria-hidden="true">
+              &bull;
+            </span>
             <button
               type="button"
               onClick={() => setIsAutoPaused((prev) => !prev)}
+              aria-label={
+                isAutoPaused ? "Resume auto rotation" : "Pause auto rotation"
+              }
               title={
                 isAutoPaused ? "Resume auto rotation" : "Pause auto rotation"
               }
@@ -213,7 +244,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           <div className="absolute inset-0 rounded-[38px] bg-gradient-to-b from-[#00f0ff]/10 via-transparent to-transparent pointer-events-none opacity-40 group-hover/chassis:opacity-80 transition-opacity" />
 
           {/* Screen Shell */}
-          <div className="relative rounded-[28px] overflow-hidden bg-[#07090e] border border-white/[0.08] shadow-inner min-h-[500px] sm:min-h-[520px] flex flex-col">
+          <div
+            id={`screen-panel-${project.id}`}
+            role="region"
+            aria-label={`${primaryTitle} interactive demonstration`}
+            className="relative rounded-[28px] overflow-hidden bg-[#07090e] border border-white/[0.08] shadow-inner min-h-[500px] sm:min-h-[520px] flex flex-col"
+          >
             {project.id === "pinto-app" ? (
               <PintoScreen
                 activeState={pintoActiveTab}
@@ -271,7 +307,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               CASE STUDY // {projectNum}
             </span>
             <span className="text-zinc-400 uppercase tracking-wider text-[11px]">
-              {project.tag} &bull; {project.year}
+              {project.tag} &bull; {displayYear}
             </span>
           </div>
 
@@ -361,15 +397,17 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/[0.06]">
             {/* Primary CTA: Dark Surface, Subtle Electric-Cyan Hover */}
             <button
+              type="button"
               onClick={() => onSelect(project)}
+              aria-haspopup="dialog"
               data-cursor-text="ANALYZE"
-              className="group/cta relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] cursor-pointer"
+              className="group/cta relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             >
               <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] transition-colors" />
               <span className="font-semibold tracking-wider">
                 {t("เจาะลึกสถาปัตยกรรม", "VIEW CASE STUDY")}
               </span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 transition-all duration-300" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
             </button>
 
             {/* Secondary CTA: Source */}
@@ -379,7 +417,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-text="GITHUB"
-                className="group/src relative inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-zinc-200 text-xs font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer"
+                className="group/src relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-zinc-200 text-xs font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Github className="w-3.5 h-3.5 text-zinc-500 group-hover/src:text-zinc-300 transition-colors" />
                 <span>SOURCE</span>
@@ -403,7 +441,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             CASE STUDY // {projectNum}
           </span>
           <span className="text-zinc-400 uppercase tracking-wider text-[11px]">
-            {project.tag} &bull; {project.year}
+            {project.tag} &bull; {displayYear}
           </span>
         </div>
 
@@ -488,9 +526,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         {/* 7. CTAs */}
         <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/[0.06]">
           <button
+            type="button"
             onClick={() => onSelect(project)}
+            aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta relative inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-md cursor-pointer flex-1 justify-center"
+            className="group/cta relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-md cursor-pointer flex-1 justify-center focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff]" />
             <span className="font-semibold">
@@ -505,7 +545,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-text="GITHUB"
-              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-transparent border border-white/[0.08] text-zinc-400 hover:text-white text-xs font-mono uppercase transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-white text-xs font-mono uppercase transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             >
               <Github className="w-3.5 h-3.5" />
               <span>SOURCE</span>

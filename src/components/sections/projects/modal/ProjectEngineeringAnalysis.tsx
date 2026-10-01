@@ -83,7 +83,7 @@ export const ProjectEngineeringAnalysis: React.FC<
             return (
               <div
                 key={card.id}
-                className={`p-3.5 rounded-2xl bg-zinc-950/70 border ${card.borderColor} space-y-1.5`}
+                className={`p-3.5 rounded-2xl bg-white/[0.015] border ${card.borderColor} space-y-1.5`}
               >
                 <div
                   className={`flex items-center gap-1.5 text-xs font-mono font-semibold ${card.textColor}`}
@@ -102,7 +102,7 @@ export const ProjectEngineeringAnalysis: React.FC<
 
       {/* 5. Measured Outcome & Business Impact */}
       {outcomeText && (
-        <div className="p-3.5 rounded-2xl bg-emerald-950/20 border border-emerald-800/40 space-y-1.5">
+        <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 space-y-1.5">
           <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-400">
             <TrendingUp className="w-3.5 h-3.5 shrink-0" />
             <span>

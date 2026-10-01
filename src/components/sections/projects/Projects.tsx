@@ -57,11 +57,17 @@ export const Projects: React.FC = () => {
           </div>
 
           {/* Minimalist Segmented Filter */}
-          <div className="flex items-center gap-1 p-1 bg-white/[0.02] border border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs">
+          <div
+            role="toolbar"
+            aria-label={t("ตัวกรองหมวดหมู่ผลงาน", "Project category filter")}
+            className="flex items-center gap-1 p-1 bg-white/[0.02] border border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs"
+          >
             <button
+              type="button"
               onClick={() => setFilter("all")}
+              aria-pressed={filter === "all"}
               data-cursor-text="FILTER"
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                 filter === "all"
                   ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
                   : "text-zinc-400 hover:text-white border border-transparent"
@@ -70,9 +76,11 @@ export const Projects: React.FC = () => {
               {t("ทั้งหมด (3)", "ALL (3)")}
             </button>
             <button
+              type="button"
               onClick={() => setFilter("mobile")}
+              aria-pressed={filter === "mobile"}
               data-cursor-text="FILTER"
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                 filter === "mobile"
                   ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
                   : "text-zinc-400 hover:text-white border border-transparent"
@@ -81,9 +89,11 @@ export const Projects: React.FC = () => {
               {t("โมบาย (2)", "MOBILE (2)")}
             </button>
             <button
+              type="button"
               onClick={() => setFilter("system")}
+              aria-pressed={filter === "system"}
               data-cursor-text="FILTER"
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                 filter === "system"
                   ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
                   : "text-zinc-400 hover:text-white border border-transparent"

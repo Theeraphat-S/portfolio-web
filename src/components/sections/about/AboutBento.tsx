@@ -91,7 +91,7 @@ export const AboutBento: React.FC = () => {
           {/* Principle 01 */}
           <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="text-zinc-500">01</span>
+              <span className="text-zinc-400 font-mono">01</span>
               <Layers className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono">
@@ -107,7 +107,7 @@ export const AboutBento: React.FC = () => {
           {/* Principle 02 */}
           <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="text-zinc-500">02</span>
+              <span className="text-zinc-400 font-mono">02</span>
               <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono">
@@ -125,7 +125,7 @@ export const AboutBento: React.FC = () => {
           {/* Principle 03 */}
           <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="text-zinc-500">03</span>
+              <span className="text-zinc-400 font-mono">03</span>
               <Zap className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono">
@@ -217,7 +217,7 @@ export const AboutBento: React.FC = () => {
               <span className="text-xs font-mono font-bold text-white uppercase">
                 {t("วุฒิการศึกษา", "ACADEMIC CREDENTIALS")}
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
                 2022 - 2026
               </span>
             </div>
@@ -241,7 +241,7 @@ export const AboutBento: React.FC = () => {
               <span className="text-xs font-mono font-bold text-white uppercase">
                 {t("บทบาทผู้นำและการสอน", "LEADERSHIP & MENTORSHIP")}
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
                 {t("3 เทอมการศึกษา", "3 SEMESTERS")}
               </span>
             </div>

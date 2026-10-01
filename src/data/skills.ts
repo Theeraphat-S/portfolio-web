@@ -2,7 +2,7 @@ import { SkillCategory } from "../types";
 
 export const skillCategoriesData: SkillCategory[] = [
   {
-    nameTh: "Mobile App Mastery",
+    nameTh: "ความเชี่ยวชาญด้านโมบาย (Mobile App Mastery)",
     nameEn: "Mobile App Mastery",
     icon: "smartphone",
     color: "cyan",
@@ -40,7 +40,7 @@ export const skillCategoriesData: SkillCategory[] = [
     ],
   },
   {
-    nameTh: "Languages & Web Stack",
+    nameTh: "ภาษาโปรแกรมและเว็บเทคโนโลยี (Languages & Web Stack)",
     nameEn: "Languages & Web Stack",
     icon: "code",
     color: "cyan",
@@ -78,7 +78,7 @@ export const skillCategoriesData: SkillCategory[] = [
     ],
   },
   {
-    nameTh: "Database & DevOps Tools",
+    nameTh: "ฐานข้อมูลและเครื่องมือวิศวกรรม (Database & DevOps Tools)",
     nameEn: "Database & DevOps Tools",
     icon: "database",
     color: "blue",
@@ -116,7 +116,7 @@ export const skillCategoriesData: SkillCategory[] = [
     ],
   },
   {
-    nameTh: "Soft Skills & Leadership",
+    nameTh: "ทักษะความเป็นผู้นำและการสื่อสาร (Soft Skills & Leadership)",
     nameEn: "Soft Skills & Leadership",
     icon: "users",
     color: "indigo",

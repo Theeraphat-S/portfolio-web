@@ -113,7 +113,7 @@ export const Skills: React.FC = () => {
                     <span>{meta.index} //</span>
                     <span>{meta.label}</span>
                   </div>
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase">
+                  <span className="text-[10px] font-mono text-zinc-400 uppercase">
                     {category.skills.length} MODULES
                   </span>
                 </div>
@@ -146,7 +146,7 @@ export const Skills: React.FC = () => {
                           <span className="font-medium text-zinc-200 group-hover/node:text-white transition-colors block truncate">
                             {skill.name}
                           </span>
-                          <span className="text-[11px] text-zinc-500 font-sans font-light block truncate">
+                          <span className="text-[11px] text-zinc-400 font-sans font-light block truncate">
                             {skill.desc}
                           </span>
                         </div>

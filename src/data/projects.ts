@@ -9,6 +9,8 @@ export const projectsData: ProjectItem[] = [
     subtitleEn: "Senior Capstone Project at Maejo University",
     category: "mobile",
     year: "2568",
+    yearTh: "2568",
+    yearEn: "2025",
     tag: "Healthcare Mobile App",
     color: "#10b981",
     descriptionTh:
@@ -88,6 +90,8 @@ export const projectsData: ProjectItem[] = [
     subtitleEn: "Internship at Fakduay Logistics & Digital Platform",
     category: "mobile",
     year: "2569",
+    yearTh: "2569",
+    yearEn: "2026",
     tag: "Commercial App Feature",
     color: "#06b6d4",
     descriptionTh:
@@ -154,6 +158,8 @@ export const projectsData: ProjectItem[] = [
     subtitleEn: "Retail Store Inventory & Payment Management",
     category: "system",
     year: "2569",
+    yearTh: "2569",
+    yearEn: "2026",
     tag: "Enterprise System",
     color: "#3b82f6",
     descriptionTh:

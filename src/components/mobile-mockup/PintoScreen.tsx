@@ -126,7 +126,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
           </span>
           <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
             <span>Pinto Mobile</span>
-            <span className="text-[8px] px-1.5 py-0.2 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-mono border border-[#00f0ff]/20">
+            <span className="text-[8px] px-1.5 py-0.5 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-mono border border-[#00f0ff]/20">
               PROD
             </span>
           </h4>
@@ -252,6 +252,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
+                    aria-label="Call Courier"
                     className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] cursor-pointer"
                     title="Call Courier"
                   >
@@ -259,6 +260,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   </button>
                   <button
                     type="button"
+                    aria-label="Chat with Courier"
                     className="p-1.5 rounded-lg bg-[#00f0ff]/15 hover:bg-[#00f0ff]/25 text-[#00f0ff] border border-[#00f0ff]/30 cursor-pointer"
                     title="Chat with Courier"
                   >
@@ -332,8 +334,14 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
 
                 {/* Claim Button */}
                 <motion.button
+                  type="button"
                   whileTap={{ scale: 0.96 }}
                   onClick={handleStreakClick}
+                  aria-label={
+                    isStreaked
+                      ? "Daily streak already claimed"
+                      : "Claim daily streak +50 points"
+                  }
                   className={`w-full py-1.5 rounded-lg text-[11px] font-mono font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                     isStreaked
                       ? "bg-zinc-800 text-[#00f0ff] border border-[#00f0ff]/30"
@@ -420,7 +428,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                     <p className="text-[10px] font-semibold text-zinc-200">
                       {t("ส่วนลดจัดส่ง ฿50", "฿50 Logistics Discount")}
                     </p>
-                    <p className="text-[8px] font-mono text-zinc-500">
+                    <p className="text-[8px] font-mono text-zinc-400">
                       Streak reward &bull; Valid 5 days
                     </p>
                   </div>
@@ -455,6 +463,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 <button
                   type="button"
                   onClick={handleRefreshSync}
+                  aria-label="Resync WebView Bridge"
                   className="p-1 hover:text-white text-zinc-400 transition-colors cursor-pointer"
                   title="Resync Bridge"
                 >
@@ -530,6 +539,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                         <button
                           type="button"
                           onClick={() => updateQty(item.id, -1)}
+                          aria-label={`Decrease quantity of ${item.name}`}
                           className="p-0.5 rounded bg-zinc-800 text-zinc-300 hover:bg-zinc-700 cursor-pointer"
                         >
                           <Minus className="w-2.5 h-2.5" />
@@ -540,6 +550,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                         <button
                           type="button"
                           onClick={() => updateQty(item.id, 1)}
+                          aria-label={`Increase quantity of ${item.name}`}
                           className="p-0.5 rounded bg-[#00f0ff]/20 text-[#00f0ff] hover:bg-[#00f0ff]/30 cursor-pointer"
                         >
                           <Plus className="w-2.5 h-2.5" />

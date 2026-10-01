@@ -36,7 +36,7 @@ export const PosScreen: React.FC<PosScreenProps> = () => {
       {/* 2. App Bar */}
       <div className="px-4 py-2.5 flex items-center justify-between border-b border-white/[0.06] bg-[#0c101a]/90 backdrop-blur-md">
         <div>
-          <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase block">
+          <span className="text-[9px] font-mono tracking-widest text-zinc-400 uppercase block">
             RETAIL POINT OF SALE
           </span>
           <h4 className="text-xs font-bold text-white flex items-center gap-1">
@@ -57,7 +57,7 @@ export const PosScreen: React.FC<PosScreenProps> = () => {
             <span className="uppercase tracking-wider">
               {t("รายการสินค้าในตะกร้า", "Cart Order (2 Items)")}
             </span>
-            <span className="text-zinc-500">INV-256903-88</span>
+            <span className="text-zinc-400">INV-256903-88</span>
           </div>
 
           <div className="p-2.5 rounded-lg bg-zinc-900/70 border border-white/[0.06] flex justify-between items-center text-[11px]">
@@ -65,7 +65,7 @@ export const PosScreen: React.FC<PosScreenProps> = () => {
               <p className="font-semibold text-zinc-200">
                 Premium Arabica (250g)
               </p>
-              <p className="text-[9px] font-mono text-zinc-500">
+              <p className="text-[9px] font-mono text-zinc-400">
                 SKU: COF-8812 &bull; Qty: 1
               </p>
             </div>
@@ -77,7 +77,7 @@ export const PosScreen: React.FC<PosScreenProps> = () => {
               <p className="font-semibold text-zinc-200">
                 Ceramic Drip Tumbler
               </p>
-              <p className="text-[9px] font-mono text-zinc-500">
+              <p className="text-[9px] font-mono text-zinc-400">
                 SKU: ACC-1044 &bull; Qty: 1
               </p>
             </div>
@@ -102,7 +102,7 @@ export const PosScreen: React.FC<PosScreenProps> = () => {
               <span className="font-bold text-zinc-200 block">
                 PromptPay QR Instant
               </span>
-              <span className="text-zinc-500 text-[9px]">
+              <span className="text-zinc-400 text-[9px]">
                 Auto-reconciliation ready
               </span>
             </div>
@@ -123,9 +123,15 @@ export const PosScreen: React.FC<PosScreenProps> = () => {
 
         {/* Action Button */}
         <motion.button
+          type="button"
           whileTap={{ scale: 0.96 }}
           onClick={() => setIsCompleted(!isCompleted)}
-          className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+          aria-label={
+            isCompleted
+              ? "Receipt printed, click to reset transaction"
+              : "Commit transaction with sync API"
+          }
+          className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070b12]"
         >
           {isCompleted ? (
             <>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import {
   Github,
@@ -14,7 +14,7 @@ import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 
 export const ContactSection: React.FC = () => {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const { personal } = portfolioData;
   const [copied, setCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -23,6 +23,15 @@ export const ContactSection: React.FC = () => {
     email: "",
     message: "",
   });
+  const copyTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) {
+        clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
 
   const copyEmail = async () => {
     try {
@@ -41,7 +50,10 @@ export const ContactSection: React.FC = () => {
         document.body.removeChild(textArea);
       }
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      if (copyTimerRef.current !== null) {
+        clearTimeout(copyTimerRef.current);
+      }
+      copyTimerRef.current = window.setTimeout(() => setCopied(false), 2000);
     } catch {
       window.location.href = `mailto:${personal.email}`;
     }
@@ -153,17 +165,29 @@ export const ContactSection: React.FC = () => {
                 type="button"
                 onClick={copyEmail}
                 data-cursor-text="COPY"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 font-mono text-xs font-semibold cursor-pointer transition-all self-start sm:self-auto shrink-0"
+                aria-live="polite"
+                aria-label={
+                  copied
+                    ? t(
+                        "คัดลอกอีเมลเรียบร้อยแล้ว",
+                        "Email address copied to clipboard",
+                      )
+                    : t(
+                        "คัดลอกที่อยู่อีเมลลงคลิปบอร์ด",
+                        "Copy email address to clipboard",
+                      )
+                }
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 font-mono text-xs font-semibold cursor-pointer transition-all self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 {copied ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-[#00f0ff]" />
-                    <span>COPIED!</span>
+                    <span>{t("คัดลอกสำเร็จ!", "COPIED!")}</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5 text-[#00f0ff]" />
-                    <span>COPY EMAIL</span>
+                    <span>{t("คัดลอกอีเมล", "COPY EMAIL")}</span>
                   </>
                 )}
               </button>
@@ -236,12 +260,16 @@ export const ContactSection: React.FC = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+                <label
+                  htmlFor="contact-name"
+                  className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block"
+                >
                   {lang === "th"
                     ? "ชื่อของคุณ / องค์กร"
                     : "Your Name / Organization"}
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   required
                   value={formData.name}
@@ -253,15 +281,19 @@ export const ContactSection: React.FC = () => {
                       ? "เช่น บริษัท เอบีซี จำกัด"
                       : "e.g. Acme Studio"
                   }
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 text-xs sm:text-sm text-white placeholder-zinc-600 outline-none transition-colors font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-1 focus:ring-[#00f0ff]/30 text-xs sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+                <label
+                  htmlFor="contact-email"
+                  className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block"
+                >
                   {lang === "th" ? "อีเมลติดต่อกลับ" : "Your Email"}
                 </label>
                 <input
+                  id="contact-email"
                   type="email"
                   required
                   value={formData.email}
@@ -269,17 +301,21 @@ export const ContactSection: React.FC = () => {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   placeholder="contact@domain.com"
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 text-xs sm:text-sm text-white placeholder-zinc-600 outline-none transition-colors font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-1 focus:ring-[#00f0ff]/30 text-xs sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+                <label
+                  htmlFor="contact-message"
+                  className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block"
+                >
                   {lang === "th"
                     ? "ข้อความ / รายละเอียดงาน"
                     : "Message / Project Scope"}
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={4}
                   required
                   value={formData.message}
@@ -291,12 +327,16 @@ export const ContactSection: React.FC = () => {
                       ? "รายละเอียดโปรเจกต์ หรือตำแหน่งงาน..."
                       : "Brief us on your timeline, architecture requirements, or role..."
                   }
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 text-xs sm:text-sm text-white placeholder-zinc-600 outline-none transition-colors font-mono resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-1 focus:ring-[#00f0ff]/30 text-xs sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono resize-none"
                 />
               </div>
 
               {formSubmitted ? (
-                <div className="p-4 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-center space-y-2">
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="p-4 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-center space-y-2"
+                >
                   <span className="text-xs font-mono font-bold text-[#00f0ff] block">
                     {lang === "th" ? "ส่งข้อความสำเร็จ!" : "INQUIRY DISPATCHED"}
                   </span>
@@ -322,12 +362,12 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   data-cursor-text="DISPATCH"
-                  className="w-full py-3 px-4 rounded-lg bg-[#00f0ff]/15 hover:bg-[#00f0ff]/25 border border-[#00f0ff]/30 hover:border-[#00f0ff]/50 text-[#00f0ff] hover:text-white font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm group"
+                  className="w-full py-3 px-6 rounded-full bg-[#00f0ff] hover:bg-[#38bdf8] text-[#07080c] font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_-4px_rgba(0,240,255,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(0,240,255,0.4)] hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00f0ff]"
                 >
                   <span>
                     {lang === "th" ? "ส่งข้อความ ↗" : "DISPATCH INQUIRY ↗"}
                   </span>
-                  <Send className="w-3.5 h-3.5 text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <Send className="w-3.5 h-3.5 text-[#07080c] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </button>
               )}
             </form>

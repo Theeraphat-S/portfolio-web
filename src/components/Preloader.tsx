@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { getLenis } from "../lib/lenis";
 
 export interface PreloaderProps {
   /**
@@ -30,6 +31,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    const lenis = getLenis();
+    lenis?.stop();
+
     // Timing breakdown:
     // Stroke 1: 0s - 0.55s
     // Stroke 2: 0.3s - 1.35s (total write: ~1.35s)
@@ -42,6 +46,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = originalOverflow;
+      lenis?.start();
     };
   }, [shouldRender]);
 
@@ -65,7 +70,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             scale: 1.03,
             transition: { duration: 0.7, ease: [0.33, 1, 0.68, 1] },
           }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-zinc-950 text-white overflow-hidden select-none"
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#07080c] text-[#f1f5f9] overflow-hidden select-none"
           aria-label="hello"
         >
           {/* Subtle dot matrix atmospheric backdrop */}

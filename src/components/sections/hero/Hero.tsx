@@ -173,20 +173,20 @@ export const Hero: React.FC = () => {
               </div>
               <div className="space-y-1.5 text-xs font-mono text-zinc-300">
                 <div className="flex items-center justify-between border-b border-white/[0.04] pb-1">
-                  <span className="text-zinc-500">ENGINE</span>
+                  <span className="text-zinc-400">ENGINE</span>
                   <span>Flutter 3.x / Dart</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/[0.04] pb-1">
-                  <span className="text-zinc-500">STATE</span>
+                  <span className="text-zinc-400">STATE</span>
                   <span>BLoC / Cubit</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-zinc-500">SYNC</span>
+                  <span className="text-zinc-400">SYNC</span>
                   <span>Offline SQLite</span>
                 </div>
               </div>
               <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                <span className="text-zinc-500">TRACK</span>
+                <span className="text-zinc-400">TRACK</span>
                 <span className="text-zinc-200">Production Systems</span>
               </div>
             </div>

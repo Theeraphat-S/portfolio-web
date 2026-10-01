@@ -20,7 +20,7 @@ export const ProjectModalTechDetails: React.FC<
           <Sparkles className="w-3.5 h-3.5" />
           {t("ภาพรวมโครงการ", "Project Overview")}
         </h4>
-        <p className="text-sm text-zinc-200 leading-relaxed bg-zinc-950/60 p-4 rounded-2xl border border-zinc-800/80">
+        <p className="text-sm text-zinc-200 leading-relaxed bg-white/[0.02] p-4 rounded-2xl border border-white/[0.06]">
           {lang === "th" ? project.descriptionTh : project.descriptionEn}
         </p>
       </div>
@@ -39,7 +39,7 @@ export const ProjectModalTechDetails: React.FC<
             (hl, idx) => (
               <div
                 key={idx}
-                className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-950/40 border border-zinc-800/60 text-xs sm:text-sm text-zinc-300"
+                className="flex items-start gap-2.5 p-3 rounded-xl bg-white/[0.015] border border-white/[0.06] text-xs sm:text-sm text-zinc-300"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] mt-2 shrink-0" />
                 <span>{hl}</span>
@@ -55,7 +55,7 @@ export const ProjectModalTechDetails: React.FC<
           <Layers className="w-3.5 h-3.5" />
           {t("สถาปัตยกรรมระบบ (Architecture)", "System Architecture")}
         </h4>
-        <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-[#38bdf8]">
+        <div className="p-3.5 rounded-xl bg-[#07090e] border border-white/[0.08] text-xs font-mono text-[#38bdf8]">
           {lang === "th" ? project.architectureTh : project.architectureEn}
         </div>
       </div>
@@ -69,7 +69,7 @@ export const ProjectModalTechDetails: React.FC<
           {project.technologies.map((tech, idx) => (
             <span
               key={idx}
-              className="px-3 py-1 rounded-lg bg-zinc-800 border border-zinc-700 text-xs font-mono text-zinc-200"
+              className="px-3 py-1 rounded-md bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-zinc-200"
             >
               {tech}
             </span>

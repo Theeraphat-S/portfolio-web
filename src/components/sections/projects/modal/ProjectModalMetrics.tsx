@@ -18,12 +18,12 @@ export const ProjectModalMetrics: React.FC<ProjectModalMetricsProps> = ({
       {metrics.map((m, idx) => (
         <div
           key={idx}
-          className="p-3 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center"
+          className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-center"
         >
           <span className="text-[11px] text-zinc-400 block mb-0.5 font-medium">
             {lang === "th" ? m.labelTh : m.labelEn}
           </span>
-          <span className="text-sm sm:text-base font-bold font-mono text-emerald-400">
+          <span className="text-sm sm:text-base font-bold font-mono text-[#00f0ff]">
             {m.value}
           </span>
         </div>

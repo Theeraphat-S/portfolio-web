@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T04:10:45.000Z",
+  "title": "Design System: Theeraphat Srimontha Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Electric Cyan",
+        "canonical": "#00f0ff",
+        "tonalRamp": [
+          "#00262b",
+          "#004c54",
+          "#00737f",
+          "#009ea8",
+          "#00c8d4",
+          "#00f0ff",
+          "#52f5ff",
+          "#a8faff"
+        ]
+      },
+      "accent-sky": {
+        "role": "secondary",
+        "displayName": "Aero Sky",
+        "canonical": "#38bdf8",
+        "tonalRamp": [
+          "#082f49",
+          "#0c4a6e",
+          "#0369a1",
+          "#0284c7",
+          "#0ea5e9",
+          "#38bdf8",
+          "#7dd3fc",
+          "#bae6fd"
+        ]
+      },
+      "accent-deep": {
+        "role": "secondary",
+        "displayName": "Deep Oceanic",
+        "canonical": "#0284c7",
+        "tonalRamp": [
+          "#041e2f",
+          "#083344",
+          "#0e4a68",
+          "#0369a1",
+          "#0284c7",
+          "#38bdf8",
+          "#7dd3fc",
+          "#e0f2fe"
+        ]
+      },
+      "status-emerald": {
+        "role": "tertiary",
+        "displayName": "Telemetry Emerald",
+        "canonical": "#10b981",
+        "tonalRamp": [
+          "#022c22",
+          "#064e3b",
+          "#065f46",
+          "#047857",
+          "#059669",
+          "#10b981",
+          "#34d399",
+          "#6ee7b7"
+        ]
+      },
+      "bg-void": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "#07080c",
+        "tonalRamp": [
+          "#000000",
+          "#07080c",
+          "#0d0f17",
+          "#141724",
+          "#1e2235",
+          "#2a3048",
+          "#3f4765",
+          "#5c668b"
+        ]
+      },
+      "surface-obsidian": {
+        "role": "neutral",
+        "displayName": "Obsidian Surface",
+        "canonical": "#0d0f17",
+        "tonalRamp": [
+          "#05060a",
+          "#090a10",
+          "#0d0f17",
+          "#141724",
+          "#1b1f2e",
+          "#24293e",
+          "#333a54",
+          "#4a5374"
+        ]
+      },
+      "surface-elevated": {
+        "role": "neutral",
+        "displayName": "Elevated Surface",
+        "canonical": "#141724",
+        "tonalRamp": [
+          "#0a0b12",
+          "#0f111c",
+          "#141724",
+          "#1d2133",
+          "#282e46",
+          "#353d5a",
+          "#475276",
+          "#616e9b"
+        ]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Starlight White",
+        "canonical": "#f1f5f9",
+        "tonalRamp": [
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f1f5f9",
+          "#ffffff"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Slate Gray",
+        "canonical": "#cbd5e1",
+        "tonalRamp": [
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Muted Zinc",
+        "canonical": "#a1a1aa",
+        "tonalRamp": [
+          "#18181b",
+          "#27272a",
+          "#3f3f46",
+          "#52525b",
+          "#71717a",
+          "#a1a1aa",
+          "#d4d4d8",
+          "#f4f4f5"
+        ]
+      },
+      "border-hairline": {
+        "role": "neutral",
+        "displayName": "Hairline White Border",
+        "canonical": "rgba(255, 255, 255, 0.07)",
+        "tonalRamp": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)",
+          "rgba(255,255,255,0.07)",
+          "rgba(255,255,255,0.12)",
+          "rgba(255,255,255,0.20)",
+          "rgba(255,255,255,0.35)",
+          "rgba(255,255,255,0.50)",
+          "rgba(255,255,255,0.80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Monumental hero statement and headline anchors."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles and philosophical declarations."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles, project titles, and modal headers."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Narrative descriptions, case studies, and reading copy."
+      },
+      "label": {
+        "displayName": "Label / Technical Mono",
+        "purpose": "Section eyebrows, system specs, telemetry labels, and code tokens."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambient-hover",
+        "value": "0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(0, 240, 255, 0.08)",
+        "purpose": "Card hover elevation with electric cyan halo."
+      },
+      {
+        "name": "btn-primary-glow",
+        "value": "0 4px 20px -4px rgba(0, 240, 255, 0.28)",
+        "purpose": "Tactile energy glow on primary action button."
+      },
+      {
+        "name": "nav-floating",
+        "value": "0 12px 32px rgba(0, 0, 0, 0.65)",
+        "purpose": "Backdrop blur elevation for floating pill navigation dock."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-editorial",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "High-end organic spring damping for cards, buttons, and transitions."
+      },
+      {
+        "name": "duration-fast",
+        "value": "0.25s",
+        "purpose": "Quick state transition for buttons, pills, and links."
+      },
+      {
+        "name": "duration-smooth",
+        "value": "0.4s",
+        "purpose": "Standard card hover and view transition duration."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Editorial Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Magnetic high-contrast action trigger for primary conversions.",
+      "html": "<button class=\"ds-btn-primary\"><span>EXPLORE WORK</span><svg class=\"ds-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M19 12l-7 7-7-7\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #00f0ff; color: #07080c; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 9999px; padding: 13px 26px; border: none; cursor: pointer; box-shadow: 0 4px 20px -4px rgba(0, 240, 255, 0.28); transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: #38bdf8; transform: translateY(-1px); box-shadow: 0 6px 24px -4px rgba(0, 240, 255, 0.4); } .ds-btn-primary .ds-icon { transition: transform 0.25s ease; } .ds-btn-primary:hover .ds-icon { transform: translateY(2px); }"
+    },
+    {
+      "name": "Outline Editorial Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Restrained secondary trigger with hairline border.",
+      "html": "<button class=\"ds-btn-outline\"><svg class=\"ds-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z\"/><polyline points=\"14 2 14 8 20 8\"/></svg><span>RESUME / CV</span></button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: transparent; color: #f1f5f9; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 9999px; padding: 13px 26px; border: 1px solid rgba(255, 255, 255, 0.12); cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-outline:hover { border-color: rgba(0, 240, 255, 0.4); color: #00f0ff; background: rgba(0, 240, 255, 0.04); transform: translateY(-1px); }"
+    },
+    {
+      "name": "Technical Section Eyebrow",
+      "kind": "custom",
+      "refersTo": "eyebrow-mono",
+      "description": "Standardized uppercase section header anchor.",
+      "html": "<div class=\"ds-eyebrow\"><span class=\"ds-eyebrow-pip\"></span><span>01 // IDENTITY & PHILOSOPHY</span></div>",
+      "css": ".ds-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.22em; color: #00f0ff; } .ds-eyebrow-pip { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; animation: ds-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; } @keyframes ds-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }"
+    },
+    {
+      "name": "Editorial Glass Card",
+      "kind": "card",
+      "refersTo": "card-editorial",
+      "description": "Dark translucent card container with hairline border and ambient hover glow.",
+      "html": "<div class=\"ds-card-editorial\"><div class=\"ds-card-meta\"><span>SPEC 01</span><span>60-120 FPS</span></div><h4 class=\"ds-card-title\">Deterministic State Architecture</h4><p class=\"ds-card-body\">Unidirectional data flows and discrete event-to-state transformations with BLoC that eliminate race conditions.</p></div>",
+      "css": ".ds-card-editorial { position: relative; background: rgba(13, 15, 23, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 16px; padding: 22px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); } .ds-card-editorial:hover { border-color: rgba(0, 240, 255, 0.35); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(0, 240, 255, 0.08); } .ds-card-meta { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a1a1aa; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; } .ds-card-title { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0; } .ds-card-body { font-family: 'Outfit', sans-serif; font-size: 13px; color: #a1a1aa; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Telemetry Status Badge",
+      "kind": "chip",
+      "refersTo": "badge-status",
+      "description": "Living system indicator badge for active availability.",
+      "html": "<div class=\"ds-status-badge\"><span class=\"ds-status-dot\"></span><span>OPEN FOR ROLES</span></div>",
+      "css": ".ds-status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 9999px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); color: #10b981; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; } .ds-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; box-shadow: 0 0 6px #10b981; animation: ds-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; } @keyframes ds-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }"
+    },
+    {
+      "name": "Floating Navigation Dock",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Docked pill navigation with active tab highlight.",
+      "html": "<nav class=\"ds-nav-dock\"><a class=\"ds-nav-item ds-active\" href=\"#\">ABOUT<span class=\"ds-nav-line\"></span></a><a class=\"ds-nav-item\" href=\"#\">WORK</a><a class=\"ds-nav-item\" href=\"#\">CAPABILITIES</a><a class=\"ds-nav-item\" href=\"#\">CONTACT</a></nav>",
+      "css": ".ds-nav-dock { display: inline-flex; align-items: center; gap: 4px; padding: 4px 6px; background: rgba(7, 8, 12, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 9999px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65); } .ds-nav-item { position: relative; padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: #a1a1aa; text-decoration: none; border-radius: 9999px; transition: color 0.2s ease; } .ds-nav-item:hover { color: #f1f5f9; } .ds-nav-item.ds-active { color: #00f0ff; font-weight: 600; background: rgba(255, 255, 255, 0.03); } .ds-nav-line { position: absolute; bottom: 2px; left: 14px; right: 14px; height: 2px; background: #00f0ff; border-radius: 9999px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Avionics Instrument Deck",
+    "overview": "The visual language of Theeraphat Srimontha's portfolio functions as an advanced flight deck for high-reliability mobile engineering. Rather than treating software as abstract styling, the interface mirrors the precision, predictability, and tactile certainty of avionics instrumentation: deep void-black backgrounds (#07080c), layered obsidian glass surfaces (#0d0f17/80%), 1px laser-etched borders, and razor-sharp typographic telemetry. Every element conveys intentional control—deterministic states, measured frame budgets, and zero unnecessary visual noise. Electric Cyan (#00f0ff) serves as the operational signal color across the dark expanse, highlighting system vitals, active state channels, and verified metrics.",
+    "keyCharacteristics": [
+      "Obsidian Dark Void: Total immersion in deep slate-black surfaces (#07080c to #141724) that direct immediate focus to project artifacts.",
+      "Laser-Etched Precision: Restrained 1px borders with subtle linear gradient transitions that outline containers without visual weight.",
+      "Instrument Telemetry: Monospace timestamps, millisecond ping metrics, and status pulse indicators that ground claims in living system truth.",
+      "Tactile Magnetic Interactions: Fluid pill-shaped controls with subtle cyan glow and smooth hover transitions."
+    ],
+    "rules": [
+      {
+        "name": "The 8% Cyan Rule",
+        "body": "Electric Cyan must never exceed 8% of the surface area on any viewport. Cyan is reserved for signals, active states, and quantified metrics; diluting it across large body backgrounds destroys its operational authority.",
+        "section": "colors"
+      },
+      {
+        "name": "The Telemetry Heartbeat Rule",
+        "body": "Telemetry Emerald (#10b981) is strictly reserved for live, active, or verified real-world indicators (status pulses, online signals). It is never used as decorative text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Technical Eyebrow Rule",
+        "body": "Every major section begins with an uppercase monospace eyebrow (01 // SECTION NAME) rendered in Electric Cyan or muted zinc with 0.22em tracking.",
+        "section": "typography"
+      },
+      {
+        "name": "The Dual-Script Baseline Rule",
+        "body": "Thai and Latin typefaces must share proportional leading and word-break rules to prevent jagged layout shifts when switching languages.",
+        "section": "typography"
+      },
+      {
+        "name": "The Glass Before Blur Rule",
+        "body": "Transparent containers must always combine translucent dark backgrounds (rgba(13, 15, 23, 0.8)) with backdrop-filter: blur(20px) and a 1px white border at 6–8% opacity. Blur without border definition is prohibited.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Restrained Luminescence Rule",
+        "body": "Glow effects are strictly reactive: they appear during hover or active states, never idling as high-intensity persistent backgrounds.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do anchor every claim with verified metrics (e.g. 100% Accuracy, 60-120 FPS, 3 Consecutive Terms).",
+      "Do wrap code terms, architecture patterns, and technical keywords in monospace styling (font-mono).",
+      "Do respect prefers-reduced-motion across all spring physics, particle systems, and 3D tilts.",
+      "Do maintain bilingual typography balance, ensuring line wraps and heights look natural in both Thai and English."
+    ],
+    "donts": [
+      "Don't use solid high-contrast borders (e.g., solid #ffffff or solid #00f0ff); borders must remain translucent hairline strokes (rgba(255, 255, 255, 0.07)).",
+      "Don't flood screen backgrounds with bright or neon fills; background canvas remains strictly obsidian void (#07080c).",
+      "Don't apply cyan color to long body copy; reserve it exclusively for accents, active states, and key data.",
+      "Don't introduce heavy skeuomorphic shadows or harsh multi-color rainbow gradients outside the approved cyan-to-sky spectrum."
+    ]
+  }
+}

@@ -190,7 +190,7 @@ export const ExperienceTimeline: React.FC = () => {
                     </div>
 
                     {/* Location */}
-                    <p className="text-xs text-zinc-500 font-mono flex items-center gap-1.5 pt-0.5">
+                    <p className="text-xs text-zinc-400 font-mono flex items-center gap-1.5 pt-0.5">
                       <MapPin className="w-3 h-3 text-zinc-400 shrink-0" />
                       <span className="truncate">
                         {lang === "th" ? exp.locationTh : exp.locationEn}
@@ -279,7 +279,7 @@ export const ExperienceTimeline: React.FC = () => {
                                   className={`text-xs font-mono font-bold ${
                                     isActive
                                       ? "text-[#00f0ff]"
-                                      : "text-zinc-500 group-hover:text-zinc-300"
+                                      : "text-zinc-400 group-hover:text-zinc-200"
                                   } tracking-tighter pt-0.5 select-none transition-colors`}
                                 >
                                   {String(cIdx + 1).padStart(2, "0")}
@@ -308,7 +308,7 @@ export const ExperienceTimeline: React.FC = () => {
                                     className={`text-xs font-mono font-bold ${
                                       isActive
                                         ? "text-[#00f0ff]"
-                                        : "text-zinc-500 group-hover:text-zinc-300"
+                                        : "text-zinc-400 group-hover:text-zinc-200"
                                     } tracking-tighter pt-0.5 select-none transition-colors`}
                                   >
                                     {String(bIdx + 1).padStart(2, "0")}
@@ -396,7 +396,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.phone && (
               <a
                 href={`tel:${personal.reference.phone}`}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Phone className="w-3.5 h-3.5 text-[#00f0ff]" />
                 <span>{personal.reference.phone}</span>
@@ -405,7 +405,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.email && (
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Mail className="w-3.5 h-3.5 text-[#00f0ff]" />
                 <span>{personal.reference.email}</span>
