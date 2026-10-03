@@ -1,9 +1,5 @@
 export type StreamEventType =
-  | "bloc_event"
-  | "bloc_state"
-  | "bridge_call"
-  | "sqlite_queue"
-  | "telemetry";
+  "bloc_event" | "bloc_state" | "bridge_call" | "sqlite_queue" | "telemetry";
 
 export interface BLoCStreamEvent {
   id: string;

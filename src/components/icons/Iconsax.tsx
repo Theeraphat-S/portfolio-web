@@ -196,9 +196,7 @@ export const FlameStreakIcon: React.FC<IconProps> = ({
     >
       <motion.path
         animate={
-          animated
-            ? { scaleY: [1, 1.1, 0.96, 1.05, 1], originY: 1 }
-            : undefined
+          animated ? { scaleY: [1, 1.1, 0.96, 1.05, 1], originY: 1 } : undefined
         }
         transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
         d="M14.57 3.5C14.07 4.96 13.06 6.13 11.75 6.94C10.02 8.01 9 9.94 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 9.77 16.5 8.1 17.5 7C19.24 9.1 20 11.83 20 14.5C20 18.64 16.64 22 12.5 22C8.36 22 5 18.64 5 14.5C5 10.5 7.6 6.8 11.2 5.3C12.5 4.7 13.7 4 14.57 3.5Z"

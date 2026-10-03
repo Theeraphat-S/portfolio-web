@@ -107,8 +107,8 @@ export const ProjectEngineeringAnalysis: React.FC<
             <TrendingUp className="w-3.5 h-3.5 shrink-0" />
             <span>
               {t(
-                "5. ผลลัพธ์ที่พิสูจน์ได้จริง (Measured Outcome & Impact)",
-                "5. Proven Outcome & Impact",
+                "5. ผลลัพธ์และคุณค่าที่ส่งมอบ (Verified Outcomes & Impact)",
+                "5. Verified Outcomes & Engineering Impact",
               )}
             </span>
           </div>

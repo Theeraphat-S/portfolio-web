@@ -20,7 +20,7 @@ export const Projects: React.FC = () => {
   return (
     <section
       id="work"
-      className="relative py-20 sm:py-28 border-b border-white/[0.08]"
+      className="relative py-16 sm:py-24 border-b border-white/[0.08]"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="projects" className="absolute -top-24 pointer-events-none" />
@@ -35,10 +35,10 @@ export const Projects: React.FC = () => {
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06]">
           <span className="editorial-eyebrow text-[#00f0ff]">
-            02 // SELECTED WORK
+            02 // {t("ผลงานเด่น", "SELECTED WORK")}
           </span>
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-            ENGINEERED CASE STUDIES
+            {t("สถาปัตยกรรม & โปรเจกต์ใช้งานจริง", "ENGINEERED CASE STUDIES")}
           </span>
         </div>
 

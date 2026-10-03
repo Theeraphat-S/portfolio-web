@@ -230,11 +230,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       >
         {/* State Switcher Pills for Pinto Application */}
         {project.id === "pinto-app" && (
-          <div className="mb-3.5 flex items-center gap-1.5 p-1 rounded-lg bg-[#0a0d14] border border-white/[0.08] shadow-sm font-mono text-[10px]">
+          <div className="mb-3.5 w-full flex flex-col gap-1.5 p-1 rounded-lg bg-[#0a0d14] border border-white/[0.08] shadow-sm font-mono text-xs">
             <div
               role="tablist"
               aria-label="Pinto feature screens"
-              className="flex items-center gap-1.5"
+              className="grid grid-cols-3 gap-1"
             >
               <button
                 type="button"
@@ -243,17 +243,14 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 aria-controls={`screen-panel-${project.id}`}
                 aria-label="Screen 01: Order tracking"
                 onClick={() => handleTabClick("tracking")}
-                className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
+                className={`min-h-11 px-1 py-2 rounded transition-all cursor-pointer ${
                   pintoActiveTab === "tracking"
                     ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                01 TRACKING
+                {t("ติดตาม", "Tracking")}
               </button>
-              <span className="text-zinc-700" aria-hidden="true">
-                &bull;
-              </span>
               <button
                 type="button"
                 role="tab"
@@ -261,17 +258,14 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 aria-controls={`screen-panel-${project.id}`}
                 aria-label="Screen 02: Chat streak gamification"
                 onClick={() => handleTabClick("streak")}
-                className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
+                className={`min-h-11 px-1 py-2 rounded transition-all cursor-pointer ${
                   pintoActiveTab === "streak"
                     ? "bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                02 CHAT STREAK
+                {t("สะสมแต้ม", "Streaks")}
               </button>
-              <span className="text-zinc-700" aria-hidden="true">
-                &bull;
-              </span>
               <button
                 type="button"
                 role="tab"
@@ -279,18 +273,15 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 aria-controls={`screen-panel-${project.id}`}
                 aria-label="Screen 03: Hybrid WebView menu"
                 onClick={() => handleTabClick("webview")}
-                className={`px-2.5 py-1 rounded transition-all cursor-pointer ${
+                className={`min-h-11 px-1 py-2 rounded transition-all cursor-pointer ${
                   pintoActiveTab === "webview"
                     ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                03 WEBVIEW
+                WebView
               </button>
             </div>
-            <span className="text-zinc-700" aria-hidden="true">
-              &bull;
-            </span>
             <button
               type="button"
               onClick={() => setIsManualPaused((prev) => !prev)}
@@ -300,13 +291,15 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               title={
                 isManualPaused ? "Resume auto rotation" : "Pause auto rotation"
               }
-              className={`px-1.5 py-1 rounded transition-all cursor-pointer text-[9px] ${
+              className={`min-h-11 px-2 py-2 rounded transition-all cursor-pointer text-xs ${
                 !isManualPaused
                   ? "text-[#00f0ff] bg-[#00f0ff]/10"
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
-              {!isManualPaused ? "AUTO ⟳" : "PAUSED"}
+              {isManualPaused
+                ? t("เริ่มสลับหน้าจออัตโนมัติ", "Resume auto rotation")
+                : t("หยุดสลับหน้าจออัตโนมัติ", "Pause auto rotation")}
             </button>
           </div>
         )}
@@ -337,14 +330,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           </div>
 
           {/* Device Footer Micro-bar */}
-          <div className="pt-2.5 px-3 flex items-center justify-between text-[10px] font-mono text-zinc-400">
+          <div className="pt-2.5 px-3 flex items-center justify-between text-xs font-mono text-zinc-400">
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse" />
-              FLUTTER ENGINE
+              {t("ตัวอย่างโต้ตอบจำลอง", "Interactive simulation")}
             </span>
-            <span className="text-zinc-400 tracking-wider">
-              60 FPS &bull; V2.4
-            </span>
+            <span className="text-zinc-400 tracking-wider">React</span>
           </div>
         </div>
 
@@ -379,7 +370,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           ======================================================== */}
       <div className="hidden lg:grid lg:grid-cols-12 gap-10 xl:gap-14 items-center">
         {/* Left Column (42%): Device Showcase */}
-        <div className="lg:col-span-5 flex justify-center">
+        <div className="lg:col-span-5 flex flex-col items-center gap-4">
+          <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
+            {t(
+              "ตัวอย่างโต้ตอบสร้างด้วย React เพื่ออธิบายการทำงานของแอป",
+              "Interactive React simulation illustrating the app workflow.",
+            )}
+          </p>
           {renderDeviceMockup()}
         </div>
 
@@ -390,7 +387,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             <span className="text-[#00f0ff] font-bold tracking-widest uppercase">
               CASE STUDY // {projectNum}
             </span>
-            <span className="text-zinc-400 uppercase tracking-wider text-[11px]">
+            <span className="text-zinc-400 uppercase tracking-wider text-xs">
               {project.tag} &bull; {displayYear}
             </span>
           </div>
@@ -423,10 +420,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   key={mIdx}
                   className={`space-y-1 min-w-0 ${mIdx === 0 ? "pr-4" : mIdx === 1 ? "px-4" : "pl-4"}`}
                 >
-                  <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block truncate">
+                  <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block break-words">
                     {lang === "th" ? metric.labelTh : metric.labelEn}
                   </span>
-                  <span className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block truncate">
+                  <span className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block break-words">
                     {metric.value}
                   </span>
                 </div>
@@ -436,7 +433,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
           {/* 5. Tech Stack Specifications */}
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-xs text-zinc-400 pt-1">
-            <span className="text-[10px] tracking-widest text-zinc-400 uppercase mr-1 font-semibold">
+            <span className="text-xs tracking-widest text-zinc-400 uppercase mr-1 font-semibold">
               SPECS:
             </span>
             {project.technologies.map((tech, tIdx) => (
@@ -453,10 +450,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
           {/* 6. Technical Story / Architecture Flow Pipeline */}
           <div className="pt-2">
-            <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block mb-2 font-semibold">
+            <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block mb-2 font-semibold">
               {architecture.label}
             </span>
-            <div className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-black/40 border border-white/[0.06] font-mono text-[11px] text-zinc-300">
+            <div className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-black/40 border border-white/[0.06] font-mono text-xs text-zinc-300">
               {architecture.steps.map((step, sIdx) => (
                 <React.Fragment key={step}>
                   {sIdx > 0 && (
@@ -489,7 +486,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             >
               <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] transition-colors" />
               <span className="font-semibold tracking-wider">
-                {t("เจาะลึกสถาปัตยกรรม", "VIEW CASE STUDY")}
+                {t("อ่าน case study", "VIEW CASE STUDY")}
               </span>
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
             </button>
@@ -504,9 +501,17 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 className="group/src relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-zinc-200 text-xs font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Github className="w-3.5 h-3.5 text-zinc-500 group-hover/src:text-zinc-300 transition-colors" />
-                <span>SOURCE</span>
+                <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600 group-hover/src:text-zinc-300 group-hover/src:translate-x-0.5 group-hover/src:-translate-y-0.5 transition-all duration-300" />
               </a>
+            )}
+
+            {project.repositoryNoticeEn && (
+              <span className="text-[11px] font-mono text-zinc-400 ml-1">
+                {lang === "th"
+                  ? project.repositoryNoticeTh
+                  : project.repositoryNoticeEn}
+              </span>
             )}
           </div>
         </div>
@@ -514,9 +519,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
       {/* ========================================================
           MOBILE & TABLET STACK (< lg):
-          Exact sequence requested:
-          CASE STUDY -> Title -> Description -> Phone showcase ->
-          Metadata -> Architecture -> CTA
+          Summary and case-study actions precede the interactive preview.
           ======================================================== */}
       <div className="lg:hidden flex flex-col space-y-6">
         {/* 1. CASE STUDY Eyebrow */}
@@ -524,7 +527,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           <span className="text-[#00f0ff] font-bold tracking-widest uppercase">
             CASE STUDY // {projectNum}
           </span>
-          <span className="text-zinc-400 uppercase tracking-wider text-[11px]">
+          <span className="text-zinc-400 uppercase tracking-wider text-xs">
             {project.tag} &bull; {displayYear}
           </span>
         </div>
@@ -549,9 +552,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           {highlightedDescription}
         </p>
 
-        {/* 4. Phone Showcase */}
-        <div className="py-2 flex justify-center">{renderDeviceMockup()}</div>
-
         {/* 5. Minimal Editorial Metadata */}
         {project.metrics && project.metrics.length > 0 && (
           <div className="grid grid-cols-3 border-y border-white/[0.08] py-3 divide-x divide-white/[0.06]">
@@ -560,10 +560,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 key={mIdx}
                 className={`space-y-1 min-w-0 ${mIdx === 0 ? "pr-2" : mIdx === 1 ? "px-2" : "pl-2"}`}
               >
-                <span className="text-[9px] font-mono tracking-widest text-zinc-400 uppercase block truncate">
+                <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block break-words">
                   {lang === "th" ? metric.labelTh : metric.labelEn}
                 </span>
-                <span className="text-xs font-mono font-semibold text-zinc-200 block truncate">
+                <span className="text-xs font-mono font-semibold text-zinc-200 block break-words">
                   {metric.value}
                 </span>
               </div>
@@ -572,8 +572,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         )}
 
         {/* Tech Stack Specs */}
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] text-zinc-400">
-          <span className="text-[10px] uppercase tracking-widest text-zinc-400 mr-1 font-semibold">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-zinc-400">
+          <span className="text-xs uppercase tracking-widest text-zinc-400 mr-1 font-semibold">
             SPECS:
           </span>
           {project.technologies.map((tech, tIdx) => (
@@ -586,12 +586,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           ))}
         </div>
 
-        {/* 6. Architecture Flow */}
-        <div className="space-y-1.5">
-          <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block font-semibold">
+        {/* 6. Architecture Flow (Mobile) */}
+        <div className="space-y-1.5 pt-1">
+          <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block font-semibold">
             {architecture.label}
           </span>
-          <div className="flex flex-col gap-1.5 p-3 rounded-xl bg-black/40 border border-white/[0.06] font-mono text-[11px] text-zinc-300">
+          <div className="flex flex-col gap-1.5 p-3 rounded-xl bg-black/40 border border-white/[0.06] font-mono text-xs text-zinc-300">
             {architecture.steps.map((step, sIdx) => (
               <React.Fragment key={step}>
                 {sIdx > 0 && (
@@ -608,13 +608,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         </div>
 
         {/* 7. CTAs */}
-        <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/[0.06]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-white/[0.06]">
           <button
             type="button"
             onClick={() => onSelect(project)}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-md cursor-pointer flex-1 justify-center focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="group/cta relative inline-flex min-h-11 items-center gap-2 px-4 py-2.5 rounded-full bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-md cursor-pointer justify-center focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff]" />
             <span className="font-semibold">
@@ -629,14 +629,31 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-text="GITHUB"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-white text-xs font-mono uppercase transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+              className="inline-flex min-h-11 justify-center items-center gap-2 px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-white text-xs font-mono uppercase transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             >
               <Github className="w-3.5 h-3.5" />
-              <span>SOURCE</span>
+              <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600" />
             </a>
           )}
         </div>
+
+        {project.repositoryNoticeEn && (
+          <p className="text-[11px] font-mono text-zinc-400">
+            {lang === "th"
+              ? project.repositoryNoticeTh
+              : project.repositoryNoticeEn}
+          </p>
+        )}
+
+        <p className="text-sm text-zinc-400 leading-relaxed">
+          {t(
+            "ตัวอย่างนี้สร้างด้วย React เพื่ออธิบายการทำงาน ไม่ใช่แอป Flutter ที่รันในเบราว์เซอร์",
+            "This React simulation illustrates the workflow; it is not the Flutter app running in your browser.",
+          )}
+        </p>
+        {/* 4. Phone Showcase */}
+        <div className="py-2 flex justify-center">{renderDeviceMockup()}</div>
       </div>
 
       {/* Flutter & BLoC DevTools Drawer */}

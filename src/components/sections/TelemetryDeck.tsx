@@ -1,10 +1,9 @@
 import React from "react";
 import { Radio, Activity } from "lucide-react";
-import { KineticCounter } from "../reactbits/KineticCounter";
 import { useTelemetry } from "../../hooks/useTelemetry";
 
 export const TelemetryDeck: React.FC = () => {
-  const { localTime, latency } = useTelemetry();
+  const { localTime, fpsTarget } = useTelemetry();
 
   return (
     <section className="py-8 relative overflow-hidden border-b border-white/[0.08]">
@@ -25,15 +24,10 @@ export const TelemetryDeck: React.FC = () => {
         <div className="flex flex-wrap items-center gap-6 sm:gap-10 text-xs font-mono">
           <div className="flex items-center gap-2">
             <span className="text-zinc-400 uppercase tracking-wider">
-              LATENCY:
+              REFRESH TARGET:
             </span>
             <span className="text-white font-bold flex items-center gap-1">
-              <KineticCounter
-                value={latency}
-                prefix="~"
-                suffix="ms"
-                duration={1.2}
-              />
+              <span>{fpsTarget}</span>
               <Activity className="w-3 h-3 text-emerald-400" />
             </span>
           </div>

@@ -12,12 +12,25 @@ export const ProjectModalFooter: React.FC<ProjectModalFooterProps> = ({
   project,
   onClose,
 }) => {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
-    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between gap-4 shrink-0">
+    <div className="pt-4 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 shrink-0">
       <div className="text-xs text-zinc-400 font-mono">
-        Designed & Built by Theeraphat Srimontha
+        {project.repositoryNoticeEn ? (
+          <span>
+            {lang === "th"
+              ? project.repositoryNoticeTh
+              : project.repositoryNoticeEn}
+          </span>
+        ) : (
+          <span>
+            {t(
+              "ผลงานและบทบาทของธีรภัทร",
+              "Project contributions by Theeraphat",
+            )}
+          </span>
+        )}
       </div>
 
       <div className="flex items-center gap-3">
@@ -29,7 +42,7 @@ export const ProjectModalFooter: React.FC<ProjectModalFooterProps> = ({
             className="px-4 py-2 rounded-full bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 hover:text-white text-xs font-mono font-medium flex items-center gap-1.5 transition-all border border-white/[0.08] hover:border-white/20 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
           >
             <Github className="w-3.5 h-3.5" />
-            <span>GitHub</span>
+            <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>
           </a>
         )}
         <button

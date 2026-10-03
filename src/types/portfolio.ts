@@ -36,6 +36,9 @@ export interface ProjectItem {
   architectureTh: string;
   architectureEn: string;
   githubUrl?: string;
+  repositoryType?: "public" | "private" | "commercial";
+  repositoryNoticeTh?: string;
+  repositoryNoticeEn?: string;
   demoUrl?: string;
   color: string;
 }

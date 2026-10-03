@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 
 export interface TelemetryData {
   localTime: string;
-  latency: number;
+  fpsTarget: string;
 }
 
 export const useTelemetry = (): TelemetryData => {
   const [localTime, setLocalTime] = useState<string>("");
-  const [latency, setLatency] = useState<number>(12);
 
   useEffect(() => {
     const updateTime = () => {
@@ -27,16 +26,5 @@ export const useTelemetry = (): TelemetryData => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const jitterInterval = setInterval(() => {
-      const jitterValues = [10, 12, 11, 14, 12];
-      const next =
-        jitterValues[Math.floor(Math.random() * jitterValues.length)];
-      setLatency(next);
-    }, 4000);
-
-    return () => clearInterval(jitterInterval);
-  }, []);
-
-  return { localTime, latency };
+  return { localTime, fpsTarget: "60-120 FPS" };
 };

@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import {
-  QrCode,
-  CheckCircle2,
-  Wifi,
-  Battery,
-  Plus,
-  Minus,
-} from "lucide-react";
+import { QrCode, CheckCircle2, Wifi, Battery, Plus, Minus } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import {
   PosRegisterIcon,
@@ -37,9 +30,7 @@ interface QueuedOrder {
   itemCount: number;
 }
 
-export const PosScreen: React.FC<PosScreenProps> = ({
-  onDispatchEvent,
-}) => {
+export const PosScreen: React.FC<PosScreenProps> = ({ onDispatchEvent }) => {
   const { t } = useLanguage();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
@@ -63,10 +54,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
     },
   ]);
 
-  const totalAmount = cartItems.reduce(
-    (acc, it) => acc + it.price * it.qty,
-    0,
-  );
+  const totalAmount = cartItems.reduce((acc, it) => acc + it.price * it.qty, 0);
 
   const updateItemQty = (id: string, delta: number) => {
     const updated = cartItems
@@ -144,7 +132,9 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           type: "telemetry",
           tag: nextState ? "NET_ONLINE" : "NET_OFFLINE",
           name: nextState ? "NetworkRestoredEvent" : "NetworkDroppedEvent",
-          stateName: nextState ? "NetworkConnectedState" : "OfflineModeActiveState",
+          stateName: nextState
+            ? "NetworkConnectedState"
+            : "OfflineModeActiveState",
           details: nextState
             ? `Network active. Triggering idempotent background retry queue flush.`
             : `Network disconnected. Switching to local SQLite Write-Ahead Logging (WAL).`,
@@ -214,8 +204,12 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           source: "PosScreen",
           type: isOnline ? "bloc_event" : "sqlite_queue",
           tag: isOnline ? "HTTP_COMMIT" : "SQLITE_QUEUE",
-          name: isOnline ? "CommitTransactionEvent" : "EnqueueOfflineTransaction",
-          stateName: isOnline ? "TransactionCommittedState" : "OfflineEnqueuedState",
+          name: isOnline
+            ? "CommitTransactionEvent"
+            : "EnqueueOfflineTransaction",
+          stateName: isOnline
+            ? "TransactionCommittedState"
+            : "OfflineEnqueuedState",
           details: isOnline
             ? `Idempotency UUID: ${txId} ➔ 200 OK Sync with MySQL (฿${totalAmount})`
             : `No connection. Enqueued in SQLite WAL queue (Pending Sync: ${
@@ -296,7 +290,9 @@ export const PosScreen: React.FC<PosScreenProps> = ({
       <div className="flex-1 p-3 flex flex-col justify-between space-y-2.5 overflow-y-auto">
         {/* Preset Scenarios */}
         <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto">
-          <span className="text-zinc-500 uppercase px-1 shrink-0">SCENARIOS:</span>
+          <span className="text-zinc-500 uppercase px-1 shrink-0">
+            SCENARIOS:
+          </span>
           <button
             type="button"
             onClick={() => toggleNetwork(false)}
@@ -324,7 +320,10 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
             <span className="uppercase tracking-wider">
-              {t("รายการสินค้าในตะกร้า", `Cart Order (${cartItems.length} Items)`)}
+              {t(
+                "รายการสินค้าในตะกร้า",
+                `Cart Order (${cartItems.length} Items)`,
+              )}
             </span>
             <button
               type="button"
@@ -411,7 +410,11 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           </div>
           <div className="flex items-center justify-between text-zinc-400">
             <span className="flex items-center gap-1">
-              <DatabaseSyncIcon size={12} color="#10b981" animated={!isOnline} />
+              <DatabaseSyncIcon
+                size={12}
+                color="#10b981"
+                animated={!isOnline}
+              />
               SQLite Retry Queue
             </span>
             <span

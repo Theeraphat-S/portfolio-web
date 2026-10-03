@@ -90,9 +90,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
   const updateQty = (id: number, delta: number) => {
     const updated = cartItems
       .map((item) =>
-        item.id === id
-          ? { ...item, qty: Math.max(0, item.qty + delta) }
-          : item,
+        item.id === id ? { ...item, qty: Math.max(0, item.qty + delta) } : item,
       )
       .filter((item) => item.qty > 0);
 
@@ -227,7 +225,9 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
       <div className="flex-1 p-3 flex flex-col justify-between overflow-hidden">
         {/* Preset Bar */}
         <div className="mb-2 flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto">
-          <span className="text-zinc-500 uppercase px-1 shrink-0">SCENARIOS:</span>
+          <span className="text-zinc-500 uppercase px-1 shrink-0">
+            SCENARIOS:
+          </span>
           <button
             type="button"
             onClick={() => {
@@ -471,8 +471,14 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 >
                   <Sparkles className="w-3 h-3" />
                   {isStreaked
-                    ? t(`เช็คอินสำเร็จ (${streakCount} วัน)`, `Claimed! ${streakCount} Days Active`)
-                    : t("กดรับแต้มวันนี้ (+50 PTS)", "Claim Daily Streak (+50 Pts)")}
+                    ? t(
+                        `เช็คอินสำเร็จ (${streakCount} วัน)`,
+                        `Claimed! ${streakCount} Days Active`,
+                      )
+                    : t(
+                        "กดรับแต้มวันนี้ (+50 PTS)",
+                        "Claim Daily Streak (+50 Pts)",
+                      )}
                 </motion.button>
               </div>
 
@@ -683,7 +689,10 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            <RoutingIcon size={14} color={currentState === "tracking" ? "#00f0ff" : "#71717a"} />
+            <RoutingIcon
+              size={14}
+              color={currentState === "tracking" ? "#00f0ff" : "#71717a"}
+            />
             <span className="text-[8px] tracking-wider uppercase">
               TRACKING
             </span>
@@ -698,7 +707,10 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            <FlameStreakIcon size={14} color={currentState === "streak" ? "#f59e0b" : "#71717a"} />
+            <FlameStreakIcon
+              size={14}
+              color={currentState === "streak" ? "#f59e0b" : "#71717a"}
+            />
             <span className="text-[8px] tracking-wider uppercase">STREAKS</span>
           </button>
 
@@ -711,7 +723,10 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            <CodeBridgeIcon size={14} color={currentState === "webview" ? "#00f0ff" : "#71717a"} />
+            <CodeBridgeIcon
+              size={14}
+              color={currentState === "webview" ? "#00f0ff" : "#71717a"}
+            />
             <span className="text-[8px] tracking-wider uppercase">WEBVIEW</span>
           </button>
         </div>

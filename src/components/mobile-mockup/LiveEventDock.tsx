@@ -92,7 +92,9 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
                     </span>
                   </>
                 )}
-                <span className="text-zinc-500 hidden md:inline shrink-0">&bull;</span>
+                <span className="text-zinc-500 hidden md:inline shrink-0">
+                  &bull;
+                </span>
                 <span className="text-zinc-400 text-[9px] truncate hidden md:inline">
                   {latestEvent.details}
                 </span>
@@ -100,14 +102,21 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
 
               <div className="flex items-center gap-2 shrink-0 text-[9px] font-mono text-zinc-500">
                 <span className="text-emerald-400 font-bold">
-                  {latestEvent.latencyMs !== undefined ? `${latestEvent.latencyMs}ms` : "< 1ms"}
+                  {latestEvent.latencyMs !== undefined
+                    ? `${latestEvent.latencyMs}ms`
+                    : "< 1ms"}
                 </span>
-                <span className="hidden sm:inline">{latestEvent.timestamp.split(" ")[0]}</span>
+                <span className="hidden sm:inline">
+                  {latestEvent.timestamp.split(" ")[0]}
+                </span>
               </div>
             </motion.div>
           ) : (
             <div className="py-1 px-2 text-zinc-500 text-[10px] text-center italic">
-              {t("กำลังรอ Event จากการกดเล่นบนหน้าจอด้านบน...", "Ready. Interact with the phone screen above to stream live events.")}
+              {t(
+                "กำลังรอ Event จากการกดเล่นบนหน้าจอด้านบน...",
+                "Ready. Interact with the phone screen above to stream live events.",
+              )}
             </div>
           )}
         </AnimatePresence>

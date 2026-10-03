@@ -24,19 +24,19 @@ export const projectsData: ProjectItem[] = [
     decisionRationaleTh:
       "ย้าย Business Logic ในการประเมิน Risk Scoring และ State Validation ทั้งหมดมาทำงานบน Client-side (Flutter & BLoC) เพื่อให้สามารถคำนวณคะแนนและแสดงผลประเมินความเสี่ยงได้ทันทีแบบ Real-time แม้ไม่มีสัญญาณอินเทอร์เน็ต",
     decisionRationaleEn:
-      "Migrated all risk scoring business logic and form state validation to client-side (Flutter & BLoC). This enables instant, zero-latency risk evaluation and continuous operation completely offline.",
+      "Migrated all risk scoring business logic and form state validation to client-side (Flutter & BLoC). This allows risk evaluation without a network request.",
     tradeOffsTh:
-      "ยอมแลกความซับซ้อนของ BLoC State Machines และ Domain Validation Rules บน Client ที่สูงขึ้น เพื่อรับประกัน Zero-latency, Data Integrity และการประมวลผลที่แม่นยำ 100% หน้างาน",
+      "ยอมแลกความซับซ้อนของ BLoC State Machines และ Domain Validation Rules บน Client ที่สูงขึ้น เพื่อให้คำนวณคะแนนได้โดยไม่ต้องรอเครือข่าย และตรวจสอบข้อมูลก่อนประมวลผล",
     tradeOffsEn:
-      "Accepted higher state machine and domain validation complexity on the client side in exchange for guaranteed offline reliability, instant feedback, and 100% computational integrity.",
+      "Accepted higher state machine and domain validation complexity on the client side to support offline scoring and input validation.",
     evidenceTh:
       "จากการทดสอบภาคสนาม (Field Testing) ร่วมกับบุคลากรและ อสม. พบว่า อสม. สับสนกับค่า Lab และศัพท์แพทย์เฉพาะทาง จึง Redesign Input ให้เป็น Visual Range Slider พร้อม Color-coded Status และระบบแปลงหน่วยอัตโนมัติ",
     evidenceEn:
       "Usability field tests with healthcare workers and VHVs revealed confusion around technical lab thresholds. We redesigned inputs into visual range sliders with color-coded risk bands and automatic unit conversions.",
     outcomeTh:
-      "ลดเวลาเฉลี่ยในการคัดกรองต่อคนลงจาก 10-15 นาที เหลือ < 3-5 นาที (ลดลงกว่า 60%), ขจัดความผิดพลาดในการคำนวณคะแนนความเสี่ยงเป็น 0%, และส่งออกรายงานสรุปผลให้ รพ.สต. ได้ทันที",
+      "ลดเวลาคัดกรองต่อคนลงเหลือ < 3-5 นาที (จากเดิม 10-15 นาทีในกระบวนการบันทึกด้วยมือ), ขจัดความผิดพลาดในการคำนวณคะแนนความเสี่ยง (100% computational integrity ตามเกณฑ์ประเมินทางการแพทย์), พร้อมออกรายงานสรุปผลการตรวจได้ทันที",
     outcomeEn:
-      "Reduced screening time per patient from 10-15 mins to < 3-5 mins (>60% reduction), eliminated scoring calculation errors to 0%, and enabled immediate automated medical report generation.",
+      "Reduced screening time per patient to < 3-5 mins (down from 10-15 mins in manual workflows), achieved 100% calculation integrity matching clinical guidelines, and enabled instant summary report generation.",
     highlightsTh: [
       "ออกแบบและพัฒนา Front-end ด้วย Flutter & Dart พร้อมสถาปัตยกรรม Bloc เพื่อการจัดการ State ที่มีประสิทธิภาพสูง",
       "จัดการฐานข้อมูลด้วย MySQL สำหรับบันทึกและประมวลผลข้อมูลผู้ป่วยอย่างรัดกุม ปลอดภัยตามมาตรฐานข้อมูลสุขภาพ",
@@ -80,6 +80,9 @@ export const projectsData: ProjectItem[] = [
     architectureEn:
       "Clean Architecture (Presentation Layer with Bloc, Domain Use Cases, Data Repository connecting to Backend REST API & MySQL)",
     githubUrl: "https://github.com/Theeraphat-S",
+    repositoryType: "private",
+    repositoryNoticeTh: "ซอร์สโค้ดวิจัยและสาธารณสุขชุมชน (Private Codebase)",
+    repositoryNoticeEn: "Community Healthcare Research · Private Codebase",
   },
   {
     id: "pinto-app",
@@ -115,9 +118,9 @@ export const projectsData: ProjectItem[] = [
     evidenceEn:
       "User telemetry indicated drop-offs during slow WebView reloads, prompting implementation of proactive caching and optimistic UI state transitions.",
     outcomeTh:
-      "ยกระดับ User Retention และ Chat Engagement ได้ตามเป้าหมายของทีม พร้อมทั้งส่งมอบโมดูลที่เสถียรขึ้นสู่ Production ตามกำหนดเวลาของ Sprint",
+      "ร่วมส่งมอบฟีเจอร์เมนู WebView และระบบ Gamification Chat Streaks สู่ Production พร้อมเชื่อมต่อ Profile API อย่างเสถียร รองรับการขยายตัวของผู้ใช้งานตามเป้าหมายของทีม",
     outcomeEn:
-      "Met user retention and streak engagement targets while delivering robust, production-ready modules within Agile sprint schedules.",
+      "Successfully shipped hybrid WebView menus and gamified Chat Streaks features to production, integrating with Profile API and meeting team sprint delivery targets.",
     highlightsTh: [
       "พัฒนาและปรับปรุงฟีเจอร์ด้วย Flutter & Dart รองรับการสลับเมนูแบบ Hybrid WebView ได้อย่างลื่นไหลไม่มีสะดุด",
       "สร้างระบบ Gamification สะสมแต้มต่อเนื่อง (Chat Streaks) เพื่อกระตุ้นการมีส่วนร่วม (Engagement) ของผู้ใช้งาน",
@@ -149,6 +152,10 @@ export const projectsData: ProjectItem[] = [
     architectureEn:
       "Feature-Driven Flutter Architecture with Modular State Management and WebView Bridge Controller",
     githubUrl: "https://github.com/Theeraphat-S",
+    repositoryType: "commercial",
+    repositoryNoticeTh:
+      "ซอร์สโค้ดเชิงพาณิชย์ของบริษัทภายใต้ข้อตกลงรักษาความลับ (Proprietary NDA)",
+    repositoryNoticeEn: "Commercial Production · Proprietary Codebase (NDA)",
   },
   {
     id: "pos-system",
@@ -183,9 +190,9 @@ export const projectsData: ProjectItem[] = [
     evidenceEn:
       "Network stress testing exposed potential duplicate API triggers, leading to client-generated transaction UUIDs to guarantee zero double-charging.",
     outcomeTh:
-      "อัตราความถูกต้องของข้อมูลธุรกรรมและสต็อกสินค้าอยู่ที่ 99.9% และลดเวลาต่อหนึ่ง Transaction ลงอย่างชัดเจน",
+      "ระบบรองรับการทำงานแบบ Offline-tolerant และส่งมอบความถูกต้องของข้อมูลธุรกรรม 99.9% ผ่าน Idempotency UUID ช่วยลดเวลาต่อการชำระเงินและป้องกันการคิดเงินซ้ำ",
     outcomeEn:
-      "Maintained 99.9% transaction and inventory consistency while significantly reducing average checkout duration per customer.",
+      "Delivered offline-tolerant checkout architecture maintaining 99.9% transaction consistency with idempotent UUID keys, eliminating duplicate billing and checkout bottlenecks.",
     highlightsTh: [
       "ออกแบบระบบจัดการสินค้าคงคลัง (Inventory) และระบบตะกร้าสินค้าที่คิดคำนวณราคาและภาษีอัตโนมัติ",
       "เชื่อมต่อ RESTful API ความเร็วสูงระหว่างหน้าบ้านและระบบหลังบ้าน พร้อมกลไกป้องกันข้อมูลซ้ำซ้อน",
@@ -213,14 +220,14 @@ export const projectsData: ProjectItem[] = [
         value: "99.9%",
       },
       {
+        labelTh: "ป้องกันซ้ำซ้อน",
+        labelEn: "Deduplication",
+        value: "Idempotency UUID",
+      },
+      {
         labelTh: "ช่องทางชำระ",
         labelEn: "Payment Options",
         value: "Cash & QR PromptPay",
-      },
-      {
-        labelTh: "สถาปัตยกรรม",
-        labelEn: "Architecture",
-        value: "RESTful Integration",
       },
     ],
     architectureTh:
@@ -228,5 +235,9 @@ export const projectsData: ProjectItem[] = [
     architectureEn:
       "Modular Client Architecture with Optimistic UI updates and resilient API request retry logic",
     githubUrl: "https://github.com/Theeraphat-S",
+    repositoryType: "commercial",
+    repositoryNoticeTh:
+      "ระบบแคชเชียร์เชิงพาณิชย์สำหรับธุรกิจค้าปลีก (Client Solution · Private Codebase)",
+    repositoryNoticeEn: "Commercial Retail Client Solution · Private Codebase",
   },
 ];

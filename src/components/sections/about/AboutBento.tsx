@@ -32,10 +32,13 @@ export const AboutBento: React.FC = () => {
         className="flex items-center justify-between pb-6 mb-10 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
-          01 // IDENTITY & PHILOSOPHY
+          01 // {t("ตัวตน & ปรัชญา", "IDENTITY & PHILOSOPHY")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          ENGINEERING PERSPECTIVE
+          {t(
+            "สถาปัตยกรรม & คุณภาพระดับ Production",
+            "ENGINEERING PHILOSOPHY & METRICS",
+          )}
         </span>
       </motion.div>
 
@@ -71,8 +74,8 @@ export const AboutBento: React.FC = () => {
 
         <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl">
           {lang === "th"
-            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ ผู้เริ่มต้นพัฒนาโมบายแอปพลิเคชันอย่างเข้มข้นตั้งแต่ปี 2565 มุ่งเน้นการเปลี่ยนหลักการทางวิศวกรรมซอฟต์แวร์ให้เป็นระบบที่เสถียร รองรับผู้ใช้งานจริงระดับ Production ทั้งการเชื่อมต่อ WebView Bridge ไปจนถึงระบบ Offline Database ที่มีข้อผิดพลาดเป็นศูนย์"
-            : "Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to zero-error offline clinical databases."}
+            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ ผู้เริ่มต้นพัฒนาโมบายแอปพลิเคชันอย่างเข้มข้นตั้งแต่ปี 2565 มุ่งเน้นการเปลี่ยนหลักการทางวิศวกรรมซอฟต์แวร์ให้เป็นระบบที่เสถียร รองรับผู้ใช้งานจริงระดับ Production ทั้งการเชื่อมต่อ WebView Bridge ไปจนถึงการจัดการข้อมูลออฟไลน์"
+            : "Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to offline clinical data handling."}
         </p>
       </motion.div>
 
@@ -101,8 +104,8 @@ export const AboutBento: React.FC = () => {
             </h3>
             <p className="text-xs text-zinc-400 font-sans leading-relaxed">
               {lang === "th"
-                ? "สถาปัตยกรรม Unidirectional Data Flow และการแปลง Event เป็น State ด้วย BLoC ช่วยกำจัด Race Condition และควบคุม State ได้แม่นยำ"
-                : "Unidirectional data flows and discrete event-to-state transformations with BLoC that eliminate race conditions and ensure testable state transitions."}
+                ? "ใช้ BLoC แปลง Event เป็น State เพื่อแยกตรรกะออกจากหน้าจอและตรวจสอบการเปลี่ยนแปลง State ได้ง่ายขึ้น"
+                : "Use BLoC event-to-state transitions to separate logic from screens and make state changes easier to test."}
             </p>
           </div>
 
@@ -119,8 +122,8 @@ export const AboutBento: React.FC = () => {
             </h3>
             <p className="text-xs text-zinc-400 font-sans leading-relaxed">
               {lang === "th"
-                ? "การจัดเก็บข้อมูลผ่าน Local SQLite ร่วมกับคิวทำงานแบบ Idempotent Retry ทำให้การทำงานราบรื่นแม้ในพื้นที่ไม่มีสัญญาณเครือข่าย"
-                : "Local SQLite database persistence paired with idempotent retry queues ensuring operations never fail during field network dropouts."}
+                ? "ออกแบบการจัดเก็บข้อมูลในเครื่องและการส่งคำขอซ้ำ เพื่อรองรับการเชื่อมต่อที่ไม่เสถียร"
+                : "Design local data storage and retry handling for unreliable network connections."}
             </p>
           </div>
 
@@ -137,8 +140,8 @@ export const AboutBento: React.FC = () => {
             </h3>
             <p className="text-xs text-zinc-400 font-sans leading-relaxed">
               {lang === "th"
-                ? "ควบคุม Frame Budget ภายใน 16ms กำหนด Rebuild Boundary อย่างแม่นยำ และตรวจสอบ Memory Leaks เพื่อความลื่นไหลระดับ 60-120 FPS"
-                : "Strict 16ms frame-budget adherence, isolated rebuild boundaries, and memory leak profiling for seamless 60-120 FPS interaction."}
+                ? "แยกส่วนที่ต้อง Rebuild และตรวจสอบการใช้งานหน่วยความจำ เพื่อให้การโต้ตอบในแอปลื่นไหล"
+                : "Isolate rebuild boundaries and inspect memory usage to keep app interactions responsive."}
             </p>
           </div>
         </div>
@@ -152,54 +155,54 @@ export const AboutBento: React.FC = () => {
         variants={fadeIn}
         className="mb-12 p-4 sm:p-5 rounded-xl bg-white/[0.015] border border-white/[0.08]"
       >
-        <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-3">
-          {t("ตัวชี้วัดความเสถียรของระบบ", "VERIFIED SYSTEM METRICS")}
+        <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-3">
+          {t("ตัวชี้วัดความเสถียร & ประสบการณ์", "VERIFIED SYSTEM METRICS")}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
           <div className="space-y-0.5 pt-2 md:pt-0 md:pr-4">
-            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
-              {t("ความแม่นยำ NCDs", "NCDS ACCURACY")}
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
+              {t("ความแม่นยำ NCDs", "NCDS INTEGRITY")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               100%
             </span>
-            <span className="text-[10px] font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block">
               {t("คำนวณสูตรแม่นยำ 100%", "Zero calculation error")}
             </span>
           </div>
 
           <div className="space-y-0.5 pt-2 md:pt-0 md:px-4">
-            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
-              {t("นศ. ที่ให้คำปรึกษา", "STUDENTS TAUGHT")}
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
+              {t("นศ. ที่ให้คำปรึกษา", "STUDENTS MENTORED")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               100+
             </span>
-            <span className="text-[10px] font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block">
               {t("ให้คำปรึกษาระดับปริญญาตรี", "Undergraduate mentorship")}
             </span>
           </div>
 
           <div className="space-y-0.5 pt-2 md:pt-0 md:px-4">
-            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
               {t("วาระผู้ช่วยสอน", "TEACHING TERMS")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               3
             </span>
-            <span className="text-[10px] font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block">
               {t("3 ภาคการศึกษาต่อเนื่อง", "Consecutive terms")}
             </span>
           </div>
 
           <div className="space-y-0.5 pt-2 md:pt-0 md:pl-4">
-            <span className="text-[11px] font-mono uppercase text-zinc-400 block truncate">
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
               {t("เป้าหมายความลื่นไหล", "FRAME BUDGET")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               60-120 FPS
             </span>
-            <span className="text-[10px] font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block">
               {t("ประมวลผลบน UI Thread", "UI thread execution")}
             </span>
           </div>
@@ -221,7 +224,7 @@ export const AboutBento: React.FC = () => {
               <span className="text-xs font-mono font-bold text-white uppercase">
                 {t("วุฒิการศึกษา", "ACADEMIC CREDENTIALS")}
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
+              <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
                 2022 - 2026
               </span>
             </div>
@@ -245,7 +248,7 @@ export const AboutBento: React.FC = () => {
               <span className="text-xs font-mono font-bold text-white uppercase">
                 {t("บทบาทผู้นำและการสอน", "LEADERSHIP & MENTORSHIP")}
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
+              <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
                 {t("3 เทอมการศึกษา", "3 SEMESTERS")}
               </span>
             </div>

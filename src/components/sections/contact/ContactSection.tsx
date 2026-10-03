@@ -17,7 +17,7 @@ export const ContactSection: React.FC = () => {
   const { lang, t } = useLanguage();
   const { personal } = portfolioData;
   const [copied, setCopied] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [draftOpened, setDraftOpened] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -70,7 +70,7 @@ export const ContactSection: React.FC = () => {
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
     );
     window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
-    setFormSubmitted(true);
+    setDraftOpened(true);
   };
 
   const fadeIn = {
@@ -119,7 +119,7 @@ export const ContactSection: React.FC = () => {
             <span className="tracking-wide">
               {lang === "th"
                 ? "พร้อมเริ่มงานทันที • ONSITE / HYBRID / REMOTE"
-                : "AVAILABLE FOR PRODUCTION ROLES & COLLABORATION"}
+                : "OPEN FOR MOBILE DEVELOPER ROLES"}
             </span>
           </div>
 
@@ -141,17 +141,17 @@ export const ContactSection: React.FC = () => {
           {/* Value Proposition Narrative */}
           <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl">
             {lang === "th"
-              ? "ผมพร้อมสำหรับการร่วมงานในตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite (กรุงเทพฯ / เชียงใหม่), Hybrid และ Remote พร้อมส่งมอบคุณค่าและสถาปัตยกรรมที่เสถียรตั้งแต่วันแรก"
+              ? "ผมพร้อมสำหรับการร่วมงานในตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite (กรุงเทพฯ / เชียงใหม่), Hybrid และ Remote พร้อมเรียนรู้และร่วมพัฒนาแอปกับทีม"
               : "Open for full-time Mobile Developer positions and high-impact digital ventures. Based in Chiang Mai, Thailand (GMT+7) with full flexibility for Bangkok relocation, Hybrid, or Worldwide Remote."}
           </p>
 
           {/* Prominent Primary Email CTA Card */}
           <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all space-y-3">
-            <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
-              <span>PRIMARY DIRECT CHANNEL</span>
+            <div className="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-widest">
+              <span>{t("อีเมล", "Email")}</span>
               <span className="text-emerald-400 flex items-center gap-1 font-semibold">
                 <Clock className="w-3 h-3" />
-                RESPONDS IN &lt;24H
+                {t("ติดต่อทางอีเมล", "Email contact")}
               </span>
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
@@ -177,7 +177,7 @@ export const ContactSection: React.FC = () => {
                         "Copy email address to clipboard",
                       )
                 }
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 font-mono text-xs font-semibold cursor-pointer transition-all self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 font-mono text-xs font-semibold cursor-pointer transition-all self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 {copied ? (
                   <>
@@ -197,9 +197,9 @@ export const ContactSection: React.FC = () => {
           {/* Secondary Coordinates in Clean Hairline Blocks */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             <div className="p-3.5 rounded-xl bg-white/[0.015] border border-white/[0.06] space-y-1">
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400 uppercase">
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
                 <Phone className="w-3 h-3 text-[#00f0ff]" />
-                <span>DIRECT PHONE</span>
+                <span>{t("โทรศัพท์", "Phone")}</span>
               </div>
               <a
                 href={`tel:${personal.phone}`}
@@ -210,9 +210,9 @@ export const ContactSection: React.FC = () => {
             </div>
 
             <div className="p-3.5 rounded-xl bg-white/[0.015] border border-white/[0.06] space-y-1">
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400 uppercase">
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
                 <Github className="w-3 h-3 text-[#00f0ff]" />
-                <span>GITHUB PROFILE</span>
+                <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>
               </div>
               <a
                 href={personal.github}
@@ -227,9 +227,11 @@ export const ContactSection: React.FC = () => {
             </div>
 
             <div className="p-3.5 rounded-xl bg-white/[0.015] border border-white/[0.06] space-y-1 sm:col-span-2">
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400 uppercase">
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
                 <MapPin className="w-3 h-3 text-[#00f0ff]" />
-                <span>BASE & AVAILABILITY</span>
+                <span>
+                  {t("ที่ตั้งและรูปแบบงาน", "Location & availability")}
+                </span>
               </div>
               <span className="text-xs font-mono text-zinc-300 block">
                 {lang === "th" ? personal.locationTh : personal.locationEn}
@@ -249,12 +251,12 @@ export const ContactSection: React.FC = () => {
           <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.015] border border-white/[0.08] backdrop-blur-sm space-y-5">
             <div className="space-y-1 pb-3 border-b border-white/[0.06]">
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
-                {lang === "th" ? "ส่งข้อความโดยตรง" : "Direct Dispatch"}
+                {lang === "th" ? "เขียนอีเมลถึงผม" : "Write an email"}
               </h3>
               <p className="text-xs font-mono text-zinc-400">
                 {lang === "th"
-                  ? "ระบุรายละเอียดโปรเจกต์หรือตำแหน่งงานเพื่อเริ่มต้นการสนทนา"
-                  : "Drop project specifications or role inquiries directly to my inbox."}
+                  ? "แบบฟอร์มนี้จะเปิดร่างในแอปอีเมลของคุณ กรุณากดส่งจากแอปนั้น"
+                  : "This opens a draft in your email app. Send it there to complete your inquiry."}
               </p>
             </div>
 
@@ -262,7 +264,7 @@ export const ContactSection: React.FC = () => {
               <div className="space-y-1.5">
                 <label
                   htmlFor="contact-name"
-                  className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block"
+                  className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
                 >
                   {lang === "th"
                     ? "ชื่อของคุณ / องค์กร"
@@ -271,6 +273,7 @@ export const ContactSection: React.FC = () => {
                 <input
                   id="contact-name"
                   type="text"
+                  autoComplete="name"
                   required
                   value={formData.name}
                   onChange={(e) =>
@@ -288,13 +291,14 @@ export const ContactSection: React.FC = () => {
               <div className="space-y-1.5">
                 <label
                   htmlFor="contact-email"
-                  className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block"
+                  className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
                 >
                   {lang === "th" ? "อีเมลติดต่อกลับ" : "Your Email"}
                 </label>
                 <input
                   id="contact-email"
                   type="email"
+                  autoComplete="email"
                   required
                   value={formData.email}
                   onChange={(e) =>
@@ -308,7 +312,7 @@ export const ContactSection: React.FC = () => {
               <div className="space-y-1.5">
                 <label
                   htmlFor="contact-message"
-                  className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block"
+                  className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
                 >
                   {lang === "th"
                     ? "ข้อความ / รายละเอียดงาน"
@@ -331,32 +335,42 @@ export const ContactSection: React.FC = () => {
                 />
               </div>
 
-              {formSubmitted ? (
+              {draftOpened ? (
                 <div
                   role="status"
                   aria-live="polite"
                   className="p-4 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-center space-y-2"
                 >
                   <span className="text-xs font-mono font-bold text-[#00f0ff] block">
-                    {lang === "th" ? "ส่งข้อความสำเร็จ!" : "INQUIRY DISPATCHED"}
+                    {lang === "th"
+                      ? "พร้อมเปิดร่างอีเมล"
+                      : "Email draft requested"}
                   </span>
                   <span className="text-xs text-zinc-300 block">
                     {lang === "th"
-                      ? "เปิดไคลเอนต์อีเมลของคุณเรียบร้อยแล้ว ขอบคุณที่ติดต่อครับ"
-                      : "Email client launched. Looking forward to speaking with you!"}
+                      ? "หากแอปอีเมลเปิดขึ้น กรุณากดส่งจากแอปนั้น หากไม่เปิด ให้คัดลอกที่อยู่อีเมลบนหน้านี้ไปเขียนข้อความเอง"
+                      : "If your email app opened, send the draft there. If it did not, copy my email address and compose your message manually."}
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFormSubmitted(false);
-                      setFormData({ name: "", email: "", message: "" });
-                    }}
-                    className="inline-block mt-2 text-[11px] font-mono text-[#00f0ff] hover:underline cursor-pointer"
-                  >
-                    {lang === "th"
-                      ? "← ส่งข้อความใหม่อีกครั้ง"
-                      : "← Send another inquiry"}
-                  </button>
+                  <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+                    <button
+                      type="button"
+                      onClick={copyEmail}
+                      className="px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-mono text-white transition-all cursor-pointer border border-white/[0.1]"
+                    >
+                      {copied
+                        ? t("คัดลอกแล้ว!", "Copied!")
+                        : t("คัดลอกอีเมล", "Copy email address")}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDraftOpened(false);
+                      }}
+                      className="text-xs font-mono text-[#00f0ff] hover:underline cursor-pointer"
+                    >
+                      {lang === "th" ? "แก้ไขข้อความ" : "Edit message"}
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <button
@@ -365,7 +379,7 @@ export const ContactSection: React.FC = () => {
                   className="w-full py-3 px-6 rounded-full bg-[#00f0ff] hover:bg-[#38bdf8] text-[#07080c] font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_-4px_rgba(0,240,255,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(0,240,255,0.4)] hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00f0ff]"
                 >
                   <span>
-                    {lang === "th" ? "ส่งข้อความ ↗" : "DISPATCH INQUIRY ↗"}
+                    {lang === "th" ? "เปิดร่างในแอปอีเมล" : "Open email draft"}
                   </span>
                   <Send className="w-3.5 h-3.5 text-[#07080c] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </button>

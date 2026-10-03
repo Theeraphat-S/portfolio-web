@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Copy, Check, Terminal, Code2, Activity, Trash2 } from "lucide-react";
+import {
+  X,
+  Copy,
+  Check,
+  Terminal,
+  Code2,
+  Activity,
+  Trash2,
+} from "lucide-react";
 import { BLoCStreamEvent } from "../../types/stream";
 import { DART_SNIPPETS } from "../../data/dartCodeSnippets";
 import { useLanguage } from "../../context/LanguageContext";
@@ -119,7 +127,9 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   }`}
                 >
                   <Terminal className="w-3.5 h-3.5" />
-                  <span>{t("BLoC Event Stream", "BLoC Stream")} ({events.length})</span>
+                  <span>
+                    {t("BLoC Event Stream", "BLoC Stream")} ({events.length})
+                  </span>
                 </button>
 
                 <button
@@ -193,13 +203,20 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                         ? "บันทึก Real-time Event Stream จากการตอบสนองบนหน้าจอด้านนอก"
                         : "Real-time reactive event stream recorded directly from user interactions."}
                     </span>
-                    <span className="text-[#00f0ff] font-bold">Unidirectional BLoC</span>
+                    <span className="text-[#00f0ff] font-bold">
+                      Unidirectional BLoC
+                    </span>
                   </div>
 
                   {events.length === 0 ? (
                     <div className="py-16 text-center text-zinc-500 space-y-2">
                       <Terminal className="w-8 h-8 mx-auto text-zinc-600 opacity-60" />
-                      <p>{t("ยังไม่มี Event ในเซสชันนี้ ให้ลองกดเลื่อน Slider หรือกดปุ่มบนโทรศัพท์", "No events captured yet. Try adjusting sliders or tapping buttons on the phone mockup.")}</p>
+                      <p>
+                        {t(
+                          "ยังไม่มี Event ในเซสชันนี้ ให้ลองกดเลื่อน Slider หรือกดปุ่มบนโทรศัพท์",
+                          "No events captured yet. Try adjusting sliders or tapping buttons on the phone mockup.",
+                        )}
+                      </p>
                     </div>
                   ) : (
                     <div className="space-y-2">
@@ -216,9 +233,13 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                               <span className="px-1.5 py-0.5 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-bold border border-[#00f0ff]/20 text-[9px]">
                                 {evt.tag}
                               </span>
-                              <span className="text-white font-bold">{evt.name}</span>
+                              <span className="text-white font-bold">
+                                {evt.name}
+                              </span>
                             </div>
-                            <span className="text-zinc-500 text-[10px]">{evt.timestamp}</span>
+                            <span className="text-zinc-500 text-[10px]">
+                              {evt.timestamp}
+                            </span>
                           </div>
 
                           <p className="text-zinc-300 text-[11px] pl-6 font-mono">
@@ -246,7 +267,9 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 <div className="space-y-3">
                   <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-zinc-300 text-xs">
                     <p className="font-sans font-light">
-                      {lang === "th" ? snippet.explanationTh : snippet.explanationEn}
+                      {lang === "th"
+                        ? snippet.explanationTh
+                        : snippet.explanationEn}
                     </p>
                     <span className="text-[10px] text-[#00f0ff] block mt-1">
                       File: {snippet.filePath}
@@ -306,7 +329,12 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   <div className="p-4 rounded-xl bg-[#0a0f19] border border-white/[0.08] space-y-2 text-xs">
                     <h4 className="text-white font-bold flex items-center gap-2">
                       <Activity className="w-4 h-4 text-[#00f0ff]" />
-                      <span>{t("หลักการควบคุม Rebuild Boundary ใน Flutter", "Flutter Rebuild Boundary Strategy")}</span>
+                      <span>
+                        {t(
+                          "หลักการควบคุม Rebuild Boundary ใน Flutter",
+                          "Flutter Rebuild Boundary Strategy",
+                        )}
+                      </span>
                     </h4>
                     <p className="text-zinc-300 font-sans leading-relaxed text-[11px]">
                       {lang === "th"

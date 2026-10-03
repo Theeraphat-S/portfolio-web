@@ -11,7 +11,6 @@ export const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("about");
   const navContainerRef = useRef<HTMLDivElement>(null);
 
-  // Reordered navigation items: ABOUT is 01, WORK is 02
   const navLinks = [
     {
       id: "about",
@@ -227,7 +226,7 @@ export const Navbar: React.FC = () => {
               />
             </div>
             <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline-block leading-tight mt-1">
-              {lang === "th" ? "วิศวกรระบบโมบาย" : "MOBILE SYSTEMS ARCHITECT"}
+              {lang === "th" ? "วิศวกรระบบโมบาย" : "MOBILE SYSTEMS ENGINEER"}
             </span>
           </div>
         </a>

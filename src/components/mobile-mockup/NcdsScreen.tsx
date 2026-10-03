@@ -22,9 +22,7 @@ interface NcdsScreenProps {
   onDispatchEvent?: (event: BLoCStreamEvent) => void;
 }
 
-export const NcdsScreen: React.FC<NcdsScreenProps> = ({
-  onDispatchEvent,
-}) => {
+export const NcdsScreen: React.FC<NcdsScreenProps> = ({ onDispatchEvent }) => {
   const { t } = useLanguage();
 
   // Interactive Clinical Input Values
@@ -69,8 +67,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
 
     const tier =
       score >= 8 ? "HIGH RISK" : score >= 4 ? "MODERATE" : "LOW RISK";
-    const color =
-      score >= 8 ? "rose" : score >= 4 ? "amber" : "emerald";
+    const color = score >= 8 ? "rose" : score >= 4 ? "amber" : "emerald";
 
     return { score, tier, color, flags };
   };
@@ -107,7 +104,11 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
     }
   };
 
-  const applyPreset = (presetGlucose: number, presetSystolic: number, presetName: string) => {
+  const applyPreset = (
+    presetGlucose: number,
+    presetSystolic: number,
+    presetName: string,
+  ) => {
     handleVitalsChange(presetGlucose, presetSystolic);
     if (onDispatchEvent) {
       onDispatchEvent(
@@ -186,7 +187,9 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
       <div className="flex-1 p-3 flex flex-col justify-between space-y-2.5 overflow-y-auto">
         {/* Quick Scenario Preset Chips */}
         <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto">
-          <span className="text-zinc-500 uppercase px-1 shrink-0">PRESETS:</span>
+          <span className="text-zinc-500 uppercase px-1 shrink-0">
+            PRESETS:
+          </span>
           <button
             type="button"
             onClick={() => applyPreset(92, 115, "Normal")}
@@ -225,7 +228,9 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                       : "#10b981"
                 }
               />
-              <span>{t("ผลการคำนวณความเสี่ยง BLoC", "BLoC Risk Score Engine")}</span>
+              <span>
+                {t("ผลการคำนวณความเสี่ยง BLoC", "BLoC Risk Score Engine")}
+              </span>
             </span>
             <span
               className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border transition-colors ${
@@ -249,7 +254,9 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                   <BloodGlucoseIcon size={12} color="#38bdf8" />
                   <span>{t("น้ำตาลในเลือด (Glucose)", "Blood Glucose")}</span>
                 </span>
-                <span className="font-bold text-[#00f0ff]">{glucose} mg/dL</span>
+                <span className="font-bold text-[#00f0ff]">
+                  {glucose} mg/dL
+                </span>
               </div>
               <input
                 type="range"
@@ -272,7 +279,9 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                   <BloodPressureIcon size={12} color="#10b981" />
                   <span>{t("ความดันโลหิต (Systolic)", "Blood Pressure")}</span>
                 </span>
-                <span className="font-bold text-emerald-400">{systolic}/80 mmHg</span>
+                <span className="font-bold text-emerald-400">
+                  {systolic}/80 mmHg
+                </span>
               </div>
               <input
                 type="range"
@@ -294,7 +303,10 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
         <div className="space-y-1">
           <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
             <span className="tracking-wider uppercase">
-              {t("สถานะกลุ่มโรค (Clinical States)", "Clinical State Diagnostics")}
+              {t(
+                "สถานะกลุ่มโรค (Clinical States)",
+                "Clinical State Diagnostics",
+              )}
             </span>
             <span className="text-emerald-400 text-[9px]">Reactive Flow</span>
           </div>
@@ -356,7 +368,9 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                   ) : (
                     <CheckCircle2
                       className={`w-3.5 h-3.5 shrink-0 ${
-                        card.id === "heart" ? "text-sky-400" : "text-emerald-400"
+                        card.id === "heart"
+                          ? "text-sky-400"
+                          : "text-emerald-400"
                       }`}
                     />
                   )}
@@ -370,11 +384,15 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
         <div className="p-2 rounded-lg bg-zinc-900/50 border border-white/[0.04] space-y-1 text-[9px] font-mono">
           <div className="flex items-center justify-between text-zinc-400">
             <span>Offline Persistence</span>
-            <span className="text-sky-400 font-bold">Encrypted SQLite (WAL)</span>
+            <span className="text-sky-400 font-bold">
+              Encrypted SQLite (WAL)
+            </span>
           </div>
           <div className="flex items-center justify-between text-zinc-400">
             <span>Client Eval Latency</span>
-            <span className="text-emerald-400 font-bold">&lt; 0.8ms (Zero Error)</span>
+            <span className="text-emerald-400 font-bold">
+              &lt; 0.8ms (Zero Error)
+            </span>
           </div>
         </div>
 
@@ -394,7 +412,9 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
           ) : (
             <>
               <TrendingUp className="w-3.5 h-3.5" />
-              <span>{t("ออกรายงานผลตรวจ (Export PDF)", "Export Medical Report")}</span>
+              <span>
+                {t("ออกรายงานผลตรวจ (Export PDF)", "Export Medical Report")}
+              </span>
             </>
           )}
         </motion.button>

@@ -10,7 +10,8 @@ export interface DartCodeSnippet {
 export const DART_SNIPPETS: Record<string, DartCodeSnippet> = {
   "ncds-screening": {
     fileName: "risk_assessment_bloc.dart",
-    filePath: "lib/features/screening/presentation/bloc/risk_assessment_bloc.dart",
+    filePath:
+      "lib/features/screening/presentation/bloc/risk_assessment_bloc.dart",
     architectureLayer: "Presentation (BLoC) & Domain Logic",
     explanationTh:
       "BLoC State Machine คำนวณคะแนนความเสี่ยง NCDs ฝั่ง Client ทันทีแบบ Zero Latency พร้อมบันทึกข้อมูลเข้ารหัสลง SQLite ท้องถิ่น",

@@ -1,50 +1,26 @@
 import React, { useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useReducedMotion,
-} from "motion/react";
-import {
-  ArrowUpRight,
-  FileText,
-  ArrowDown,
-  Activity,
-  Radio,
-} from "lucide-react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { ArrowUpRight, FileText, ArrowDown, Sparkles } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
-import { useTelemetry } from "../../../hooks/useTelemetry";
 import { scrollToElement } from "../../../lib/lenis";
 
 export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
-  const { localTime, latency } = useTelemetry();
-  const shouldReduceMotion = useReducedMotion();
 
-  const heroRef = useRef<HTMLElement>(null);
+  // Subtle 3D Card Tilt for Specs Badge
+  const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 30, stiffness: 200 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
+  const rotateXSpring = useSpring(mouseY, { stiffness: 120, damping: 15 });
+  const rotateYSpring = useSpring(mouseX, { stiffness: 120, damping: 15 });
 
-  // Restrained parallax transforms for visual anchor (disabled if reduced motion)
-  const rotateX = useTransform(
-    smoothY,
-    [-0.5, 0.5],
-    shouldReduceMotion ? [0, 0] : [5, -5],
-  );
-  const rotateY = useTransform(
-    smoothX,
-    [-0.5, 0.5],
-    shouldReduceMotion ? [0, 0] : [-6, 6],
-  );
+  const rotateX = useTransform(rotateXSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(rotateYSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (shouldReduceMotion || !heroRef.current) return;
-    const rect = heroRef.current.getBoundingClientRect();
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     mouseX.set(x);
@@ -67,89 +43,61 @@ export const Hero: React.FC = () => {
     },
   };
 
-  const lineVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 30 },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0.01 : 0.8,
-        ease: [0.16, 1, 0.3, 1] as const,
-      },
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
   return (
-    <section
-      ref={heroRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative pt-6 sm:pt-14 pb-16 sm:pb-24 border-b border-white/[0.08]"
-    >
+    <section className="relative pt-4 sm:pt-6 pb-12 sm:pb-16 border-b border-white/[0.08]">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="flex flex-col space-y-10 sm:space-y-14"
+        className="space-y-6 sm:space-y-8"
       >
-        {/* Top Identity & Integrated Telemetry Bar */}
+        {/* Eyebrow & Status Row */}
         <motion.div
-          variants={lineVariants}
-          className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06]"
+          variants={itemVariants}
+          className="flex flex-wrap items-center justify-between gap-3"
         >
-          {/* Identity & Domain */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <span className="editorial-eyebrow text-[#00f0ff]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
-              THEERAPHAT SRIMONTHA
+              THEERAPHAT SRIMONTHA &bull; OVEN
             </span>
-            <span className="text-zinc-600 font-mono text-xs hidden sm:inline">
-              /
-            </span>
-            <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
-              MOBILE SYSTEMS ARCHITECT
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-[10px] font-mono text-zinc-300">
+              <Sparkles className="w-2.5 h-2.5 text-[#00f0ff]" />
+              <span>FLUTTER & BLoC</span>
             </span>
           </div>
 
-          {/* Real-time Geographic & System Telemetry with Emerald status indicators */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-mono">
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-400">CHIANG MAI, TH (GMT+7)</span>
-              <span className="text-zinc-600">&bull;</span>
-              <span className="text-white font-semibold">
-                {localTime || "12:00:00"}
-              </span>
-            </div>
-
-            <div className="hidden md:flex items-center gap-2 text-zinc-400">
-              <Activity className="w-3 h-3 text-emerald-400" />
-              <span>~{latency}ms</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[11px] font-medium">
-                <Radio className="w-2.5 h-2.5 animate-pulse text-emerald-400" />
-                <span>{t("พร้อมเริ่มงานทันที", "OPEN FOR ROLES")}</span>
-              </span>
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{t("พร้อมเริ่มงานทันที", "OPEN FOR ROLES")}</span>
+            </span>
           </div>
         </motion.div>
 
-        {/* Monumental Asymmetric Editorial Headline */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-          <div className="lg:col-span-9 space-y-3">
-            <h1 className="text-4xl xs:text-5xl sm:text-7xl lg:text-8xl xl:text-[6.5rem] font-extrabold tracking-tighter leading-[0.92] text-white">
+        {/* Monumental Editorial Display Headline + Specs Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
+          <div className="lg:col-span-8 space-y-2">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.85rem] font-extrabold tracking-[-0.035em] leading-[1.02] text-white break-keep hyphens-none">
               <motion.span
-                variants={lineVariants}
+                variants={itemVariants}
                 className="block text-zinc-300"
               >
-                {lang === "th" ? "สถาปัตยกรรมโมบาย" : "ARCHITECTING"}
+                {lang === "th" ? "วิศวกรรมโมบายแอป" : "ENGINEERING"}
               </motion.span>
-              <motion.span variants={lineVariants} className="block text-white">
+              <motion.span variants={itemVariants} className="block text-white">
                 {lang === "th" ? "ระดับ PRODUCTION" : "HIGH-PERFORMANCE"}
               </motion.span>
               <motion.span
-                variants={lineVariants}
+                variants={itemVariants}
                 className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-[#38bdf8] to-[#0284c7]"
               >
                 {lang === "th" ? "ด้วย FLUTTER & DART." : "MOBILE SYSTEMS."}
@@ -157,15 +105,18 @@ export const Hero: React.FC = () => {
             </h1>
           </div>
 
-          {/* Asymmetric Technical Specs Card */}
+          {/* Technical Specs Card (Avionics Deck Identity) */}
           <motion.div
-            variants={lineVariants}
+            variants={itemVariants}
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
             style={{ rotateX, rotateY, transformPerspective: 1000 }}
-            className="lg:col-span-3 flex flex-col justify-end"
+            className="lg:col-span-4 flex flex-col justify-end"
           >
-            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] space-y-3.5 hover:border-white/20 transition-colors">
-              <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                <span className="tracking-wider uppercase text-[11px] text-zinc-400">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all space-y-3 shadow-lg backdrop-blur-sm">
+              <div className="flex items-center justify-between text-xs font-mono">
+                <span className="text-zinc-400 tracking-wider uppercase text-[10px]">
                   SYSTEM SPECS
                 </span>
                 <span className="text-[#00f0ff] font-bold text-xs">
@@ -183,10 +134,10 @@ export const Hero: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-zinc-400">SYNC</span>
-                  <span>Offline SQLite</span>
+                  <span>Offline SQLite / REST</span>
                 </div>
               </div>
-              <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-zinc-400">
+              <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono">
                 <span className="text-zinc-400">TRACK</span>
                 <span className="text-zinc-200">Production Systems</span>
               </div>
@@ -194,18 +145,17 @@ export const Hero: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Supporting Narrative & Strategic Positioning */}
+        {/* Narrative & Action CTAs - Placed above the fold */}
         <motion.div
-          variants={lineVariants}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2"
+          variants={itemVariants}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-1"
         >
           <div className="lg:col-span-7">
-            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
               {lang === "th" ? (
                 <>
-                  บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้
-                  ผู้เชี่ยวชาญการออกแบบและพัฒนา Cross-platform Mobile
-                  Application ด้วย{" "}
+                  บัณฑิต IT มหาวิทยาลัยแม่โจ้ ผู้เชี่ยวชาญการออกแบบและพัฒนา
+                  Cross-platform Mobile Application ด้วย{" "}
                   <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
                     Flutter, Dart & BLoC
                   </strong>{" "}
@@ -215,8 +165,8 @@ export const Hero: React.FC = () => {
                 </>
               ) : (
                 <>
-                  IT graduate from Maejo University specialized in engineering
-                  reliable cross-platform mobile systems with{" "}
+                  Maejo University IT graduate specializing in cross-platform
+                  mobile engineering with{" "}
                   <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
                     Flutter, Dart & BLoC
                   </strong>
@@ -228,7 +178,6 @@ export const Hero: React.FC = () => {
             </p>
           </div>
 
-          {/* Action CTAs */}
           <div className="lg:col-span-5 flex flex-wrap items-center gap-3 lg:justify-end">
             <a
               href="#work"
@@ -239,7 +188,7 @@ export const Hero: React.FC = () => {
               data-cursor-text="EXPLORE"
               className="btn-editorial btn-editorial-primary group"
             >
-              <span>{t("สำรวจผลงาน", "EXPLORE WORK")}</span>
+              <span>{t("ดูผลงาน", "EXPLORE WORK")}</span>
               <ArrowDown className="w-4 h-4 text-[#07080c] group-hover:translate-y-0.5 transition-transform" />
             </a>
 
@@ -251,53 +200,29 @@ export const Hero: React.FC = () => {
               className="btn-editorial btn-editorial-outline group"
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
-              <span>{t("ดาวน์โหลด CV", "RESUME / CV")}</span>
+              <span>{t("เปิด CV", "RESUME / CV")}</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </a>
+
+            <a
+              href="mailto:theeraphat.sm@gmail.com"
+              className="inline-flex min-h-11 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors"
+            >
+              {t("ติดต่อทางอีเมล", "Email me")}
             </a>
           </div>
         </motion.div>
 
-        {/* Technical Specification Ribbon */}
-        <motion.div
-          variants={lineVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/[0.06]"
+        {/* Location & Modality Notice */}
+        <motion.p
+          variants={itemVariants}
+          className="text-xs sm:text-sm font-mono text-zinc-400 pt-1"
         >
-          <div className="space-y-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
-              PRIMARY ARCHITECTURE
-            </span>
-            <span className="text-sm font-mono font-bold text-white block">
-              BLoC / Clean Architecture
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
-              DATA INTEGRITY
-            </span>
-            <span className="text-sm font-mono font-bold text-white block">
-              Offline-First / REST & SQLite
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
-              LEADERSHIP & MENTORSHIP
-            </span>
-            <span className="text-sm font-mono font-bold text-white block">
-              Teaching Assistant (3 Terms)
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
-              COMMERCIAL FOCUS
-            </span>
-            <span className="text-sm font-mono font-bold text-[#00f0ff] block">
-              Production-Grade Mobile
-            </span>
-          </div>
-        </motion.div>
+          {t(
+            "📍 เชียงใหม่ ประเทศไทย &bull; ยินดีทำงาน Onsite / Hybrid / Remote",
+            "📍 Chiang Mai, Thailand &bull; Open to Onsite, Hybrid, or Remote roles",
+          )}
+        </motion.p>
       </motion.div>
     </section>
   );

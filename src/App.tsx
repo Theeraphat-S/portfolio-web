@@ -33,7 +33,7 @@ export const App: React.FC = () => {
         {/* Desktop-only Precision Custom Cursor */}
         <CustomCursor />
 
-        {/* Preloader Sequence */}
+        {/* Preloader Sequence (Session-cached & fast) */}
         <Preloader />
 
         <div className="min-h-[100dvh] relative bg-[#07080c] text-[#f1f5f9] selection:bg-[#00f0ff] selection:text-[#07080c] flex flex-col font-sans overflow-x-hidden">
