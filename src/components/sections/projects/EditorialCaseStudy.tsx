@@ -12,6 +12,9 @@ import { ProjectItem } from "../../../types";
 import { PintoScreen, PintoState } from "../../mobile-mockup/PintoScreen";
 import { NcdsScreen } from "../../mobile-mockup/NcdsScreen";
 import { PosScreen } from "../../mobile-mockup/PosScreen";
+import { LiveEventDock } from "../../mobile-mockup/LiveEventDock";
+import { DevToolsDrawer } from "../../mobile-mockup/DevToolsDrawer";
+import { BLoCStreamEvent } from "../../../types/stream";
 
 interface EditorialCaseStudyProps {
   project: ProjectItem;
@@ -50,6 +53,62 @@ const ARCHITECTURE_FLOWS: Record<string, { label: string; steps: string[] }> = {
   },
 };
 
+const getInitialEvent = (id: string): BLoCStreamEvent => {
+  if (id === "ncds-screening") {
+    return {
+      id: "init-ncds",
+      timestamp: "09:41:00.012",
+      projectId: "ncds-screening",
+      source: "NcdsScreen",
+      type: "bloc_state",
+      tag: "BLoC::State",
+      name: "RiskEvaluatedState",
+      details: "Glucose 108 mg/dL, BP 122/80 ➔ Score: 3/15 (LOW RISK)",
+      payload: {
+        glucose: 108,
+        systolic: 122,
+        totalScore: 3,
+        tier: "LOW RISK",
+        persistedOffline: true,
+      },
+    };
+  }
+  if (id === "pinto-app") {
+    return {
+      id: "init-pinto",
+      timestamp: "09:41:00.045",
+      projectId: "pinto-app",
+      source: "PintoScreen",
+      type: "bloc_state",
+      tag: "WS_SYNC",
+      name: "OrderTrackingState",
+      details: "Live WS active ➔ Courier Somchai K. (1.4km away, ETA 12:45)",
+      payload: {
+        orderId: "#FD-8942",
+        status: "InTransit",
+        courier: "Somchai K.",
+        distanceKm: 1.4,
+      },
+    };
+  }
+  return {
+    id: "init-pos",
+    timestamp: "09:41:00.088",
+    projectId: "pos-system",
+    source: "PosScreen",
+    type: "bloc_state",
+    tag: "CART_INIT",
+    name: "CartInitializedState",
+    details: "Register #04 Ready ➔ 2 SKUs in Cart, Net: ฿420.00, Sync: Online",
+    payload: {
+      register: "#04",
+      itemCount: 2,
+      totalAmount: 420.0,
+      offlineQueueReady: true,
+    },
+  };
+};
+
 export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   project,
   index,
@@ -59,6 +118,19 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("tracking");
   const [isManualPaused, setIsManualPaused] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Live BLoC Stream Events and DevTools Drawer
+  const [streamEvents, setStreamEvents] = useState<BLoCStreamEvent[]>([
+    getInitialEvent(project.id),
+  ]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [drawerTab, setDrawerTab] = useState<"stream" | "code" | "telemetry">(
+    "stream",
+  );
+
+  const handleDispatchEvent = (event: BLoCStreamEvent) => {
+    setStreamEvents((prev) => [event, ...prev.slice(0, 24)]);
+  };
 
   // Auto-switch Pinto state every 5 seconds unless explicitly paused by user or hovered
   React.useEffect(() => {
@@ -255,11 +327,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               <PintoScreen
                 activeState={pintoActiveTab}
                 onStateChange={handleTabClick}
+                onDispatchEvent={handleDispatchEvent}
               />
             ) : project.id === "ncds-screening" ? (
-              <NcdsScreen />
+              <NcdsScreen onDispatchEvent={handleDispatchEvent} />
             ) : (
-              <PosScreen />
+              <PosScreen onDispatchEvent={handleDispatchEvent} />
             )}
           </div>
 
@@ -274,6 +347,16 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             </span>
           </div>
         </div>
+
+        {/* Live Reactive BLoC Event Dock directly under Chassis */}
+        <LiveEventDock
+          latestEvent={streamEvents[0] || null}
+          eventsCount={streamEvents.length}
+          onOpenDrawer={(tab) => {
+            setDrawerTab(tab);
+            setIsDrawerOpen(true);
+          }}
+        />
       </div>
     );
   };
@@ -555,6 +638,16 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           )}
         </div>
       </div>
+
+      {/* Flutter & BLoC DevTools Drawer */}
+      <DevToolsDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        initialTab={drawerTab}
+        projectId={project.id}
+        events={streamEvents}
+        onClearEvents={() => setStreamEvents([])}
+      />
     </motion.article>
   );
 };
