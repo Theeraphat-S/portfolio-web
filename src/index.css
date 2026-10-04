@@ -138,13 +138,53 @@
     0 0 30px -10px rgba(0, 240, 255, 0.08);
 }
 
-/* Fixed Navbar Offset Globally for all section anchors */
+/* Keep chapter anchors clear without reserving space for a fixed navbar. */
 section[id] {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 1.5rem;
 }
 @media (min-width: 640px) {
   section[id] {
-    scroll-margin-top: 7rem;
+    scroll-margin-top: 2rem;
+  }
+}
+
+.story-progress-line {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.story-progress-dot {
+  position: relative;
+  z-index: 1;
+  width: 5px;
+  height: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: #07080c;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.story-progress-dot.is-passed {
+  border-color: rgba(0, 240, 255, 0.6);
+  background: rgba(0, 240, 255, 0.6);
+}
+
+.story-progress-dot.is-active {
+  border-color: #00f0ff;
+  background: #00f0ff;
+  transform: scale(1.45);
+}
+
+@media (min-width: 1024px) and (min-height: 860px) {
+  .project-demo-sticky {
+    position: sticky;
+    top: 3rem;
   }
 }
 

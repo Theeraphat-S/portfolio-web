@@ -1,11 +1,25 @@
 import React, { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { ArrowUpRight, FileText, ArrowDown, Sparkles } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { scrollToElement } from "../../../lib/lenis";
 
 export const Hero: React.FC = () => {
-  const { lang, t } = useLanguage();
+  const { lang, t, toggleLang } = useLanguage();
+  const heroRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const cardParallax = useTransform(scrollYProgress, [0, 1], [0, 28]);
 
   // Subtle 3D Card Tilt for Specs Badge
   const cardRef = useRef<HTMLDivElement>(null);
@@ -19,7 +33,7 @@ export const Hero: React.FC = () => {
   const rotateY = useTransform(rotateYSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    if (shouldReduceMotion || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -53,7 +67,11 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-4 sm:pt-6 pb-12 sm:pb-16 border-b border-white/[0.08]">
+    <section
+      id="intro"
+      ref={heroRef}
+      className="relative pt-4 sm:pt-6 pb-12 sm:pb-16 border-b border-white/[0.08]"
+    >
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -76,6 +94,16 @@ export const Hero: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
+              className="min-h-11 px-3 text-[11px] font-mono tracking-wider text-zinc-400 hover:text-white border border-white/[0.08] hover:border-white/20 rounded-full transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            >
+              <span className={lang === "th" ? "text-[#00f0ff]" : ""}>TH</span>
+              <span className="px-1.5 text-zinc-600">/</span>
+              <span className={lang === "en" ? "text-[#00f0ff]" : ""}>EN</span>
+            </button>
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>{t("พร้อมเริ่มงานทันที", "OPEN FOR ROLES")}</span>
@@ -111,7 +139,12 @@ export const Hero: React.FC = () => {
             ref={cardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            style={{ rotateX, rotateY, transformPerspective: 1000 }}
+            style={{
+              rotateX,
+              rotateY,
+              y: shouldReduceMotion ? 0 : cardParallax,
+              transformPerspective: 1000,
+            }}
             className="lg:col-span-4 flex flex-col justify-end"
           >
             <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all space-y-3 shadow-lg backdrop-blur-sm">

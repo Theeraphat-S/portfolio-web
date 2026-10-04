@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Lenis from "lenis";
+import { MotionConfig } from "motion/react";
 
 interface SmoothScrollProps {
   children: React.ReactNode;
@@ -46,5 +47,5 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     };
   }, []);
 
-  return <>{children}</>;
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 };

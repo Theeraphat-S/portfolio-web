@@ -359,7 +359,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative rounded-3xl bg-[#090c13]/90 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all duration-500 p-6 sm:p-10 lg:p-12 overflow-hidden backdrop-blur-md"
+      className="relative rounded-3xl bg-[#090c13]/90 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all duration-500 p-6 sm:p-10 lg:p-12 backdrop-blur-md"
     >
       {/* Editorial Watermark Corner */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00f0ff]/10 via-transparent to-transparent pointer-events-none" />
@@ -370,7 +370,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           ======================================================== */}
       <div className="hidden lg:grid lg:grid-cols-12 gap-10 xl:gap-14 items-center">
         {/* Left Column (42%): Device Showcase */}
-        <div className="lg:col-span-5 flex flex-col items-center gap-4">
+        <div className="project-demo-sticky lg:col-span-5 flex flex-col items-center gap-4 self-start">
           <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
             {t(
               "ตัวอย่างโต้ตอบสร้างด้วย React เพื่ออธิบายการทำงานของแอป",
