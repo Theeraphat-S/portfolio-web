@@ -494,15 +494,15 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 </div>
 
                 {/* Title & Subtitle */}
-                <h4 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                <h4 className="text-base sm:text-lg font-bold text-white tracking-tight min-h-[1.75rem]">
                   {lang === "th" ? beat.titleTh : beat.titleEn}
                 </h4>
-                <p className="text-xs font-mono text-zinc-400 mt-0.5">
+                <p className="text-xs font-mono text-zinc-400 mt-0.5 min-h-[1.1rem]">
                   {lang === "th" ? beat.subtitleTh : beat.subtitleEn}
                 </p>
 
                 {/* Narrative Description */}
-                <p className="text-sm text-zinc-300/90 font-light leading-relaxed mt-2.5">
+                <p className="text-sm text-zinc-300/90 font-light leading-relaxed mt-2.5 min-h-[4rem] sm:min-h-[3rem]">
                   {lang === "th" ? beat.descriptionTh : beat.descriptionEn}
                 </p>
 
@@ -547,7 +547,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
         {/* 2. Project Title & Subtitle Hierarchy */}
         <div className="space-y-1.5">
-          <h3 className="text-3xl xl:text-4xl font-bold tracking-tight text-white leading-tight">
+          <h3 className="text-3xl xl:text-4xl font-bold tracking-tight text-white leading-tight min-h-[2.5rem]">
             {primaryTitle}
           </h3>
           {featureSubtitle && (
@@ -555,13 +555,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               {featureSubtitle}
             </p>
           )}
-          <p className="text-xs font-mono text-zinc-400 tracking-wide">
+          <p className="text-xs font-mono text-zinc-400 tracking-wide min-h-[1rem]">
             {affiliationSubtitle}
           </p>
         </div>
 
         {/* 3. Description */}
-        <p className="text-sm xl:text-[15px] text-zinc-300/90 font-light leading-relaxed max-w-xl">
+        <p className="text-sm xl:text-[15px] text-zinc-300/90 font-light leading-relaxed max-w-xl min-h-[4.5rem]">
           {highlightedDescription}
         </p>
 
@@ -575,7 +575,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   mIdx === 0 ? "pr-4" : mIdx === 1 ? "px-4" : "pl-4"
                 }`}
               >
-                <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block break-words">
+                <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block break-words min-h-[1.25rem]">
                   {lang === "th" ? metric.labelTh : metric.labelEn}
                 </span>
                 <span className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block break-words">
@@ -636,7 +636,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onClick={() => onSelect(project)}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] px-5 py-2.5 rounded-full bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] transition-colors" />
             <span className="font-semibold tracking-wider">
@@ -651,7 +651,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-text="GITHUB"
-              className="group/src relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-zinc-200 text-xs font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+              className="group/src relative inline-flex items-center justify-center gap-2 min-w-[145px] px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-zinc-200 text-xs font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             >
               <Github className="w-3.5 h-3.5 text-zinc-500 group-hover/src:text-zinc-300 transition-colors" />
               <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>

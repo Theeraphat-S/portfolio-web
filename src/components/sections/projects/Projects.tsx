@@ -44,12 +44,12 @@ export const Projects: React.FC = () => {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-3xl space-y-3">
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight min-h-[2.5rem] sm:min-h-[3rem]">
               {lang === "th"
                 ? "ผลงานเด่น & สถาปัตยกรรมระดับ Production"
                 : "Flagship Systems & Production Architectures"}
             </h2>
-            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
+            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed min-h-[3.5rem] sm:min-h-[3rem]">
               {lang === "th"
                 ? "เจาะลึก 3 โปรเจกต์หลักที่ผ่านการพิสูจน์การใช้งานจริง ตั้งแต่ระบบคัดกรองโรคระดับชุมชน ไปจนถึงสถาปัตยกรรม Hybrid WebView และระบบแคชเชียร์ออฟไลน์"
                 : "Three signature architectures built for real-world reliability: offline-first healthcare screening, hybrid WebView logistics, and fault-tolerant retail point-of-sale."}
@@ -60,14 +60,14 @@ export const Projects: React.FC = () => {
           <div
             role="toolbar"
             aria-label={t("ตัวกรองหมวดหมู่ผลงาน", "Project category filter")}
-            className="flex items-center gap-1 p-1 bg-white/[0.02] border border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs"
+            className="flex items-center gap-1 p-1 bg-white/[0.02] border border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs shrink-0"
           >
             <button
               type="button"
               onClick={() => setFilter("all")}
               aria-pressed={filter === "all"}
               data-cursor-text="FILTER"
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+              className={`min-w-[86px] text-center px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                 filter === "all"
                   ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
                   : "text-zinc-400 hover:text-white border border-transparent"
@@ -80,7 +80,7 @@ export const Projects: React.FC = () => {
               onClick={() => setFilter("mobile")}
               aria-pressed={filter === "mobile"}
               data-cursor-text="FILTER"
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+              className={`min-w-[88px] text-center px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                 filter === "mobile"
                   ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
                   : "text-zinc-400 hover:text-white border border-transparent"
@@ -93,7 +93,7 @@ export const Projects: React.FC = () => {
               onClick={() => setFilter("system")}
               aria-pressed={filter === "system"}
               data-cursor-text="FILTER"
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+              className={`min-w-[118px] text-center px-3 py-1.5 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                 filter === "system"
                   ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
                   : "text-zinc-400 hover:text-white border border-transparent"

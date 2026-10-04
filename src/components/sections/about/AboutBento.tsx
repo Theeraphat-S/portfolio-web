@@ -50,7 +50,7 @@ export const AboutBento: React.FC = () => {
         variants={fadeIn}
         className="space-y-4 mb-10"
       >
-        <h2 className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl">
+        <h2 className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl min-h-[5.5rem] sm:min-h-[5rem] lg:min-h-[6.2rem]">
           {lang === "th" ? (
             <>
               ซอฟต์แวร์ที่ดีไม่ใช่เรื่องบังเอิญ{" "}
@@ -72,9 +72,9 @@ export const AboutBento: React.FC = () => {
           )}
         </h2>
 
-        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl">
+        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl min-h-[4.5rem] sm:min-h-[4rem] lg:min-h-[3.5rem]">
           {lang === "th"
-            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ ผู้เริ่มต้นพัฒนาโมบายแอปพลิเคชันอย่างเข้มข้นตั้งแต่ปี 2565 มุ่งเน้นการเปลี่ยนหลักการทางวิศวกรรมซอฟต์แวร์ให้เป็นระบบที่เสถียร รองรับผู้ใช้งานจริงระดับ Production ทั้งการเชื่อมต่อ WebView Bridge ไปจนถึงการจัดการข้อมูลออฟไลน์"
+            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ มุ่งมั่นพัฒนาโมบายแอปพลิเคชันตั้งแต่ปี 2565 เปลี่ยนหลักวิศวกรรมซอฟต์แวร์สู่ระบบจริงที่เสถียร ทั้งสถาปัตยกรรม Hybrid WebView และการประมวลผลข้อมูลออฟไลน์"
             : "Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to offline clinical data handling."}
         </p>
       </motion.div>
@@ -92,55 +92,49 @@ export const AboutBento: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Principle 01 */}
-          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
+          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors flex flex-col justify-between h-full min-h-[145px] space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="text-zinc-400 font-mono">01</span>
               <Layers className="w-3.5 h-3.5 text-zinc-400" />
             </div>
-            <h3 className="text-sm font-bold text-white font-mono">
-              {lang === "th"
-                ? "Deterministic State (การจัดการ State ที่แน่นอน)"
-                : "Deterministic State"}
+            <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
+              Deterministic State
             </h3>
-            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed min-h-[2.8rem]">
               {lang === "th"
-                ? "ใช้ BLoC แปลง Event เป็น State เพื่อแยกตรรกะออกจากหน้าจอและตรวจสอบการเปลี่ยนแปลง State ได้ง่ายขึ้น"
+                ? "ใช้ BLoC จัดการ Event สู่ State เพื่อแยกตรรกะออกจาก UI และควบคุมสถานะได้อย่างแม่นยำ"
                 : "Use BLoC event-to-state transitions to separate logic from screens and make state changes easier to test."}
             </p>
           </div>
 
           {/* Principle 02 */}
-          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
+          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors flex flex-col justify-between h-full min-h-[145px] space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="text-zinc-400 font-mono">02</span>
               <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
             </div>
-            <h3 className="text-sm font-bold text-white font-mono">
-              {lang === "th"
-                ? "Offline-First Resilience (ความทนทานแบบออฟไลน์)"
-                : "Offline-First Resilience"}
+            <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
+              Offline-First Resilience
             </h3>
-            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed min-h-[2.8rem]">
               {lang === "th"
-                ? "ออกแบบการจัดเก็บข้อมูลในเครื่องและการส่งคำขอซ้ำ เพื่อรองรับการเชื่อมต่อที่ไม่เสถียร"
+                ? "ออกแบบการจัดเก็บข้อมูลในเครื่องพร้อมกลไก Retry เพื่อความต่อเนื่องบนเครือข่ายที่ไม่เสถียร"
                 : "Design local data storage and retry handling for unreliable network connections."}
             </p>
           </div>
 
           {/* Principle 03 */}
-          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors space-y-2">
+          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-colors flex flex-col justify-between h-full min-h-[145px] space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="text-zinc-400 font-mono">03</span>
               <Zap className="w-3.5 h-3.5 text-zinc-400" />
             </div>
-            <h3 className="text-sm font-bold text-white font-mono">
-              {lang === "th"
-                ? "Fluid Performance (ประสิทธิภาพที่ลื่นไหล)"
-                : "Fluid Performance"}
+            <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
+              Fluid Performance
             </h3>
-            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed min-h-[2.8rem]">
               {lang === "th"
-                ? "แยกส่วนที่ต้อง Rebuild และตรวจสอบการใช้งานหน่วยความจำ เพื่อให้การโต้ตอบในแอปลื่นไหล"
+                ? "จำกัดขอบเขต Rebuild และควบคุม Memory เพื่อให้เฟรมเรตและอินเตอร์แอคชันลื่นไหล"
                 : "Isolate rebuild boundaries and inspect memory usage to keep app interactions responsive."}
             </p>
           </div>
@@ -159,50 +153,50 @@ export const AboutBento: React.FC = () => {
           {t("ตัวชี้วัดความเสถียร & ประสบการณ์", "VERIFIED SYSTEM METRICS")}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
-          <div className="space-y-0.5 pt-2 md:pt-0 md:pr-4">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
+          <div className="space-y-0.5 pt-2 md:pt-0 md:pr-4 flex flex-col justify-between">
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
               {t("ความแม่นยำ NCDs", "NCDS INTEGRITY")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               100%
             </span>
-            <span className="text-xs font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
               {t("คำนวณสูตรแม่นยำ 100%", "Zero calculation error")}
             </span>
           </div>
 
-          <div className="space-y-0.5 pt-2 md:pt-0 md:px-4">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
+          <div className="space-y-0.5 pt-2 md:pt-0 md:px-4 flex flex-col justify-between">
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
               {t("นศ. ที่ให้คำปรึกษา", "STUDENTS MENTORED")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               100+
             </span>
-            <span className="text-xs font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
               {t("ให้คำปรึกษาระดับปริญญาตรี", "Undergraduate mentorship")}
             </span>
           </div>
 
-          <div className="space-y-0.5 pt-2 md:pt-0 md:px-4">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
+          <div className="space-y-0.5 pt-2 md:pt-0 md:px-4 flex flex-col justify-between">
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
               {t("วาระผู้ช่วยสอน", "TEACHING TERMS")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               3
             </span>
-            <span className="text-xs font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
               {t("3 ภาคการศึกษาต่อเนื่อง", "Consecutive terms")}
             </span>
           </div>
 
-          <div className="space-y-0.5 pt-2 md:pt-0 md:pl-4">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words">
+          <div className="space-y-0.5 pt-2 md:pt-0 md:pl-4 flex flex-col justify-between">
+            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
               {t("เป้าหมายความลื่นไหล", "FRAME BUDGET")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               60-120 FPS
             </span>
-            <span className="text-xs font-mono text-zinc-400 block">
+            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
               {t("ประมวลผลบน UI Thread", "UI thread execution")}
             </span>
           </div>
@@ -217,7 +211,7 @@ export const AboutBento: React.FC = () => {
         variants={fadeIn}
         className="grid grid-cols-1 md:grid-cols-2 gap-4"
       >
-        <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-3.5">
+        <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-3.5 min-h-[110px]">
           <GraduationCap className="w-5 h-5 text-zinc-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -241,7 +235,7 @@ export const AboutBento: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-3.5">
+        <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-3.5 min-h-[110px]">
           <Presentation className="w-5 h-5 text-zinc-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -259,7 +253,7 @@ export const AboutBento: React.FC = () => {
             </p>
             <p className="text-xs text-zinc-400 font-mono">
               {lang === "th"
-                ? "ดูแลและให้คำปรึกษานักศึกษา 100+ คน ด้าน Frontend, ฐานข้อมูล และตรรกะโปรแกรม"
+                ? "ดูแลและให้คำปรึกษานักศึกษา 100+ คน ด้าน Frontend และตรรกะโปรแกรม"
                 : "Mentored 100+ students across Frontend, Database, and Algorithmic Logic"}
             </p>
           </div>

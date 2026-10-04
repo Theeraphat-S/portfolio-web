@@ -114,7 +114,7 @@ export const ContactSection: React.FC = () => {
           className="lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-8"
         >
           {/* Availability Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 font-mono text-xs">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 font-mono text-xs min-h-[1.75rem]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="tracking-wide">
               {lang === "th"
@@ -125,7 +125,7 @@ export const ContactSection: React.FC = () => {
 
           {/* Monumental Headline */}
           <div className="space-y-1">
-            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tighter leading-[0.95] text-white">
+            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tighter leading-[0.95] text-white min-h-[120px] sm:min-h-[180px] xl:min-h-[210px] flex flex-col justify-end">
               <span className="block text-zinc-400">
                 {lang === "th" ? "มาร่วมสร้างสรรค์" : "LET'S BUILD"}
               </span>
@@ -139,9 +139,9 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Value Proposition Narrative */}
-          <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl">
+          <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl min-h-[4.5rem] sm:min-h-[3.5rem]">
             {lang === "th"
-              ? "ผมพร้อมสำหรับการร่วมงานในตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite (กรุงเทพฯ / เชียงใหม่), Hybrid และ Remote พร้อมเรียนรู้และร่วมพัฒนาแอปกับทีม"
+              ? "พร้อมร่วมงานตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite, Hybrid และ Remote มุ่งมั่นร่วมสร้างสรรค์ผลงานคุณภาพกับทีม"
               : "Open for full-time Mobile Developer positions and high-impact digital ventures. Based in Chiang Mai, Thailand (GMT+7) with full flexibility for Bangkok relocation, Hybrid, or Worldwide Remote."}
           </p>
 

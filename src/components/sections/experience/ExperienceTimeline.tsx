@@ -102,14 +102,14 @@ export const ExperienceTimeline: React.FC = () => {
         variants={sectionFadeIn}
         className="space-y-4 mb-16 max-w-4xl"
       >
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight min-h-[2.5rem] sm:min-h-[3rem]">
           {lang === "th"
-            ? "เส้นทางวิศวกรรม & ประสบการณ์ทำงาน (Career Milestones)"
+            ? "เส้นทางวิศวกรรมและประสบการณ์การทำงาน"
             : "Engineering Career Timeline & Milestones"}
         </h2>
-        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
+        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed min-h-[3.5rem] sm:min-h-[3rem]">
           {lang === "th"
-            ? "จากการฝึกงานจริงในการสร้างฟีเจอร์ระดับ Commercial Production สู่บทบาทผู้ช่วยสอนประจำภาควิชา 3 เทอม และวิทยากรบรรยายพิเศษด้าน AI"
+            ? "จากประสบการณ์ส่งมอบฟีเจอร์ระดับ Production สู่บทบาทผู้ช่วยสอนประจำภาควิชา 3 เทอม และวิทยากรบรรยายพิเศษด้าน AI"
             : "From shipping production features during commercial software engineering internships to 3 consecutive semesters of university mentorship and guest AI keynote speaking."}
         </p>
       </motion.div>

@@ -98,13 +98,13 @@ export const Hero: React.FC = () => {
               type="button"
               onClick={toggleLang}
               aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-              className="min-h-11 px-3 text-[11px] font-mono tracking-wider text-zinc-400 hover:text-white border border-white/[0.08] hover:border-white/20 rounded-full transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+              className="min-h-11 px-3 text-[11px] font-mono tracking-wider text-zinc-400 hover:text-white border border-white/[0.08] hover:border-white/20 rounded-full transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] shrink-0"
             >
               <span className={lang === "th" ? "text-[#00f0ff]" : ""}>TH</span>
               <span className="px-1.5 text-zinc-600">/</span>
               <span className={lang === "en" ? "text-[#00f0ff]" : ""}>EN</span>
             </button>
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300">
+            <span className="inline-flex items-center justify-center gap-2 min-w-[145px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>{t("พร้อมเริ่มงานทันที", "OPEN FOR ROLES")}</span>
             </span>
@@ -113,13 +113,13 @@ export const Hero: React.FC = () => {
 
         {/* Monumental Editorial Display Headline + Specs Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
-          <div className="lg:col-span-8 space-y-2">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.85rem] font-extrabold tracking-[-0.035em] leading-[1.02] text-white break-keep hyphens-none">
+          <div className="lg:col-span-8 space-y-2 min-h-[105px] sm:min-h-[155px] md:min-h-[195px] lg:min-h-[220px] xl:min-h-[240px] flex flex-col justify-end">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.85rem] font-extrabold tracking-[-0.035em] leading-[1.05] text-white break-keep hyphens-none">
               <motion.span
                 variants={itemVariants}
                 className="block text-zinc-300"
               >
-                {lang === "th" ? "วิศวกรรมโมบายแอป" : "ENGINEERING"}
+                {lang === "th" ? "วิศวกรรมโมบาย" : "ENGINEERING"}
               </motion.span>
               <motion.span variants={itemVariants} className="block text-white">
                 {lang === "th" ? "ระดับ PRODUCTION" : "HIGH-PERFORMANCE"}
@@ -128,7 +128,7 @@ export const Hero: React.FC = () => {
                 variants={itemVariants}
                 className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-[#38bdf8] to-[#0284c7]"
               >
-                {lang === "th" ? "ด้วย FLUTTER & DART." : "MOBILE SYSTEMS."}
+                {lang === "th" ? "FLUTTER & DART." : "MOBILE SYSTEMS."}
               </motion.span>
             </h1>
           </div>
@@ -184,7 +184,7 @@ export const Hero: React.FC = () => {
           className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-1"
         >
           <div className="lg:col-span-7">
-            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
+            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed min-h-[5.5rem] sm:min-h-[4.75rem] lg:min-h-[4.25rem]">
               {lang === "th" ? (
                 <>
                   บัณฑิต IT มหาวิทยาลัยแม่โจ้ ผู้เชี่ยวชาญการออกแบบและพัฒนา
@@ -192,9 +192,8 @@ export const Hero: React.FC = () => {
                   <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
                     Flutter, Dart & BLoC
                   </strong>{" "}
-                  มีประสบการณ์ส่งมอบโปรเจกต์ใช้งานจริงระดับ Production
-                  ทั้งระบบคัดกรองโรค (NCDs), ฟีเจอร์แอปพลิเคชัน Pinto และระบบ
-                  POS ร้านค้า
+                  ส่งมอบโปรเจกต์ใช้งานจริงระดับ Production ทั้งระบบคัดกรองโรค
+                  (NCDs), ฟีเจอร์แอปพลิเคชัน Pinto และระบบ POS ออฟไลน์
                 </>
               ) : (
                 <>
@@ -219,7 +218,7 @@ export const Hero: React.FC = () => {
                 scrollToElement("work", 76);
               }}
               data-cursor-text="EXPLORE"
-              className="btn-editorial btn-editorial-primary group"
+              className="btn-editorial btn-editorial-primary group min-w-[145px] justify-center"
             >
               <span>{t("ดูผลงาน", "EXPLORE WORK")}</span>
               <ArrowDown className="w-4 h-4 text-[#07080c] group-hover:translate-y-0.5 transition-transform" />
@@ -230,7 +229,7 @@ export const Hero: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-text="RESUME"
-              className="btn-editorial btn-editorial-outline group"
+              className="btn-editorial btn-editorial-outline group min-w-[140px] justify-center"
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
               <span>{t("เปิด CV", "RESUME / CV")}</span>
@@ -239,7 +238,7 @@ export const Hero: React.FC = () => {
 
             <a
               href="mailto:theeraphat.sm@gmail.com"
-              className="inline-flex min-h-11 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors"
+              className="inline-flex min-h-11 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors min-w-[110px] justify-center sm:justify-start"
             >
               {t("ติดต่อทางอีเมล", "Email me")}
             </a>
@@ -249,7 +248,7 @@ export const Hero: React.FC = () => {
         {/* Location & Modality Notice */}
         <motion.p
           variants={itemVariants}
-          className="text-xs sm:text-sm font-mono text-zinc-400 pt-1"
+          className="text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
         >
           {t(
             "📍 เชียงใหม่ ประเทศไทย &bull; ยินดีทำงาน Onsite / Hybrid / Remote",

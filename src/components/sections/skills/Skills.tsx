@@ -87,14 +87,14 @@ export const Skills: React.FC = () => {
         variants={fadeIn}
         className="space-y-4 mb-16 max-w-4xl"
       >
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight min-h-[2.5rem] sm:min-h-[3rem]">
           {lang === "th"
-            ? "ชุดความเชี่ยวชาญเชิงวิศวกรรมซอฟต์แวร์ (Technical Matrix)"
+            ? "ขีดความสามารถและเทคโนโลยีหลัก"
             : "Engineering Capabilities & Technical Stack"}
         </h2>
-        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
+        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed min-h-[3.5rem] sm:min-h-[3rem]">
           {lang === "th"
-            ? "การบูรณาการระหว่างความเชี่ยวชาญเชิงลึกในระบบ Flutter/Dart สถาปัตยกรรม BLoC และฐานข้อมูลออฟไลน์ ควบคู่ไปกับพื้นฐาน Backend และทักษะการสื่อสารที่ผ่านการสอนนักศึกษาจริง"
+            ? "บูรณาการความเชี่ยวชาญเชิงลึก Flutter/Dart, สถาปัตยกรรม BLoC และฐานข้อมูลออฟไลน์ ควบคู่พื้นฐาน Backend และทักษะการสื่อสารที่ผ่านการสอนจริง"
             : "A structured balance between deep cross-platform mobile engineering, deterministic state management, offline persistence, and clear technical communication."}
         </p>
       </motion.div>
@@ -130,10 +130,10 @@ export const Skills: React.FC = () => {
                     {category.skills.length} MODULES
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight">
+                <h3 className="text-xl font-bold text-white tracking-tight min-h-[1.75rem]">
                   {lang === "th" ? category.nameTh : category.nameEn}
                 </h3>
-                <p className="text-xs font-mono text-zinc-400">
+                <p className="text-xs font-mono text-zinc-400 min-h-[2rem] sm:min-h-[1.25rem]">
                   {lang === "th" ? meta.taglineTh : meta.taglineEn}
                 </p>
               </div>

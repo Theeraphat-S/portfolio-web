@@ -12,22 +12,19 @@ export const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Left: Author & Geographic status */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-center sm:text-left">
-          <span className="font-mono font-bold text-white tracking-tight">
-            &copy; {new Date().getFullYear()}{" "}
-            {lang === "th"
-              ? portfolioData.personal.nameTh
-              : portfolioData.personal.nameEn}
+          <span className="font-mono font-bold text-white tracking-tight min-w-[140px]">
+            &copy; {new Date().getFullYear()} {portfolioData.personal.nameEn}
           </span>
           <span className="hidden sm:inline text-zinc-600">&bull;</span>
-          <span className="font-mono text-[11px] text-zinc-400">
+          <span className="font-mono text-[11px] text-zinc-400 min-w-[180px]">
             {lang === "th"
-              ? "เชียงใหม่, ประเทศไทย • พร้อมร่วมงานทุกรูปแบบ"
+              ? "เชียงใหม่, ประเทศไทย • พร้อมเริ่มงาน"
               : "Chiang Mai, Thailand • Available Worldwide"}
           </span>
         </div>
 
         {/* Center: Engineering Stack */}
-        <div className="font-mono text-[11px] text-zinc-400 text-center">
+        <div className="font-mono text-[11px] text-zinc-400 text-center min-w-[220px]">
           <span>
             {lang === "th" ? "พัฒนาและออกแบบด้วย " : "Architected with "}
           </span>
