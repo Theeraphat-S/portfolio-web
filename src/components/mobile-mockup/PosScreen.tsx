@@ -14,6 +14,7 @@ import { createStreamEvent } from "../../lib/streamUtils";
 interface PosScreenProps {
   direction?: number;
   onDispatchEvent?: (event: BLoCStreamEvent) => void;
+  activeBeat?: number;
 }
 
 interface PosCartItem {
@@ -30,12 +31,32 @@ interface QueuedOrder {
   itemCount: number;
 }
 
-export const PosScreen: React.FC<PosScreenProps> = ({ onDispatchEvent }) => {
+export const PosScreen: React.FC<PosScreenProps> = ({
+  onDispatchEvent,
+  activeBeat,
+}) => {
   const { t } = useLanguage();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const [pendingSyncCount, setPendingSyncCount] = useState(0);
   const [queuedOrders, setQueuedOrders] = useState<QueuedOrder[]>([]);
+
+  // Adjust state when activeBeat prop changes
+  const [prevBeat, setPrevBeat] = useState(activeBeat);
+  if (activeBeat !== prevBeat) {
+    setPrevBeat(activeBeat);
+    if (activeBeat === 0) {
+      setIsOnline(true);
+      setIsCompleted(false);
+    } else if (activeBeat === 1) {
+      setIsOnline(false);
+      setIsCompleted(false);
+      setPendingSyncCount((prev) => (prev === 0 ? 1 : prev));
+    } else if (activeBeat === 2) {
+      setIsCompleted(true);
+      setIsOnline(true);
+    }
+  }
 
   const [cartItems, setCartItems] = useState<PosCartItem[]>([
     {

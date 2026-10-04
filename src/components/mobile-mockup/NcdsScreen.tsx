@@ -20,15 +20,36 @@ import { createStreamEvent } from "../../lib/streamUtils";
 interface NcdsScreenProps {
   direction?: number;
   onDispatchEvent?: (event: BLoCStreamEvent) => void;
+  activeBeat?: number;
 }
 
-export const NcdsScreen: React.FC<NcdsScreenProps> = ({ onDispatchEvent }) => {
+export const NcdsScreen: React.FC<NcdsScreenProps> = ({
+  onDispatchEvent,
+  activeBeat,
+}) => {
   const { t } = useLanguage();
 
   // Interactive Clinical Input Values
   const [glucose, setGlucose] = useState<number>(108); // mg/dL
   const [systolic, setSystolic] = useState<number>(122); // mmHg
   const [isExported, setIsExported] = useState<boolean>(false);
+
+  // Adjust state when activeBeat prop changes
+  const [prevBeat, setPrevBeat] = useState(activeBeat);
+  if (activeBeat !== prevBeat) {
+    setPrevBeat(activeBeat);
+    if (activeBeat === 0) {
+      setGlucose(98);
+      setSystolic(118);
+      setIsExported(false);
+    } else if (activeBeat === 1) {
+      setGlucose(108);
+      setSystolic(122);
+      setIsExported(false);
+    } else if (activeBeat === 2) {
+      setIsExported(true);
+    }
+  }
 
   // Real-time Client-side Clinical Risk Algorithm
   const calculateRisk = (gluc: number, sys: number) => {

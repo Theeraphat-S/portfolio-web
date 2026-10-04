@@ -137,6 +137,22 @@ export interface SkillCategory {
   skills: SkillDetail[];
 }
 
+export interface StoryBeat {
+  id: string;
+  badgeTh: string;
+  badgeEn: string;
+  titleTh: string;
+  titleEn: string;
+  subtitleTh: string;
+  subtitleEn: string;
+  descriptionTh: string;
+  descriptionEn: string;
+  streamTag: string;
+  streamState: string;
+  streamDetails: string;
+  highlightSpecs: string[];
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
   stats: StatItem[];

@@ -20,4 +20,5 @@ export {
   skillCategoriesData,
   experiencesData,
 };
+export { BEATS_BY_PROJECT } from "./scrollytellingBeats";
 export * from "../types";
