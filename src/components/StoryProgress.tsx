@@ -33,11 +33,12 @@ export const StoryProgress: React.FC = () => {
 
   const activeIndex = chapters.findIndex(({ id }) => id === activeChapter);
   const chapter = chapters[Math.max(activeIndex, 0)];
+  const chapterNumber = String(Math.max(activeIndex + 1, 1)).padStart(2, "0");
 
   return (
     <>
       <aside
-        className="story-progress fixed left-8 top-1/2 z-30 hidden -translate-y-1/2 xl:block"
+        className="story-progress fixed left-8 top-1/2 z-30 hidden -translate-y-1/2 2xl:block"
         aria-label="Story progress"
       >
         <div className="flex items-center gap-3">
@@ -55,7 +56,7 @@ export const StoryProgress: React.FC = () => {
           </div>
           <div className="min-w-28">
             <p className="font-mono text-[10px] tracking-[0.18em] text-zinc-500">
-              {String(Math.max(activeIndex + 1, 1)).padStart(2, "0")} / 06
+              {chapterNumber} / 06
             </p>
             <p className="mt-1 font-mono text-[10px] tracking-[0.12em] text-zinc-300">
               {chapter.label}
@@ -66,12 +67,10 @@ export const StoryProgress: React.FC = () => {
 
       {activeIndex > 0 && (
         <aside
-          className="fixed right-4 top-3 z-30 rounded-full border border-white/10 bg-[#07080c]/85 px-3 py-1.5 font-mono text-[10px] tracking-wider text-zinc-300 backdrop-blur-sm xl:hidden"
+          className="fixed right-4 top-3 z-30 rounded-full border border-white/10 bg-[#07080c]/85 px-3 py-1.5 font-mono text-[10px] tracking-wider text-zinc-300 backdrop-blur-sm 2xl:hidden"
           aria-label="Story progress"
         >
-          <span className="text-zinc-500">
-            {String(activeIndex + 1).padStart(2, "0")} / 06
-          </span>
+          <span className="text-zinc-500">{chapterNumber} / 06</span>
           <span className="mx-2 text-zinc-600">/</span>
           <span>{chapter.label}</span>
         </aside>
