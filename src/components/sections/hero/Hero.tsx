@@ -104,7 +104,7 @@ export const Hero: React.FC = () => {
               <span className="px-1.5 text-zinc-600">/</span>
               <span className={lang === "en" ? "text-[#00f0ff]" : ""}>EN</span>
             </button>
-            <span className="inline-flex items-center justify-center gap-2 min-w-[145px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
+            <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>{t("พร้อมเริ่มงานทันที", "OPEN FOR ROLES")}</span>
             </span>

@@ -12,8 +12,11 @@ export const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Left: Author & Geographic status */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-center sm:text-left">
-          <span className="font-mono font-bold text-white tracking-tight min-w-[140px]">
-            &copy; {new Date().getFullYear()} {portfolioData.personal.nameEn}
+          <span className="font-mono font-bold text-white tracking-tight min-w-[170px] inline-block">
+            &copy; {new Date().getFullYear()}{" "}
+            {lang === "th"
+              ? portfolioData.personal.nameTh
+              : portfolioData.personal.nameEn}
           </span>
           <span className="hidden sm:inline text-zinc-600">&bull;</span>
           <span className="font-mono text-[11px] text-zinc-400 min-w-[180px]">

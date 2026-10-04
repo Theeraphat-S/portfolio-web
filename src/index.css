@@ -52,16 +52,6 @@
     word-break: break-word;
   }
 
-  html[lang="th"] h1,
-  html[lang="th"] h2,
-  html[lang="th"] h3,
-  html[lang="th"] h4,
-  html[lang="th"] h5,
-  html[lang="th"] h6 {
-    letter-spacing: normal;
-    line-height: 1.15;
-  }
-
   h1,
   h2,
   h3,
