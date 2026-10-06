@@ -33,7 +33,7 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "Domain layer evaluates Diabetes, Hypertension, Cardiac, and Obesity risk tiers instantly on-device, eliminating human calculation error by 100%.",
       streamTag: "BLoC::State",
       streamState: "RiskEvaluatedState",
-      streamDetails: "Score: 3/15 (LOW RISK Tier Verified)",
+      streamDetails: "Score: 4/15 (MODERATE Tier Verified)",
       highlightSpecs: [
         "Risk Scoring Engine",
         "Clean Architecture",

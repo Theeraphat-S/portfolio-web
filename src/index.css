@@ -199,6 +199,8 @@ section[id] {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 600;
+  /* Fixed line box so the Thai fallback face cannot grow the button. */
+  line-height: 1.25rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 9999px;
@@ -273,4 +275,10 @@ section[id] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Wide mono tracking is tuned for Latin caps; Thai glyphs fall back to the
+   sans face and become hard to read when letter-spaced. */
+html[lang="th"] .editorial-eyebrow {
+  letter-spacing: 0.04em;
 }

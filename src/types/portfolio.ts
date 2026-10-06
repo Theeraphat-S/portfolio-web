@@ -1,7 +1,11 @@
 export interface ProjectMetric {
   labelTh: string;
   labelEn: string;
+  /** Language-neutral value (numbers, product names). */
   value: string;
+  /** Localized overrides when the value contains translatable words. */
+  valueTh?: string;
+  valueEn?: string;
 }
 
 export type ProjectCategory = "mobile" | "system" | "featured";
@@ -99,6 +103,8 @@ export interface PersonalInfo {
   nameTh: string;
   nameEn: string;
   nickname: string;
+  /** Core stack shown beside the job title, e.g. "Flutter & Dart". */
+  specialty: string;
   titleTh: string;
   titleEn: string;
   taglineTh: string;

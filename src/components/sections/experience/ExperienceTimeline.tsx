@@ -15,7 +15,7 @@ import { portfolioData } from "../../../data";
 import { ExperienceItem } from "../../../types";
 
 export const ExperienceTimeline: React.FC = () => {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const { experiences, personal } = portfolioData;
   const shouldReduceMotion = useReducedMotion();
 
@@ -87,10 +87,10 @@ export const ExperienceTimeline: React.FC = () => {
         className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
-          04 // ENGINEERING CAREER TIMELINE
+          04 // {t("เส้นทางการทำงาน", "CAREER TIMELINE")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          TRACK RECORD
+          {t("ประสบการณ์จริง", "TRACK RECORD")}
         </span>
       </motion.div>
 

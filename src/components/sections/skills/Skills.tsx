@@ -43,7 +43,7 @@ const CATEGORY_META = [
 ];
 
 export const Skills: React.FC = () => {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const { skillCategories } = portfolioData;
 
   const fadeIn = {
@@ -72,10 +72,10 @@ export const Skills: React.FC = () => {
         className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
-          03 // CAPABILITIES & SYSTEMS
+          03 // {t("ความสามารถ & ระบบ", "CAPABILITIES & SYSTEMS")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          ENGINEERING TREE MATRIX
+          {t("ทักษะแยกตามหมวด", "SKILLS BY DOMAIN")}
         </span>
       </motion.div>
 
@@ -127,7 +127,10 @@ export const Skills: React.FC = () => {
                     <span>{lang === "th" ? meta.labelTh : meta.labelEn}</span>
                   </div>
                   <span className="text-[10px] font-mono text-zinc-400 uppercase">
-                    {category.skills.length} MODULES
+                    {t(
+                      `${category.skills.length} ทักษะ`,
+                      `${category.skills.length} SKILLS`,
+                    )}
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-white tracking-tight min-h-[1.75rem]">

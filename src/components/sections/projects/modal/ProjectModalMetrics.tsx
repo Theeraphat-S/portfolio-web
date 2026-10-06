@@ -1,4 +1,5 @@
 import React from "react";
+import { getMetricValue } from "../../../../lib/utils";
 import { useLanguage } from "../../../../context/LanguageContext";
 import { ProjectMetric } from "../../../../types";
 
@@ -24,7 +25,7 @@ export const ProjectModalMetrics: React.FC<ProjectModalMetricsProps> = ({
             {lang === "th" ? m.labelTh : m.labelEn}
           </span>
           <span className="text-sm sm:text-base font-bold font-mono text-[#00f0ff]">
-            {m.value}
+            {getMetricValue(m, lang)}
           </span>
         </div>
       ))}

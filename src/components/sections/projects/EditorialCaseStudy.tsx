@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Layers,
 } from "lucide-react";
+import { getMetricValue } from "../../../lib/utils";
 import { useLanguage } from "../../../context/LanguageContext";
 import { ProjectItem } from "../../../types";
 import { BEATS_BY_PROJECT } from "../../../data";
@@ -22,6 +23,7 @@ import { PosScreen } from "../../mobile-mockup/PosScreen";
 import { LiveEventDock } from "../../mobile-mockup/LiveEventDock";
 import { DevToolsDrawer } from "../../mobile-mockup/DevToolsDrawer";
 import { BLoCStreamEvent } from "../../../types/stream";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 interface EditorialCaseStudyProps {
   project: ProjectItem;
@@ -70,12 +72,12 @@ const getInitialEvent = (id: string): BLoCStreamEvent => {
       type: "bloc_state",
       tag: "BLoC::State",
       name: "RiskEvaluatedState",
-      details: "Glucose 108 mg/dL, BP 122/80 ➔ Score: 3/15 (LOW RISK)",
+      details: "Glucose 108 mg/dL, BP 122/80 ➔ Score: 4/15 (MODERATE)",
       payload: {
         glucose: 108,
         systolic: 122,
-        totalScore: 3,
-        tier: "LOW RISK",
+        totalScore: 4,
+        tier: "MODERATE",
         persistedOffline: true,
       },
     };
@@ -124,6 +126,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const { lang, t } = useLanguage();
   const [activeBeat, setActiveBeat] = useState<number>(0);
   const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("tracking");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // Alternating Layout Rhythm (Project 1 Left, Project 2 Right, Project 3 Left)
   const isReversed = index % 2 === 1;
@@ -211,7 +214,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     return () => {
       observers.forEach((obs) => obs.disconnect());
     };
-  }, [applyBeat]);
+    // Re-bind when the layout branch swaps, since beat nodes are remounted.
+  }, [applyBeat, isDesktop]);
 
   const handleTabClick = (tab: PintoState) => {
     setPintoActiveTab(tab);
@@ -287,27 +291,38 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     steps: ["Client UI", "State Layer", "Service Bridge", "Data Engine"],
   };
 
+  const activeBeatData = beats[activeBeat];
+  const activeBeatLabel = activeBeatData
+    ? (lang === "th" ? activeBeatData.badgeTh : activeBeatData.badgeEn).replace(
+        /^\d+\s*\/\/\s*/,
+        "",
+      )
+    : "";
+
   // Render Phone Simulator Device (Sticky Pin Anchor)
   const renderDeviceMockup = () => {
     return (
-      <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px] flex flex-col items-center gap-3.5">
+      <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px] flex flex-col items-center gap-3">
         {/* Scrollytelling Beat Active Indicator HUD */}
         <div className="w-full flex items-center justify-between px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-[#00f0ff]/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00f0ff] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00f0ff]" />
-            </span>
-            <span className="text-[#00f0ff] font-semibold tracking-wider">
-              SCROLLYTELLING
+            <span className="h-2 w-2 shrink-0 rounded-full bg-[#00f0ff]" />
+            <span className="text-[#00f0ff] font-semibold tracking-wider truncate">
+              {activeBeatLabel}
             </span>
           </div>
-          <div className="flex items-center gap-1.5 text-zinc-300">
+          <div
+            className="flex items-center gap-1.5 text-zinc-300 shrink-0"
+            aria-live="polite"
+          >
+            <span className="sr-only">{t("ขั้นตอน", "Step")}</span>
             <span className="text-[#00f0ff] font-bold">
-              BEAT 0{activeBeat + 1}
+              {String(activeBeat + 1).padStart(2, "0")}
             </span>
             <span className="text-zinc-600">/</span>
-            <span className="text-zinc-400">03</span>
+            <span className="text-zinc-400">
+              {String(beats.length).padStart(2, "0")}
+            </span>
           </div>
         </div>
 
@@ -397,17 +412,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 onDispatchEvent={handleDispatchEvent}
               />
             )}
-          </div>
-
-          {/* Device Footer Micro-bar */}
-          <div className="pt-2.5 px-3 flex items-center justify-between text-xs font-mono text-zinc-400">
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse" />
-              {t("โหมดสตรีม BLoC สด", "Live BLoC Stream Active")}
-            </span>
-            <span className="text-zinc-400 tracking-wider">
-              React Simulation
-            </span>
           </div>
         </div>
 
@@ -579,7 +583,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   {lang === "th" ? metric.labelTh : metric.labelEn}
                 </span>
                 <span className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block break-words">
-                  {metric.value}
+                  {getMetricValue(metric, lang)}
                 </span>
               </div>
             ))}
@@ -671,6 +675,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     );
   };
 
+  const storyColumn = (
+    <div className="col-span-7 space-y-10">
+      {renderProjectHeader()}
+      {renderStoryBeats()}
+    </div>
+  );
+
   return (
     <motion.article
       layout
@@ -683,50 +694,25 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       {/* Editorial Watermark Corner */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00f0ff]/10 via-transparent to-transparent pointer-events-none" />
 
-      {/* ========================================================
-          DESKTOP SCROLLYTELLING RUNWAY (>= lg):
-          Two-column composition with Sticky Device Mockup.
-          CSS ordering handles Alternating Layout without code duplication:
-          - Default (Index 0, 2): Device col-span-5 (order 1) / Story col-span-7 (order 2)
-          - Reversed (Index 1): Story col-span-7 (order 1) / Device col-span-5 (order 2)
-          ======================================================== */}
-      <div className="hidden lg:grid lg:grid-cols-12 gap-10 xl:gap-14 items-start">
-        {/* Sticky Device Showcase Column */}
-        <div
-          className={`lg:col-span-5 sticky top-24 self-start space-y-4 ${
-            isReversed ? "lg:order-2" : "lg:order-1"
-          }`}
-        >
-          <p className="text-xs text-zinc-400 leading-relaxed font-mono">
-            {t(
-              "จำลองสภาพแวดล้อมสตรีม BLoC สดผูกกับการเลื่อนอ่าน",
-              "Live BLoC stream simulation synchronized with scroll progression.",
-            )}
-          </p>
-          {renderDeviceMockup()}
+      {/* Render exactly one layout tree: duplicated hidden markup would
+          steal the beat refs from the visible runway and duplicate ids. */}
+      {isDesktop ? (
+        <div className="grid grid-cols-12 gap-10 xl:gap-14 items-start">
+          {/* DOM order follows visual order so keyboard focus matches the
+              alternating rhythm (device left on even, right on odd). */}
+          {isReversed && storyColumn}
+          <div className="col-span-5 self-start [@media(min-height:860px)]:sticky [@media(min-height:860px)]:top-16">
+            {renderDeviceMockup()}
+          </div>
+          {!isReversed && storyColumn}
         </div>
-
-        {/* Scrolling Narrative Story Runway Column */}
-        <div
-          className={`lg:col-span-7 space-y-10 ${
-            isReversed ? "lg:order-1" : "lg:order-2"
-          }`}
-        >
+      ) : (
+        <div className="flex flex-col space-y-8">
           {renderProjectHeader()}
           {renderStoryBeats()}
+          <div className="py-2 flex justify-center">{renderDeviceMockup()}</div>
         </div>
-      </div>
-
-      {/* ========================================================
-          MOBILE & TABLET ADAPTIVE CLEAN STACK (< lg):
-          Reuses canonical project header and stacked story beats
-          without duplicating layout code.
-          ======================================================== */}
-      <div className="lg:hidden flex flex-col space-y-8">
-        {renderProjectHeader()}
-        {renderStoryBeats()}
-        <div className="py-2 flex justify-center">{renderDeviceMockup()}</div>
-      </div>
+      )}
 
       {/* Flutter & BLoC DevTools Drawer */}
       <DevToolsDrawer

@@ -6,6 +6,7 @@ export const personalData: PersonalInfo = {
   nickname: "Oven",
   titleTh: "Mobile Developer",
   titleEn: "Mobile Developer",
+  specialty: "Flutter & Dart",
   taglineTh:
     "นักศึกษาจบใหม่ สาขาเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ ที่มีความเชี่ยวชาญและหลงใหลในการพัฒนา Mobile Application ด้วย Flutter & Dart มีประสบการณ์สร้างแอปพลิเคชันใช้งานจริง ตั้งแต่ระบบคัดกรองโรค (NCDs) ไปจนถึงแอปพลิเคชัน Pinto และระบบ POS ที่มีการเชื่อมต่อ WebView และ Profile API",
   taglineEn:

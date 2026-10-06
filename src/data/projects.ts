@@ -62,7 +62,9 @@ export const projectsData: ProjectItem[] = [
       {
         labelTh: "เวลาคัดกรอง",
         labelEn: "Screening Time",
-        value: "< 3-5 นาที",
+        value: "< 3-5 min",
+        valueTh: "< 3-5 นาที",
+        valueEn: "< 3-5 min",
       },
       {
         labelTh: "ความแม่นยำคะแนน",
@@ -72,7 +74,9 @@ export const projectsData: ProjectItem[] = [
       {
         labelTh: "โรคที่รองรับ",
         labelEn: "Diseases Covered",
-        value: "4 กลุ่มโรค",
+        value: "4 disease groups",
+        valueTh: "4 กลุ่มโรค",
+        valueEn: "4 disease groups",
       },
     ],
     architectureTh:

@@ -96,10 +96,10 @@ export const ContactSection: React.FC = () => {
         className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
-          05 // INITIATE COLLABORATION
+          05 // {t("ติดต่อ", "CONTACT")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          DIRECT DISPATCH
+          {t("ช่องทางติดต่อ", "GET IN TOUCH")}
         </span>
       </motion.div>
 

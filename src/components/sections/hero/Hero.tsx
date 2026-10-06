@@ -7,9 +7,10 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { ArrowUpRight, FileText, ArrowDown, Sparkles } from "lucide-react";
+import { ArrowUpRight, FileText, ArrowDown, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { scrollToElement } from "../../../lib/lenis";
+import { personalData } from "../../../data";
 
 export const Hero: React.FC = () => {
   const { lang, t, toggleLang } = useLanguage();
@@ -78,19 +79,34 @@ export const Hero: React.FC = () => {
         animate="visible"
         className="space-y-6 sm:space-y-8"
       >
-        {/* Eyebrow & Status Row */}
+        {/* Identity & Status Row: who this is and what role, before anything else */}
         <motion.div
           variants={itemVariants}
           className="flex flex-wrap items-center justify-between gap-3"
         >
-          <div className="flex items-center gap-2.5">
-            <span className="editorial-eyebrow text-[#00f0ff]">
-              THEERAPHAT SRIMONTHA &bull; OVEN
-            </span>
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-[10px] font-mono text-zinc-300">
-              <Sparkles className="w-2.5 h-2.5 text-[#00f0ff]" />
-              <span>FLUTTER & BLoC</span>
-            </span>
+          <div className="flex items-center gap-3 min-w-0">
+            <img
+              src="/profile.jpg"
+              alt=""
+              width={48}
+              height={48}
+              className="h-12 w-12 shrink-0 rounded-full object-cover border border-white/[0.12]"
+            />
+            <h1 className="flex flex-col gap-0.5 min-w-0 leading-snug tracking-tight">
+              <span className="text-base sm:text-lg font-semibold text-white">
+                {lang === "th" ? personalData.nameTh : personalData.nameEn}{" "}
+                <span className="font-normal text-zinc-400">
+                  ({personalData.nickname})
+                </span>
+              </span>
+              <span className="text-sm font-normal text-zinc-300">
+                {lang === "th" ? personalData.titleTh : personalData.titleEn}{" "}
+                <span className="text-zinc-500" aria-hidden="true">
+                  ·
+                </span>{" "}
+                {personalData.specialty}
+              </span>
+            </h1>
           </div>
 
           <div className="flex items-center gap-2">
@@ -113,8 +129,10 @@ export const Hero: React.FC = () => {
 
         {/* Monumental Editorial Display Headline + Specs Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
-          <div className="lg:col-span-8 space-y-2 min-h-[105px] sm:min-h-[155px] md:min-h-[195px] lg:min-h-[220px] xl:min-h-[240px] flex flex-col justify-end">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.85rem] font-extrabold tracking-[-0.035em] leading-[1.05] text-white break-keep hyphens-none">
+          {/* Each line is nowrap and sized to its container, so EN and TH
+              always set as exactly three lines and the toggle never shifts layout. */}
+          <div className="lg:col-span-8 @container flex flex-col justify-end">
+            <p className="text-[clamp(1.75rem,9.4cqi,4.85rem)] font-extrabold tracking-[-0.035em] leading-[1.05] text-white whitespace-nowrap">
               <motion.span
                 variants={itemVariants}
                 className="block text-zinc-300"
@@ -126,11 +144,11 @@ export const Hero: React.FC = () => {
               </motion.span>
               <motion.span
                 variants={itemVariants}
-                className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-[#38bdf8] to-[#0284c7]"
+                className="block text-[#00f0ff]"
               >
                 {lang === "th" ? "FLUTTER & DART." : "MOBILE SYSTEMS."}
               </motion.span>
-            </h1>
+            </p>
           </div>
 
           {/* Technical Specs Card (Avionics Deck Identity) */}
@@ -183,30 +201,36 @@ export const Hero: React.FC = () => {
           variants={itemVariants}
           className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-1"
         >
-          <div className="lg:col-span-7">
-            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed min-h-[5.5rem] sm:min-h-[4.75rem] lg:min-h-[4.25rem]">
-              {lang === "th" ? (
-                <>
-                  บัณฑิต IT มหาวิทยาลัยแม่โจ้ ผู้เชี่ยวชาญการออกแบบและพัฒนา
-                  Cross-platform Mobile Application ด้วย{" "}
-                  <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
-                    Flutter, Dart & BLoC
-                  </strong>{" "}
-                  ส่งมอบโปรเจกต์ใช้งานจริงระดับ Production ทั้งระบบคัดกรองโรค
-                  (NCDs), ฟีเจอร์แอปพลิเคชัน Pinto และระบบ POS ออฟไลน์
-                </>
-              ) : (
-                <>
-                  Maejo University IT graduate specializing in cross-platform
-                  mobile engineering with{" "}
-                  <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
-                    Flutter, Dart & BLoC
-                  </strong>
-                  . Proven track record shipping production applications across
-                  preventive healthcare screening (NCDs), commercial logistics
-                  (Pinto), and offline-capable retail POS architectures.
-                </>
-              )}
+          {/* Both languages occupy the same grid cell; the inactive one is
+              invisible, so the block always takes the taller height and the
+              language toggle cannot shift the CTAs below. */}
+          <div className="lg:col-span-7 grid">
+            <p
+              lang="th"
+              aria-hidden={lang !== "th"}
+              className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-light leading-relaxed ${lang === "th" ? "" : "invisible"}`}
+            >
+              บัณฑิต IT มหาวิทยาลัยแม่โจ้ ผู้เชี่ยวชาญการออกแบบและพัฒนา
+              Cross-platform Mobile Application ด้วย{" "}
+              <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
+                Flutter, Dart & BLoC
+              </strong>{" "}
+              ส่งมอบโปรเจกต์ใช้งานจริงระดับ Production ทั้งระบบคัดกรองโรค
+              (NCDs), ฟีเจอร์แอปพลิเคชัน Pinto และระบบ POS ออฟไลน์
+            </p>
+            <p
+              lang="en"
+              aria-hidden={lang !== "en"}
+              className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-light leading-relaxed ${lang === "en" ? "" : "invisible"}`}
+            >
+              Maejo University IT graduate specializing in cross-platform mobile
+              engineering with{" "}
+              <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
+                Flutter, Dart & BLoC
+              </strong>
+              . Proven track record shipping production applications across
+              preventive healthcare screening (NCDs), commercial logistics
+              (Pinto), and offline-capable retail POS architectures.
             </p>
           </div>
 
@@ -218,7 +242,7 @@ export const Hero: React.FC = () => {
                 scrollToElement("work", 76);
               }}
               data-cursor-text="EXPLORE"
-              className="btn-editorial btn-editorial-primary group min-w-[145px] justify-center"
+              className="btn-editorial btn-editorial-primary group h-12 min-w-[145px] justify-center"
             >
               <span>{t("ดูผลงาน", "EXPLORE WORK")}</span>
               <ArrowDown className="w-4 h-4 text-[#07080c] group-hover:translate-y-0.5 transition-transform" />
@@ -229,7 +253,7 @@ export const Hero: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-text="RESUME"
-              className="btn-editorial btn-editorial-outline group min-w-[140px] justify-center"
+              className="btn-editorial btn-editorial-outline group h-12 min-w-[140px] justify-center"
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
               <span>{t("เปิด CV", "RESUME / CV")}</span>
@@ -237,8 +261,8 @@ export const Hero: React.FC = () => {
             </a>
 
             <a
-              href="mailto:theeraphat.sm@gmail.com"
-              className="inline-flex min-h-11 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors min-w-[110px] justify-center sm:justify-start"
+              href={`mailto:${personalData.email}`}
+              className="inline-flex h-12 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors min-w-[110px] justify-center sm:justify-start"
             >
               {t("ติดต่อทางอีเมล", "Email me")}
             </a>
@@ -248,12 +272,24 @@ export const Hero: React.FC = () => {
         {/* Location & Modality Notice */}
         <motion.p
           variants={itemVariants}
-          className="text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
+          className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
         >
-          {t(
-            "📍 เชียงใหม่ ประเทศไทย &bull; ยินดีทำงาน Onsite / Hybrid / Remote",
-            "📍 Chiang Mai, Thailand &bull; Open to Onsite, Hybrid, or Remote roles",
-          )}
+          <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+          <span>
+            {t(
+              "เชียงใหม่ ประเทศไทย • ยินดีทำงาน Onsite / Hybrid / Remote",
+              "Chiang Mai, Thailand • Open to Onsite, Hybrid, or Remote roles",
+            )}
+          </span>
+          <span className="text-zinc-600" aria-hidden="true">
+            •
+          </span>
+          <a
+            href={`tel:${personalData.phone.replace(/-/g, "")}`}
+            className="hover:text-[#00f0ff] underline-offset-4 hover:underline transition-colors"
+          >
+            {personalData.phone}
+          </a>
         </motion.p>
       </motion.div>
     </section>
