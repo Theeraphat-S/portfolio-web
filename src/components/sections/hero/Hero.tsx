@@ -171,6 +171,7 @@ export const Hero: React.FC = () => {
                   SYSTEM SPECS
                 </span>
                 <span className="text-[#00f0ff] font-bold text-xs">
+                  <span className="text-zinc-400 font-normal">TARGET</span>{" "}
                   60-120 FPS
                 </span>
               </div>

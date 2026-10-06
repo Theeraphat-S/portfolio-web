@@ -275,10 +275,10 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           <span className="text-[8px] font-mono tracking-widest text-zinc-400 uppercase block">
             RETAIL POINT OF SALE
           </span>
-          <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+          <p className="text-xs font-bold text-white flex items-center gap-1.5">
             <PosRegisterIcon size={14} color="#3b82f6" />
             <span>POS Register #04</span>
-          </h4>
+          </p>
         </div>
 
         {/* Network & Offline Queue Toggle */}

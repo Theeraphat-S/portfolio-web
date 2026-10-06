@@ -80,9 +80,9 @@ flowchart TD
 
 ### 🏥 NCDs Risk Screening App `Senior Capstone Project, 2025`
 
-`Flutter` • `Dart` • `BLoC Pattern` • `Clean Architecture` • `SQLite` • `MySQL`
+`Flutter` • `Dart` • `BLoC Pattern` • `Clean Architecture` • `REST API` • `MySQL`
 
-- **Offline Clinical Engine**: Migrated chronic disease risk algorithms on-device for village health volunteers (VHVs), eliminating human calculation error by 100%.
+- **Client-side Clinical Engine**: Migrated chronic disease risk algorithms on-device for village health volunteers (VHVs), eliminating human calculation error by 100%.
 - **Measurable Impact**: Cut patient screening time from 10–15 min down to **< 3–5 min** with one-touch PDF clinical report generation.
 - 🔗 [View Interactive Showcase](https://theeraphat-portfolio.vercel.app/)
 

@@ -2,6 +2,8 @@ export interface DartCodeSnippet {
   fileName: string;
   filePath: string;
   architectureLayer: string;
+  /** Storage story shown in the DevTools telemetry tab. */
+  persistence: { label: string; detail: string };
   code: string;
   explanationTh: string;
   explanationEn: string;
@@ -13,10 +15,14 @@ export const DART_SNIPPETS: Record<string, DartCodeSnippet> = {
     filePath:
       "lib/features/screening/presentation/bloc/risk_assessment_bloc.dart",
     architectureLayer: "Presentation (BLoC) & Domain Logic",
+    persistence: {
+      label: "MySQL via REST",
+      detail: "Client-side scoring, server-side records",
+    },
     explanationTh:
-      "BLoC State Machine คำนวณคะแนนความเสี่ยง NCDs ฝั่ง Client ทันทีแบบ Zero Latency พร้อมบันทึกข้อมูลเข้ารหัสลง SQLite ท้องถิ่น",
+      "BLoC State Machine คำนวณคะแนนความเสี่ยง NCDs ฝั่ง Client ทันทีโดยไม่ต้องรอเครือข่าย แล้วจึงส่งผลที่ผ่านการตรวจสอบไปบันทึกใน MySQL ผ่าน REST API",
     explanationEn:
-      "Client-side BLoC State Machine evaluating NCDs risk algorithms with zero-latency offline persistence via Encrypted SQLite.",
+      "Client-side BLoC State Machine evaluating NCDs risk instantly without a network round-trip, then submitting the validated record to MySQL through the REST API.",
     code: `import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -49,24 +55,24 @@ class RiskEvaluatedState extends Equatable {
   final int totalScore;
   final RiskTier tier;
   final Map<String, String> diseaseFlags;
-  final bool isPersistedOffline;
+  final bool isSubmitted;
 
   const RiskEvaluatedState({
     required this.totalScore,
     required this.tier,
     required this.diseaseFlags,
-    this.isPersistedOffline = true,
+    this.isSubmitted = false,
   });
 
   @override
-  List<Object?> get props => [totalScore, tier, diseaseFlags, isPersistedOffline];
+  List<Object?> get props => [totalScore, tier, diseaseFlags, isSubmitted];
 }
 
 // --- BLOC IMPLEMENTATION ---
 class RiskAssessmentBloc extends Bloc<RiskAssessmentEvent, RiskEvaluatedState> {
-  final LocalSqliteRepository _sqliteRepo;
+  final AssessmentRepository _repository; // REST API -> MySQL
 
-  RiskAssessmentBloc(this._sqliteRepo)
+  RiskAssessmentBloc(this._repository)
       : super(const RiskEvaluatedState(
           totalScore: 2,
           tier: RiskTier.low,
@@ -110,8 +116,10 @@ class RiskAssessmentBloc extends Bloc<RiskAssessmentEvent, RiskEvaluatedState> {
             ? RiskTier.moderate
             : RiskTier.low;
 
-    // Offline-first: Guarantee zero data loss even in dead zones
-    await _sqliteRepo.saveAssessmentDraft(
+    // Scoring above is pure and client-side; only the result hits the network.
+    emit(RiskEvaluatedState(totalScore: score, tier: tier, diseaseFlags: flags));
+
+    await _repository.submitAssessment(
       glucose: event.glucose,
       bp: '\${event.systolicBp}/\${event.diastolicBp}',
       score: score,
@@ -121,7 +129,7 @@ class RiskAssessmentBloc extends Bloc<RiskAssessmentEvent, RiskEvaluatedState> {
       totalScore: score,
       tier: tier,
       diseaseFlags: flags,
-      isPersistedOffline: true,
+      isSubmitted: true,
     ));
   }
 }`,
@@ -131,6 +139,10 @@ class RiskAssessmentBloc extends Bloc<RiskAssessmentEvent, RiskEvaluatedState> {
     fileName: "hybrid_bridge_controller.dart",
     filePath: "lib/features/bridge/controllers/hybrid_bridge_controller.dart",
     architectureLayer: "Platform Bridge & Event-Driven State",
+    persistence: {
+      label: "Profile API (REST)",
+      detail: "Server-synced streak & profile state",
+    },
     explanationTh:
       "JavascriptChannel เชื่อมต่อ HTML5 WebView เข้ากับ Flutter BLoC เพื่อซิงค์ราคาสินค้า และระบบ Gamification Chat Streaks",
     explanationEn:
@@ -185,6 +197,10 @@ class HybridBridgeController {
     fileName: "idempotent_pos_sync_queue.dart",
     filePath: "lib/features/checkout/data/idempotent_pos_sync_queue.dart",
     architectureLayer: "Data Layer / Fault-Tolerant Persistence",
+    persistence: {
+      label: "Encrypted SQLite",
+      detail: "Write-Ahead Logging (WAL)",
+    },
     explanationTh:
       "ระบบคิวสั่งซื้อแบบ Idempotent UUID ที่บันทึกลง Local SQLite ทันที และซิงค์ขึ้น MySQL หลังบ้านอัตโนมัติเมื่อเครือข่ายกลับมาทำงาน",
     explanationEn:

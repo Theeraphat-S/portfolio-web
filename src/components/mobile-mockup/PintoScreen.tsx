@@ -204,12 +204,12 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
           <span className="text-[8px] font-mono tracking-widest text-zinc-400 uppercase block">
             FAKDUAY LOGISTICS &bull; PROD
           </span>
-          <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+          <p className="text-xs font-bold text-white flex items-center gap-1.5">
             <span>Pinto Mobile</span>
             <span className="text-[8px] px-1.5 py-0.2 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-mono border border-[#00f0ff]/20">
               BLoC V8
             </span>
-          </h4>
+          </p>
         </div>
 
         {/* Live WS Telemetry */}
@@ -436,9 +436,9 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                       <span className="text-[9px] font-mono text-amber-300/80 uppercase block tracking-wider">
                         {t("สถิติแชทต่อเนื่อง BLoC", "Streak Engine")}
                       </span>
-                      <h5 className="text-xs font-bold text-white">
+                      <p className="text-xs font-bold text-white">
                         {t("Chat Streaks สะสมแต้ม", "Daily Chat Streaks")}
-                      </h5>
+                      </p>
                     </div>
                   </div>
                   <div className="text-right">

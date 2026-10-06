@@ -6,13 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { motion } from "motion/react";
-import {
-  ArrowUpRight,
-  Github,
-  Terminal,
-  ArrowRight,
-  Layers,
-} from "lucide-react";
+import { ArrowUpRight, Terminal } from "lucide-react";
 import { getMetricValue } from "../../../lib/utils";
 import { useLanguage } from "../../../context/LanguageContext";
 import { ProjectItem } from "../../../types";
@@ -30,37 +24,6 @@ interface EditorialCaseStudyProps {
   index: number;
   onSelect: (project: ProjectItem) => void;
 }
-
-// Architecture Pipeline definitions for each case study
-const ARCHITECTURE_FLOWS: Record<string, { label: string; steps: string[] }> = {
-  "pinto-app": {
-    label: "ARCHITECTURE",
-    steps: [
-      "Flutter Native",
-      "WebView Bridge",
-      "Profile API",
-      "Gamified Chat Streaks",
-    ],
-  },
-  "ncds-screening": {
-    label: "ARCHITECTURE",
-    steps: [
-      "Flutter (BLoC)",
-      "Offline Form State",
-      "Risk Score Engine",
-      "Encrypted SQLite",
-    ],
-  },
-  "pos-system": {
-    label: "ARCHITECTURE",
-    steps: [
-      "Cart & Order Client",
-      "Optimistic State Engine",
-      "Idempotent Retry Queue",
-      "Payment & REST API",
-    ],
-  },
-};
 
 const getInitialEvent = (id: string): BLoCStreamEvent => {
   if (id === "ncds-screening") {
@@ -142,7 +105,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
   const beats = useMemo(() => BEATS_BY_PROJECT[project.id] || [], [project.id]);
 
-  const beatRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const beatRefs = useRef<(HTMLElement | null)[]>([]);
 
   const handleDispatchEvent = (event: BLoCStreamEvent) => {
     setStreamEvents((prev) => [event, ...prev.slice(0, 24)]);
@@ -223,7 +186,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     setActiveBeat(tabIdx);
   };
 
-  const projectNum = String(index + 1).padStart(2, "0");
   const displayYear =
     lang === "th"
       ? project.yearTh || project.year
@@ -260,8 +222,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       "BLoC",
       "Clean Architecture",
       "REST API",
-      "Offline-first",
-      "Drift SQLite",
       "Idempotency",
     ];
 
@@ -286,11 +246,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     });
   }, [descriptionText]);
 
-  const architecture = ARCHITECTURE_FLOWS[project.id] ?? {
-    label: "ARCHITECTURE",
-    steps: ["Client UI", "State Layer", "Service Bridge", "Data Engine"],
-  };
-
   const activeBeatData = beats[activeBeat];
   const activeBeatLabel = activeBeatData
     ? (lang === "th" ? activeBeatData.badgeTh : activeBeatData.badgeEn).replace(
@@ -303,31 +258,33 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const renderDeviceMockup = () => {
     return (
       <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px] flex flex-col items-center gap-3">
-        {/* Scrollytelling Beat Active Indicator HUD */}
-        <div className="w-full flex items-center justify-between px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-[#00f0ff]/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 shrink-0 rounded-full bg-[#00f0ff]" />
-            <span className="text-[#00f0ff] font-semibold tracking-wider truncate">
-              {activeBeatLabel}
-            </span>
+        {/* Active stage HUD (desktop only; mobile uses the stepper above) */}
+        {isDesktop && (
+          <div className="w-full flex items-center justify-between px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-[#00f0ff]/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-[#00f0ff]" />
+              <span className="text-[#00f0ff] font-semibold tracking-wider truncate">
+                {activeBeatLabel}
+              </span>
+            </div>
+            <div
+              className="flex items-center gap-1.5 text-zinc-300 shrink-0"
+              aria-live="polite"
+            >
+              <span className="sr-only">{t("ขั้นตอน", "Step")}</span>
+              <span className="text-[#00f0ff] font-bold">
+                {String(activeBeat + 1).padStart(2, "0")}
+              </span>
+              <span className="text-zinc-600">/</span>
+              <span className="text-zinc-400">
+                {String(beats.length).padStart(2, "0")}
+              </span>
+            </div>
           </div>
-          <div
-            className="flex items-center gap-1.5 text-zinc-300 shrink-0"
-            aria-live="polite"
-          >
-            <span className="sr-only">{t("ขั้นตอน", "Step")}</span>
-            <span className="text-[#00f0ff] font-bold">
-              {String(activeBeat + 1).padStart(2, "0")}
-            </span>
-            <span className="text-zinc-600">/</span>
-            <span className="text-zinc-400">
-              {String(beats.length).padStart(2, "0")}
-            </span>
-          </div>
-        </div>
+        )}
 
         {/* State Switcher Pills for Pinto Application */}
-        {project.id === "pinto-app" && (
+        {project.id === "pinto-app" && isDesktop && (
           <div className="w-full flex flex-col gap-1.5 p-1 rounded-lg bg-[#0a0d14] border border-white/[0.08] shadow-sm font-mono text-xs">
             <div
               role="tablist"
@@ -428,25 +385,22 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     );
   };
 
-  // Render Story Beat Step Cards (Desktop & Mobile)
+  // Desktop runway: flat beat list, advanced by scroll or click.
   const renderStoryBeats = () => {
     return (
-      <div className="space-y-4 pt-2">
-        <div className="flex items-center justify-between pb-1 border-b border-white/[0.06]">
-          <span className="flex items-center gap-2 font-mono text-xs text-[#00f0ff] tracking-wider uppercase font-semibold">
-            <Layers className="w-3.5 h-3.5" />
-            {t("ขั้นตอนสถาปัตยกรรม (SCROLL RUNWAY)", "ARCHITECTURE RUNWAY")}
-          </span>
-          <span className="text-[11px] font-mono text-zinc-400">
-            {t("เลื่อนจอเพื่อเปลี่ยนฉาก", "Scroll down to advance beats")}
-          </span>
-        </div>
+      <div className="pt-2">
+        <p className="pb-3 font-mono text-[11px] text-zinc-400">
+          {t(
+            "เลื่อนลงเพื่อดูแต่ละขั้นบนหน้าจอจำลอง",
+            "Scroll to step through each stage on the device",
+          )}
+        </p>
 
-        <div className="space-y-4">
+        <ol>
           {beats.map((beat, bIdx) => {
             const isActive = activeBeat === bIdx;
             return (
-              <div
+              <li
                 key={beat.id}
                 ref={(el) => {
                   beatRefs.current[bIdx] = el;
@@ -461,76 +415,82 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   }
                 }}
                 aria-current={isActive ? "step" : undefined}
-                className={`group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 border text-left cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+                className={`min-h-[50vh] border-t py-7 text-left cursor-pointer outline-none transition-[opacity,border-color] duration-300 focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                   isActive
-                    ? "bg-white/[0.04] border-[#00f0ff]/50 shadow-[0_0_28px_rgba(0,240,255,0.09)] ring-1 ring-[#00f0ff]/30"
-                    : "bg-white/[0.015] border-white/[0.06] hover:border-white/[0.15] hover:bg-white/[0.025] opacity-75 hover:opacity-100"
+                    ? "border-[#00f0ff]/60 opacity-100"
+                    : "border-white/[0.08] opacity-55 hover:opacity-90"
                 }`}
               >
-                {/* Active Indicator Bar on Left Edge */}
-                <div
-                  className={`absolute left-0 top-3 bottom-3 w-1 rounded-r-full transition-all duration-300 ${
-                    isActive
-                      ? "bg-[#00f0ff] opacity-100"
-                      : "bg-transparent opacity-0"
+                <p
+                  className={`font-mono text-xs tracking-wider font-semibold ${
+                    isActive ? "text-[#00f0ff]" : "text-zinc-400"
                   }`}
-                />
-
-                {/* Top Badge & Stream Tag */}
-                <div className="flex items-center justify-between gap-2 pb-2">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        isActive ? "bg-[#00f0ff] animate-pulse" : "bg-zinc-600"
-                      }`}
-                    />
-                    <span
-                      className={`font-mono text-xs tracking-wider font-semibold transition-colors ${
-                        isActive ? "text-[#00f0ff]" : "text-zinc-400"
-                      }`}
-                    >
-                      {lang === "th" ? beat.badgeTh : beat.badgeEn}
-                    </span>
-                  </div>
-                  <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-black/60 border border-white/[0.08] text-zinc-400 group-hover:border-white/20 transition-colors">
-                    {beat.streamTag}
-                  </span>
-                </div>
-
-                {/* Title & Subtitle */}
-                <h4 className="text-base sm:text-lg font-bold text-white tracking-tight min-h-[1.75rem]">
+                >
+                  {lang === "th" ? beat.badgeTh : beat.badgeEn}
+                </p>
+                <h4 className="mt-2 text-lg font-bold text-white tracking-tight">
                   {lang === "th" ? beat.titleTh : beat.titleEn}
                 </h4>
-                <p className="text-xs font-mono text-zinc-400 mt-0.5 min-h-[1.1rem]">
-                  {lang === "th" ? beat.subtitleTh : beat.subtitleEn}
-                </p>
-
-                {/* Narrative Description */}
-                <p className="text-sm text-zinc-300/90 font-light leading-relaxed mt-2.5 min-h-[4rem] sm:min-h-[3rem]">
+                <p className="mt-2 text-sm text-zinc-300 font-light leading-relaxed max-w-prose">
                   {lang === "th" ? beat.descriptionTh : beat.descriptionEn}
                 </p>
+                <p className="mt-3 font-mono text-xs text-zinc-400">
+                  <span className="text-[#00f0ff]" aria-hidden="true">
+                    →{" "}
+                  </span>
+                  {beat.streamState}
+                </p>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    );
+  };
 
-                {/* Telemetry Snapshot Row */}
-                <div className="mt-3.5 pt-3 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                  <div className="flex items-center gap-1.5 text-zinc-300">
-                    <span className="text-[#00f0ff]">➔</span>
-                    <span className="font-medium">{beat.streamState}</span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1">
-                    {beat.highlightSpecs.map((spec) => (
-                      <span
-                        key={spec}
-                        className="px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[10px] text-zinc-400"
-                      >
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+  // Mobile: the device cannot pin, so a 3-step selector sits directly above
+  // it and only the selected stage's story is shown.
+  const renderMobileStepper = () => {
+    const beat = beats[activeBeat];
+    return (
+      <div className="space-y-4">
+        <div
+          role="group"
+          aria-label={t("ขั้นตอนสถาปัตยกรรม", "Architecture stages")}
+          className="grid grid-cols-3 gap-2"
+        >
+          {beats.map((b, bIdx) => {
+            const isActive = activeBeat === bIdx;
+            return (
+              <button
+                key={b.id}
+                type="button"
+                onClick={() => applyBeat(bIdx)}
+                aria-current={isActive ? "step" : undefined}
+                className={`min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-[11px] leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+                  isActive
+                    ? "border-[#00f0ff]/50 bg-[#00f0ff]/10 text-[#00f0ff]"
+                    : "border-white/[0.08] text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                {(lang === "th" ? b.badgeTh : b.badgeEn).replace(
+                  /\s*\/\/\s*/,
+                  " ",
+                )}
+              </button>
             );
           })}
         </div>
+        {beat && (
+          <div aria-live="polite" className="min-h-[7.5rem]">
+            <h4 className="text-base font-bold text-white tracking-tight">
+              {lang === "th" ? beat.titleTh : beat.titleEn}
+            </h4>
+            <p className="mt-1.5 text-sm text-zinc-300 font-light leading-relaxed">
+              {lang === "th" ? beat.descriptionTh : beat.descriptionEn}
+            </p>
+          </div>
+        )}
       </div>
     );
   };
@@ -539,18 +499,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const renderProjectHeader = () => {
     return (
       <div className="space-y-6">
-        {/* 1. Case Study Eyebrow - Strictly Canonical Index without decorative noise */}
-        <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-white/[0.06]">
-          <span className="editorial-eyebrow text-[#00f0ff]">
-            CASE STUDY // {projectNum}
-          </span>
-          <span className="text-zinc-400 uppercase tracking-wider text-xs">
-            {project.tag} &bull; {displayYear}
-          </span>
-        </div>
-
-        {/* 2. Project Title & Subtitle Hierarchy */}
+        {/* Title block; tag and year sit in one quiet meta line */}
         <div className="space-y-1.5">
+          <p className="font-mono text-xs text-zinc-400">
+            {project.tag} · {displayYear}
+          </p>
           <h3 className="text-3xl xl:text-4xl font-bold tracking-tight text-white leading-tight min-h-[2.5rem]">
             {primaryTitle}
           </h3>
@@ -564,12 +517,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           </p>
         </div>
 
-        {/* 3. Description */}
+        {/* Description */}
         <p className="text-sm xl:text-[15px] text-zinc-300/90 font-light leading-relaxed max-w-xl min-h-[4.5rem]">
           {highlightedDescription}
         </p>
 
-        {/* 4. Minimal Editorial Metadata */}
+        {/* Outcome metrics */}
         {project.metrics && project.metrics.length > 0 && (
           <div className="grid grid-cols-3 border-y border-white/[0.08] py-3.5 divide-x divide-white/[0.06]">
             {project.metrics.map((metric, mIdx) => (
@@ -590,51 +543,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           </div>
         )}
 
-        {/* 5. Tech Stack Specifications */}
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-xs text-zinc-400 pt-1">
-          <span className="text-xs tracking-widest text-zinc-400 uppercase mr-1 font-semibold">
-            SPECS:
-          </span>
-          {project.technologies.map((tech, tIdx) => (
-            <React.Fragment key={tech}>
-              {tIdx > 0 && (
-                <span className="text-zinc-600 select-none">&bull;</span>
-              )}
-              <span className="text-zinc-300 hover:text-white transition-colors">
-                {tech.toUpperCase()}
-              </span>
-            </React.Fragment>
-          ))}
-        </div>
-
-        {/* 6. Technical Story / Architecture Flow Pipeline */}
-        <div className="pt-2">
-          <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block mb-2 font-semibold">
-            {architecture.label}
-          </span>
-          <div className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-black/40 border border-white/[0.06] font-mono text-xs text-zinc-300">
-            {architecture.steps.map((step, sIdx) => (
-              <React.Fragment key={step}>
-                {sIdx > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0.3 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: sIdx * 0.12, duration: 0.3 }}
-                    className="text-[#00f0ff] flex items-center"
-                  >
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </motion.div>
-                )}
-                <span className="px-2 py-1 rounded bg-[#0f1420] text-zinc-200 border border-white/[0.06]">
-                  {step}
-                </span>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-
-        {/* 7. Action Triggers / CTAs */}
-        <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/[0.06]">
+        {/* Stack, architecture and repository notes live in the modal */}
+        <div>
           <button
             type="button"
             onClick={() => onSelect(project)}
@@ -648,35 +558,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             </span>
             <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
           </button>
-
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-text="GITHUB"
-              className="group/src relative inline-flex items-center justify-center gap-2 min-w-[145px] px-4 py-2.5 rounded-full bg-transparent border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.03] text-zinc-400 hover:text-zinc-200 text-xs font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
-            >
-              <Github className="w-3.5 h-3.5 text-zinc-500 group-hover/src:text-zinc-300 transition-colors" />
-              <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600 group-hover/src:text-zinc-300 group-hover/src:translate-x-0.5 group-hover/src:-translate-y-0.5 transition-all duration-300" />
-            </a>
-          )}
-
-          {project.repositoryNoticeEn && (
-            <span className="text-[11px] font-mono text-zinc-400 ml-1">
-              {lang === "th"
-                ? project.repositoryNoticeTh
-                : project.repositoryNoticeEn}
-            </span>
-          )}
         </div>
       </div>
     );
   };
 
   const storyColumn = (
-    <div className="col-span-7 space-y-10">
+    <div className="col-span-7 space-y-8">
       {renderProjectHeader()}
       {renderStoryBeats()}
     </div>
@@ -691,9 +579,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="relative rounded-3xl bg-[#090c13]/90 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all duration-500 p-6 sm:p-10 lg:p-12 backdrop-blur-md"
     >
-      {/* Editorial Watermark Corner */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00f0ff]/10 via-transparent to-transparent pointer-events-none" />
-
       {/* Render exactly one layout tree: duplicated hidden markup would
           steal the beat refs from the visible runway and duplicate ids. */}
       {isDesktop ? (
@@ -709,8 +594,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       ) : (
         <div className="flex flex-col space-y-8">
           {renderProjectHeader()}
-          {renderStoryBeats()}
-          <div className="py-2 flex justify-center">{renderDeviceMockup()}</div>
+          {renderMobileStepper()}
+          <div className="flex justify-center">{renderDeviceMockup()}</div>
         </div>
       )}
 

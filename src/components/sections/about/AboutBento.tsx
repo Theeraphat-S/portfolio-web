@@ -150,7 +150,7 @@ export const AboutBento: React.FC = () => {
         className="mb-12 p-4 sm:p-5 rounded-xl bg-white/[0.015] border border-white/[0.08]"
       >
         <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-3">
-          {t("ตัวชี้วัดความเสถียร & ประสบการณ์", "VERIFIED SYSTEM METRICS")}
+          {t("ตัวชี้วัดหลัก", "KEY METRICS")}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
           <div className="space-y-0.5 pt-2 md:pt-0 md:pr-4 flex flex-col justify-between">
@@ -191,13 +191,13 @@ export const AboutBento: React.FC = () => {
 
           <div className="space-y-0.5 pt-2 md:pt-0 md:pl-4 flex flex-col justify-between">
             <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
-              {t("เป้าหมายความลื่นไหล", "FRAME BUDGET")}
+              {t("เป้าหมายเฟรมเรต", "FRAME-RATE TARGET")}
             </span>
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               60-120 FPS
             </span>
             <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
-              {t("ประมวลผลบน UI Thread", "UI thread execution")}
+              {t("เป้าหมายการออกแบบ UI", "Design target, UI thread")}
             </span>
           </div>
         </div>

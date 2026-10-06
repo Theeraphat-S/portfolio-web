@@ -20,7 +20,7 @@ The product is the professional portfolio and interactive engineering showcase f
 
 Unlike generic entry-level portfolios filled with static screenshots or tutorial clones, this platform demonstrates production-proven Flutter engineering through a **scroll-led interactive case study story**:
 
-- **NCDs Risk Screening App**: Client-side offline-first architecture for medical screening (reducing screening time by >60% and human error to 0%) through deterministic BLoC calculation.
+- **NCDs Risk Screening App**: Client-side BLoC risk scoring (no network round-trip) with records submitted to MySQL via REST API, for medical screening (reducing screening time by >60% and human error to 0%) through deterministic BLoC calculation.
 - **Pinto Logistics App**: Commercial mobile features with hybrid WebView bridges, live WebSocket tracking, and gamification streaks.
 - **Enterprise POS System**: Fault-tolerant retail POS system featuring local SQLite Write-Ahead Logging (WAL), idempotent retry queues, and direct ESC/POS thermal printer integration.
 
@@ -55,7 +55,7 @@ Every flagship project is structured around 3 canonical architectural beats that
 
 - **Beat 1 — Presentation & Intake**: Zero-latency client-side vitals validation (glucose, blood pressure) via BLoC Presentation Layer without network dependency.
 - **Beat 2 — Deterministic Engine**: Deterministic on-device clinical risk algorithm evaluating Diabetes, Hypertension, Cardiac, and Obesity risk tiers, eliminating human calculation error by 100%.
-- **Beat 3 — Persistence & Infrastructure**: Resilient local SQLite persistence with one-touch PDF report generation for remote village health volunteers (VHVs) in off-grid field clinics.
+- **Beat 3 — Persistence & Infrastructure**: Validated screening records submitted through the REST API into a central MySQL database, with one-touch PDF report generation for village health volunteers (VHVs). The app has no local database; only scoring runs without the network.
 - **Verified Outcome**: Screening time reduced from 10–15 min down to < 3–5 min per patient; 100% calculation accuracy; 4 disease groups supported.
 
 ### 2. Pinto Logistics Commercial App (Internship at Fakduay Logistics, 2026)

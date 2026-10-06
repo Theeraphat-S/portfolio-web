@@ -117,7 +117,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
             totalScore: computed.score,
             riskTier: computed.tier,
             flags: computed.flags,
-            persistedOfflineDb: "Drift/SQLite",
+            evaluatedOn: "client (BLoC)",
           },
           latencyMs: 0.6,
         }),
@@ -160,7 +160,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
           tag: "PDF_GEN",
           name: "GenerateMedicalReportEvent",
           stateName: "ReportPdfExportedState",
-          details: `Generated offline clinical PDF summary (Score ${riskData.score}/15)`,
+          details: `Generated clinical PDF summary (Score ${riskData.score}/15)`,
           payload: {
             patientRef: "VHV-PAT-0941",
             status: "Draft Exported",
@@ -186,18 +186,18 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
         </div>
       </div>
 
-      {/* 2. App Bar with VHV Mode & Offline State */}
+      {/* 2. App Bar with VHV Mode & Backend State */}
       <div className="px-3.5 py-2 flex items-center justify-between border-b border-white/[0.06] bg-[#0b1017]/90 backdrop-blur-md">
         <div>
           <span className="text-[8px] font-mono tracking-widest text-zinc-400 uppercase block">
-            MJU CAPSTONE &bull; OFFLINE ENGINE
+            MJU CAPSTONE &bull; CLIENT-SIDE ENGINE
           </span>
-          <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+          <p className="text-xs font-bold text-white flex items-center gap-1.5">
             <span>NCDs Risk Screener</span>
             <span className="text-[8px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20">
-              SQLITE ACTIVE
+              REST · MYSQL
             </span>
-          </h4>
+          </p>
         </div>
         <span className="text-[9px] font-mono bg-sky-950/60 text-sky-400 px-2 py-0.5 rounded border border-sky-800/40">
           VHV Field Mode
@@ -404,10 +404,8 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
         {/* Real-time Field Telemetry */}
         <div className="p-2 rounded-lg bg-zinc-900/50 border border-white/[0.04] space-y-1 text-[9px] font-mono">
           <div className="flex items-center justify-between text-zinc-400">
-            <span>Offline Persistence</span>
-            <span className="text-sky-400 font-bold">
-              Encrypted SQLite (WAL)
-            </span>
+            <span>Record Storage</span>
+            <span className="text-sky-400 font-bold">REST API → MySQL</span>
           </div>
           <div className="flex items-center justify-between text-zinc-400">
             <span>Client Eval Latency</span>

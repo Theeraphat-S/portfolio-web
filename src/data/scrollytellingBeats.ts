@@ -41,21 +41,22 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       ],
     },
     {
-      id: "offline-persistence",
+      id: "record-submission",
       badgeTh: "03 // PERSISTENCE & REPORT",
       badgeEn: "03 // PERSISTENCE & REPORT",
-      titleTh: "การจัดเก็บข้อมูลเข้ารหัสออฟไลน์ & ออกรายงาน",
-      titleEn: "Encrypted SQLite Storage & Report Export",
-      subtitleTh: "ความคงทนของข้อมูลพร้อมใช้งานภาคสนาม",
-      subtitleEn: "Field-Ready Data Persistence",
+      titleTh: "บันทึกผลผ่าน REST API & ออกรายงาน",
+      titleEn: "REST API Record Submission & Report Export",
+      subtitleTh: "ข้อมูลผู้ป่วยรวมศูนย์ใน MySQL",
+      subtitleEn: "Centralized MySQL Patient Records",
       descriptionTh:
-        "บันทึกข้อมูลลงฐานข้อมูล SQLite ในเครื่องทันที พร้อมส่งออกรายงานผลการตรวจ PDF สำหรับผู้รับการคัดกรอง แม้อยู่ในพื้นที่อับสัญญาณของ อสม.",
+        "เมื่อประเมินเสร็จ ผลคัดกรองที่ผ่านการตรวจสอบแล้วจะถูกส่งผ่าน REST API ไปเก็บในฐานข้อมูล MySQL ส่วนกลาง พร้อมออกรายงานผลการตรวจ PDF ให้ผู้รับการคัดกรองได้ทันที",
       descriptionEn:
-        "Immediate local SQLite encrypted persistence with one-touch PDF report generation, purpose-built for remote field clinics without cellular coverage.",
-      streamTag: "SQLITE_ENCRYPTED_STORE",
-      streamState: "EncryptedStoreCommittedState",
-      streamDetails: "AES-256 Record Saved ➔ Local SQLite & PDF Export Ready",
-      highlightSpecs: ["SQLite Local DB", "PDF Export Engine", "Offline-first"],
+        "Once scoring completes, the validated screening record is submitted through the REST API into a central MySQL database, with one-touch PDF report generation for the patient.",
+      streamTag: "REST_SUBMIT",
+      streamState: "RecordSubmittedState",
+      streamDetails:
+        "POST /assessments ➔ MySQL record saved & PDF export ready",
+      highlightSpecs: ["REST API", "MySQL", "PDF Export Engine"],
     },
   ],
   "pinto-app": [

@@ -234,7 +234,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
   - **NCDs Risk Screening App**:
     - _Beat 1 (Presentation & Intake)_: `NcdsScreen` vitals validation sliders emit `UpdateVitalsEvent` with zero network latency.
     - _Beat 2 (Deterministic Engine)_: Automated risk calculation engine transitions to `RiskEvaluatedState` and highlights low/moderate/high tier cards.
-    - _Beat 3 (Persistence & Infrastructure)_: Encrypted SQLite storage commit and PDF report export dispatch (`EncryptedStoreCommittedState`).
+    - _Beat 3 (Persistence & Infrastructure)_: REST API record submission to MySQL and PDF report export dispatch (`RecordSubmittedState`).
   - **Pinto Logistics Commercial App**:
     - _Beat 1 (Presentation & Intake)_: `PintoScreen` live courier GPS stream and dynamic ETA indicator dispatching `WS_SYNC` events.
     - _Beat 2 (Deterministic Engine)_: Gamified chat streaks interaction with daily flame counter and reward multiplier calculation (`StreakCountState`).

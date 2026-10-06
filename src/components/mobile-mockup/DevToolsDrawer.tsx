@@ -318,10 +318,10 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                         DATA PERSISTENCE
                       </span>
                       <span className="text-xl font-bold text-sky-400 block font-mono">
-                        Encrypted SQLite
+                        {snippet.persistence.label}
                       </span>
                       <span className="text-[10px] text-zinc-500 block">
-                        Write-Ahead Logging (WAL)
+                        {snippet.persistence.detail}
                       </span>
                     </div>
                   </div>
