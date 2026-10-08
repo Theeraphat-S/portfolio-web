@@ -21,16 +21,14 @@ export const Footer: React.FC = () => {
           <span className="hidden sm:inline text-zinc-600">&bull;</span>
           <span className="font-mono text-[11px] text-zinc-400 min-w-[180px]">
             {lang === "th"
-              ? "เชียงใหม่, ประเทศไทย • พร้อมเริ่มงาน"
-              : "Chiang Mai, Thailand • Available Worldwide"}
+              ? portfolioData.personal.locationTh
+              : portfolioData.personal.locationEn}
           </span>
         </div>
 
         {/* Center: Engineering Stack */}
         <div className="font-mono text-[11px] text-zinc-400 text-center min-w-[220px]">
-          <span>
-            {lang === "th" ? "พัฒนาและออกแบบด้วย " : "Architected with "}
-          </span>
+          <span>{lang === "th" ? "สร้างด้วย " : "Built with "}</span>
           <span className="text-zinc-300 font-medium">
             React, Vite & Tailwind CSS
           </span>
@@ -43,7 +41,7 @@ export const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             data-cursor-text="GITHUB"
-            className="p-2 rounded-full bg-white/[0.03] text-zinc-400 hover:text-[#00f0ff] hover:bg-white/[0.06] transition-colors border border-white/[0.06] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="p-2.5 rounded-full bg-white/[0.03] text-zinc-400 hover:text-[#00f0ff] hover:bg-white/[0.06] transition-colors border border-white/[0.06] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             aria-label="GitHub profile"
           >
             <Github className="w-3.5 h-3.5" />
@@ -52,7 +50,7 @@ export const Footer: React.FC = () => {
           <a
             href={`mailto:${portfolioData.personal.email}`}
             data-cursor-text="EMAIL"
-            className="p-2 rounded-full bg-white/[0.03] text-zinc-400 hover:text-[#00f0ff] hover:bg-white/[0.06] transition-colors border border-white/[0.06] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="p-2.5 rounded-full bg-white/[0.03] text-zinc-400 hover:text-[#00f0ff] hover:bg-white/[0.06] transition-colors border border-white/[0.06] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             aria-label="Email"
           >
             <Mail className="w-3.5 h-3.5" />
@@ -62,7 +60,7 @@ export const Footer: React.FC = () => {
             type="button"
             onClick={scrollToTop}
             data-cursor-text="TOP"
-            className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-mono font-medium text-zinc-400 hover:text-[#00f0ff] bg-white/[0.03] hover:bg-[#00f0ff]/10 border border-white/[0.06] hover:border-[#00f0ff]/30 rounded-full transition-all cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="inline-flex items-center gap-1.5 px-3.5 min-h-9 text-[11px] font-mono font-medium text-zinc-400 hover:text-[#00f0ff] bg-white/[0.03] hover:bg-[#00f0ff]/10 border border-white/[0.06] hover:border-[#00f0ff]/30 rounded-full transition-all cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             aria-label="Scroll back to top"
           >
             <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />

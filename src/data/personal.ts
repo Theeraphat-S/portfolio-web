@@ -4,13 +4,13 @@ export const personalData: PersonalInfo = {
   nameTh: "ธีรภัทร ศรีมณฑา",
   nameEn: "Theeraphat Srimontha",
   nickname: "Oven",
-  titleTh: "Mobile Developer",
-  titleEn: "Mobile Developer",
+  titleTh: "Junior Mobile Developer",
+  titleEn: "Junior Mobile Developer",
   specialty: "Flutter & Dart",
   taglineTh:
-    "นักศึกษาจบใหม่ สาขาเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ ที่มีความเชี่ยวชาญและหลงใหลในการพัฒนา Mobile Application ด้วย Flutter & Dart มีประสบการณ์สร้างแอปพลิเคชันใช้งานจริง ตั้งแต่ระบบคัดกรองโรค (NCDs) ไปจนถึงแอปพลิเคชัน Pinto และระบบ POS ที่มีการเชื่อมต่อ WebView และ Profile API",
+    "บัณฑิตจบใหม่ สาขาเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ นักพัฒนาโมบายระดับ Junior ที่ใช้ Flutter & Dart เป็นหลัก พัฒนาแอปคัดกรองโรค NCDs เป็นโปรเจกต์จบ และได้ร่วมพัฒนาฟีเจอร์บนแอป Pinto และระบบ POS ระหว่างฝึกงาน",
   taglineEn:
-    "Recent IT Graduate from Maejo University specialized in Flutter & Dart cross-platform mobile engineering. Proven experience shipping production-grade apps from healthcare screening (NCDs) to commercial platforms (Pinto) and POS retail systems with WebView bridges and Profile APIs.",
+    "Recent IT graduate from Maejo University and junior mobile developer working mainly with Flutter & Dart. Built an NCDs health-screening app as a capstone project and contributed features to the Pinto app and a POS system during an internship.",
   email: "theeraphat.sm@gmail.com",
   phone: "064-770-0893",
   expectedSalaryTh: "20,000 - 25,000 บาท",

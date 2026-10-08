@@ -38,7 +38,7 @@ export const App: React.FC = () => {
           <main
             id="main-content"
             tabIndex={-1}
-            className="relative z-10 flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 space-y-16 sm:space-y-24 pb-20 sm:pb-32 outline-none"
+            className="relative z-10 flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-20 sm:pb-32 outline-none"
           >
             <Hero />
             <AboutBento />

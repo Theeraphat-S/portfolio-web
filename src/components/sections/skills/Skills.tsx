@@ -8,20 +8,19 @@ import { SkillCategory } from "../../../types";
 const CATEGORY_META = [
   {
     index: "01",
-    labelEn: "MOBILE SYSTEMS",
-    labelTh: "ระบบโมบาย",
+    labelEn: "MOBILE",
+    labelTh: "โมบาย",
     taglineEn:
-      "Cross-platform mobile applications, state engines, and reactive UI architecture.",
+      "Cross-platform apps with Flutter, state management, and reactive UI.",
     taglineTh:
-      "สถาปัตยกรรมแอปพลิเคชันโมบายข้ามแพลตฟอร์ม โครงสร้าง State และ UI แบบ Reactive",
+      "แอปข้ามแพลตฟอร์มด้วย Flutter การจัดการ State และ UI แบบ Reactive",
   },
   {
     index: "02",
     labelEn: "LANGUAGES & WEB",
     labelTh: "ภาษาและเว็บ",
-    taglineEn:
-      "Core enterprise programming languages, web standards, and API backends.",
-    taglineTh: "ภาษาโปรแกรมหลักระดับองค์กร มาตรฐานเว็บ และสถาปัตยกรรม REST API",
+    taglineEn: "Programming languages, web basics, and REST API backends.",
+    taglineTh: "ภาษาโปรแกรม พื้นฐานเว็บ และ REST API ฝั่ง Backend",
   },
   {
     index: "03",
@@ -34,10 +33,10 @@ const CATEGORY_META = [
   },
   {
     index: "04",
-    labelEn: "LEADERSHIP & MINDSET",
-    labelTh: "ความเป็นผู้นำและการสอน",
+    labelEn: "TEAMWORK & TEACHING",
+    labelTh: "การทำงานเป็นทีมและการสอน",
     taglineEn:
-      "Mentorship impact, university teaching assistantship, and Agile sprint execution.",
+      "Teaching assistant work, helping students, and working in Agile sprints.",
     taglineTh:
       "การเป็นผู้ช่วยสอนประจำภาควิชา ให้คำปรึกษานักศึกษารุ่นน้อง และการทำงานแบบ Agile",
   },
@@ -59,7 +58,7 @@ export const Skills: React.FC = () => {
   return (
     <section
       id="capabilities"
-      className="relative py-20 sm:py-28 border-b border-white/[0.08]"
+      className="relative py-16 sm:py-24 border-b border-white/[0.08]"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="skills" className="absolute -top-24 pointer-events-none" />
@@ -91,16 +90,16 @@ export const Skills: React.FC = () => {
         <BilingualStack
           as="h2"
           className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight"
-          th={"ขีดความสามารถและเทคโนโลยีหลัก"}
-          en={"Engineering Capabilities & Technical Stack"}
+          th={"ทักษะและเครื่องมือ"}
+          en={"Skills & Tools"}
         />
         <BilingualStack
           className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
           th={
-            "บูรณาการความเชี่ยวชาญเชิงลึก Flutter/Dart, สถาปัตยกรรม BLoC และฐานข้อมูลออฟไลน์ ควบคู่พื้นฐาน Backend และทักษะการสื่อสารที่ผ่านการสอนจริง"
+            "Flutter และ Dart คือเครื่องมือหลัก นอกจากนี้มีประสบการณ์ด้านเว็บ Backend และฐานข้อมูลจากการเรียนและการฝึกงาน รวมถึงการเป็นผู้ช่วยสอน 3 ภาคการศึกษา"
           }
           en={
-            "A structured balance between deep cross-platform mobile engineering, deterministic state management, offline persistence, and clear technical communication."
+            "Flutter and Dart are my main tools. I also have hands-on experience with web, backend and databases from university and my internship, plus three semesters as a teaching assistant."
           }
         />
       </motion.div>
@@ -146,7 +145,7 @@ export const Skills: React.FC = () => {
                   en={category.nameEn}
                 />
                 <BilingualStack
-                  className="text-xs font-mono text-zinc-400"
+                  className="text-xs font-mono text-zinc-400 leading-normal md:min-h-[2lh]"
                   th={meta.taglineTh}
                   en={meta.taglineEn}
                 />

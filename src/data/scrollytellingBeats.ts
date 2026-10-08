@@ -8,8 +8,8 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       badgeEn: "01 // FORM & BLoC INTAKE",
       titleTh: "การรับข้อมูล Vitals & การตรวจสอบฝั่ง Client",
       titleEn: "Client-side Vitals Intake & Validation",
-      subtitleTh: "สถาปัตยกรรม Clean Architecture แบบไร้ความหน่วง",
-      subtitleEn: "Zero-Latency UI with Clean Architecture",
+      subtitleTh: "ตรวจค่าบนเครื่อง ไม่ต้องรอเครือข่าย",
+      subtitleEn: "Validated on the device, no network wait",
       descriptionTh:
         "Presentation Layer ขับเคลื่อนด้วย BLoC รับข้อมูล Vitals (ระดับน้ำตาล, ความดัน) และตรวจสอบความถูกต้องแบบ Real-time โดยไม่พึ่งพาเครือข่าย",
       descriptionEn:
@@ -23,10 +23,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       id: "scoring-algorithm",
       badgeTh: "02 // RISK ALGORITHM",
       badgeEn: "02 // RISK ALGORITHM",
-      titleTh: "อัลกอริทึมประเมินความเสี่ยงโรคเรื้อรังอัตโนมัติ",
-      titleEn: "Automated Clinical Risk Scoring Engine",
-      subtitleTh: "การประมวลผล Domain Logic เชิงกำหนด",
-      subtitleEn: "Deterministic Domain Calculation",
+      titleTh: "คำนวณความเสี่ยงโรคเรื้อรังอัตโนมัติ",
+      titleEn: "Automatic Risk Scoring",
+      subtitleTh: "ใส่ค่าเดิม ได้คะแนนเดิมทุกครั้ง",
+      subtitleEn: "Same inputs, same score, every time",
       descriptionTh:
         "Business Logic ประเมินความเสี่ยงโรคเบาหวาน ความดันโลหิต หัวใจ และโรคอ้วน แยก Tier (Low, Moderate, High) ทันทีบนอุปกรณ์ ขจัด Human Calculation Error 100%",
       descriptionEn:

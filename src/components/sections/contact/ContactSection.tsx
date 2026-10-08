@@ -9,10 +9,45 @@ import {
   Send,
   ArrowUpRight,
   MapPin,
-  Clock,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
+
+type Field = "name" | "email" | "message";
+
+const LIMITS: Record<Field, number> = { name: 100, email: 254, message: 1500 };
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const findErrors = (data: Record<Field, string>) => {
+  const errors: Partial<Record<Field, true>> = {};
+  if (!data.name.trim()) errors.name = true;
+  if (!EMAIL_PATTERN.test(data.email.trim())) errors.email = true;
+  if (!data.message.trim()) errors.message = true;
+  return errors;
+};
+
+const ERROR_TEXT: Record<Field, { th: string; en: string }> = {
+  name: {
+    th: "กรุณาใส่ชื่อหรือชื่อบริษัท",
+    en: "Please enter your name or company.",
+  },
+  email: {
+    th: "กรุณาใส่อีเมลให้ถูกรูปแบบ เช่น name@company.com",
+    en: "Please enter a valid email, e.g. name@company.com.",
+  },
+  message: {
+    th: "กรุณาเขียนข้อความสั้น ๆ",
+    en: "Please write a short message.",
+  },
+};
+
+// 16px text on phones: iOS Safari zooms the page when a smaller input gets focus.
+const inputClass = (invalid: boolean) =>
+  `w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border ${
+    invalid
+      ? "border-rose-400/60 focus:border-rose-400 focus:ring-rose-400/30"
+      : "border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-[#00f0ff]/30"
+  } focus:ring-1 text-base sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono`;
 
 export const ContactSection: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -24,7 +59,15 @@ export const ContactSection: React.FC = () => {
     email: "",
     message: "",
   });
+  const [errors, setErrors] = useState<Partial<Record<Field, true>>>({});
   const copyTimerRef = useRef<number | null>(null);
+
+  const updateField = (field: Field, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+  };
 
   useEffect(() => {
     return () => {
@@ -62,13 +105,22 @@ export const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-
-    const subject = encodeURIComponent(
-      `Portfolio Inquiry from ${formData.name}`,
+    const found = findErrors(formData);
+    setErrors(found);
+    const firstInvalid = (["name", "email", "message"] as Field[]).find(
+      (field) => found[field],
     );
+    if (firstInvalid) {
+      document.getElementById(`contact-${firstInvalid}`)?.focus();
+      return;
+    }
+
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const message = formData.message.trim();
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
     const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     );
     window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
     setDraftOpened(true);
@@ -86,7 +138,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-20 sm:py-28 border-b border-white/[0.08]"
+      className="py-16 sm:py-24 border-b border-white/[0.08]"
     >
       {/* Section Eyebrow */}
       <motion.div
@@ -119,22 +171,22 @@ export const ContactSection: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="tracking-wide">
               {lang === "th"
-                ? "พร้อมเริ่มงานทันที • ONSITE / HYBRID / REMOTE"
-                : "OPEN FOR MOBILE DEVELOPER ROLES"}
+                ? "เปิดรับตำแหน่ง JUNIOR MOBILE"
+                : "OPEN FOR JUNIOR MOBILE ROLES"}
             </span>
           </div>
 
           {/* Monumental Headline */}
           <div className="space-y-1">
-            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tighter leading-[0.95] text-white min-h-[120px] sm:min-h-[180px] xl:min-h-[210px] flex flex-col justify-end">
+            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tighter [word-spacing:0.12em] leading-[0.95] text-white min-h-[120px] sm:min-h-[180px] xl:min-h-[210px] flex flex-col justify-end">
               <span className="block text-zinc-400">
-                {lang === "th" ? "มาร่วมสร้างสรรค์" : "LET'S BUILD"}
+                {lang === "th" ? "กำลังมองหา" : "LOOKING FOR"}
               </span>{" "}
               <span className="block text-white">
-                {lang === "th" ? "ผลิตภัณฑ์ดิจิทัล" : "SOMETHING"}
+                {lang === "th" ? "ตำแหน่ง JUNIOR" : "A JUNIOR"}
               </span>{" "}
               <span className="block text-[#00f0ff]">
-                {lang === "th" ? "ที่ยอดเยี่ยมด้วยกัน." : "EXCEPTIONAL."}
+                {lang === "th" ? "FLUTTER DEV." : "FLUTTER ROLE."}
               </span>
             </h2>
           </div>
@@ -143,10 +195,10 @@ export const ContactSection: React.FC = () => {
           <BilingualStack
             className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl"
             th={
-              "พร้อมร่วมงานตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite, Hybrid และ Remote มุ่งมั่นร่วมสร้างสรรค์ผลงานคุณภาพกับทีม"
+              "พร้อมร่วมงานตำแหน่ง Junior Mobile Developer (Flutter & Dart) แบบเต็มเวลา ทั้ง Onsite, Hybrid และ Remote อยากทำงานกับทีมที่ได้เรียนรู้และเติบโตไปด้วยกัน"
             }
             en={
-              "Open for full-time Mobile Developer positions and high-impact digital ventures. Based in Chiang Mai, Thailand (GMT+7) with full flexibility for Bangkok relocation, Hybrid, or Worldwide Remote."
+              "Looking for a full-time junior Mobile Developer role (Flutter & Dart) on a team where I can keep learning. Based in Chiang Mai, Thailand (GMT+7); open to onsite, hybrid, or remote work."
             }
           />
 
@@ -154,10 +206,6 @@ export const ContactSection: React.FC = () => {
           <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all space-y-3">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-widest">
               <span>{t("อีเมล", "Email")}</span>
-              <span className="text-emerald-400 flex items-center gap-1 font-semibold">
-                <Clock className="w-3 h-3" />
-                {t("ติดต่อทางอีเมล", "Email contact")}
-              </span>
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
               <a
@@ -272,32 +320,38 @@ export const ContactSection: React.FC = () => {
               />
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div className="space-y-1.5">
                 <label
                   htmlFor="contact-name"
                   className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
                 >
-                  {lang === "th"
-                    ? "ชื่อของคุณ / องค์กร"
-                    : "Your Name / Organization"}
+                  {lang === "th" ? "ชื่อ / บริษัท" : "Name / Company"}
                 </label>
                 <input
                   id="contact-name"
                   type="text"
                   autoComplete="name"
                   required
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
+                  maxLength={LIMITS.name}
+                  aria-invalid={errors.name ? true : undefined}
+                  aria-describedby={
+                    errors.name ? "contact-name-error" : undefined
                   }
+                  value={formData.name}
+                  onChange={(e) => updateField("name", e.target.value)}
                   placeholder={
                     lang === "th"
-                      ? "เช่น บริษัท เอบีซี จำกัด"
-                      : "e.g. Acme Studio"
+                      ? "เช่น สมชาย, บริษัท เอบีซี จำกัด"
+                      : "e.g. Jane Lee, Acme Studio"
                   }
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-1 focus:ring-[#00f0ff]/30 text-xs sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono"
+                  className={inputClass(!!errors.name)}
                 />
+                {errors.name && (
+                  <p id="contact-name-error" className="text-xs text-rose-300">
+                    {t(ERROR_TEXT.name.th, ERROR_TEXT.name.en)}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-1.5">
@@ -305,20 +359,31 @@ export const ContactSection: React.FC = () => {
                   htmlFor="contact-email"
                   className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
                 >
-                  {lang === "th" ? "อีเมลติดต่อกลับ" : "Your Email"}
+                  {lang === "th"
+                    ? "อีเมลสำหรับตอบกลับ"
+                    : "Your email (for my reply)"}
                 </label>
                 <input
                   id="contact-email"
                   type="email"
                   autoComplete="email"
+                  inputMode="email"
                   required
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
+                  maxLength={LIMITS.email}
+                  aria-invalid={errors.email ? true : undefined}
+                  aria-describedby={
+                    errors.email ? "contact-email-error" : undefined
                   }
-                  placeholder="contact@domain.com"
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-1 focus:ring-[#00f0ff]/30 text-xs sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono"
+                  value={formData.email}
+                  onChange={(e) => updateField("email", e.target.value)}
+                  placeholder="name@company.com"
+                  className={inputClass(!!errors.email)}
                 />
+                {errors.email && (
+                  <p id="contact-email-error" className="text-xs text-rose-300">
+                    {t(ERROR_TEXT.email.th, ERROR_TEXT.email.en)}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-1.5">
@@ -326,25 +391,49 @@ export const ContactSection: React.FC = () => {
                   htmlFor="contact-message"
                   className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
                 >
-                  {lang === "th"
-                    ? "ข้อความ / รายละเอียดงาน"
-                    : "Message / Project Scope"}
+                  {lang === "th" ? "ข้อความ" : "Message"}
                 </label>
                 <textarea
                   id="contact-message"
                   rows={4}
                   required
+                  maxLength={LIMITS.message}
+                  aria-invalid={errors.message ? true : undefined}
+                  aria-describedby={`contact-message-count${
+                    errors.message ? " contact-message-error" : ""
+                  }`}
                   value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
+                  onChange={(e) => updateField("message", e.target.value)}
                   placeholder={
                     lang === "th"
-                      ? "รายละเอียดโปรเจกต์ หรือตำแหน่งงาน..."
-                      : "Brief us on your timeline, architecture requirements, or role..."
+                      ? "ตำแหน่งงาน ทีม หรือโปรเจกต์ที่อยากคุยด้วย"
+                      : "The role, team, or project you have in mind"
                   }
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-1 focus:ring-[#00f0ff]/30 text-xs sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono resize-none"
+                  className={`${inputClass(!!errors.message)} resize-none`}
                 />
+                <div className="flex items-start justify-between gap-3">
+                  {errors.message ? (
+                    <p
+                      id="contact-message-error"
+                      className="text-xs text-rose-300"
+                    >
+                      {t(ERROR_TEXT.message.th, ERROR_TEXT.message.en)}
+                    </p>
+                  ) : (
+                    <span />
+                  )}
+                  <span
+                    id="contact-message-count"
+                    className={`text-[11px] font-mono tabular-nums shrink-0 ${
+                      formData.message.length >= LIMITS.message
+                        ? "text-rose-300"
+                        : "text-zinc-500"
+                    }`}
+                  >
+                    {formData.message.length.toLocaleString()} /{" "}
+                    {LIMITS.message.toLocaleString()}
+                  </span>
+                </div>
               </div>
 
               {draftOpened ? (

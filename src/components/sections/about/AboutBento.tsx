@@ -36,10 +36,7 @@ export const AboutBento: React.FC = () => {
           01 // {t("ตัวตน & ปรัชญา", "IDENTITY & PHILOSOPHY")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          {t(
-            "สถาปัตยกรรม & คุณภาพระดับ Production",
-            "ENGINEERING PHILOSOPHY & METRICS",
-          )}
+          {t("แนวทางการทำงาน", "HOW I WORK")}
         </span>
       </motion.div>
 
@@ -56,30 +53,28 @@ export const AboutBento: React.FC = () => {
           className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl"
           th={
             <>
-              ซอฟต์แวร์ที่ดีไม่ใช่เรื่องบังเอิญ{" "}
-              <span className="text-[#00f0ff]">
-                แต่คือสถาปัตยกรรมที่ตั้งใจออกแบบ
-              </span>{" "}
-              บนระเบียบ State ที่แน่นอน การทำงานแบบ Offline-first
-              และความเข้าใจผู้ใช้งานจริง
+              ยังอยู่ช่วงต้นของสายอาชีพ{" "}
+              <span className="text-[#00f0ff]">จึงให้ความสำคัญกับพื้นฐาน</span>{" "}
+              ทั้ง State ที่อ่านเข้าใจง่าย แอปที่รับมือเน็ตไม่เสถียรได้
+              และการรับฟังผู้ใช้งานจริง
             </>
           }
           en={
             <>
-              Good software is rarely an accident.{" "}
+              Still early in my career,{" "}
               <span className="text-[#00f0ff]">
-                It is a deliberate architecture
-              </span>{" "}
-              built on strict state discipline, offline resilience, and human
-              empathy.
+                so I focus on the fundamentals
+              </span>
+              : clear state, apps that cope with bad networks, and listening to
+              the people who use them.
             </>
           }
         />
 
         <BilingualStack
           className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl"
-          th="บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ มุ่งมั่นพัฒนาโมบายแอปพลิเคชันตั้งแต่ปี 2565 เปลี่ยนหลักวิศวกรรมซอฟต์แวร์สู่ระบบจริงที่เสถียร ทั้งสถาปัตยกรรม Hybrid WebView และระบบคิดเงินที่ทำงานต่อได้เมื่อออฟไลน์"
-          en="Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to offline-capable retail checkout."
+          th="บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ (2565–2569) เขียน Flutter มาตั้งแต่สมัยเรียน ตั้งแต่แอปคัดกรองสุขภาพในโปรเจกต์จบ ไปจนถึงฟีเจอร์บนแอป Hybrid WebView และระบบคิดเงิน POS ที่ทำงานต่อได้เมื่อออฟไลน์ระหว่างฝึกงาน"
+          en="Information Technology graduate from Maejo University (2022–2026). I have worked with Flutter since university, from a health-screening app for my capstone to features in a hybrid WebView app and an offline-capable POS checkout during my internship."
         />
       </motion.div>
 
@@ -92,7 +87,7 @@ export const AboutBento: React.FC = () => {
         className="mb-12"
       >
         <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-4">
-          {t("หลักการทางวิศวกรรม", "ENGINEERING PRINCIPLES")}
+          {t("สิ่งที่ฝึกฝนอยู่", "WHAT I PRACTICE")}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Principle 01 */}
@@ -102,15 +97,15 @@ export const AboutBento: React.FC = () => {
               <Layers className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
-              Deterministic State
+              Predictable State
             </h3>
             <BilingualStack
               className="text-xs text-zinc-400 font-sans leading-relaxed"
               th={
-                "ใช้ BLoC จัดการ Event สู่ State เพื่อแยกตรรกะออกจาก UI และควบคุมสถานะได้อย่างแม่นยำ"
+                "ใช้ BLoC แยกตรรกะออกจาก UI ให้การเปลี่ยน State ติดตามและทดสอบได้ง่าย"
               }
               en={
-                "Use BLoC event-to-state transitions to separate logic from screens and make state changes easier to test."
+                "Use BLoC to keep logic out of widgets, so state changes are easier to follow and test."
               }
             />
           </div>
@@ -122,15 +117,13 @@ export const AboutBento: React.FC = () => {
               <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
-              Offline-First Resilience
+              Offline Resilience
             </h3>
             <BilingualStack
               className="text-xs text-zinc-400 font-sans leading-relaxed"
-              th={
-                "ออกแบบการจัดเก็บข้อมูลในเครื่องพร้อมกลไก Retry เพื่อความต่อเนื่องบนเครือข่ายที่ไม่เสถียร"
-              }
+              th={"เก็บข้อมูลไว้ในเครื่องและส่งคำขอซ้ำเมื่อเครือข่ายไม่เสถียร"}
               en={
-                "Design local data storage and retry handling for unreliable network connections."
+                "Store data locally and retry requests when the network is unreliable."
               }
             />
           </div>
@@ -142,15 +135,15 @@ export const AboutBento: React.FC = () => {
               <Zap className="w-3.5 h-3.5 text-zinc-400" />
             </div>
             <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
-              Fluid Performance
+              Smooth UI
             </h3>
             <BilingualStack
               className="text-xs text-zinc-400 font-sans leading-relaxed"
               th={
-                "จำกัดขอบเขต Rebuild และควบคุม Memory เพื่อให้เฟรมเรตและอินเตอร์แอคชันลื่นไหล"
+                "สังเกตการ Rebuild ของ Widget และการใช้ Memory เพื่อให้หน้าจอตอบสนองลื่นไหล"
               }
               en={
-                "Isolate rebuild boundaries and inspect memory usage to keep app interactions responsive."
+                "Watch widget rebuilds and memory use so screens stay responsive."
               }
             />
           </div>
@@ -166,55 +159,79 @@ export const AboutBento: React.FC = () => {
         className="mb-12 p-4 sm:p-5 rounded-xl bg-white/[0.015] border border-white/[0.08]"
       >
         <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-3">
-          {t("ตัวชี้วัดหลัก", "KEY METRICS")}
+          {t("ตัวเลขสำคัญ", "AT A GLANCE")}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
           <div className="space-y-0.5 pt-2 md:pt-0 md:pr-4 flex flex-col justify-between">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
-              {t("ความแม่นยำ NCDs", "NCDS INTEGRITY")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]"
+              th="ความแม่นยำ NCDs"
+              en="NCDS ACCURACY"
+            />
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               100%
             </span>
-            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
-              {t("คำนวณสูตรแม่นยำ 100%", "Zero calculation error")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]"
+              th="คำนวณตรงตามเกณฑ์"
+              en="Matches scoring rules"
+            />
           </div>
 
           <div className="space-y-0.5 pt-2 md:pt-0 md:px-4 flex flex-col justify-between">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
-              {t("นศ. ที่ให้คำปรึกษา", "STUDENTS MENTORED")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]"
+              th="นศ. ที่ให้คำปรึกษา"
+              en="STUDENTS MENTORED"
+            />
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               100+
             </span>
-            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
-              {t("ให้คำปรึกษาระดับปริญญาตรี", "Undergraduate mentorship")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]"
+              th="ในฐานะผู้ช่วยสอน"
+              en="As a teaching assistant"
+            />
           </div>
 
           <div className="space-y-0.5 pt-2 md:pt-0 md:px-4 flex flex-col justify-between">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
-              {t("วาระผู้ช่วยสอน", "TEACHING TERMS")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]"
+              th="วาระผู้ช่วยสอน"
+              en="TEACHING TERMS"
+            />
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
               3
             </span>
-            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
-              {t("3 ภาคการศึกษาต่อเนื่อง", "Consecutive terms")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]"
+              th="3 ภาคการศึกษาต่อเนื่อง"
+              en="Consecutive terms"
+            />
           </div>
 
           <div className="space-y-0.5 pt-2 md:pt-0 md:pl-4 flex flex-col justify-between">
-            <span className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]">
-              {t("เป้าหมายเฟรมเรต", "FRAME-RATE TARGET")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono uppercase text-zinc-400 block break-words min-h-[1.25rem]"
+              th="โปรเจกต์"
+              en="PROJECTS"
+            />
             <span className="text-2xl sm:text-3xl font-mono font-bold text-[#00f0ff] block">
-              60-120 FPS
+              3
             </span>
-            <span className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]">
-              {t("เป้าหมายการออกแบบ UI", "Design target, UI thread")}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]"
+              th="โปรเจกต์จบ 1 · ฝึกงาน 2"
+              en="1 capstone · 2 internship"
+            />
           </div>
         </div>
       </motion.div>
@@ -256,7 +273,7 @@ export const AboutBento: React.FC = () => {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono font-bold text-white uppercase">
-                {t("บทบาทผู้นำและการสอน", "LEADERSHIP & MENTORSHIP")}
+                {t("การสอนและการให้คำปรึกษา", "TEACHING & MENTORING")}
               </span>
               <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.06]">
                 {t("3 เทอมการศึกษา", "3 SEMESTERS")}
@@ -273,7 +290,7 @@ export const AboutBento: React.FC = () => {
                 "ดูแลและให้คำปรึกษานักศึกษา 100+ คน ด้าน Frontend และตรรกะโปรแกรม"
               }
               en={
-                "Mentored 100+ students across Frontend, Database, and Algorithmic Logic"
+                "Helped 100+ students in Frontend, Database, and Programming Logic courses"
               }
             />
           </div>

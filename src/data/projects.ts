@@ -6,20 +6,21 @@ export const projectsData: ProjectItem[] = [
     titleTh: "แอปพลิเคชันคัดกรองความเสี่ยงโรคไม่ติดต่อเรื้อรัง (NCDs)",
     titleEn: "NCDs Risk Screening Mobile Application",
     subtitleTh: "โปรเจกต์จบปีสุดท้าย มหาวิทยาลัยแม่โจ้",
-    subtitleEn: "Senior Capstone Project at Maejo University",
+    subtitleEn: "Final-year Capstone Project at Maejo University",
     category: "mobile",
     year: "2568",
     yearTh: "2568",
     yearEn: "2025",
     tag: "Healthcare Mobile App",
     shortName: "NCDs Screening",
+    origin: "capstone",
     proofTh: "ลดเวลาคัดกรองจาก 10–15 เหลือ 3–5 นาที ทดสอบภาคสนามกับ อสม.",
     proofEn: "Screening cut from 10–15 to 3–5 min, field-tested with VHVs",
     color: "#10b981",
     descriptionTh:
       "แอปพลิเคชันมือถือสำหรับตรวจคัดกรองและประเมินความเสี่ยงโรคไม่ติดต่อเรื้อรัง (NCDs) ได้แก่ โรคเบาหวาน, ความดันโลหิตสูง, โรคหัวใจ และโรคอ้วน ออกแบบ UI/UX ให้ใช้งานง่ายและตอบโจทย์ทั้งบุคลากรทางการแพทย์ เจ้าหน้าที่ อสม. และประชาชนทั่วไป",
     descriptionEn:
-      "Mobile application designed for risk screening and assessment of Non-Communicable Diseases (NCDs) including Diabetes, Hypertension, Heart Disease, and Obesity. Custom-engineered UI/UX catering to healthcare workers, village health volunteers (VHVs), and patients.",
+      "Mobile application designed for risk screening and assessment of Non-Communicable Diseases (NCDs) including Diabetes, Hypertension, Heart Disease, and Obesity. UI designed for healthcare workers, village health volunteers (VHVs), and patients.",
     problemTh:
       "กระบวนการคัดกรองโรค NCDs ในชุมชนเดิมใช้กระดาษที่มีแบบสอบถามและตัวแปรคำนวณซับซ้อน มักเกิด Human Error ในการคิดคะแนนความเสี่ยง และมีอุปสรรคสำคัญคือพื้นที่ปฏิบัติงานของ อสม. มักเป็นจุดอับสัญญาณอินเทอร์เน็ต",
     problemEn:
@@ -41,15 +42,15 @@ export const projectsData: ProjectItem[] = [
     outcomeEn:
       "Reduced screening time per patient to < 3-5 mins (down from 10-15 mins in manual workflows), achieved 100% calculation integrity matching clinical guidelines, and enabled instant summary report generation.",
     highlightsTh: [
-      "ออกแบบและพัฒนา Front-end ด้วย Flutter & Dart พร้อมสถาปัตยกรรม Bloc เพื่อการจัดการ State ที่มีประสิทธิภาพสูง",
+      "พัฒนา Front-end ด้วย Flutter & Dart โดยใช้ BLoC จัดการ State",
       "จัดการฐานข้อมูลด้วย MySQL สำหรับบันทึกและประมวลผลข้อมูลผู้ป่วยอย่างรัดกุม ปลอดภัยตามมาตรฐานข้อมูลสุขภาพ",
       "พัฒนาระบบคำนวณและประเมินคะแนนความเสี่ยง (Risk Score Algorithm) พร้อมออกรายงานสรุปผลการคัดกรองอัตโนมัติ",
       "ทดสอบการใช้งานจริง (Field Testing) ร่วมกับบุคลากรทางการแพทย์และเจ้าหน้าที่ อสม. ในพื้นที่จริงเพื่อปรับปรุง UI/UX ให้ใช้งานง่ายที่สุด",
     ],
     highlightsEn: [
-      "Built full Front-end with Flutter & Dart using Bloc State Management for robust, scalable reactive UI.",
+      "Built the Flutter & Dart front end, using BLoC for state management.",
       "Structured MySQL database management for secure, accurate patient health records.",
-      "Engineered automated risk scoring algorithm with instant medical report generation.",
+      "Built the automated risk-scoring logic and summary report generation.",
       "Conducted real-world usability testing with healthcare professionals and Village Health Volunteers (VHVs).",
     ],
     technologies: [
@@ -104,42 +105,43 @@ export const projectsData: ProjectItem[] = [
     yearEn: "2026",
     tag: "Commercial App Feature",
     shortName: "Pinto App",
+    origin: "internship",
     proofTh: "ส่งมอบเมนู WebView และ Chat Streaks ขึ้นแอปที่ใช้งานจริง",
     proofEn: "WebView menus and Chat Streaks shipped to the production app",
     color: "#06b6d4",
     descriptionTh:
-      "ร่วมพัฒนาและอัปเดตฟีเจอร์สำคัญบนแอปพลิเคชัน Pinto ในระดับ Production จัดการสถาปัตยกรรม State Management เพื่อรองรับการแสดงผลเมนู WebView และพัฒนาระบบสะสมแต้มแชท (Chat Streaks) พร้อมเชื่อมต่อ Profile API",
+      "ร่วมพัฒนาและอัปเดตฟีเจอร์บนแอปพลิเคชัน Pinto ที่ใช้งานจริง ดูแล State Management เพื่อรองรับการแสดงผลเมนู WebView และพัฒนาระบบสะสมแต้มแชท (Chat Streaks) พร้อมเชื่อมต่อ Profile API",
     descriptionEn:
-      "Engineered and shipped core features on the production Pinto Application. Managed state architecture for hybrid WebView menu integration and developed gamified Chat Streaks system synced with user Profile API.",
+      "Built and shipped features on the production Pinto app: state management for the hybrid WebView menus, and a gamified Chat Streaks system synced with the user Profile API.",
     problemTh:
       "ต้องการเพิ่ม Daily Active Users (DAU) และ User Engagement ภายในแอป โดยผสานหน้าเว็บ WebView ที่มีอยู่เดิมเข้ากับ Native Experience โดยไม่ทำให้ประสิทธิภาพและความลื่นไหลของแอปลดลง",
     problemEn:
-      "Needed to boost Daily Active Users (DAU) and engagement by seamlessly bridging legacy dynamic WebView menus with native Flutter experiences without degrading performance.",
+      "Needed to boost Daily Active Users (DAU) and engagement by bringing the existing WebView menus into the native Flutter app without slowing it down.",
     decisionRationaleTh:
       "ออกแบบ State Bridge Controller เพื่อซิงค์ข้อมูลระหว่าง Flutter Native กับ WebView และสร้างระบบ Chat Streaks Gamification เชื่อมต่อกับ Profile API",
     decisionRationaleEn:
-      "Engineered a State Bridge Controller to synchronize state between native Flutter and WebView, and built a gamified Chat Streaks mechanism connected with user Profile API.",
+      "Built a state bridge controller to keep native Flutter and the WebView in sync, and a gamified Chat Streaks feature connected to the user Profile API.",
     tradeOffsTh:
       "จัดการ Memory Overhead และ Lifecycle ของ Hybrid WebView เพื่อแลกกับความยืดหยุ่นในการอัปเดตเมนูโปรโมชั่นฝั่ง Server โดยไม่ต้อง Release App Store ใหม่",
     tradeOffsEn:
       "Balanced hybrid WebView memory overhead against business agility, allowing instant server-side menu updates without requiring App Store release cycles.",
     evidenceTh:
-      "วิเคราะห์พฤติกรรมผู้ใช้พบว่า Drop-off rate สูงขึ้นเมื่อเกิดหน้าจอโหลดค้าง จึงปรับปรุง Caching Strategy และ Optimistic UI ระหว่างสลับเมนู",
+      "หน้าเมนู WebView ที่โหลดซ้ำทุกครั้งทำให้รู้สึกช้า จึงเพิ่ม Caching และ Optimistic UI ระหว่างสลับเมนู ให้หน้าจอไม่ค้างรอโหลด",
     evidenceEn:
-      "User telemetry indicated drop-offs during slow WebView reloads, prompting implementation of proactive caching and optimistic UI state transitions.",
+      "Reloading the WebView menu on every visit felt slow, so I added caching and optimistic UI updates between menus to keep the screen from stalling.",
     outcomeTh:
       "ร่วมส่งมอบฟีเจอร์เมนู WebView และระบบ Gamification Chat Streaks สู่ Production พร้อมเชื่อมต่อ Profile API อย่างเสถียร รองรับการขยายตัวของผู้ใช้งานตามเป้าหมายของทีม",
     outcomeEn:
       "Successfully shipped hybrid WebView menus and gamified Chat Streaks features to production, integrating with Profile API and meeting team sprint delivery targets.",
     highlightsTh: [
-      "พัฒนาและปรับปรุงฟีเจอร์ด้วย Flutter & Dart รองรับการสลับเมนูแบบ Hybrid WebView ได้อย่างลื่นไหลไม่มีสะดุด",
+      "พัฒนาและปรับปรุงฟีเจอร์ด้วย Flutter & Dart รองรับการสลับเมนูแบบ Hybrid WebView",
       "สร้างระบบ Gamification สะสมแต้มต่อเนื่อง (Chat Streaks) เพื่อกระตุ้นการมีส่วนร่วม (Engagement) ของผู้ใช้งาน",
       "เชื่อมต่อระบบคะแนนและข้อมูลผู้ใช้งานผ่าน Profile API ได้อย่างแม่นยำและปลอดภัย",
       "ทำงานร่วมกับทีมผ่านกระบวนการ Agile / Scrum และควบคุมเวอร์ชันโค้ดด้วย Git / GitHub ตาม Timeline",
     ],
     highlightsEn: [
-      "Delivered responsive Flutter & Dart modules seamlessly bridging native screens with dynamic WebView menus.",
-      "Implemented gamified Chat Streaks logic boosting daily active user engagement and retention.",
+      "Built Flutter & Dart modules connecting native screens with the WebView menus.",
+      "Implemented the Chat Streaks logic, designed to encourage users to chat daily.",
       "Integrated Profile API for real-time loyalty point updates and reward redemption.",
       "Collaborated in Agile sprints with Git/GitHub version control meeting project release timelines.",
     ],
@@ -180,6 +182,7 @@ export const projectsData: ProjectItem[] = [
     yearEn: "2026",
     tag: "Retail POS Module",
     shortName: "Retail POS",
+    origin: "internship",
     proofTh: "คิดเงินต่อได้แม้เน็ตหลุด และไม่คิดเงินซ้ำเมื่อส่งคำขอซ้ำ",
     proofEn: "Checkout keeps working offline, with no double charges on retry",
     color: "#3b82f6",
@@ -194,22 +197,22 @@ export const projectsData: ProjectItem[] = [
     decisionRationaleTh:
       "ออกแบบ Client-side Cart & Order State ที่มี Optimistic Updates และระบบคิวส่ง Request ซ้ำอัตโนมัติ (Retry Mechanism with Idempotency Key) เมื่อต่อเน็ตได้",
     decisionRationaleEn:
-      "Implemented optimistic cart state updates with idempotent background retry queues to ensure seamless cashier operations during network hiccups.",
+      "Implemented optimistic cart updates and an idempotent retry queue so cashiers can keep working when the network drops.",
     tradeOffsTh:
       "ยอมรับภาระการทำ Local Queue Reconciliation และ Conflict Resolution เพื่อแลกกับความเร็วในการสแกนคิดเงินหน้าเคาน์เตอร์ที่ไม่มีทางสะดุด",
     tradeOffsEn:
-      "Accepted local queue reconciliation overhead to ensure zero checkout friction and non-blocking cashier UX.",
+      "Accepted the extra work of reconciling a local queue so checkout never has to wait on the network.",
     evidenceTh:
-      "ทดสอบ Stress Test ในสภาวะเน็ตกระตุก พบโอกาสยิง API ซ้ำ จึงเพิ่ม Client-generated Transaction UUID เพื่อป้องกัน Double-charging",
+      "ตอนทดสอบปิด-เปิดเน็ตระหว่างคิดเงิน พบว่าคำขอเดิมอาจถูกส่งซ้ำ จึงสร้าง Transaction UUID ฝั่งเครื่อง เพื่อไม่ให้คิดเงินซ้ำ",
     evidenceEn:
-      "Network stress testing exposed potential duplicate API triggers, leading to client-generated transaction UUIDs that prevent double-charging.",
+      "Toggling the network during checkout showed the same request could be sent twice, so I added client-generated transaction UUIDs to prevent double-charging.",
     outcomeTh:
       "ระบบคิดเงินทำงานต่อได้แม้เน็ตหลุด โดยเก็บธุรกรรมไว้ในคิว SQLite บนเครื่อง และป้องกันการคิดเงินซ้ำเมื่อส่งซ้ำด้วย Transaction UUID",
     outcomeEn:
       "Checkout keeps working through network drops by holding transactions in a local SQLite queue, and client-generated UUIDs prevent double-charging when the queue retries.",
     highlightsTh: [
       "ออกแบบระบบจัดการสินค้าคงคลัง (Inventory) และระบบตะกร้าสินค้าที่คิดคำนวณราคาและภาษีอัตโนมัติ",
-      "เชื่อมต่อ RESTful API ความเร็วสูงระหว่างหน้าบ้านและระบบหลังบ้าน พร้อมกลไกป้องกันข้อมูลซ้ำซ้อน",
+      "เชื่อมต่อ RESTful API ระหว่างหน้าบ้านและระบบหลังบ้าน พร้อมกลไกป้องกันข้อมูลซ้ำซ้อน",
       "เก็บธุรกรรมลงคิว SQLite บนเครื่องเมื่อออฟไลน์ แล้วส่งซ้ำแบบ Idempotent เมื่อกลับมาออนไลน์",
       "ระบบออกแบบให้ทำงานได้อย่างต่อเนื่องแม้ในสภาวะการเชื่อมต่อที่ไม่เสถียร (Offline-tolerant UI)",
     ],
@@ -217,7 +220,7 @@ export const projectsData: ProjectItem[] = [
       "Designed real-time inventory tracking and dynamic checkout calculation logic.",
       "Integrated REST APIs between client and backend with duplicate-safe request handling.",
       "Queued transactions in local SQLite during outages and replayed them with idempotency keys on reconnect.",
-      "Engineered error-resilient client handling for seamless offline-tolerant cashier flow.",
+      "Added error handling so the cashier flow keeps working through short outages.",
     ],
     technologies: [
       "Flutter",

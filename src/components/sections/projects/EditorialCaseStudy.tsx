@@ -451,7 +451,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         )}
         <div
           role="group"
-          aria-label={t("ขั้นตอนสถาปัตยกรรม", "Architecture stages")}
+          aria-label={t("ขั้นตอนของโปรเจกต์", "Project stages")}
           className="grid grid-cols-3 gap-2"
         >
           {beats.map((b, bIdx) => {
@@ -518,12 +518,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
         {/* Outcome metrics */}
         {project.metrics && project.metrics.length > 0 && (
-          <div className="grid grid-cols-3 border-y border-white/[0.08] py-3.5 divide-x divide-white/[0.06]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 border-y border-white/[0.08] sm:py-3.5 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.06]">
             {project.metrics.map((metric, mIdx) => (
               <div
                 key={mIdx}
-                className={`space-y-1 min-w-0 ${
-                  mIdx === 0 ? "pr-4" : mIdx === 1 ? "px-4" : "pl-4"
+                className={`flex items-baseline justify-between gap-4 py-2.5 sm:block sm:py-0 sm:space-y-1 min-w-0 ${
+                  mIdx === 0 ? "sm:pr-4" : mIdx === 1 ? "sm:px-4" : "sm:pl-4"
                 }`}
               >
                 <BilingualStack
@@ -534,7 +534,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 />
                 <BilingualStack
                   as="span"
-                  className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block break-words"
+                  className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block break-words text-right sm:text-left"
                   th={getMetricValue(metric, "th")}
                   en={getMetricValue(metric, "en")}
                 />

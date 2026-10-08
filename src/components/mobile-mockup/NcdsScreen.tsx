@@ -16,6 +16,7 @@ import {
 } from "../icons/Iconsax";
 import { BLoCStreamEvent } from "../../types/stream";
 import { createStreamEvent } from "../../lib/streamUtils";
+import { useTransientFlag } from "../../hooks/useTransientFlag";
 
 interface NcdsScreenProps {
   direction?: number;
@@ -32,7 +33,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
   // Interactive Clinical Input Values
   const [glucose, setGlucose] = useState<number>(108); // mg/dL
   const [systolic, setSystolic] = useState<number>(122); // mmHg
-  const [isExported, setIsExported] = useState<boolean>(false);
+  const [isExported, flashExported, setIsExported] = useTransientFlag(2400);
 
   // Adjust state when activeBeat prop changes
   const [prevBeat, setPrevBeat] = useState(activeBeat);
@@ -148,8 +149,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
   };
 
   const handleExportPdf = () => {
-    setIsExported(true);
-    setTimeout(() => setIsExported(false), 2400);
+    flashExported();
 
     if (onDispatchEvent) {
       onDispatchEvent(
@@ -207,7 +207,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
       {/* 3. Screen Body with Interactive Sliders */}
       <div className="flex-1 p-3 flex flex-col justify-between space-y-2.5 overflow-y-auto">
         {/* Quick Scenario Preset Chips */}
-        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto">
+        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto scrollbar-none">
           <span className="text-zinc-500 uppercase px-1 shrink-0">
             PRESETS:
           </span>

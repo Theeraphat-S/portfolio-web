@@ -43,7 +43,7 @@ It highlights architectural reasoning (BLoC state machines, clean architecture, 
 ## Brand Commitments
 
 - **Subject**: Theeraphat Srimontha (Nickname: Oven).
-- **Target Role**: Mobile Developer (Flutter & Dart Specialist).
+- **Target Role**: Junior Mobile Developer (Flutter & Dart). Copy speaks as an early-career developer: what was built or contributed, never "expert", "architected", or "enterprise-grade".
 - **Tone & Voice**: Authoritative, precise, engineering-driven, humble yet confident; speaks in terms of architectural decisions, trade-offs, and quantified user outcomes rather than buzzwords.
 - **Factual Honesty**: Transparent representation of degree completion (2022–2026, Maejo University), internship role at Fakduay Logistics, and verified academic references.
 

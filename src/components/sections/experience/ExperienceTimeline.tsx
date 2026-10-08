@@ -73,7 +73,7 @@ export const ExperienceTimeline: React.FC = () => {
   return (
     <section
       id="timeline"
-      className="relative py-20 sm:py-28 border-b border-white/[0.08]"
+      className="relative py-16 sm:py-24 border-b border-white/[0.08]"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="experience" className="absolute -top-24 pointer-events-none" />
@@ -90,7 +90,7 @@ export const ExperienceTimeline: React.FC = () => {
           04 // {t("เส้นทางการทำงาน", "CAREER TIMELINE")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          {t("ประสบการณ์จริง", "TRACK RECORD")}
+          {t("ฝึกงานและการสอน", "INTERNSHIP & TEACHING")}
         </span>
       </motion.div>
 
@@ -105,13 +105,13 @@ export const ExperienceTimeline: React.FC = () => {
         <BilingualStack
           as="h2"
           className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight"
-          th="เส้นทางวิศวกรรมและประสบการณ์การทำงาน"
-          en="Engineering Career Timeline & Milestones"
+          th="ประสบการณ์"
+          en="Experience"
         />
         <BilingualStack
           className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
-          th="จากประสบการณ์ส่งมอบฟีเจอร์ระดับ Production สู่บทบาทผู้ช่วยสอนประจำภาควิชา 3 เทอม และวิทยากรบรรยายพิเศษด้าน AI"
-          en="From shipping production features during a commercial software internship to 3 consecutive semesters of university mentorship and guest AI keynote speaking."
+          th="ฝึกงานเป็น Mobile Developer ที่ได้ส่งฟีเจอร์ขึ้นแอปที่ใช้งานจริง เป็นผู้ช่วยสอน 3 ภาคการศึกษา และเป็นวิทยากรรับเชิญด้าน AI ให้โรงเรียนมัธยม"
+          en="A mobile developer internship where I shipped features to a live app, three semesters as a teaching assistant, and a guest talk on AI for high-school students."
         />
       </motion.div>
 
@@ -227,11 +227,11 @@ export const ExperienceTimeline: React.FC = () => {
                     {isAcademic && (
                       <div className="text-[10px] font-mono tracking-wider text-sky-400 uppercase font-semibold flex items-center gap-1.5">
                         <GraduationCap className="w-3.5 h-3.5" />
-                        <span>
-                          {lang === "th"
-                            ? "บทบาททางวิชาการและผู้ช่วยสอน"
-                            : "ACADEMIC LEADERSHIP // UNIVERSITY MENTORSHIP"}
-                        </span>
+                        <BilingualStack
+                          as="span"
+                          th="บทบาททางวิชาการและผู้ช่วยสอน"
+                          en="ACADEMIC LEADERSHIP // UNIVERSITY MENTORSHIP"
+                        />
                       </div>
                     )}
 
@@ -373,11 +373,12 @@ export const ExperienceTimeline: React.FC = () => {
           className="mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-white/[0.08] hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           <div className="space-y-1">
-            <span className="text-[10px] font-mono text-[#00f0ff] uppercase tracking-widest block font-medium">
-              {lang === "th"
-                ? "04.1 // การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
-                : "04.1 // ACADEMIC VERIFICATION & REFERENCE"}
-            </span>
+            <BilingualStack
+              as="span"
+              className="text-[10px] font-mono text-[#00f0ff] uppercase tracking-widest block font-medium"
+              th="04.1 // การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
+              en="04.1 // ACADEMIC VERIFICATION & REFERENCE"
+            />
             <BilingualStack
               as="h4"
               className="text-base sm:text-lg font-bold text-white tracking-tight"

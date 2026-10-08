@@ -47,6 +47,8 @@ export interface ProjectItem {
   color: string;
   /** Short name and one verified outcome for the hero "shipped work" card. */
   shortName?: string;
+  /** Where the work was done; drives the Selected Work filter. */
+  origin?: "capstone" | "internship";
   proofTh?: string;
   proofEn?: string;
 }

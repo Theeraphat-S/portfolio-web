@@ -45,11 +45,13 @@
     color: #f1f5f9;
   }
 
-  /* Optimize Thai typography rendering when active */
-  html[lang="th"] body,
-  :lang(th) {
+  /* Thai glyphs read poorly when letter-spaced. Scope the reset to blocks
+     explicitly marked Thai (BilingualStack layers), not every element under
+     html[lang="th"]: a page-wide reset strips inherited tracking from
+     language-neutral text and changes its wrapping when TH/EN is toggled. */
+  [lang="th"]:not(html),
+  [lang="th"]:not(html) * {
     letter-spacing: normal;
-    word-break: break-word;
   }
 
   h1,
@@ -286,4 +288,12 @@ html[lang="th"] .editorial-eyebrow {
 /* Fixed page chrome steps aside while any modal dialog is open. */
 html[data-dialog-open] .hide-when-dialog {
   display: none;
+}
+
+/* Horizontal chip rows that scroll by touch without showing a track */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -2,8 +2,8 @@ import { SkillCategory } from "../types";
 
 export const skillCategoriesData: SkillCategory[] = [
   {
-    nameTh: "ความเชี่ยวชาญด้านโมบาย",
-    nameEn: "Mobile App Mastery",
+    nameTh: "การพัฒนาโมบายแอป",
+    nameEn: "Mobile Development",
     icon: "smartphone",
     color: "cyan",
     skills: [
@@ -18,9 +18,9 @@ export const skillCategoriesData: SkillCategory[] = [
         desc: "Asynchronous programming, OOP, Streams, Generics",
       },
       {
-        name: "Bloc / Cubit",
+        name: "BLoC / Cubit",
         level: "Advanced",
-        desc: "Enterprise-grade predictable state management",
+        desc: "Predictable state management",
       },
       {
         name: "Provider",
@@ -63,7 +63,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Go (Golang)",
         level: "Intermediate",
-        desc: "Microservices & high-concurrency programming",
+        desc: "Basics of services and concurrency",
       },
       {
         name: "React",
@@ -73,13 +73,13 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Spring Boot",
         level: "Intermediate",
-        desc: "Java enterprise REST API development",
+        desc: "REST API development with Java",
       },
     ],
   },
   {
-    nameTh: "ฐานข้อมูลและเครื่องมือวิศวกรรม",
-    nameEn: "Database & DevOps Tools",
+    nameTh: "ฐานข้อมูลและเครื่องมือ",
+    nameEn: "Databases & Tools",
     icon: "database",
     color: "blue",
     skills: [
@@ -91,7 +91,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Oracle Database",
         level: "Intermediate",
-        desc: "Enterprise SQL queries, Triggers, Views",
+        desc: "SQL queries, triggers, views",
       },
       {
         name: "Git & GitHub",
@@ -111,8 +111,8 @@ export const skillCategoriesData: SkillCategory[] = [
     ],
   },
   {
-    nameTh: "ทักษะความเป็นผู้นำและการสื่อสาร",
-    nameEn: "Soft Skills & Leadership",
+    nameTh: "การทำงานร่วมกันและการสื่อสาร",
+    nameEn: "Teamwork & Communication",
     icon: "users",
     color: "indigo",
     skills: [
@@ -129,7 +129,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Logical Problem Solving",
         level: "Advanced",
-        desc: "Analytical bug diagnosis & architectural planning",
+        desc: "Debugging and breaking problems into steps",
       },
       {
         name: "Adaptive Learning",

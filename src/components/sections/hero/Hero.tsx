@@ -96,7 +96,7 @@ export const Hero: React.FC = () => {
             </button>
             <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{t("พร้อมเริ่มงานทันที", "OPEN FOR ROLES")}</span>
+              <span>{t("เปิดรับตำแหน่งงาน", "OPEN FOR ROLES")}</span>
             </span>
           </div>
         </motion.div>
@@ -111,21 +111,21 @@ export const Hero: React.FC = () => {
                 variants={itemVariants}
                 className="block text-zinc-300"
               >
-                {lang === "th" ? "วิศวกรรมโมบาย" : "ENGINEERING"}
+                {lang === "th" ? "สร้างโมบายแอป" : "BUILDING"}
               </motion.span>
               <motion.span variants={itemVariants} className="block text-white">
-                {lang === "th" ? "ระดับ PRODUCTION" : "HIGH-PERFORMANCE"}
+                {lang === "th" ? "ที่ใช้งานได้จริง" : "MOBILE APPS"}
               </motion.span>
               <motion.span
                 variants={itemVariants}
                 className="block text-[#00f0ff]"
               >
-                {lang === "th" ? "FLUTTER & DART." : "MOBILE SYSTEMS."}
+                {lang === "th" ? "ด้วย FLUTTER." : "WITH FLUTTER."}
               </motion.span>
             </p>
           </div>
 
-          {/* Shipped work: one verified outcome per project, so a recruiter
+          {/* One verified outcome per project, so a recruiter
               sees proof in the first viewport instead of a spec list. */}
           <motion.div
             variants={itemVariants}
@@ -136,8 +136,8 @@ export const Hero: React.FC = () => {
               <BilingualStack
                 as="span"
                 className="block font-mono text-[11px] uppercase tracking-wider text-zinc-400"
-                th="ผลงานที่ส่งมอบ"
-                en="Shipped work"
+                th="ผลงานที่ทำ"
+                en="What I built"
               />
               <ul className="mt-3 divide-y divide-white/[0.06]">
                 {portfolioData.projects.map((project) => (
@@ -181,27 +181,26 @@ export const Hero: React.FC = () => {
               aria-hidden={lang !== "th"}
               className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-light leading-relaxed ${lang === "th" ? "" : "invisible"}`}
             >
-              บัณฑิต IT มหาวิทยาลัยแม่โจ้ ผู้เชี่ยวชาญการออกแบบและพัฒนา
-              Cross-platform Mobile Application ด้วย{" "}
+              บัณฑิต IT มหาวิทยาลัยแม่โจ้ นักพัฒนาโมบายระดับ Junior ที่ใช้{" "}
               <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
                 Flutter, Dart & BLoC
               </strong>{" "}
-              ส่งมอบโปรเจกต์ใช้งานจริงระดับ Production ทั้งระบบคัดกรองโรค
-              (NCDs), ฟีเจอร์แอปพลิเคชัน Pinto และระบบ POS ออฟไลน์
+              เป็นหลัก พัฒนาแอปคัดกรองโรค NCDs เป็นโปรเจกต์จบ
+              และได้ร่วมพัฒนาฟีเจอร์บนแอป Pinto และระบบ POS ระหว่างฝึกงาน
             </p>
             <p
               lang="en"
               aria-hidden={lang !== "en"}
               className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-light leading-relaxed ${lang === "en" ? "" : "invisible"}`}
             >
-              Maejo University IT graduate specializing in cross-platform mobile
-              engineering with{" "}
+              Maejo University IT graduate and junior mobile developer working
+              with{" "}
               <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
                 Flutter, Dart & BLoC
               </strong>
-              . Proven track record shipping production applications across
-              preventive healthcare screening (NCDs), commercial logistics
-              (Pinto), and offline-capable retail POS architectures.
+              . I built an NCDs risk-screening app for my capstone and shipped
+              features to the Pinto app and a retail POS system during my
+              internship.
             </p>
           </div>
 

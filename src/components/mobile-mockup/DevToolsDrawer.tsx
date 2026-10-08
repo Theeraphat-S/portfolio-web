@@ -14,6 +14,7 @@ import { BLoCStreamEvent } from "../../types/stream";
 import { DART_SNIPPETS } from "../../data/dartCodeSnippets";
 import { useLanguage } from "../../context/LanguageContext";
 import { useDialog } from "../../hooks/useDialog";
+import { useTransientFlag } from "../../hooks/useTransientFlag";
 
 interface DevToolsDrawerProps {
   isOpen: boolean;
@@ -37,7 +38,8 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
     "stream" | "code" | "telemetry" | null
   >(null);
   const activeTab = tabOverride ?? initialTab;
-  const [isCopied, setIsCopied] = useState(false);
+  const [isCopied, flashCopied] = useTransientFlag(2000);
+  const [copyFailed, flashCopyFailed] = useTransientFlag(3000);
 
   const dialogRef = useRef<HTMLDivElement>(null);
   useDialog(isOpen, dialogRef, onClose);
@@ -47,11 +49,12 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
   const handleCopyCode = async () => {
     if (!snippet) return;
     try {
+      // Clipboard is unavailable on insecure origins and can be denied.
+      if (!navigator.clipboard) throw new Error("clipboard unavailable");
       await navigator.clipboard.writeText(snippet.code);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
+      flashCopied();
     } catch {
-      // Fallback
+      flashCopyFailed();
     }
   };
 
@@ -176,13 +179,21 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 <button
                   type="button"
                   onClick={handleCopyCode}
-                  className="px-2.5 py-1 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-white/[0.08] text-[10px] transition-all flex items-center gap-1.5 cursor-pointer"
+                  aria-live="polite"
+                  className="px-2.5 py-1 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-white/[0.08] text-[10px] transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
                 >
                   {isCopied ? (
                     <>
-                      <Check className="w-3 h-3 text-emerald-400" />
-                      <span className="text-emerald-400">COPIED</span>
+                      <Check className="w-3 h-3 text-[#00f0ff]" />
+                      <span className="text-[#00f0ff]">COPIED</span>
                     </>
+                  ) : copyFailed ? (
+                    <span className="text-rose-300">
+                      {t(
+                        "คัดลอกไม่ได้ ให้เลือกโค้ดแล้วคัดลอกเอง",
+                        "Couldn't copy. Select the code and copy it manually",
+                      )}
+                    </span>
                   ) : (
                     <>
                       <Copy className="w-3 h-3 text-zinc-400" />

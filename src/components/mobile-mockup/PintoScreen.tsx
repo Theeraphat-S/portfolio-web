@@ -21,6 +21,7 @@ import {
 } from "../icons/Iconsax";
 import { BLoCStreamEvent } from "../../types/stream";
 import { createStreamEvent } from "../../lib/streamUtils";
+import { useTransientFlag } from "../../hooks/useTransientFlag";
 
 export type PintoState = "webview" | "streak" | "profile";
 
@@ -64,7 +65,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
   };
 
   // State 3: Profile API sync
-  const [isProfileRefreshing, setIsProfileRefreshing] = useState(false);
+  const [isProfileRefreshing, flashProfileRefreshing] = useTransientFlag(700);
 
   // State 2: Streak State
   const [streakCount, setStreakCount] = useState(7);
@@ -75,7 +76,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
     { id: 1, name: "Bento Salmon Teriyaki", price: 189, qty: 1 },
     { id: 2, name: "Cold Brew Arabica", price: 85, qty: 1 },
   ]);
-  const [isSyncing, setIsSyncing] = useState(false);
+  const [isSyncing, flashSyncing] = useTransientFlag(700);
 
   const cartTotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
@@ -160,8 +161,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
   };
 
   const handleProfileRefresh = () => {
-    setIsProfileRefreshing(true);
-    setTimeout(() => setIsProfileRefreshing(false), 700);
+    flashProfileRefreshing();
 
     if (onDispatchEvent) {
       onDispatchEvent(
@@ -179,8 +179,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
   };
 
   const handleRefreshSync = () => {
-    setIsSyncing(true);
-    setTimeout(() => setIsSyncing(false), 700);
+    flashSyncing();
 
     if (onDispatchEvent) {
       onDispatchEvent(
@@ -237,7 +236,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
       {/* 3. Screen Body with Smooth Animated Transition */}
       <div className="flex-1 p-3 flex flex-col justify-between overflow-hidden">
         {/* Preset Bar */}
-        <div className="mb-2 flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto">
+        <div className="mb-2 flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto scrollbar-none">
           <span className="text-zinc-500 uppercase px-1 shrink-0">
             SCENARIOS:
           </span>

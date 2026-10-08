@@ -311,7 +311,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
       {/* 3. Screen Body */}
       <div className="flex-1 p-3 flex flex-col justify-between space-y-2.5 overflow-y-auto">
         {/* Preset Scenarios */}
-        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto">
+        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto scrollbar-none">
           <span className="text-zinc-500 uppercase px-1 shrink-0">
             SCENARIOS:
           </span>

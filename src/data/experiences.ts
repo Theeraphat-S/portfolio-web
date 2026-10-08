@@ -17,25 +17,24 @@ export const experiencesData: ExperienceItem[] = [
     badgeTh: "การฝึกงานวิชาชีพ",
     badgeEn: "Industry Internship",
     descriptionTh:
-      "ร่วมเป็นส่วนหนึ่งของทีมพัฒนาแอปพลิเคชันเชิงพาณิชย์ พัฒนาแอปพลิเคชัน Pinto และระบบจัดการ ณ จุดขาย (POS) ด้วย Flutter/Dart เชื่อมต่อ REST API ให้มีความเสถียรและตอบสนองรวดเร็ว",
+      "ทำงานในทีมพัฒนาแอป Pinto และระบบจัดการ ณ จุดขาย (POS) ด้วย Flutter/Dart และเชื่อมต่อฟีเจอร์เข้ากับ REST API ของบริษัท",
     descriptionEn:
-      "Contributed to commercial digital platforms, developing key modules for the Pinto application and retail POS system using Flutter/Dart with high-throughput REST APIs.",
+      "Worked in the team building the Pinto app and a retail POS system with Flutter/Dart, connecting features to the company's REST APIs.",
     contributions: [
       {
-        labelEn: "Architecture",
-        labelTh: "สถาปัตยกรรมระบบ",
+        labelEn: "State Management",
+        labelTh: "การจัดการ State",
         descEn:
-          "Managed state architecture for hybrid WebView menus and Chat Streaks gamification in Pinto App.",
+          "Built state management for the hybrid WebView menus and the Chat Streaks feature in the Pinto app.",
         descTh:
           "พัฒนาโครงสร้าง State Management สำหรับเมนู WebView และฟังก์ชัน Chat Streaks บน Pinto App",
       },
       {
-        labelEn: "Product Engineering",
-        labelTh: "วิศวกรรมผลิตภัณฑ์",
+        labelEn: "POS Modules",
+        labelTh: "โมดูล POS",
         descEn:
-          "Engineered POS store management modules with resilient REST API integration.",
-        descTh:
-          "ออกแบบและพัฒนาโมดูลฝั่งระบบจัดการร้านค้า POS เชื่อมต่อ REST API ให้มีเสถียรภาพ",
+          "Developed POS store-management modules connected to REST APIs.",
+        descTh: "พัฒนาโมดูลระบบจัดการร้านค้า POS และเชื่อมต่อกับ REST API",
       },
       {
         labelEn: "Collaboration & Delivery",
@@ -48,12 +47,12 @@ export const experiencesData: ExperienceItem[] = [
     ],
     bulletsTh: [
       "พัฒนาโครงสร้าง State Management สำหรับเมนู WebView และฟังก์ชัน Chat Streaks บน Pinto App",
-      "ออกแบบและพัฒนาโมดูลฝั่งระบบจัดการร้านค้า POS เชื่อมต่อ REST API ให้มีเสถียรภาพ",
+      "พัฒนาโมดูลระบบจัดการร้านค้า POS และเชื่อมต่อกับ REST API",
       "ทำงานร่วมกับทีมผ่านกระบวนการ Agile/Scrum และจัดการเวอร์ชันซอร์สโค้ดด้วย Git/GitHub",
     ],
     bulletsEn: [
-      "Architected State Management for hybrid WebView menus and Chat Streaks gamification in Pinto App.",
-      "Engineered POS store management modules with resilient REST API integration.",
+      "Built state management for the hybrid WebView menus and the Chat Streaks feature in the Pinto app.",
+      "Developed POS store-management modules connected to REST APIs.",
       "Collaborated in Agile sprints and managed code versions through Git/GitHub.",
     ],
     skills: ["Flutter", "Dart", "State Management", "REST API", "Git", "Agile"],
@@ -129,25 +128,25 @@ export const experiencesData: ExperienceItem[] = [
     yearEn: "2025",
     periodTh: "กันยายน 2568",
     periodEn: "September 2025",
-    roleTh: "วิทยากรโครงการพิเศษ (Keynote Instructor)",
-    roleEn: "Keynote Instructor & Speaker",
+    roleTh: "วิทยากรรับเชิญ (Guest Speaker)",
+    roleEn: "Guest Speaker",
     companyTh: 'โครงการ "เริ่มต้นใช้ AI อย่างชาญฉลาดเพื่อการศึกษา"',
     companyEn: '"Smart AI for Education" Workshop',
     locationTh: "โรงเรียนจักรคำคณาทร, จ.ลำพูน",
     locationEn: "Jakkhumkhanathorn School, Lamphun",
     type: "speaker",
     badgeTh: "วิทยากรบรรยาย",
-    badgeEn: "Keynote Speaker",
+    badgeEn: "Guest Speaker",
     descriptionTh:
       "ได้รับเชิญเป็นวิทยากรบรรยายและจัดเวิร์กช็อปให้แก่นักเรียน ม.4 ห้อง Gifted Computer โรงเรียนจักรคำคณาทร ในหัวข้อการประยุกต์ใช้ AI เพื่อการเรียนรู้และการเขียนโปรแกรมอย่างมีจริยธรรม",
     descriptionEn:
       "Invited speaker leading a practical workshop for M.4 Gifted Computer students at Jakkhumkhanathorn School on leveraging generative AI and ethical programming practices.",
     contributions: [
       {
-        labelEn: "Architecture & Tooling",
-        labelTh: "สถาปัตยกรรมและเครื่องมือ AI",
+        labelEn: "AI Tools",
+        labelTh: "เครื่องมือ AI",
         descEn:
-          "Delivered technical keynote on the architecture of Modern AI tools in software engineering and education.",
+          "Explained how modern AI tools are used in software development and education.",
         descTh:
           "บรรยายแนวคิดและหลักการทำงานของ Modern AI Tools ในงาน Software Development และการศึกษา",
       },
@@ -155,7 +154,7 @@ export const experiencesData: ExperienceItem[] = [
         labelEn: "Prompt Engineering & Synthesis",
         labelTh: "การสั่งการและการเขียนโค้ดร่วมกับ AI",
         descEn:
-          "Demonstrated practical prompt engineering paradigms and structured AI-assisted problem solving for algorithmic challenges.",
+          "Demonstrated prompt writing and using AI to work through coding exercises step by step.",
         descTh:
           "สาธิต Prompt Engineering และการใช้ AI ช่วยแก้โจทย์ Coding อย่างมีประสิทธิภาพและถูกต้องตามหลักวิชาการ",
       },
@@ -163,7 +162,7 @@ export const experiencesData: ExperienceItem[] = [
         labelEn: "Developer Pathways",
         labelTh: "เส้นทางสู่วิชาชีพนักพัฒนา",
         descEn:
-          "Inspired young aspiring programmers on modern software engineering trajectories, continuous skill-building, and ethical code authorship.",
+          "Shared paths into software development, continuous learning, and ethical coding.",
         descTh:
           "ถ่ายทอดแรงบันดาลใจและเส้นทางสู่สายอาชีพนักพัฒนาซอฟต์แวร์ (Developer Roadmap) พร้อมหลักจริยธรรม",
       },
@@ -174,9 +173,9 @@ export const experiencesData: ExperienceItem[] = [
       "ถ่ายทอดแรงบันดาลใจและเส้นทางสู่สายอาชีพนักพัฒนาซอฟต์แวร์ (Developer Roadmap)",
     ],
     bulletsEn: [
-      "Delivered keynote on the architecture of Modern AI tools in software engineering and education.",
+      "Explained how modern AI tools are used in software development and education.",
       "Demonstrated effective Prompt Engineering and practical AI-assisted problem solving.",
-      "Inspired young aspiring programmers on modern software developer career pathways.",
+      "Shared paths into software development careers.",
     ],
     skills: [
       "AI Education",
