@@ -1,4 +1,5 @@
 import React from "react";
+import { BilingualStack } from "../../BilingualStack";
 import { motion } from "motion/react";
 import { Smartphone, Code2, Database, Users, Terminal } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
@@ -14,7 +15,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
   category,
   index,
 }) => {
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
 
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
@@ -60,9 +61,12 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
             {getCategoryIcon(category.icon)}
           </div>
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-white">
-              {lang === "th" ? category.nameTh : category.nameEn}
-            </h3>
+            <BilingualStack
+              as="h3"
+              className="text-base sm:text-lg font-bold text-white"
+              th={category.nameTh}
+              en={category.nameEn}
+            />
             <span className="text-xs text-zinc-400 font-mono">
               {category.skills.length} {t("ทักษะหลัก", "Core Competencies")}
             </span>

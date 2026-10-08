@@ -1,4 +1,5 @@
 import React from "react";
+import { BilingualStack } from "../../BilingualStack";
 import { Code2, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { PersonalInfo } from "../../../types";
@@ -34,9 +35,12 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ personal }) => {
         {/* Bottom Profile Details Overlay */}
         <div className="relative z-10 p-5 sm:p-6 space-y-2">
           <div className="space-y-0.5">
-            <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight drop-shadow-md">
-              {lang === "th" ? personal.nameTh : personal.nameEn}
-            </h3>
+            <BilingualStack
+              as="h3"
+              className="text-xl sm:text-2xl font-extrabold text-white tracking-tight drop-shadow-md"
+              th={personal.nameTh}
+              en={personal.nameEn}
+            />
             <p className="text-xs sm:text-sm font-semibold font-mono text-cyan-400 flex items-center gap-1.5">
               <Code2 className="w-3.5 h-3.5" />
               {lang === "th" ? personal.titleTh : personal.titleEn}

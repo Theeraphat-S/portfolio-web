@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { ProjectItem } from "../../../../types";
 import { ProjectModalHeader } from "./ProjectModalHeader";
@@ -6,7 +7,7 @@ import { ProjectModalMetrics } from "./ProjectModalMetrics";
 import { ProjectEngineeringAnalysis } from "./ProjectEngineeringAnalysis";
 import { ProjectModalTechDetails } from "./ProjectModalTechDetails";
 import { ProjectModalFooter } from "./ProjectModalFooter";
-import { getLenis } from "../../../../lib/lenis";
+import { useDialog } from "../../../../hooks/useDialog";
 
 export interface ProjectModalProps {
   project: ProjectItem | null;
@@ -17,82 +18,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   project,
   onClose,
 }) => {
-  const previousActiveElementRef = React.useRef<HTMLElement | null>(null);
   const modalContainerRef = React.useRef<HTMLDivElement>(null);
+  useDialog(project !== null, modalContainerRef, onClose);
 
-  useEffect(() => {
-    if (!project) return;
-
-    previousActiveElementRef.current = document.activeElement as HTMLElement;
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const lenis = getLenis();
-    lenis?.stop();
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        onClose();
-        return;
-      }
-
-      if (e.key === "Tab") {
-        if (!modalContainerRef.current) return;
-        const focusableElements =
-          modalContainerRef.current.querySelectorAll<HTMLElement>(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-          );
-        if (focusableElements.length === 0) {
-          e.preventDefault();
-          return;
-        }
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          if (
-            document.activeElement === firstElement ||
-            document.activeElement === modalContainerRef.current
-          ) {
-            e.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    // Focus first interactive control or the modal container on mount
-    const rafId = requestAnimationFrame(() => {
-      const firstFocusable =
-        modalContainerRef.current?.querySelector<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        );
-      if (firstFocusable) {
-        firstFocusable.focus();
-      } else {
-        modalContainerRef.current?.focus();
-      }
-    });
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      document.body.style.overflow = originalOverflow;
-      lenis?.start();
-      window.removeEventListener("keydown", handleKeyDown);
-      previousActiveElementRef.current?.focus();
-    };
-  }, [project, onClose]);
-
-  return (
+  // Portal to <body> so no transformed/blurred ancestor or stacking
+  // context can clip the overlay or let fixed chrome sit above it.
+  return createPortal(
     <AnimatePresence>
       {project && (
         <motion.div
@@ -160,7 +91,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { BilingualStack } from "../../BilingualStack";
 import { GraduationCap, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { PersonalInfo } from "../../../types";
@@ -9,7 +10,7 @@ interface EducationCardProps {
 }
 
 export const EducationCard: React.FC<EducationCardProps> = ({ personal }) => {
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="md:col-span-1 lg:col-span-1">
@@ -25,21 +26,22 @@ export const EducationCard: React.FC<EducationCardProps> = ({ personal }) => {
               {t("ประวัติการศึกษา", "Education")}
             </span>
           </div>
-          <h3 className="text-lg font-bold text-white">
-            {lang === "th"
-              ? personal.education.universityTh
-              : personal.education.universityEn}
-          </h3>
-          <p className="text-sm font-medium text-cyan-300 mt-1">
-            {lang === "th"
-              ? personal.education.degreeTh
-              : personal.education.degreeEn}
-          </p>
-          <p className="text-xs text-zinc-400 font-mono mt-1">
-            {lang === "th"
-              ? personal.education.yearsTh
-              : personal.education.yearsEn}
-          </p>
+          <BilingualStack
+            as="h3"
+            className="text-lg font-bold text-white"
+            th={personal.education.universityTh}
+            en={personal.education.universityEn}
+          />
+          <BilingualStack
+            className="text-sm font-medium text-cyan-300 mt-1"
+            th={personal.education.degreeTh}
+            en={personal.education.degreeEn}
+          />
+          <BilingualStack
+            className="text-xs text-zinc-400 font-mono mt-1"
+            th={personal.education.yearsTh}
+            en={personal.education.yearsEn}
+          />
           <p className="text-xs text-zinc-300 mt-3 leading-relaxed">
             {t(
               "ศึกษาเจาะลึกโครงสร้างข้อมูล อัลกอริทึม ระบบฐานข้อมูล การพัฒนาซอฟต์แวร์ฝั่งไคลเอนต์และเซิร์ฟเวอร์ และได้รับคัดเลือกเป็น TA ประจำภาควิชา 3 เทอม",

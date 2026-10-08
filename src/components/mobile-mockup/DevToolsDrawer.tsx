@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -12,6 +13,7 @@ import {
 import { BLoCStreamEvent } from "../../types/stream";
 import { DART_SNIPPETS } from "../../data/dartCodeSnippets";
 import { useLanguage } from "../../context/LanguageContext";
+import { useDialog } from "../../hooks/useDialog";
 
 interface DevToolsDrawerProps {
   isOpen: boolean;
@@ -37,16 +39,8 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
   const activeTab = tabOverride ?? initialTab;
   const [isCopied, setIsCopied] = useState(false);
 
-  // Handle ESC key to close
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialog(isOpen, dialogRef, onClose);
 
   const snippet = DART_SNIPPETS[projectId] || DART_SNIPPETS["ncds-screening"];
 
@@ -61,10 +55,15 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
     }
   };
 
-  return (
+  // Portal to <body>: the case-study card uses backdrop-filter, which would
+  // otherwise become the containing block for this fixed overlay.
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-hidden">
+        <div
+          data-lenis-prevent
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden"
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -77,6 +76,8 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
 
           {/* Dialog Container */}
           <motion.div
+            ref={dialogRef}
+            tabIndex={-1}
             initial={{ opacity: 0, scale: 0.96, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 15 }}
@@ -84,7 +85,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
             role="dialog"
             aria-modal="true"
             aria-label="Flutter & BLoC DevTools Inspector"
-            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-3xl bg-[#090d16] border border-white/[0.12] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_30px_rgba(0,240,255,0.12)] overflow-hidden font-mono z-10"
+            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-3xl bg-[#090d16] border border-white/[0.12] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_30px_rgba(0,240,255,0.12)] overflow-hidden font-mono z-10 outline-none"
           >
             {/* Header Strip */}
             <div className="px-5 py-4 border-b border-white/[0.08] flex items-center justify-between bg-[#0c121e]">
@@ -348,6 +349,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };

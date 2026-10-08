@@ -108,11 +108,6 @@ export const skillCategoriesData: SkillCategory[] = [
         level: "Advanced",
         desc: "API testing, Mock servers, Request inspection",
       },
-      {
-        name: "Antigravity IDE",
-        level: "Proficient",
-        desc: "Next-generation AI pair programming & workflows",
-      },
     ],
   },
   {

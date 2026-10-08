@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { BilingualStack } from "../../BilingualStack";
 import { motion } from "motion/react";
 import {
   Github,
@@ -128,10 +129,10 @@ export const ContactSection: React.FC = () => {
             <h2 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tighter leading-[0.95] text-white min-h-[120px] sm:min-h-[180px] xl:min-h-[210px] flex flex-col justify-end">
               <span className="block text-zinc-400">
                 {lang === "th" ? "มาร่วมสร้างสรรค์" : "LET'S BUILD"}
-              </span>
+              </span>{" "}
               <span className="block text-white">
                 {lang === "th" ? "ผลิตภัณฑ์ดิจิทัล" : "SOMETHING"}
-              </span>
+              </span>{" "}
               <span className="block text-[#00f0ff]">
                 {lang === "th" ? "ที่ยอดเยี่ยมด้วยกัน." : "EXCEPTIONAL."}
               </span>
@@ -139,11 +140,15 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Value Proposition Narrative */}
-          <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl min-h-[4.5rem] sm:min-h-[3.5rem]">
-            {lang === "th"
-              ? "พร้อมร่วมงานตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite, Hybrid และ Remote มุ่งมั่นร่วมสร้างสรรค์ผลงานคุณภาพกับทีม"
-              : "Open for full-time Mobile Developer positions and high-impact digital ventures. Based in Chiang Mai, Thailand (GMT+7) with full flexibility for Bangkok relocation, Hybrid, or Worldwide Remote."}
-          </p>
+          <BilingualStack
+            className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl"
+            th={
+              "พร้อมร่วมงานตำแหน่ง Mobile Developer (Flutter & Dart) ในทุกรูปแบบ ทั้ง Onsite, Hybrid และ Remote มุ่งมั่นร่วมสร้างสรรค์ผลงานคุณภาพกับทีม"
+            }
+            en={
+              "Open for full-time Mobile Developer positions and high-impact digital ventures. Based in Chiang Mai, Thailand (GMT+7) with full flexibility for Bangkok relocation, Hybrid, or Worldwide Remote."
+            }
+          />
 
           {/* Prominent Primary Email CTA Card */}
           <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all space-y-3">
@@ -250,14 +255,21 @@ export const ContactSection: React.FC = () => {
         >
           <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.015] border border-white/[0.08] backdrop-blur-sm space-y-5">
             <div className="space-y-1 pb-3 border-b border-white/[0.06]">
-              <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
-                {lang === "th" ? "เขียนอีเมลถึงผม" : "Write an email"}
-              </h3>
-              <p className="text-xs font-mono text-zinc-400">
-                {lang === "th"
-                  ? "แบบฟอร์มนี้จะเปิดร่างในแอปอีเมลของคุณ กรุณากดส่งจากแอปนั้น"
-                  : "This opens a draft in your email app. Send it there to complete your inquiry."}
-              </p>
+              <BilingualStack
+                as="h3"
+                className="text-lg sm:text-xl font-bold text-white tracking-tight"
+                th={"เขียนอีเมลถึงผม"}
+                en={"Write an email"}
+              />
+              <BilingualStack
+                className="text-xs font-mono text-zinc-400"
+                th={
+                  "แบบฟอร์มนี้จะเปิดร่างในแอปอีเมลของคุณ กรุณากดส่งจากแอปนั้น"
+                }
+                en={
+                  "This opens a draft in your email app. Send it there to complete your inquiry."
+                }
+              />
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">

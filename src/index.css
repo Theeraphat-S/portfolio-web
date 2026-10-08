@@ -282,3 +282,8 @@ section[id] {
 html[lang="th"] .editorial-eyebrow {
   letter-spacing: 0.04em;
 }
+
+/* Fixed page chrome steps aside while any modal dialog is open. */
+html[data-dialog-open] .hide-when-dialog {
+  display: none;
+}

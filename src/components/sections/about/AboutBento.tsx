@@ -1,4 +1,5 @@
 import React from "react";
+import { BilingualStack } from "../../BilingualStack";
 import { motion } from "motion/react";
 import {
   GraduationCap,
@@ -10,7 +11,7 @@ import {
 import { useLanguage } from "../../../context/LanguageContext";
 
 export const AboutBento: React.FC = () => {
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
 
   const fadeIn = {
     hidden: { opacity: 0, y: 18 },
@@ -50,8 +51,10 @@ export const AboutBento: React.FC = () => {
         variants={fadeIn}
         className="space-y-4 mb-10"
       >
-        <h2 className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl min-h-[5.5rem] sm:min-h-[5rem] lg:min-h-[6.2rem]">
-          {lang === "th" ? (
+        <BilingualStack
+          as="h2"
+          className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl"
+          th={
             <>
               ซอฟต์แวร์ที่ดีไม่ใช่เรื่องบังเอิญ{" "}
               <span className="text-[#00f0ff]">
@@ -60,7 +63,8 @@ export const AboutBento: React.FC = () => {
               บนระเบียบ State ที่แน่นอน การทำงานแบบ Offline-first
               และความเข้าใจผู้ใช้งานจริง
             </>
-          ) : (
+          }
+          en={
             <>
               Good software is rarely an accident.{" "}
               <span className="text-[#00f0ff]">
@@ -69,14 +73,14 @@ export const AboutBento: React.FC = () => {
               built on strict state discipline, offline resilience, and human
               empathy.
             </>
-          )}
-        </h2>
+          }
+        />
 
-        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl min-h-[4.5rem] sm:min-h-[4rem] lg:min-h-[3.5rem]">
-          {lang === "th"
-            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ มุ่งมั่นพัฒนาโมบายแอปพลิเคชันตั้งแต่ปี 2565 เปลี่ยนหลักวิศวกรรมซอฟต์แวร์สู่ระบบจริงที่เสถียร ทั้งสถาปัตยกรรม Hybrid WebView และระบบคิดเงินที่ทำงานต่อได้เมื่อออฟไลน์"
-            : "Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to offline-capable retail checkout."}
-        </p>
+        <BilingualStack
+          className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl"
+          th="บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ มุ่งมั่นพัฒนาโมบายแอปพลิเคชันตั้งแต่ปี 2565 เปลี่ยนหลักวิศวกรรมซอฟต์แวร์สู่ระบบจริงที่เสถียร ทั้งสถาปัตยกรรม Hybrid WebView และระบบคิดเงินที่ทำงานต่อได้เมื่อออฟไลน์"
+          en="Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to offline-capable retail checkout."
+        />
       </motion.div>
 
       {/* 3. Engineering Principles (3 clean columns, no heavy bloated cards) */}
@@ -100,11 +104,15 @@ export const AboutBento: React.FC = () => {
             <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
               Deterministic State
             </h3>
-            <p className="text-xs text-zinc-400 font-sans leading-relaxed min-h-[2.8rem]">
-              {lang === "th"
-                ? "ใช้ BLoC จัดการ Event สู่ State เพื่อแยกตรรกะออกจาก UI และควบคุมสถานะได้อย่างแม่นยำ"
-                : "Use BLoC event-to-state transitions to separate logic from screens and make state changes easier to test."}
-            </p>
+            <BilingualStack
+              className="text-xs text-zinc-400 font-sans leading-relaxed"
+              th={
+                "ใช้ BLoC จัดการ Event สู่ State เพื่อแยกตรรกะออกจาก UI และควบคุมสถานะได้อย่างแม่นยำ"
+              }
+              en={
+                "Use BLoC event-to-state transitions to separate logic from screens and make state changes easier to test."
+              }
+            />
           </div>
 
           {/* Principle 02 */}
@@ -116,11 +124,15 @@ export const AboutBento: React.FC = () => {
             <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
               Offline-First Resilience
             </h3>
-            <p className="text-xs text-zinc-400 font-sans leading-relaxed min-h-[2.8rem]">
-              {lang === "th"
-                ? "ออกแบบการจัดเก็บข้อมูลในเครื่องพร้อมกลไก Retry เพื่อความต่อเนื่องบนเครือข่ายที่ไม่เสถียร"
-                : "Design local data storage and retry handling for unreliable network connections."}
-            </p>
+            <BilingualStack
+              className="text-xs text-zinc-400 font-sans leading-relaxed"
+              th={
+                "ออกแบบการจัดเก็บข้อมูลในเครื่องพร้อมกลไก Retry เพื่อความต่อเนื่องบนเครือข่ายที่ไม่เสถียร"
+              }
+              en={
+                "Design local data storage and retry handling for unreliable network connections."
+              }
+            />
           </div>
 
           {/* Principle 03 */}
@@ -132,11 +144,15 @@ export const AboutBento: React.FC = () => {
             <h3 className="text-sm font-bold text-white font-mono min-h-[1.25rem]">
               Fluid Performance
             </h3>
-            <p className="text-xs text-zinc-400 font-sans leading-relaxed min-h-[2.8rem]">
-              {lang === "th"
-                ? "จำกัดขอบเขต Rebuild และควบคุม Memory เพื่อให้เฟรมเรตและอินเตอร์แอคชันลื่นไหล"
-                : "Isolate rebuild boundaries and inspect memory usage to keep app interactions responsive."}
-            </p>
+            <BilingualStack
+              className="text-xs text-zinc-400 font-sans leading-relaxed"
+              th={
+                "จำกัดขอบเขต Rebuild และควบคุม Memory เพื่อให้เฟรมเรตและอินเตอร์แอคชันลื่นไหล"
+              }
+              en={
+                "Isolate rebuild boundaries and inspect memory usage to keep app interactions responsive."
+              }
+            />
           </div>
         </div>
       </motion.div>
@@ -222,16 +238,16 @@ export const AboutBento: React.FC = () => {
                 2022 - 2026
               </span>
             </div>
-            <p className="text-sm font-sans font-medium text-zinc-200">
-              {lang === "th"
-                ? "วท.บ. สาขาวิชาเทคโนโลยีสารสนเทศ"
-                : "B.Sc. in Information Technology"}
-            </p>
-            <p className="text-xs text-zinc-400 font-mono">
-              {lang === "th"
-                ? "มหาวิทยาลัยแม่โจ้ • วิศวกรรมซอฟต์แวร์และระบบโมบาย"
-                : "Maejo University • Software Engineering & Mobile Systems"}
-            </p>
+            <BilingualStack
+              className="text-sm font-sans font-medium text-zinc-200"
+              th={"วท.บ. สาขาวิชาเทคโนโลยีสารสนเทศ"}
+              en={"B.Sc. in Information Technology"}
+            />
+            <BilingualStack
+              className="text-xs text-zinc-400 font-mono"
+              th={"มหาวิทยาลัยแม่โจ้ • วิศวกรรมซอฟต์แวร์และระบบโมบาย"}
+              en={"Maejo University • Software Engineering & Mobile Systems"}
+            />
           </div>
         </div>
 
@@ -246,16 +262,20 @@ export const AboutBento: React.FC = () => {
                 {t("3 เทอมการศึกษา", "3 SEMESTERS")}
               </span>
             </div>
-            <p className="text-sm font-sans font-medium text-zinc-200">
-              {lang === "th"
-                ? "ผู้ช่วยสอนประจำภาควิชา & วิทยากรรับเชิญ"
-                : "Undergraduate Teaching Assistant & Guest Speaker"}
-            </p>
-            <p className="text-xs text-zinc-400 font-mono">
-              {lang === "th"
-                ? "ดูแลและให้คำปรึกษานักศึกษา 100+ คน ด้าน Frontend และตรรกะโปรแกรม"
-                : "Mentored 100+ students across Frontend, Database, and Algorithmic Logic"}
-            </p>
+            <BilingualStack
+              className="text-sm font-sans font-medium text-zinc-200"
+              th={"ผู้ช่วยสอนประจำภาควิชา & วิทยากรรับเชิญ"}
+              en={"Undergraduate Teaching Assistant & Guest Speaker"}
+            />
+            <BilingualStack
+              className="text-xs text-zinc-400 font-mono"
+              th={
+                "ดูแลและให้คำปรึกษานักศึกษา 100+ คน ด้าน Frontend และตรรกะโปรแกรม"
+              }
+              en={
+                "Mentored 100+ students across Frontend, Database, and Algorithmic Logic"
+              }
+            />
           </div>
         </div>
       </motion.div>

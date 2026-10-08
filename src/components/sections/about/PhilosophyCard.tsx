@@ -1,10 +1,11 @@
 import React from "react";
+import { BilingualStack } from "../../BilingualStack";
 import { Terminal, CheckCircle } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { SpotlightCard } from "../../reactbits/SpotlightCard";
 
 export const PhilosophyCard: React.FC = () => {
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="md:col-span-1 lg:col-span-2">
@@ -26,11 +27,15 @@ export const PhilosophyCard: React.FC = () => {
               "Building Clean, Reliable & Human-Centric Software",
             )}
           </h3>
-          <p className="text-sm text-zinc-300 leading-relaxed">
-            {lang === "th"
-              ? "มีความเชี่ยวชาญและหลงใหลในการพัฒนา Mobile Application ด้วย Flutter & Dart มีประสบการณ์สร้างแอปพลิเคชันใช้งานจริง ตั้งแต่ระบบคัดกรองโรค (NCDs) ไปจนถึงแอปพลิเคชัน Pinto และระบบ POS ที่มีการเชื่อมต่อ WebView และ Profile API พร้อมนำทักษะการแก้ปัญหาและการทำงานร่วมกับทีมมาพัฒนาโมบายแอปที่มีประสิทธิภาพสูงให้กับองค์กร"
-              : "Specialized in building robust cross-platform mobile apps with Flutter & Dart. Experienced in shipping real-world apps from healthcare screening (NCDs) to enterprise e-commerce (Pinto) and Point of Sale (POS) systems with seamless API integration."}
-          </p>
+          <BilingualStack
+            className="text-sm text-zinc-300 leading-relaxed"
+            th={
+              "มีความเชี่ยวชาญและหลงใหลในการพัฒนา Mobile Application ด้วย Flutter & Dart มีประสบการณ์สร้างแอปพลิเคชันใช้งานจริง ตั้งแต่ระบบคัดกรองโรค (NCDs) ไปจนถึงแอปพลิเคชัน Pinto และระบบ POS ที่มีการเชื่อมต่อ WebView และ Profile API พร้อมนำทักษะการแก้ปัญหาและการทำงานร่วมกับทีมมาพัฒนาโมบายแอปที่มีประสิทธิภาพสูงให้กับองค์กร"
+            }
+            en={
+              "Specialized in building robust cross-platform mobile apps with Flutter & Dart. Experienced in shipping real-world apps from healthcare screening (NCDs) to enterprise e-commerce (Pinto) and Point of Sale (POS) systems with seamless API integration."
+            }
+          />
         </div>
 
         <div className="pt-4 mt-4 border-t border-zinc-800 flex flex-wrap items-center gap-2">

@@ -45,6 +45,10 @@ export interface ProjectItem {
   repositoryNoticeEn?: string;
   demoUrl?: string;
   color: string;
+  /** Short name and one verified outcome for the hero "shipped work" card. */
+  shortName?: string;
+  proofTh?: string;
+  proofEn?: string;
 }
 
 export type ExperienceType = "internship" | "academic" | "speaker" | "ta";

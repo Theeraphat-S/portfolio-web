@@ -1,16 +1,15 @@
 import React, { useRef } from "react";
 import {
   motion,
-  useMotionValue,
   useReducedMotion,
   useScroll,
-  useSpring,
   useTransform,
 } from "motion/react";
 import { ArrowUpRight, FileText, ArrowDown, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { scrollToElement } from "../../../lib/lenis";
-import { personalData } from "../../../data";
+import { personalData, portfolioData } from "../../../data";
+import { BilingualStack } from "../../BilingualStack";
 
 export const Hero: React.FC = () => {
   const { lang, t, toggleLang } = useLanguage();
@@ -21,31 +20,6 @@ export const Hero: React.FC = () => {
     offset: ["start start", "end start"],
   });
   const cardParallax = useTransform(scrollYProgress, [0, 1], [0, 28]);
-
-  // Subtle 3D Card Tilt for Specs Badge
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateXSpring = useSpring(mouseY, { stiffness: 120, damping: 15 });
-  const rotateYSpring = useSpring(mouseX, { stiffness: 120, damping: 15 });
-
-  const rotateX = useTransform(rotateXSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
-  const rotateY = useTransform(rotateYSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -151,48 +125,44 @@ export const Hero: React.FC = () => {
             </p>
           </div>
 
-          {/* Technical Specs Card (Avionics Deck Identity) */}
+          {/* Shipped work: one verified outcome per project, so a recruiter
+              sees proof in the first viewport instead of a spec list. */}
           <motion.div
             variants={itemVariants}
-            ref={cardRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              rotateX,
-              rotateY,
-              y: shouldReduceMotion ? 0 : cardParallax,
-              transformPerspective: 1000,
-            }}
+            style={{ y: shouldReduceMotion ? 0 : cardParallax }}
             className="lg:col-span-4 flex flex-col justify-end"
           >
-            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all space-y-3 shadow-lg backdrop-blur-sm">
-              <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-zinc-400 tracking-wider uppercase text-[10px]">
-                  SYSTEM SPECS
-                </span>
-                <span className="text-[#00f0ff] font-bold text-xs">
-                  <span className="text-zinc-400 font-normal">TARGET</span>{" "}
-                  60-120 FPS
-                </span>
-              </div>
-              <div className="space-y-1.5 text-xs font-mono text-zinc-300">
-                <div className="flex items-center justify-between border-b border-white/[0.04] pb-1">
-                  <span className="text-zinc-400">ENGINE</span>
-                  <span>Flutter 3.x / Dart</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-white/[0.04] pb-1">
-                  <span className="text-zinc-400">STATE</span>
-                  <span>BLoC / Cubit</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-zinc-400">SYNC</span>
-                  <span>REST API / SQLite queue</span>
-                </div>
-              </div>
-              <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono">
-                <span className="text-zinc-400">TRACK</span>
-                <span className="text-zinc-200">Production Systems</span>
-              </div>
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-[20px]">
+              <BilingualStack
+                as="span"
+                className="block font-mono text-[11px] uppercase tracking-wider text-zinc-400"
+                th="ผลงานที่ส่งมอบ"
+                en="Shipped work"
+              />
+              <ul className="mt-3 divide-y divide-white/[0.06]">
+                {portfolioData.projects.map((project) => (
+                  <li key={project.id} className="py-2.5 first:pt-0 last:pb-0">
+                    <a
+                      href="#work"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToElement("work", 76);
+                      }}
+                      className="group block rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                    >
+                      <span className="block font-mono text-xs font-semibold text-white group-hover:text-[#00f0ff] transition-colors">
+                        {project.shortName ?? project.titleEn}
+                      </span>
+                      <BilingualStack
+                        as="span"
+                        className="mt-0.5 block text-sm leading-snug text-zinc-300"
+                        th={project.proofTh ?? project.descriptionTh}
+                        en={project.proofEn ?? project.descriptionEn}
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </motion.div>
         </div>
@@ -235,7 +205,8 @@ export const Hero: React.FC = () => {
             </p>
           </div>
 
-          <div className="lg:col-span-5 flex flex-wrap items-center gap-3 lg:justify-end">
+          {/* Fixed button widths: the row wraps identically in TH and EN. */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center lg:justify-end">
             <a
               href="#work"
               onClick={(e) => {
@@ -243,7 +214,7 @@ export const Hero: React.FC = () => {
                 scrollToElement("work", 76);
               }}
               data-cursor-text="EXPLORE"
-              className="btn-editorial btn-editorial-primary group h-12 min-w-[145px] justify-center"
+              className="btn-editorial btn-editorial-primary group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"
             >
               <span>{t("ดูผลงาน", "EXPLORE WORK")}</span>
               <ArrowDown className="w-4 h-4 text-[#07080c] group-hover:translate-y-0.5 transition-transform" />
@@ -254,16 +225,16 @@ export const Hero: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-text="RESUME"
-              className="btn-editorial btn-editorial-outline group h-12 min-w-[140px] justify-center"
+              className="btn-editorial btn-editorial-outline group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
               <span>{t("เปิด CV", "RESUME / CV")}</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </a>
 
             <a
               href={`mailto:${personalData.email}`}
-              className="inline-flex h-12 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors min-w-[110px] justify-center sm:justify-start"
+              className="col-span-2 inline-flex h-12 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors sm:w-36 justify-center sm:justify-start"
             >
               {t("ติดต่อทางอีเมล", "Email me")}
             </a>

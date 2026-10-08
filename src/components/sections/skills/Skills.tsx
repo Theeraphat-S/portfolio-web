@@ -1,4 +1,5 @@
 import React from "react";
+import { BilingualStack } from "../../BilingualStack";
 import { motion } from "motion/react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -87,16 +88,21 @@ export const Skills: React.FC = () => {
         variants={fadeIn}
         className="space-y-4 mb-16 max-w-4xl"
       >
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight min-h-[2.5rem] sm:min-h-[3rem]">
-          {lang === "th"
-            ? "ขีดความสามารถและเทคโนโลยีหลัก"
-            : "Engineering Capabilities & Technical Stack"}
-        </h2>
-        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed min-h-[3.5rem] sm:min-h-[3rem]">
-          {lang === "th"
-            ? "บูรณาการความเชี่ยวชาญเชิงลึก Flutter/Dart, สถาปัตยกรรม BLoC และฐานข้อมูลออฟไลน์ ควบคู่พื้นฐาน Backend และทักษะการสื่อสารที่ผ่านการสอนจริง"
-            : "A structured balance between deep cross-platform mobile engineering, deterministic state management, offline persistence, and clear technical communication."}
-        </p>
+        <BilingualStack
+          as="h2"
+          className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight"
+          th={"ขีดความสามารถและเทคโนโลยีหลัก"}
+          en={"Engineering Capabilities & Technical Stack"}
+        />
+        <BilingualStack
+          className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
+          th={
+            "บูรณาการความเชี่ยวชาญเชิงลึก Flutter/Dart, สถาปัตยกรรม BLoC และฐานข้อมูลออฟไลน์ ควบคู่พื้นฐาน Backend และทักษะการสื่อสารที่ผ่านการสอนจริง"
+          }
+          en={
+            "A structured balance between deep cross-platform mobile engineering, deterministic state management, offline persistence, and clear technical communication."
+          }
+        />
       </motion.div>
 
       {/* Clean Monospace Tree Layout (2 Columns with Hairline Separation) */}
@@ -133,12 +139,17 @@ export const Skills: React.FC = () => {
                     )}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight min-h-[1.75rem]">
-                  {lang === "th" ? category.nameTh : category.nameEn}
-                </h3>
-                <p className="text-xs font-mono text-zinc-400 min-h-[2rem] sm:min-h-[1.25rem]">
-                  {lang === "th" ? meta.taglineTh : meta.taglineEn}
-                </p>
+                <BilingualStack
+                  as="h3"
+                  className="text-xl font-bold text-white tracking-tight"
+                  th={category.nameTh}
+                  en={category.nameEn}
+                />
+                <BilingualStack
+                  className="text-xs font-mono text-zinc-400"
+                  th={meta.taglineTh}
+                  en={meta.taglineEn}
+                />
               </div>
 
               {/* Monospace Tree Branches */}
@@ -162,16 +173,11 @@ export const Skills: React.FC = () => {
                           <span className="font-medium text-zinc-200 group-hover/node:text-white transition-colors block truncate">
                             {skill.name}
                           </span>
-                          <span className="text-[11px] text-zinc-400 font-sans font-light block truncate">
+                          <span className="text-xs text-zinc-400 font-sans font-light block">
                             {skill.desc}
                           </span>
                         </div>
                       </div>
-
-                      {/* Right: Muted Skill Level Badge */}
-                      <span className="text-[9px] uppercase tracking-wider text-zinc-400 group-hover/node:text-[#00f0ff] shrink-0 pt-0.5 transition-colors select-none font-medium">
-                        [{skill.level.split("/")[0].trim().toUpperCase()}]
-                      </span>
                     </div>
                   );
                 })}

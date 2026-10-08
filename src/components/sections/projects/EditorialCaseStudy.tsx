@@ -18,12 +18,52 @@ import { LiveEventDock } from "../../mobile-mockup/LiveEventDock";
 import { DevToolsDrawer } from "../../mobile-mockup/DevToolsDrawer";
 import { BLoCStreamEvent } from "../../../types/stream";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { BilingualStack } from "../../BilingualStack";
 
 interface EditorialCaseStudyProps {
   project: ProjectItem;
   index: number;
   onSelect: (project: ProjectItem) => void;
 }
+
+// "Product — Feature" titles render as a title plus a feature subtitle.
+const splitTitle = (raw: string): [string, string] => {
+  for (const sep of [" — ", " - "]) {
+    if (raw.includes(sep)) {
+      const [title, subtitle] = raw.split(sep);
+      return [title, subtitle];
+    }
+  }
+  return [raw, ""];
+};
+
+const TECH_KEYWORDS = [
+  "WebView",
+  "State Management",
+  "Profile API",
+  "Gamification",
+  "Chat Streaks",
+  "BLoC",
+  "Clean Architecture",
+  "REST API",
+  "Idempotency",
+];
+const TECH_KEYWORD_REGEX = new RegExp(`(${TECH_KEYWORDS.join("|")})`, "gi");
+
+// Underline technical terms in a description.
+const highlightTerms = (text: string): React.ReactNode[] =>
+  text.split(TECH_KEYWORD_REGEX).map((part, pIdx) =>
+    TECH_KEYWORDS.some((kw) => kw.toLowerCase() === part.toLowerCase()) ? (
+      <span
+        key={pIdx}
+        className="text-white font-medium border-b border-[#00f0ff]/40 pb-[0.5px]"
+      >
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
 
 const getInitialEvent = (id: string): BLoCStreamEvent => {
   if (id === "ncds-screening") {
@@ -88,6 +128,30 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const [activeBeat, setActiveBeat] = useState<number>(0);
   const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("webview");
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Scale the pinned device down on short viewports so the whole stack
+  // (screen + event dock) fits inside 100vh minus the sticky offset.
+  const deviceRef = useRef<HTMLDivElement>(null);
+  const [deviceFit, setDeviceFit] = useState({ scale: 1, height: 0 });
+  useEffect(() => {
+    const el = deviceRef.current;
+    if (!isDesktop || !el) return;
+    const measure = () => {
+      // offsetHeight ignores transforms, so this is the unscaled height.
+      const height = el.offsetHeight;
+      const available = window.innerHeight - 96;
+      const scale = Math.max(0.68, Math.min(1, available / height));
+      setDeviceFit({ scale, height });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [isDesktop]);
 
   // Alternating Layout Rhythm (Project 1 Left, Project 2 Right, Project 3 Left)
   const isReversed = index % 2 === 1;
@@ -189,60 +253,9 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       ? project.yearTh || project.year
       : project.yearEn || project.year;
 
-  // Split title if it contains a dash/hyphen
-  const rawTitle = lang === "th" ? project.titleTh : project.titleEn;
-  let primaryTitle = rawTitle;
-  let featureSubtitle = "";
-
-  if (rawTitle.includes(" — ")) {
-    const parts = rawTitle.split(" — ");
-    primaryTitle = parts[0];
-    featureSubtitle = parts[1];
-  } else if (rawTitle.includes(" - ")) {
-    const parts = rawTitle.split(" - ");
-    primaryTitle = parts[0];
-    featureSubtitle = parts[1];
-  }
-
-  const affiliationSubtitle =
-    lang === "th" ? project.subtitleTh : project.subtitleEn;
-  const descriptionText =
-    lang === "th" ? project.descriptionTh : project.descriptionEn;
-
-  // Technical terms to highlight subtly
-  const highlightedDescription = useMemo(() => {
-    const technicalKeywords = [
-      "WebView",
-      "State Management",
-      "Profile API",
-      "Gamification",
-      "Chat Streaks",
-      "BLoC",
-      "Clean Architecture",
-      "REST API",
-      "Idempotency",
-    ];
-
-    const regex = new RegExp(`(${technicalKeywords.join("|")})`, "gi");
-    const parts = descriptionText.split(regex);
-
-    return parts.map((part, pIdx) => {
-      const isMatch = technicalKeywords.some(
-        (kw) => kw.toLowerCase() === part.toLowerCase(),
-      );
-      if (isMatch) {
-        return (
-          <span
-            key={pIdx}
-            className="text-white font-medium border-b border-[#00f0ff]/40 pb-[0.5px]"
-          >
-            {part}
-          </span>
-        );
-      }
-      return part;
-    });
-  }, [descriptionText]);
+  const [titleTh, featureTh] = splitTitle(project.titleTh);
+  const [titleEn, featureEn] = splitTitle(project.titleEn);
+  const primaryTitle = lang === "th" ? titleTh : titleEn;
 
   const activeBeatData = beats[activeBeat];
   const activeBeatLabel = activeBeatData
@@ -322,12 +335,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             setIsDrawerOpen(true);
           }}
         />
-        <p className="w-full text-center font-mono text-[11px] text-zinc-500">
-          {t(
-            "จำลองการทำงานของแอป Flutter ในเบราว์เซอร์ · ตัวเลขเป็นตัวอย่าง",
-            "In-browser simulation of the Flutter app · figures are illustrative",
-          )}
-        </p>
+        <BilingualStack
+          className="w-full text-center font-mono text-[11px] text-zinc-500"
+          th="จำลองการทำงานของแอป Flutter ในเบราว์เซอร์ · ตัวเลขเป็นตัวอย่าง"
+          en="In-browser simulation of the Flutter app · figures are illustrative"
+        />
       </div>
     );
   };
@@ -375,12 +387,21 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 >
                   {lang === "th" ? beat.badgeTh : beat.badgeEn}
                 </p>
-                <h4 className="mt-2 text-lg font-bold text-white tracking-tight">
-                  {lang === "th" ? beat.titleTh : beat.titleEn}
-                </h4>
-                <p className="mt-2 text-sm text-zinc-300 font-light leading-relaxed max-w-prose">
-                  {lang === "th" ? beat.descriptionTh : beat.descriptionEn}
-                </p>
+                <div className="mt-2">
+                  <BilingualStack
+                    as="h4"
+                    className="text-lg font-bold text-white tracking-tight"
+                    th={beat.titleTh}
+                    en={beat.titleEn}
+                  />
+                </div>
+                <div className="mt-2">
+                  <BilingualStack
+                    className="text-sm text-zinc-300 font-light leading-relaxed max-w-prose"
+                    th={beat.descriptionTh}
+                    en={beat.descriptionEn}
+                  />
+                </div>
                 <p className="mt-3 font-mono text-xs text-zinc-400">
                   <span className="text-[#00f0ff]" aria-hidden="true">
                     →{" "}
@@ -395,12 +416,39 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     );
   };
 
-  // Mobile: the device cannot pin, so a 3-step selector sits directly above
-  // it and only the selected stage's story is shown.
+  // Mobile: the device cannot pin, so the selected stage's story comes first
+  // and the 3-step selector sits flush against the top of the device.
   const renderMobileStepper = () => {
     const beat = beats[activeBeat];
     return (
       <div className="space-y-4">
+        {beat && (
+          // Every stage's text shares one grid cell, so switching stage or
+          // language never changes the height above the device.
+          <div aria-live="polite" className="grid">
+            {beats.map((b, bIdx) => (
+              <div
+                key={b.id}
+                aria-hidden={bIdx !== activeBeat}
+                className={`col-start-1 row-start-1 ${bIdx === activeBeat ? "" : "invisible"}`}
+              >
+                <BilingualStack
+                  as="h4"
+                  className="text-base font-bold text-white tracking-tight"
+                  th={b.titleTh}
+                  en={b.titleEn}
+                />
+                <div className="mt-1.5">
+                  <BilingualStack
+                    className="text-sm text-zinc-300 font-light leading-relaxed"
+                    th={b.descriptionTh}
+                    en={b.descriptionEn}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
         <div
           role="group"
           aria-label={t("ขั้นตอนสถาปัตยกรรม", "Architecture stages")}
@@ -428,16 +476,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             );
           })}
         </div>
-        {beat && (
-          <div aria-live="polite" className="min-h-[7.5rem]">
-            <h4 className="text-base font-bold text-white tracking-tight">
-              {lang === "th" ? beat.titleTh : beat.titleEn}
-            </h4>
-            <p className="mt-1.5 text-sm text-zinc-300 font-light leading-relaxed">
-              {lang === "th" ? beat.descriptionTh : beat.descriptionEn}
-            </p>
-          </div>
-        )}
       </div>
     );
   };
@@ -451,23 +489,32 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           <p className="font-mono text-xs text-zinc-400">
             {project.tag} · {displayYear}
           </p>
-          <h3 className="text-3xl xl:text-4xl font-bold tracking-tight text-white leading-tight min-h-[2.5rem]">
-            {primaryTitle}
-          </h3>
-          {featureSubtitle && (
-            <p className="text-base font-sans font-medium text-zinc-300">
-              {featureSubtitle}
-            </p>
+          <BilingualStack
+            as="h3"
+            className="text-3xl xl:text-4xl font-bold tracking-tight text-white leading-tight"
+            th={titleTh}
+            en={titleEn}
+          />
+          {(featureTh || featureEn) && (
+            <BilingualStack
+              className="text-base font-sans font-medium text-zinc-300"
+              th={featureTh}
+              en={featureEn}
+            />
           )}
-          <p className="text-xs font-mono text-zinc-400 tracking-wide min-h-[1rem]">
-            {affiliationSubtitle}
-          </p>
+          <BilingualStack
+            className="text-xs font-mono text-zinc-400 tracking-wide"
+            th={project.subtitleTh}
+            en={project.subtitleEn}
+          />
         </div>
 
         {/* Description */}
-        <p className="text-sm xl:text-[15px] text-zinc-300/90 font-light leading-relaxed max-w-xl min-h-[4.5rem]">
-          {highlightedDescription}
-        </p>
+        <BilingualStack
+          className="text-sm xl:text-base text-zinc-300/90 font-light leading-relaxed max-w-xl"
+          th={highlightTerms(project.descriptionTh)}
+          en={highlightTerms(project.descriptionEn)}
+        />
 
         {/* Outcome metrics */}
         {project.metrics && project.metrics.length > 0 && (
@@ -479,12 +526,18 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   mIdx === 0 ? "pr-4" : mIdx === 1 ? "px-4" : "pl-4"
                 }`}
               >
-                <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase block break-words min-h-[1.25rem]">
-                  {lang === "th" ? metric.labelTh : metric.labelEn}
-                </span>
-                <span className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block break-words">
-                  {getMetricValue(metric, lang)}
-                </span>
+                <BilingualStack
+                  as="span"
+                  className="text-xs font-mono tracking-widest text-zinc-400 uppercase block break-words"
+                  th={metric.labelTh}
+                  en={metric.labelEn}
+                />
+                <BilingualStack
+                  as="span"
+                  className="text-xs sm:text-sm font-mono font-semibold text-zinc-200 block break-words"
+                  th={getMetricValue(metric, "th")}
+                  en={getMetricValue(metric, "en")}
+                />
               </div>
             ))}
           </div>
@@ -533,8 +586,18 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           {/* DOM order follows visual order so keyboard focus matches the
               alternating rhythm (device left on even, right on odd). */}
           {isReversed && storyColumn}
-          <div className="col-span-5 self-start [@media(min-height:860px)]:sticky [@media(min-height:860px)]:top-16">
-            {renderDeviceMockup()}
+          <div className="col-span-5 self-start sticky top-16">
+            <div
+              ref={deviceRef}
+              style={{
+                transform: `scale(${deviceFit.scale})`,
+                transformOrigin: "top center",
+                // Reclaim the layout space the scale-down frees up.
+                marginBottom: deviceFit.height * (deviceFit.scale - 1),
+              }}
+            >
+              {renderDeviceMockup()}
+            </div>
           </div>
           {!isReversed && storyColumn}
         </div>

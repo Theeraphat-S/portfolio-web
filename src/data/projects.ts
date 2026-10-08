@@ -12,6 +12,9 @@ export const projectsData: ProjectItem[] = [
     yearTh: "2568",
     yearEn: "2025",
     tag: "Healthcare Mobile App",
+    shortName: "NCDs Screening",
+    proofTh: "ลดเวลาคัดกรองจาก 10–15 เหลือ 3–5 นาที ทดสอบภาคสนามกับ อสม.",
+    proofEn: "Screening cut from 10–15 to 3–5 min, field-tested with VHVs",
     color: "#10b981",
     descriptionTh:
       "แอปพลิเคชันมือถือสำหรับตรวจคัดกรองและประเมินความเสี่ยงโรคไม่ติดต่อเรื้อรัง (NCDs) ได้แก่ โรคเบาหวาน, ความดันโลหิตสูง, โรคหัวใจ และโรคอ้วน ออกแบบ UI/UX ให้ใช้งานง่ายและตอบโจทย์ทั้งบุคลากรทางการแพทย์ เจ้าหน้าที่ อสม. และประชาชนทั่วไป",
@@ -100,6 +103,9 @@ export const projectsData: ProjectItem[] = [
     yearTh: "2569",
     yearEn: "2026",
     tag: "Commercial App Feature",
+    shortName: "Pinto App",
+    proofTh: "ส่งมอบเมนู WebView และ Chat Streaks ขึ้นแอปที่ใช้งานจริง",
+    proofEn: "WebView menus and Chat Streaks shipped to the production app",
     color: "#06b6d4",
     descriptionTh:
       "ร่วมพัฒนาและอัปเดตฟีเจอร์สำคัญบนแอปพลิเคชัน Pinto ในระดับ Production จัดการสถาปัตยกรรม State Management เพื่อรองรับการแสดงผลเมนู WebView และพัฒนาระบบสะสมแต้มแชท (Chat Streaks) พร้อมเชื่อมต่อ Profile API",
@@ -173,6 +179,9 @@ export const projectsData: ProjectItem[] = [
     yearTh: "2569",
     yearEn: "2026",
     tag: "Retail POS Module",
+    shortName: "Retail POS",
+    proofTh: "คิดเงินต่อได้แม้เน็ตหลุด และไม่คิดเงินซ้ำเมื่อส่งคำขอซ้ำ",
+    proofEn: "Checkout keeps working offline, with no double charges on retry",
     color: "#3b82f6",
     descriptionTh:
       "ออกแบบและพัฒนาโมดูลฝั่งระบบจัดการร้านค้า ณ จุดขาย (POS) เชื่อมต่อ Rest API ระหว่างหน้าบ้านและระบบหลังบ้านเพื่อจัดการข้อมูลสินค้า ออเดอร์ และการรับชำระเงินให้มีความถูกต้อง เสถียร และปลอดภัย",
