@@ -236,13 +236,13 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
     - _Beat 2 (Deterministic Engine)_: Automated risk calculation engine transitions to `RiskEvaluatedState` and highlights low/moderate/high tier cards.
     - _Beat 3 (Persistence & Infrastructure)_: REST API record submission to MySQL and PDF report export dispatch (`RecordSubmittedState`).
   - **Pinto Logistics Commercial App**:
-    - _Beat 1 (Presentation & Intake)_: `PintoScreen` live courier GPS stream and dynamic ETA indicator dispatching `WS_SYNC` events.
+    - _Beat 1 (Presentation & Intake)_: `PintoScreen` hybrid WebView menu inside the native shell (`WebViewMenuLoadedState`).
     - _Beat 2 (Deterministic Engine)_: Gamified chat streaks interaction with daily flame counter and reward multiplier calculation (`StreakCountState`).
-    - _Beat 3 (Persistence & Infrastructure)_: Bidirectional `JavaScriptChannel` bridge token handshake between embedded WebView and Flutter shell (`ProfileApiHandshakeState`).
-  - **Enterprise POS & Store Management**:
-    - _Beat 1 (Presentation & Intake)_: `PosScreen` sub-millisecond barcode scan, cart mutation, and tax/total calculation (`CartUpdatedState`).
-    - _Beat 2 (Deterministic Engine)_: Network disconnection simulation activating local SQLite Write-Ahead Log queue with idempotency keys (`OfflineModeActiveState`).
-    - _Beat 3 (Persistence & Infrastructure)_: Direct ESC/POS thermal printer byte stream dispatch and finalized audit trail commit (`ReceiptPrintedState`).
+    - _Beat 3 (Persistence & Infrastructure)_: Profile API sync of streak points shared across native and WebView screens (`ProfileSyncedState`).
+  - **Retail POS Module**:
+    - _Beat 1 (Presentation & Intake)_: `PosScreen` cart mutation and tax/total calculation (`CartUpdatedState`).
+    - _Beat 2 (Deterministic Engine)_: Network disconnection simulation writing transactions to a local SQLite queue (`OfflineModeActiveState`).
+    - _Beat 3 (Persistence & Infrastructure)_: Reconnect replays the queue with idempotency keys (`TransactionsSyncedState`).
 
 ## Do's and Don'ts
 

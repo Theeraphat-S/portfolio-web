@@ -198,8 +198,8 @@ class HybridBridgeController {
     filePath: "lib/features/checkout/data/idempotent_pos_sync_queue.dart",
     architectureLayer: "Data Layer / Fault-Tolerant Persistence",
     persistence: {
-      label: "Encrypted SQLite",
-      detail: "Write-Ahead Logging (WAL)",
+      label: "SQLite queue",
+      detail: "Idempotent retry on reconnect",
     },
     explanationTh:
       "ระบบคิวสั่งซื้อแบบ Idempotent UUID ที่บันทึกลง Local SQLite ทันที และซิงค์ขึ้น MySQL หลังบ้านอัตโนมัติเมื่อเครือข่ายกลับมาทำงาน",
@@ -232,7 +232,7 @@ class IdempotentPosSyncQueue {
       'created_at': DateTime.now().toIso8601String(),
     };
 
-    // 1. Write to local SQLite first (Write-Ahead Log)
+    // 1. Write to the local SQLite queue first
     await db.insert('offline_transactions', record);
 
     if (!isOnline) {

@@ -52,7 +52,7 @@ export const Projects: React.FC = () => {
             <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed min-h-[3.5rem] sm:min-h-[3rem]">
               {lang === "th"
                 ? "เจาะลึก 3 โปรเจกต์หลักที่ผ่านการพิสูจน์การใช้งานจริง ตั้งแต่ระบบคัดกรองโรคระดับชุมชน ไปจนถึงสถาปัตยกรรม Hybrid WebView และระบบแคชเชียร์ออฟไลน์"
-                : "Three signature architectures built for real-world reliability: offline-first healthcare screening, hybrid WebView logistics, and fault-tolerant retail point-of-sale."}
+                : "Three signature architectures built for real-world reliability: client-side healthcare risk scoring, hybrid WebView logistics, and offline-capable retail point-of-sale."}
             </p>
           </div>
 
@@ -99,7 +99,7 @@ export const Projects: React.FC = () => {
                   : "text-zinc-400 hover:text-white border border-transparent"
               }`}
             >
-              {t("ระบบองค์กร (1)", "ENTERPRISE (1)")}
+              {t("ระบบร้านค้า (1)", "RETAIL (1)")}
             </button>
           </div>
         </div>

@@ -19,7 +19,7 @@ The standardized 3-stage engineering progression applied to each flagship case s
 
 1. _Presentation & Intake_: Form validation, real-time input capture, and event dispatch.
 2. _Deterministic Engine_: On-device clinical calculations, BLoC state machines, and gamification multipliers.
-3. _Persistence & Infrastructure_: Encrypted local SQLite persistence, hybrid WebView platform channels, and ESC/POS hardware print dispatch.
+3. _Persistence & Infrastructure_: REST API record submission (NCDs), Profile API sync (Pinto), and an idempotent SQLite retry queue (POS).
    _Avoid_: Unstructured paragraph blobs, purely marketing-oriented feature descriptions without architectural details.
 
 **Live BLoC Stream Event & DevTools Dock**:

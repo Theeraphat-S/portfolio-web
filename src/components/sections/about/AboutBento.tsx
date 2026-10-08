@@ -74,8 +74,8 @@ export const AboutBento: React.FC = () => {
 
         <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl min-h-[4.5rem] sm:min-h-[4rem] lg:min-h-[3.5rem]">
           {lang === "th"
-            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ มุ่งมั่นพัฒนาโมบายแอปพลิเคชันตั้งแต่ปี 2565 เปลี่ยนหลักวิศวกรรมซอฟต์แวร์สู่ระบบจริงที่เสถียร ทั้งสถาปัตยกรรม Hybrid WebView และการประมวลผลข้อมูลออฟไลน์"
-            : "Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to offline clinical data handling."}
+            ? "บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ มุ่งมั่นพัฒนาโมบายแอปพลิเคชันตั้งแต่ปี 2565 เปลี่ยนหลักวิศวกรรมซอฟต์แวร์สู่ระบบจริงที่เสถียร ทั้งสถาปัตยกรรม Hybrid WebView และระบบคิดเงินที่ทำงานต่อได้เมื่อออฟไลน์"
+            : "Mobile software engineer graduated in Information Technology from Maejo University. Focused since 2022 on turning software engineering rigor into reliable production systems — ranging from hybrid native WebView bridges to offline-capable retail checkout."}
         </p>
       </motion.div>
 

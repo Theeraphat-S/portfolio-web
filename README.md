@@ -88,18 +88,18 @@ flowchart TD
 
 ### 📦 Pinto Logistics Commercial App `Internship at Fakduay, 2026`
 
-`Flutter` • `Dart` • `WebSockets` • `Hybrid WebView Bridge` • `Agile/Scrum`
+`Flutter` • `Dart` • `Hybrid WebView` • `Profile API` • `Agile/Scrum`
 
-- **Real-Time GPS & Retention**: Low-latency courier tracking via WebSockets and gamified daily chat streaks with dynamic reward tier multipliers.
+- **Retention Features**: Gamified daily Chat Streaks with rewards, synced through the Profile API.
 - **Hybrid Bridge Architecture**: Engineered a bidirectional `JavaScriptChannel` bridge synchronizing auth tokens and carts between legacy WebViews and native Flutter widgets.
 - 🔗 [View Interactive Showcase](https://theeraphat-portfolio.vercel.app/)
 
-### 💳 Enterprise Retail POS System `Commercial Retail`
+### 💳 Retail POS Module `Internship at Fakduay, 2026`
 
-`React 19` • `TypeScript` • `Tailwind CSS v4` • `REST API` • `ESC/POS`
+`Flutter` • `Dart` • `SQLite` • `REST API`
 
-- **Resilient Offline POS**: High-speed barcode scanning with sub-millisecond local SKU cache and SQLite Write-Ahead Logging (WAL) for 100% offline checkout continuity.
-- **Hardware Integration**: Direct ESC/POS byte stream printing and instant dynamic PromptPay QR payment processing.
+- **Offline Checkout**: Transactions are held in a local SQLite queue when the network drops, so the counter keeps working.
+- **Idempotent Sync**: On reconnect the queue replays with client-generated transaction UUIDs, preventing double-charging.
 - 🔗 [View Interactive Showcase](https://theeraphat-portfolio.vercel.app/)
 
 ---

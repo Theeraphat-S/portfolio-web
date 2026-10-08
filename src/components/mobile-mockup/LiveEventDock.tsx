@@ -101,11 +101,6 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               </div>
 
               <div className="flex items-center gap-2 shrink-0 text-[9px] font-mono text-zinc-500">
-                <span className="text-emerald-400 font-bold">
-                  {latestEvent.latencyMs !== undefined
-                    ? `${latestEvent.latencyMs}ms`
-                    : "< 1ms"}
-                </span>
                 <span className="hidden sm:inline">
                   {latestEvent.timestamp.split(" ")[0]}
                 </span>

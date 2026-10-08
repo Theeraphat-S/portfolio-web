@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { QrCode, CheckCircle2, Wifi, Battery, Plus, Minus } from "lucide-react";
+import { CheckCircle2, Wifi, Battery, Plus, Minus } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import {
   PosRegisterIcon,
@@ -53,8 +53,11 @@ export const PosScreen: React.FC<PosScreenProps> = ({
       setIsCompleted(false);
       setPendingSyncCount((prev) => (prev === 0 ? 1 : prev));
     } else if (activeBeat === 2) {
+      // Reconnected: the queue replays and drains.
       setIsCompleted(true);
       setIsOnline(true);
+      setPendingSyncCount(0);
+      setQueuedOrders([]);
     }
   }
 
@@ -158,10 +161,10 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             : "OfflineModeActiveState",
           details: nextState
             ? `Network active. Triggering idempotent background retry queue flush.`
-            : `Network disconnected. Switching to local SQLite Write-Ahead Logging (WAL).`,
+            : `Network disconnected. New transactions go to the local SQLite queue.`,
           payload: {
             isOnline: nextState,
-            protocol: "WAL_JOURNAL",
+            storage: "sqlite_queue",
           },
           latencyMs: 0.6,
         }),
@@ -233,15 +236,13 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             : "OfflineEnqueuedState",
           details: isOnline
             ? `Idempotency UUID: ${txId} ➔ 200 OK Sync with MySQL (฿${totalAmount})`
-            : `No connection. Enqueued in SQLite WAL queue (Pending Sync: ${
+            : `No connection. Enqueued in SQLite queue (Pending Sync: ${
                 pendingSyncCount + 1
               })`,
           payload: {
             idempotencyKey: txId,
             total: totalAmount,
             itemCount,
-            paymentMode: "PromptPay QR Instant",
-            dataIntegrity: "99.9%",
             queuedOrders: isOnline ? undefined : nextQueue,
           },
           latencyMs: isOnline ? 1.8 : 0.4,
@@ -326,7 +327,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             onClick={handleCommitCheckout}
             className="px-2 py-0.5 rounded bg-blue-950/40 hover:bg-blue-900/60 text-blue-300 border border-blue-500/30 transition-colors shrink-0 cursor-pointer"
           >
-            ⚡ QR Checkout
+            ⚡ Checkout
           </button>
           <button
             type="button"
@@ -397,7 +398,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           </div>
         </div>
 
-        {/* Pricing & QR PromptPay Card */}
+        {/* Total & sync status */}
         <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0c1626] to-[#090d16] border border-blue-500/25 space-y-2 shadow-md">
           <div className="flex justify-between items-baseline border-b border-white/[0.06] pb-1.5">
             <span className="text-[9px] font-mono text-zinc-400 uppercase">
@@ -408,19 +409,14 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-2 p-1.5 rounded-lg bg-black/40 border border-white/[0.06]">
-            <QrCode className="w-7 h-7 text-[#2196f3] shrink-0" />
-            <div className="text-[9px] font-mono">
-              <span className="font-bold text-zinc-200 block">
-                PromptPay QR Instant
-              </span>
-              <span className="text-zinc-400 text-[8px]">
-                {isOnline
-                  ? "Auto-reconciled with backend API"
-                  : "Queued in local SQLite WAL table"}
-              </span>
-            </div>
-          </div>
+          <p className="text-[9px] font-mono text-zinc-400">
+            {isOnline
+              ? t("ซิงค์กับ REST API แล้ว", "Synced with the REST API")
+              : t(
+                  "บันทึกในคิว SQLite บนเครื่อง",
+                  "Held in the local SQLite queue",
+                )}
+          </p>
         </div>
 
         {/* Resilience Telemetry */}
@@ -445,7 +441,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             >
               {pendingSyncCount > 0
                 ? `${pendingSyncCount} Pending (Auto-flush)`
-                : "0 Pending (Synced 99.9%)"}
+                : "0 Pending (All synced)"}
             </span>
           </div>
         </div>
@@ -463,7 +459,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
               <span>
                 {isOnline
-                  ? t("ออกใบเสร็จ & ซิงค์สำเร็จ", "Receipt Printed (Synced)")
+                  ? t("ซิงค์ธุรกรรมสำเร็จ", "Transaction Synced")
                   : t("บันทึกลงคิวออฟไลน์สำเร็จ", "Enqueued in Offline SQLite")}
               </span>
             </>

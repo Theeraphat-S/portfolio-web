@@ -186,7 +186,7 @@ export const Hero: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-zinc-400">SYNC</span>
-                  <span>Offline SQLite / REST</span>
+                  <span>REST API / SQLite queue</span>
                 </div>
               </div>
               <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono">

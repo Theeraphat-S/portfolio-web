@@ -165,18 +165,19 @@ export const projectsData: ProjectItem[] = [
     id: "pos-system",
     titleTh: "ระบบจัดการ ณ จุดขาย (POS System & Store Management)",
     titleEn: "Point of Sale (POS) & Store Management System",
-    subtitleTh: "ระบบจัดการสินค้าและการรับชำระเงินสำหรับธุรกิจค้าปลีก",
-    subtitleEn: "Retail Store Inventory & Payment Management",
+    subtitleTh:
+      "ฝึกงาน ณ บริษัท ฝากด้วย โลจิสติกส์ แอนด์ ดิจิทัล แพลตฟอร์ม จำกัด",
+    subtitleEn: "Internship at Fakduay Logistics & Digital Platform",
     category: "system",
     year: "2569",
     yearTh: "2569",
     yearEn: "2026",
-    tag: "Enterprise System",
+    tag: "Retail POS Module",
     color: "#3b82f6",
     descriptionTh:
       "ออกแบบและพัฒนาโมดูลฝั่งระบบจัดการร้านค้า ณ จุดขาย (POS) เชื่อมต่อ Rest API ระหว่างหน้าบ้านและระบบหลังบ้านเพื่อจัดการข้อมูลสินค้า ออเดอร์ และการรับชำระเงินให้มีความถูกต้อง เสถียร และปลอดภัย",
     descriptionEn:
-      "Designed and developed retail Point of Sale (POS) store management modules. Integrated Rest APIs between client and backend to ensure synchronized inventory data, instant transaction processing, and receipt generation.",
+      "Designed and developed retail Point of Sale (POS) store management modules. Integrated Rest APIs between client and backend to keep inventory data in sync and transactions reliable.",
     problemTh:
       "ระบบแคชเชียร์และจัดการสต็อกแบบเดิมทำงานช้า ไม่รองรับการเชื่อมต่อขัดข้องชั่วคราว ทำให้แถวคิดเงินติดขัดและเสี่ยงต่อข้อมูลสต็อกไม่ตรงกัน (Race Condition)",
     problemEn:
@@ -192,26 +193,27 @@ export const projectsData: ProjectItem[] = [
     evidenceTh:
       "ทดสอบ Stress Test ในสภาวะเน็ตกระตุก พบโอกาสยิง API ซ้ำ จึงเพิ่ม Client-generated Transaction UUID เพื่อป้องกัน Double-charging",
     evidenceEn:
-      "Network stress testing exposed potential duplicate API triggers, leading to client-generated transaction UUIDs to guarantee zero double-charging.",
+      "Network stress testing exposed potential duplicate API triggers, leading to client-generated transaction UUIDs that prevent double-charging.",
     outcomeTh:
-      "ระบบรองรับการทำงานแบบ Offline-tolerant และส่งมอบความถูกต้องของข้อมูลธุรกรรม 99.9% ผ่าน Idempotency UUID ช่วยลดเวลาต่อการชำระเงินและป้องกันการคิดเงินซ้ำ",
+      "ระบบคิดเงินทำงานต่อได้แม้เน็ตหลุด โดยเก็บธุรกรรมไว้ในคิว SQLite บนเครื่อง และป้องกันการคิดเงินซ้ำเมื่อส่งซ้ำด้วย Transaction UUID",
     outcomeEn:
-      "Delivered offline-tolerant checkout architecture maintaining 99.9% transaction consistency with idempotent UUID keys, eliminating duplicate billing and checkout bottlenecks.",
+      "Checkout keeps working through network drops by holding transactions in a local SQLite queue, and client-generated UUIDs prevent double-charging when the queue retries.",
     highlightsTh: [
       "ออกแบบระบบจัดการสินค้าคงคลัง (Inventory) และระบบตะกร้าสินค้าที่คิดคำนวณราคาและภาษีอัตโนมัติ",
       "เชื่อมต่อ RESTful API ความเร็วสูงระหว่างหน้าบ้านและระบบหลังบ้าน พร้อมกลไกป้องกันข้อมูลซ้ำซ้อน",
-      "รองรับระบบชำระเงินแบบหลายช่องทาง (เงินสด, QR Code PromptPay) และออกใบเสร็จรับเงิน",
+      "เก็บธุรกรรมลงคิว SQLite บนเครื่องเมื่อออฟไลน์ แล้วส่งซ้ำแบบ Idempotent เมื่อกลับมาออนไลน์",
       "ระบบออกแบบให้ทำงานได้อย่างต่อเนื่องแม้ในสภาวะการเชื่อมต่อที่ไม่เสถียร (Offline-tolerant UI)",
     ],
     highlightsEn: [
       "Designed real-time inventory tracking and dynamic checkout calculation logic.",
-      "Integrated high-throughput REST APIs ensuring zero transaction loss during peak operations.",
-      "Supported multi-channel payments (Cash, QR PromptPay) with instant digital receipt generation.",
+      "Integrated REST APIs between client and backend with duplicate-safe request handling.",
+      "Queued transactions in local SQLite during outages and replayed them with idempotency keys on reconnect.",
       "Engineered error-resilient client handling for seamless offline-tolerant cashier flow.",
     ],
     technologies: [
-      "React / Flutter",
-      "JavaScript / Dart",
+      "Flutter",
+      "Dart",
+      "SQLite",
       "REST API",
       "MySQL",
       "State Management",
@@ -219,9 +221,11 @@ export const projectsData: ProjectItem[] = [
     ],
     metrics: [
       {
-        labelTh: "ความถูกต้องข้อมูล",
-        labelEn: "Data Consistency",
-        value: "99.9%",
+        labelTh: "โหมดออฟไลน์",
+        labelEn: "Offline Mode",
+        value: "SQLite queue",
+        valueTh: "คิว SQLite",
+        valueEn: "SQLite queue",
       },
       {
         labelTh: "ป้องกันซ้ำซ้อน",
@@ -229,9 +233,11 @@ export const projectsData: ProjectItem[] = [
         value: "Idempotency UUID",
       },
       {
-        labelTh: "ช่องทางชำระ",
-        labelEn: "Payment Options",
-        value: "Cash & QR PromptPay",
+        labelTh: "พัฒนาที่",
+        labelEn: "Built At",
+        value: "Fakduay internship",
+        valueTh: "ฝึกงานที่ฝากด้วย",
+        valueEn: "Fakduay internship",
       },
     ],
     architectureTh:
@@ -240,8 +246,7 @@ export const projectsData: ProjectItem[] = [
       "Modular Client Architecture with Optimistic UI updates and resilient API request retry logic",
     githubUrl: "https://github.com/Theeraphat-S",
     repositoryType: "commercial",
-    repositoryNoticeTh:
-      "ระบบแคชเชียร์เชิงพาณิชย์สำหรับธุรกิจค้าปลีก (Client Solution · Private Codebase)",
-    repositoryNoticeEn: "Commercial Retail Client Solution · Private Codebase",
+    repositoryNoticeTh: "งานช่วงฝึกงาน · ซอร์สโค้ดของบริษัท (Private)",
+    repositoryNoticeEn: "Internship work · Company private codebase",
   },
 ];

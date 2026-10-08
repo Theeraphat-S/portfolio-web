@@ -11,13 +11,10 @@ import {
   ExternalLink,
   Wifi,
   Battery,
-  Phone,
-  MessageSquare,
-  Clock,
+  UserRound,
 } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import {
-  RoutingIcon,
   FlameStreakIcon,
   CodeBridgeIcon,
   ShoppingBagIcon,
@@ -25,7 +22,7 @@ import {
 import { BLoCStreamEvent } from "../../types/stream";
 import { createStreamEvent } from "../../lib/streamUtils";
 
-export type PintoState = "tracking" | "streak" | "webview";
+export type PintoState = "webview" | "streak" | "profile";
 
 interface PintoScreenProps {
   direction?: number;
@@ -40,7 +37,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
   onDispatchEvent,
 }) => {
   const { t } = useLanguage();
-  const [internalState, setInternalState] = useState<PintoState>("tracking");
+  const [internalState, setInternalState] = useState<PintoState>("webview");
   const currentState = controlledState ?? internalState;
 
   const handleStateSelect = (state: PintoState) => {
@@ -66,9 +63,8 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
     }
   };
 
-  // State 1: Tracking State
-  const [courierDistance, setCourierDistance] = useState(1.4);
-  const [isCourierNearby, setIsCourierNearby] = useState(false);
+  // State 3: Profile API sync
+  const [isProfileRefreshing, setIsProfileRefreshing] = useState(false);
 
   // State 2: Streak State
   const [streakCount, setStreakCount] = useState(7);
@@ -163,6 +159,25 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
     }
   };
 
+  const handleProfileRefresh = () => {
+    setIsProfileRefreshing(true);
+    setTimeout(() => setIsProfileRefreshing(false), 700);
+
+    if (onDispatchEvent) {
+      onDispatchEvent(
+        createStreamEvent({
+          projectId: "pinto-app",
+          source: "PintoScreen",
+          type: "bloc_event",
+          tag: "PROFILE_API",
+          name: "RefreshProfileEvent",
+          stateName: "ProfileSyncedState",
+          details: `GET /profile ➔ points & tier refreshed for streak rewards`,
+        }),
+      );
+    }
+  };
+
   const handleRefreshSync = () => {
     setIsSyncing(true);
     setTimeout(() => setIsSyncing(false), 700);
@@ -212,12 +227,10 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
           </p>
         </div>
 
-        {/* Live WS Telemetry */}
+        {/* Backend status */}
         <div className="flex items-center gap-1.5 text-[9px] font-mono bg-black/40 px-2 py-1 rounded-md border border-white/[0.06]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-zinc-300">LIVE WS</span>
-          <span className="text-zinc-600">&bull;</span>
-          <span className="text-[#00f0ff]">24ms</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span className="text-zinc-300">Profile API</span>
         </div>
       </div>
 
@@ -228,17 +241,6 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
           <span className="text-zinc-500 uppercase px-1 shrink-0">
             SCENARIOS:
           </span>
-          <button
-            type="button"
-            onClick={() => {
-              handleStateSelect("tracking");
-              setCourierDistance(0.2);
-              setIsCourierNearby(true);
-            }}
-            className="px-2 py-0.5 rounded bg-sky-950/40 hover:bg-sky-900/60 text-sky-300 border border-sky-500/30 transition-colors shrink-0 cursor-pointer"
-          >
-            🛵 Courier Arrived
-          </button>
           <button
             type="button"
             onClick={() => {
@@ -259,163 +261,19 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
           >
             🌐 Sync Bridge
           </button>
+          <button
+            type="button"
+            onClick={() => {
+              handleStateSelect("profile");
+              handleProfileRefresh();
+            }}
+            className="px-2 py-0.5 rounded bg-sky-950/40 hover:bg-sky-900/60 text-sky-300 border border-sky-500/30 transition-colors shrink-0 cursor-pointer"
+          >
+            👤 Refresh Profile
+          </button>
         </div>
 
         <AnimatePresence mode="wait">
-          {/* TAB 1: LIVE ORDER TRACKING */}
-          {currentState === "tracking" && (
-            <motion.div
-              key="state-tracking"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2.5 flex-1 flex flex-col justify-between"
-            >
-              <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0e1624] to-[#0a0f19] border border-white/[0.08] shadow-sm">
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                      {isCourierNearby ? "COURIER ARRIVED" : "COURIER EN ROUTE"}
-                    </span>
-                  </div>
-                  <span className="text-[9px] font-mono text-zinc-400 bg-black/40 px-1.5 py-0.5 rounded border border-white/[0.06]">
-                    ORDER #FD-8942
-                  </span>
-                </div>
-
-                <div className="flex items-baseline justify-between pt-1">
-                  <div>
-                    <span className="text-[9px] font-mono text-zinc-400 uppercase block">
-                      Estimated Arrival
-                    </span>
-                    <span className="text-base font-bold font-mono text-white flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-[#00f0ff]" />
-                      {isCourierNearby ? "Arriving Now" : "12:45 PM"}
-                      <span className="text-[10px] text-zinc-400 font-normal">
-                        ({isCourierNearby ? "< 1 min" : "14 mins"})
-                      </span>
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[9px] font-mono text-[#00f0ff] block font-bold">
-                      {courierDistance} km away
-                    </span>
-                    <span className="text-[9px] font-mono text-zinc-400">
-                      BLoC: InTransit
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Simulated GPS Route */}
-              <div className="relative p-3 rounded-xl bg-black/40 border border-white/[0.06] overflow-hidden space-y-2.5">
-                <div className="flex items-start gap-2.5 relative">
-                  <div className="flex flex-col items-center pt-0.5">
-                    <span className="w-2 h-2 rounded-full bg-zinc-500" />
-                    <div className="w-0.5 h-7 bg-gradient-to-b from-zinc-500 to-[#00f0ff]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#00f0ff] ring-2 ring-[#00f0ff]/30 animate-pulse" />
-                  </div>
-                  <div className="space-y-2 text-[10px] font-mono flex-1">
-                    <div>
-                      <span className="text-zinc-400 text-[8px] uppercase tracking-wider block">
-                        PICKUP
-                      </span>
-                      <p className="text-zinc-200 font-semibold truncate">
-                        Bento Kitchen Nimman Soi 9
-                      </p>
-                    </div>
-                    <div>
-                      <span className="text-[#00f0ff] text-[8px] uppercase tracking-wider block">
-                        DESTINATION
-                      </span>
-                      <p className="text-white font-semibold truncate">
-                        Faculty of Science, MJU
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[9px] font-mono text-zinc-400">
-                  <span className="flex items-center gap-1">
-                    <RoutingIcon size={12} color="#00f0ff" animated />
-                    Speed: 38 km/h
-                  </span>
-                  <span>Accuracy: High (&plusmn;3m)</span>
-                </div>
-              </div>
-
-              {/* Courier Profile & Communication Card */}
-              <div className="p-2.5 rounded-xl bg-[#0c1017] border border-white/[0.06] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-[10px] font-bold text-[#00f0ff] font-mono">
-                    SK
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold text-white">
-                      Somchai K.
-                    </p>
-                    <p className="text-[9px] font-mono text-zinc-400">
-                      Honda Wave &bull; &#9733; 4.9 (420+ rides)
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (onDispatchEvent) {
-                        onDispatchEvent(
-                          createStreamEvent({
-                            projectId: "pinto-app",
-                            source: "PintoScreen",
-                            type: "bloc_event",
-                            tag: "COMM_CHANNEL",
-                            name: "TriggerVoipCallEvent(Somchai)",
-                            stateName: "DriverCallInitiatedState",
-                            details: `Encrypted in-app driver communication channel initiated`,
-                            latencyMs: 1.4,
-                          }),
-                        );
-                      }
-                    }}
-                    aria-label="Call Courier"
-                    className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] cursor-pointer"
-                    title="Call Courier"
-                  >
-                    <Phone className="w-3 h-3 text-[#00f0ff]" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (onDispatchEvent) {
-                        onDispatchEvent(
-                          createStreamEvent({
-                            projectId: "pinto-app",
-                            source: "PintoScreen",
-                            type: "bloc_event",
-                            tag: "COMM_CHANNEL",
-                            name: "OpenDriverChatStreamEvent",
-                            stateName: "ChatTunnelConnectedState",
-                            details: `Websocket chat tunnel established with courier telemetry`,
-                            latencyMs: 0.8,
-                          }),
-                        );
-                      }
-                    }}
-                    aria-label="Chat with Courier"
-                    className="p-1.5 rounded-lg bg-[#00f0ff]/15 hover:bg-[#00f0ff]/25 text-[#00f0ff] border border-[#00f0ff]/30 cursor-pointer"
-                    title="Chat with Courier"
-                  >
-                    <MessageSquare className="w-3 h-3" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
           {/* TAB 2: GAMIFIED CHAT STREAKS */}
           {currentState === "streak" && (
             <motion.div
@@ -516,32 +374,6 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 </div>
               </div>
 
-              {/* Profile API Points & Tier */}
-              <div className="p-2.5 rounded-xl bg-[#0c1017] border border-white/[0.06] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-[10px] font-bold text-[#00f0ff] font-mono">
-                    TS
-                  </div>
-                  <div>
-                    <span className="text-[8px] font-mono text-zinc-400 uppercase block">
-                      Profile API &bull; Gold
-                    </span>
-                    <span className="text-xs font-bold font-mono text-white">
-                      {1450 + (isStreaked ? 50 : 0)}{" "}
-                      <span className="text-[9px] text-[#00f0ff]">PTS</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <span className="text-[8px] font-mono text-amber-400/90 block">
-                    {500 - (isStreaked ? 50 : 0)} pts to Platinum
-                  </span>
-                  <div className="w-20 h-1 bg-zinc-800 rounded-full mt-1 overflow-hidden">
-                    <div className="w-[76%] h-full bg-gradient-to-r from-[#00f0ff] to-amber-400 rounded-full" />
-                  </div>
-                </div>
-              </div>
-
               {/* Unlocked Reward Voucher */}
               <div className="p-2 rounded-lg bg-zinc-900/60 border border-white/[0.06] flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -599,9 +431,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   <CodeBridgeIcon size={12} color="#00f0ff" />
                   JS &lt;-&gt; Flutter Bridge: Active
                 </span>
-                <span className="text-emerald-400 font-bold">
-                  0.4ms Latency
-                </span>
+                <span className="text-emerald-400 font-bold">Synced</span>
               </div>
 
               {/* Dynamic Items */}
@@ -674,6 +504,88 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
               </div>
             </motion.div>
           )}
+          {/* TAB 3: PROFILE API SYNC */}
+          {currentState === "profile" && (
+            <motion.div
+              key="state-profile"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-2.5 flex-1 flex flex-col"
+            >
+              <div className="p-3 rounded-xl bg-[#0c1017] border border-white/[0.08]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-[10px] font-bold text-[#00f0ff] font-mono">
+                      TS
+                    </div>
+                    <div>
+                      <span className="text-[8px] font-mono text-zinc-400 uppercase block">
+                        Profile API &bull; Gold
+                      </span>
+                      <span className="text-sm font-bold font-mono text-white">
+                        {1450 + (isStreaked ? 50 : 0)}{" "}
+                        <span className="text-[9px] text-[#00f0ff]">PTS</span>
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleProfileRefresh}
+                    aria-label="Refresh profile from Profile API"
+                    className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] cursor-pointer"
+                  >
+                    <RefreshCw
+                      className={`w-3 h-3 ${isProfileRefreshing ? "animate-spin text-[#00f0ff]" : ""}`}
+                    />
+                  </button>
+                </div>
+                <div className="mt-2.5">
+                  <div className="flex items-center justify-between text-[8px] font-mono text-zinc-400">
+                    <span>Gold</span>
+                    <span className="text-amber-400/90">
+                      {500 - (isStreaked ? 50 : 0)} pts to Platinum
+                    </span>
+                  </div>
+                  <div className="w-full h-1 bg-zinc-800 rounded-full mt-1 overflow-hidden">
+                    <div
+                      className="h-full bg-[#00f0ff] rounded-full transition-[width] duration-500"
+                      style={{ width: isStreaked ? "78%" : "74%" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-2.5 rounded-xl bg-black/40 border border-white/[0.06] space-y-1.5 text-[9px] font-mono">
+                <span className="text-[8px] text-zinc-400 uppercase tracking-wider block">
+                  {t(
+                    "ลำดับการซิงค์ (ตัวอย่าง)",
+                    "Sync sequence (illustrative)",
+                  )}
+                </span>
+                <p className="text-zinc-300">
+                  <span className="text-[#00f0ff]">1</span> Native ➔ WebView:
+                  auth token via bridge
+                </p>
+                <p className="text-zinc-300">
+                  <span className="text-[#00f0ff]">2</span> GET /profile ➔
+                  points &amp; tier
+                </p>
+                <p className={isStreaked ? "text-zinc-300" : "text-zinc-500"}>
+                  <span className="text-[#00f0ff]">3</span> POST streak claim ➔
+                  profile updated
+                </p>
+              </div>
+
+              <p className="mt-auto text-[9px] text-zinc-400 leading-relaxed">
+                {t(
+                  "แต้มจาก Chat Streaks ถูกบันทึกผ่าน Profile API ทำให้ทั้งหน้า Native และ WebView เห็นยอดเดียวกัน",
+                  "Streak points are written through the Profile API, so native screens and WebView menus show the same balance.",
+                )}
+              </p>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
 
@@ -682,22 +594,19 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
         <div className="w-full grid grid-cols-3 text-center font-mono">
           <button
             type="button"
-            onClick={() => handleStateSelect("tracking")}
+            onClick={() => handleStateSelect("webview")}
             className={`py-1 flex flex-col items-center gap-0.5 cursor-pointer transition-colors ${
-              currentState === "tracking"
+              currentState === "webview"
                 ? "text-[#00f0ff] font-bold"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            <RoutingIcon
+            <CodeBridgeIcon
               size={14}
-              color={currentState === "tracking" ? "#00f0ff" : "#71717a"}
+              color={currentState === "webview" ? "#00f0ff" : "#71717a"}
             />
-            <span className="text-[8px] tracking-wider uppercase">
-              TRACKING
-            </span>
+            <span className="text-[8px] tracking-wider uppercase">WEBVIEW</span>
           </button>
-
           <button
             type="button"
             onClick={() => handleStateSelect("streak")}
@@ -716,18 +625,17 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
 
           <button
             type="button"
-            onClick={() => handleStateSelect("webview")}
+            onClick={() => handleStateSelect("profile")}
             className={`py-1 flex flex-col items-center gap-0.5 cursor-pointer transition-colors ${
-              currentState === "webview"
+              currentState === "profile"
                 ? "text-[#00f0ff] font-bold"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            <CodeBridgeIcon
-              size={14}
-              color={currentState === "webview" ? "#00f0ff" : "#71717a"}
+            <UserRound
+              className={`w-3.5 h-3.5 ${currentState === "profile" ? "text-[#00f0ff]" : "text-zinc-500"}`}
             />
-            <span className="text-[8px] tracking-wider uppercase">WEBVIEW</span>
+            <span className="text-[8px] tracking-wider uppercase">PROFILE</span>
           </button>
         </div>
         <div className="w-20 h-1 bg-white/20 rounded-full mt-1.5 mb-0.5" />

@@ -41,7 +41,7 @@ const getInitialEvent = (id: string): BLoCStreamEvent => {
         systolic: 122,
         totalScore: 4,
         tier: "MODERATE",
-        persistedOffline: true,
+        evaluatedOn: "client",
       },
     };
   }
@@ -52,14 +52,12 @@ const getInitialEvent = (id: string): BLoCStreamEvent => {
       projectId: "pinto-app",
       source: "PintoScreen",
       type: "bloc_state",
-      tag: "WS_SYNC",
-      name: "OrderTrackingState",
-      details: "Live WS active ➔ Courier Somchai K. (1.4km away, ETA 12:45)",
+      tag: "WEBVIEW_MESSAGE",
+      name: "WebViewMenuLoadedState",
+      details: "Hybrid menu loaded in native shell ➔ cart bridge ready",
       payload: {
-        orderId: "#FD-8942",
-        status: "InTransit",
-        courier: "Somchai K.",
-        distanceKm: 1.4,
+        bridge: "JavaScriptChannel",
+        cartItems: 2,
       },
     };
   }
@@ -88,7 +86,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 }) => {
   const { lang, t } = useLanguage();
   const [activeBeat, setActiveBeat] = useState<number>(0);
-  const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("tracking");
+  const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("webview");
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // Alternating Layout Rhythm (Project 1 Left, Project 2 Right, Project 3 Left)
@@ -119,8 +117,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       if (!beat) return;
 
       if (project.id === "pinto-app") {
-        const tabs: PintoState[] = ["tracking", "streak", "webview"];
-        setPintoActiveTab(tabs[bIdx] || "tracking");
+        const tabs: PintoState[] = ["webview", "streak", "profile"];
+        setPintoActiveTab(tabs[bIdx] || "webview");
       }
 
       const now = new Date();
@@ -182,7 +180,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
   const handleTabClick = (tab: PintoState) => {
     setPintoActiveTab(tab);
-    const tabIdx = tab === "tracking" ? 0 : tab === "streak" ? 1 : 2;
+    const tabIdx = tab === "webview" ? 0 : tab === "streak" ? 1 : 2;
     setActiveBeat(tabIdx);
   };
 
@@ -283,63 +281,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           </div>
         )}
 
-        {/* State Switcher Pills for Pinto Application */}
-        {project.id === "pinto-app" && isDesktop && (
-          <div className="w-full flex flex-col gap-1.5 p-1 rounded-lg bg-[#0a0d14] border border-white/[0.08] shadow-sm font-mono text-xs">
-            <div
-              role="tablist"
-              aria-label="Pinto feature screens"
-              className="grid grid-cols-3 gap-1"
-            >
-              <button
-                type="button"
-                role="tab"
-                aria-selected={pintoActiveTab === "tracking"}
-                aria-controls={`screen-panel-${project.id}`}
-                aria-label="Screen 01: Order tracking"
-                onClick={() => handleTabClick("tracking")}
-                className={`min-h-11 px-1 py-2 rounded transition-all cursor-pointer ${
-                  pintoActiveTab === "tracking"
-                    ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                {t("ติดตาม", "Tracking")}
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={pintoActiveTab === "streak"}
-                aria-controls={`screen-panel-${project.id}`}
-                aria-label="Screen 02: Chat streak gamification"
-                onClick={() => handleTabClick("streak")}
-                className={`min-h-11 px-1 py-2 rounded transition-all cursor-pointer ${
-                  pintoActiveTab === "streak"
-                    ? "bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                {t("สะสมแต้ม", "Streaks")}
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={pintoActiveTab === "webview"}
-                aria-controls={`screen-panel-${project.id}`}
-                aria-label="Screen 03: Hybrid WebView menu"
-                onClick={() => handleTabClick("webview")}
-                className={`min-h-11 px-1 py-2 rounded transition-all cursor-pointer ${
-                  pintoActiveTab === "webview"
-                    ? "bg-[#00f0ff]/15 text-[#00f0ff] font-bold border border-[#00f0ff]/30"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                WebView
-              </button>
-            </div>
-          </div>
-        )}
-
         {/* Smartphone Chassis with Subtle Ambient Blue Lighting */}
         <div className="relative w-full rounded-[38px] bg-[#0c1017] p-2 sm:p-2.5 border border-white/[0.12] hover:border-[#00f0ff]/35 transition-all duration-500 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_35px_-12px_rgba(0,240,255,0.12)] group/chassis will-change-transform">
           {/* Outer Rim Glow Line */}
@@ -381,6 +322,12 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             setIsDrawerOpen(true);
           }}
         />
+        <p className="w-full text-center font-mono text-[11px] text-zinc-500">
+          {t(
+            "จำลองการทำงานของแอป Flutter ในเบราว์เซอร์ · ตัวเลขเป็นตัวอย่าง",
+            "In-browser simulation of the Flutter app · figures are illustrative",
+          )}
+        </p>
       </div>
     );
   };

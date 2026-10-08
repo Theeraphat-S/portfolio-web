@@ -21,8 +21,8 @@ The product is the professional portfolio and interactive engineering showcase f
 Unlike generic entry-level portfolios filled with static screenshots or tutorial clones, this platform demonstrates production-proven Flutter engineering through a **scroll-led interactive case study story**:
 
 - **NCDs Risk Screening App**: Client-side BLoC risk scoring (no network round-trip) with records submitted to MySQL via REST API, for medical screening (reducing screening time by >60% and human error to 0%) through deterministic BLoC calculation.
-- **Pinto Logistics App**: Commercial mobile features with hybrid WebView bridges, live WebSocket tracking, and gamification streaks.
-- **Enterprise POS System**: Fault-tolerant retail POS system featuring local SQLite Write-Ahead Logging (WAL), idempotent retry queues, and direct ESC/POS thermal printer integration.
+- **Pinto Logistics App** (Fakduay internship): Hybrid WebView menus in a Flutter shell, gamified Chat Streaks, and Profile API sync.
+- **Retail POS Module** (Fakduay internship): Checkout that keeps working offline via a local SQLite queue, replayed with idempotent retries on reconnect.
 
 It highlights architectural reasoning (BLoC state machines, clean architecture, real usability field testing) backed by academic mentorship (TA for 3 semesters) and community tech leadership.
 
@@ -60,17 +60,17 @@ Every flagship project is structured around 3 canonical architectural beats that
 
 ### 2. Pinto Logistics Commercial App (Internship at Fakduay Logistics, 2026)
 
-- **Beat 1 — Presentation & Intake**: Low-latency courier GPS coordinates streamed over WebSockets, updating dynamic ETA and milestone status reactively.
-- **Beat 2 — Deterministic Engine**: Daily chat streaks engine with dynamic reward tier multipliers driving Daily Active Users (DAU) and retention.
-- **Beat 3 — Persistence & Infrastructure**: Bidirectional `JavaScriptChannel` bridge synchronizing auth tokens and cart payloads between legacy WebViews and native Flutter widgets.
-- **Verified Outcome**: Seamless hybrid navigation without frame drops; measurable retention boost via daily reward loop; shipped to production.
+- **Beat 1 — Presentation & Intake**: Existing web menus embedded in a WebView inside the Flutter app, with state management keeping the native cart in step.
+- **Beat 2 — Deterministic Engine**: Chat Streaks logic counting consecutive chat days and unlocking rewards on check-in.
+- **Beat 3 — Persistence & Infrastructure**: Streak points written through the Profile API; a state bridge passes user data between Flutter and the WebView.
+- **Outcome**: Features shipped to the production Pinto app. Courier GPS / WebSocket tracking was not part of this work and must not be claimed.
 
-### 3. Enterprise POS & Store Management (Commercial Retail System)
+### 3. Retail POS Module (Internship at Fakduay Logistics, 2026)
 
-- **Beat 1 — Presentation & Intake**: High-speed barcode scanning with sub-millisecond local SKU cache hits and reactive cart state calculation.
-- **Beat 2 — Deterministic Engine**: Retail continuity during network blackouts via local SQLite Write-Ahead Logging (WAL) and idempotent background retry queues.
-- **Beat 3 — Persistence & Infrastructure**: Direct byte dispatch to thermal receipt printers upon checkout confirmation, creating tamper-evident audit trails.
-- **Verified Outcome**: 99.9% transaction consistency; zero stock desync during peak hours; instant PromptPay QR verification.
+- **Beat 1 — Presentation & Intake**: Reactive cart state recalculating totals, tax and item counts without waiting on the server.
+- **Beat 2 — Deterministic Engine**: When the network drops, transactions are written to a local SQLite queue so checkout continues.
+- **Beat 3 — Persistence & Infrastructure**: On reconnect the queue replays to the REST API with client-generated transaction UUIDs, so the server drops duplicates.
+- **Outcome**: No unmeasured figures. Do not claim ESC/POS printing, PromptPay, WAL, or "99.9%" consistency; none were part of the work or measured.
 
 ### Work & Leadership History
 

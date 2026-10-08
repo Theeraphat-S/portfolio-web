@@ -408,9 +408,9 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
             <span className="text-sky-400 font-bold">REST API → MySQL</span>
           </div>
           <div className="flex items-center justify-between text-zinc-400">
-            <span>Client Eval Latency</span>
+            <span>Risk Scoring</span>
             <span className="text-emerald-400 font-bold">
-              &lt; 0.8ms (Zero Error)
+              On-device, no network call
             </span>
           </div>
         </div>
