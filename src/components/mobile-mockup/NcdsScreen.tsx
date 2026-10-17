@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { m, AnimatePresence } from "motion/react";
+import { m } from "motion/react";
 import {
   ArrowLeft,
   MoreVertical,
@@ -15,6 +15,9 @@ import { BLoCStreamEvent } from "../../types/stream";
 import { createStreamEvent } from "../../lib/streamUtils";
 import { useTransientFlag } from "../../hooks/useTransientFlag";
 import { SAFE_BOTTOM, SAFE_TOP } from "./DeviceFrame";
+import { AppSnackbar } from "./AppSnackbar";
+import { ncdsDemo } from "../../data/deviceDemos";
+import { BilingualText } from "../../types/portfolio";
 
 interface NcdsScreenProps {
   direction?: number;
@@ -24,27 +27,56 @@ interface NcdsScreenProps {
 
 type RiskLevel = "low" | "moderate" | "high";
 
-// Light Material 3 theme (purple baseline) of the field app used by village health volunteers.
+// Light Material 3 theme (purple baseline) of the field app used by
+// village health volunteers. Every risk-dependent style and label lives
+// here so the screen never branches on the level itself.
 const LEVEL_STYLE: Record<
   RiskLevel,
-  { text: string; container: string; chip: string }
+  {
+    tier: string;
+    text: string;
+    container: string;
+    chip: string;
+    bar: string;
+    icon: string;
+    headline: BilingualText;
+    label: BilingualText;
+  }
 > = {
   low: {
+    tier: "LOW RISK",
     text: "text-[#1b6b3a]",
     container: "bg-[#e3f4e8]",
     chip: "bg-[#d3eedb] text-[#1b6b3a]",
+    bar: "bg-[#2e8b57]",
+    icon: "text-[#2e8b57]",
+    headline: { th: "ความเสี่ยงต่ำ", en: "Low risk" },
+    label: { th: "ปกติ", en: "Normal" },
   },
   moderate: {
+    tier: "MODERATE",
     text: "text-[#8a5300]",
     container: "bg-[#fff1d6]",
     chip: "bg-[#ffe6b3] text-[#7a4900]",
+    bar: "bg-[#c77800]",
+    icon: "text-[#c77800]",
+    headline: { th: "ความเสี่ยงปานกลาง", en: "Moderate risk" },
+    label: { th: "เฝ้าระวัง", en: "Watch" },
   },
   high: {
+    tier: "HIGH RISK",
     text: "text-[#b3261e]",
     container: "bg-[#fde7e5]",
     chip: "bg-[#f9d3cf] text-[#a1231b]",
+    bar: "bg-[#b3261e]",
+    icon: "text-[#b3261e]",
+    headline: { th: "ความเสี่ยงสูง", en: "High risk" },
+    label: { th: "เสี่ยงสูง", en: "High" },
   },
 };
+
+const tr = (t: (th: string, en: string) => string, text: BilingualText) =>
+  t(text.th, text.en);
 
 export const NcdsScreen: React.FC<NcdsScreenProps> = ({
   onDispatchEvent,
@@ -99,12 +131,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
 
     const level: RiskLevel =
       score >= 8 ? "high" : score >= 4 ? "moderate" : "low";
-    const tier =
-      level === "high"
-        ? "HIGH RISK"
-        : level === "moderate"
-          ? "MODERATE"
-          : "LOW RISK";
+    const tier = LEVEL_STYLE[level].tier;
 
     return { score, level, tier, diabetesRisk, hypertensionRisk, heartRisk };
   };
@@ -163,20 +190,6 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
     );
   };
 
-  const levelLabel = (level: RiskLevel) =>
-    level === "high"
-      ? t("เสี่ยงสูง", "High")
-      : level === "moderate"
-        ? t("เฝ้าระวัง", "Watch")
-        : t("ปกติ", "Normal");
-
-  const headline =
-    risk.level === "high"
-      ? t("ความเสี่ยงสูง", "High risk")
-      : risk.level === "moderate"
-        ? t("ความเสี่ยงปานกลาง", "Moderate risk")
-        : t("ความเสี่ยงต่ำ", "Low risk");
-
   const diseases: { id: string; title: string; level: RiskLevel }[] = [
     { id: "dm", title: t("เบาหวาน", "Diabetes"), level: risk.diabetesRisk },
     {
@@ -209,7 +222,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
               {t("คัดกรองความเสี่ยง", "Risk screening")}
             </p>
             <p className="truncate text-[11px] text-[#625b71]">
-              {t("ผู้รับบริการ HN 0941 · อายุ 58", "Client HN 0941 · age 58")}
+              {tr(t, ncdsDemo.clientLabel)}
             </p>
           </div>
           <span className="grid h-9 w-9 place-items-center rounded-full text-[#49454f]">
@@ -233,7 +246,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
           </p>
           <div className="mt-1 flex items-end justify-between gap-2">
             <p className={`text-[20px] font-bold leading-tight ${style.text}`}>
-              {headline}
+              {tr(t, style.headline)}
             </p>
             <p
               className={`shrink-0 whitespace-nowrap text-[13px] font-semibold tabular-nums ${style.text}`}
@@ -244,13 +257,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/70">
             <div
-              className={`h-full w-full origin-left rounded-full transition-transform duration-500 ${
-                risk.level === "high"
-                  ? "bg-[#b3261e]"
-                  : risk.level === "moderate"
-                    ? "bg-[#c77800]"
-                    : "bg-[#2e8b57]"
-              }`}
+              className={`h-full w-full origin-left rounded-full transition-transform duration-500 ${style.bar}`}
               style={{ transform: `scaleX(${risk.score / 15})` }}
             />
           </div>
@@ -328,16 +335,12 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
               >
                 {d.level === "high" ? (
                   <AlertTriangle
-                    className="h-4 w-4 shrink-0 text-[#b3261e]"
+                    className={`h-4 w-4 shrink-0 ${LEVEL_STYLE.high.icon}`}
                     aria-hidden="true"
                   />
                 ) : (
                   <CheckCircle2
-                    className={`h-4 w-4 shrink-0 ${
-                      d.level === "moderate"
-                        ? "text-[#c77800]"
-                        : "text-[#2e8b57]"
-                    }`}
+                    className={`h-4 w-4 shrink-0 ${LEVEL_STYLE[d.level].icon}`}
                     aria-hidden="true"
                   />
                 )}
@@ -345,7 +348,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                 <span
                   className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${LEVEL_STYLE[d.level].chip}`}
                 >
-                  {levelLabel(d.level)}
+                  {tr(t, LEVEL_STYLE[d.level].label)}
                 </span>
               </li>
             ))}
@@ -355,24 +358,13 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
 
       {/* Primary action */}
       <div className="relative bg-[#f7f2fa] px-3 pb-2 pt-1">
-        <AnimatePresence>
-          {isExported && (
-            <m.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.2 }}
-              role="status"
-              className="absolute inset-x-3 bottom-full mb-2 flex items-center gap-2 rounded-lg bg-[#2e3132] px-3 py-2.5 text-[12px] text-[#eff1f1] shadow-lg"
-            >
-              <CheckCircle2
-                className="h-4 w-4 text-[#7fd8a4]"
-                aria-hidden="true"
-              />
-              {t("บันทึกผลแล้ว · สร้าง PDF สำเร็จ", "Saved · PDF report ready")}
-            </m.div>
-          )}
-        </AnimatePresence>
+        <AppSnackbar
+          message={
+            isExported
+              ? t("บันทึกผลแล้ว · สร้าง PDF สำเร็จ", "Saved · PDF report ready")
+              : null
+          }
+        />
         <m.button
           type="button"
           whileTap={{ scale: 0.98 }}

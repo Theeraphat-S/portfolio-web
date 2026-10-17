@@ -111,7 +111,7 @@ export const Hero: React.FC = () => {
               </m.span>
               <m.span
                 variants={itemVariants}
-                className="block text-primary [text-shadow:0_0_48px_rgba(77,124,254,0.35)]"
+                className="block text-primary [text-shadow:0_0_48px_color-mix(in_oklab,var(--color-primary)_35%,transparent)]"
               >
                 {lang === "th" ? "ด้วย FLUTTER." : "WITH FLUTTER."}
               </m.span>

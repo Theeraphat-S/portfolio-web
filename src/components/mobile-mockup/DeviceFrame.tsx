@@ -49,6 +49,8 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
             role="region"
             aria-label={label}
             className="relative isolate aspect-[9/19.5] w-full overflow-hidden rounded-[34px] bg-white"
+            // The site theme tints `white`; app screens need true white.
+            style={{ "--color-white": "#ffffff" } as React.CSSProperties}
           >
             {children}
 

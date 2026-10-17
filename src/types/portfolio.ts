@@ -172,3 +172,31 @@ export interface PortfolioData {
   skillCategories: SkillCategory[];
   experiences: ExperienceItem[];
 }
+
+/** A Thai / English string pair for in-device demo copy. */
+export interface BilingualText {
+  th: string;
+  en: string;
+}
+
+export type PintoPostVisual = "cat" | "laptop" | "coffee" | "mountain";
+
+export interface PintoFeedPost {
+  id: number;
+  author: string;
+  official?: boolean;
+  likes: number;
+  caption: BilingualText;
+  visual: PintoPostVisual;
+  /** Portrait tiles are 3:4, tall tiles 4:5, so the grid staggers. */
+  shape: "portrait" | "tall";
+  video?: boolean;
+}
+
+export interface PosDemoItem {
+  id: string;
+  name: string;
+  sku: string;
+  price: number;
+  qty: number;
+}

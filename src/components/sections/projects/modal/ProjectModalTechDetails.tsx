@@ -51,11 +51,11 @@ export const ProjectModalTechDetails: React.FC<
 
       {/* System Architecture */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-signal mb-2 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-primary mb-2 flex items-center gap-1.5">
           <Layers className="w-3.5 h-3.5" />
           {t("สถาปัตยกรรมระบบ (Architecture)", "System Architecture")}
         </h4>
-        <div className="p-3.5 rounded-xl bg-[#070b14] border border-line text-xs font-mono text-signal">
+        <div className="p-3.5 rounded-xl bg-[#070b14] border border-line text-xs font-mono text-zinc-300">
           {lang === "th" ? project.architectureTh : project.architectureEn}
         </div>
       </div>

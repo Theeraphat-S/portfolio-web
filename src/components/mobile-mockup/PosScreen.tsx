@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { m, AnimatePresence } from "motion/react";
 import {
-  CheckCircle2,
   Plus,
   Minus,
   ScanLine,
@@ -16,6 +15,9 @@ import { useLanguage } from "../../context/LanguageContext";
 import { BLoCStreamEvent } from "../../types/stream";
 import { createStreamEvent } from "../../lib/streamUtils";
 import { SAFE_BOTTOM, SAFE_TOP } from "./DeviceFrame";
+import { AppSnackbar } from "./AppSnackbar";
+import { posDemo } from "../../data/deviceDemos";
+import { PosDemoItem } from "../../types/portfolio";
 
 interface PosScreenProps {
   direction?: number;
@@ -25,21 +27,14 @@ interface PosScreenProps {
   onOnlineChange?: (online: boolean) => void;
 }
 
-interface PosCartItem {
-  id: string;
-  name: string;
-  sku: string;
-  price: number;
-  qty: number;
-}
-
 interface QueuedOrder {
   id: string;
   total: number;
   itemCount: number;
 }
 
-const BRAND = "#006c4c";
+// Deep green accent of the POS app.
+const POS_GREEN = "#006c4c";
 
 export const PosScreen: React.FC<PosScreenProps> = ({
   onDispatchEvent,
@@ -52,7 +47,9 @@ export const PosScreen: React.FC<PosScreenProps> = ({
   const [pendingSyncCount, setPendingSyncCount] = useState(0);
   const [queuedOrders, setQueuedOrders] = useState<QueuedOrder[]>([]);
   const [justSynced, setJustSynced] = useState(0);
-  const [dismissed, setDismissed] = useState<string | null>(null);
+  const [dismissedSnackbar, setDismissedSnackbar] = useState<string | null>(
+    null,
+  );
 
   // Adjust state when activeBeat prop changes
   const [prevBeat, setPrevBeat] = useState(activeBeat);
@@ -81,22 +78,9 @@ export const PosScreen: React.FC<PosScreenProps> = ({
     onOnlineChange?.(isOnline);
   }, [isOnline, onOnlineChange]);
 
-  const [cartItems, setCartItems] = useState<PosCartItem[]>([
-    {
-      id: "sku-1",
-      name: "Premium Arabica (250g)",
-      sku: "COF-8812",
-      price: 250,
-      qty: 1,
-    },
-    {
-      id: "sku-2",
-      name: "Ceramic Drip Tumbler",
-      sku: "ACC-1044",
-      price: 170,
-      qty: 1,
-    },
-  ]);
+  const [cartItems, setCartItems] = useState<PosDemoItem[]>(
+    posDemo.startingCart,
+  );
 
   const totalAmount = cartItems.reduce((acc, it) => acc + it.price * it.qty, 0);
   const itemTotal = cartItems.reduce((acc, it) => acc + it.qty, 0);
@@ -132,21 +116,13 @@ export const PosScreen: React.FC<PosScreenProps> = ({
   };
 
   const handleAddSampleItem = () => {
-    const existing = cartItems.find((it) => it.sku === "ACC-3021");
+    const scanned = posDemo.scannedItem;
+    const existing = cartItems.find((it) => it.sku === scanned.sku);
     if (existing) {
       updateItemQty(existing.id, 1);
       return;
     }
-    setCartItems((prev) => [
-      ...prev,
-      {
-        id: "sku-3",
-        name: "Drip Filter Paper (100pcs)",
-        sku: "ACC-3021",
-        price: 80,
-        qty: 1,
-      },
-    ]);
+    setCartItems((prev) => [...prev, scanned]);
     setIsCompleted(false);
 
     onDispatchEvent?.(
@@ -155,13 +131,12 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         source: "PosScreen",
         type: "bloc_event",
         tag: "BARCODE_SCAN",
-        name: "BarcodeScannedEvent(ACC-3021)",
-        stateName: "ProductCatalogLoadedState",
-        details: `Item resolved via local SQLite Cache: ฿80.00`,
+        name: `BarcodeScannedEvent(${scanned.sku})`,
+        stateName: "CartUpdatedState",
+        details: `Scanned ${scanned.sku} ➔ added to cart (฿${scanned.price})`,
         payload: {
-          sku: "ACC-3021",
-          price: 80,
-          cacheHit: true,
+          sku: scanned.sku,
+          price: scanned.price,
         },
         latencyMs: 0.3,
       }),
@@ -175,7 +150,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
     setPendingSyncCount(0);
     setQueuedOrders([]);
     setJustSynced(count);
-    setDismissed(null);
+    setDismissedSnackbar(null);
 
     onDispatchEvent?.(
       createStreamEvent({
@@ -189,7 +164,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         payload: {
           flushedCount: count,
           syncedOrders: ordersToSync,
-          strategy: "IDEMPOTENT_RETRY_BACKOFF",
+          strategy: "IDEMPOTENT_REPLAY",
         },
         latencyMs: 12.4,
       }),
@@ -229,7 +204,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
 
   const handleCommitCheckout = () => {
     setIsCompleted(true);
-    setDismissed(null);
+    setDismissedSnackbar(null);
     setJustSynced(0);
     const txId = `uuid_tx_${Math.random().toString(36).substring(2, 8)}`;
 
@@ -286,10 +261,11 @@ export const PosScreen: React.FC<PosScreenProps> = ({
   // Snackbars dismiss themselves, as in Material.
   useEffect(() => {
     if (!snackbar) return;
-    const id = window.setTimeout(() => setDismissed(snackbar), 2600);
+    const id = window.setTimeout(() => setDismissedSnackbar(snackbar), 2600);
     return () => window.clearTimeout(id);
   }, [snackbar]);
-  const visibleSnackbar = snackbar && snackbar !== dismissed ? snackbar : null;
+  const visibleSnackbar =
+    snackbar && snackbar !== dismissedSnackbar ? snackbar : null;
 
   return (
     <div className="absolute inset-0 flex flex-col bg-[#f4f8f6] text-[#191d1b] font-sans select-none">
@@ -303,7 +279,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
               {t("ขายหน้าร้าน", "Checkout")}
             </p>
             <p className="truncate text-[11px] text-[#57615b]">
-              {t("สาขานิมมาน · เครื่อง 04", "Nimman branch · Till 04")}
+              {t(posDemo.tillLabel.th, posDemo.tillLabel.en)}
             </p>
           </div>
           <button
@@ -375,7 +351,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         >
           <ScanLine
             className="h-[18px] w-[18px]"
-            style={{ color: BRAND }}
+            style={{ color: POS_GREEN }}
             aria-hidden="true"
           />
           {t("สแกนบาร์โค้ดหรือค้นหาสินค้า", "Scan barcode or search")}
@@ -445,7 +421,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             </span>
             <span
               className="text-[22px] font-bold tabular-nums"
-              style={{ color: BRAND }}
+              style={{ color: POS_GREEN }}
             >
               ฿{totalAmount}.00
             </span>
@@ -455,32 +431,14 @@ export const PosScreen: React.FC<PosScreenProps> = ({
 
       {/* Pay */}
       <div className="relative px-3 pb-2 pt-1">
-        <AnimatePresence>
-          {visibleSnackbar && (
-            <m.div
-              key={visibleSnackbar}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.2 }}
-              role="status"
-              className="absolute inset-x-3 bottom-full mb-2 flex items-center gap-2 rounded-lg bg-[#303036] px-3 py-2.5 text-[12px] text-[#f2f0f7] shadow-lg"
-            >
-              <CheckCircle2
-                className="h-4 w-4 shrink-0 text-[#8fe0ad]"
-                aria-hidden="true"
-              />
-              {visibleSnackbar}
-            </m.div>
-          )}
-        </AnimatePresence>
+        <AppSnackbar message={visibleSnackbar} />
         <m.button
           type="button"
           whileTap={{ scale: 0.98 }}
           onClick={handleCommitCheckout}
           disabled={cartItems.length === 0}
           className="flex h-12 w-full cursor-pointer items-center justify-between rounded-full px-5 text-white transition-opacity disabled:cursor-default disabled:opacity-40"
-          style={{ backgroundColor: BRAND }}
+          style={{ backgroundColor: POS_GREEN }}
         >
           <span className="text-[14px] font-semibold">
             {t("ชำระเงิน", "Charge")}

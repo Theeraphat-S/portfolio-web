@@ -22,3 +22,4 @@ export {
 };
 export { BEATS_BY_PROJECT } from "./scrollytellingBeats";
 export * from "../types";
+export { ncdsDemo, pintoDemo, posDemo } from "./deviceDemos";
