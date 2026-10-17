@@ -64,6 +64,15 @@
     letter-spacing: -0.035em;
     overflow-wrap: break-word;
   }
+
+  /* Tight tracking only reads well at display sizes; at card-title sizes
+     it crushes letterforms together. */
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.015em;
+  }
 }
 
 /* Custom Minimalist Precision Scrollbar */
@@ -130,7 +139,9 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .editorial-card:hover {
@@ -206,7 +217,10 @@ section[id] {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 9999px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-property:
+    color, background-color, border-color, box-shadow, transform;
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 

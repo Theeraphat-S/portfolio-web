@@ -1,6 +1,7 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { motion } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { SkillCategory } from "../../../types";
@@ -51,7 +52,7 @@ export const Skills: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
   };
 

@@ -13,7 +13,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ personal }) => {
 
   return (
     <div className="md:col-span-1 lg:col-span-1" data-cursor-text="Oven">
-      <div className="group relative h-full min-h-[380px] sm:min-h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-950/90 shadow-2xl flex flex-col justify-between hover:border-cyan-500/50 transition-all duration-500">
+      <div className="group relative h-full min-h-[380px] sm:min-h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-950/90 shadow-2xl flex flex-col justify-between hover:border-cyan-500/50 transition duration-500">
         {/* Profile Background Image with Smooth Hover Zoom */}
         <img
           src="/profile.jpg"

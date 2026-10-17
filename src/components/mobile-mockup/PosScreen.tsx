@@ -258,7 +258,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         <span className="font-semibold text-zinc-200">09:41</span>
         <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-          <span className="w-1 h-1 rounded-full bg-blue-500/80 animate-pulse" />
+          <span className="w-1 h-1 rounded-full bg-blue-500/80" />
         </div>
         <div className="flex items-center gap-1.5 text-zinc-400">
           {isOnline ? (
@@ -288,7 +288,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           onClick={() => toggleNetwork()}
           aria-label="Toggle network state"
           title="Click to simulate Online / Offline"
-          className={`px-2 py-0.5 rounded text-[8px] font-mono font-bold transition-all border flex items-center gap-1 cursor-pointer ${
+          className={`px-2 py-0.5 rounded text-[8px] font-mono font-bold transition border flex items-center gap-1 cursor-pointer ${
             isOnline
               ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25"
               : "bg-rose-500/10 text-rose-400 border-rose-500/25"
@@ -296,7 +296,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         >
           {isOnline ? (
             <>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span>ONLINE SYNC</span>
             </>
           ) : (

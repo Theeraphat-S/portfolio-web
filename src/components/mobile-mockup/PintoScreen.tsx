@@ -204,7 +204,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
         <span className="font-semibold text-zinc-200">09:41</span>
         <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-          <span className="w-1 h-1 rounded-full bg-[#00f0ff] animate-pulse" />
+          <span className="w-1 h-1 rounded-full bg-[#00f0ff]" />
         </div>
         <div className="flex items-center gap-1.5 text-zinc-400">
           <Wifi className="w-3 h-3 text-zinc-300" />
@@ -320,7 +320,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   whileTap={{ scale: 0.96 }}
                   onClick={triggerStreakClaim}
                   aria-label="Claim daily streak"
-                  className={`w-full py-1.5 rounded-lg text-[11px] font-mono font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
+                  className={`w-full py-1.5 rounded-lg text-[11px] font-mono font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                     isStreaked
                       ? "bg-zinc-800 text-[#00f0ff] border border-[#00f0ff]/30"
                       : "bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-zinc-950 shadow-amber-950/40"

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { motion } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import {
   Github,
   Phone,
@@ -131,7 +132,7 @@ export const ContactSection: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
   };
 
@@ -168,7 +169,7 @@ export const ContactSection: React.FC = () => {
         >
           {/* Availability Status Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 font-mono text-xs min-h-[1.75rem]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span className="tracking-wide">
               {lang === "th"
                 ? "เปิดรับตำแหน่ง JUNIOR MOBILE"
@@ -203,7 +204,7 @@ export const ContactSection: React.FC = () => {
           />
 
           {/* Prominent Primary Email CTA Card */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all space-y-3">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition space-y-3">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-widest">
               <span>{t("อีเมล", "Email")}</span>
             </div>
@@ -230,7 +231,7 @@ export const ContactSection: React.FC = () => {
                         "Copy email address to clipboard",
                       )
                 }
-                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 font-mono text-xs font-semibold cursor-pointer transition-all self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 {copied ? (
                   <>
@@ -456,7 +457,7 @@ export const ContactSection: React.FC = () => {
                     <button
                       type="button"
                       onClick={copyEmail}
-                      className="px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-mono text-white transition-all cursor-pointer border border-white/[0.1]"
+                      className="px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-mono text-white transition cursor-pointer border border-white/[0.1]"
                     >
                       {copied
                         ? t("คัดลอกแล้ว!", "Copied!")
@@ -477,7 +478,7 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   data-cursor-text="DISPATCH"
-                  className="w-full py-3 px-6 rounded-full bg-[#00f0ff] hover:bg-[#38bdf8] text-[#07080c] font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_-4px_rgba(0,240,255,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(0,240,255,0.4)] hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00f0ff]"
+                  className="w-full py-3 px-6 rounded-full bg-[#00f0ff] hover:bg-[#38bdf8] text-[#07080c] font-mono text-xs font-bold tracking-wider uppercase transition duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_-4px_rgba(0,240,255,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(0,240,255,0.4)] hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00f0ff]"
                 >
                   <span>
                     {lang === "th" ? "เปิดร่างในแอปอีเมล" : "Open email draft"}

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import {
   Phone,
   Mail,
@@ -36,7 +37,7 @@ export const ExperienceTimeline: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
   };
 
@@ -47,7 +48,7 @@ export const ExperienceTimeline: React.FC = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.16, 1, 0.3, 1] as const,
+        ease: EASE_OUT_EXPO,
       },
     },
   };
@@ -204,7 +205,7 @@ export const ExperienceTimeline: React.FC = () => {
                   {/* Axis Node Indicator Marker */}
                   <div
                     aria-hidden="true"
-                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-[#07080c] flex items-center justify-center transition-all duration-300 ${
+                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-[#07080c] flex items-center justify-center transition duration-300 ${
                       isActive
                         ? "border border-[#00f0ff]/60 shadow-[0_0_10px_rgba(0,240,255,0.25)]"
                         : "border border-white/10 group-hover:border-[#00f0ff]/40 group-hover:scale-105"
@@ -396,7 +397,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.phone && (
               <a
                 href={`tel:${personal.reference.phone}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Phone className="w-3.5 h-3.5 text-[#00f0ff]" />
                 <span>{personal.reference.phone}</span>
@@ -405,7 +406,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.email && (
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Mail className="w-3.5 h-3.5 text-[#00f0ff]" />
                 <span>{personal.reference.email}</span>

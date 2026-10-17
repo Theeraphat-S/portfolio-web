@@ -5,6 +5,7 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { ArrowUpRight, FileText, ArrowDown, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { scrollToElement } from "../../../lib/lenis";
@@ -37,7 +38,7 @@ export const Hero: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
   };
 
@@ -95,7 +96,7 @@ export const Hero: React.FC = () => {
               <span className={lang === "en" ? "text-[#00f0ff]" : ""}>EN</span>
             </button>
             <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span>{t("เปิดรับตำแหน่งงาน", "OPEN FOR ROLES")}</span>
             </span>
           </div>
@@ -228,7 +229,7 @@ export const Hero: React.FC = () => {
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
               <span>{t("เปิด CV", "RESUME / CV")}</span>
-              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
             </a>
 
             <a

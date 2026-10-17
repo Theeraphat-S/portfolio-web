@@ -1,6 +1,7 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { motion } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import {
   GraduationCap,
   Layers,
@@ -18,7 +19,7 @@ export const AboutBento: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
   };
 
