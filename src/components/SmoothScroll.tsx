@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Lenis from "lenis";
-import { MotionConfig } from "motion/react";
+import { LazyMotion, MotionConfig, domAnimation } from "motion/react";
 
 interface SmoothScrollProps {
   children: React.ReactNode;
@@ -47,5 +47,14 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     };
   }, []);
 
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  // `strict` makes any stray `motion.*` component throw, keeping the full
+  // renderer out of the bundle; every component must use `m.*` instead.
+  // domAnimation is bundled synchronously: sections start at opacity 0, so
+  // loading features async would leave content hidden until a chunk arrives.
+  // It has no `layout`/drag support; switch to domMax if those are needed.
+  return (
+    <LazyMotion features={domAnimation} strict>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </LazyMotion>
+  );
 };

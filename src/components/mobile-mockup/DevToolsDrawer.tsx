@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
+import { EASE_OUT_EXPO } from "../../lib/motion";
 import {
   X,
   Copy,
@@ -68,7 +69,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
           className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden"
         >
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -78,13 +79,13 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
           />
 
           {/* Dialog Container */}
-          <motion.div
+          <m.div
             ref={dialogRef}
             tabIndex={-1}
             initial={{ opacity: 0, scale: 0.96, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 15 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.25, ease: EASE_OUT_EXPO }}
             role="dialog"
             aria-modal="true"
             aria-label="Flutter & BLoC DevTools Inspector"
@@ -100,7 +101,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   </span>
                   <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
                     <span>{snippet.fileName}</span>
-                    <span className="text-[9px] px-2 py-0.5 rounded bg-white/[0.05] text-zinc-400 font-normal">
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-white/[0.05] text-zinc-400 font-normal">
                       {snippet.architectureLayer}
                     </span>
                   </h3>
@@ -124,7 +125,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 <button
                   type="button"
                   onClick={() => setTabOverride("stream")}
-                  className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "stream"
                       ? "bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/30 font-bold"
                       : "text-zinc-400 hover:text-zinc-200"
@@ -139,7 +140,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 <button
                   type="button"
                   onClick={() => setTabOverride("code")}
-                  className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "code"
                       ? "bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/30 font-bold"
                       : "text-zinc-400 hover:text-zinc-200"
@@ -152,7 +153,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 <button
                   type="button"
                   onClick={() => setTabOverride("telemetry")}
-                  className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "telemetry"
                       ? "bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/30 font-bold"
                       : "text-zinc-400 hover:text-zinc-200"
@@ -180,7 +181,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   type="button"
                   onClick={handleCopyCode}
                   aria-live="polite"
-                  className="px-2.5 py-1 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-white/[0.08] text-[10px] transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                  className="px-2.5 py-1 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-white/[0.08] text-[10px] transition flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
                 >
                   {isCopied ? (
                     <>
@@ -239,10 +240,10 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                         >
                           <div className="flex items-center justify-between text-[11px]">
                             <div className="flex items-center gap-2">
-                              <span className="text-zinc-500 text-[9px]">
+                              <span className="text-zinc-500 text-[10px]">
                                 #{String(events.length - idx).padStart(2, "0")}
                               </span>
-                              <span className="px-1.5 py-0.5 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-bold border border-[#00f0ff]/20 text-[9px]">
+                              <span className="px-1.5 py-0.5 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-bold border border-[#00f0ff]/20 text-[10px]">
                                 {evt.tag}
                               </span>
                               <span className="text-white font-bold">
@@ -357,7 +358,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>,

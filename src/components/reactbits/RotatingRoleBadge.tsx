@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { Terminal } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 
@@ -57,7 +57,7 @@ export const RotatingRoleBadge: React.FC<RotatingRoleBadgeProps> = ({
 
       <div className="h-5 overflow-hidden flex items-center min-w-[150px] sm:min-w-[175px]">
         <AnimatePresence mode="wait">
-          <motion.span
+          <m.span
             key={currentRole}
             initial={{ y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -70,7 +70,7 @@ export const RotatingRoleBadge: React.FC<RotatingRoleBadgeProps> = ({
             className="text-[11px] sm:text-xs font-mono font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400 whitespace-nowrap block"
           >
             {currentRole}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { m, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import {
   Phone,
   Mail,
@@ -36,7 +37,7 @@ export const ExperienceTimeline: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
   };
 
@@ -47,7 +48,7 @@ export const ExperienceTimeline: React.FC = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.16, 1, 0.3, 1] as const,
+        ease: EASE_OUT_EXPO,
       },
     },
   };
@@ -79,7 +80,7 @@ export const ExperienceTimeline: React.FC = () => {
       <div id="experience" className="absolute -top-24 pointer-events-none" />
 
       {/* Section Eyebrow */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -92,10 +93,10 @@ export const ExperienceTimeline: React.FC = () => {
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ฝึกงานและการสอน", "INTERNSHIP & TEACHING")}
         </span>
-      </motion.div>
+      </m.div>
 
       {/* Headline & Subtitle */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -113,7 +114,7 @@ export const ExperienceTimeline: React.FC = () => {
           th="ฝึกงานเป็น Mobile Developer ที่ได้ส่งฟีเจอร์ขึ้นแอปที่ใช้งานจริง เป็นผู้ช่วยสอน 3 ภาคการศึกษา และเป็นวิทยากรรับเชิญด้าน AI ให้โรงเรียนมัธยม"
           en="A mobile developer internship where I shipped features to a live app, three semesters as a teaching assistant, and a guest talk on AI for high-school students."
         />
-      </motion.div>
+      </m.div>
 
       {/* Connected Engineering Timeline */}
       <div ref={timelineRef} className="relative">
@@ -124,7 +125,7 @@ export const ExperienceTimeline: React.FC = () => {
         />
 
         {/* Scroll-Linked Dynamic Subtle Axis */}
-        <motion.div
+        <m.div
           aria-hidden="true"
           style={{ scaleY: shouldReduceMotion ? 1 : smoothScaleY }}
           className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-[#00f0ff]/70 via-[#00f0ff]/30 to-transparent origin-top pointer-events-none"
@@ -142,7 +143,7 @@ export const ExperienceTimeline: React.FC = () => {
               Boolean(exp.subBadgeEn) && exp.year.includes("2024");
 
             return (
-              <motion.article
+              <m.article
                 key={idx}
                 initial="hidden"
                 whileInView="visible"
@@ -204,7 +205,7 @@ export const ExperienceTimeline: React.FC = () => {
                   {/* Axis Node Indicator Marker */}
                   <div
                     aria-hidden="true"
-                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-[#07080c] flex items-center justify-center transition-all duration-300 ${
+                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-[#07080c] flex items-center justify-center transition duration-300 ${
                       isActive
                         ? "border border-[#00f0ff]/60 shadow-[0_0_10px_rgba(0,240,255,0.25)]"
                         : "border border-white/10 group-hover:border-[#00f0ff]/40 group-hover:scale-105"
@@ -286,7 +287,7 @@ export const ExperienceTimeline: React.FC = () => {
                                     isActive
                                       ? "text-[#00f0ff]"
                                       : "text-zinc-400 group-hover:text-zinc-200"
-                                  } tracking-tighter pt-0.5 select-none transition-colors`}
+                                  } pt-0.5 select-none transition-colors`}
                                 >
                                   {String(cIdx + 1).padStart(2, "0")}
                                 </span>
@@ -314,7 +315,7 @@ export const ExperienceTimeline: React.FC = () => {
                                     isActive
                                       ? "text-[#00f0ff]"
                                       : "text-zinc-400 group-hover:text-zinc-200"
-                                  } tracking-tighter pt-0.5 select-none transition-colors`}
+                                  } pt-0.5 select-none transition-colors`}
                                 >
                                   {String(bIdx + 1).padStart(2, "0")}
                                 </span>
@@ -357,7 +358,7 @@ export const ExperienceTimeline: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             );
           })}
         </div>
@@ -365,7 +366,7 @@ export const ExperienceTimeline: React.FC = () => {
 
       {/* Restyled Academic Reference Strip */}
       {personal.reference && (
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -396,7 +397,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.phone && (
               <a
                 href={`tel:${personal.reference.phone}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Phone className="w-3.5 h-3.5 text-[#00f0ff]" />
                 <span>{personal.reference.phone}</span>
@@ -405,14 +406,14 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.email && (
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
               >
                 <Mail className="w-3.5 h-3.5 text-[#00f0ff]" />
                 <span>{personal.reference.email}</span>
               </a>
             )}
           </div>
-        </motion.div>
+        </m.div>
       )}
     </section>
   );

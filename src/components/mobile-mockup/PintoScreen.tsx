@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
 import {
   Sparkles,
@@ -204,7 +204,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
         <span className="font-semibold text-zinc-200">09:41</span>
         <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-          <span className="w-1 h-1 rounded-full bg-[#00f0ff] animate-pulse" />
+          <span className="w-1 h-1 rounded-full bg-[#00f0ff]" />
         </div>
         <div className="flex items-center gap-1.5 text-zinc-400">
           <Wifi className="w-3 h-3 text-zinc-300" />
@@ -275,7 +275,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
         <AnimatePresence mode="wait">
           {/* TAB 2: GAMIFIED CHAT STREAKS */}
           {currentState === "streak" && (
-            <motion.div
+            <m.div
               key="state-streak"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -315,12 +315,12 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   )}
                 </p>
 
-                <motion.button
+                <m.button
                   type="button"
                   whileTap={{ scale: 0.96 }}
                   onClick={triggerStreakClaim}
                   aria-label="Claim daily streak"
-                  className={`w-full py-1.5 rounded-lg text-[11px] font-mono font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
+                  className={`w-full py-1.5 rounded-lg text-[11px] font-mono font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                     isStreaked
                       ? "bg-zinc-800 text-[#00f0ff] border border-[#00f0ff]/30"
                       : "bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-zinc-950 shadow-amber-950/40"
@@ -336,7 +336,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                         "กดรับแต้มวันนี้ (+50 PTS)",
                         "Claim Daily Streak (+50 Pts)",
                       )}
-                </motion.button>
+                </m.button>
               </div>
 
               {/* 7-Day Timeline */}
@@ -392,12 +392,12 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   APPLY
                 </span>
               </div>
-            </motion.div>
+            </m.div>
           )}
 
           {/* TAB 3: HYBRID WEBVIEW */}
           {currentState === "webview" && (
-            <motion.div
+            <m.div
               key="state-webview"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -501,11 +501,11 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   <ExternalLink className="w-2.5 h-2.5" />
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           )}
           {/* TAB 3: PROFILE API SYNC */}
           {currentState === "profile" && (
-            <motion.div
+            <m.div
               key="state-profile"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -549,8 +549,10 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   </div>
                   <div className="w-full h-1 bg-zinc-800 rounded-full mt-1 overflow-hidden">
                     <div
-                      className="h-full bg-[#00f0ff] rounded-full transition-[width] duration-500"
-                      style={{ width: isStreaked ? "78%" : "74%" }}
+                      className="h-full w-full origin-left bg-[#00f0ff] rounded-full transition-transform duration-500"
+                      style={{
+                        transform: `scaleX(${isStreaked ? 0.78 : 0.74})`,
+                      }}
                     />
                   </div>
                 </div>
@@ -583,7 +585,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   "Streak points are written through the Profile API, so native screens and WebView menus show the same balance.",
                 )}
               </p>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

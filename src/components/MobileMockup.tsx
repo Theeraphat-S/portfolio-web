@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import {
   Activity,
   MessageSquare,
@@ -35,7 +35,7 @@ export const MobileMockup: React.FC = () => {
       <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-sky-500/15 to-blue-600/20 blur-2xl -z-10 animate-pulse-subtle" />
 
       {/* Floating Badges */}
-      <motion.div
+      <m.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="absolute -top-4 -right-4 z-20 hidden sm:flex items-center gap-2 rounded-xl bg-zinc-900/90 border border-cyan-500/40 px-3 py-2 shadow-xl backdrop-blur-md"
@@ -44,9 +44,9 @@ export const MobileMockup: React.FC = () => {
         <span className="text-xs font-semibold text-cyan-300 font-mono">
           Flutter 3.x + Bloc
         </span>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         animate={{ y: [0, 8, 0] }}
         transition={{
           duration: 4.5,
@@ -60,7 +60,7 @@ export const MobileMockup: React.FC = () => {
         <span className="text-xs font-semibold text-blue-300 font-mono">
           Clean Architecture
         </span>
-      </motion.div>
+      </m.div>
 
       {/* Outer Phone Shell */}
       <div className="relative rounded-[44px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900 p-[3px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_40px_rgba(6,182,212,0.18)] ring-1 ring-white/10">
@@ -71,7 +71,7 @@ export const MobileMockup: React.FC = () => {
             <span>09:41</span>
 
             {/* Dynamic Island with Reactive State Pulse */}
-            <motion.div
+            <m.div
               key={`island-${activeScreen}`}
               initial={{ scale: 0.92 }}
               animate={{ scale: 1 }}
@@ -86,7 +86,7 @@ export const MobileMockup: React.FC = () => {
                   className={`w-1 h-1 rounded-full ${SCREEN_THEME_MAP[activeScreen].dot}`}
                 />
               </div>
-            </motion.div>
+            </m.div>
 
             <div className="flex items-center gap-1.5 font-mono text-[10px]">
               <span>5G</span>

@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
             type="button"
             onClick={scrollToTop}
             data-cursor-text="TOP"
-            className="inline-flex items-center gap-1.5 px-3.5 min-h-9 text-[11px] font-mono font-medium text-zinc-400 hover:text-[#00f0ff] bg-white/[0.03] hover:bg-[#00f0ff]/10 border border-white/[0.06] hover:border-[#00f0ff]/30 rounded-full transition-all cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="inline-flex items-center gap-1.5 px-3.5 min-h-9 text-[11px] font-mono font-medium text-zinc-400 hover:text-[#00f0ff] bg-white/[0.03] hover:bg-[#00f0ff]/10 border border-white/[0.06] hover:border-[#00f0ff]/30 rounded-full transition cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
             aria-label="Scroll back to top"
           >
             <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />

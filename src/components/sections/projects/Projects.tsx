@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { ProjectItem } from "../../../types";
@@ -53,11 +54,11 @@ export const Projects: React.FC = () => {
       <div id="projects" className="absolute -top-24 pointer-events-none" />
 
       {/* Section Eyebrow & Headline */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
         className="space-y-6 mb-16"
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06]">
@@ -101,7 +102,7 @@ export const Projects: React.FC = () => {
                 onClick={() => setFilter(key)}
                 aria-pressed={filter === key}
                 data-cursor-text="FILTER"
-                className={`${width} text-center px-3 min-h-9 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+                className={`${width} text-center px-3 min-h-9 rounded-full transition cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
                   filter === key
                     ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
                     : "text-zinc-400 hover:text-white border border-transparent"
@@ -112,7 +113,7 @@ export const Projects: React.FC = () => {
             ))}
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Editorial Case Studies Stream */}
       <div className="space-y-16 sm:space-y-24">

@@ -1,6 +1,7 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion } from "motion/react";
+import { m } from "motion/react";
+import { FADE_UP } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { SkillCategory } from "../../../types";
@@ -46,15 +47,6 @@ export const Skills: React.FC = () => {
   const { lang, t } = useLanguage();
   const { skillCategories } = portfolioData;
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
   return (
     <section
       id="capabilities"
@@ -64,11 +56,11 @@ export const Skills: React.FC = () => {
       <div id="skills" className="absolute -top-24 pointer-events-none" />
 
       {/* Section Eyebrow */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
@@ -77,14 +69,14 @@ export const Skills: React.FC = () => {
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ทักษะแยกตามหมวด", "SKILLS BY DOMAIN")}
         </span>
-      </motion.div>
+      </m.div>
 
       {/* Headline */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="space-y-4 mb-16 max-w-4xl"
       >
         <BilingualStack
@@ -102,7 +94,7 @@ export const Skills: React.FC = () => {
             "Flutter and Dart are my main tools. I also have hands-on experience with web, backend and databases from university and my internship, plus three semesters as a teaching assistant."
           }
         />
-      </motion.div>
+      </m.div>
 
       {/* Clean Monospace Tree Layout (2 Columns with Hairline Separation) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-12 lg:gap-y-14">
@@ -116,12 +108,12 @@ export const Skills: React.FC = () => {
           };
 
           return (
-            <motion.div
+            <m.div
               key={catIdx}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
-              variants={fadeIn}
+              variants={FADE_UP}
               className="space-y-5"
             >
               {/* Category Tree Root Header */}
@@ -181,7 +173,7 @@ export const Skills: React.FC = () => {
                   );
                 })}
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { m, useMotionValue, useSpring } from "motion/react";
 
 interface MagnetProps {
   children: React.ReactNode;
@@ -75,7 +75,7 @@ export const Magnet: React.FC<MagnetProps> = ({
   }, [x, y]);
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
@@ -86,6 +86,6 @@ export const Magnet: React.FC<MagnetProps> = ({
       className={`inline-block transform-gpu will-change-transform ${className}`}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };

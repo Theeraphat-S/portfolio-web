@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { m, useScroll, useSpring, useReducedMotion } from "motion/react";
 
 interface ScrollProgressBarProps {
   className?: string;
@@ -18,7 +18,7 @@ export const ScrollProgressBar: React.FC<ScrollProgressBarProps> = ({
   });
 
   return (
-    <motion.div
+    <m.div
       style={{
         scaleX: shouldReduceMotion ? scrollYProgress : scaleX,
         transformOrigin: "0%",

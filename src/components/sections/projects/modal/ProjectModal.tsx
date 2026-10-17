@@ -1,6 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { ProjectItem } from "../../../../types";
 import { ProjectModalHeader } from "./ProjectModalHeader";
 import { ProjectModalMetrics } from "./ProjectModalMetrics";
@@ -26,7 +26,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   return createPortal(
     <AnimatePresence>
       {project && (
-        <motion.div
+        <m.div
           key="project-modal-wrapper"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -41,7 +41,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-hidden cursor-default"
         >
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -51,7 +51,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           />
 
           {/* Modal Container */}
-          <motion.div
+          <m.div
             ref={modalContainerRef}
             tabIndex={-1}
             role="dialog"
@@ -88,8 +88,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* Modal Footer Actions */}
             <ProjectModalFooter project={project} onClose={onClose} />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>,
     document.body,

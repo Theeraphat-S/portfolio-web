@@ -30,7 +30,7 @@ export const ContactEmailCard: React.FC<ContactEmailCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-cyan-500/40 transition-all gap-4">
+    <div className="flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-cyan-500/40 transition gap-4">
       <div className="flex items-start gap-3.5">
         <div className="w-11 h-11 rounded-xl bg-cyan-950/70 border border-cyan-800/60 flex items-center justify-center text-cyan-400 shrink-0">
           <Mail className="w-5 h-5" />
@@ -52,7 +52,7 @@ export const ContactEmailCard: React.FC<ContactEmailCardProps> = ({
         <button
           onClick={() => copyEmailToClipboard(email)}
           data-cursor-text="Copy"
-          className="flex-1 py-2 px-3.5 rounded-xl bg-zinc-800 hover:bg-cyan-500 hover:text-zinc-950 text-xs font-semibold text-zinc-200 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+          className="flex-1 py-2 px-3.5 rounded-xl bg-zinc-800 hover:bg-cyan-500 hover:text-zinc-950 text-xs font-semibold text-zinc-200 transition flex items-center justify-center gap-1.5 cursor-pointer"
         >
           {copiedEmail ? (
             <>
@@ -72,7 +72,7 @@ export const ContactEmailCard: React.FC<ContactEmailCardProps> = ({
         <a
           href={`mailto:${email}`}
           data-cursor-text="Send"
-          className="py-2 px-3.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-semibold transition-all flex items-center justify-center gap-1"
+          className="py-2 px-3.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-semibold transition flex items-center justify-center gap-1"
         >
           <span>{t("ส่งอีเมล", "Send")}</span>
           <ExternalLink className="w-3 h-3" />

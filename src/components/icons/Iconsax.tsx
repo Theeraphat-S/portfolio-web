@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 interface IconProps {
   className?: string;
@@ -30,7 +30,7 @@ export const HeartPulseIcon: React.FC<IconProps> = ({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <motion.path
+      <m.path
         animate={animated ? { scale: [1, 1.15, 1, 1.08, 1] } : undefined}
         transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
         d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.69C2 5.6 4.49 3.1 7.56 3.1C9.38 3.1 10.99 3.98 12 5.34C13.01 3.98 14.63 3.1 16.44 3.1C19.51 3.1 22 5.6 22 8.69C22 15.69 15.52 19.82 12.62 20.81Z"
@@ -160,7 +160,7 @@ export const RoutingIcon: React.FC<IconProps> = ({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <motion.path
+      <m.path
         animate={
           animated
             ? { pathLength: [0, 1, 1], pathOffset: [0, 0, 1] }
@@ -194,7 +194,7 @@ export const FlameStreakIcon: React.FC<IconProps> = ({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <motion.path
+      <m.path
         animate={
           animated ? { scaleY: [1, 1.1, 0.96, 1.05, 1], originY: 1 } : undefined
         }
@@ -430,7 +430,7 @@ export const DatabaseSyncIcon: React.FC<IconProps> = ({
         strokeLinejoin="round"
       />
       {animated && (
-        <motion.circle
+        <m.circle
           animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
           cx="17"

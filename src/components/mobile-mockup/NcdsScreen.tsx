@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import {
   TrendingUp,
   CheckCircle2,
@@ -178,7 +178,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
         <span className="font-semibold text-zinc-200">09:41</span>
         <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-          <span className="w-1 h-1 rounded-full bg-emerald-500/80 animate-pulse" />
+          <span className="w-1 h-1 rounded-full bg-emerald-500/80" />
         </div>
         <div className="flex items-center gap-1.5 text-zinc-400">
           <Wifi className="w-3 h-3 text-zinc-300" />
@@ -416,7 +416,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
         </div>
 
         {/* Generate Report Button */}
-        <motion.button
+        <m.button
           type="button"
           whileTap={{ scale: 0.97 }}
           onClick={handleExportPdf}
@@ -436,7 +436,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
               </span>
             </>
           )}
-        </motion.button>
+        </m.button>
       </div>
 
       {/* 4. Bottom Home Indicator */}

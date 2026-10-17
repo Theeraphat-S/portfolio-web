@@ -1,10 +1,6 @@
 import React, { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { ArrowUpRight, FileText, ArrowDown, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { scrollToElement } from "../../../lib/lenis";
@@ -37,7 +33,7 @@ export const Hero: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
   };
 
@@ -47,14 +43,14 @@ export const Hero: React.FC = () => {
       ref={heroRef}
       className="relative pt-4 sm:pt-6 pb-12 sm:pb-16 border-b border-white/[0.08]"
     >
-      <motion.div
+      <m.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="space-y-6 sm:space-y-8"
       >
         {/* Identity & Status Row: who this is and what role, before anything else */}
-        <motion.div
+        <m.div
           variants={itemVariants}
           className="flex flex-wrap items-center justify-between gap-3"
         >
@@ -95,11 +91,11 @@ export const Hero: React.FC = () => {
               <span className={lang === "en" ? "text-[#00f0ff]" : ""}>EN</span>
             </button>
             <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span>{t("เปิดรับตำแหน่งงาน", "OPEN FOR ROLES")}</span>
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Monumental Editorial Display Headline + Specs Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
@@ -107,27 +103,21 @@ export const Hero: React.FC = () => {
               always set as exactly three lines and the toggle never shifts layout. */}
           <div className="lg:col-span-8 @container flex flex-col justify-end">
             <p className="text-[clamp(1.75rem,9.4cqi,4.85rem)] font-extrabold tracking-[-0.035em] leading-[1.05] text-white whitespace-nowrap">
-              <motion.span
-                variants={itemVariants}
-                className="block text-zinc-300"
-              >
+              <m.span variants={itemVariants} className="block text-zinc-300">
                 {lang === "th" ? "สร้างโมบายแอป" : "BUILDING"}
-              </motion.span>
-              <motion.span variants={itemVariants} className="block text-white">
+              </m.span>
+              <m.span variants={itemVariants} className="block text-white">
                 {lang === "th" ? "ที่ใช้งานได้จริง" : "MOBILE APPS"}
-              </motion.span>
-              <motion.span
-                variants={itemVariants}
-                className="block text-[#00f0ff]"
-              >
+              </m.span>
+              <m.span variants={itemVariants} className="block text-[#00f0ff]">
                 {lang === "th" ? "ด้วย FLUTTER." : "WITH FLUTTER."}
-              </motion.span>
+              </m.span>
             </p>
           </div>
 
           {/* One verified outcome per project, so a recruiter
               sees proof in the first viewport instead of a spec list. */}
-          <motion.div
+          <m.div
             variants={itemVariants}
             style={{ y: shouldReduceMotion ? 0 : cardParallax }}
             className="lg:col-span-4 flex flex-col justify-end"
@@ -164,11 +154,11 @@ export const Hero: React.FC = () => {
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Narrative & Action CTAs - Placed above the fold */}
-        <motion.div
+        <m.div
           variants={itemVariants}
           className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-1"
         >
@@ -228,7 +218,7 @@ export const Hero: React.FC = () => {
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
               <span>{t("เปิด CV", "RESUME / CV")}</span>
-              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
             </a>
 
             <a
@@ -238,10 +228,10 @@ export const Hero: React.FC = () => {
               {t("ติดต่อทางอีเมล", "Email me")}
             </a>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Location & Modality Notice */}
-        <motion.p
+        <m.p
           variants={itemVariants}
           className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
         >
@@ -261,8 +251,8 @@ export const Hero: React.FC = () => {
           >
             {personalData.phone}
           </a>
-        </motion.p>
-      </motion.div>
+        </m.p>
+      </m.div>
     </section>
   );
 };

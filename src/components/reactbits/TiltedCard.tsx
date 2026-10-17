@@ -5,7 +5,7 @@ import React, {
   useSyncExternalStore,
 } from "react";
 import {
-  motion,
+  m,
   useMotionValue,
   useSpring,
   useTransform,
@@ -123,7 +123,7 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
       className={`perspective-1000 transform-gpu ${containerClassName}`}
       style={{ perspective: 1000 }}
     >
-      <motion.div
+      <m.div
         style={{
           rotateX,
           rotateY,
@@ -137,14 +137,14 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
       >
         {children}
         {glareEffect && isHovered && !isMotionDisabled && (
-          <motion.div
+          <m.div
             className="pointer-events-none absolute inset-0 z-50 mix-blend-overlay"
             style={{
               background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%)`,
             }}
           />
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 };
