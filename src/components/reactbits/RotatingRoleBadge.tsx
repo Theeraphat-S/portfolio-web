@@ -48,7 +48,7 @@ export const RotatingRoleBadge: React.FC<RotatingRoleBadgeProps> = ({
 
   return (
     <div
-      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.15)] backdrop-blur-md select-none ${className}`}
+      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-cyan-500/40 shadow-[0_0_15px_rgba(56,217,255,0.15)] backdrop-blur-md select-none ${className}`}
     >
       <div className="flex items-center gap-1.5 text-cyan-400">
         <Terminal className="w-3.5 h-3.5" />

@@ -41,7 +41,7 @@ export const Hero: React.FC = () => {
     <section
       id="intro"
       ref={heroRef}
-      className="relative pt-4 sm:pt-6 pb-12 sm:pb-16 border-b border-white/[0.08]"
+      className="relative pt-4 sm:pt-6 pb-12 sm:pb-16 border-b border-line"
     >
       <m.div
         variants={containerVariants}
@@ -84,11 +84,11 @@ export const Hero: React.FC = () => {
               type="button"
               onClick={toggleLang}
               aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-              className="min-h-11 px-3 text-[11px] font-mono tracking-wider text-zinc-400 hover:text-white border border-white/[0.08] hover:border-white/20 rounded-full transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] shrink-0"
+              className="min-h-11 px-3 text-[11px] font-mono tracking-wider text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-signal shrink-0"
             >
-              <span className={lang === "th" ? "text-[#00f0ff]" : ""}>TH</span>
+              <span className={lang === "th" ? "text-primary" : ""}>TH</span>
               <span className="px-1.5 text-zinc-600">/</span>
-              <span className={lang === "en" ? "text-[#00f0ff]" : ""}>EN</span>
+              <span className={lang === "en" ? "text-primary" : ""}>EN</span>
             </button>
             <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
@@ -109,7 +109,10 @@ export const Hero: React.FC = () => {
               <m.span variants={itemVariants} className="block text-white">
                 {lang === "th" ? "ที่ใช้งานได้จริง" : "MOBILE APPS"}
               </m.span>
-              <m.span variants={itemVariants} className="block text-[#00f0ff]">
+              <m.span
+                variants={itemVariants}
+                className="block text-primary [text-shadow:0_0_48px_color-mix(in_oklab,var(--color-primary)_35%,transparent)]"
+              >
                 {lang === "th" ? "ด้วย FLUTTER." : "WITH FLUTTER."}
               </m.span>
             </p>
@@ -122,14 +125,14 @@ export const Hero: React.FC = () => {
             style={{ y: shouldReduceMotion ? 0 : cardParallax }}
             className="lg:col-span-4 flex flex-col justify-end"
           >
-            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-[20px]">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-line backdrop-blur-[20px]">
               <BilingualStack
                 as="span"
                 className="block font-mono text-[11px] uppercase tracking-wider text-zinc-400"
                 th="ผลงานที่ทำ"
                 en="What I built"
               />
-              <ul className="mt-3 divide-y divide-white/[0.06]">
+              <ul className="mt-3 divide-y divide-line">
                 {portfolioData.projects.map((project) => (
                   <li key={project.id} className="py-2.5 first:pt-0 last:pb-0">
                     <a
@@ -138,9 +141,9 @@ export const Hero: React.FC = () => {
                         e.preventDefault();
                         scrollToElement("work", 76);
                       }}
-                      className="group block rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                      className="group block rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
                     >
-                      <span className="block font-mono text-xs font-semibold text-white group-hover:text-[#00f0ff] transition-colors">
+                      <span className="block font-mono text-xs font-semibold text-white group-hover:text-signal transition-colors">
                         {project.shortName ?? project.titleEn}
                       </span>
                       <BilingualStack
@@ -172,7 +175,7 @@ export const Hero: React.FC = () => {
               className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-light leading-relaxed ${lang === "th" ? "" : "invisible"}`}
             >
               บัณฑิต IT มหาวิทยาลัยแม่โจ้ นักพัฒนาโมบายระดับ Junior ที่ใช้{" "}
-              <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
+              <strong className="text-white font-medium underline decoration-primary/40 decoration-1 underline-offset-4">
                 Flutter, Dart & BLoC
               </strong>{" "}
               เป็นหลัก พัฒนาแอปคัดกรองโรค NCDs เป็นโปรเจกต์จบ
@@ -185,7 +188,7 @@ export const Hero: React.FC = () => {
             >
               Maejo University IT graduate and junior mobile developer working
               with{" "}
-              <strong className="text-white font-medium underline decoration-[#00f0ff]/40 decoration-1 underline-offset-4">
+              <strong className="text-white font-medium underline decoration-primary/40 decoration-1 underline-offset-4">
                 Flutter, Dart & BLoC
               </strong>
               . I built an NCDs risk-screening app for my capstone and shipped
@@ -206,7 +209,7 @@ export const Hero: React.FC = () => {
               className="btn-editorial btn-editorial-primary group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"
             >
               <span>{t("ดูผลงาน", "EXPLORE WORK")}</span>
-              <ArrowDown className="w-4 h-4 text-[#07080c] group-hover:translate-y-0.5 transition-transform" />
+              <ArrowDown className="w-4 h-4 text-void group-hover:translate-y-0.5 transition-transform" />
             </a>
 
             <a
@@ -216,14 +219,14 @@ export const Hero: React.FC = () => {
               data-cursor-text="RESUME"
               className="btn-editorial btn-editorial-outline group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"
             >
-              <FileText className="w-4 h-4 text-zinc-400 group-hover:text-[#00f0ff] transition-colors" />
+              <FileText className="w-4 h-4 text-zinc-400 group-hover:text-signal transition-colors" />
               <span>{t("เปิด CV", "RESUME / CV")}</span>
-              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
             </a>
 
             <a
               href={`mailto:${personalData.email}`}
-              className="col-span-2 inline-flex h-12 items-center px-3 text-sm text-zinc-300 hover:text-[#00f0ff] underline underline-offset-4 transition-colors sm:w-36 justify-center sm:justify-start"
+              className="col-span-2 inline-flex h-12 items-center px-3 text-sm text-zinc-300 hover:text-signal underline underline-offset-4 transition-colors sm:w-36 justify-center sm:justify-start"
             >
               {t("ติดต่อทางอีเมล", "Email me")}
             </a>
@@ -247,7 +250,7 @@ export const Hero: React.FC = () => {
           </span>
           <a
             href={`tel:${personalData.phone.replace(/-/g, "")}`}
-            className="hover:text-[#00f0ff] underline-offset-4 hover:underline transition-colors"
+            className="hover:text-signal underline-offset-4 hover:underline transition-colors"
           >
             {personalData.phone}
           </a>

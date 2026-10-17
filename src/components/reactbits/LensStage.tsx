@@ -102,7 +102,7 @@ export const LensStage: React.FC<LensStageProps> = ({
               marginTop: `-${radius}px`,
               borderColor: activeBorderColor,
             }}
-            className="absolute rounded-full pointer-events-none z-30 border-2 shadow-[0_0_25px_rgba(6,182,212,0.4)] will-change-transform"
+            className="absolute rounded-full pointer-events-none z-30 border-2 shadow-[0_0_25px_rgba(56,217,255,0.4)] will-change-transform"
           >
             {/* Center Precision Crosshair */}
             <div className="absolute top-1/2 left-1/2 w-2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/90 shadow-[0_0_8px_#06b6d4]" />

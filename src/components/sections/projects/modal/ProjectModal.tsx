@@ -46,7 +46,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-[#07080c]/85 backdrop-blur-xl -z-10"
+            className="fixed inset-0 bg-void/85 backdrop-blur-xl -z-10"
             aria-hidden="true"
           />
 
@@ -63,13 +63,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 28, stiffness: 320 }}
-            className="relative w-full max-w-3xl rounded-3xl bg-[#0d0f17]/95 border border-white/[0.08] p-6 sm:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_35px_-12px_rgba(0,240,255,0.12)] overflow-hidden max-h-[90vh] flex flex-col my-auto backdrop-blur-2xl outline-none"
+            className="relative w-full max-w-3xl rounded-3xl bg-surface/95 border border-line p-6 sm:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_35px_-12px_rgba(56,217,255,0.12)] overflow-hidden max-h-[90vh] flex flex-col my-auto backdrop-blur-2xl outline-none"
           >
             {/* Top Decorative Border Highlight */}
             <div
               className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
               style={{
-                backgroundImage: `linear-gradient(to right, ${project.color}, #00f0ff, transparent)`,
+                backgroundImage: `linear-gradient(to right, ${project.color}, #38d9ff, transparent)`,
               }}
             />
 

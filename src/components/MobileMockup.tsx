@@ -63,7 +63,7 @@ export const MobileMockup: React.FC = () => {
       </m.div>
 
       {/* Outer Phone Shell */}
-      <div className="relative rounded-[44px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900 p-[3px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_40px_rgba(6,182,212,0.18)] ring-1 ring-white/10">
+      <div className="relative rounded-[44px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900 p-[3px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_40px_rgba(56,217,255,0.18)] ring-1 ring-white/10">
         {/* Inner Bezel */}
         <div className="relative h-[660px] w-full overflow-hidden rounded-[41px] bg-zinc-950 flex flex-col justify-between border border-zinc-800/80">
           {/* Top Status Bar & Dynamic Island */}
@@ -139,7 +139,7 @@ export const MobileMockup: React.FC = () => {
           <LensStage
             radius={85}
             label="FLUTTER ARCHITECTURE"
-            activeBorderColor="rgba(6, 182, 212, 0.9)"
+            activeBorderColor="rgba(56,217,255, 0.9)"
             containerClassName="flex-1 overflow-hidden"
             className="h-full overflow-y-auto px-4 py-3 text-zinc-100 relative"
             revealContent={<BlueprintScreen activeScreen={activeScreen} />}

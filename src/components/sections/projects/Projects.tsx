@@ -46,10 +46,7 @@ export const Projects: React.FC = () => {
           .length;
 
   return (
-    <section
-      id="work"
-      className="relative py-16 sm:py-24 border-b border-white/[0.08]"
-    >
+    <section id="work" className="relative py-16 sm:py-24 border-b border-line">
       {/* Anchor Alias for backwards compatibility */}
       <div id="projects" className="absolute -top-24 pointer-events-none" />
 
@@ -61,8 +58,8 @@ export const Projects: React.FC = () => {
         transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
         className="space-y-6 mb-16"
       >
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06]">
-          <span className="editorial-eyebrow text-[#00f0ff]">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-line">
+          <span className="editorial-eyebrow text-primary">
             02 // {t("ผลงานเด่น", "SELECTED WORK")}
           </span>
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
@@ -93,7 +90,7 @@ export const Projects: React.FC = () => {
           <div
             role="toolbar"
             aria-label={t("กรองผลงานตามที่มา", "Filter projects by origin")}
-            className="flex items-center gap-1 p-1 bg-white/[0.02] border border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs shrink-0"
+            className="flex items-center gap-1 p-1 bg-white/[0.02] border border-line rounded-full self-start md:self-auto font-mono text-xs shrink-0"
           >
             {FILTERS.map(({ key, th, en, width }) => (
               <button
@@ -102,9 +99,9 @@ export const Projects: React.FC = () => {
                 onClick={() => setFilter(key)}
                 aria-pressed={filter === key}
                 data-cursor-text="FILTER"
-                className={`${width} text-center px-3 min-h-9 rounded-full transition cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+                className={`${width} text-center px-3 min-h-9 rounded-full transition cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
                   filter === key
-                    ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 font-medium"
+                    ? "bg-primary/10 text-primary border border-primary/30 font-medium"
                     : "text-zinc-400 hover:text-white border border-transparent"
                 }`}
               >

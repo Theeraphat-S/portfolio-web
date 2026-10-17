@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { m } from "motion/react";
 import {
-  TrendingUp,
+  ArrowLeft,
+  MoreVertical,
   CheckCircle2,
   AlertTriangle,
-  Wifi,
-  Battery,
-  FileCheck2,
+  FileText,
+  House,
+  ClipboardList,
+  History,
 } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
-import {
-  HeartPulseIcon,
-  BloodGlucoseIcon,
-  BloodPressureIcon,
-} from "../icons/Iconsax";
 import { BLoCStreamEvent } from "../../types/stream";
 import { createStreamEvent } from "../../lib/streamUtils";
 import { useTransientFlag } from "../../hooks/useTransientFlag";
+import { SAFE_BOTTOM, SAFE_TOP } from "./DeviceFrame";
+import { AppSnackbar } from "./AppSnackbar";
+import { ncdsDemo } from "../../data/deviceDemos";
+import { BilingualText } from "../../types/portfolio";
 
 interface NcdsScreenProps {
   direction?: number;
@@ -24,13 +25,65 @@ interface NcdsScreenProps {
   activeBeat?: number;
 }
 
+type RiskLevel = "low" | "moderate" | "high";
+
+// Light Material 3 theme (purple baseline) of the field app used by
+// village health volunteers. Every risk-dependent style and label lives
+// here so the screen never branches on the level itself.
+const LEVEL_STYLE: Record<
+  RiskLevel,
+  {
+    tier: string;
+    text: string;
+    container: string;
+    chip: string;
+    bar: string;
+    icon: string;
+    headline: BilingualText;
+    label: BilingualText;
+  }
+> = {
+  low: {
+    tier: "LOW RISK",
+    text: "text-[#1b6b3a]",
+    container: "bg-[#e3f4e8]",
+    chip: "bg-[#d3eedb] text-[#1b6b3a]",
+    bar: "bg-[#2e8b57]",
+    icon: "text-[#2e8b57]",
+    headline: { th: "ความเสี่ยงต่ำ", en: "Low risk" },
+    label: { th: "ปกติ", en: "Normal" },
+  },
+  moderate: {
+    tier: "MODERATE",
+    text: "text-[#8a5300]",
+    container: "bg-[#fff1d6]",
+    chip: "bg-[#ffe6b3] text-[#7a4900]",
+    bar: "bg-[#c77800]",
+    icon: "text-[#c77800]",
+    headline: { th: "ความเสี่ยงปานกลาง", en: "Moderate risk" },
+    label: { th: "เฝ้าระวัง", en: "Watch" },
+  },
+  high: {
+    tier: "HIGH RISK",
+    text: "text-[#b3261e]",
+    container: "bg-[#fde7e5]",
+    chip: "bg-[#f9d3cf] text-[#a1231b]",
+    bar: "bg-[#b3261e]",
+    icon: "text-[#b3261e]",
+    headline: { th: "ความเสี่ยงสูง", en: "High risk" },
+    label: { th: "เสี่ยงสูง", en: "High" },
+  },
+};
+
+const tr = (t: (th: string, en: string) => string, text: BilingualText) =>
+  t(text.th, text.en);
+
 export const NcdsScreen: React.FC<NcdsScreenProps> = ({
   onDispatchEvent,
   activeBeat,
 }) => {
   const { t } = useLanguage();
 
-  // Interactive Clinical Input Values
   const [glucose, setGlucose] = useState<number>(108); // mg/dL
   const [systolic, setSystolic] = useState<number>(122); // mmHg
   const [isExported, flashExported, setIsExported] = useTransientFlag(2400);
@@ -52,397 +105,311 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
     }
   }
 
-  // Real-time Client-side Clinical Risk Algorithm
+  // Client-side risk algorithm (same rules the BLoC evaluates on device)
   const calculateRisk = (gluc: number, sys: number) => {
     let score = 1; // base lifestyle score
-    const flags = {
-      diabetes: "Normal",
-      diabetesRisk: "low",
-      hypertension: "Optimal",
-      hypertensionRisk: "low",
-      heart: "Low Risk",
-      obesity: "BMI 22.4 (Normal)",
-    };
+    let diabetesRisk: RiskLevel = "low";
+    let hypertensionRisk: RiskLevel = "low";
+    let heartRisk: RiskLevel = "low";
 
-    // Glucose Evaluation
     if (gluc >= 126) {
       score += 6;
-      flags.diabetes = "High Risk (Diabetes)";
-      flags.diabetesRisk = "high";
+      diabetesRisk = "high";
     } else if (gluc >= 100) {
       score += 3;
-      flags.diabetes = "Pre-Diabetes";
-      flags.diabetesRisk = "moderate";
+      diabetesRisk = "moderate";
     }
 
-    // Blood Pressure Evaluation
     if (sys >= 140) {
       score += 5;
-      flags.hypertension = "Stage 2 Hypertension";
-      flags.hypertensionRisk = "high";
-      flags.heart = "Elevated Cardiac Load";
+      hypertensionRisk = "high";
+      heartRisk = "moderate";
     } else if (sys >= 130) {
       score += 3;
-      flags.hypertension = "Pre-Hypertension";
-      flags.hypertensionRisk = "moderate";
+      hypertensionRisk = "moderate";
     }
 
-    const tier =
-      score >= 8 ? "HIGH RISK" : score >= 4 ? "MODERATE" : "LOW RISK";
-    const color = score >= 8 ? "rose" : score >= 4 ? "amber" : "emerald";
+    const level: RiskLevel =
+      score >= 8 ? "high" : score >= 4 ? "moderate" : "low";
+    const tier = LEVEL_STYLE[level].tier;
 
-    return { score, tier, color, flags };
+    return { score, level, tier, diabetesRisk, hypertensionRisk, heartRisk };
   };
 
-  const riskData = calculateRisk(glucose, systolic);
+  const risk = calculateRisk(glucose, systolic);
 
-  // Dispatch BLoC stream event on adjustment
   const handleVitalsChange = (newGlucose: number, newSystolic: number) => {
     setGlucose(newGlucose);
     setSystolic(newSystolic);
     const computed = calculateRisk(newGlucose, newSystolic);
 
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "ncds-screening",
-          source: "NcdsScreen",
-          type: "bloc_event",
-          tag: "BLoC::Event",
-          name: "UpdateVitalsEvent",
-          stateName: `RiskEvaluatedState(${computed.score}/15)`,
-          details: `Glucose: ${newGlucose} mg/dL, BP: ${newSystolic}/80 mmHg ➔ ${computed.tier}`,
-          payload: {
-            glucose: newGlucose,
-            bloodPressure: `${newSystolic}/80`,
-            totalScore: computed.score,
-            riskTier: computed.tier,
-            flags: computed.flags,
-            evaluatedOn: "client (BLoC)",
+    onDispatchEvent?.(
+      createStreamEvent({
+        projectId: "ncds-screening",
+        source: "NcdsScreen",
+        type: "bloc_event",
+        tag: "BLoC::Event",
+        name: "UpdateVitalsEvent",
+        stateName: `RiskEvaluatedState(${computed.score}/15)`,
+        details: `Glucose: ${newGlucose} mg/dL, BP: ${newSystolic}/80 mmHg ➔ ${computed.tier}`,
+        payload: {
+          glucose: newGlucose,
+          bloodPressure: `${newSystolic}/80`,
+          totalScore: computed.score,
+          riskTier: computed.tier,
+          flags: {
+            diabetes: computed.diabetesRisk,
+            hypertension: computed.hypertensionRisk,
+            heart: computed.heartRisk,
           },
-          latencyMs: 0.6,
-        }),
-      );
-    }
-  };
-
-  const applyPreset = (
-    presetGlucose: number,
-    presetSystolic: number,
-    presetName: string,
-  ) => {
-    handleVitalsChange(presetGlucose, presetSystolic);
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "ncds-screening",
-          source: "NcdsScreen",
-          type: "bloc_state",
-          tag: "SCENARIO",
-          name: `ApplyPreset: ${presetName}`,
-          stateName: "VitalsPresetLoadedState",
-          details: `Simulated patient vitals loaded into BLoC form state`,
-          latencyMs: 0.4,
-        }),
-      );
-    }
+          evaluatedOn: "client (BLoC)",
+        },
+        latencyMs: 0.6,
+      }),
+    );
   };
 
   const handleExportPdf = () => {
     flashExported();
 
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "ncds-screening",
-          source: "NcdsScreen",
-          type: "bloc_event",
-          tag: "PDF_GEN",
-          name: "GenerateMedicalReportEvent",
-          stateName: "ReportPdfExportedState",
-          details: `Generated clinical PDF summary (Score ${riskData.score}/15)`,
-          payload: {
-            patientRef: "VHV-PAT-0941",
-            status: "Draft Exported",
-          },
-          latencyMs: 1.2,
-        }),
-      );
-    }
+    onDispatchEvent?.(
+      createStreamEvent({
+        projectId: "ncds-screening",
+        source: "NcdsScreen",
+        type: "bloc_event",
+        tag: "PDF_GEN",
+        name: "GenerateMedicalReportEvent",
+        stateName: "ReportPdfExportedState",
+        details: `Record submitted via REST API · PDF summary generated (Score ${risk.score}/15)`,
+        payload: {
+          patientRef: "VHV-PAT-0941",
+          status: "Submitted",
+        },
+        latencyMs: 1.2,
+      }),
+    );
   };
 
+  const diseases: { id: string; title: string; level: RiskLevel }[] = [
+    { id: "dm", title: t("เบาหวาน", "Diabetes"), level: risk.diabetesRisk },
+    {
+      id: "ht",
+      title: t("ความดันโลหิตสูง", "Hypertension"),
+      level: risk.hypertensionRisk,
+    },
+    { id: "cvd", title: t("โรคหัวใจ", "Heart disease"), level: risk.heartRisk },
+    {
+      id: "bmi",
+      title: t("โรคอ้วน (BMI 22.4)", "Obesity (BMI 22.4)"),
+      level: "low",
+    },
+  ];
+
+  const style = LEVEL_STYLE[risk.level];
+
   return (
-    <div className="flex flex-col h-full min-h-[500px] bg-[#070b10] text-zinc-100 select-none">
-      {/* 1. Status Bar */}
-      <div className="px-5 pt-3 pb-1 flex items-center justify-between text-[11px] font-mono text-zinc-400 border-b border-white/[0.04]">
-        <span className="font-semibold text-zinc-200">09:41</span>
-        <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-          <span className="w-1 h-1 rounded-full bg-emerald-500/80" />
-        </div>
-        <div className="flex items-center gap-1.5 text-zinc-400">
-          <Wifi className="w-3 h-3 text-zinc-300" />
-          <Battery className="w-3.5 h-3.5 text-zinc-300" />
-        </div>
-      </div>
-
-      {/* 2. App Bar with VHV Mode & Backend State */}
-      <div className="px-3.5 py-2 flex items-center justify-between border-b border-white/[0.06] bg-[#0b1017]/90 backdrop-blur-md">
-        <div>
-          <span className="text-[8px] font-mono tracking-widest text-zinc-400 uppercase block">
-            MJU CAPSTONE &bull; CLIENT-SIDE ENGINE
+    <div className="absolute inset-0 flex flex-col bg-[#f7f2fa] text-[#1d1b20] font-sans select-none">
+      {/* App bar */}
+      <header
+        className={`${SAFE_TOP} bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]`}
+      >
+        <div className="flex h-12 items-center gap-2 px-2">
+          <span className="grid h-9 w-9 place-items-center rounded-full text-[#49454f]">
+            <ArrowLeft className="h-[18px] w-[18px]" aria-hidden="true" />
           </span>
-          <p className="text-xs font-bold text-white flex items-center gap-1.5">
-            <span>NCDs Risk Screener</span>
-            <span className="text-[8px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20">
-              REST · MYSQL
-            </span>
+          <div className="min-w-0 flex-1 leading-tight">
+            <p className="truncate text-[15px] font-semibold">
+              {t("คัดกรองความเสี่ยง", "Risk screening")}
+            </p>
+            <p className="truncate text-[11px] text-[#625b71]">
+              {tr(t, ncdsDemo.clientLabel)}
+            </p>
+          </div>
+          <span className="grid h-9 w-9 place-items-center rounded-full text-[#49454f]">
+            <MoreVertical className="h-[18px] w-[18px]" aria-hidden="true" />
+          </span>
+        </div>
+      </header>
+
+      {/* Body */}
+      <div
+        data-lenis-prevent
+        className="flex-1 space-y-3 overflow-y-auto px-3 py-3 scrollbar-none"
+      >
+        {/* Result */}
+        <div
+          className={`rounded-2xl p-4 transition-colors duration-300 ${style.container}`}
+          aria-live="polite"
+        >
+          <p className="text-[11px] font-medium text-[#49454f]">
+            {t("ผลประเมินรวม", "Overall result")}
           </p>
-        </div>
-        <span className="text-[9px] font-mono bg-sky-950/60 text-sky-400 px-2 py-0.5 rounded border border-sky-800/40">
-          VHV Field Mode
-        </span>
-      </div>
-
-      {/* 3. Screen Body with Interactive Sliders */}
-      <div className="flex-1 p-3 flex flex-col justify-between space-y-2.5 overflow-y-auto">
-        {/* Quick Scenario Preset Chips */}
-        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto scrollbar-none">
-          <span className="text-zinc-500 uppercase px-1 shrink-0">
-            PRESETS:
-          </span>
-          <button
-            type="button"
-            onClick={() => applyPreset(92, 115, "Normal")}
-            className="px-2 py-0.5 rounded bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 transition-colors shrink-0 cursor-pointer"
-          >
-            🟢 Normal
-          </button>
-          <button
-            type="button"
-            onClick={() => applyPreset(118, 134, "Pre-Diabetes")}
-            className="px-2 py-0.5 rounded bg-amber-950/40 hover:bg-amber-900/60 text-amber-300 border border-amber-500/30 transition-colors shrink-0 cursor-pointer"
-          >
-            🟡 Moderate
-          </button>
-          <button
-            type="button"
-            onClick={() => applyPreset(235, 172, "Critical High")}
-            className="px-2 py-0.5 rounded bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 border border-rose-500/30 transition-colors shrink-0 cursor-pointer"
-          >
-            🔴 Critical
-          </button>
+          <div className="mt-1 flex items-end justify-between gap-2">
+            <p className={`text-[20px] font-bold leading-tight ${style.text}`}>
+              {tr(t, style.headline)}
+            </p>
+            <p
+              className={`shrink-0 whitespace-nowrap text-[13px] font-semibold tabular-nums ${style.text}`}
+            >
+              {risk.score}
+              <span className="font-normal opacity-70"> / 15</span>
+            </p>
+          </div>
+          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/70">
+            <div
+              className={`h-full w-full origin-left rounded-full transition-transform duration-500 ${style.bar}`}
+              style={{ transform: `scaleX(${risk.score / 15})` }}
+            />
+          </div>
         </div>
 
-        {/* Dynamic Vitals Summary & Real-time Risk Score */}
-        <div className="p-3 rounded-xl bg-gradient-to-br from-[#0d1624] to-[#0a0f19] border border-white/[0.08] shadow-md">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-semibold text-zinc-200 flex items-center gap-1.5">
-              <HeartPulseIcon
-                size={16}
-                animated={riskData.score >= 8}
-                color={
-                  riskData.color === "rose"
-                    ? "#f43f5e"
-                    : riskData.color === "amber"
-                      ? "#f59e0b"
-                      : "#10b981"
-                }
-              />
-              <span>
-                {t("ผลการคำนวณความเสี่ยง BLoC", "BLoC Risk Score Engine")}
+        {/* Vitals */}
+        <section className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+          <h4 className="text-[13px] font-semibold tracking-normal">
+            {t("สัญญาณชีพ", "Vital signs")}
+          </h4>
+
+          <label className="mt-3 block">
+            <span className="flex items-baseline justify-between">
+              <span className="text-[12px] text-[#625b71]">
+                {t("น้ำตาลในเลือด (อดอาหาร)", "Fasting glucose")}
+              </span>
+              <span className="text-[15px] font-semibold tabular-nums">
+                {glucose}
+                <span className="ml-1 text-[11px] font-normal text-[#625b71]">
+                  mg/dL
+                </span>
               </span>
             </span>
-            <span
-              className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border transition-colors ${
-                riskData.color === "rose"
-                  ? "text-rose-400 bg-rose-950/60 border-rose-600/40"
-                  : riskData.color === "amber"
-                    ? "text-amber-400 bg-amber-950/60 border-amber-600/40"
-                    : "text-emerald-400 bg-emerald-950/60 border-emerald-600/40"
-              }`}
-            >
-              {riskData.tier} ({riskData.score}/15)
+            <input
+              type="range"
+              min="70"
+              max="260"
+              step="1"
+              value={glucose}
+              onChange={(e) =>
+                handleVitalsChange(Number(e.target.value), systolic)
+              }
+              aria-label="Fasting blood glucose level"
+              className="mt-2 h-1 w-full cursor-pointer appearance-none rounded-full bg-[#e8def8] accent-[#6750a4]"
+            />
+          </label>
+
+          <label className="mt-4 block">
+            <span className="flex items-baseline justify-between">
+              <span className="text-[12px] text-[#625b71]">
+                {t("ความดันโลหิต", "Blood pressure")}
+              </span>
+              <span className="text-[15px] font-semibold tabular-nums">
+                {systolic}/80
+                <span className="ml-1 text-[11px] font-normal text-[#625b71]">
+                  mmHg
+                </span>
+              </span>
             </span>
-          </div>
+            <input
+              type="range"
+              min="90"
+              max="185"
+              step="1"
+              value={systolic}
+              onChange={(e) =>
+                handleVitalsChange(glucose, Number(e.target.value))
+              }
+              aria-label="Systolic blood pressure level"
+              className="mt-2 h-1 w-full cursor-pointer appearance-none rounded-full bg-[#e8def8] accent-[#6750a4]"
+            />
+          </label>
+        </section>
 
-          {/* Interactive Range Sliders */}
-          <div className="space-y-2 mt-2 pt-1 border-t border-white/[0.06]">
-            {/* 1. Fasting Glucose Slider */}
-            <div className="space-y-1">
-              <div className="flex items-center justify-between text-[10px] font-mono">
-                <span className="text-zinc-400 flex items-center gap-1">
-                  <BloodGlucoseIcon size={12} color="#38bdf8" />
-                  <span>{t("น้ำตาลในเลือด (Glucose)", "Blood Glucose")}</span>
-                </span>
-                <span className="font-bold text-[#00f0ff]">
-                  {glucose} mg/dL
-                </span>
-              </div>
-              <input
-                type="range"
-                min="70"
-                max="260"
-                step="1"
-                value={glucose}
-                onChange={(e) =>
-                  handleVitalsChange(Number(e.target.value), systolic)
-                }
-                aria-label="Fasting blood glucose level"
-                className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#00f0ff]"
-              />
-            </div>
-
-            {/* 2. Systolic Blood Pressure Slider */}
-            <div className="space-y-1">
-              <div className="flex items-center justify-between text-[10px] font-mono">
-                <span className="text-zinc-400 flex items-center gap-1">
-                  <BloodPressureIcon size={12} color="#10b981" />
-                  <span>{t("ความดันโลหิต (Systolic)", "Blood Pressure")}</span>
-                </span>
-                <span className="font-bold text-emerald-400">
-                  {systolic}/80 mmHg
-                </span>
-              </div>
-              <input
-                type="range"
-                min="90"
-                max="185"
-                step="1"
-                value={systolic}
-                onChange={(e) =>
-                  handleVitalsChange(glucose, Number(e.target.value))
-                }
-                aria-label="Systolic blood pressure level"
-                className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-emerald-400"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* 4 Disease Module Checkers */}
-        <div className="space-y-1">
-          <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
-            <span className="tracking-wider uppercase">
-              {t(
-                "สถานะกลุ่มโรค (Clinical States)",
-                "Clinical State Diagnostics",
-              )}
-            </span>
-            <span className="text-emerald-400 text-[9px]">Reactive Flow</span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-1.5">
-            {[
-              {
-                id: "diabetes",
-                title: t("โรคเบาหวาน", "Diabetes"),
-                value: riskData.flags.diabetes,
-                risk: riskData.flags.diabetesRisk,
-              },
-              {
-                id: "hypertension",
-                title: t("ความดันโลหิต", "Hypertension"),
-                value: riskData.flags.hypertension,
-                risk: riskData.flags.hypertensionRisk,
-              },
-              {
-                id: "heart",
-                title: t("โรคหัวใจ", "Heart Risk"),
-                value: riskData.flags.heart,
-                risk: "normal",
-              },
-              {
-                id: "obesity",
-                title: t("ดัชนีมวลกาย", "Obesity / BMI"),
-                value: riskData.flags.obesity,
-                risk: "normal",
-              },
-            ].map((card) => {
-              const isHigh = card.risk === "high";
-              const isModerate = card.risk === "moderate";
-              return (
-                <div
-                  key={card.id}
-                  className="p-2 rounded-lg bg-zinc-900/70 border border-white/[0.06] flex items-center justify-between"
+        {/* Per-disease results */}
+        <section className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+          <h4 className="px-4 pt-3 pb-1 text-[13px] font-semibold tracking-normal">
+            {t("ผลแยกรายโรค", "By condition")}
+          </h4>
+          <ul>
+            {diseases.map((d) => (
+              <li
+                key={d.id}
+                className="flex items-center gap-3 border-t border-[#f1ecf4] px-4 py-2.5 first:border-t-0"
+              >
+                {d.level === "high" ? (
+                  <AlertTriangle
+                    className={`h-4 w-4 shrink-0 ${LEVEL_STYLE.high.icon}`}
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <CheckCircle2
+                    className={`h-4 w-4 shrink-0 ${LEVEL_STYLE[d.level].icon}`}
+                    aria-hidden="true"
+                  />
+                )}
+                <span className="flex-1 text-[13px]">{d.title}</span>
+                <span
+                  className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${LEVEL_STYLE[d.level].chip}`}
                 >
-                  <div>
-                    <p className="text-[10px] text-zinc-300 font-medium">
-                      {card.title}
-                    </p>
-                    <p
-                      className={`text-[9px] font-mono font-semibold ${
-                        isHigh
-                          ? "text-rose-400"
-                          : isModerate
-                            ? "text-amber-400"
-                            : card.id === "heart"
-                              ? "text-zinc-400"
-                              : "text-emerald-400"
-                      }`}
-                    >
-                      {card.value}
-                    </p>
-                  </div>
-                  {isHigh ? (
-                    <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-                  ) : (
-                    <CheckCircle2
-                      className={`w-3.5 h-3.5 shrink-0 ${
-                        card.id === "heart"
-                          ? "text-sky-400"
-                          : "text-emerald-400"
-                      }`}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                  {tr(t, LEVEL_STYLE[d.level].label)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
 
-        {/* Real-time Field Telemetry */}
-        <div className="p-2 rounded-lg bg-zinc-900/50 border border-white/[0.04] space-y-1 text-[9px] font-mono">
-          <div className="flex items-center justify-between text-zinc-400">
-            <span>Record Storage</span>
-            <span className="text-sky-400 font-bold">REST API → MySQL</span>
-          </div>
-          <div className="flex items-center justify-between text-zinc-400">
-            <span>Risk Scoring</span>
-            <span className="text-emerald-400 font-bold">
-              On-device, no network call
-            </span>
-          </div>
-        </div>
-
-        {/* Generate Report Button */}
+      {/* Primary action */}
+      <div className="relative bg-[#f7f2fa] px-3 pb-2 pt-1">
+        <AppSnackbar
+          message={
+            isExported
+              ? t("บันทึกผลแล้ว · สร้าง PDF สำเร็จ", "Saved · PDF report ready")
+              : null
+          }
+        />
         <m.button
           type="button"
-          whileTap={{ scale: 0.97 }}
+          whileTap={{ scale: 0.98 }}
           onClick={handleExportPdf}
-          aria-label="Export medical report"
-          className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-sky-600 hover:from-emerald-500 hover:to-sky-500 text-white font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+          className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#6750a4] text-[14px] font-semibold text-white transition-colors hover:bg-[#523d8f]"
         >
-          {isExported ? (
-            <>
-              <FileCheck2 className="w-3.5 h-3.5 text-emerald-200" />
-              <span>{t("ออกรายงาน PDF สำเร็จ", "PDF Report Generated!")}</span>
-            </>
-          ) : (
-            <>
-              <TrendingUp className="w-3.5 h-3.5" />
-              <span>
-                {t("ออกรายงานผลตรวจ (Export PDF)", "Export Medical Report")}
-              </span>
-            </>
-          )}
+          <FileText className="h-4 w-4" aria-hidden="true" />
+          {t("บันทึกและออกรายงาน PDF", "Save & export PDF")}
         </m.button>
       </div>
 
-      {/* 4. Bottom Home Indicator */}
-      <div className="px-4 py-2 border-t border-white/[0.04] bg-[#0b1017] flex flex-col items-center">
-        <div className="w-24 h-1 bg-white/20 rounded-full my-0.5" />
-      </div>
+      {/* Navigation bar */}
+      <nav
+        aria-label={t("เมนูแอป", "App navigation")}
+        className={`${SAFE_BOTTOM} grid grid-cols-3 bg-[#f3edf7] pt-2`}
+      >
+        {[
+          { id: "home", icon: House, label: t("หน้าหลัก", "Home") },
+          { id: "screen", icon: ClipboardList, label: t("คัดกรอง", "Screen") },
+          { id: "history", icon: History, label: t("ประวัติ", "History") },
+        ].map(({ id, icon: Icon, label }) => {
+          const active = id === "screen";
+          return (
+            <span
+              key={id}
+              className="flex flex-col items-center gap-1 text-[11px]"
+            >
+              <span
+                className={`grid h-7 w-14 place-items-center rounded-full ${
+                  active ? "bg-[#eaddff] text-[#21005d]" : "text-[#49454f]"
+                }`}
+              >
+                <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+              </span>
+              <span
+                className={
+                  active ? "font-semibold text-[#1d1b20]" : "text-[#49454f]"
+                }
+              >
+                {label}
+              </span>
+            </span>
+          );
+        })}
+      </nav>
     </div>
   );
 };

@@ -21,7 +21,7 @@ export const ContactEmailCard: React.FC<ContactEmailCardProps> = ({
       particleCount: 35,
       spread: 60,
       origin: { y: 0.8 },
-      colors: ["#06b6d4", "#0284c7", "#38bdf8"],
+      colors: ["#38d9ff", "#4d7cfe", "#f3f6fc"],
     });
 
     setTimeout(() => {

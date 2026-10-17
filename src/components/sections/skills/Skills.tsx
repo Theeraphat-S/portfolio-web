@@ -50,7 +50,7 @@ export const Skills: React.FC = () => {
   return (
     <section
       id="capabilities"
-      className="relative py-16 sm:py-24 border-b border-white/[0.08]"
+      className="relative py-16 sm:py-24 border-b border-line"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="skills" className="absolute -top-24 pointer-events-none" />
@@ -61,9 +61,9 @@ export const Skills: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={FADE_UP}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
+        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-[#00f0ff]">
+        <span className="editorial-eyebrow text-primary">
           03 // {t("ความสามารถ & ระบบ", "CAPABILITIES & SYSTEMS")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
@@ -117,9 +117,9 @@ export const Skills: React.FC = () => {
               className="space-y-5"
             >
               {/* Category Tree Root Header */}
-              <div className="pb-3 border-b border-white/[0.08] space-y-1">
+              <div className="pb-3 border-b border-line space-y-1">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#00f0ff] font-semibold tracking-wider">
+                  <div className="flex items-center gap-2 text-xs font-mono text-primary font-semibold tracking-wider">
                     <span>{meta.index} //</span>
                     <span>{lang === "th" ? meta.labelTh : meta.labelEn}</span>
                   </div>
@@ -157,7 +157,7 @@ export const Skills: React.FC = () => {
                     >
                       {/* Left: Monospace Connector + Name + Short Desc */}
                       <div className="flex items-start gap-2.5 min-w-0">
-                        <span className="text-zinc-600 select-none font-bold group-hover/node:text-[#00f0ff] transition-colors shrink-0">
+                        <span className="text-zinc-600 select-none font-bold group-hover/node:text-primary transition-colors shrink-0">
                           {connector}
                         </span>
                         <div className="space-y-0.5 min-w-0">

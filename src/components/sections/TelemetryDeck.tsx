@@ -6,8 +6,8 @@ export const TelemetryDeck: React.FC = () => {
   const { localTime, fpsTarget } = useTelemetry();
 
   return (
-    <section className="py-8 relative overflow-hidden border-b border-white/[0.08]">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 py-3 px-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+    <section className="py-8 relative overflow-hidden border-b border-line">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 py-3 px-5 rounded-2xl bg-white/[0.02] border border-line">
         {/* Left: Node Identity */}
         <div className="flex items-center gap-3">
           <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
@@ -15,7 +15,7 @@ export const TelemetryDeck: React.FC = () => {
             CHIANG MAI NODE (GMT+7)
           </span>
           <span className="text-zinc-600 font-mono text-xs">/</span>
-          <span className="text-xs font-mono text-[#00f0ff] font-semibold">
+          <span className="text-xs font-mono text-primary font-semibold">
             {localTime || "12:00:00"}
           </span>
         </div>
@@ -43,7 +43,7 @@ export const TelemetryDeck: React.FC = () => {
             <span className="text-zinc-400 uppercase tracking-wider">
               TREE:
             </span>
-            <span className="text-[#00f0ff] font-bold">
+            <span className="text-primary font-bold">
               STABLE &bull; PRODUCTION READY
             </span>
           </div>

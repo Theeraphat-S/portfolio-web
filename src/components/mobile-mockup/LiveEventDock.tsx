@@ -19,16 +19,16 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
   const { t } = useLanguage();
 
   return (
-    <div className="w-full mt-3 rounded-2xl bg-[#090d15]/95 border border-white/[0.08] hover:border-[#00f0ff]/30 p-2.5 sm:p-3 shadow-lg backdrop-blur-md transition font-mono">
+    <div className="w-full mt-3 rounded-2xl bg-[#090d15]/95 border border-line hover:border-signal/30 p-2.5 sm:p-3 shadow-lg backdrop-blur-md transition font-mono">
       {/* Top Header: Live Status + Action Buttons */}
-      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 pb-2 border-b border-white/[0.06] text-[10px]">
+      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 pb-2 border-b border-line text-[10px]">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_6px_#10b981]" />
           </span>
           <span className="text-zinc-300 font-semibold tracking-wider uppercase flex items-center gap-1.5 whitespace-nowrap">
-            <TerminalBoxIcon className="w-3.5 h-3.5 text-[#00f0ff]" />
+            <TerminalBoxIcon className="w-3.5 h-3.5 text-primary" />
             <span>BLoC DEVTOOLS</span>
           </span>
         </div>
@@ -40,9 +40,9 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onClick={() => onOpenDrawer("stream")}
             data-cursor-text="LOGS"
             aria-label={t("เปิดดูประวัติ Event Log", "Open Live Stream Logs")}
-            className="min-h-7 px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-[#00f0ff]/10 text-zinc-300 hover:text-[#00f0ff] border border-white/[0.08] hover:border-[#00f0ff]/30 text-[10px] font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="min-h-7 px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-[10px] font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
-            <Terminal className="w-2.5 h-2.5 text-[#00f0ff]" />
+            <Terminal className="w-2.5 h-2.5 text-primary" />
             <span>LOGS ({eventsCount})</span>
           </button>
 
@@ -51,7 +51,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onClick={() => onOpenDrawer("code")}
             data-cursor-text="DART"
             aria-label={t("ดูโค้ด Flutter/Dart", "View Dart Source Code")}
-            className="min-h-7 px-2 rounded-md whitespace-nowrap bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 text-[10px] font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="min-h-7 px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/20 text-primary border border-primary/30 text-[10px] font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <Code2 className="w-2.5 h-2.5" />
             <span>DART CODE</span>
@@ -75,7 +75,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
                 `เปิด Event Log: ${latestEvent.name}`,
                 `Open event log: ${latestEvent.name}`,
               )}
-              className="w-full text-left group cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] rounded-lg bg-black/40 hover:bg-black/60 p-1.5 sm:p-2 border border-white/[0.04] hover:border-white/[0.12] transition flex items-center justify-between gap-2 text-[10px]"
+              className="w-full text-left group cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal rounded-lg bg-black/40 hover:bg-black/60 p-1.5 sm:p-2 border border-white/[0.04] hover:border-white/[0.12] transition flex items-center justify-between gap-2 text-[10px]"
             >
               <div className="flex items-center gap-2 min-w-0">
                 <span className="px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-400 text-[10px] font-bold border border-sky-800/40 shrink-0">
@@ -87,7 +87,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
                 {latestEvent.stateName && (
                   <>
                     <span className="text-zinc-500 shrink-0">➔</span>
-                    <span className="text-[#00f0ff] font-medium text-[10px] truncate min-w-0 bg-[#00f0ff]/10 px-1.5 py-0.5 rounded border border-[#00f0ff]/20">
+                    <span className="text-primary font-medium text-[10px] truncate min-w-0 bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
                       {latestEvent.stateName}
                     </span>
                   </>

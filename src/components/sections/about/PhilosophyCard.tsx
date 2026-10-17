@@ -10,7 +10,7 @@ export const PhilosophyCard: React.FC = () => {
   return (
     <div className="md:col-span-1 lg:col-span-2">
       <SpotlightCard
-        spotlightColor="rgba(6, 182, 212, 0.15)"
+        spotlightColor="rgba(56,217,255, 0.15)"
         className="h-full flex flex-col justify-between"
         data-cursor-text="Philosophy"
       >

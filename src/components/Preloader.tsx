@@ -86,7 +86,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             transition: { duration: 0.25, ease: [0.33, 1, 0.68, 1] },
           }}
           onClick={() => setIsFinished(true)}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#07080c] text-[#f1f5f9] overflow-hidden select-none cursor-pointer"
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-void text-ink overflow-hidden select-none cursor-pointer"
           aria-label="hello - click to skip"
           title="Click to skip"
         >
