@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
   const { lang } = useLanguage();
 
   return (
-    <footer className="border-t border-white/[0.08] bg-[#07080c] text-zinc-400 text-xs py-12 transition-colors">
+    <footer className="border-t border-line bg-void text-zinc-400 text-xs py-12 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Left: Author & Geographic status */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-center sm:text-left">
@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             data-cursor-text="GITHUB"
-            className="p-2.5 rounded-full bg-white/[0.03] text-zinc-400 hover:text-[#00f0ff] hover:bg-white/[0.06] transition-colors border border-white/[0.06] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="p-2.5 rounded-full bg-white/[0.03] text-zinc-400 hover:text-signal hover:bg-white/[0.06] transition-colors border border-line focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
             aria-label="GitHub profile"
           >
             <Github className="w-3.5 h-3.5" />
@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
           <a
             href={`mailto:${portfolioData.personal.email}`}
             data-cursor-text="EMAIL"
-            className="p-2.5 rounded-full bg-white/[0.03] text-zinc-400 hover:text-[#00f0ff] hover:bg-white/[0.06] transition-colors border border-white/[0.06] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="p-2.5 rounded-full bg-white/[0.03] text-zinc-400 hover:text-signal hover:bg-white/[0.06] transition-colors border border-line focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
             aria-label="Email"
           >
             <Mail className="w-3.5 h-3.5" />
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
             type="button"
             onClick={scrollToTop}
             data-cursor-text="TOP"
-            className="inline-flex items-center gap-1.5 px-3.5 min-h-9 text-[11px] font-mono font-medium text-zinc-400 hover:text-[#00f0ff] bg-white/[0.03] hover:bg-[#00f0ff]/10 border border-white/[0.06] hover:border-[#00f0ff]/30 rounded-full transition cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="inline-flex items-center gap-1.5 px-3.5 min-h-9 text-[11px] font-mono font-medium text-zinc-400 hover:text-signal bg-white/[0.03] hover:bg-signal/10 border border-line hover:border-signal/30 rounded-full transition cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
             aria-label="Scroll back to top"
           >
             <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />

@@ -55,7 +55,7 @@ export const ExperienceTimeline: React.FC = () => {
 
   const getCategoryIcon = (type: string, isActive: boolean) => {
     const iconClass = `w-3.5 h-3.5 ${
-      isActive ? "text-[#00f0ff]" : "text-zinc-400 group-hover:text-[#00f0ff]"
+      isActive ? "text-primary" : "text-zinc-400 group-hover:text-signal"
     } transition-colors`;
 
     switch (type) {
@@ -74,7 +74,7 @@ export const ExperienceTimeline: React.FC = () => {
   return (
     <section
       id="timeline"
-      className="relative py-16 sm:py-24 border-b border-white/[0.08]"
+      className="relative py-16 sm:py-24 border-b border-line"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="experience" className="absolute -top-24 pointer-events-none" />
@@ -85,9 +85,9 @@ export const ExperienceTimeline: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={sectionFadeIn}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
+        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-[#00f0ff]">
+        <span className="editorial-eyebrow text-primary">
           04 // {t("เส้นทางการทำงาน", "CAREER TIMELINE")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
@@ -128,7 +128,7 @@ export const ExperienceTimeline: React.FC = () => {
         <m.div
           aria-hidden="true"
           style={{ scaleY: shouldReduceMotion ? 1 : smoothScaleY }}
-          className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-[#00f0ff]/70 via-[#00f0ff]/30 to-transparent origin-top pointer-events-none"
+          className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-signal/70 via-primary/30 to-transparent origin-top pointer-events-none"
         />
 
         <div className="space-y-12 md:space-y-16">
@@ -149,12 +149,12 @@ export const ExperienceTimeline: React.FC = () => {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
                 variants={itemVariants}
-                className="relative group pb-12 md:pb-16 border-b border-white/[0.06] last:border-b-0 last:pb-0"
+                className="relative group pb-12 md:pb-16 border-b border-line last:border-b-0 last:pb-0"
               >
                 {/* Subtle Radial Blue Ambient Highlight on Hover */}
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 -mx-3 sm:-mx-6 px-3 sm:px-6 rounded-2xl bg-gradient-to-r from-[#00f0ff]/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"
+                  className="absolute inset-0 -mx-3 sm:-mx-6 px-3 sm:px-6 rounded-2xl bg-gradient-to-r from-signal/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"
                 />
 
                 <div className="flex flex-col md:flex-row items-start">
@@ -165,7 +165,7 @@ export const ExperienceTimeline: React.FC = () => {
                       as="span"
                       className={`text-lg sm:text-xl font-bold font-mono tracking-tight block ${
                         isActive
-                          ? "text-[#00f0ff]"
+                          ? "text-primary"
                           : "text-zinc-200 group-hover:text-white"
                       } transition-colors`}
                       th={isMultiTerm ? `${yearTh} / 3 เทอมการศึกษา` : yearTh}
@@ -185,8 +185,8 @@ export const ExperienceTimeline: React.FC = () => {
                       <span
                         className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono tracking-wider uppercase whitespace-nowrap ${
                           isActive
-                            ? "bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/25"
-                            : "bg-white/[0.03] text-zinc-400 border border-white/[0.06]"
+                            ? "bg-primary/10 text-primary border border-primary/25"
+                            : "bg-white/[0.03] text-zinc-400 border border-line"
                         }`}
                       >
                         {lang === "th" ? exp.badgeTh : exp.badgeEn}
@@ -205,10 +205,10 @@ export const ExperienceTimeline: React.FC = () => {
                   {/* Axis Node Indicator Marker */}
                   <div
                     aria-hidden="true"
-                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-[#07080c] flex items-center justify-center transition duration-300 ${
+                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-void flex items-center justify-center transition duration-300 ${
                       isActive
-                        ? "border border-[#00f0ff]/60 shadow-[0_0_10px_rgba(0,240,255,0.25)]"
-                        : "border border-white/10 group-hover:border-[#00f0ff]/40 group-hover:scale-105"
+                        ? "border border-primary/60 shadow-[0_0_10px_rgba(56,217,255,0.25)]"
+                        : "border border-white/10 group-hover:border-signal/40 group-hover:scale-105"
                     }`}
                   >
                     {getCategoryIcon(exp.type, isActive)}
@@ -247,7 +247,7 @@ export const ExperienceTimeline: React.FC = () => {
                       <BilingualStack
                         className={`text-sm font-mono font-medium ${
                           isActive
-                            ? "text-[#00f0ff]"
+                            ? "text-primary"
                             : "text-zinc-400 group-hover:text-zinc-200"
                         } transition-colors`}
                         th={exp.companyTh}
@@ -262,7 +262,7 @@ export const ExperienceTimeline: React.FC = () => {
                           <Sparkles
                             className={`w-3 h-3 ${
                               isActive
-                                ? "text-[#00f0ff]"
+                                ? "text-primary"
                                 : "text-zinc-500 group-hover:text-zinc-300"
                             } transition-colors`}
                           />
@@ -285,7 +285,7 @@ export const ExperienceTimeline: React.FC = () => {
                                 <span
                                   className={`text-xs font-mono font-bold ${
                                     isActive
-                                      ? "text-[#00f0ff]"
+                                      ? "text-primary"
                                       : "text-zinc-400 group-hover:text-zinc-200"
                                   } pt-0.5 select-none transition-colors`}
                                 >
@@ -313,7 +313,7 @@ export const ExperienceTimeline: React.FC = () => {
                                 <span
                                   className={`text-xs font-mono font-bold ${
                                     isActive
-                                      ? "text-[#00f0ff]"
+                                      ? "text-primary"
                                       : "text-zinc-400 group-hover:text-zinc-200"
                                   } pt-0.5 select-none transition-colors`}
                                 >
@@ -349,7 +349,7 @@ export const ExperienceTimeline: React.FC = () => {
                                 &bull;
                               </span>
                             )}
-                            <span className="hover:text-[#00f0ff] transition-colors uppercase font-medium">
+                            <span className="hover:text-signal transition-colors uppercase font-medium">
                               {skill}
                             </span>
                           </React.Fragment>
@@ -371,12 +371,12 @@ export const ExperienceTimeline: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={sectionFadeIn}
-          className="mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-white/[0.08] hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
+          className="mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-line hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           <div className="space-y-1">
             <BilingualStack
               as="span"
-              className="text-[10px] font-mono text-[#00f0ff] uppercase tracking-widest block font-medium"
+              className="text-[10px] font-mono text-primary uppercase tracking-widest block font-medium"
               th="04.1 // การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
               en="04.1 // ACADEMIC VERIFICATION & REFERENCE"
             />
@@ -397,18 +397,18 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.phone && (
               <a
                 href={`tel:${personal.reference.phone}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
               >
-                <Phone className="w-3.5 h-3.5 text-[#00f0ff]" />
+                <Phone className="w-3.5 h-3.5 text-primary" />
                 <span>{personal.reference.phone}</span>
               </a>
             )}
             {personal.reference.email && (
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 border border-white/[0.08] hover:border-[#00f0ff]/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
               >
-                <Mail className="w-3.5 h-3.5 text-[#00f0ff]" />
+                <Mail className="w-3.5 h-3.5 text-primary" />
                 <span>{personal.reference.email}</span>
               </a>
             )}

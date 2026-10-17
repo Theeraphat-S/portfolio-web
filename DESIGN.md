@@ -2,17 +2,16 @@
 name: Theeraphat Srimontha Portfolio
 description: High-performance mobile systems engineering showcase
 colors:
-  primary: "#00f0ff"
-  accent-sky: "#38bdf8"
-  accent-deep: "#0284c7"
+  primary: "#4d7cfe"
+  signal: "#38d9ff"
   status-emerald: "#10b981"
-  bg-void: "#07080c"
-  surface-obsidian: "#0d0f17"
-  surface-elevated: "#141724"
-  text-primary: "#f1f5f9"
-  text-secondary: "#cbd5e1"
-  text-muted: "#a1a1aa"
-  border-hairline: "rgba(255, 255, 255, 0.07)"
+  bg-void: "#070b14"
+  surface: "#0d1424"
+  surface-raised: "#131c30"
+  text-primary: "#f3f6fc"
+  text-secondary: "#b9c3d4"
+  text-muted: "#8b97ad"
+  border-line: "#26324a"
 typography:
   display:
     fontFamily: "Outfit, IBM Plex Sans Thai, -apple-system, BlinkMacSystemFont, sans-serif"
@@ -64,7 +63,7 @@ components:
     rounded: "{rounded.full}"
     padding: "13px 26px"
   button-primary-hover:
-    backgroundColor: "{colors.accent-sky}"
+    backgroundColor: "{colors.signal}"
     textColor: "{colors.bg-void}"
     rounded: "{rounded.full}"
     padding: "13px 26px"
@@ -74,12 +73,12 @@ components:
     rounded: "{rounded.full}"
     padding: "13px 26px"
   button-outline-hover:
-    backgroundColor: "rgba(0, 240, 255, 0.04)"
-    textColor: "{colors.primary}"
+    backgroundColor: "rgba(56, 217, 255, 0.05)"
+    textColor: "{colors.signal}"
     rounded: "{rounded.full}"
     padding: "13px 26px"
   card-editorial:
-    backgroundColor: "{colors.surface-obsidian}"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.text-primary}"
     rounded: "{rounded.xl}"
     padding: "20px 24px"
@@ -91,13 +90,13 @@ components:
 
 **Creative North Star: "The Avionics Instrument Deck"**
 
-The visual language of Theeraphat Srimontha's portfolio functions as an advanced flight deck for high-reliability mobile engineering, organized as a **scroll-led narrative journey**. Rather than treating software as abstract styling, the interface mirrors the precision, predictability, and tactile certainty of avionics instrumentation: deep void-black backgrounds (`#07080c`), layered obsidian glass surfaces (`#0d0f17`/80%), 1px laser-etched borders, and razor-sharp typographic telemetry. Every element conveys intentional control—deterministic states, measured frame budgets, and zero unnecessary visual noise.
+The visual language of Theeraphat Srimontha's portfolio functions as an advanced flight deck for high-reliability mobile engineering, organized as a **scroll-led narrative journey**. Rather than treating software as abstract styling, the interface mirrors the precision, predictability, and tactile certainty of avionics instrumentation: deep blue-black backgrounds (`#070b14`), layered midnight surfaces (`#0d1424`/80%), 1px laser-etched borders, and razor-sharp typographic telemetry. Every element conveys intentional control—deterministic states, measured frame budgets, and zero unnecessary visual noise.
 
-Electric Cyan (`#00f0ff`) serves as the operational signal color across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and magnetic buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
+Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38d9ff`) is the signal color for motion and live state across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and magnetic buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
 
 **Key Characteristics:**
 
-- **Obsidian Dark Void**: Total immersion in deep slate-black surfaces (`#07080c` to `#141724`) that direct immediate focus to project artifacts.
+- **Obsidian Dark Void**: Total immersion in deep slate-black surfaces (`#070b14` to `#131c30`) that direct immediate focus to project artifacts.
 - **Scroll-Led Story Progression**: Continuous narrative journey where technical depth unfolds naturally through scroll-linked sticky runways and live BLoC stream mutations.
 - **Laser-Etched Precision**: Restrained 1px borders with subtle linear gradient transitions that outline containers without visual weight.
 - **Instrument Telemetry**: Monospace timestamps, sub-millisecond ping metrics, and status pulse indicators that ground claims in living system truth.
@@ -105,37 +104,38 @@ Electric Cyan (`#00f0ff`) serves as the operational signal color across the dark
 
 ## Colors
 
-The palette is anchored in deep dark-glass layers illuminated by high-voltage cyan accents and living telemetry emeralds.
+**Theme: Midnight Circuit.** A blue-black canvas cut with Primary Blue and Electric Cyan. Tokens live in the `@theme` block of `src/index.css` (`void`, `surface`, `surface-raised`, `primary`, `signal`, `ink`, `muted`, `line`); the Tailwind `zinc`, `cyan`, `sky` and `blue` ramps and `white` are re-tuned to the same blue-slate family, so stock utilities inherit the theme.
 
 ### Primary
 
-- **Electric Cyan** (`#00f0ff`): The primary operational accent. Used for key callouts, active navigation indicators, metric values, and primary button backgrounds. Signals interactive authority and live system state.
+- **Primary Blue** (`#4d7cfe`, `primary`): Primary buttons, links, section eyebrows, key metric values and the hero accent line. Buttons use `void` text on blue (≈5:1).
 
 ### Secondary
 
-- **Aero Sky** (`#38bdf8`): Transition hover state for primary cyan triggers and gradient highlights.
-- **Deep Oceanic** (`#0284c7`): Terminal end of the headline gradient; provides atmospheric depth.
+- **Electric Cyan** (`#38d9ff`, `signal`): Motion and live state only — hover and focus states, pulsing indicators, the active chapter dot, the scroll progress bar and the section-transition trace.
 
 ### Tertiary
 
-- **Telemetry Emerald** (`#10b981`): Status heartbeat for real-time telemetry, live system availability, and "Open for Roles" signaling.
+- **Telemetry Emerald** (`#10b981`): Status heartbeat for live availability and "Open for Roles" signaling.
 
 ### Neutral
 
-- **Void Black** (`#07080c`): Base global canvas background.
-- **Obsidian Surface** (`#0d0f17`): Primary card and container fill, rendered with 80% opacity and 20px backdrop blur.
-- **Elevated Navy-Black** (`#141724`): Popover, modal, drawer, and nested element background.
-- **Starlight White** (`#f1f5f9`): High-contrast primary reading text and active headlines.
-- **Slate Gray** (`#cbd5e1`): Secondary narrative copy and supporting metadata.
-- **Muted Zinc** (`#a1a1aa`): Unselected tab labels, subtle icons, and tertiary descriptors.
-- **Hairline Border** (`rgba(255, 255, 255, 0.07)`): Universal divider and container stroke.
+- **Void** (`#070b14`, `void`): Global canvas.
+- **Surface** (`#0d1424`, `surface`): Sections and cards; glass cards use it at 80% with 20px blur.
+- **Surface Raised** (`#131c30`): Popovers, modals, drawers, nested elements.
+- **Ink** (`#f3f6fc`, `ink`): Headlines and primary text.
+- **Secondary Text** (`#b9c3d4`, `zinc-300`): Supporting narrative copy.
+- **Muted** (`#8b97ad`, `muted` / `zinc-400`): Descriptions and secondary data.
+- **Line** (`#26324a`, `line`): Card borders and section dividers.
 
 ### Named Rules
 
-**The 8% Cyan Rule.** Electric Cyan must never exceed 8% of the surface area on any viewport. Cyan is reserved for signals, active states, and quantified metrics; diluting it across large body backgrounds destroys its operational authority.  
-**The Telemetry Heartbeat Rule.** Telemetry Emerald (`#10b981`) is strictly reserved for live, active, or verified real-world indicators (status pulses, online signals). It is never used as decorative text.  
-**The Zero-Shift Bilingual Rule.** All text containers supporting dual languages (Thai and English) must apply balanced line-heights, flex alignments, and explicit min-height constraints to eliminate layout shifts when toggling languages.  
-**The Sticky Viewport Budget Rule.** Pinned interactive demonstration viewports must never exceed `calc(100vh - 6rem)` to guarantee full visual accessibility across 13" laptop screens up to ultra-wide desktop monitors.
+**The 80 / 15 / 5 Rule.** Roughly 80% dark canvas and space, 15% surfaces and gray text, 5% blue and cyan. Accent color that spreads past that loses its pull.
+**The Blue Acts, Cyan Moves Rule.** Blue marks what is important or clickable at rest; cyan appears only when something moves, is hovered, or is live. Never set long body copy in either.
+**The Reserved Glow Rule.** Glow and gradient belong to the hero accent line, key numbers, and section transitions. Cards and buttons at rest carry no glow.
+**The Telemetry Heartbeat Rule.** Emerald (`#10b981`) is reserved for live, active, or verified real-world indicators, never decorative text.
+**The Zero-Shift Bilingual Rule.** All text containers supporting Thai and English apply balanced line-heights, flex alignment, and explicit min-heights so toggling languages causes no layout shift.
+**The Sticky Viewport Budget Rule.** Pinned demonstration viewports never exceed `calc(100vh - 6rem)`.
 
 ## Typography
 
@@ -164,8 +164,8 @@ The spatial model employs an asymmetric 12-column responsive grid framed within 
 
 - **Maximum Content Width:** `max-w-5xl` (1024px) for reading sections, navigation, and bento grids; `max-w-6xl` (1152px) for the main application shell; `max-w-7xl` (1280px) for wide telemetry decks and editorial hero headers.
 - **Section Spacing Rhythm:** Standard vertical rhythm is `py-16` (64px) on mobile scaling to `py-24` (96px) on desktop viewports.
-- **Dividing Boundaries:** Sections are demarcated by `border-b border-white/[0.08]` paired with fading gradient horizontal rules.
-- **Grid Background:** Ultra-subtle 56px technical grid lines (`rgba(255, 255, 255, 0.025)`) provide depth behind transparent containers.
+- **Dividing Boundaries:** Sections are demarcated by `border-b border-line`. As each chapter scrolls out, a single cyan trace runs along its bottom rule (CSS scroll-driven `circuit-trace`, hidden under reduced motion).
+- **Grid Background:** Ultra-subtle 56px technical grid lines (`rgba(77, 124, 254, 0.05)`) provide depth behind transparent containers.
 
 ## Elevation & Depth
 
@@ -173,13 +173,13 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Shadow Vocabulary
 
-- **Ambient Cyan Glow** (`0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(0, 240, 255, 0.08)`): Applied on card hover to create a diffused electromagnetic aura.
-- **Button Energy Shadow** (`0 4px 20px -4px rgba(0, 240, 255, 0.28)`): Soft, directional glow beneath primary interactive buttons.
+- **Ambient Cyan Glow** (`0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 12px 30px -12px rgba(56, 217, 255, 0.1)`): Applied on card hover to create a diffused electromagnetic aura.
+- **Button Energy Shadow** (`0 4px 20px -4px rgba(77, 124, 254, 0.35)`): Soft, directional glow beneath primary interactive buttons.
 - **Dock Elevation** (`0 12px 32px rgba(0, 0, 0, 0.65)`): Deep shadow applied to floating telemetry and chapter indicators.
 
 ### Named Rules
 
-**The Glass Before Blur Rule.** Transparent containers must always combine translucent dark backgrounds (`rgba(13, 15, 23, 0.8)` or `#07080c/85` for compact floating pills) with `backdrop-filter: blur(16px–20px)` and a `1px` white border at 6–8% opacity. Blur without border definition is prohibited.  
+**The Glass Before Blur Rule.** Transparent containers must always combine translucent dark backgrounds (`rgba(13, 20, 36, 0.8)` or `void/85` for compact floating pills) with `backdrop-filter: blur(16px–20px)` and a `1px` `line` (`#26324a`) border. Blur without border definition is prohibited.  
 **The Restrained Luminescence Rule.** Glow effects are strictly reactive: they appear during hover or active states, never idling as high-intensity persistent backgrounds.
 
 ## Shapes
@@ -193,16 +193,16 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 ### Buttons
 
 - **Shape:** Pill silhouette (`rounded-full`, 9999px).
-- **Primary:** Background `#00f0ff`, text `#07080c`, font `JetBrains Mono` 600 (`13px`), padding `13px 26px`, uppercase with `0.06em` letter spacing.
-- **Hover / Focus:** Shifts background to `#38bdf8`, transforms `translateY(-1px)`, and deepens cyan shadow glow (`0 6px 24px -4px rgba(0, 240, 255, 0.4)`).
-- **Outline / Ghost:** Background `transparent`, border `1px solid rgba(255, 255, 255, 0.12)`, text `#f1f5f9`. On hover, border shifts to `rgba(0, 240, 255, 0.4)` and text shifts to `#00f0ff`.
+- **Primary:** Background `#4d7cfe`, text `#070b14`, font `JetBrains Mono` 600 (`13px`), padding `13px 26px`, uppercase with `0.06em` letter spacing.
+- **Hover / Focus:** Shifts background to Electric Cyan `#38d9ff`, transforms `translateY(-1px)`, with a cyan shadow (`0 6px 24px -4px rgba(56, 217, 255, 0.4)`).
+- **Outline / Ghost:** Background `transparent`, border `1px solid #26324a`, text `#f3f6fc`. On hover, border shifts to `rgba(56, 217, 255, 0.45)` and text shifts to `#38d9ff`.
 
 ### Cards & Containers
 
 - **Corner Style:** Rounded 12px (`rounded-xl`) or 16px (`rounded-2xl`).
-- **Background:** `rgba(13, 15, 23, 0.8)` with `backdrop-blur(20px)`.
-- **Border:** `1px solid rgba(255, 255, 255, 0.07)`.
-- **Hover Treatment:** Border shifts to `rgba(0, 240, 255, 0.35)` with ambient cyan shadow glow.
+- **Background:** `rgba(13, 20, 36, 0.8)` with `backdrop-blur(20px)`.
+- **Border:** `1px solid #26324a`.
+- **Hover Treatment:** Border shifts to `rgba(56, 217, 255, 0.35)` with a soft offset cyan shadow.
 - **Internal Padding:** `p-5 sm:p-6` for bento cards; `p-6 sm:p-8` for flagship case study containers.
 
 ### Avionics Story Progress Indicator (`StoryProgress`)
@@ -212,7 +212,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
   - Passed state (`is-passed`): illuminated cyan core.
   - Active state (`is-active`): animated pulsing cyan beacon with halo glow.
   - Telemetry label readout: `01 / 06` chapter index and uppercase monospace title (`INTRO`, `APPROACH`, `SELECTED WORK`, `CAPABILITIES`, `EXPERIENCE`, `CONTACT`).
-- **Mobile & Tablet (<2XL):** Minimalist top-right floating pill capsule at `fixed right-4 top-3 z-30` with `bg-[#07080c]/85`, `backdrop-blur-sm`, and border `white/10`, rendering the active chapter index (`02 / 06 / APPROACH`) without obstructing hero typography.
+- **Mobile & Tablet (<2XL):** Minimalist top-right floating pill capsule at `fixed right-4 top-3 z-30` with `bg-void/85`, `backdrop-blur-sm`, and border `line`, rendering the active chapter index (`02 / 06 / APPROACH`) without obstructing hero typography.
 
 ### Hero Eyebrow & Language Control Deck
 
@@ -256,8 +256,8 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Don't:
 
-- **Don't** use solid high-contrast borders (e.g., solid `#ffffff` or solid `#00f0ff`); borders must remain translucent hairline strokes (`rgba(255, 255, 255, 0.07)`).
-- **Don't** flood screen backgrounds with bright or neon fills; background canvas remains strictly obsidian void (`#07080c`).
+- **Don't** use solid high-contrast borders (e.g., solid `#ffffff` or solid `#38d9ff`); borders use the `line` token (`#26324a`).
+- **Don't** flood screen backgrounds with bright or neon fills; background canvas remains Midnight void (`#070b14`).
 - **Don't** apply cyan color to long body copy; reserve it exclusively for accents, active states, and key data.
 - **Don't** introduce layout shifts when toggling languages or switching between scrollytelling beats.
 - **Don't** resurrect obsolete navigation patterns (top floating navbar dock or preloader splash screen) in active components.

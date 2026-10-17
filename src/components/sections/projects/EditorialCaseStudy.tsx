@@ -16,6 +16,7 @@ import { PintoScreen, PintoState } from "../../mobile-mockup/PintoScreen";
 import { NcdsScreen } from "../../mobile-mockup/NcdsScreen";
 import { PosScreen } from "../../mobile-mockup/PosScreen";
 import { LiveEventDock } from "../../mobile-mockup/LiveEventDock";
+import { DeviceFrame } from "../../mobile-mockup/DeviceFrame";
 import { DevToolsDrawer } from "../../mobile-mockup/DevToolsDrawer";
 import { BLoCStreamEvent } from "../../../types/stream";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
@@ -57,7 +58,7 @@ const highlightTerms = (text: string): React.ReactNode[] =>
     TECH_KEYWORDS.some((kw) => kw.toLowerCase() === part.toLowerCase()) ? (
       <span
         key={pIdx}
-        className="text-white font-medium border-b border-[#00f0ff]/40 pb-[0.5px]"
+        className="text-white font-medium border-b border-primary/40 pb-[0.5px]"
       >
         {part}
       </span>
@@ -128,6 +129,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const { lang, t } = useLanguage();
   const [activeBeat, setActiveBeat] = useState<number>(0);
   const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("webview");
+  const [posOnline, setPosOnline] = useState(true);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // Scale the pinned device down on short viewports so the whole stack
@@ -272,10 +274,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px] flex flex-col items-center gap-3">
         {/* Active stage HUD (desktop only; mobile uses the stepper above) */}
         {isDesktop && (
-          <div className="w-full flex items-center justify-between px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-[#00f0ff]/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
+          <div className="w-full flex items-center justify-between px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
             <div className="flex items-center gap-2">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-[#00f0ff]" />
-              <span className="text-[#00f0ff] font-semibold tracking-wider truncate">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
+              <span className="text-primary font-semibold tracking-wider truncate">
                 {activeBeatLabel}
               </span>
             </div>
@@ -284,7 +286,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               aria-live="polite"
             >
               <span className="sr-only">{t("ขั้นตอน", "Step")}</span>
-              <span className="text-[#00f0ff] font-bold">
+              <span className="text-primary font-bold">
                 {String(activeBeat + 1).padStart(2, "0")}
               </span>
               <span className="text-zinc-600">/</span>
@@ -295,37 +297,30 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           </div>
         )}
 
-        {/* Smartphone Chassis with Subtle Ambient Blue Lighting */}
-        <div className="relative w-full rounded-[38px] bg-[#0c1017] p-2 sm:p-2.5 border border-white/[0.12] hover:border-[#00f0ff]/35 transition duration-500 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_35px_-12px_rgba(0,240,255,0.12)] group/chassis will-change-transform">
-          {/* Outer Rim Glow Line */}
-          <div className="absolute inset-0 rounded-[38px] bg-gradient-to-b from-[#00f0ff]/10 via-transparent to-transparent pointer-events-none opacity-40 group-hover/chassis:opacity-80 transition-opacity" />
-
-          {/* Screen Shell */}
-          <div
-            id={`screen-panel-${project.id}`}
-            role="region"
-            aria-label={`${primaryTitle} interactive demonstration`}
-            className="relative rounded-[28px] overflow-hidden bg-[#07090e] border border-white/[0.08] shadow-inner min-h-[500px] sm:min-h-[520px] flex flex-col"
-          >
-            {project.id === "pinto-app" ? (
-              <PintoScreen
-                activeState={pintoActiveTab}
-                onStateChange={handleTabClick}
-                onDispatchEvent={handleDispatchEvent}
-              />
-            ) : project.id === "ncds-screening" ? (
-              <NcdsScreen
-                activeBeat={activeBeat}
-                onDispatchEvent={handleDispatchEvent}
-              />
-            ) : (
-              <PosScreen
-                activeBeat={activeBeat}
-                onDispatchEvent={handleDispatchEvent}
-              />
-            )}
-          </div>
-        </div>
+        <DeviceFrame
+          screenId={`screen-panel-${project.id}`}
+          label={`${primaryTitle} interactive demonstration`}
+          offline={project.id === "pos-system" && !posOnline}
+        >
+          {project.id === "pinto-app" ? (
+            <PintoScreen
+              activeState={pintoActiveTab}
+              onStateChange={handleTabClick}
+              onDispatchEvent={handleDispatchEvent}
+            />
+          ) : project.id === "ncds-screening" ? (
+            <NcdsScreen
+              activeBeat={activeBeat}
+              onDispatchEvent={handleDispatchEvent}
+            />
+          ) : (
+            <PosScreen
+              activeBeat={activeBeat}
+              onDispatchEvent={handleDispatchEvent}
+              onOnlineChange={setPosOnline}
+            />
+          )}
+        </DeviceFrame>
 
         {/* Live Reactive BLoC Event Dock directly under Chassis */}
         <LiveEventDock
@@ -375,15 +370,15 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   }
                 }}
                 aria-current={isActive ? "step" : undefined}
-                className={`min-h-[50vh] border-t py-7 text-left cursor-pointer outline-none transition-[opacity,border-color] duration-300 focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+                className={`min-h-[50vh] border-t py-7 text-left cursor-pointer outline-none transition-[opacity,border-color] duration-300 focus-visible:ring-1 focus-visible:ring-signal ${
                   isActive
-                    ? "border-[#00f0ff]/60 opacity-100"
-                    : "border-white/[0.08] opacity-55 hover:opacity-90"
+                    ? "border-primary/60 opacity-100"
+                    : "border-line opacity-55 hover:opacity-90"
                 }`}
               >
                 <p
                   className={`font-mono text-xs tracking-wider font-semibold ${
-                    isActive ? "text-[#00f0ff]" : "text-zinc-400"
+                    isActive ? "text-primary" : "text-zinc-400"
                   }`}
                 >
                   {lang === "th" ? beat.badgeTh : beat.badgeEn}
@@ -404,7 +399,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   />
                 </div>
                 <p className="mt-3 font-mono text-xs text-zinc-400">
-                  <span className="text-[#00f0ff]" aria-hidden="true">
+                  <span className="text-primary" aria-hidden="true">
                     →{" "}
                   </span>
                   {beat.streamState}
@@ -463,10 +458,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 type="button"
                 onClick={() => applyBeat(bIdx)}
                 aria-current={isActive ? "step" : undefined}
-                className={`min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-[11px] leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+                className={`min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-[11px] leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
                   isActive
-                    ? "border-[#00f0ff]/50 bg-[#00f0ff]/10 text-[#00f0ff]"
-                    : "border-white/[0.08] text-zinc-400 hover:text-zinc-200"
+                    ? "border-primary/50 bg-primary/10 text-primary"
+                    : "border-line text-zinc-400 hover:text-zinc-200"
                 }`}
               >
                 {(lang === "th" ? b.badgeTh : b.badgeEn).replace(
@@ -519,7 +514,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
         {/* Outcome metrics */}
         {project.metrics && project.metrics.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 border-y border-white/[0.08] sm:py-3.5 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.06]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 border-y border-line sm:py-3.5 divide-y sm:divide-y-0 sm:divide-x divide-line">
             {project.metrics.map((metric, mIdx) => (
               <div
                 key={mIdx}
@@ -551,13 +546,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onClick={() => onSelect(project)}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] px-5 py-2.5 rounded-full bg-[#0c1017] border border-white/[0.12] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] px-5 py-2.5 rounded-full bg-[#0d1424] border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(56,217,255,0.15)] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
-            <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] transition-colors" />
+            <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-primary transition-colors" />
             <span className="font-semibold tracking-wider">
               {t("อ่าน case study", "VIEW CASE STUDY")}
             </span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-300" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-300" />
           </button>
         </div>
       </div>
@@ -577,7 +572,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-      className="relative rounded-3xl bg-[#090c13]/90 border border-white/[0.08] hover:border-[#00f0ff]/30 transition duration-500 p-6 sm:p-10 lg:p-12 backdrop-blur-md"
+      className="relative rounded-3xl bg-[#0a1020]/90 border border-line hover:border-signal/30 transition duration-500 p-6 sm:p-10 lg:p-12 backdrop-blur-md"
     >
       {/* Render exactly one layout tree: duplicated hidden markup would
           steal the beat refs from the visible runway and duplicate ids. */}

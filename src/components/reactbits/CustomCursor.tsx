@@ -114,7 +114,7 @@ export const CustomCursor: React.FC = () => {
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.7, opacity: 0 }}
-            className="px-3 py-1 rounded-full bg-[#00f0ff] text-[#07080c] font-mono font-bold text-[10px] tracking-widest shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 whitespace-nowrap uppercase border border-cyan-300"
+            className="px-3 py-1 rounded-full bg-primary text-void font-mono font-bold text-[10px] tracking-widest shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 whitespace-nowrap uppercase border border-cyan-300"
           >
             <span>{cursorText}</span>
           </m.div>
@@ -122,7 +122,7 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`rounded-full transition-all duration-300 border ${
               isHovered
-                ? "w-10 h-10 border-cyan-400/80 bg-cyan-400/10 shadow-[0_0_20px_rgba(0,240,255,0.35)]"
+                ? "w-10 h-10 border-cyan-400/80 bg-cyan-400/10 shadow-[0_0_20px_rgba(56,217,255,0.35)]"
                 : "w-7 h-7 border-white/20 dark:border-white/15 bg-white/5"
             }`}
           />
@@ -143,7 +143,7 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`rounded-full transition-all duration-200 ${
               isHovered
-                ? "w-1.5 h-1.5 bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]"
+                ? "w-1.5 h-1.5 bg-signal shadow-[0_0_8px_var(--color-signal)]"
                 : "w-1.5 h-1.5 bg-white dark:bg-white"
             }`}
           />

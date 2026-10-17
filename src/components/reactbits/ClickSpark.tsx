@@ -32,7 +32,7 @@ export const ClickSpark: React.FC = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    const darkColors = ["#10b981", "#34d399", "#38bdf8", "#f4f4f5", "#a7f3d0"];
+    const darkColors = ["#10b981", "#34d399", "#4d7cfe", "#f4f4f5", "#a7f3d0"];
     const lightColors = ["#059669", "#0284c7", "#0d9488", "#1e293b", "#10b981"];
 
     const handleClick = (e: MouseEvent) => {

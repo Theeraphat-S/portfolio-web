@@ -2,26 +2,42 @@ import React, { useState } from "react";
 import { m, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
 import {
-  Sparkles,
-  CheckCircle2,
-  Plus,
-  Minus,
-  RefreshCw,
-  Gift,
-  ExternalLink,
-  Wifi,
-  Battery,
+  Check,
+  RotateCw,
+  Ticket,
+  Flame,
   UserRound,
+  UserCheck,
+  ChevronRight,
+  ShoppingBag,
+  Coins,
+  Settings,
+  ScanLine,
+  Sparkles,
+  Search,
+  Star,
+  Plane,
+  Shirt,
+  Soup,
+  ListFilter,
+  Heart,
+  Play,
+  House,
+  Clapperboard,
+  Plus,
+  MessagesSquare,
+  Cat,
+  Mountain,
+  Laptop,
+  Coffee,
+  Palmtree,
+  type LucideIcon,
 } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
-import {
-  FlameStreakIcon,
-  CodeBridgeIcon,
-  ShoppingBagIcon,
-} from "../icons/Iconsax";
 import { BLoCStreamEvent } from "../../types/stream";
 import { createStreamEvent } from "../../lib/streamUtils";
 import { useTransientFlag } from "../../hooks/useTransientFlag";
+import { SAFE_BOTTOM, SAFE_TOP } from "./DeviceFrame";
 
 export type PintoState = "webview" | "streak" | "profile";
 
@@ -31,6 +47,74 @@ interface PintoScreenProps {
   onStateChange?: (state: PintoState) => void;
   onDispatchEvent?: (event: BLoCStreamEvent) => void;
 }
+
+// Pinto brand green, matched to the production app.
+const BRAND = "#23b14d";
+
+interface FeedPost {
+  id: number;
+  author: string;
+  official?: boolean;
+  likes: number;
+  captionTh: string;
+  captionEn: string;
+  icon: LucideIcon;
+  /** Tailwind classes for the illustrative photo tile. */
+  tile: string;
+  /** Tile height as an aspect ratio, so the grid staggers like the app. */
+  aspect: string;
+  video?: boolean;
+}
+
+// Illustrative posts; photos are drawn as tinted tiles.
+const FEED: FeedPost[][] = [
+  [
+    {
+      id: 1,
+      author: "มะปราง",
+      likes: 4,
+      captionTh: "แมวส้มเฝ้าร้านกาแฟ",
+      captionEn: "The café's ginger guard",
+      icon: Cat,
+      tile: "bg-gradient-to-b from-[#3b3f4a] to-[#1e2129] text-[#f2c38f]",
+      aspect: "aspect-[3/4]",
+    },
+    {
+      id: 3,
+      author: "Ton.Dev",
+      likes: 3,
+      captionTh: "โต๊ะทำงานใหม่",
+      captionEn: "New desk setup",
+      icon: Laptop,
+      tile: "bg-gradient-to-b from-[#c9d6ea] to-[#8fa6c9] text-[#23324d]",
+      aspect: "aspect-[4/5]",
+    },
+  ],
+  [
+    {
+      id: 2,
+      author: "Pinto",
+      official: true,
+      likes: 7,
+      captionTh: "Flutter Workshop เสาร์นี้",
+      captionEn: "Flutter workshop this Saturday",
+      icon: Coffee,
+      tile: "bg-gradient-to-b from-[#dfe7f5] to-[#b9c9e6] text-[#3b4f7a]",
+      aspect: "aspect-[4/5]",
+      video: true,
+    },
+    {
+      id: 4,
+      author: "ข้าวหอม",
+      likes: 12,
+      captionTh: "ทริปดอยสุเทพตอนเช้า",
+      captionEn: "Sunrise at Doi Suthep",
+      icon: Mountain,
+      tile: "bg-gradient-to-b from-[#ffd9a8] to-[#e98d5a] text-[#5a2a10]",
+      aspect: "aspect-[3/4]",
+    },
+  ],
+];
 
 export const PintoScreen: React.FC<PintoScreenProps> = ({
   activeState: controlledState,
@@ -48,75 +132,51 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
       setInternalState(state);
     }
 
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "pinto-app",
-          source: "PintoScreen",
-          type: "bloc_event",
-          tag: "NAVIGATION",
-          name: `SwitchScreenEvent(${state.toUpperCase()})`,
-          stateName: `${state.charAt(0).toUpperCase() + state.slice(1)}ActiveState`,
-          details: `Navigation state emitted to Flutter Navigator`,
-          latencyMs: 1.1,
-        }),
-      );
-    }
+    onDispatchEvent?.(
+      createStreamEvent({
+        projectId: "pinto-app",
+        source: "PintoScreen",
+        type: "bloc_event",
+        tag: "NAVIGATION",
+        name: `SwitchScreenEvent(${state.toUpperCase()})`,
+        stateName: `${state.charAt(0).toUpperCase() + state.slice(1)}ActiveState`,
+        details: `Navigation state emitted to Flutter Navigator`,
+        latencyMs: 1.1,
+      }),
+    );
   };
 
-  // State 3: Profile API sync
   const [isProfileRefreshing, flashProfileRefreshing] = useTransientFlag(700);
-
-  // State 2: Streak State
-  const [streakCount, setStreakCount] = useState(7);
+  const [streakCount, setStreakCount] = useState(6);
   const [isStreaked, setIsStreaked] = useState(false);
+  const [liked, setLiked] = useState<number[]>([]);
+  const points = 1450 + (isStreaked ? 50 : 0);
 
-  // State 3: WebView State
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Bento Salmon Teriyaki", price: 189, qty: 1 },
-    { id: 2, name: "Cold Brew Arabica", price: 85, qty: 1 },
-  ]);
-  const [isSyncing, flashSyncing] = useTransientFlag(700);
-
-  const cartTotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0,
-  );
-  const cartCount = cartItems.reduce((acc, item) => acc + item.qty, 0);
-
-  const updateQty = (id: number, delta: number) => {
-    const updated = cartItems
-      .map((item) =>
-        item.id === id ? { ...item, qty: Math.max(0, item.qty + delta) } : item,
-      )
-      .filter((item) => item.qty > 0);
-
-    setCartItems(updated);
-
-    const newTotal = updated.reduce(
-      (acc, item) => acc + item.price * item.qty,
-      0,
+  // Likes happen in the web feed; the bridge keeps native state in step.
+  const toggleLike = (post: FeedPost) => {
+    const isLiked = liked.includes(post.id);
+    setLiked((prev) =>
+      isLiked ? prev.filter((x) => x !== post.id) : [...prev, post.id],
     );
 
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "pinto-app",
-          source: "PintoScreen",
-          type: "bridge_call",
-          tag: "JS_BRIDGE",
-          name: "JavascriptChannel::postMessage",
-          stateName: "CartSyncedState",
-          details: `Payload: { action: 'UPDATE_QTY', id: ${id}, delta: ${delta} } ➔ Synced Total: ฿${newTotal}`,
-          payload: {
-            bridgeName: "FlutterNativeBridge",
-            cartTotal: newTotal,
-            itemCount: updated.reduce((acc, it) => acc + it.qty, 0),
-          },
-          latencyMs: 0.4,
-        }),
-      );
-    }
+    onDispatchEvent?.(
+      createStreamEvent({
+        projectId: "pinto-app",
+        source: "PintoScreen",
+        type: "bridge_call",
+        tag: "JS_BRIDGE",
+        name: "JavascriptChannel::postMessage",
+        stateName: "FeedSyncedState",
+        details: `Payload: { action: '${isLiked ? "UNLIKE" : "LIKE"}', postId: ${post.id} } ➔ native state updated`,
+        payload: {
+          bridgeName: "FlutterNativeBridge",
+          postId: post.id,
+          liked: !isLiked,
+          likeCount: post.likes + (isLiked ? 0 : 1),
+        },
+        latencyMs: 0.4,
+      }),
+    );
   };
 
   const triggerStreakClaim = (e?: React.MouseEvent) => {
@@ -132,517 +192,519 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
       particleCount: 36,
       spread: 60,
       origin: { x, y },
-      colors: ["#f59e0b", "#00f0ff", "#38bdf8", "#10b981"],
+      colors: [BRAND, "#ffc84a", "#bfeccf", "#2e9d5b"],
       disableForReducedMotion: true,
       zIndex: 2000,
       scalar: 0.85,
     });
 
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "pinto-app",
-          source: "PintoScreen",
-          type: "bloc_event",
-          tag: "BLoC::Event",
-          name: "ClaimDailyStreakEvent",
-          stateName: "StreakClaimedState",
-          details: `Day ${newCount} active (+50 PTS) ➔ State: StreakClaimedState(VoucherUnlocked: true)`,
-          payload: {
-            streakDays: newCount,
-            pointsEarned: 50,
-            profileTier: "Gold (1,500 PTS)",
-            unlockedVoucher: "฿50 Logistics Discount",
-          },
-          latencyMs: 0.9,
-        }),
-      );
-    }
+    onDispatchEvent?.(
+      createStreamEvent({
+        projectId: "pinto-app",
+        source: "PintoScreen",
+        type: "bloc_event",
+        tag: "BLoC::Event",
+        name: "ClaimDailyStreakEvent",
+        stateName: "StreakClaimedState",
+        details: `Day ${newCount} active (+50 PTS) ➔ State: StreakClaimedState(VoucherUnlocked: true)`,
+        payload: {
+          streakDays: newCount,
+          pointsEarned: 50,
+          profileTier: "Gold (1,500 PTS)",
+          unlockedVoucher: "฿50 Logistics Discount",
+        },
+        latencyMs: 0.9,
+      }),
+    );
   };
 
   const handleProfileRefresh = () => {
     flashProfileRefreshing();
-
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "pinto-app",
-          source: "PintoScreen",
-          type: "bloc_event",
-          tag: "PROFILE_API",
-          name: "RefreshProfileEvent",
-          stateName: "ProfileSyncedState",
-          details: `GET /profile ➔ points & tier refreshed for streak rewards`,
-        }),
-      );
-    }
+    onDispatchEvent?.(
+      createStreamEvent({
+        projectId: "pinto-app",
+        source: "PintoScreen",
+        type: "bloc_event",
+        tag: "PROFILE_API",
+        name: "RefreshProfileEvent",
+        stateName: "ProfileSyncedState",
+        details: `GET /profile ➔ points & tier refreshed for streak rewards`,
+      }),
+    );
   };
 
-  const handleRefreshSync = () => {
-    flashSyncing();
+  const iconButton =
+    "grid h-9 w-9 place-items-center rounded-full text-[#404943] cursor-pointer hover:bg-black/5";
 
-    if (onDispatchEvent) {
-      onDispatchEvent(
-        createStreamEvent({
-          projectId: "pinto-app",
-          source: "PintoScreen",
-          type: "bridge_call",
-          tag: "BRIDGE_SYNC",
-          name: "WebView::ReloadAndResync",
-          stateName: "CatalogResyncedState",
-          details: `Synchronized HTML5 merchant catalog with Flutter Native Cart State`,
-          latencyMs: 0.6,
-        }),
-      );
-    }
-  };
+  const chips: { label: string; icon?: LucideIcon; cls: string }[] = [
+    { label: "All", cls: "border-[#9aa19c] text-[#404943] bg-white" },
+    {
+      label: "Travel",
+      icon: Plane,
+      cls: "border-[#9fe0d6] bg-[#e3f7f3] text-[#1b9a87]",
+    },
+    {
+      label: "Fashion & Style",
+      icon: Shirt,
+      cls: "border-[#f7b7cc] bg-[#fde6ee] text-[#d4457a]",
+    },
+    {
+      label: "Food",
+      icon: Soup,
+      cls: "border-[#f8d39a] bg-[#fff2dc] text-[#b86e00]",
+    },
+  ];
 
   return (
-    <div className="flex flex-col h-full min-h-[520px] bg-[#07090e] text-zinc-100 select-none">
-      {/* 1. Status Bar */}
-      <div className="px-5 pt-3 pb-1.5 flex items-center justify-between text-[11px] font-mono text-zinc-400 border-b border-white/[0.04] bg-[#090c13]">
-        <span className="font-semibold text-zinc-200">09:41</span>
-        <div className="w-16 h-3.5 bg-black rounded-full border border-white/[0.08] flex items-center justify-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-          <span className="w-1 h-1 rounded-full bg-[#00f0ff]" />
-        </div>
-        <div className="flex items-center gap-1.5 text-zinc-400">
-          <Wifi className="w-3 h-3 text-zinc-300" />
-          <Battery className="w-3.5 h-3.5 text-zinc-300" />
-        </div>
-      </div>
+    <div className="absolute inset-0 flex flex-col bg-[#f2f4f3] text-[#191d1a] font-sans select-none">
+      {/* App bar */}
+      <header className={`${SAFE_TOP} bg-white`}>
+        {currentState === "webview" ? (
+          <>
+            <div className="flex h-12 items-center gap-1 pl-4 pr-1.5">
+              <p
+                className="flex-1 text-[22px] font-black italic tracking-tight"
+                style={{ color: BRAND }}
+              >
+                PINTO
+              </p>
+              <span className={iconButton} aria-hidden="true">
+                <ScanLine className="h-[19px] w-[19px]" />
+              </span>
+              <span className={iconButton} aria-hidden="true">
+                <Sparkles
+                  className="h-[19px] w-[19px]"
+                  style={{ color: BRAND }}
+                />
+              </span>
+              <span className={iconButton} aria-hidden="true">
+                <Search className="h-[19px] w-[19px]" />
+              </span>
+            </div>
 
-      {/* 2. Production Flutter App Bar */}
-      <div className="px-3.5 py-2 flex items-center justify-between border-b border-white/[0.06] bg-[#0a0e16]/95 backdrop-blur-md">
-        <div>
-          <span className="text-[8px] font-mono tracking-widest text-zinc-400 uppercase block">
-            FAKDUAY LOGISTICS &bull; PROD
-          </span>
-          <p className="text-xs font-bold text-white flex items-center gap-1.5">
-            <span>Pinto Mobile</span>
-            <span className="text-[8px] px-1.5 py-0.2 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-mono border border-[#00f0ff]/20">
-              BLoC V8
-            </span>
-          </p>
-        </div>
+            {/* Following / For-you tabs */}
+            <div className="grid grid-cols-2 border-b border-[#e6e9e7] text-[13px]">
+              <span className="grid h-9 place-items-center text-[#8a918c]">
+                <UserCheck className="h-[18px] w-[18px]" aria-hidden="true" />
+              </span>
+              <span
+                className="relative flex h-9 items-center justify-center gap-1 font-semibold"
+                style={{ color: BRAND }}
+              >
+                {t("น่าสนใจ", "For you")}
+                <Star className="h-3.5 w-3.5" aria-hidden="true" />
+                <span
+                  className="absolute inset-x-3 bottom-0 h-[2px] rounded-full"
+                  style={{ backgroundColor: BRAND }}
+                />
+              </span>
+            </div>
 
-        {/* Backend status */}
-        <div className="flex items-center gap-1.5 text-[9px] font-mono bg-black/40 px-2 py-1 rounded-md border border-white/[0.06]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          <span className="text-zinc-300">Profile API</span>
-        </div>
-      </div>
+            {/* Category chips */}
+            <div className="flex items-center gap-1.5 px-3 py-2">
+              <div className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto scrollbar-none">
+                {chips.map(({ label, icon: Icon, cls }) => (
+                  <span
+                    key={label}
+                    className={`flex shrink-0 items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-medium ${cls}`}
+                  >
+                    {Icon && <Icon className="h-3 w-3" aria-hidden="true" />}
+                    {label}
+                  </span>
+                ))}
+              </div>
+              <span className="flex shrink-0 items-center gap-1 border-l border-[#e6e9e7] pl-2 text-[11px] text-[#5c6660]">
+                {t("กำลังมาแรง", "Trending")}
+                <ListFilter className="h-3 w-3" aria-hidden="true" />
+              </span>
+            </div>
+          </>
+        ) : (
+          <div className="flex h-12 items-center gap-2 border-b border-[#e6e9e7] pl-4 pr-1.5">
+            <p className="min-w-0 flex-1 truncate text-[16px] font-semibold">
+              {currentState === "streak"
+                ? t("แชท", "Chats")
+                : t("โปรไฟล์", "Profile")}
+            </p>
+            {currentState === "profile" && (
+              <button
+                type="button"
+                onClick={handleProfileRefresh}
+                aria-label={t("รีเฟรชโปรไฟล์", "Refresh profile")}
+                className={iconButton}
+              >
+                <RotateCw
+                  className={`h-[18px] w-[18px] ${isProfileRefreshing ? "animate-spin" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+            )}
+          </div>
+        )}
+      </header>
 
-      {/* 3. Screen Body with Smooth Animated Transition */}
-      <div className="flex-1 p-3 flex flex-col justify-between overflow-hidden">
-        {/* Preset Bar */}
-        <div className="mb-2 flex items-center gap-1.5 p-1 rounded-lg bg-black/40 border border-white/[0.06] text-[9px] font-mono overflow-x-auto scrollbar-none">
-          <span className="text-zinc-500 uppercase px-1 shrink-0">
-            SCENARIOS:
-          </span>
-          <button
-            type="button"
-            onClick={() => {
-              handleStateSelect("streak");
-              triggerStreakClaim();
-            }}
-            className="px-2 py-0.5 rounded bg-amber-950/40 hover:bg-amber-900/60 text-amber-300 border border-amber-500/30 transition-colors shrink-0 cursor-pointer"
-          >
-            🔥 Streak Check-in
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              handleStateSelect("webview");
-              handleRefreshSync();
-            }}
-            className="px-2 py-0.5 rounded bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 transition-colors shrink-0 cursor-pointer"
-          >
-            🌐 Sync Bridge
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              handleStateSelect("profile");
-              handleProfileRefresh();
-            }}
-            className="px-2 py-0.5 rounded bg-sky-950/40 hover:bg-sky-900/60 text-sky-300 border border-sky-500/30 transition-colors shrink-0 cursor-pointer"
-          >
-            👤 Refresh Profile
-          </button>
-        </div>
+      <div
+        data-lenis-prevent
+        className="relative flex-1 overflow-y-auto scrollbar-none"
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          {currentState === "webview" && (
+            <m.div
+              key="webview"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              className="grid grid-cols-2 items-start gap-1.5 p-1.5"
+            >
+              {/* Staggered two-column feed (web content inside the WebView) */}
+              {FEED.map((column, ci) => (
+                <div key={ci} className="space-y-1.5">
+                  {column.map((post) => {
+                    const isLiked = liked.includes(post.id);
+                    const Icon = post.icon;
+                    return (
+                      <article
+                        key={post.id}
+                        className="overflow-hidden rounded-lg bg-white"
+                      >
+                        <header className="flex items-center gap-1.5 px-2 py-1.5">
+                          <span
+                            className="relative grid h-5 w-5 shrink-0 place-items-center rounded-full text-[9px] font-semibold text-white"
+                            style={{
+                              backgroundColor: post.official
+                                ? BRAND
+                                : "#8a9a90",
+                            }}
+                          >
+                            {post.author.charAt(0)}
+                            {post.official && (
+                              <Check
+                                className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-white p-px"
+                                style={{ color: BRAND }}
+                                aria-hidden="true"
+                              />
+                            )}
+                          </span>
+                          <span className="min-w-0 flex-1 truncate text-[11px]">
+                            {post.author}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => toggleLike(post)}
+                            aria-pressed={isLiked}
+                            aria-label={`${t("ถูกใจ", "Like")} ${post.author}`}
+                            className="flex cursor-pointer items-center gap-0.5 text-[10px] text-[#8a918c]"
+                          >
+                            <Heart
+                              className={`h-3.5 w-3.5 ${isLiked ? "text-[#e0245e]" : "text-[#5c6660]"}`}
+                              fill={isLiked ? "#e0245e" : "none"}
+                              aria-hidden="true"
+                            />
+                            <span className="tabular-nums">
+                              {post.likes + (isLiked ? 1 : 0)}
+                            </span>
+                          </button>
+                        </header>
+                        <div
+                          className={`relative grid ${post.aspect} place-items-center ${post.tile}`}
+                        >
+                          <Icon
+                            className="h-9 w-9 opacity-80"
+                            aria-hidden="true"
+                          />
+                          {post.video && (
+                            <span className="absolute right-1.5 top-1.5 grid h-5 w-5 place-items-center rounded bg-black/45 text-white">
+                              <Play
+                                className="h-2.5 w-2.5"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          )}
+                        </div>
+                        <p className="truncate px-2 py-1.5 text-[11px]">
+                          {t(post.captionTh, post.captionEn)}
+                        </p>
+                      </article>
+                    );
+                  })}
+                  {ci === 0 && (
+                    <div className="grid aspect-square place-items-center rounded-lg bg-[#e3f7f3] text-[#1b9a87]">
+                      <Palmtree
+                        className="h-8 w-8 opacity-70"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </m.div>
+          )}
 
-        <AnimatePresence mode="wait">
-          {/* TAB 2: GAMIFIED CHAT STREAKS */}
           {currentState === "streak" && (
             <m.div
-              key="state-streak"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2.5 flex-1 flex flex-col justify-between"
+              key="streak"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              className="space-y-3 p-3"
             >
-              <div className="rounded-xl bg-gradient-to-br from-amber-950/30 via-[#10141e] to-[#0c1017] border border-amber-500/25 p-3 shadow-sm">
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="p-1 rounded-md bg-amber-500/20 text-amber-400">
-                      <FlameStreakIcon size={16} color="#f59e0b" animated />
-                    </span>
-                    <div>
-                      <span className="text-[9px] font-mono text-amber-300/80 uppercase block tracking-wider">
-                        {t("สถิติแชทต่อเนื่อง BLoC", "Streak Engine")}
-                      </span>
-                      <p className="text-xs font-bold text-white">
-                        {t("Chat Streaks สะสมแต้ม", "Daily Chat Streaks")}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-sm font-bold font-mono text-amber-400">
-                      {streakCount}{" "}
-                      <span className="text-[9px] font-normal text-zinc-400">
-                        {t("วัน", "Days")}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-
-                <p className="text-[10px] text-zinc-300 mb-2 leading-relaxed">
-                  {t(
-                    "แชทสั่งสินค้าต่อเนื่องเพื่อปลดล็อก Voucher และเพิ่มอันดับโปรไฟล์",
-                    "Keep messaging daily to preserve streak and unlock exclusive VIP vouchers.",
-                  )}
+              <div className="rounded-3xl bg-gradient-to-b from-[#e9f7ee] to-white p-4 text-center shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+                <span
+                  className="mx-auto grid h-14 w-14 place-items-center rounded-full"
+                  style={{ backgroundColor: "#c8efd6" }}
+                >
+                  <Flame
+                    className="h-8 w-8"
+                    style={{ color: BRAND }}
+                    fill={BRAND}
+                    aria-hidden="true"
+                  />
+                </span>
+                <p className="mt-2 text-[28px] font-bold leading-none tabular-nums">
+                  {streakCount}
+                </p>
+                <p className="mt-1 text-[13px] text-[#5c6660]">
+                  {t("วันที่แชทติดต่อกัน", "days chatting in a row")}
                 </p>
 
-                <m.button
-                  type="button"
-                  whileTap={{ scale: 0.96 }}
-                  onClick={triggerStreakClaim}
-                  aria-label="Claim daily streak"
-                  className={`w-full py-1.5 rounded-lg text-[11px] font-mono font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
-                    isStreaked
-                      ? "bg-zinc-800 text-[#00f0ff] border border-[#00f0ff]/30"
-                      : "bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-zinc-950 shadow-amber-950/40"
-                  }`}
-                >
-                  <Sparkles className="w-3 h-3" />
-                  {isStreaked
-                    ? t(
-                        `เช็คอินสำเร็จ (${streakCount} วัน)`,
-                        `Claimed! ${streakCount} Days Active`,
-                      )
-                    : t(
-                        "กดรับแต้มวันนี้ (+50 PTS)",
-                        "Claim Daily Streak (+50 Pts)",
-                      )}
-                </m.button>
-              </div>
-
-              {/* 7-Day Timeline */}
-              <div className="p-2.5 rounded-xl bg-zinc-900/60 border border-white/[0.06]">
-                <span className="text-[8px] font-mono text-zinc-400 uppercase tracking-wider block mb-1.5">
-                  {t("บันทึก 7 วันล่าสุด", "7-Day Streak Timeline")}
-                </span>
-                <div className="grid grid-cols-7 gap-1 text-center font-mono">
-                  {["M", "T", "W", "T", "F", "S", "S"].map((day, dIdx) => {
-                    const isPassed = dIdx < 6;
-                    const isToday = dIdx === 6;
+                <div className="mt-4 grid grid-cols-7 gap-1">
+                  {weekdayLabels(t).map((day, i) => {
+                    const done = i < 6 || isStreaked;
                     return (
-                      <div
-                        key={dIdx}
-                        className={`py-1 px-0.5 rounded-md border min-w-0 flex flex-col items-center gap-0.5 ${
-                          isToday
-                            ? "bg-amber-500/20 border-amber-500/40 text-amber-300 font-bold"
-                            : isPassed
-                              ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-400"
-                              : "bg-zinc-900 border-zinc-800 text-zinc-600"
-                        }`}
-                      >
-                        <span className="text-[8px]">{day}</span>
-                        {isPassed ? (
-                          <CheckCircle2 className="w-2.5 h-2.5 text-emerald-400" />
-                        ) : isToday ? (
-                          <FlameStreakIcon size={10} color="#f59e0b" />
-                        ) : (
-                          <span className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
-                        )}
+                      <div key={i} className="flex flex-col items-center gap-1">
+                        <span
+                          className={`grid h-7 w-7 place-items-center rounded-full ${
+                            done
+                              ? "text-white"
+                              : "border border-dashed border-[#9fd3b2]"
+                          }`}
+                          style={done ? { backgroundColor: BRAND } : undefined}
+                        >
+                          {done && (
+                            <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                          )}
+                        </span>
+                        <span className="text-[10px] text-[#5c6660]">
+                          {day}
+                        </span>
                       </div>
                     );
                   })}
                 </div>
-              </div>
 
-              {/* Unlocked Reward Voucher */}
-              <div className="p-2 rounded-lg bg-zinc-900/60 border border-white/[0.06] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="p-1.5 rounded bg-amber-500/10 text-amber-400">
-                    <Gift className="w-3 h-3" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-semibold text-zinc-200">
-                      {t("ส่วนลดจัดส่ง ฿50", "฿50 Logistics Discount")}
-                    </p>
-                    <p className="text-[8px] font-mono text-zinc-400">
-                      Streak reward &bull; Valid 5 days
-                    </p>
-                  </div>
-                </div>
-                <span className="px-2 py-0.5 rounded text-[8px] font-mono bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/30 font-bold">
-                  APPLY
-                </span>
-              </div>
-            </m.div>
-          )}
-
-          {/* TAB 3: HYBRID WEBVIEW */}
-          {currentState === "webview" && (
-            <m.div
-              key="state-webview"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2.5 flex-1 flex flex-col justify-between"
-            >
-              <div className="p-2 rounded-lg bg-zinc-900 border border-white/[0.08] flex items-center justify-between text-[9px] font-mono">
-                <div className="flex items-center gap-1.5 text-zinc-400 truncate">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <span className="text-zinc-300 font-medium truncate">
-                    bridge://merchant.fakduay.com/catalog
-                  </span>
-                </div>
-                <button
+                <m.button
                   type="button"
-                  onClick={handleRefreshSync}
-                  aria-label="Resync WebView Bridge"
-                  className="p-1 hover:text-white text-zinc-400 transition-colors cursor-pointer"
-                  title="Resync Bridge"
+                  whileTap={{ scale: 0.98 }}
+                  onClick={triggerStreakClaim}
+                  disabled={isStreaked}
+                  className={`mt-4 h-11 w-full rounded-full text-[14px] font-semibold transition-colors ${
+                    isStreaked
+                      ? "cursor-default bg-[#e5efe8] text-[#5c6660]"
+                      : "cursor-pointer text-white"
+                  }`}
+                  style={isStreaked ? undefined : { backgroundColor: BRAND }}
                 >
-                  <RefreshCw
-                    className={`w-2.5 h-2.5 ${isSyncing ? "animate-spin text-[#00f0ff]" : ""}`}
+                  {isStreaked
+                    ? t("เช็คอินวันนี้แล้ว", "Checked in today")
+                    : t("เช็คอินรับ 50 แต้ม", "Check in for 50 pts")}
+                </m.button>
+              </div>
+
+              {/* Reward voucher */}
+              <div className="flex items-center gap-3 rounded-2xl border border-dashed border-[#a8dcbb] bg-white p-3">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#e9f7ee]">
+                  <Ticket
+                    className="h-5 w-5"
+                    style={{ color: BRAND }}
+                    aria-hidden="true"
                   />
-                </button>
-              </div>
-
-              <div className="px-2.5 py-1.5 rounded-md bg-[#00f0ff]/10 border border-[#00f0ff]/25 flex items-center justify-between text-[9px] font-mono">
-                <span className="text-[#00f0ff] flex items-center gap-1.5">
-                  <CodeBridgeIcon size={12} color="#00f0ff" />
-                  JS &lt;-&gt; Flutter Bridge: Active
                 </span>
-                <span className="text-emerald-400 font-bold">Synced</span>
-              </div>
-
-              {/* Dynamic Items */}
-              <div className="space-y-1.5">
-                <span className="text-[8px] font-mono text-zinc-400 uppercase tracking-wider block">
-                  {t("เมนูร้านค้าแบบไดนามิก (HTML5 Web)", "HTML5 Dynamic Menu")}
+                <div className="min-w-0 flex-1">
+                  <p className="text-[13px] font-semibold">
+                    {t("ส่วนลดค่าส่ง ฿50", "฿50 off delivery")}
+                  </p>
+                  <p className="text-[11px] text-[#5c6660]">
+                    {t(
+                      "รางวัลสตรีค · ใช้ได้ 5 วัน",
+                      "Streak reward · 5 days left",
+                    )}
+                  </p>
+                </div>
+                <span
+                  className="text-[12px] font-semibold"
+                  style={{ color: "#17703e" }}
+                >
+                  {t("ใช้เลย", "Use")}
                 </span>
-
-                {cartItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="p-2 rounded-lg bg-zinc-900/70 border border-white/[0.06] flex items-center justify-between"
-                  >
-                    <div>
-                      <p className="text-[10px] font-semibold text-zinc-200">
-                        {item.name}
-                      </p>
-                      <p className="text-[8px] font-mono text-zinc-400">
-                        ฿{item.price} &bull; Synced with Native Cart
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5 font-mono text-xs">
-                      <button
-                        type="button"
-                        onClick={() => updateQty(item.id, -1)}
-                        aria-label={`Decrease quantity of ${item.name}`}
-                        className="p-0.5 rounded bg-zinc-800 text-zinc-300 hover:bg-zinc-700 cursor-pointer"
-                      >
-                        <Minus className="w-2.5 h-2.5" />
-                      </button>
-                      <span className="text-[9px] text-white bg-black/60 px-1.5 py-0.5 rounded font-bold min-w-[18px] text-center">
-                        {item.qty}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => updateQty(item.id, 1)}
-                        aria-label={`Increase quantity of ${item.name}`}
-                        className="p-0.5 rounded bg-[#00f0ff]/20 text-[#00f0ff] hover:bg-[#00f0ff]/30 cursor-pointer"
-                      >
-                        <Plus className="w-2.5 h-2.5" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Native Checkout Bar */}
-              <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-white/[0.08] flex items-center justify-between mt-auto">
-                <div className="flex items-center gap-2">
-                  <div className="relative p-1.5 rounded-md bg-[#00f0ff]/15 text-[#00f0ff]">
-                    <ShoppingBagIcon size={14} color="#00f0ff" />
-                    <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#00f0ff] text-[8px] font-bold text-black flex items-center justify-center font-mono">
-                      {cartCount}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-[8px] font-mono text-zinc-400 block uppercase">
-                      Bridge Subtotal
-                    </span>
-                    <span className="text-xs font-bold font-mono text-white">
-                      ฿{cartTotal}.00
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-1 text-[8px] font-mono font-bold text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-1 rounded border border-[#00f0ff]/30">
-                  <span>SYNC STATE</span>
-                  <ExternalLink className="w-2.5 h-2.5" />
-                </div>
               </div>
             </m.div>
           )}
-          {/* TAB 3: PROFILE API SYNC */}
+
           {currentState === "profile" && (
             <m.div
-              key="state-profile"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2.5 flex-1 flex flex-col"
+              key="profile"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              className="space-y-3 p-3"
             >
-              <div className="p-3 rounded-xl bg-[#0c1017] border border-white/[0.08]">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-[10px] font-bold text-[#00f0ff] font-mono">
-                      TS
-                    </div>
-                    <div>
-                      <span className="text-[8px] font-mono text-zinc-400 uppercase block">
-                        Profile API &bull; Gold
-                      </span>
-                      <span className="text-sm font-bold font-mono text-white">
-                        {1450 + (isStreaked ? 50 : 0)}{" "}
-                        <span className="text-[9px] text-[#00f0ff]">PTS</span>
-                      </span>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleProfileRefresh}
-                    aria-label="Refresh profile from Profile API"
-                    className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] cursor-pointer"
+              <div className="rounded-3xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="grid h-12 w-12 place-items-center rounded-full text-[15px] font-semibold text-white"
+                    style={{ backgroundColor: BRAND }}
                   >
-                    <RefreshCw
-                      className={`w-3 h-3 ${isProfileRefreshing ? "animate-spin text-[#00f0ff]" : ""}`}
-                    />
-                  </button>
-                </div>
-                <div className="mt-2.5">
-                  <div className="flex items-center justify-between text-[8px] font-mono text-zinc-400">
-                    <span>Gold</span>
-                    <span className="text-amber-400/90">
-                      {500 - (isStreaked ? 50 : 0)} pts to Platinum
+                    P
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[15px] font-semibold">
+                      {t("สมาชิก Pinto", "Pinto member")}
+                    </p>
+                    <span className="mt-0.5 inline-block rounded-full bg-[#fff1cc] px-2 py-0.5 text-[11px] font-semibold text-[#7a5600]">
+                      Gold
                     </span>
                   </div>
-                  <div className="w-full h-1 bg-zinc-800 rounded-full mt-1 overflow-hidden">
-                    <div
-                      className="h-full w-full origin-left bg-[#00f0ff] rounded-full transition-transform duration-500"
-                      style={{
-                        transform: `scaleX(${isStreaked ? 0.78 : 0.74})`,
-                      }}
-                    />
+                </div>
+
+                <div className="mt-4 flex items-end justify-between">
+                  <div>
+                    <p className="text-[11px] text-[#5c6660]">
+                      {t("แต้มสะสม", "Points")}
+                    </p>
+                    <p className="text-[24px] font-bold leading-tight tabular-nums">
+                      {points.toLocaleString()}
+                    </p>
                   </div>
+                  <p className="text-[11px] text-[#5c6660] tabular-nums">
+                    {t(
+                      `อีก ${2000 - points} แต้มถึง Platinum`,
+                      `${2000 - points} pts to Platinum`,
+                    )}
+                  </p>
+                </div>
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#e3efe7]">
+                  <div
+                    className="h-full w-full origin-left rounded-full transition-transform duration-500"
+                    style={{
+                      backgroundColor: BRAND,
+                      transform: `scaleX(${points / 2000})`,
+                    }}
+                  />
                 </div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-black/40 border border-white/[0.06] space-y-1.5 text-[9px] font-mono">
-                <span className="text-[8px] text-zinc-400 uppercase tracking-wider block">
-                  {t(
-                    "ลำดับการซิงค์ (ตัวอย่าง)",
-                    "Sync sequence (illustrative)",
-                  )}
-                </span>
-                <p className="text-zinc-300">
-                  <span className="text-[#00f0ff]">1</span> Native ➔ WebView:
-                  auth token via bridge
-                </p>
-                <p className="text-zinc-300">
-                  <span className="text-[#00f0ff]">2</span> GET /profile ➔
-                  points &amp; tier
-                </p>
-                <p className={isStreaked ? "text-zinc-300" : "text-zinc-500"}>
-                  <span className="text-[#00f0ff]">3</span> POST streak claim ➔
-                  profile updated
-                </p>
-              </div>
-
-              <p className="mt-auto text-[9px] text-zinc-400 leading-relaxed">
-                {t(
-                  "แต้มจาก Chat Streaks ถูกบันทึกผ่าน Profile API ทำให้ทั้งหน้า Native และ WebView เห็นยอดเดียวกัน",
-                  "Streak points are written through the Profile API, so native screens and WebView menus show the same balance.",
-                )}
-              </p>
+              <ul className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+                {[
+                  { icon: Coins, label: t("ประวัติแต้ม", "Points history") },
+                  { icon: Ticket, label: t("คูปองของฉัน", "My vouchers") },
+                  { icon: ShoppingBag, label: t("คำสั่งซื้อ", "Orders") },
+                  { icon: Settings, label: t("ตั้งค่า", "Settings") },
+                ].map(({ icon: Icon, label }) => (
+                  <li
+                    key={label}
+                    className="flex items-center gap-3 border-t border-[#eaf1ec] px-4 py-3 first:border-t-0"
+                  >
+                    <Icon
+                      className="h-[18px] w-[18px] text-[#5c6660]"
+                      aria-hidden="true"
+                    />
+                    <span className="flex-1 text-[13px]">{label}</span>
+                    <ChevronRight
+                      className="h-4 w-4 text-[#a3b0a8]"
+                      aria-hidden="true"
+                    />
+                  </li>
+                ))}
+              </ul>
             </m.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* 4. Realistic Flutter Bottom Navigation Bar */}
-      <div className="px-3 pt-2 pb-1.5 border-t border-white/[0.06] bg-[#090c13] flex flex-col items-center">
-        <div className="w-full grid grid-cols-3 text-center font-mono">
-          <button
-            type="button"
-            onClick={() => handleStateSelect("webview")}
-            className={`py-1 flex flex-col items-center gap-0.5 cursor-pointer transition-colors ${
-              currentState === "webview"
-                ? "text-[#00f0ff] font-bold"
-                : "text-zinc-400 hover:text-zinc-200"
-            }`}
+      {/* Bottom bar: home, clips, create, chats, profile */}
+      <nav
+        aria-label={t("เมนูแอป", "App navigation")}
+        className={`${SAFE_BOTTOM} grid grid-cols-5 items-center bg-white pt-1.5 shadow-[0_-1px_0_rgba(0,0,0,0.06)]`}
+      >
+        <NavIcon
+          icon={House}
+          label={t("หน้าแรก", "Home")}
+          active={currentState === "webview"}
+          onClick={() => handleStateSelect("webview")}
+        />
+        <NavIcon icon={Clapperboard} label={t("คลิป", "Clips")} />
+        <span className="grid place-items-center">
+          <span
+            className="grid h-11 w-11 place-items-center rounded-full text-white shadow-[0_4px_10px_-3px_rgba(35,177,77,0.6)]"
+            style={{ backgroundColor: BRAND }}
+            aria-hidden="true"
           >
-            <CodeBridgeIcon
-              size={14}
-              color={currentState === "webview" ? "#00f0ff" : "#71717a"}
-            />
-            <span className="text-[8px] tracking-wider uppercase">WEBVIEW</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => handleStateSelect("streak")}
-            className={`py-1 flex flex-col items-center gap-0.5 cursor-pointer transition-colors ${
-              currentState === "streak"
-                ? "text-amber-400 font-bold"
-                : "text-zinc-400 hover:text-zinc-200"
-            }`}
-          >
-            <FlameStreakIcon
-              size={14}
-              color={currentState === "streak" ? "#f59e0b" : "#71717a"}
-            />
-            <span className="text-[8px] tracking-wider uppercase">STREAKS</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleStateSelect("profile")}
-            className={`py-1 flex flex-col items-center gap-0.5 cursor-pointer transition-colors ${
-              currentState === "profile"
-                ? "text-[#00f0ff] font-bold"
-                : "text-zinc-400 hover:text-zinc-200"
-            }`}
-          >
-            <UserRound
-              className={`w-3.5 h-3.5 ${currentState === "profile" ? "text-[#00f0ff]" : "text-zinc-500"}`}
-            />
-            <span className="text-[8px] tracking-wider uppercase">PROFILE</span>
-          </button>
-        </div>
-        <div className="w-20 h-1 bg-white/20 rounded-full mt-1.5 mb-0.5" />
-      </div>
+            <Plus className="h-6 w-6" />
+          </span>
+        </span>
+        <NavIcon
+          icon={MessagesSquare}
+          label={t("แชท", "Chats")}
+          active={currentState === "streak"}
+          onClick={() => handleStateSelect("streak")}
+        />
+        <NavIcon
+          icon={UserRound}
+          label={t("โปรไฟล์", "Profile")}
+          active={currentState === "profile"}
+          onClick={() => handleStateSelect("profile")}
+        />
+      </nav>
     </div>
   );
 };
+
+const NavIcon: React.FC<{
+  icon: LucideIcon;
+  label: string;
+  active?: boolean;
+  onClick?: () => void;
+}> = ({ icon: Icon, label, active = false, onClick }) => {
+  const iconEl = (
+    <Icon
+      className="h-[22px] w-[22px]"
+      style={{ color: active ? BRAND : "#5c6660" }}
+      fill={active ? "rgba(35,177,77,0.15)" : "none"}
+      aria-hidden="true"
+    />
+  );
+  if (!onClick) {
+    return (
+      <span className="grid h-11 place-items-center" aria-hidden="true">
+        {iconEl}
+      </span>
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      aria-current={active ? "page" : undefined}
+      className="grid h-11 cursor-pointer place-items-center"
+    >
+      {iconEl}
+    </button>
+  );
+};
+
+const weekdayLabels = (t: (th: string, en: string) => string) => [
+  t("จ", "M"),
+  t("อ", "T"),
+  t("พ", "W"),
+  t("พฤ", "T"),
+  t("ศ", "F"),
+  t("ส", "S"),
+  t("อา", "S"),
+];
 
 export default PintoScreen;

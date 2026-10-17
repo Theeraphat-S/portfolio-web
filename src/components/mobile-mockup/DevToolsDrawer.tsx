@@ -89,14 +89,14 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
             role="dialog"
             aria-modal="true"
             aria-label="Flutter & BLoC DevTools Inspector"
-            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-3xl bg-[#090d16] border border-white/[0.12] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_30px_rgba(0,240,255,0.12)] overflow-hidden font-mono z-10 outline-none"
+            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-3xl bg-[#0a1020] border border-white/[0.12] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_30px_rgba(56,217,255,0.12)] overflow-hidden font-mono z-10 outline-none"
           >
             {/* Header Strip */}
-            <div className="px-5 py-4 border-b border-white/[0.08] flex items-center justify-between bg-[#0c121e]">
+            <div className="px-5 py-4 border-b border-line flex items-center justify-between bg-[#0c121e]">
               <div className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-signal shadow-[0_0_8px_var(--color-signal)]" />
                 <div>
-                  <span className="text-[10px] uppercase tracking-widest text-[#00f0ff] font-bold block">
+                  <span className="text-[10px] uppercase tracking-widest text-primary font-bold block">
                     FLUTTER DEVTOOLS & ARCHITECTURE
                   </span>
                   <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
@@ -120,14 +120,14 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
             </div>
 
             {/* Navigation Tabs */}
-            <div className="px-5 pt-3 pb-2 border-b border-white/[0.06] bg-[#080b12] flex items-center justify-between gap-4">
+            <div className="px-5 pt-3 pb-2 border-b border-line bg-[#080b12] flex items-center justify-between gap-4">
               <div className="flex items-center gap-1.5 text-xs">
                 <button
                   type="button"
                   onClick={() => setTabOverride("stream")}
                   className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "stream"
-                      ? "bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/30 font-bold"
+                      ? "bg-primary/15 text-primary border border-primary/30 font-bold"
                       : "text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
@@ -142,7 +142,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   onClick={() => setTabOverride("code")}
                   className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "code"
-                      ? "bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/30 font-bold"
+                      ? "bg-primary/15 text-primary border border-primary/30 font-bold"
                       : "text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
@@ -155,7 +155,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   onClick={() => setTabOverride("telemetry")}
                   className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "telemetry"
-                      ? "bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/30 font-bold"
+                      ? "bg-primary/15 text-primary border border-primary/30 font-bold"
                       : "text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
@@ -181,12 +181,12 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   type="button"
                   onClick={handleCopyCode}
                   aria-live="polite"
-                  className="px-2.5 py-1 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-white/[0.08] text-[10px] transition flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                  className="px-2.5 py-1 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-line text-[10px] transition flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
                 >
                   {isCopied ? (
                     <>
-                      <Check className="w-3 h-3 text-[#00f0ff]" />
-                      <span className="text-[#00f0ff]">COPIED</span>
+                      <Check className="w-3 h-3 text-primary" />
+                      <span className="text-primary">COPIED</span>
                     </>
                   ) : copyFailed ? (
                     <span className="text-rose-300">
@@ -210,13 +210,13 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
               {/* TAB 1: BLoC Event Stream */}
               {activeTab === "stream" && (
                 <div className="space-y-3">
-                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-[11px] text-zinc-400 flex items-center justify-between">
+                  <div className="p-3 rounded-xl bg-white/[0.02] border border-line text-[11px] text-zinc-400 flex items-center justify-between">
                     <span>
                       {lang === "th"
                         ? "บันทึก Real-time Event Stream จากการตอบสนองบนหน้าจอด้านนอก"
                         : "Real-time reactive event stream recorded directly from user interactions."}
                     </span>
-                    <span className="text-[#00f0ff] font-bold">
+                    <span className="text-primary font-bold">
                       Unidirectional BLoC
                     </span>
                   </div>
@@ -236,14 +236,14 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       {events.map((evt, idx) => (
                         <div
                           key={evt.id}
-                          className="p-3 rounded-xl bg-black/50 border border-white/[0.06] hover:border-white/[0.12] transition-colors space-y-1.5"
+                          className="p-3 rounded-xl bg-black/50 border border-line hover:border-white/[0.12] transition-colors space-y-1.5"
                         >
                           <div className="flex items-center justify-between text-[11px]">
                             <div className="flex items-center gap-2">
                               <span className="text-zinc-500 text-[10px]">
                                 #{String(events.length - idx).padStart(2, "0")}
                               </span>
-                              <span className="px-1.5 py-0.5 rounded bg-[#00f0ff]/10 text-[#00f0ff] font-bold border border-[#00f0ff]/20 text-[10px]">
+                              <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-bold border border-primary/20 text-[10px]">
                                 {evt.tag}
                               </span>
                               <span className="text-white font-bold">
@@ -278,19 +278,19 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
               {/* TAB 2: Dart Source Code */}
               {activeTab === "code" && snippet && (
                 <div className="space-y-3">
-                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-zinc-300 text-xs">
+                  <div className="p-3 rounded-xl bg-white/[0.02] border border-line text-zinc-300 text-xs">
                     <p className="font-sans font-light">
                       {lang === "th"
                         ? snippet.explanationTh
                         : snippet.explanationEn}
                     </p>
-                    <span className="text-[10px] text-[#00f0ff] block mt-1">
+                    <span className="text-[10px] text-primary block mt-1">
                       File: {snippet.filePath}
                     </span>
                   </div>
 
                   {/* Code Block with line numbering */}
-                  <div className="p-4 rounded-2xl bg-[#06080e] border border-white/[0.08] overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
+                  <div className="p-4 rounded-2xl bg-[#06080e] border border-line overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
                     <pre>
                       <code>{snippet.code}</code>
                     </pre>
@@ -302,7 +302,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
               {activeTab === "telemetry" && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                    <div className="p-4 rounded-xl bg-white/[0.02] border border-line space-y-1">
                       <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">
                         FRAME BUDGET
                       </span>
@@ -314,11 +314,11 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       </span>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                    <div className="p-4 rounded-xl bg-white/[0.02] border border-line space-y-1">
                       <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">
                         STATE DISCIPLINE
                       </span>
-                      <span className="text-xl font-bold text-[#00f0ff] block font-mono">
+                      <span className="text-xl font-bold text-primary block font-mono">
                         BLoC / Equatable
                       </span>
                       <span className="text-[10px] text-zinc-500 block">
@@ -326,7 +326,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       </span>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                    <div className="p-4 rounded-xl bg-white/[0.02] border border-line space-y-1">
                       <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">
                         DATA PERSISTENCE
                       </span>
@@ -339,9 +339,9 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#0a0f19] border border-white/[0.08] space-y-2 text-xs">
+                  <div className="p-4 rounded-xl bg-[#0d1424] border border-line space-y-2 text-xs">
                     <h4 className="text-white font-bold flex items-center gap-2">
-                      <Activity className="w-4 h-4 text-[#00f0ff]" />
+                      <Activity className="w-4 h-4 text-primary" />
                       <span>
                         {t(
                           "หลักการควบคุม Rebuild Boundary ใน Flutter",

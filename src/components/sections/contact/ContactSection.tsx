@@ -47,7 +47,7 @@ const inputClass = (invalid: boolean) =>
   `w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border ${
     invalid
       ? "border-rose-400/60 focus:border-rose-400 focus:ring-rose-400/30"
-      : "border-white/[0.08] focus:border-[#00f0ff]/60 focus:ring-[#00f0ff]/30"
+      : "border-line focus:border-signal/60 focus:ring-signal/30"
   } focus:ring-1 text-base sm:text-sm text-white placeholder-zinc-400 outline-none transition-colors font-mono`;
 
 export const ContactSection: React.FC = () => {
@@ -128,19 +128,16 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="py-16 sm:py-24 border-b border-white/[0.08]"
-    >
+    <section id="contact" className="py-16 sm:py-24 border-b border-line">
       {/* Section Eyebrow */}
       <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={FADE_UP}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
+        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-[#00f0ff]">
+        <span className="editorial-eyebrow text-primary">
           05 // {t("ติดต่อ", "CONTACT")}
         </span>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
@@ -177,7 +174,7 @@ export const ContactSection: React.FC = () => {
               <span className="block text-white">
                 {lang === "th" ? "ตำแหน่ง JUNIOR" : "A JUNIOR"}
               </span>{" "}
-              <span className="block text-[#00f0ff]">
+              <span className="block text-primary">
                 {lang === "th" ? "FLUTTER DEV." : "FLUTTER ROLE."}
               </span>
             </h2>
@@ -195,14 +192,14 @@ export const ContactSection: React.FC = () => {
           />
 
           {/* Prominent Primary Email CTA Card */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00f0ff]/30 transition space-y-3">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-line hover:border-signal/30 transition space-y-3">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-widest">
               <span>{t("อีเมล", "Email")}</span>
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
               <a
                 href={`mailto:${personal.email}`}
-                className="text-base sm:text-xl font-mono font-bold text-white hover:text-[#00f0ff] transition-colors break-all"
+                className="text-base sm:text-xl font-mono font-bold text-white hover:text-signal transition-colors break-all"
               >
                 {personal.email}
               </a>
@@ -222,16 +219,16 @@ export const ContactSection: React.FC = () => {
                         "Copy email address to clipboard",
                       )
                 }
-                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-primary/10 hover:bg-signal/20 text-primary border border-primary/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
               >
                 {copied ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-[#00f0ff]" />
+                    <Check className="w-3.5 h-3.5 text-primary" />
                     <span>{t("คัดลอกสำเร็จ!", "COPIED!")}</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5 text-[#00f0ff]" />
+                    <Copy className="w-3.5 h-3.5 text-primary" />
                     <span>{t("คัดลอกอีเมล", "COPY EMAIL")}</span>
                   </>
                 )}
@@ -241,22 +238,22 @@ export const ContactSection: React.FC = () => {
 
           {/* Secondary Coordinates in Clean Hairline Blocks */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-white/[0.06] space-y-1">
+            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
-                <Phone className="w-3 h-3 text-[#00f0ff]" />
+                <Phone className="w-3 h-3 text-primary" />
                 <span>{t("โทรศัพท์", "Phone")}</span>
               </div>
               <a
                 href={`tel:${personal.phone}`}
-                className="text-xs sm:text-sm font-mono font-bold text-zinc-200 hover:text-[#00f0ff] transition-colors block"
+                className="text-xs sm:text-sm font-mono font-bold text-zinc-200 hover:text-signal transition-colors block"
               >
                 {personal.phone}
               </a>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-white/[0.06] space-y-1">
+            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
-                <Github className="w-3 h-3 text-[#00f0ff]" />
+                <Github className="w-3 h-3 text-primary" />
                 <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>
               </div>
               <a
@@ -264,16 +261,16 @@ export const ContactSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-text="VISIT"
-                className="text-xs sm:text-sm font-mono font-bold text-zinc-200 hover:text-[#00f0ff] transition-colors flex items-center gap-1"
+                className="text-xs sm:text-sm font-mono font-bold text-zinc-200 hover:text-signal transition-colors flex items-center gap-1"
               >
                 <span>github.com/{personal.githubUsername}</span>
                 <ArrowUpRight className="w-3 h-3 text-zinc-400" />
               </a>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-white/[0.06] space-y-1 sm:col-span-2">
+            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1 sm:col-span-2">
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
-                <MapPin className="w-3 h-3 text-[#00f0ff]" />
+                <MapPin className="w-3 h-3 text-primary" />
                 <span>
                   {t("ที่ตั้งและรูปแบบงาน", "Location & availability")}
                 </span>
@@ -293,8 +290,8 @@ export const ContactSection: React.FC = () => {
           variants={FADE_UP}
           className="lg:col-span-6 xl:col-span-5"
         >
-          <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.015] border border-white/[0.08] backdrop-blur-sm space-y-5">
-            <div className="space-y-1 pb-3 border-b border-white/[0.06]">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.015] border border-line backdrop-blur-sm space-y-5">
+            <div className="space-y-1 pb-3 border-b border-line">
               <BilingualStack
                 as="h3"
                 className="text-lg sm:text-xl font-bold text-white tracking-tight"
@@ -432,9 +429,9 @@ export const ContactSection: React.FC = () => {
                 <div
                   role="status"
                   aria-live="polite"
-                  className="p-4 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-center space-y-2"
+                  className="p-4 rounded-xl bg-primary/10 border border-primary/30 text-center space-y-2"
                 >
-                  <span className="text-xs font-mono font-bold text-[#00f0ff] block">
+                  <span className="text-xs font-mono font-bold text-primary block">
                     {lang === "th"
                       ? "พร้อมเปิดร่างอีเมล"
                       : "Email draft requested"}
@@ -459,7 +456,7 @@ export const ContactSection: React.FC = () => {
                       onClick={() => {
                         setDraftOpened(false);
                       }}
-                      className="text-xs font-mono text-[#00f0ff] hover:underline cursor-pointer"
+                      className="text-xs font-mono text-primary hover:underline cursor-pointer"
                     >
                       {lang === "th" ? "แก้ไขข้อความ" : "Edit message"}
                     </button>
@@ -469,12 +466,12 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   data-cursor-text="DISPATCH"
-                  className="w-full py-3 px-6 rounded-full bg-[#00f0ff] hover:bg-[#38bdf8] text-[#07080c] font-mono text-xs font-bold tracking-wider uppercase transition duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_-4px_rgba(0,240,255,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(0,240,255,0.4)] hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00f0ff]"
+                  className="w-full py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_-4px_rgba(77,124,254,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(77,124,254,0.4)] hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal"
                 >
                   <span>
                     {lang === "th" ? "เปิดร่างในแอปอีเมล" : "Open email draft"}
                   </span>
-                  <Send className="w-3.5 h-3.5 text-[#07080c] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <Send className="w-3.5 h-3.5 text-void group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </button>
               )}
             </form>

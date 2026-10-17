@@ -193,8 +193,8 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
         className={`pointer-events-auto w-full max-w-5xl rounded-full transition-all duration-300 flex items-center justify-between ${
           scrolled
-            ? "bg-[#07080c]/85 backdrop-blur-xl border border-white/[0.08] shadow-[0_12px_32px_rgba(0,0,0,0.65)] py-1.5 px-3 sm:px-4"
-            : "bg-[#07080c]/60 backdrop-blur-md border border-white/[0.06] shadow-[0_6px_24px_rgba(0,0,0,0.25)] py-1.5 px-3 sm:px-4"
+            ? "bg-void/85 backdrop-blur-xl border border-line shadow-[0_12px_32px_rgba(0,0,0,0.65)] py-1.5 px-3 sm:px-4"
+            : "bg-void/60 backdrop-blur-md border border-line shadow-[0_6px_24px_rgba(0,0,0,0.25)] py-1.5 px-3 sm:px-4"
         }`}
       >
         {/* Left: Brand Lockup */}
@@ -206,7 +206,7 @@ export const Navbar: React.FC = () => {
           }}
           data-cursor-text="TOP"
           aria-label="Theeraphat Srimontha - Back to top"
-          className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] rounded-full pr-1 shrink-0"
+          className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-1 focus-visible:ring-signal rounded-full pr-1 shrink-0"
         >
           <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-white/15 shrink-0 bg-white/[0.04]">
             <img
@@ -217,7 +217,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div className="flex flex-col text-left">
             <div className="flex items-center gap-1.5 leading-none">
-              <span className="font-mono font-bold text-xs sm:text-[13px] text-white tracking-tight group-hover:text-[#00f0ff] transition-colors">
+              <span className="font-mono font-bold text-xs sm:text-[13px] text-white tracking-tight group-hover:text-signal transition-colors">
                 THEERAPHAT S.
               </span>
               <span
@@ -234,7 +234,7 @@ export const Navbar: React.FC = () => {
         {/* Center: Desktop Technical Navigation Menu */}
         <nav
           aria-label="Primary navigation"
-          className="hidden md:flex items-center gap-0.5 lg:gap-1 bg-white/[0.03] p-1 rounded-full border border-white/[0.06]"
+          className="hidden md:flex items-center gap-0.5 lg:gap-1 bg-white/[0.03] p-1 rounded-full border border-line"
         >
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
@@ -245,16 +245,16 @@ export const Navbar: React.FC = () => {
                 onClick={(e) => scrollToSection(link.id, e)}
                 data-cursor-text="GOTO"
                 aria-current={isActive ? "page" : undefined}
-                className={`relative px-2.5 lg:px-3 py-1 text-[11px] font-mono tracking-wider transition-colors duration-200 inline-flex items-center gap-1 group rounded-full focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff] ${
+                className={`relative px-2.5 lg:px-3 py-1 text-[11px] font-mono tracking-wider transition-colors duration-200 inline-flex items-center gap-1 group rounded-full focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
                   isActive
-                    ? "text-[#00f0ff] font-medium bg-white/[0.03]"
+                    ? "text-primary font-medium bg-white/[0.03]"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
                 {isActive && (
                   <m.div
                     layoutId="active-nav-indicator"
-                    className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-[#00f0ff]/90 rounded-full"
+                    className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-primary/90 rounded-full"
                     transition={{ type: "spring", stiffness: 450, damping: 35 }}
                   />
                 )}
@@ -262,7 +262,7 @@ export const Navbar: React.FC = () => {
                   <span
                     className={`font-mono transition-colors ${
                       isActive
-                        ? "text-[#00f0ff]/70"
+                        ? "text-primary/70"
                         : "text-zinc-500 group-hover:text-zinc-400"
                     }`}
                   >
@@ -284,13 +284,13 @@ export const Navbar: React.FC = () => {
             onClick={toggleLang}
             data-cursor-text="LANG"
             aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-white/20 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-white/20 rounded-full transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_6px_rgba(0,240,255,0.7)] shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_rgba(56,217,255,0.7)] shrink-0" />
             <span
               className={
                 lang === "th"
-                  ? "text-[#00f0ff] font-bold"
+                  ? "text-primary font-bold"
                   : "text-zinc-400 hover:text-zinc-200"
               }
             >
@@ -300,7 +300,7 @@ export const Navbar: React.FC = () => {
             <span
               className={
                 lang === "en"
-                  ? "text-[#00f0ff] font-bold"
+                  ? "text-primary font-bold"
                   : "text-zinc-400 hover:text-zinc-200"
               }
             >
@@ -315,9 +315,9 @@ export const Navbar: React.FC = () => {
             rel="noopener noreferrer"
             data-cursor-text="RESUME"
             aria-label="View Curriculum Vitae (PDF)"
-            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono text-zinc-300 hover:text-white bg-white/[0.03] hover:bg-[#00f0ff]/[0.08] border border-white/[0.08] hover:border-[#00f0ff]/40 rounded-full transition-all group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono text-zinc-300 hover:text-white bg-white/[0.03] hover:bg-signal/[0.08] border border-line hover:border-signal/40 rounded-full transition-all group focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
-            <ArrowDown className="w-3 h-3 text-[#00f0ff] group-hover:translate-y-0.5 transition-transform duration-200" />
+            <ArrowDown className="w-3 h-3 text-primary group-hover:translate-y-0.5 transition-transform duration-200" />
             <span className="tracking-wider">CV</span>
           </a>
 
@@ -328,11 +328,11 @@ export const Navbar: React.FC = () => {
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
-            className="md:hidden flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono font-medium text-zinc-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 rounded-full transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00f0ff]"
+            className="md:hidden flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono font-medium text-zinc-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 rounded-full transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <span>MENU</span>
             {mobileMenuOpen ? (
-              <X className="w-3.5 h-3.5 text-[#00f0ff]" />
+              <X className="w-3.5 h-3.5 text-primary" />
             ) : (
               <Menu className="w-3.5 h-3.5 text-zinc-400" />
             )}
@@ -351,7 +351,7 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto md:hidden w-full max-w-sm mt-2 rounded-2xl bg-[#07080c]/95 backdrop-blur-xl border border-white/10 p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.8)] space-y-3"
+            className="pointer-events-auto md:hidden w-full max-w-sm mt-2 rounded-2xl bg-void/95 backdrop-blur-xl border border-white/10 p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.8)] space-y-3"
           >
             {/* Nav list 01-05 */}
             <div className="flex flex-col space-y-0.5 text-xs font-mono tracking-wider">
@@ -364,20 +364,20 @@ export const Navbar: React.FC = () => {
                     onClick={(e) => scrollToSection(link.id, e)}
                     className={`py-2 px-3 rounded-lg transition-colors flex items-center justify-between ${
                       isActive
-                        ? "bg-white/[0.04] text-[#00f0ff] font-medium border-l-2 border-[#00f0ff]"
+                        ? "bg-white/[0.04] text-primary font-medium border-l-2 border-primary"
                         : "text-zinc-300 hover:bg-white/[0.03] hover:text-white"
                     }`}
                   >
                     <div className="flex items-center gap-2">
                       <span
-                        className={`font-mono text-[11px] ${isActive ? "text-[#00f0ff]/70" : "text-zinc-400"}`}
+                        className={`font-mono text-[11px] ${isActive ? "text-primary/70" : "text-zinc-400"}`}
                       >
                         {link.num} /
                       </span>
                       <span>{link.label}</span>
                     </div>
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                     )}
                   </a>
                 );
@@ -385,7 +385,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile Utility Footer (Language switch & CV) */}
-            <div className="pt-2.5 border-t border-white/[0.08] flex items-center justify-between">
+            <div className="pt-2.5 border-t border-line flex items-center justify-between">
               {/* Language Switch */}
               <button
                 type="button"
@@ -393,7 +393,7 @@ export const Navbar: React.FC = () => {
                 aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
                 className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-zinc-300 bg-white/[0.04] border border-white/10 rounded-full cursor-pointer hover:bg-white/[0.08]"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                 <span
                   className={
                     lang === "th" ? "text-white font-bold" : "text-zinc-400"
@@ -416,9 +416,9 @@ export const Navbar: React.FC = () => {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-[#00f0ff]/10 border border-white/10 hover:border-[#00f0ff]/30 rounded-full transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-signal/10 border border-white/10 hover:border-signal/30 rounded-full transition-colors"
               >
-                <ArrowDown className="w-3 h-3 text-[#00f0ff]" />
+                <ArrowDown className="w-3 h-3 text-primary" />
                 <span>CV (RESUME)</span>
               </a>
             </div>
