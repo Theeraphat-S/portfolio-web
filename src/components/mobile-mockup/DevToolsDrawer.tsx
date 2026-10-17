@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { EASE_OUT_EXPO } from "../../lib/motion";
 import {
   X,
@@ -69,7 +69,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
           className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden"
         >
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -79,7 +79,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
           />
 
           {/* Dialog Container */}
-          <motion.div
+          <m.div
             ref={dialogRef}
             tabIndex={-1}
             initial={{ opacity: 0, scale: 0.96, y: 15 }}
@@ -358,7 +358,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>,

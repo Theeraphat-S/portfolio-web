@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { m, useMotionValue, useSpring } from "motion/react";
 
 export const CustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -95,7 +95,7 @@ export const CustomCursor: React.FC = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden transform-gpu select-none">
       {/* Outer Follower / Context Badge */}
-      <motion.div
+      <m.div
         style={{
           x: cursorX,
           y: cursorY,
@@ -110,14 +110,14 @@ export const CustomCursor: React.FC = () => {
         className="fixed top-0 left-0 flex items-center justify-center pointer-events-none will-change-transform"
       >
         {cursorText ? (
-          <motion.div
+          <m.div
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.7, opacity: 0 }}
             className="px-3 py-1 rounded-full bg-[#00f0ff] text-[#07080c] font-mono font-bold text-[10px] tracking-widest shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 whitespace-nowrap uppercase border border-cyan-300"
           >
             <span>{cursorText}</span>
-          </motion.div>
+          </m.div>
         ) : (
           <div
             className={`rounded-full transition-all duration-300 border ${
@@ -127,11 +127,11 @@ export const CustomCursor: React.FC = () => {
             }`}
           />
         )}
-      </motion.div>
+      </m.div>
 
       {/* Center Pinpoint Dot (Hidden when text label is present) */}
       {!cursorText && (
-        <motion.div
+        <m.div
           style={{
             x: dotX,
             y: dotY,
@@ -147,7 +147,7 @@ export const CustomCursor: React.FC = () => {
                 : "w-1.5 h-1.5 bg-white dark:bg-white"
             }`}
           />
-        </motion.div>
+        </m.div>
       )}
     </div>
   );

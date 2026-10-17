@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { ArrowUpRight, Terminal } from "lucide-react";
 import { getMetricValue } from "../../../lib/utils";
@@ -572,8 +572,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   );
 
   return (
-    <motion.article
-      layout
+    <m.article
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -619,7 +618,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         events={streamEvents}
         onClearEvents={() => setStreamEvents([])}
       />
-    </motion.article>
+    </m.article>
   );
 };
 

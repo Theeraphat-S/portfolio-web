@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { m, useScroll, useSpring, useReducedMotion } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import {
   Phone,
@@ -80,7 +80,7 @@ export const ExperienceTimeline: React.FC = () => {
       <div id="experience" className="absolute -top-24 pointer-events-none" />
 
       {/* Section Eyebrow */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -93,10 +93,10 @@ export const ExperienceTimeline: React.FC = () => {
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ฝึกงานและการสอน", "INTERNSHIP & TEACHING")}
         </span>
-      </motion.div>
+      </m.div>
 
       {/* Headline & Subtitle */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -114,7 +114,7 @@ export const ExperienceTimeline: React.FC = () => {
           th="ฝึกงานเป็น Mobile Developer ที่ได้ส่งฟีเจอร์ขึ้นแอปที่ใช้งานจริง เป็นผู้ช่วยสอน 3 ภาคการศึกษา และเป็นวิทยากรรับเชิญด้าน AI ให้โรงเรียนมัธยม"
           en="A mobile developer internship where I shipped features to a live app, three semesters as a teaching assistant, and a guest talk on AI for high-school students."
         />
-      </motion.div>
+      </m.div>
 
       {/* Connected Engineering Timeline */}
       <div ref={timelineRef} className="relative">
@@ -125,7 +125,7 @@ export const ExperienceTimeline: React.FC = () => {
         />
 
         {/* Scroll-Linked Dynamic Subtle Axis */}
-        <motion.div
+        <m.div
           aria-hidden="true"
           style={{ scaleY: shouldReduceMotion ? 1 : smoothScaleY }}
           className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-[#00f0ff]/70 via-[#00f0ff]/30 to-transparent origin-top pointer-events-none"
@@ -143,7 +143,7 @@ export const ExperienceTimeline: React.FC = () => {
               Boolean(exp.subBadgeEn) && exp.year.includes("2024");
 
             return (
-              <motion.article
+              <m.article
                 key={idx}
                 initial="hidden"
                 whileInView="visible"
@@ -358,7 +358,7 @@ export const ExperienceTimeline: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             );
           })}
         </div>
@@ -366,7 +366,7 @@ export const ExperienceTimeline: React.FC = () => {
 
       {/* Restyled Academic Reference Strip */}
       {personal.reference && (
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -413,7 +413,7 @@ export const ExperienceTimeline: React.FC = () => {
               </a>
             )}
           </div>
-        </motion.div>
+        </m.div>
       )}
     </section>
   );

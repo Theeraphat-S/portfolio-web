@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -54,7 +54,7 @@ export const Projects: React.FC = () => {
       <div id="projects" className="absolute -top-24 pointer-events-none" />
 
       {/* Section Eyebrow & Headline */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -113,7 +113,7 @@ export const Projects: React.FC = () => {
             ))}
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Editorial Case Studies Stream */}
       <div className="space-y-16 sm:space-y-24">

@@ -1,6 +1,6 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
@@ -65,7 +65,7 @@ export const Skills: React.FC = () => {
       <div id="skills" className="absolute -top-24 pointer-events-none" />
 
       {/* Section Eyebrow */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -78,10 +78,10 @@ export const Skills: React.FC = () => {
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ทักษะแยกตามหมวด", "SKILLS BY DOMAIN")}
         </span>
-      </motion.div>
+      </m.div>
 
       {/* Headline */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -103,7 +103,7 @@ export const Skills: React.FC = () => {
             "Flutter and Dart are my main tools. I also have hands-on experience with web, backend and databases from university and my internship, plus three semesters as a teaching assistant."
           }
         />
-      </motion.div>
+      </m.div>
 
       {/* Clean Monospace Tree Layout (2 Columns with Hairline Separation) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-12 lg:gap-y-14">
@@ -117,7 +117,7 @@ export const Skills: React.FC = () => {
           };
 
           return (
-            <motion.div
+            <m.div
               key={catIdx}
               initial="hidden"
               whileInView="visible"
@@ -182,7 +182,7 @@ export const Skills: React.FC = () => {
                   );
                 })}
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

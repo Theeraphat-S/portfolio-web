@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 interface DecryptedTextProps {
   text: string;
@@ -116,7 +116,7 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
   }, [isScrambling, text, speed, maxIterations, sequential, characters]);
 
   return (
-    <motion.span
+    <m.span
       ref={containerRef}
       className={`inline-block whitespace-pre-wrap ${parentClassName}`}
       onMouseEnter={() => {
@@ -145,6 +145,6 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
           );
         })}
       </span>
-    </motion.span>
+    </m.span>
   );
 };

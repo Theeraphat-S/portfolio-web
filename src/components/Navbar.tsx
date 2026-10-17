@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { ArrowDown, Menu, X } from "lucide-react";
 import { useLanguage } from "../context";
 import { scrollToTop, scrollToElement } from "../lib/lenis";
@@ -186,7 +186,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="fixed top-2.5 sm:top-4 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-6 pointer-events-none">
-      <motion.div
+      <m.div
         ref={navContainerRef}
         initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -252,7 +252,7 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 {isActive && (
-                  <motion.div
+                  <m.div
                     layoutId="active-nav-indicator"
                     className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-[#00f0ff]/90 rounded-full"
                     transition={{ type: "spring", stiffness: 450, damping: 35 }}
@@ -338,12 +338,12 @@ export const Navbar: React.FC = () => {
             )}
           </button>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Mobile Navigation Dropdown */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.nav
+          <m.nav
             ref={mobileMenuRef}
             id="mobile-navigation"
             aria-label="Mobile navigation"
@@ -422,7 +422,7 @@ export const Navbar: React.FC = () => {
                 <span>CV (RESUME)</span>
               </a>
             </div>
-          </motion.nav>
+          </m.nav>
         )}
       </AnimatePresence>
     </header>
