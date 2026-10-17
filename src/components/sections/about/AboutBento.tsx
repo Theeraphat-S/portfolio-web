@@ -1,6 +1,6 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import {
   GraduationCap,
   Layers,
@@ -25,7 +25,7 @@ export const AboutBento: React.FC = () => {
   return (
     <section id="about" className="py-16 sm:py-24 border-b border-white/[0.08]">
       {/* 1. Section Eyebrow */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -38,10 +38,10 @@ export const AboutBento: React.FC = () => {
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("แนวทางการทำงาน", "HOW I WORK")}
         </span>
-      </motion.div>
+      </m.div>
 
       {/* 2. Main Statement (Reduced ~15-20% for faster scanability) */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -76,10 +76,10 @@ export const AboutBento: React.FC = () => {
           th="บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ (2565–2569) เขียน Flutter มาตั้งแต่สมัยเรียน ตั้งแต่แอปคัดกรองสุขภาพในโปรเจกต์จบ ไปจนถึงฟีเจอร์บนแอป Hybrid WebView และระบบคิดเงิน POS ที่ทำงานต่อได้เมื่อออฟไลน์ระหว่างฝึกงาน"
           en="Information Technology graduate from Maejo University (2022–2026). I have worked with Flutter since university, from a health-screening app for my capstone to features in a hybrid WebView app and an offline-capable POS checkout during my internship."
         />
-      </motion.div>
+      </m.div>
 
       {/* 3. Engineering Principles (3 clean columns, no heavy bloated cards) */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -148,10 +148,10 @@ export const AboutBento: React.FC = () => {
             />
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* 4. Real Data Metrics (Restrained typography, cyan only for values) */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -234,10 +234,10 @@ export const AboutBento: React.FC = () => {
             />
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* 5. Impact & Academic Background (Compact supporting cards) */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -295,7 +295,7 @@ export const AboutBento: React.FC = () => {
             />
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 };

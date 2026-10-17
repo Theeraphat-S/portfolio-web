@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import {
   Github,
   Phone,
@@ -141,7 +141,7 @@ export const ContactSection: React.FC = () => {
       className="py-16 sm:py-24 border-b border-white/[0.08]"
     >
       {/* Section Eyebrow */}
-      <motion.div
+      <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -154,12 +154,12 @@ export const ContactSection: React.FC = () => {
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ช่องทางติดต่อ", "GET IN TOUCH")}
         </span>
-      </motion.div>
+      </m.div>
 
       {/* Asymmetric 2-Column Editorial Split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
         {/* Left Column (Monumental Headline, Availability, Primary Email CTA & Coordinates) */}
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -291,10 +291,10 @@ export const ContactSection: React.FC = () => {
               </span>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Right Column (Streamlined Integrated Dispatch Form) */}
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -487,7 +487,7 @@ export const ContactSection: React.FC = () => {
               )}
             </form>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

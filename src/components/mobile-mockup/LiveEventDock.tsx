@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { TerminalBoxIcon } from "../icons/Iconsax";
 import { BLoCStreamEvent } from "../../types/stream";
 import { useLanguage } from "../../context/LanguageContext";
@@ -63,7 +63,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
       <div className="pt-2">
         <AnimatePresence mode="wait">
           {latestEvent ? (
-            <motion.button
+            <m.button
               type="button"
               key={latestEvent.id}
               initial={{ opacity: 0, y: 3 }}
@@ -103,7 +103,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
                   {latestEvent.timestamp.split(" ")[0]}
                 </span>
               </div>
-            </motion.button>
+            </m.button>
           ) : (
             <div className="py-1 px-2 text-zinc-500 text-[10px] text-center italic">
               {t(

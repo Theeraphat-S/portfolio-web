@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { CheckCircle2, Wifi, Battery, Plus, Minus } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import {
@@ -447,7 +447,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         </div>
 
         {/* Action Button */}
-        <motion.button
+        <m.button
           type="button"
           whileTap={{ scale: 0.96 }}
           onClick={handleCommitCheckout}
@@ -474,7 +474,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
               </span>
             </>
           )}
-        </motion.button>
+        </m.button>
       </div>
 
       {/* 4. Bottom Bar */}

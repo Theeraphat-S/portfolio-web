@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import Lenis from "lenis";
-import { MotionConfig } from "motion/react";
+import { LazyMotion, MotionConfig } from "motion/react";
+
+const loadMotionFeatures = () =>
+  import("../lib/motionFeatures").then((mod) => mod.default);
 
 interface SmoothScrollProps {
   children: React.ReactNode;
@@ -47,5 +50,11 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     };
   }, []);
 
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  // `strict` makes any stray `motion.*` component throw, keeping the full
+  // renderer out of the bundle; every component must use `m.*` instead.
+  return (
+    <LazyMotion features={loadMotionFeatures} strict>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </LazyMotion>
+  );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 
 interface LensStageProps {
   children: React.ReactNode;
@@ -88,7 +88,7 @@ export const LensStage: React.FC<LensStageProps> = ({
       {/* 3. Norrly Precision Lens Ring & Telemetry Pill */}
       <AnimatePresence>
         {showLens && coords && (
-          <motion.div
+          <m.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
@@ -117,7 +117,7 @@ export const LensStage: React.FC<LensStageProps> = ({
                 {Math.round(coords.x)},{Math.round(coords.y)}
               </span>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

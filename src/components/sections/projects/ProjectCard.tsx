@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import {
   Smartphone,
   ArrowUpRight,
@@ -50,7 +50,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -185,6 +185,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </LensStage>
         </SpotlightCard>
       </TiltedCard>
-    </motion.div>
+    </m.div>
   );
 };

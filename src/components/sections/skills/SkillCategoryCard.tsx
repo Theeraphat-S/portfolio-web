@@ -1,6 +1,6 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Smartphone, Code2, Database, Users, Terminal } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { SkillCategory } from "../../../types";
@@ -45,7 +45,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -96,6 +96,6 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
           ))}
         </div>
       </SpotlightCard>
-    </motion.div>
+    </m.div>
   );
 };

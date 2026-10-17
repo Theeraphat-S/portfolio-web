@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import {
   Briefcase,
   GraduationCap,
@@ -44,7 +44,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -54,13 +54,13 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
       }`}
     >
       {/* Timeline Center Node with Tactile Hover Spring */}
-      <motion.div
+      <m.div
         whileHover={{ scale: 1.25 }}
         transition={{ type: "spring", stiffness: 350, damping: 20 }}
         className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_#06b6d4] z-10 cursor-pointer"
       >
         {getTypeIcon(experience.type)}
-      </motion.div>
+      </m.div>
 
       {/* Content Box */}
       <div className="ml-12 md:ml-0 md:w-1/2 md:px-8 w-full">
@@ -127,6 +127,6 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
           </div>
         </SpotlightCard>
       </div>
-    </motion.div>
+    </m.div>
   );
 };
