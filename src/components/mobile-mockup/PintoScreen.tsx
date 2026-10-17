@@ -549,8 +549,10 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   </div>
                   <div className="w-full h-1 bg-zinc-800 rounded-full mt-1 overflow-hidden">
                     <div
-                      className="h-full bg-[#00f0ff] rounded-full transition-[width] duration-500"
-                      style={{ width: isStreaked ? "78%" : "74%" }}
+                      className="h-full w-full origin-left bg-[#00f0ff] rounded-full transition-transform duration-500"
+                      style={{
+                        transform: `scaleX(${isStreaked ? 0.78 : 0.74})`,
+                      }}
                     />
                   </div>
                 </div>

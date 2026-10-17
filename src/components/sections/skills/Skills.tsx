@@ -1,7 +1,7 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { m } from "motion/react";
-import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { FADE_UP } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { SkillCategory } from "../../../types";
@@ -47,15 +47,6 @@ export const Skills: React.FC = () => {
   const { lang, t } = useLanguage();
   const { skillCategories } = portfolioData;
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
-    },
-  };
-
   return (
     <section
       id="capabilities"
@@ -69,7 +60,7 @@ export const Skills: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
@@ -85,7 +76,7 @@ export const Skills: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="space-y-4 mb-16 max-w-4xl"
       >
         <BilingualStack
@@ -122,7 +113,7 @@ export const Skills: React.FC = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
-              variants={fadeIn}
+              variants={FADE_UP}
               className="space-y-5"
             >
               {/* Category Tree Root Header */}

@@ -106,6 +106,8 @@ src/
 - Wrap interactive motion in `useReducedMotion()` from `motion/react` where appropriate.
 - Always provide accessible ARIA labels for buttons and state indicators.
 - Preserve keyboard navigation and the `#main-content` skip link.
+- Use `m.*` from `motion/react`, never `motion.*`: the app runs inside `<LazyMotion features={domAnimation} strict>` ([`SmoothScroll.tsx`](file:///c:/Work/portfolio-Web/src/components/SmoothScroll.tsx)), so a `motion.*` component throws. `domAnimation` has no `layout`/`layoutId` or drag support; switch the feature pack to `domMax` before using them.
+- Reuse the shared motion tokens in [`src/lib/motion.ts`](file:///c:/Work/portfolio-Web/src/lib/motion.ts) (`EASE_OUT_EXPO`, `FADE_UP`) and `--ease-out-expo` in CSS. Animate transforms and opacity, not width/height/padding, and keep static status indicators still.
 
 ---
 

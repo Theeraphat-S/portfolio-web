@@ -1,7 +1,7 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { m } from "motion/react";
-import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { FADE_UP } from "../../../lib/motion";
 import {
   GraduationCap,
   Layers,
@@ -14,15 +14,6 @@ import { useLanguage } from "../../../context/LanguageContext";
 export const AboutBento: React.FC = () => {
   const { t } = useLanguage();
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
-    },
-  };
-
   return (
     <section id="about" className="py-16 sm:py-24 border-b border-white/[0.08]">
       {/* 1. Section Eyebrow */}
@@ -30,7 +21,7 @@ export const AboutBento: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-10 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
@@ -46,7 +37,7 @@ export const AboutBento: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="space-y-4 mb-10"
       >
         <BilingualStack
@@ -84,7 +75,7 @@ export const AboutBento: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="mb-12"
       >
         <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-4">
@@ -156,7 +147,7 @@ export const AboutBento: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="mb-12 p-4 sm:p-5 rounded-xl bg-white/[0.015] border border-white/[0.08]"
       >
         <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-3">
@@ -242,7 +233,7 @@ export const AboutBento: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="grid grid-cols-1 md:grid-cols-2 gap-4"
       >
         <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-3.5 min-h-[110px]">

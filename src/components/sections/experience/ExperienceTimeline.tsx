@@ -287,7 +287,7 @@ export const ExperienceTimeline: React.FC = () => {
                                     isActive
                                       ? "text-[#00f0ff]"
                                       : "text-zinc-400 group-hover:text-zinc-200"
-                                  } tracking-tighter pt-0.5 select-none transition-colors`}
+                                  } pt-0.5 select-none transition-colors`}
                                 >
                                   {String(cIdx + 1).padStart(2, "0")}
                                 </span>
@@ -315,7 +315,7 @@ export const ExperienceTimeline: React.FC = () => {
                                     isActive
                                       ? "text-[#00f0ff]"
                                       : "text-zinc-400 group-hover:text-zinc-200"
-                                  } tracking-tighter pt-0.5 select-none transition-colors`}
+                                  } pt-0.5 select-none transition-colors`}
                                 >
                                   {String(bIdx + 1).padStart(2, "0")}
                                 </span>

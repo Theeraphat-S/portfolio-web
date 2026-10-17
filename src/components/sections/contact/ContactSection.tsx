@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { m } from "motion/react";
-import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { FADE_UP } from "../../../lib/motion";
 import {
   Github,
   Phone,
@@ -127,15 +127,6 @@ export const ContactSection: React.FC = () => {
     setDraftOpened(true);
   };
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
-    },
-  };
-
   return (
     <section
       id="contact"
@@ -146,7 +137,7 @@ export const ContactSection: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={fadeIn}
+        variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-12 border-b border-white/[0.06]"
       >
         <span className="editorial-eyebrow text-[#00f0ff]">
@@ -164,7 +155,7 @@ export const ContactSection: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeIn}
+          variants={FADE_UP}
           className="lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-8"
         >
           {/* Availability Status Badge */}
@@ -299,7 +290,7 @@ export const ContactSection: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeIn}
+          variants={FADE_UP}
           className="lg:col-span-6 xl:col-span-5"
         >
           <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.015] border border-white/[0.08] backdrop-blur-sm space-y-5">
