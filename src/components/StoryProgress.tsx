@@ -1,45 +1,26 @@
 import React, { useEffect, useId, useRef, useState } from "react";
+import { m, useTransform } from "motion/react";
 import { FileText, Languages, Mail, Menu, X } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
-import { scrollToElement } from "../lib/lenis";
-import { personalData } from "../data";
-
-const chapters = [
-  { id: "intro", labelEn: "INTRO", labelTh: "แนะนำตัว" },
-  { id: "about", labelEn: "APPROACH", labelTh: "แนวคิด" },
-  { id: "work", labelEn: "SELECTED WORK", labelTh: "ผลงานเด่น" },
-  { id: "capabilities", labelEn: "CAPABILITIES", labelTh: "ความสามารถ" },
-  { id: "timeline", labelEn: "EXPERIENCE", labelTh: "ประสบการณ์" },
-  { id: "contact", labelEn: "CONTACT", labelTh: "ติดต่อ" },
-];
+import { useStoryScroll } from "../context/useStoryScroll";
+import { CHAPTER_OFFSET, scrollToElement } from "../lib/lenis";
+import { personalData, STORY_CHAPTERS as chapters } from "../data";
 
 export const StoryProgress: React.FC = () => {
   const { lang, t, toggleLang } = useLanguage();
-  const [activeChapter, setActiveChapter] = useState(chapters[0].id);
+  const { activeIndex, position } = useStoryScroll();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuId = useId();
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const sections = chapters
-      .map(({ id }) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSections = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visibleSections[0]) setActiveChapter(visibleSections[0].target.id);
-      },
-      { rootMargin: "-38% 0px -38% 0px", threshold: [0, 0.25, 0.5, 0.75] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+  // The rail fills one segment per chapter; the capsule shows only the
+  // current chapter, since the top bar already tracks the whole page.
+  const railFill = useTransform(position, [0, chapters.length], [0, 1]);
+  const chapterFill = useTransform(position, (p) => {
+    const index = Math.min(Math.floor(p), chapters.length - 1);
+    return p - index;
+  });
 
   // Close the jump menu on Escape or a click outside it.
   useEffect(() => {
@@ -69,14 +50,14 @@ export const StoryProgress: React.FC = () => {
     };
   }, [isMenuOpen]);
 
-  const activeIndex = chapters.findIndex(({ id }) => id === activeChapter);
-  const chapter = chapters[Math.max(activeIndex, 0)];
+  const chapter = chapters[activeIndex];
+  const activeChapter = chapter.id;
   const labelOf = (c: (typeof chapters)[number]) =>
     lang === "th" ? c.labelTh : c.labelEn;
 
   const jumpTo = (id: string) => {
     setIsMenuOpen(false);
-    scrollToElement(id, 76);
+    scrollToElement(id, CHAPTER_OFFSET);
   };
 
   return (
@@ -88,6 +69,11 @@ export const StoryProgress: React.FC = () => {
         <div className="flex items-center gap-2">
           <div className="relative flex flex-col items-center">
             <span className="story-progress-line" aria-hidden="true" />
+            <m.span
+              className="story-progress-fill"
+              style={{ scaleY: railFill }}
+              aria-hidden="true"
+            />
             <ol className="relative flex flex-col items-center">
               {chapters.map((c, index) => (
                 <li key={c.id}>
@@ -107,6 +93,12 @@ export const StoryProgress: React.FC = () => {
                 </li>
               ))}
             </ol>
+            <span
+              className="relative flex h-6 w-6 items-center justify-center"
+              aria-hidden="true"
+            >
+              <span className="h-px w-1.5 bg-muted" />
+            </span>
           </div>
           <p
             className="min-w-28 font-mono text-[11px] tracking-[0.12em] text-zinc-300"
@@ -195,7 +187,7 @@ export const StoryProgress: React.FC = () => {
               `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
               `Navigation menu (current: ${chapter.labelEn})`,
             )}
-            className="flex min-h-11 items-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-[11px] tracking-wider text-zinc-200 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.9)] backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="relative flex min-h-11 items-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-[11px] tracking-wider text-zinc-200 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.9)] backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             {isMenuOpen ? (
               <X className="h-4 w-4 text-zinc-400" aria-hidden />
@@ -205,6 +197,11 @@ export const StoryProgress: React.FC = () => {
             <span aria-hidden="true" className="hidden sm:inline">
               {labelOf(chapter)}
             </span>
+            <m.span
+              aria-hidden="true"
+              className="absolute inset-x-4 bottom-1.5 h-px origin-left bg-signal/70"
+              style={{ scaleX: chapterFill }}
+            />
           </button>
         </div>
       )}

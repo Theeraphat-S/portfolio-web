@@ -7,12 +7,27 @@ Personal showcase and professional identity platform for Theeraphat Srimontha (O
 ### Visual & Architecture Concepts
 
 **Story Progress Tracker**:
-A fixed vertical avionics chapter tracker (`StoryProgress.tsx`) located on the left flank on 2XL+ screens and as a top-right floating capsule on mobile/tablet devices, mapping out the 6 continuous story chapters (`INTRO`, `APPROACH`, `SELECTED WORK`, `CAPABILITIES`, `EXPERIENCE`, `CONTACT`).
-_Avoid_: Generic fixed navbar dock that occupies persistent vertical reading space, unanchored floating menus.
+A fixed vertical avionics chapter tracker (`StoryProgress.tsx`) located on the left flank on 2XL+ screens and as a bottom-right floating capsule on mobile/tablet devices, mapping out the 6 continuous story chapters (`INTRO`, `APPROACH`, `SELECTED WORK`, `CAPABILITIES`, `EXPERIENCE`, `CONTACT`). The rail fills one segment per chapter and the capsule shows the current chapter's progress; whole-page progress belongs to the top bar.
+_Avoid_: Generic fixed navbar dock that occupies persistent vertical reading space, unanchored floating menus, a second whole-page progress bar.
+
+**Story Position**:
+The continuous place of the reader in the story, from `StoryScrollProvider`: the integer part is the chapter under the **Reading Line**, the fraction is how far through it the reader is (2.5 = halfway through `SELECTED WORK`). It drives the **Chapter Atmosphere** and the **Story Progress Tracker**, and the active chapter is mirrored into the URL hash with `replaceState`.
+_Avoid_: Per-component `IntersectionObserver`s that each decide the active chapter.
+
+**Reading Line**:
+The horizontal line in the viewport where content counts as being read: 40% down for chapters, 50% for the pinned runway, 60% for the stacked runway.
+
+**Chapter Atmosphere**:
+Fixed lighting behind the page (`Atmosphere.tsx`): a Primary Blue glow, an Electric Cyan glow and a lift toward the `surface` tone, with one look per chapter blended across chapter boundaries by **Story Position**. Transform and opacity only; reduced motion holds the intro look.
+_Avoid_: Animating gradients or colours directly, per-chapter accent hues outside the palette.
+
+**Chapter Bridge**:
+The lead line under a chapter heading (`ChapterBridge.tsx`, copy in `src/data/chapters.ts`) that picks up from the chapter before it, lit word by word as it scrolls in. Thai is segmented with `Intl.Segmenter`. A chapter jump always lands on a fully lit bridge.
+_Avoid_: Extra transition bands between chapters, which add page length.
 
 **Sticky Scrollytelling Runway**:
-An architectural case study presentation pattern (`EditorialCaseStudy.tsx`) where an interactive smartphone simulator remains pinned on the desktop viewport (`lg:sticky lg:top-24`) while recruiters scroll through sequential engineering beats, synchronizing the simulated mobile screen and live telemetry stream with the visible narrative beat.
-_Avoid_: Static screenshot carousels, unlinked scroll sections without interactive state alignment.
+An architectural case study presentation pattern (`EditorialCaseStudy.tsx`) where an interactive smartphone simulator stays pinned on desktop (`sticky top-16`) while the beat list scrolls past. `useBeatScrub` drives it: the HUD rail, beat opacity and a slight device drift follow the scroll continuously, while the device screen changes only when the **Reading Line** clears a beat boundary by 32px, emitting one `BLoCStreamEvent` per change in either direction. Below `lg`, and with reduced motion, the runway is stacked (stepper above the device) and nothing is pinned.
+_Avoid_: Static screenshot carousels, unlinked scroll sections without interactive state alignment, filters that change the page length under a pinned runway.
 
 **Architectural Story Beat**:
 The standardized 3-stage engineering progression applied to each flagship case study (`BEATS_BY_PROJECT` in `src/data/scrollytellingBeats.ts`):
@@ -86,5 +101,7 @@ The following concepts and components from earlier iterations are formally depre
   Retired in favor of immediate, zero-delay main interface mounting, prioritizing the recruiter fast-path and sub-second First Contentful Paint (FCP).
 - **[Legacy] The Lens Stage (`LensStage.tsx` / `MobileMockup.tsx`)**:
   Retired in favor of the **Sticky Scrollytelling Runway** and **DevTools Drawer**, replacing circular cursor spotlight masks with direct, continuous scrollytelling and developer drawer inspection.
+- **[Legacy] Project Origin Filter (`Projects.tsx`)**:
+  Retired in favor of the project jump nav (`#case-<id>` links), because filtering changed the page length under the pinned runways (ADR 0006).
 - **[Legacy] ProjectCard Grid (`ProjectCard.tsx`)**:
   Retired in favor of full-width **Editorial Case Studies** (`EditorialCaseStudy.tsx`) supporting multi-beat runways.

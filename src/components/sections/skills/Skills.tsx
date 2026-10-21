@@ -1,9 +1,10 @@
 import React from "react";
 import { BilingualStack } from "../../BilingualStack";
+import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
 import { FADE_UP } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
-import { portfolioData } from "../../../data";
+import { portfolioData, bridgeFor } from "../../../data";
 import { SkillCategory } from "../../../types";
 
 const CATEGORY_META = [
@@ -85,14 +86,9 @@ export const Skills: React.FC = () => {
           th={"ทักษะและเครื่องมือ"}
           en={"Skills & Tools"}
         />
-        <BilingualStack
+        <ChapterBridge
+          bridge={bridgeFor("capabilities")}
           className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
-          th={
-            "Flutter และ Dart คือเครื่องมือหลัก นอกจากนี้มีประสบการณ์ด้านเว็บ Backend และฐานข้อมูลจากการเรียนและการฝึกงาน รวมถึงการเป็นผู้ช่วยสอน 3 ภาคการศึกษา"
-          }
-          en={
-            "Flutter and Dart are my main tools. I also have hands-on experience with web, backend and databases from university and my internship, plus three semesters as a teaching assistant."
-          }
         />
       </m.div>
 

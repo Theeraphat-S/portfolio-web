@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BilingualStack } from "../../BilingualStack";
+import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
 import { FADE_UP } from "../../../lib/motion";
 import {
@@ -12,7 +13,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
-import { portfolioData } from "../../../data";
+import { portfolioData, bridgeFor } from "../../../data";
 
 type Field = "name" | "email" | "message";
 
@@ -181,14 +182,9 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Value Proposition Narrative */}
-          <BilingualStack
+          <ChapterBridge
+            bridge={bridgeFor("contact")}
             className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl"
-            th={
-              "พร้อมร่วมงานตำแหน่ง Junior Mobile Developer (Flutter & Dart) แบบเต็มเวลา ทั้ง Onsite, Hybrid และ Remote อยากทำงานกับทีมที่ได้เรียนรู้และเติบโตไปด้วยกัน"
-            }
-            en={
-              "Looking for a full-time junior Mobile Developer role (Flutter & Dart) on a team where I can keep learning. Based in Chiang Mai, Thailand (GMT+7); open to onsite, hybrid, or remote work."
-            }
           />
 
           {/* Prominent Primary Email CTA Card */}

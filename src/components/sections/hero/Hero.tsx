@@ -3,7 +3,7 @@ import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { ArrowUpRight, FileText, ArrowDown, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
-import { scrollToElement } from "../../../lib/lenis";
+import { CHAPTER_OFFSET, scrollToElement } from "../../../lib/lenis";
 import { personalData, portfolioData } from "../../../data";
 import { BilingualStack } from "../../BilingualStack";
 
@@ -16,6 +16,15 @@ export const Hero: React.FC = () => {
     offset: ["start start", "end start"],
   });
   const cardParallax = useTransform(scrollYProgress, [0, 1], [0, 28]);
+  // Hand-off to the next chapter: the display headline lifts and dims as
+  // the hero scrolls out. Name, contacts and CTAs stay fully opaque.
+  // The function form keeps opacity on the JS path: Motion's ScrollTimeline
+  // acceleration lost the fade near the end of this offset range.
+  const headlineOpacity = useTransform(
+    scrollYProgress,
+    (p) => 1 - 0.85 * Math.min(1, Math.max(0, (p - 0.1) / 0.7)),
+  );
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -101,7 +110,14 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
           {/* Each line is nowrap and sized to its container, so EN and TH
               always set as exactly three lines and the toggle never shifts layout. */}
-          <div className="lg:col-span-8 @container flex flex-col justify-end">
+          <m.div
+            style={
+              shouldReduceMotion
+                ? undefined
+                : { opacity: headlineOpacity, y: headlineY }
+            }
+            className="lg:col-span-8 @container flex flex-col justify-end"
+          >
             <p className="text-[clamp(1.75rem,9.4cqi,4.85rem)] font-extrabold tracking-[-0.035em] leading-[1.05] text-white whitespace-nowrap">
               <m.span variants={itemVariants} className="block text-zinc-300">
                 {lang === "th" ? "สร้างโมบายแอป" : "BUILDING"}
@@ -116,7 +132,7 @@ export const Hero: React.FC = () => {
                 {lang === "th" ? "ด้วย FLUTTER." : "WITH FLUTTER."}
               </m.span>
             </p>
-          </div>
+          </m.div>
 
           {/* One verified outcome per project, so a recruiter
               sees proof in the first viewport instead of a spec list. */}
@@ -136,10 +152,10 @@ export const Hero: React.FC = () => {
                 {portfolioData.projects.map((project) => (
                   <li key={project.id} className="py-2.5 first:pt-0 last:pb-0">
                     <a
-                      href="#work"
+                      href={`#case-${project.id}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        scrollToElement("work", 76);
+                        scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
                       }}
                       className="group block rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
                     >
@@ -203,7 +219,7 @@ export const Hero: React.FC = () => {
               href="#work"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToElement("work", 76);
+                scrollToElement("work", CHAPTER_OFFSET);
               }}
               data-cursor-text="EXPLORE"
               className="btn-editorial btn-editorial-primary group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"

@@ -165,6 +165,17 @@ export interface StoryBeat {
   highlightSpecs: string[];
 }
 
+/** One chapter of the single-page story, in scroll order. */
+export interface StoryChapter {
+  /** Section element id, also written to the URL hash. */
+  id: string;
+  labelTh: string;
+  labelEn: string;
+  /** Lead line under the chapter heading that picks up from the chapter
+   * before it. Every chapter after the intro has one. */
+  bridge?: BilingualText;
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
   stats: StatItem[];

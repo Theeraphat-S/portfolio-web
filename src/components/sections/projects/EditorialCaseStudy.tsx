@@ -5,8 +5,9 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { m } from "motion/react";
+import { m, useReducedMotion, useTransform } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { scrollToElement } from "../../../lib/lenis";
 import { ArrowUpRight, Terminal } from "lucide-react";
 import { getMetricValue } from "../../../lib/utils";
 import { useLanguage } from "../../../context/LanguageContext";
@@ -20,6 +21,7 @@ import { DeviceFrame } from "../../mobile-mockup/DeviceFrame";
 import { DevToolsDrawer } from "../../mobile-mockup/DevToolsDrawer";
 import { BLoCStreamEvent } from "../../../types/stream";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { useBeatScrub } from "../../../hooks/useBeatScrub";
 import { BilingualStack } from "../../BilingualStack";
 
 interface EditorialCaseStudyProps {
@@ -131,6 +133,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const [pintoActiveTab, setPintoActiveTab] = useState<PintoState>("webview");
   const [posOnline, setPosOnline] = useState(true);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const shouldReduceMotion = useReducedMotion();
+  // Pin the device only on desktop; small screens and reduced motion get
+  // the stacked layout, where nothing is held in place while scrolling.
+  const isPinned = isDesktop && !shouldReduceMotion;
 
   // Scale the pinned device down on short viewports so the whole stack
   // (screen + event dock) fits inside 100vh minus the sticky offset.
@@ -138,7 +144,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const [deviceFit, setDeviceFit] = useState({ scale: 1, height: 0 });
   useEffect(() => {
     const el = deviceRef.current;
-    if (!isDesktop || !el) return;
+    if (!isPinned || !el) return;
     const measure = () => {
       // offsetHeight ignores transforms, so this is the unscaled height.
       const height = el.offsetHeight;
@@ -154,7 +160,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       observer.disconnect();
       window.removeEventListener("resize", measure);
     };
-  }, [isDesktop]);
+  }, [isPinned]);
 
   // Alternating Layout Rhythm (Project 1 Left, Project 2 Right, Project 3 Left)
   const isReversed = index % 2 === 1;
@@ -216,34 +222,34 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     [beats, project.id],
   );
 
-  // IntersectionObserver for Multi-beat Scrollytelling on Desktop & Tablet
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+  // Scroll drives the beats: the pinned runway scrubs across the beat list,
+  // the stacked layout across the stepper and device. Anything the reader
+  // taps on the device holds until the scroll crosses into another beat.
+  const scrubTargetRef = useRef<HTMLElement | null>(null);
+  const { progress, segments, beatOpacity } = useBeatScrub({
+    targetRef: scrubTargetRef,
+    beatCount: beats.length,
+    getBoundaries: isPinned
+      ? (rect) =>
+          beatRefs.current
+            .slice(1)
+            .map((el) =>
+              el
+                ? (el.getBoundingClientRect().top - rect.top) / rect.height
+                : 1,
+            )
+      : undefined,
+    readingLine: isPinned ? 0.5 : 0.6,
+    enabled: !shouldReduceMotion,
+    onBeat: applyBeat,
+  });
+  const deviceDrift = useTransform(progress, [0, 1], [12, -12]);
 
-    beatRefs.current.forEach((el, bIdx) => {
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              applyBeat(bIdx);
-            }
-          });
-        },
-        {
-          rootMargin: "-22% 0px -38% 0px",
-          threshold: 0.25,
-        },
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => {
-      observers.forEach((obs) => obs.disconnect());
-    };
-    // Re-bind when the layout branch swaps, since beat nodes are remounted.
-  }, [applyBeat, isDesktop]);
+  // Land a beat just past the reading line so the scrub selects it.
+  const scrollToBeat = (bIdx: number) => {
+    const el = beatRefs.current[bIdx];
+    if (el) scrollToElement(el, window.innerHeight * 0.5 - 48);
+  };
 
   const handleTabClick = (tab: PintoState) => {
     setPintoActiveTab(tab);
@@ -272,27 +278,40 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const renderDeviceMockup = () => {
     return (
       <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px] flex flex-col items-center gap-3">
-        {/* Active stage HUD (desktop only; mobile uses the stepper above) */}
-        {isDesktop && (
-          <div className="w-full flex items-center justify-between px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
-              <span className="text-primary font-semibold tracking-wider truncate">
-                {activeBeatLabel}
-              </span>
+        {/* Active stage HUD (pinned runway only; the stacked layout uses
+            the stepper above). The rail fills as the reader scrolls. */}
+        {isPinned && (
+          <div className="w-full px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
+                <span className="text-primary font-semibold tracking-wider truncate">
+                  {activeBeatLabel}
+                </span>
+              </div>
+              <div
+                className="flex items-center gap-1.5 text-zinc-300 shrink-0"
+                aria-live="polite"
+              >
+                <span className="sr-only">{t("ขั้นตอน", "Step")}</span>
+                <span className="text-primary font-bold">
+                  {String(activeBeat + 1).padStart(2, "0")}
+                </span>
+                <span className="text-zinc-600">/</span>
+                <span className="text-zinc-400">
+                  {String(beats.length).padStart(2, "0")}
+                </span>
+              </div>
             </div>
-            <div
-              className="flex items-center gap-1.5 text-zinc-300 shrink-0"
-              aria-live="polite"
-            >
-              <span className="sr-only">{t("ขั้นตอน", "Step")}</span>
-              <span className="text-primary font-bold">
-                {String(activeBeat + 1).padStart(2, "0")}
-              </span>
-              <span className="text-zinc-600">/</span>
-              <span className="text-zinc-400">
-                {String(beats.length).padStart(2, "0")}
-              </span>
+            <div aria-hidden="true" className="mt-1.5 mb-0.5 flex gap-1">
+              {segments.map((segment, sIdx) => (
+                <span key={sIdx} className="h-px flex-1 bg-line">
+                  <m.span
+                    className="block h-full origin-left bg-primary"
+                    style={{ scaleX: segment }}
+                  />
+                </span>
+              ))}
             </div>
           </div>
         )}
@@ -340,7 +359,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     );
   };
 
-  // Desktop runway: flat beat list, advanced by scroll or click.
+  // Pinned runway: flat beat list scrubbed by scroll; a click scrolls to
+  // the beat so the scrub, not the click, selects it.
   const renderStoryBeats = () => {
     return (
       <div className="pt-2">
@@ -351,29 +371,32 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           )}
         </p>
 
-        <ol>
+        <ol
+          ref={(el) => {
+            scrubTargetRef.current = el;
+          }}
+        >
           {beats.map((beat, bIdx) => {
             const isActive = activeBeat === bIdx;
             return (
-              <li
+              <m.li
                 key={beat.id}
                 ref={(el) => {
                   beatRefs.current[bIdx] = el;
                 }}
-                onClick={() => applyBeat(bIdx)}
+                onClick={() => scrollToBeat(bIdx)}
                 tabIndex={0}
                 role="button"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    applyBeat(bIdx);
+                    scrollToBeat(bIdx);
                   }
                 }}
                 aria-current={isActive ? "step" : undefined}
-                className={`min-h-[50vh] border-t py-7 text-left cursor-pointer outline-none transition-[opacity,border-color] duration-300 focus-visible:ring-1 focus-visible:ring-signal ${
-                  isActive
-                    ? "border-primary/60 opacity-100"
-                    : "border-line opacity-55 hover:opacity-90"
+                style={{ opacity: beatOpacity[bIdx] }}
+                className={`min-h-[50vh] border-t py-7 text-left cursor-pointer outline-none transition-[border-color] duration-300 focus-visible:ring-1 focus-visible:ring-signal ${
+                  isActive ? "border-primary/60" : "border-line"
                 }`}
               >
                 <p
@@ -404,7 +427,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   </span>
                   {beat.streamState}
                 </p>
-              </li>
+              </m.li>
             );
           })}
         </ol>
@@ -412,8 +435,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     );
   };
 
-  // Mobile: the device cannot pin, so the selected stage's story comes first
-  // and the 3-step selector sits flush against the top of the device.
+  // Stacked layout (small screens, or reduced motion): the device cannot
+  // pin, so the selected stage's story comes first and the 3-step selector
+  // sits flush against the top of the device. Each step fills as the
+  // reader scrolls past the device.
   const renderMobileStepper = () => {
     const beat = beats[activeBeat];
     return (
@@ -458,7 +483,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 type="button"
                 onClick={() => applyBeat(bIdx)}
                 aria-current={isActive ? "step" : undefined}
-                className={`min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-[11px] leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
+                className={`relative overflow-hidden min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-[11px] leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
                   isActive
                     ? "border-primary/50 bg-primary/10 text-primary"
                     : "border-line text-zinc-400 hover:text-zinc-200"
@@ -468,6 +493,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   /\s*\/\/\s*/,
                   " ",
                 )}
+                <m.span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-primary/60"
+                  style={{ scaleX: segments[bIdx] }}
+                />
               </button>
             );
           })}
@@ -568,6 +598,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
   return (
     <m.article
+      id={`case-${project.id}`}
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -576,31 +607,42 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     >
       {/* Render exactly one layout tree: duplicated hidden markup would
           steal the beat refs from the visible runway and duplicate ids. */}
-      {isDesktop ? (
+      {isPinned ? (
         <div className="grid grid-cols-12 gap-10 xl:gap-14 items-start">
           {/* DOM order follows visual order so keyboard focus matches the
               alternating rhythm (device left on even, right on odd). */}
           {isReversed && storyColumn}
           <div className="col-span-5 self-start sticky top-16">
-            <div
-              ref={deviceRef}
-              style={{
-                transform: `scale(${deviceFit.scale})`,
-                transformOrigin: "top center",
-                // Reclaim the layout space the scale-down frees up.
-                marginBottom: deviceFit.height * (deviceFit.scale - 1),
-              }}
-            >
-              {renderDeviceMockup()}
-            </div>
+            <m.div style={{ y: deviceDrift }}>
+              <div
+                ref={deviceRef}
+                style={{
+                  transform: `scale(${deviceFit.scale})`,
+                  transformOrigin: "top center",
+                  // Reclaim the layout space the scale-down frees up.
+                  marginBottom: deviceFit.height * (deviceFit.scale - 1),
+                }}
+              >
+                {renderDeviceMockup()}
+              </div>
+            </m.div>
           </div>
           {!isReversed && storyColumn}
         </div>
       ) : (
-        <div className="flex flex-col space-y-8">
-          {renderProjectHeader()}
-          {renderMobileStepper()}
-          <div className="flex justify-center">{renderDeviceMockup()}</div>
+        // One column on small screens; with reduced motion on desktop the
+        // stepper and device sit beside the header instead of pinning.
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 lg:items-start">
+          <div className="lg:col-span-7">{renderProjectHeader()}</div>
+          <div
+            ref={(el) => {
+              scrubTargetRef.current = el;
+            }}
+            className="space-y-8 lg:col-span-5"
+          >
+            {renderMobileStepper()}
+            <div className="flex justify-center">{renderDeviceMockup()}</div>
+          </div>
         </div>
       )}
 
