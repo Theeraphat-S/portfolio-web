@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { m } from "motion/react";
+import { ChapterBridge } from "../../ChapterBridge";
+import { bridgeFor } from "../../../data";
+import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { FADE_UP } from "../../../lib/motion";
 import {
   GraduationCap,
@@ -13,61 +15,68 @@ import { useLanguage } from "../../../context/LanguageContext";
 
 export const AboutBento: React.FC = () => {
   const { t } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
+
+  // The opening of the chapter rises with the scroll as the Hero headline
+  // lifts away, settling once its top is 60% down the viewport.
+  const openingRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: openingRef,
+    offset: ["start end", "start 60%"],
+  });
+  const openingOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const openingY = useTransform(scrollYProgress, [0, 1], [32, 0]);
 
   return (
     <section id="about" className="py-16 sm:py-24 border-b border-line">
-      {/* 1. Section Eyebrow */}
       <m.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={FADE_UP}
-        className="flex items-center justify-between pb-6 mb-10 border-b border-line"
+        ref={openingRef}
+        style={
+          shouldReduceMotion
+            ? undefined
+            : { opacity: openingOpacity, y: openingY }
+        }
       >
-        <span className="editorial-eyebrow text-primary">
-          01 // {t("ตัวตน & ปรัชญา", "IDENTITY & PHILOSOPHY")}
-        </span>
-        <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          {t("แนวทางการทำงาน", "HOW I WORK")}
-        </span>
-      </m.div>
+        {/* 1. Section Eyebrow */}
+        <div className="flex items-center justify-between pb-6 mb-10 border-b border-line">
+          <span className="editorial-eyebrow text-primary">
+            01 // {t("ตัวตน & ปรัชญา", "IDENTITY & PHILOSOPHY")}
+          </span>
+          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
+            {t("แนวทางการทำงาน", "HOW I WORK")}
+          </span>
+        </div>
 
-      {/* 2. Main Statement (Reduced ~15-20% for faster scanability) */}
-      <m.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={FADE_UP}
-        className="space-y-4 mb-10"
-      >
-        <BilingualStack
-          as="h2"
-          className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl"
-          th={
-            <>
-              ยังอยู่ช่วงต้นของสายอาชีพ{" "}
-              <span className="text-primary">จึงให้ความสำคัญกับพื้นฐาน</span>{" "}
-              ทั้ง State ที่อ่านเข้าใจง่าย แอปที่รับมือเน็ตไม่เสถียรได้
-              และการรับฟังผู้ใช้งานจริง
-            </>
-          }
-          en={
-            <>
-              Still early in my career,{" "}
-              <span className="text-primary">
-                so I focus on the fundamentals
-              </span>
-              : clear state, apps that cope with bad networks, and listening to
-              the people who use them.
-            </>
-          }
-        />
+        {/* 2. Main Statement (Reduced ~15-20% for faster scanability) */}
+        <div className="space-y-4 mb-10">
+          <BilingualStack
+            as="h2"
+            className="text-2xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.15] max-w-4xl"
+            th={
+              <>
+                ยังอยู่ช่วงต้นของสายอาชีพ{" "}
+                <span className="text-primary">จึงให้ความสำคัญกับพื้นฐาน</span>{" "}
+                ทั้ง State ที่อ่านเข้าใจง่าย แอปที่รับมือเน็ตไม่เสถียรได้
+                และการรับฟังผู้ใช้งานจริง
+              </>
+            }
+            en={
+              <>
+                Still early in my career,{" "}
+                <span className="text-primary">
+                  so I focus on the fundamentals
+                </span>
+                : clear state, apps that cope with bad networks, and listening
+                to the people who use them.
+              </>
+            }
+          />
 
-        <BilingualStack
-          className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl"
-          th="บัณฑิตเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้ (2565–2569) เขียน Flutter มาตั้งแต่สมัยเรียน ตั้งแต่แอปคัดกรองสุขภาพในโปรเจกต์จบ ไปจนถึงฟีเจอร์บนแอป Hybrid WebView และระบบคิดเงิน POS ที่ทำงานต่อได้เมื่อออฟไลน์ระหว่างฝึกงาน"
-          en="Information Technology graduate from Maejo University (2022–2026). I have worked with Flutter since university, from a health-screening app for my capstone to features in a hybrid WebView app and an offline-capable POS checkout during my internship."
-        />
+          <ChapterBridge
+            bridge={bridgeFor("about")}
+            className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl"
+          />
+        </div>
       </m.div>
 
       {/* 3. Engineering Principles (3 clean columns, no heavy bloated cards) */}

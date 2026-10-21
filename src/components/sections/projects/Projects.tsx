@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
+import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { CHAPTER_OFFSET, scrollToElement } from "../../../lib/lenis";
 import { useLanguage } from "../../../context/LanguageContext";
-import { portfolioData } from "../../../data";
+import { portfolioData, bridgeFor } from "../../../data";
 import { ProjectItem } from "../../../types";
 import { EditorialCaseStudy } from "./EditorialCaseStudy";
 import { ProjectModal } from "./modal/ProjectModal";
@@ -44,14 +45,9 @@ export const Projects: React.FC = () => {
               th={"3 โปรเจกต์ที่ได้ลงมือพัฒนา"}
               en={"Three Projects I Built and Worked On"}
             />
-            <BilingualStack
+            <ChapterBridge
+              bridge={bridgeFor("work")}
               className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
-              th={
-                "โปรเจกต์จบ 1 ชิ้น และงานระหว่างฝึกงาน 2 ชิ้น แต่ละกรณีศึกษาเล่าว่าผมทำส่วนไหน ตัดสินใจอะไร และได้เรียนรู้อะไร"
-              }
-              en={
-                "One capstone app and two internship projects. Each case study shows the part I built, the decisions involved, and what I learned."
-              }
             />
           </div>
 

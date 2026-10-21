@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { BilingualStack } from "../../BilingualStack";
+import { ChapterBridge } from "../../ChapterBridge";
 import { m, useScroll, useSpring, useReducedMotion } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import {
@@ -12,7 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
-import { portfolioData } from "../../../data";
+import { portfolioData, bridgeFor } from "../../../data";
 import { ExperienceItem } from "../../../types";
 
 export const ExperienceTimeline: React.FC = () => {
@@ -109,10 +110,9 @@ export const ExperienceTimeline: React.FC = () => {
           th="ประสบการณ์"
           en="Experience"
         />
-        <BilingualStack
+        <ChapterBridge
+          bridge={bridgeFor("timeline")}
           className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
-          th="ฝึกงานเป็น Mobile Developer ที่ได้ส่งฟีเจอร์ขึ้นแอปที่ใช้งานจริง เป็นผู้ช่วยสอน 3 ภาคการศึกษา และเป็นวิทยากรรับเชิญด้าน AI ให้โรงเรียนมัธยม"
-          en="A mobile developer internship where I shipped features to a live app, three semesters as a teaching assistant, and a guest talk on AI for high-school students."
         />
       </m.div>
 

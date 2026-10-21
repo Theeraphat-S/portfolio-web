@@ -171,6 +171,9 @@ export interface StoryChapter {
   id: string;
   labelTh: string;
   labelEn: string;
+  /** Lead line under the chapter heading that picks up from the chapter
+   * before it. Every chapter after the intro has one. */
+  bridge?: BilingualText;
 }
 
 export interface PortfolioData {
