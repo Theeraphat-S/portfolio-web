@@ -149,6 +149,33 @@
   background-size: 56px 56px;
 }
 
+/* Story atmosphere: two soft lights the Atmosphere component moves between
+   chapters. The gradient is painted once; only transform and opacity change. */
+.atmosphere-glow {
+  position: absolute;
+  left: calc(50% - 40vmax);
+  top: calc(50% - 40vmax);
+  width: 80vmax;
+  height: 80vmax;
+  will-change: transform, opacity;
+}
+
+.atmosphere-glow-blue {
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--color-primary) 26%, transparent),
+    transparent 62%
+  );
+}
+
+.atmosphere-glow-cyan {
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--color-signal) 18%, transparent),
+    transparent 58%
+  );
+}
+
 /* Micro Dot Pattern */
 .dot-matrix-bg {
   background-image: radial-gradient(
@@ -269,12 +296,23 @@ section[id] {
   }
 }
 
-.story-progress-line {
+/* The rail runs from the first dot's centre to the end cap, so each
+   chapter, the last included, owns one 1.5rem segment to fill. */
+.story-progress-line,
+.story-progress-fill {
   position: absolute;
-  top: 0.25rem;
-  bottom: 0.25rem;
+  top: 0.75rem;
+  bottom: 0.75rem;
   width: 1px;
+}
+
+.story-progress-line {
   background: var(--color-line);
+}
+
+.story-progress-fill {
+  background: linear-gradient(var(--color-signal), var(--color-primary));
+  transform-origin: top;
 }
 
 .story-progress-dot {

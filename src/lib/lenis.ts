@@ -21,9 +21,13 @@ export function scrollToTop(): void {
   }
 }
 
+/** Landing offset for chapter jumps, so the heading clears the viewport edge. */
+export const CHAPTER_OFFSET = 76;
+
 export function scrollToElement(
   target: string | HTMLElement,
   offset: number = 80,
+  { immediate = false }: { immediate?: boolean } = {},
 ): void {
   if (typeof window === "undefined") return;
   const el =
@@ -35,11 +39,14 @@ export function scrollToElement(
 
   const lenis = getLenis();
   if (lenis) {
-    lenis.scrollTo(targetPosition, { duration: 1.0 });
+    lenis.scrollTo(
+      targetPosition,
+      immediate ? { immediate: true, force: true } : { duration: 1.0 },
+    );
   } else {
     window.scrollTo({
       top: Math.max(0, targetPosition),
-      behavior: "smooth",
+      behavior: immediate ? "instant" : "smooth",
     });
   }
 }

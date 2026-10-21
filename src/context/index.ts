@@ -4,3 +4,6 @@ export * from "./useLanguage";
 export * from "./ThemeContextInstance";
 export * from "./ThemeContext";
 export * from "./useTheme";
+export * from "./StoryScrollContextInstance";
+export * from "./StoryScrollContext";
+export * from "./useStoryScroll";

@@ -21,5 +21,6 @@ export {
   experiencesData,
 };
 export { BEATS_BY_PROJECT } from "./scrollytellingBeats";
+export { STORY_CHAPTERS } from "./chapters";
 export * from "../types";
 export { ncdsDemo, pintoDemo, posDemo } from "./deviceDemos";
