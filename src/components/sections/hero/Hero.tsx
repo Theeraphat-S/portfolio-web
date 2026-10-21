@@ -3,7 +3,7 @@ import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
 import { ArrowUpRight, FileText, ArrowDown, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
-import { scrollToElement } from "../../../lib/lenis";
+import { CHAPTER_OFFSET, scrollToElement } from "../../../lib/lenis";
 import { personalData, portfolioData } from "../../../data";
 import { BilingualStack } from "../../BilingualStack";
 
@@ -136,10 +136,10 @@ export const Hero: React.FC = () => {
                 {portfolioData.projects.map((project) => (
                   <li key={project.id} className="py-2.5 first:pt-0 last:pb-0">
                     <a
-                      href="#work"
+                      href={`#case-${project.id}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        scrollToElement("work", 76);
+                        scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
                       }}
                       className="group block rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
                     >
@@ -203,7 +203,7 @@ export const Hero: React.FC = () => {
               href="#work"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToElement("work", 76);
+                scrollToElement("work", CHAPTER_OFFSET);
               }}
               data-cursor-text="EXPLORE"
               className="btn-editorial btn-editorial-primary group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"

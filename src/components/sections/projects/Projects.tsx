@@ -1,49 +1,18 @@
 import React, { useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
-import { m, AnimatePresence } from "motion/react";
+import { m } from "motion/react";
 import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { CHAPTER_OFFSET, scrollToElement } from "../../../lib/lenis";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData } from "../../../data";
 import { ProjectItem } from "../../../types";
 import { EditorialCaseStudy } from "./EditorialCaseStudy";
 import { ProjectModal } from "./modal/ProjectModal";
 
-type FilterKey = "all" | "capstone" | "internship";
-
-// Widths fit the longer of the TH/EN label so switching language never
-// resizes the filter.
-const FILTERS: {
-  key: FilterKey;
-  th: string;
-  en: string;
-  width: string;
-}[] = [
-  { key: "all", th: "ทั้งหมด", en: "ALL", width: "min-w-[86px]" },
-  { key: "capstone", th: "โปรเจกต์จบ", en: "CAPSTONE", width: "min-w-[124px]" },
-  {
-    key: "internship",
-    th: "ฝึกงาน",
-    en: "INTERNSHIP",
-    width: "min-w-[128px]",
-  },
-];
-
 export const Projects: React.FC = () => {
   const { t } = useLanguage();
-  const [filter, setFilter] = useState<FilterKey>("all");
   const [selectedModalProject, setSelectedModalProject] =
     useState<ProjectItem | null>(null);
-
-  const filteredProjects = portfolioData.projects.filter((p: ProjectItem) => {
-    if (filter === "all") return true;
-    return p.origin === filter;
-  });
-
-  const countFor = (key: FilterKey) =>
-    key === "all"
-      ? portfolioData.projects.length
-      : portfolioData.projects.filter((p: ProjectItem) => p.origin === key)
-          .length;
 
   return (
     <section id="work" className="relative py-16 sm:py-24 border-b border-line">
@@ -86,44 +55,41 @@ export const Projects: React.FC = () => {
             />
           </div>
 
-          {/* Minimalist Segmented Filter */}
-          <div
-            role="toolbar"
-            aria-label={t("กรองผลงานตามที่มา", "Filter projects by origin")}
-            className="flex items-center gap-1 p-1 bg-white/[0.02] border border-line rounded-full self-start md:self-auto font-mono text-xs shrink-0"
+          {/* Jump straight to one case study. Filtering would change the
+              page length under the pinned runways, so every project stays
+              on the page. Product names read the same in TH and EN. */}
+          <nav
+            aria-label={t("ข้ามไปยังโปรเจกต์", "Jump to a project")}
+            className="flex flex-wrap items-center gap-1 p-1 bg-white/[0.02] border border-line rounded-full self-start md:self-auto font-mono text-xs shrink-0"
           >
-            {FILTERS.map(({ key, th, en, width }) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setFilter(key)}
-                aria-pressed={filter === key}
-                data-cursor-text="FILTER"
-                className={`${width} text-center px-3 min-h-9 rounded-full transition cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
-                  filter === key
-                    ? "bg-primary/10 text-primary border border-primary/30 font-medium"
-                    : "text-zinc-400 hover:text-white border border-transparent"
-                }`}
+            {portfolioData.projects.map((project: ProjectItem) => (
+              <a
+                key={project.id}
+                href={`#case-${project.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
+                }}
+                data-cursor-text="JUMP"
+                className="inline-flex items-center px-3 min-h-9 rounded-full border border-transparent text-zinc-400 hover:text-white hover:border-primary/30 hover:bg-primary/10 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
               >
-                {t(`${th} (${countFor(key)})`, `${en} (${countFor(key)})`)}
-              </button>
+                {project.shortName ?? project.titleEn}
+              </a>
             ))}
-          </div>
+          </nav>
         </div>
       </m.div>
 
       {/* Editorial Case Studies Stream */}
       <div className="space-y-16 sm:space-y-24">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project: ProjectItem, index: number) => (
-            <EditorialCaseStudy
-              key={project.id}
-              project={project}
-              index={index}
-              onSelect={setSelectedModalProject}
-            />
-          ))}
-        </AnimatePresence>
+        {portfolioData.projects.map((project: ProjectItem, index: number) => (
+          <EditorialCaseStudy
+            key={project.id}
+            project={project}
+            index={index}
+            onSelect={setSelectedModalProject}
+          />
+        ))}
       </div>
 
       {/* Deep Architectural Modal */}
