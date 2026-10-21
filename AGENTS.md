@@ -53,13 +53,17 @@ src/
 │   │   ├── skills/               # Interactive competency matrix
 │   │   ├── experience/           # Work history, internships, and TA credentials
 │   │   └── contact/              # Direct contact reach-out with canvas confetti
+│   ├── Atmosphere.tsx            # Per-chapter lighting driven by story position
+│   ├── ChapterBridge.tsx         # Chapter lead line lit word by word on scroll
 │   ├── StoryProgress.tsx         # Fixed vertical avionics chapter tracker
 │   ├── ScrollProgressBar.tsx     # Top reading progress indicator
 │   ├── SmoothScroll.tsx          # Lenis smooth scroll provider
 │   └── Footer.tsx                # Minimalist editorial footer
 ├── context/
-│   └── LanguageContext.tsx       # Centralized bilingual state (TH / EN)
+│   ├── LanguageContext.tsx       # Centralized bilingual state (TH / EN)
+│   └── StoryScrollContext.tsx    # Active chapter, story position, URL hash
 ├── data/                         # SINGLE SOURCE OF TRUTH (Never hardcode in components)
+│   ├── chapters.ts               # Story chapters, labels and bridge lines
 │   ├── dartCodeSnippets.ts       # Production Dart/BLoC code samples for DevTools
 │   ├── experiences.ts            # Career history, internships, and academic roles
 │   ├── personal.ts               # Contact info, bio, academic reference, and degree
@@ -94,7 +98,8 @@ src/
   1. `Presentation & Intake`: UI form validation, live scanner, or tracking initialization.
   2. `Deterministic Engine`: Clinical risk calculation, gamification multiplier, or cart state machine.
   3. `Persistence & Infrastructure`: SQLite offline commit, WebView platform bridge, or ESC/POS printer stream.
-- Each beat must emit a typed `BLoCStreamEvent` to [`LiveEventDock.tsx`](file:///c:/Work/portfolio-Web/src/components/mobile-mockup/LiveEventDock.tsx) upon intersecting the viewport.
+- Each beat change must emit exactly one typed `BLoCStreamEvent` to [`LiveEventDock.tsx`](file:///c:/Work/portfolio-Web/src/components/mobile-mockup/LiveEventDock.tsx), scrolling down or up. Scroll drives beats through [`useBeatScrub`](file:///c:/Work/portfolio-Web/src/hooks/useBeatScrub.ts); see [ADR 0006](file:///c:/Work/portfolio-Web/docs/adr/0006-scroll-driven-story.md).
+- Keep the desktop page within its length budget (14.6 viewports at 1440×900): pinned scenes reuse existing scroll distance instead of adding to it, and nothing pins below `lg` or under reduced motion.
 
 ### 4. Component Hygiene & Legacy Policy
 

@@ -212,7 +212,20 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
   - Passed state (`is-passed`): illuminated cyan core.
   - Active state (`is-active`): animated pulsing cyan beacon with halo glow.
   - Telemetry label readout: `01 / 06` chapter index and uppercase monospace title (`INTRO`, `APPROACH`, `SELECTED WORK`, `CAPABILITIES`, `EXPERIENCE`, `CONTACT`).
-- **Mobile & Tablet (<2XL):** Minimalist top-right floating pill capsule at `fixed right-4 top-3 z-30` with `bg-void/85`, `backdrop-blur-sm`, and border `line`, rendering the active chapter index (`02 / 06 / APPROACH`) without obstructing hero typography.
+- **Rail fill:** A `story-progress-fill` line over the rail fills one segment per chapter (dot to dot, with an end cap after the last), so it reads as chapter progress rather than a second whole-page bar.
+- **Mobile & Tablet (<2XL):** Floating pill capsule at `fixed bottom-4 right-4 z-30` with `bg-void/90`, `backdrop-blur`, and border `line`, hidden on the intro. It opens the chapter menu and carries a 1px signal line along its bottom that fills with the current chapter's progress.
+
+### Chapter Atmosphere (`Atmosphere`)
+
+- **Layers:** Fixed behind the content: a `surface`-tone lift layer and two 80vmax radial glows (`atmosphere-glow-blue` at 26% Primary Blue, `atmosphere-glow-cyan` at 18% Electric Cyan). The gradients are painted once; only transform and opacity change.
+- **Per-chapter looks:** Intro lit from the top right; Approach swings left and lifts the void; Selected Work raises cyan beside the device; Capabilities lights low from the right; Experience dims under the timeline; Contact gathers both lights low and centred. Each look holds through its chapter and blends across the boundary (±0.2 chapter).
+- **Restraint:** The lift tops out near `surface` (`#0d1424`), and the glows stay faint enough to keep the 80 / 15 / 5 rule. Reduced motion holds the intro look.
+
+### Chapter Bridge (`ChapterBridge`)
+
+- **Role:** The lead line under each chapter heading after the intro, written to pick up from the chapter before it (copy in `src/data/chapters.ts`).
+- **Motion:** Words light from 28% to full opacity as the line scrolls from 95% to its end at 80% of the viewport, so a chapter jump always lands on fully lit text. Thai is segmented with `Intl.Segmenter`; without it the line lights as one piece.
+- **Layout:** Both languages share one grid cell like `BilingualStack`; only the visible language is split into word spans.
 
 ### Hero Eyebrow & Language Control Deck
 
@@ -222,7 +235,10 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Signature Component: Sticky Scrollytelling Runway & DevTools Dock
 
-- **Sticky Viewport:** High-fidelity smartphone shell pinned at `lg:sticky lg:top-24` on desktop displays.
+- **Sticky Viewport:** High-fidelity smartphone shell pinned at `sticky top-16` on desktop (`lg+`, motion allowed), scaled down to fit short viewports and drifting ±12px across the runway.
+- **Scrub:** `useBeatScrub` maps the beat list to scroll. The HUD above the device carries a three-segment rail that fills continuously; beat cards ease from 55% to full opacity under the reading line (50% of the viewport); the device screen changes only after the reading line clears a beat boundary by 32px. Clicking a beat scrolls to it.
+- **Stacked Runway:** Below `lg`, and with reduced motion, nothing pins: the stage text and a 3-step stepper sit above the device. Each step carries a bottom fill that tracks the scroll (reading line at 60%), and the steps advance as the device scrolls past unless motion is reduced.
+- **Jump Nav:** The Selected Work header links to each case study (`NCDs Screening`, `Pinto App`, `Retail POS`) in place of a filter, so the page length under the runways never changes.
 - **Device Shell:** Laser-beveled smartphone frame with acoustic speaker, dynamic island pill, and simulated mobile OS status bar.
 - **Interactive State Switcher:** Tabbed screen toggles swapping between simulated native Flutter screens (NCDs Screening, Pinto Logistics, POS System).
 - **Live Event Dock (`LiveEventDock`):** Attached immediately beneath the phone frame, streaming live BLoC events (`tag`, `stateName`, `details`, `latencyMs`) reactively as beats trigger or user clicks buttons inside the simulated app.
@@ -230,7 +246,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
   1. _State Stream_: Living event history log with JSON payloads.
   2. _Code Viewer_: Real-world Dart BLoC and Clean Architecture code snippets.
   3. _Widget Tree_: Interactive tree visualization of the Flutter widget hierarchy.
-- **The 3-Beat Visual Cadence:** Each case study unfolds across 3 scroll-triggered beat milestones mapped to simulated device screens:
+- **The 3-Beat Visual Cadence:** Each case study unfolds across 3 scroll-scrubbed beat milestones mapped to simulated device screens, emitting one stream event per beat change:
   - **NCDs Risk Screening App**:
     - _Beat 1 (Presentation & Intake)_: `NcdsScreen` vitals validation sliders emit `UpdateVitalsEvent` with zero network latency.
     - _Beat 2 (Deterministic Engine)_: Automated risk calculation engine transitions to `RiskEvaluatedState` and highlights low/moderate/high tier cards.
