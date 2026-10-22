@@ -48,7 +48,7 @@ src/
 │   │   ├── about/                # Glassmorphic bento grid & live Chiang Mai clock
 │   │   ├── projects/             # Selected work section
 │   │   │   ├── EditorialCaseStudy.tsx # Sticky scrollytelling runway & devtools sync
-│   │   │   ├── Projects.tsx           # Category filter & modal manager
+│   │   │   ├── Projects.tsx           # Project jump nav & modal manager
 │   │   │   └── modal/                 # Deep architectural case study modal dialogs
 │   │   ├── skills/               # Interactive competency matrix
 │   │   ├── experience/           # Work history, internships, and TA credentials

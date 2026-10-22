@@ -1,0 +1,4 @@
+# Check out text files with LF on every OS, overriding core.autocrlf, so
+# Prettier (endOfLine: "lf") and `npm run format:check` agree with the
+# working tree on Windows. Binary files are detected and left untouched.
+* text=auto eol=lf
