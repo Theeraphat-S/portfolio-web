@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
@@ -8,15 +8,35 @@ import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
 import { ProjectItem } from "../../../types";
 import { EditorialCaseStudy } from "./EditorialCaseStudy";
-import { ProjectModal } from "./modal/ProjectModal";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
+import { ChunkBoundary } from "../../ChunkBoundary";
+import { createChunk } from "../../../lib/lazyChunk";
+
+// The modal is only needed after a "View case study" click, so it ships in
+// its own chunk; hovering or focusing the button starts the download.
+const modalChunk = createChunk(() => import("./modal/ProjectModal"));
 
 export const Projects: React.FC = () => {
   const { t } = useLanguage();
   const [selectedModalProject, setSelectedModalProject] =
     useState<ProjectItem | null>(null);
+  // Stays mounted after the first open so the exit animation can run.
+  const [modalLoaded, setModalLoaded] = useState(false);
+  // A failed chunk unmounts the modal; the next click retries with a
+  // fresh lazy component.
+  const [ProjectModal, setProjectModal] = useState(modalChunk.create);
+  const handleModalError = () => {
+    setModalLoaded(false);
+    setSelectedModalProject(null);
+    setProjectModal(modalChunk.create);
+  };
+  const openModal = (project: ProjectItem) => {
+    setModalLoaded(true);
+    setSelectedModalProject(project);
+  };
 
   return (
-    <section id="work" className="relative py-16 sm:py-24 border-b border-line">
+    <section id="work" className="relative py-12 sm:py-24 border-b border-line">
       {/* Anchor Alias for backwards compatibility */}
       <div id="projects" className="absolute -top-24 pointer-events-none" />
 
@@ -26,12 +46,10 @@ export const Projects: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-        className="space-y-6 mb-16"
+        className="space-y-6 mb-10 sm:mb-16"
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-line">
-          <span className="editorial-eyebrow text-primary">
-            02 // {t("ผลงานเด่น", "SELECTED WORK")}
-          </span>
+          <ChapterEyebrow id="work" />
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
             {t("กรณีศึกษา", "CASE STUDIES")}
           </span>
@@ -77,22 +95,29 @@ export const Projects: React.FC = () => {
       </m.div>
 
       {/* Editorial Case Studies Stream */}
-      <div className="space-y-16 sm:space-y-24">
+      <div className="space-y-12 sm:space-y-24">
         {portfolioData.projects.map((project: ProjectItem, index: number) => (
           <EditorialCaseStudy
             key={project.id}
             project={project}
             index={index}
-            onSelect={setSelectedModalProject}
+            onSelect={openModal}
+            onPrefetch={modalChunk.prefetch}
           />
         ))}
       </div>
 
       {/* Deep Architectural Modal */}
-      <ProjectModal
-        project={selectedModalProject}
-        onClose={() => setSelectedModalProject(null)}
-      />
+      {modalLoaded && (
+        <ChunkBoundary onError={handleModalError}>
+          <Suspense fallback={null}>
+            <ProjectModal
+              project={selectedModalProject}
+              onClose={() => setSelectedModalProject(null)}
+            />
+          </Suspense>
+        </ChunkBoundary>
+      )}
     </section>
   );
 };

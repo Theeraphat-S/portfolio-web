@@ -44,8 +44,8 @@ export const EducationCard: React.FC<EducationCardProps> = ({ personal }) => {
           />
           <p className="text-xs text-zinc-300 mt-3 leading-relaxed">
             {t(
-              "ศึกษาเจาะลึกโครงสร้างข้อมูล อัลกอริทึม ระบบฐานข้อมูล การพัฒนาซอฟต์แวร์ฝั่งไคลเอนต์และเซิร์ฟเวอร์ และได้รับคัดเลือกเป็น TA ประจำภาควิชา 3 เทอม",
-              "Comprehensive studies in Data Structures, Algorithms, Relational Databases, and Client/Server Engineering. Selected as departmental TA for 3 consecutive semesters.",
+              "ศึกษาเจาะลึกโครงสร้างข้อมูล อัลกอริทึม ระบบฐานข้อมูล การพัฒนาซอฟต์แวร์ฝั่งไคลเอนต์และเซิร์ฟเวอร์ และได้รับคัดเลือกเป็น TA ประจำภาควิชา 4 เทอม",
+              "Comprehensive studies in Data Structures, Algorithms, Relational Databases, and Client/Server Engineering. Selected as departmental TA for 4 semesters.",
             )}
           </p>
         </div>

@@ -12,7 +12,7 @@ export const statsData: StatItem[] = [
     labelEn: "Flutter & Bloc Architecture",
   },
   {
-    value: "3x",
+    value: "4x",
     labelTh: "ผู้ช่วยสอนประจำภาควิชา (TA)",
     labelEn: "Teaching Assistant Semesters",
   },

@@ -25,7 +25,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Provider",
         level: "Proficient",
-        desc: "Lightweight reactive state architecture",
+        desc: "Lightweight reactive state management",
       },
       {
         name: "Android Studio",
@@ -58,7 +58,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "HTML5 & CSS3",
         level: "Proficient",
-        desc: "Semantic layouts, Responsive modern design",
+        desc: "Semantic markup, Responsive layouts",
       },
       {
         name: "Go (Golang)",
@@ -101,7 +101,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "VS Code & Eclipse",
         level: "Advanced",
-        desc: "Primary IDEs with optimized extensions",
+        desc: "Primary IDEs, set up with extensions",
       },
       {
         name: "REST API & Postman",
@@ -118,12 +118,12 @@ export const skillCategoriesData: SkillCategory[] = [
     skills: [
       {
         name: "Cross-Functional Collaboration",
-        level: "Expert",
+        level: "Advanced",
         desc: "Working with designers, PMs, and healthcare workers",
       },
       {
         name: "Technical Communication & TA",
-        level: "Expert",
+        level: "Advanced",
         desc: "Mentoring 100+ university students in coding",
       },
       {
@@ -134,7 +134,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Adaptive Learning",
         level: "Advanced",
-        desc: "Rapidly mastering emerging tech & AI tools",
+        desc: "Picking up new tools by building with them",
       },
       {
         name: "Agile / Scrum Mindset",

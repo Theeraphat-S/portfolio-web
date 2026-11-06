@@ -1,4 +1,4 @@
-import { BilingualText, PintoFeedPost, PosDemoItem } from "../types/portfolio";
+import { BilingualText, PintoMenuItem, PosDemoItem } from "../types/portfolio";
 
 // Illustrative content shown inside the in-browser device demos. Names,
 // posts and figures are sample data, not production records.
@@ -10,58 +10,45 @@ export const ncdsDemo = {
   } satisfies BilingualText,
 };
 
-const pintoFeedColumns: PintoFeedPost[][] = [
-  [
-    {
-      id: 1,
-      author: "มะปราง",
-      likes: 4,
-      caption: { th: "แมวส้มเฝ้าร้านกาแฟ", en: "The café's ginger guard" },
-      visual: "cat",
-      shape: "portrait",
-    },
-    {
-      id: 3,
-      author: "Ton.Dev",
-      likes: 3,
-      caption: { th: "โต๊ะทำงานใหม่", en: "New desk setup" },
-      visual: "laptop",
-      shape: "tall",
-    },
-  ],
-  [
-    {
-      id: 2,
-      author: "Pinto",
-      official: true,
-      likes: 7,
-      caption: {
-        th: "Flutter Workshop เสาร์นี้",
-        en: "Flutter workshop this Saturday",
-      },
-      visual: "coffee",
-      shape: "tall",
-      video: true,
-    },
-    {
-      id: 4,
-      author: "ข้าวหอม",
-      likes: 12,
-      caption: { th: "ทริปดอยสุเทพตอนเช้า", en: "Sunrise at Doi Suthep" },
-      visual: "mountain",
-      shape: "portrait",
-    },
-  ],
-];
-
 export const pintoDemo = {
-  feedColumns: pintoFeedColumns,
-  categories: {
-    all: { th: "ทั้งหมด", en: "All" },
-    travel: { th: "ท่องเที่ยว", en: "Travel" },
-    fashion: { th: "แฟชั่น", en: "Fashion & Style" },
-    food: { th: "อาหาร", en: "Food" },
-  } satisfies Record<string, BilingualText>,
+  /** Illustrative store whose existing web menu loads in the WebView. */
+  menu: {
+    store: { th: "ครัวนิมมาน", en: "Nimman Kitchen" } satisfies BilingualText,
+    path: "/menu/nimman-kitchen",
+    /** Badge on the browser chrome marking where the web content starts. */
+    chromeLabel: "WebView",
+    sections: {
+      popular: { th: "เมนูแนะนำ", en: "Popular" },
+    } satisfies Record<string, BilingualText>,
+    items: [
+      {
+        id: "m1",
+        name: { th: "ข้าวซอยไก่", en: "Khao soi with chicken" },
+        price: 69,
+        visual: "noodles",
+      },
+      {
+        id: "m2",
+        name: { th: "ส้มตำไทย", en: "Thai papaya salad" },
+        price: 55,
+        visual: "salad",
+      },
+      {
+        id: "m3",
+        name: { th: "ชาไทยเย็น", en: "Iced Thai tea" },
+        price: 40,
+        visual: "drink",
+      },
+      {
+        id: "m4",
+        name: { th: "ข้าวเหนียวมะม่วง", en: "Mango sticky rice" },
+        price: 65,
+        visual: "dessert",
+      },
+    ] satisfies PintoMenuItem[],
+    /** Quantities already in the native cart when the menu opens. */
+    startingCart: { m1: 1, m3: 1 } as Record<string, number>,
+  },
   /** Streak before today's check-in; claiming makes it day 8. */
   startingStreakDays: 7,
   streakRewardPoints: 50,

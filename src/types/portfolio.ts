@@ -77,8 +77,6 @@ export interface ExperienceItem {
   type: ExperienceType;
   badgeTh: string;
   badgeEn: string;
-  subBadgeTh?: string;
-  subBadgeEn?: string;
   descriptionTh: string;
   descriptionEn: string;
   contributions?: ExperienceContribution[];
@@ -101,7 +99,8 @@ export interface ReferenceInfo {
   nameEn: string;
   roleTh: string;
   roleEn: string;
-  phone: string;
+  /** Publish only with the referee's consent. */
+  phone?: string;
   email: string;
 }
 
@@ -123,10 +122,49 @@ export interface PersonalInfo {
   addressEn?: string;
   github: string;
   githubUsername: string;
+  /** Public path of the PDF resume. */
+  resumeUrl: string;
+  /** Label of the résumé card and its link text. */
+  resumeLabel: BilingualText;
+  resumeLinkLabel: BilingualText;
   locationTh: string;
   locationEn: string;
+  /** Shorter location line for the hero meta row. */
+  heroLocationTh: string;
+  heroLocationEn: string;
   education: EducationInfo;
   reference?: ReferenceInfo;
+}
+
+/** A headline split so one phrase can carry the accent colour. */
+export interface AboutHeadline {
+  lead: string;
+  highlight: string;
+  rest: string;
+}
+
+/** One line of the Approach chapter's credentials list. */
+export interface AboutCredential {
+  id: string;
+  labelTh: string;
+  labelEn: string;
+  valueTh: string;
+  valueEn: string;
+  detailTh: string;
+  detailEn: string;
+  periodTh: string;
+  periodEn: string;
+}
+
+/** Copy for the Approach (About) chapter. */
+export interface AboutContent {
+  headlineTh: AboutHeadline;
+  headlineEn: AboutHeadline;
+  practiceTh: string;
+  practiceEn: string;
+  credentialsLabelTh: string;
+  credentialsLabelEn: string;
+  credentials: AboutCredential[];
 }
 
 export interface StatItem {
@@ -162,6 +200,8 @@ export interface StoryBeat {
   streamTag: string;
   streamState: string;
   streamDetails: string;
+  /** State the device shows at this beat, sent as the event payload. */
+  streamPayload: Record<string, unknown>;
   highlightSpecs: string[];
 }
 
@@ -190,18 +230,14 @@ export interface BilingualText {
   en: string;
 }
 
-export type PintoPostVisual = "cat" | "laptop" | "coffee" | "mountain";
+export type PintoMenuVisual = "noodles" | "salad" | "drink" | "dessert";
 
-export interface PintoFeedPost {
-  id: number;
-  author: string;
-  official?: boolean;
-  likes: number;
-  caption: BilingualText;
-  visual: PintoPostVisual;
-  /** Portrait tiles are 3:4, tall tiles 4:5, so the grid staggers. */
-  shape: "portrait" | "tall";
-  video?: boolean;
+/** A dish on the web menu shown inside the Pinto WebView demo. */
+export interface PintoMenuItem {
+  id: string;
+  name: BilingualText;
+  price: number;
+  visual: PintoMenuVisual;
 }
 
 export interface PosDemoItem {

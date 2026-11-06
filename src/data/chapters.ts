@@ -36,8 +36,8 @@ export const STORY_CHAPTERS: StoryChapter[] = [
     labelTh: "ประสบการณ์",
     labelEn: "EXPERIENCE",
     bridge: {
-      th: "ทักษะเหล่านั้นฝึกมาจากบทบาทเหล่านี้ ฝึกงานเป็น Mobile Developer ที่ได้ส่งฟีเจอร์ขึ้นแอปที่ใช้งานจริง เป็นผู้ช่วยสอน 3 ภาคการศึกษา และเป็นวิทยากรรับเชิญด้าน AI ให้โรงเรียนมัธยม",
-      en: "Those skills came from these roles: a mobile developer internship where I shipped features to a live app, three semesters as a teaching assistant, and a guest talk on AI for high-school students.",
+      th: "ทักษะเหล่านั้นฝึกมาจากบทบาทเหล่านี้ ฝึกงานเป็น Mobile Developer ที่ได้ส่งฟีเจอร์ขึ้นแอปที่ใช้งานจริง เป็นผู้ช่วยสอน 4 ภาคการศึกษา และเป็นวิทยากรรับเชิญด้าน AI ให้โรงเรียนมัธยม",
+      en: "Those skills came from these roles: a mobile developer internship where I shipped features to a live app, four semesters as a teaching assistant, and a guest talk on AI for high-school students.",
     },
   },
   {
@@ -50,6 +50,21 @@ export const STORY_CHAPTERS: StoryChapter[] = [
     },
   },
 ];
+
+/** A chapter's place in the story as the two-digit number its eyebrow
+ * shows, counted from the intro as 01, the same order the tracker reads. */
+export const chapterNumber = (id: string): string => {
+  const index = STORY_CHAPTERS.findIndex((chapter) => chapter.id === id);
+  if (index < 0) throw new Error(`Unknown chapter "${id}"`);
+  return String(index + 1).padStart(2, "0");
+};
+
+/** The chapter record for a section id. */
+export const chapterFor = (id: string): StoryChapter => {
+  const chapter = STORY_CHAPTERS.find((c) => c.id === id);
+  if (!chapter) throw new Error(`Unknown chapter "${id}"`);
+  return chapter;
+};
 
 /** The bridge line that opens a chapter. */
 export const bridgeFor = (id: string): BilingualText => {

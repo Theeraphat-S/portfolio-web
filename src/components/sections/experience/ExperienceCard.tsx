@@ -119,7 +119,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
             {experience.skills.map((skill, sIdx) => (
               <span
                 key={sIdx}
-                className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-950 text-zinc-300 border border-zinc-800"
+                className="text-xs font-mono px-2 py-0.5 rounded bg-zinc-950 text-zinc-300 border border-zinc-800"
               >
                 {skill}
               </span>

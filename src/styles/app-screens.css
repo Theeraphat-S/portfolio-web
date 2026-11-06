@@ -27,18 +27,19 @@
   --color-pinto-outline: #e6e9e7;
   --color-pinto-outline-soft: #eaf1ec;
   --color-pinto-track: #e3efe7;
-  --color-pinto-muted: #8a918c;
-  --color-pinto-muted-green: #8a9a90;
   --color-pinto-chevron: #a3b0a8;
   --color-pinto-on-surface-variant: #5c6660;
-  --color-pinto-like: #e0245e;
-  --color-pinto-mint: #e3f7f3;
   --color-pinto-green-wash: #e5efe8;
   --color-pinto-green-50: #e9f7ee;
   --color-pinto-green-100: #c8efd6;
   --color-pinto-green-200: #a8dcbb;
   --color-pinto-green-300: #9fd3b2;
   --color-pinto-green-800: #17703e;
+  /* Green for text on white or the surface: #23b14d is 2.8:1 there,
+     this is 5.5:1 on white. The brand green stays for fills. */
+  --color-pinto-green-text: #18793f;
+  /* Ink for text on brand-green fills (5.8:1 on #23b14d). */
+  --color-pinto-on-green: #04260f;
   --color-pinto-amber-50: #fff1cc;
   --shadow-pinto-fab: 0 4px 10px -3px rgb(35 177 77 / 0.6);
 
@@ -72,28 +73,15 @@
   --color-m3-error-on-chip: #a1231b;
   --color-pinto-on-surface: #191d1a;
   --color-pinto-icon: #404943;
-  --color-pinto-chip-outline: #9aa19c;
-  --color-pinto-travel-outline: #9fe0d6;
-  --color-pinto-travel: #1b9a87;
-  --color-pinto-fashion-outline: #f7b7cc;
-  --color-pinto-fashion-container: #fde6ee;
-  --color-pinto-fashion: #d4457a;
-  --color-pinto-food-outline: #f8d39a;
-  --color-pinto-food-container: #fff2dc;
-  --color-pinto-food: #b86e00;
   --color-pinto-amber-text: #7a5600;
-  --color-pinto-tile-cat-from: #3b3f4a;
-  --color-pinto-tile-cat-to: #1e2129;
-  --color-pinto-tile-cat-ink: #f2c38f;
-  --color-pinto-tile-laptop-from: #c9d6ea;
-  --color-pinto-tile-laptop-to: #8fa6c9;
-  --color-pinto-tile-laptop-ink: #23324d;
-  --color-pinto-tile-coffee-from: #dfe7f5;
-  --color-pinto-tile-coffee-to: #b9c9e6;
-  --color-pinto-tile-coffee-ink: #3b4f7a;
-  --color-pinto-tile-mountain-from: #ffd9a8;
-  --color-pinto-tile-mountain-to: #e98d5a;
-  --color-pinto-tile-mountain-ink: #5a2a10;
+  --color-pinto-tile-noodles: #fff2dc;
+  --color-pinto-tile-noodles-ink: #b86e00;
+  --color-pinto-tile-salad: #e3f7f3;
+  --color-pinto-tile-salad-ink: #1b9a87;
+  --color-pinto-tile-drink: #fde6ee;
+  --color-pinto-tile-drink-ink: #d4457a;
+  --color-pinto-tile-dessert: #fff1cc;
+  --color-pinto-tile-dessert-ink: #a87500;
   --color-pos-outline-hover: #9fd8bd;
   --color-pos-on-green-container: #002114;
   --color-pos-green: #006c4c;

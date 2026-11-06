@@ -21,7 +21,7 @@ export const ProjectModalMetrics: React.FC<ProjectModalMetricsProps> = ({
           key={idx}
           className="p-3 rounded-xl bg-white/[0.02] border border-line text-center"
         >
-          <span className="text-[11px] text-zinc-400 block mb-0.5 font-medium">
+          <span className="text-xs text-zinc-400 block mb-0.5 font-medium">
             {lang === "th" ? m.labelTh : m.labelEn}
           </span>
           <span className="text-sm sm:text-base font-bold font-mono text-primary">

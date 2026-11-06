@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { flushSync } from "react-dom";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
@@ -11,19 +12,19 @@ import {
   Send,
   ArrowUpRight,
   MapPin,
+  FileText,
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
 
-type Field = "name" | "email" | "message";
+type Field = "name" | "message";
 
-const LIMITS: Record<Field, number> = { name: 100, email: 254, message: 1500 };
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const LIMITS: Record<Field, number> = { name: 100, message: 1500 };
 
 const findErrors = (data: Record<Field, string>) => {
   const errors: Partial<Record<Field, true>> = {};
   if (!data.name.trim()) errors.name = true;
-  if (!EMAIL_PATTERN.test(data.email.trim())) errors.email = true;
   if (!data.message.trim()) errors.message = true;
   return errors;
 };
@@ -32,10 +33,6 @@ const ERROR_TEXT: Record<Field, { th: string; en: string }> = {
   name: {
     th: "กรุณาใส่ชื่อหรือชื่อบริษัท",
     en: "Please enter your name or company.",
-  },
-  email: {
-    th: "กรุณาใส่อีเมลให้ถูกรูปแบบ เช่น name@company.com",
-    en: "Please enter a valid email, e.g. name@company.com.",
   },
   message: {
     th: "กรุณาเขียนข้อความสั้น ๆ",
@@ -58,7 +55,6 @@ export const ContactSection: React.FC = () => {
   const [draftOpened, setDraftOpened] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     message: "",
   });
   const [errors, setErrors] = useState<Partial<Record<Field, true>>>({});
@@ -108,8 +104,10 @@ export const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const found = findErrors(formData);
-    setErrors(found);
-    const firstInvalid = (["name", "email", "message"] as Field[]).find(
+    // Render the error text before moving focus, so the field is announced
+    // together with the message its aria-describedby now points at.
+    flushSync(() => setErrors(found));
+    const firstInvalid = (["name", "message"] as Field[]).find(
       (field) => found[field],
     );
     if (firstInvalid) {
@@ -118,36 +116,34 @@ export const ContactSection: React.FC = () => {
     }
 
     const name = formData.name.trim();
-    const email = formData.email.trim();
     const message = formData.message.trim();
     const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    );
+    const body = encodeURIComponent(`Name: ${name}\n\nMessage:\n${message}`);
     window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
     setDraftOpened(true);
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 border-b border-line">
+    <section
+      id="contact"
+      className="pt-12 pb-12 sm:pt-24 sm:pb-16 border-b border-line"
+    >
       {/* Section Eyebrow */}
       <m.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={FADE_UP}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
+        className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-primary">
-          05 // {t("ติดต่อ", "CONTACT")}
-        </span>
+        <ChapterEyebrow id="contact" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ช่องทางติดต่อ", "GET IN TOUCH")}
         </span>
       </m.div>
 
       {/* Asymmetric 2-Column Editorial Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-14 items-start">
         {/* Left Column (Monumental Headline, Availability, Primary Email CTA & Coordinates) */}
         <m.div
           initial="hidden"
@@ -264,7 +260,28 @@ export const ContactSection: React.FC = () => {
               </a>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1 sm:col-span-2">
+            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1">
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
+                <FileText className="w-3 h-3 text-primary" />
+                <span>
+                  {t(personal.resumeLabel.th, personal.resumeLabel.en)}
+                </span>
+              </div>
+              <a
+                href={personal.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor-text="RESUME"
+                className="text-xs sm:text-sm font-mono font-bold text-zinc-200 hover:text-signal transition-colors flex items-center gap-1"
+              >
+                <span>
+                  {t(personal.resumeLinkLabel.th, personal.resumeLinkLabel.en)}
+                </span>
+                <ArrowUpRight className="w-3 h-3 text-zinc-400" />
+              </a>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
                 <MapPin className="w-3 h-3 text-primary" />
                 <span>
@@ -341,38 +358,6 @@ export const ContactSection: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label
-                  htmlFor="contact-email"
-                  className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
-                >
-                  {lang === "th"
-                    ? "อีเมลสำหรับตอบกลับ"
-                    : "Your email (for my reply)"}
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  autoComplete="email"
-                  inputMode="email"
-                  required
-                  maxLength={LIMITS.email}
-                  aria-invalid={errors.email ? true : undefined}
-                  aria-describedby={
-                    errors.email ? "contact-email-error" : undefined
-                  }
-                  value={formData.email}
-                  onChange={(e) => updateField("email", e.target.value)}
-                  placeholder="name@company.com"
-                  className={inputClass(!!errors.email)}
-                />
-                {errors.email && (
-                  <p id="contact-email-error" className="text-xs text-rose-300">
-                    {t(ERROR_TEXT.email.th, ERROR_TEXT.email.en)}
-                  </p>
-                )}
-              </div>
-
-              <div className="space-y-1.5">
-                <label
                   htmlFor="contact-message"
                   className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
                 >
@@ -409,7 +394,7 @@ export const ContactSection: React.FC = () => {
                   )}
                   <span
                     id="contact-message-count"
-                    className={`text-[11px] font-mono tabular-nums shrink-0 ${
+                    className={`text-xs font-mono tabular-nums shrink-0 ${
                       formData.message.length >= LIMITS.message
                         ? "text-rose-300"
                         : "text-zinc-500"

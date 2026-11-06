@@ -15,6 +15,7 @@ import {
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
 import { ExperienceItem } from "../../../types";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
 
 export const ExperienceTimeline: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -75,7 +76,7 @@ export const ExperienceTimeline: React.FC = () => {
   return (
     <section
       id="timeline"
-      className="relative py-16 sm:py-24 border-b border-line"
+      className="relative py-12 sm:py-24 border-b border-line"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="experience" className="absolute -top-24 pointer-events-none" />
@@ -86,11 +87,9 @@ export const ExperienceTimeline: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={sectionFadeIn}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
+        className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-primary">
-          04 // {t("เส้นทางการทำงาน", "CAREER TIMELINE")}
-        </span>
+        <ChapterEyebrow id="timeline" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ฝึกงานและการสอน", "INTERNSHIP & TEACHING")}
         </span>
@@ -102,7 +101,7 @@ export const ExperienceTimeline: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={sectionFadeIn}
-        className="space-y-4 mb-16 max-w-4xl"
+        className="space-y-4 mb-10 sm:mb-16 max-w-4xl"
       >
         <BilingualStack
           as="h2"
@@ -131,16 +130,12 @@ export const ExperienceTimeline: React.FC = () => {
           className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-signal/70 to-transparent origin-top pointer-events-none"
         />
 
-        <div className="space-y-12 md:space-y-16">
+        <div className="space-y-10 md:space-y-16">
           {experiences.map((exp: ExperienceItem, idx: number) => {
             const isActive = idx === 0;
-            const isAcademic = exp.type === "ta" || exp.type === "academic";
 
             const yearTh = exp.yearTh || exp.year;
             const yearEn = exp.yearEn || exp.year;
-            // Semester note for the multi-term TA entry.
-            const isMultiTerm =
-              Boolean(exp.subBadgeEn) && exp.year.includes("2024");
 
             return (
               <m.article
@@ -149,7 +144,7 @@ export const ExperienceTimeline: React.FC = () => {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
                 variants={itemVariants}
-                className="relative group pb-12 md:pb-16 border-b border-line last:border-b-0 last:pb-0"
+                className="relative group pb-10 md:pb-16 border-b border-line last:border-b-0 last:pb-0"
               >
                 {/* Subtle Radial Blue Ambient Highlight on Hover */}
                 <div
@@ -160,19 +155,15 @@ export const ExperienceTimeline: React.FC = () => {
                 <div className="flex flex-col md:flex-row items-start">
                   {/* Left Column: Chronology (~24% Desktop) */}
                   <div className="md:w-[24%] pl-12 md:pl-0 md:pr-8 shrink-0 mb-4 md:mb-0 space-y-1.5">
-                    {/* Downsized, balanced year typography */}
+                    {/* Year or year range: one format for every role */}
                     <BilingualStack
                       as="span"
-                      className={`text-lg sm:text-xl font-bold font-mono tracking-tight block ${
-                        isActive
-                          ? "text-primary"
-                          : "text-zinc-200 group-hover:text-white"
-                      } transition-colors`}
-                      th={isMultiTerm ? `${yearTh} / 3 เทอมการศึกษา` : yearTh}
-                      en={isMultiTerm ? `${yearEn} / 3 SEMESTERS` : yearEn}
+                      className="text-lg sm:text-xl font-bold font-mono tracking-tight block text-zinc-200"
+                      th={yearTh}
+                      en={yearEn}
                     />
 
-                    {/* Exact Time Period */}
+                    {/* Months or semesters on the meta line */}
                     <BilingualStack
                       as="span"
                       className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
@@ -183,7 +174,7 @@ export const ExperienceTimeline: React.FC = () => {
                     {/* Quiet Status Badge */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono tracking-wider uppercase whitespace-nowrap ${
+                        className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-mono tracking-wider uppercase whitespace-nowrap ${
                           isActive
                             ? "bg-primary/10 text-primary border border-primary/25"
                             : "bg-white/[0.03] text-zinc-400 border border-line"
@@ -194,12 +185,19 @@ export const ExperienceTimeline: React.FC = () => {
                     </div>
 
                     {/* Location */}
-                    <p className="text-xs text-zinc-400 font-mono flex items-center gap-1.5 pt-0.5">
-                      <MapPin className="w-3 h-3 text-zinc-400 shrink-0" />
-                      <span className="truncate">
-                        {lang === "th" ? exp.locationTh : exp.locationEn}
-                      </span>
-                    </p>
+                    {/* Wraps instead of truncating; both languages share
+                        one cell so a wrap never shifts the layout. */}
+                    <div className="text-xs text-zinc-400 font-mono flex items-start gap-1.5 pt-0.5">
+                      <MapPin className="w-3 h-3 mt-0.5 text-zinc-400 shrink-0" />
+                      <div className="min-w-0">
+                        <BilingualStack
+                          as="span"
+                          className="block break-words"
+                          th={exp.locationTh}
+                          en={exp.locationEn}
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Axis Node Indicator Marker */}
@@ -224,18 +222,6 @@ export const ExperienceTimeline: React.FC = () => {
                       6. Tech Stack
                   */}
                   <div className="md:w-[76%] pl-12 md:pl-10 flex-1 space-y-4">
-                    {/* Academic Distinguisher Eyebrow */}
-                    {isAcademic && (
-                      <div className="text-[10px] font-mono tracking-wider text-sky-400 uppercase font-semibold flex items-center gap-1.5">
-                        <GraduationCap className="w-3.5 h-3.5" />
-                        <BilingualStack
-                          as="span"
-                          th="บทบาททางวิชาการและผู้ช่วยสอน"
-                          en="ACADEMIC LEADERSHIP // UNIVERSITY MENTORSHIP"
-                        />
-                      </div>
-                    )}
-
                     {/* 1. Role & 2. Company */}
                     <div className="space-y-0.5">
                       <BilingualStack
@@ -258,7 +244,7 @@ export const ExperienceTimeline: React.FC = () => {
                     {/* 3. Key Contributions & Engineering Impact */}
                     <div className="space-y-2.5 pt-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-semibold flex items-center gap-1.5">
+                        <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-semibold flex items-center gap-1.5">
                           <Sparkles
                             className={`w-3 h-3 ${
                               isActive
@@ -283,14 +269,13 @@ export const ExperienceTimeline: React.FC = () => {
                                 className="grid grid-cols-[auto_1fr] gap-x-3 items-start group/item"
                               >
                                 <span
-                                  className={`text-xs font-mono font-bold ${
+                                  aria-hidden="true"
+                                  className={`mt-2 sm:mt-2.5 h-px w-3 ${
                                     isActive
-                                      ? "text-primary"
-                                      : "text-zinc-400 group-hover:text-zinc-200"
-                                  } pt-0.5 select-none transition-colors`}
-                                >
-                                  {String(cIdx + 1).padStart(2, "0")}
-                                </span>
+                                      ? "bg-primary"
+                                      : "bg-zinc-500 group-hover:bg-zinc-300"
+                                  } transition-colors`}
+                                />
                                 <div>
                                   <span className="text-xs sm:text-sm font-mono font-semibold text-white/95">
                                     {lang === "th"
@@ -311,14 +296,13 @@ export const ExperienceTimeline: React.FC = () => {
                                 className="grid grid-cols-[auto_1fr] gap-x-3 items-start"
                               >
                                 <span
-                                  className={`text-xs font-mono font-bold ${
+                                  aria-hidden="true"
+                                  className={`mt-[0.6rem] sm:mt-[0.7rem] h-px w-3 ${
                                     isActive
-                                      ? "text-primary"
-                                      : "text-zinc-400 group-hover:text-zinc-200"
-                                  } pt-0.5 select-none transition-colors`}
-                                >
-                                  {String(bIdx + 1).padStart(2, "0")}
-                                </span>
+                                      ? "bg-primary"
+                                      : "bg-zinc-500 group-hover:bg-zinc-300"
+                                  } transition-colors`}
+                                />
                                 <BilingualStack
                                   className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-light"
                                   th={exp.bulletsTh[bIdx] ?? bulletEn}
@@ -339,7 +323,7 @@ export const ExperienceTimeline: React.FC = () => {
                     {/* 6. Minimal Technical Stack Inline Row */}
                     <div className="pt-2 border-t border-white/[0.04]">
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono tracking-wider text-zinc-400">
-                        <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mr-0.5">
+                        <span className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mr-0.5">
                           SPECS:
                         </span>
                         {exp.skills.map((skill) => (
@@ -367,14 +351,14 @@ export const ExperienceTimeline: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={sectionFadeIn}
-          className="mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-line hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
+          className="mt-10 sm:mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-line hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           <div className="space-y-1">
             <BilingualStack
               as="span"
-              className="text-[10px] font-mono text-primary uppercase tracking-widest block font-medium"
-              th="04.1 // การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
-              en="04.1 // ACADEMIC VERIFICATION & REFERENCE"
+              className="text-xs font-mono text-primary uppercase tracking-widest block font-medium"
+              th="การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
+              en="ACADEMIC VERIFICATION & REFERENCE"
             />
             <BilingualStack
               as="h4"

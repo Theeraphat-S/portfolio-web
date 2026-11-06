@@ -71,7 +71,7 @@ export const ProjectEngineeringAnalysis: React.FC<
             "Engineering Decisions & Impact Analysis",
           )}
         </h4>
-        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
           Product Sense
         </span>
       </div>

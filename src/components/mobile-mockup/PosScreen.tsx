@@ -84,6 +84,8 @@ export const PosScreen: React.FC<PosScreenProps> = ({
 
   const totalAmount = cartItems.reduce((acc, it) => acc + it.price * it.qty, 0);
   const itemTotal = cartItems.reduce((acc, it) => acc + it.qty, 0);
+  // Thai prices include 7% VAT; the summary shows the included share.
+  const vatIncluded = (totalAmount * 7) / 107;
 
   const updateItemQty = (id: string, delta: number) => {
     const updated = cartItems
@@ -412,6 +414,10 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           <div className="flex justify-between text-[12px] text-pos-on-surface-variant">
             <span>{t(`สินค้า ${itemTotal} ชิ้น`, `${itemTotal} items`)}</span>
             <span className="tabular-nums">฿{totalAmount}.00</span>
+          </div>
+          <div className="flex justify-between text-[12px] text-pos-on-surface-variant">
+            <span>{t("รวม VAT 7%", "Incl. VAT 7%")}</span>
+            <span className="tabular-nums">฿{vatIncluded.toFixed(2)}</span>
           </div>
           <div className="mt-1 flex items-baseline justify-between">
             <span className="text-[13px] font-semibold">
