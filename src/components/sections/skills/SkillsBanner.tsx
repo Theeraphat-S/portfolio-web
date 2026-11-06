@@ -8,11 +8,11 @@ export const SkillsBanner: React.FC = () => {
   return (
     <div className="mt-12 p-6 rounded-3xl bg-gradient-to-r from-zinc-900 via-zinc-900/90 to-zinc-900 border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0 shadow-glow-md">
+        <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0 ">
           <Layers className="w-6 h-6" />
         </div>
         <div>
-          <h4 className="text-base font-bold text-white flex items-center gap-2">
+          <h4 className="text-base font-semibold text-white flex items-center gap-2">
             Flutter Clean Architecture & State Mastery
             <Sparkles className="w-4 h-4 text-cyan-400" />
           </h4>

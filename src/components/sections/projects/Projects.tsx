@@ -50,8 +50,8 @@ export const Projects: React.FC = () => {
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-line">
           <ChapterEyebrow id="work" />
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-            {t("กรณีศึกษา", "CASE STUDIES")}
+          <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
+            {t("กรณีศึกษา", "Case studies")}
           </span>
         </div>
 
@@ -59,13 +59,13 @@ export const Projects: React.FC = () => {
           <div className="max-w-3xl space-y-3">
             <BilingualStack
               as="h2"
-              className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight"
+              className="text-3xl sm:text-5xl font-semibold tracking-tight text-white leading-tight"
               th={"3 โปรเจกต์ที่ได้ลงมือพัฒนา"}
-              en={"Three Projects I Built and Worked On"}
+              en={"Three projects I built and worked on"}
             />
             <ChapterBridge
               bridge={bridgeFor("work")}
-              className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
+              className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed"
             />
           </div>
 

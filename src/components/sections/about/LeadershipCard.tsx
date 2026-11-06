@@ -16,11 +16,11 @@ export const LeadershipCard: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-indigo-400 mb-2">
             <Award className="w-4 h-4" />
-            <span className="text-xs font-mono uppercase tracking-wider font-semibold">
+            <span className="text-xs font-mono font-semibold">
               {t("บทบาทวิชาการ & การถ่ายทอด", "Academic Leadership")}
             </span>
           </div>
-          <h4 className="text-base font-bold text-white">
+          <h4 className="text-base font-semibold text-white">
             {t(
               "ผู้ช่วยสอน (TA 3 รายวิชา) & วิทยากร AI",
               "3x TA & AI Workshop Keynote",

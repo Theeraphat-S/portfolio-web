@@ -17,11 +17,11 @@ export const PhilosophyCard: React.FC = () => {
         <div>
           <div className="flex items-center gap-2.5 text-cyan-400 mb-3">
             <Terminal className="w-5 h-5" />
-            <span className="text-xs font-mono uppercase tracking-wider font-semibold">
+            <span className="text-xs font-mono font-semibold">
               {t("ความมุ่งมั่นและตัวตน", "Core Philosophy")}
             </span>
           </div>
-          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+          <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">
             {t(
               "สร้างซอฟต์แวร์ที่ตอบโจทย์ผู้ใช้งานจริงและมีโครงสร้างที่ยั่งยืน",
               "Building Clean, Reliable & Human-Centric Software",

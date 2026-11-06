@@ -15,14 +15,14 @@ export const experiencesData: ExperienceItem[] = [
     locationEn: "Chiang Mai, Thailand",
     type: "internship",
     badgeTh: "การฝึกงานวิชาชีพ",
-    badgeEn: "Industry Internship",
+    badgeEn: "Industry internship",
     descriptionTh:
       "ทำงานในทีมพัฒนาแอป Pinto และระบบจัดการ ณ จุดขาย (POS) ด้วย Flutter/Dart และเชื่อมต่อฟีเจอร์เข้ากับ REST API ของบริษัท",
     descriptionEn:
       "Worked in the team building the Pinto app and a retail POS system with Flutter/Dart, connecting features to the company's REST APIs.",
     contributions: [
       {
-        labelEn: "State Management",
+        labelEn: "State management",
         labelTh: "การจัดการ State",
         descEn:
           "Built state management for the hybrid WebView menus and the Chat Streaks feature in the Pinto app.",
@@ -30,13 +30,13 @@ export const experiencesData: ExperienceItem[] = [
           "พัฒนาโครงสร้าง State Management สำหรับเมนู WebView และฟังก์ชัน Chat Streaks บน Pinto App",
       },
       {
-        labelEn: "POS Modules",
+        labelEn: "POS modules",
         labelTh: "โมดูล POS",
         descEn: "Built POS checkout features connected to REST APIs.",
         descTh: "พัฒนาฟีเจอร์ชำระเงินของระบบ POS และเชื่อมต่อกับ REST API",
       },
       {
-        labelEn: "Collaboration & Delivery",
+        labelEn: "Collaboration & delivery",
         labelTh: "การส่งมอบงานร่วมกับทีม",
         descEn:
           "Collaborated in Agile sprints and managed production code versions through Git/GitHub.",
@@ -77,7 +77,7 @@ export const experiencesData: ExperienceItem[] = [
       "Selected as Teaching Assistant, helping junior undergraduates through 3 core Computer Science & IT courses over 4 semesters.",
     contributions: [
       {
-        labelEn: "Client-Side Web Programming",
+        labelEn: "Client-side web programming",
         labelTh: "การโปรแกรมฝั่งไคลเอนต์",
         descEn:
           "Helped students with HTML5, CSS3, JavaScript ES6+, DOM manipulation, and responsive frontend foundations (Term 2/2025).",
@@ -85,7 +85,7 @@ export const experiencesData: ExperienceItem[] = [
           "ดูแลและให้คำปรึกษานักศึกษาในรายวิชาการโปรแกรมฝั่งไคลเอนต์ เทอม 2/2568 (HTML5, CSS3, JS, Frontend Frameworks)",
       },
       {
-        labelEn: "Database Systems",
+        labelEn: "Database systems",
         labelTh: "ระบบฐานข้อมูล",
         descEn:
           "Supervised relational schema design, SQL query writing, ER-Diagrams, and normalization principles (Term 1-2/2024).",
@@ -93,7 +93,7 @@ export const experiencesData: ExperienceItem[] = [
           "แนะนำการออกแบบฐานข้อมูลเชิงสัมพันธ์, ER-Diagrams, การ Normalization และการเขียนคำสั่ง SQL ในเทอม 1-2/2567",
       },
       {
-        labelEn: "Algorithmic Logic",
+        labelEn: "Algorithmic logic",
         labelTh: "ตรรกะและเทคนิคการเขียนโปรแกรม",
         descEn:
           "Coached freshmen in algorithmic problem solving, flowcharts, problem decomposition, and coding fundamentals (Term 1/2023).",
@@ -126,7 +126,7 @@ export const experiencesData: ExperienceItem[] = [
     periodTh: "กันยายน 2568",
     periodEn: "September 2025",
     roleTh: "วิทยากรรับเชิญ (Guest Speaker)",
-    roleEn: "Guest Speaker",
+    roleEn: "Guest speaker",
     companyTh: 'โครงการ "เริ่มต้นใช้ AI อย่างชาญฉลาดเพื่อการศึกษา"',
     companyEn: '"Smart AI for Education" Workshop',
     locationTh: "โรงเรียนจักรคำคณาทร, จ.ลำพูน",
@@ -140,7 +140,7 @@ export const experiencesData: ExperienceItem[] = [
       "Invited speaker leading a practical workshop for M.4 Gifted Computer students at Jakkhumkhanathorn School on using generative AI for learning and on ethical programming.",
     contributions: [
       {
-        labelEn: "AI Tools",
+        labelEn: "AI tools",
         labelTh: "เครื่องมือ AI",
         descEn:
           "Explained how modern AI tools are used in software development and education.",
@@ -148,7 +148,7 @@ export const experiencesData: ExperienceItem[] = [
           "บรรยายแนวคิดและหลักการทำงานของ Modern AI Tools ในงาน Software Development และการศึกษา",
       },
       {
-        labelEn: "Prompting & Coding with AI",
+        labelEn: "Prompting & coding with AI",
         labelTh: "การสั่งการและการเขียนโค้ดร่วมกับ AI",
         descEn:
           "Demonstrated prompt writing and using AI to work through coding exercises step by step.",
@@ -156,7 +156,7 @@ export const experiencesData: ExperienceItem[] = [
           "สาธิตการเขียน Prompt และการใช้ AI ช่วยแก้โจทย์ Coding ทีละขั้น",
       },
       {
-        labelEn: "Developer Pathways",
+        labelEn: "Developer pathways",
         labelTh: "เส้นทางสู่วิชาชีพนักพัฒนา",
         descEn:
           "Shared paths into software development, continuous learning, and ethical coding.",

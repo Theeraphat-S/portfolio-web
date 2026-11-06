@@ -11,14 +11,14 @@ A fixed vertical avionics chapter tracker (`StoryProgress.tsx`) located on the l
 _Avoid_: Generic fixed navbar dock that occupies persistent vertical reading space, unanchored floating menus, a second whole-page progress bar.
 
 **Story Position**:
-The continuous place of the reader in the story, from `StoryScrollProvider`: the integer part is the chapter under the **Reading Line**, the fraction is how far through it the reader is (2.5 = halfway through `SELECTED WORK`). It drives the **Chapter Atmosphere** and the **Story Progress Tracker**, and the active chapter is mirrored into the URL hash with `replaceState`.
+The continuous place of the reader in the story, from `StoryScrollProvider`: the integer part is the chapter under the **Reading Line**, the fraction is how far through it the reader is (2.5 = halfway through `Selected work`). It drives the **Chapter Atmosphere** and the **Story Progress Tracker**, and the active chapter is mirrored into the URL hash with `replaceState`.
 _Avoid_: Per-component `IntersectionObserver`s that each decide the active chapter.
 
 **Reading Line**:
 The horizontal line in the viewport where content counts as being read: 40% down for chapters, 50% for the pinned runway, 60% for the stacked runway.
 
 **Chapter Atmosphere**:
-Fixed lighting behind the page (`Atmosphere.tsx`): a Primary Blue glow, an Electric Cyan glow and a lift toward the `surface` tone, with one look per chapter blended across chapter boundaries by **Story Position**. Transform and opacity only; reduced motion holds the intro look.
+Fixed backdrop behind the page (`Atmosphere.tsx`): a neutral lift from `void` toward the `surface` tone, one value per chapter, blended across chapter boundaries by **Story Position**. Opacity only, no colored light; reduced motion holds the intro value.
 _Avoid_: Animating gradients or colours directly, per-chapter accent hues outside the palette.
 
 **Chapter Bridge**:

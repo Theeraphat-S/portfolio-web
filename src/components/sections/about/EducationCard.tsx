@@ -22,13 +22,13 @@ export const EducationCard: React.FC<EducationCardProps> = ({ personal }) => {
         <div>
           <div className="flex items-center gap-2.5 text-cyan-400 mb-3">
             <GraduationCap className="w-5 h-5" />
-            <span className="text-xs font-mono uppercase tracking-wider font-semibold">
+            <span className="text-xs font-mono font-semibold">
               {t("ประวัติการศึกษา", "Education")}
             </span>
           </div>
           <BilingualStack
             as="h3"
-            className="text-lg font-bold text-white"
+            className="text-lg font-semibold text-white"
             th={personal.education.universityTh}
             en={personal.education.universityEn}
           />

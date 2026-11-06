@@ -32,11 +32,11 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-signal opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-signal shadow-glow-xs" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-signal " />
           </span>
-          <span className="text-zinc-300 font-semibold tracking-wider uppercase flex items-center gap-1.5 whitespace-nowrap">
+          <span className="text-zinc-300 font-semibold flex items-center gap-1.5 whitespace-nowrap">
             <TerminalBoxIcon className="w-3.5 h-3.5 text-primary" />
-            <span>BLoC DEVTOOLS</span>
+            <span>BLoC DevTools</span>
           </span>
         </div>
 
@@ -49,10 +49,10 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onFocus={onPrefetchDrawer}
             data-cursor-text="LOGS"
             aria-label={t("เปิดดูประวัติ Event Log", "Open Live Stream Logs")}
-            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer"
+            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-xs font-semibold transition flex items-center gap-1 cursor-pointer"
           >
             <Terminal className="w-2.5 h-2.5 text-primary" />
-            <span>LOGS ({eventsCount})</span>
+            <span>Logs ({eventsCount})</span>
           </button>
 
           <button
@@ -62,10 +62,10 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onFocus={onPrefetchDrawer}
             data-cursor-text="DART"
             aria-label={t("ดูโค้ด Flutter/Dart", "View Dart Source Code")}
-            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer"
+            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 text-xs font-semibold transition flex items-center gap-1 cursor-pointer"
           >
             <Code2 className="w-2.5 h-2.5" />
-            <span>DART CODE</span>
+            <span>Dart code</span>
           </button>
         </div>
       </div>
@@ -111,7 +111,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               />
             )}
             <div className="flex items-center gap-2 min-w-0 overflow-hidden">
-              <span className="px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-400 text-xs font-bold border border-sky-800/40 shrink-0">
+              <span className="px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-400 text-xs font-semibold border border-sky-800/40 shrink-0">
                 {latestEvent.tag}
               </span>
               <span className="text-white font-medium truncate min-w-0">

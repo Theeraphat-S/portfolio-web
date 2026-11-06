@@ -91,10 +91,8 @@
   --shadow-button: 0 4px 20px -4px rgb(77 124 254 / 0.28);
   --shadow-button-hover: 0 6px 24px -4px rgb(77 124 254 / 0.4);
   --shadow-glow-cta: 0 0 20px rgb(56 217 255 / 0.15);
-  --shadow-modal:
-    0 25px 60px -15px rgb(0 0 0 / 0.95), 0 0 35px -12px rgb(56 217 255 / 0.12);
-  --shadow-drawer:
-    0 25px 70px rgb(0 0 0 / 0.9), 0 0 30px rgb(56 217 255 / 0.12);
+  --shadow-modal: 0 25px 60px -15px rgb(0 0 0 / 0.95);
+  --shadow-drawer: 0 25px 70px rgb(0 0 0 / 0.9);
   --shadow-device:
     0 30px 60px -20px rgb(0 0 0 / 0.9), 0 18px 36px -18px rgb(0 0 0 / 0.7);
   --shadow-live-sm: 0 0 6px #10b981;
@@ -231,33 +229,6 @@
   background-size: 56px 56px;
 }
 
-/* Story atmosphere: two soft lights the Atmosphere component moves between
-   chapters. The gradient is painted once; only transform and opacity change. */
-.atmosphere-glow {
-  position: absolute;
-  left: calc(50% - 40vmax);
-  top: calc(50% - 40vmax);
-  width: 80vmax;
-  height: 80vmax;
-  will-change: transform, opacity;
-}
-
-.atmosphere-glow-blue {
-  background: radial-gradient(
-    circle,
-    color-mix(in oklab, var(--color-primary) 26%, transparent),
-    transparent 62%
-  );
-}
-
-.atmosphere-glow-cyan {
-  background: radial-gradient(
-    circle,
-    color-mix(in oklab, var(--color-signal) 18%, transparent),
-    transparent 58%
-  );
-}
-
 /* Micro Dot Pattern */
 .dot-matrix-bg {
   background-image: radial-gradient(
@@ -274,10 +245,9 @@
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   color: var(--color-primary);
 }
 
@@ -404,7 +374,6 @@ section[id] {
 .story-progress-dot.is-active {
   border-color: var(--color-signal);
   background: var(--color-signal);
-  box-shadow: 0 0 10px color-mix(in oklab, var(--color-signal) 55%, transparent);
   transform: scale(1.45);
 }
 
@@ -424,14 +393,11 @@ section[id] {
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
-    padding: 0.8125rem 1.625rem;
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     /* Fixed line box so the Thai fallback face cannot grow the button. */
     line-height: 1.25rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
     border-radius: 9999px;
     transition-property:
       color, background-color, border-color, box-shadow, transform;
@@ -448,15 +414,10 @@ section[id] {
   .btn-editorial-primary {
     background: var(--color-primary);
     color: var(--color-void);
-    box-shadow: 0 4px 20px -4px
-      color-mix(in oklab, var(--color-primary) 35%, transparent);
   }
 
   .btn-editorial-primary:hover {
     background: var(--color-signal);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 24px -4px
-      color-mix(in oklab, var(--color-signal) 40%, transparent);
   }
 
   .btn-editorial-outline {
@@ -568,12 +529,6 @@ section[id] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Wide mono tracking is tuned for Latin caps; Thai glyphs fall back to the
-   sans face and become hard to read when letter-spaced. */
-html[lang="th"] .editorial-eyebrow {
-  letter-spacing: 0.04em;
 }
 
 /* Fixed page chrome steps aside while any modal dialog is open. */

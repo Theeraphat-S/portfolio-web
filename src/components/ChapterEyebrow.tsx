@@ -9,7 +9,7 @@ interface ChapterEyebrowProps {
 }
 
 /**
- * The `NN // LABEL` line that opens a chapter. Number and label both come
+ * The `NN Label` line that opens a chapter. Number and label both come
  * from STORY_CHAPTERS, so the eyebrow always agrees with StoryProgress.
  */
 export const ChapterEyebrow: React.FC<ChapterEyebrowProps> = ({
@@ -20,7 +20,8 @@ export const ChapterEyebrow: React.FC<ChapterEyebrowProps> = ({
   const chapter = chapterFor(id);
   return (
     <span className={`editorial-eyebrow text-primary ${className}`}>
-      {chapterNumber(id)} // {t(chapter.labelTh, chapter.labelEn)}
+      <span className="text-muted tabular-nums">{chapterNumber(id)}</span>
+      {t(chapter.labelTh, chapter.labelEn)}
     </span>
   );
 };

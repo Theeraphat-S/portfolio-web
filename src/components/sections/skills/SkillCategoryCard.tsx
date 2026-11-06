@@ -63,7 +63,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
           <div>
             <BilingualStack
               as="h3"
-              className="text-base sm:text-lg font-bold text-white"
+              className="text-base sm:text-lg font-semibold text-white"
               th={category.nameTh}
               en={category.nameEn}
             />
