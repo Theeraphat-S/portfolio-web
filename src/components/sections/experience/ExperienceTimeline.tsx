@@ -15,6 +15,7 @@ import {
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
 import { ExperienceItem } from "../../../types";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
 
 export const ExperienceTimeline: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -88,9 +89,7 @@ export const ExperienceTimeline: React.FC = () => {
         variants={sectionFadeIn}
         className="flex items-center justify-between pb-6 mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-primary">
-          04 // {t("เส้นทางการทำงาน", "CAREER TIMELINE")}
-        </span>
+        <ChapterEyebrow id="timeline" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ฝึกงานและการสอน", "INTERNSHIP & TEACHING")}
         </span>
@@ -286,14 +285,13 @@ export const ExperienceTimeline: React.FC = () => {
                                 className="grid grid-cols-[auto_1fr] gap-x-3 items-start group/item"
                               >
                                 <span
-                                  className={`text-xs font-mono font-bold ${
+                                  aria-hidden="true"
+                                  className={`mt-2 sm:mt-2.5 h-px w-3 ${
                                     isActive
-                                      ? "text-primary"
-                                      : "text-zinc-400 group-hover:text-zinc-200"
-                                  } pt-0.5 select-none transition-colors`}
-                                >
-                                  {String(cIdx + 1).padStart(2, "0")}
-                                </span>
+                                      ? "bg-primary"
+                                      : "bg-zinc-500 group-hover:bg-zinc-300"
+                                  } transition-colors`}
+                                />
                                 <div>
                                   <span className="text-xs sm:text-sm font-mono font-semibold text-white/95">
                                     {lang === "th"
@@ -314,14 +312,13 @@ export const ExperienceTimeline: React.FC = () => {
                                 className="grid grid-cols-[auto_1fr] gap-x-3 items-start"
                               >
                                 <span
-                                  className={`text-xs font-mono font-bold ${
+                                  aria-hidden="true"
+                                  className={`mt-[0.6rem] sm:mt-[0.7rem] h-px w-3 ${
                                     isActive
-                                      ? "text-primary"
-                                      : "text-zinc-400 group-hover:text-zinc-200"
-                                  } pt-0.5 select-none transition-colors`}
-                                >
-                                  {String(bIdx + 1).padStart(2, "0")}
-                                </span>
+                                      ? "bg-primary"
+                                      : "bg-zinc-500 group-hover:bg-zinc-300"
+                                  } transition-colors`}
+                                />
                                 <BilingualStack
                                   className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-light"
                                   th={exp.bulletsTh[bIdx] ?? bulletEn}
@@ -376,8 +373,8 @@ export const ExperienceTimeline: React.FC = () => {
             <BilingualStack
               as="span"
               className="text-xs font-mono text-primary uppercase tracking-widest block font-medium"
-              th="04.1 // การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
-              en="04.1 // ACADEMIC VERIFICATION & REFERENCE"
+              th="การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
+              en="ACADEMIC VERIFICATION & REFERENCE"
             />
             <BilingualStack
               as="h4"

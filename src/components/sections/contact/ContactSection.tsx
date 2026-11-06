@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
 
 type Field = "name" | "message";
 
@@ -132,9 +133,7 @@ export const ContactSection: React.FC = () => {
         variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-primary">
-          05 // {t("ติดต่อ", "CONTACT")}
-        </span>
+        <ChapterEyebrow id="contact" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ช่องทางติดต่อ", "GET IN TOUCH")}
         </span>

@@ -9,6 +9,7 @@ import { portfolioData, bridgeFor } from "../../../data";
 import { ProjectItem } from "../../../types";
 import { EditorialCaseStudy } from "./EditorialCaseStudy";
 import { ProjectModal } from "./modal/ProjectModal";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
 
 export const Projects: React.FC = () => {
   const { t } = useLanguage();
@@ -29,9 +30,7 @@ export const Projects: React.FC = () => {
         className="space-y-6 mb-16"
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-line">
-          <span className="editorial-eyebrow text-primary">
-            02 // {t("ผลงานเด่น", "SELECTED WORK")}
-          </span>
+          <ChapterEyebrow id="work" />
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
             {t("กรณีศึกษา", "CASE STUDIES")}
           </span>

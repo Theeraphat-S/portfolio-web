@@ -5,6 +5,7 @@ import { aboutData, bridgeFor } from "../../../data";
 import type { AboutHeadline } from "../../../types";
 import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useLanguage } from "../../../context/LanguageContext";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
 
 const Headline: React.FC<{ copy: AboutHeadline }> = ({ copy }) => (
   <>
@@ -41,9 +42,7 @@ export const AboutBento: React.FC = () => {
             : { opacity: openingOpacity, y: openingY }
         }
       >
-        <span className="editorial-eyebrow text-primary mb-6">
-          01 // {t(about.eyebrowTh, about.eyebrowEn)}
-        </span>
+        <ChapterEyebrow id="about" className="mb-6" />
 
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-x-12">
           <div className="space-y-4 lg:col-span-7">

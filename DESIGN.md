@@ -155,7 +155,7 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 ### Named Rules
 
-**The Technical Eyebrow Rule.** Every major section begins with an uppercase monospace eyebrow (`01 // SECTION NAME`) rendered in Electric Cyan or muted zinc with `0.22em` tracking.  
+**The Technical Eyebrow Rule.** Every chapter after the hero begins with an uppercase monospace eyebrow (`02 // APPROACH` … `06 // CONTACT`) rendered by `ChapterEyebrow`, which takes both number and label from `src/data/chapters.ts` so they match the StoryProgress tracker (Intro is 01). Sub-headings inside a chapter carry no `NN //` prefix; only the 3 scrollytelling beats keep their numbers, because the sequence is the story.  
 **The Dual-Script Baseline Rule.** Thai and Latin typefaces must share proportional leading and word-break rules (`overflow-wrap: break-word`, `word-break: break-word`) to prevent jagged layout shifts when switching languages.
 
 ## Layout & Spatial System

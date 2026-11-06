@@ -154,8 +154,6 @@ export interface AboutCredential {
 
 /** Copy for the Approach (About) chapter. */
 export interface AboutContent {
-  eyebrowTh: string;
-  eyebrowEn: string;
   headlineTh: AboutHeadline;
   headlineEn: AboutHeadline;
   practiceTh: string;

@@ -6,10 +6,10 @@ import { FADE_UP } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
 import { SkillCategory } from "../../../types";
+import { ChapterEyebrow } from "../../ChapterEyebrow";
 
 const CATEGORY_META = [
   {
-    index: "01",
     labelEn: "MOBILE",
     labelTh: "โมบาย",
     taglineEn:
@@ -18,14 +18,12 @@ const CATEGORY_META = [
       "แอปข้ามแพลตฟอร์มด้วย Flutter การจัดการ State และ UI แบบ Reactive",
   },
   {
-    index: "02",
     labelEn: "LANGUAGES & WEB",
     labelTh: "ภาษาและเว็บ",
     taglineEn: "Programming languages, web basics, and REST API backends.",
     taglineTh: "ภาษาโปรแกรม พื้นฐานเว็บ และ REST API ฝั่ง Backend",
   },
   {
-    index: "03",
     labelEn: "DATA & TOOLING",
     labelTh: "ข้อมูลและเครื่องมือ",
     taglineEn:
@@ -34,7 +32,6 @@ const CATEGORY_META = [
       "ฐานข้อมูลเชิงสัมพันธ์ เครื่องมือทดสอบ API ระบบ Version Control และกระบวนการพัฒนา",
   },
   {
-    index: "04",
     labelEn: "TEAMWORK & TEACHING",
     labelTh: "การทำงานเป็นทีมและการสอน",
     taglineEn:
@@ -64,9 +61,7 @@ export const Skills: React.FC = () => {
         variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-12 border-b border-line"
       >
-        <span className="editorial-eyebrow text-primary">
-          03 // {t("ความสามารถ & ระบบ", "CAPABILITIES & SYSTEMS")}
-        </span>
+        <ChapterEyebrow id="capabilities" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
           {t("ทักษะแยกตามหมวด", "SKILLS BY DOMAIN")}
         </span>
@@ -96,7 +91,6 @@ export const Skills: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-12 lg:gap-y-14">
         {skillCategories.map((category: SkillCategory, catIdx: number) => {
           const meta = CATEGORY_META[catIdx] || {
-            index: String(catIdx + 1).padStart(2, "0"),
             labelEn: "CAPABILITY",
             labelTh: "ความสามารถ",
             taglineEn: "",
@@ -116,7 +110,6 @@ export const Skills: React.FC = () => {
               <div className="pb-3 border-b border-line space-y-1">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs font-mono text-primary font-semibold tracking-wider">
-                    <span>{meta.index} //</span>
                     <span>{lang === "th" ? meta.labelTh : meta.labelEn}</span>
                   </div>
                   <span className="text-xs font-mono text-zinc-400 uppercase">

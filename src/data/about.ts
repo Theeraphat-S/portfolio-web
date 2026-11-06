@@ -7,8 +7,6 @@ const { education } = personalData;
  * the credentials behind it. The NCDs accuracy figure lives with the NCDs
  * case study, not here. */
 export const aboutData: AboutContent = {
-  eyebrowTh: "แนวคิด",
-  eyebrowEn: "APPROACH",
   headlineTh: {
     lead: "ยังอยู่ช่วงต้นของสายอาชีพ ",
     highlight: "จึงให้ความสำคัญกับพื้นฐาน",
