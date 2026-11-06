@@ -297,9 +297,12 @@ export const ContactSection: React.FC = () => {
                   {t("ที่ตั้งและรูปแบบงาน", "Location & availability")}
                 </span>
               </div>
-              <span className="text-xs font-mono text-zinc-300 block">
-                {lang === "th" ? personal.locationTh : personal.locationEn}
-              </span>
+              <BilingualStack
+                as="span"
+                className="text-xs font-mono text-zinc-300 block"
+                th={personal.locationTh}
+                en={personal.locationEn}
+              />
             </div>
           </div>
         </m.div>
