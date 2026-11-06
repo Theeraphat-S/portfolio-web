@@ -56,7 +56,7 @@ src/
 │   ├── Atmosphere.tsx            # Per-chapter lighting driven by story position
 │   ├── ChapterBridge.tsx         # Chapter lead line lit word by word on scroll
 │   ├── StoryProgress.tsx         # Fixed vertical avionics chapter tracker
-│   ├── ScrollProgressBar.tsx     # Top reading progress indicator
+│   ├── ScrollProgressBar.tsx     # Top reading progress bar (hidden at 2xl, where StoryProgress shows)
 │   ├── SmoothScroll.tsx          # Lenis smooth scroll provider
 │   └── Footer.tsx                # Minimalist editorial footer
 ├── context/
