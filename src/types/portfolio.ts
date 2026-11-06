@@ -224,18 +224,14 @@ export interface BilingualText {
   en: string;
 }
 
-export type PintoPostVisual = "cat" | "laptop" | "coffee" | "mountain";
+export type PintoMenuVisual = "noodles" | "salad" | "drink" | "dessert";
 
-export interface PintoFeedPost {
-  id: number;
-  author: string;
-  official?: boolean;
-  likes: number;
-  caption: BilingualText;
-  visual: PintoPostVisual;
-  /** Portrait tiles are 3:4, tall tiles 4:5, so the grid staggers. */
-  shape: "portrait" | "tall";
-  video?: boolean;
+/** A dish on the web menu shown inside the Pinto WebView demo. */
+export interface PintoMenuItem {
+  id: string;
+  name: BilingualText;
+  price: number;
+  visual: PintoMenuVisual;
 }
 
 export interface PosDemoItem {
