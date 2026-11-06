@@ -19,8 +19,6 @@ export const ProjectEngineeringAnalysis: React.FC<
       labelEn: "1. The Real Problem",
       content: lang === "th" ? project.problemTh : project.problemEn,
       icon: AlertCircle,
-      borderColor: "border-rose-900/40",
-      textColor: "text-rose-400",
     },
     {
       id: "decision",
@@ -31,8 +29,6 @@ export const ProjectEngineeringAnalysis: React.FC<
           ? project.decisionRationaleTh
           : project.decisionRationaleEn,
       icon: Cpu,
-      borderColor: "border-sky-900/40",
-      textColor: "text-sky-400",
     },
     {
       id: "tradeoffs",
@@ -40,8 +36,6 @@ export const ProjectEngineeringAnalysis: React.FC<
       labelEn: "3. Key Trade-offs",
       content: lang === "th" ? project.tradeOffsTh : project.tradeOffsEn,
       icon: Scale,
-      borderColor: "border-amber-900/40",
-      textColor: "text-amber-400",
     },
     {
       id: "evidence",
@@ -49,8 +43,6 @@ export const ProjectEngineeringAnalysis: React.FC<
       labelEn: "4. Evidence & Usability Insight",
       content: lang === "th" ? project.evidenceTh : project.evidenceEn,
       icon: Search,
-      borderColor: "border-purple-900/40",
-      textColor: "text-purple-400",
     },
   ].filter((card): card is typeof card & { content: string } =>
     Boolean(card.content),
@@ -64,14 +56,14 @@ export const ProjectEngineeringAnalysis: React.FC<
   return (
     <div className="space-y-3 pt-2">
       <div className="flex items-center justify-between">
-        <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-primary flex items-center gap-1.5">
           <Cpu className="w-3.5 h-3.5" />
           {t(
             "การตัดสินใจเชิงวิศวกรรม & ผลกระทบ",
             "Engineering Decisions & Impact Analysis",
           )}
         </h4>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-white/[0.04] text-zinc-300 border border-line">
           Product Sense
         </span>
       </div>
@@ -83,12 +75,10 @@ export const ProjectEngineeringAnalysis: React.FC<
             return (
               <div
                 key={card.id}
-                className={`p-3.5 rounded-2xl bg-white/[0.015] border ${card.borderColor} space-y-1.5`}
+                className="p-3.5 rounded-2xl bg-white/[0.015] border border-line space-y-1.5"
               >
-                <div
-                  className={`flex items-center gap-1.5 text-xs font-mono font-semibold ${card.textColor}`}
-                >
-                  <Icon className="w-3.5 h-3.5 shrink-0" />
+                <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-zinc-100">
+                  <Icon className="w-3.5 h-3.5 shrink-0 text-primary" />
                   <span>{lang === "th" ? card.labelTh : card.labelEn}</span>
                 </div>
                 <p className="text-xs text-zinc-300 leading-relaxed">
@@ -102,8 +92,8 @@ export const ProjectEngineeringAnalysis: React.FC<
 
       {/* 5. Measured Outcome & Business Impact */}
       {outcomeText && (
-        <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 space-y-1.5">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-400">
+        <div className="p-3.5 rounded-2xl bg-primary/[0.06] border border-primary/30 space-y-1.5">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-primary">
             <TrendingUp className="w-3.5 h-3.5 shrink-0" />
             <span>
               {t(
@@ -112,9 +102,7 @@ export const ProjectEngineeringAnalysis: React.FC<
               )}
             </span>
           </div>
-          <p className="text-xs text-emerald-200/90 leading-relaxed">
-            {outcomeText}
-          </p>
+          <p className="text-xs text-zinc-200 leading-relaxed">{outcomeText}</p>
         </div>
       )}
     </div>

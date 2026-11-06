@@ -64,14 +64,15 @@
   /* Near-black tinted toward the void, used only mixed down for shadows. */
   --color-shade: #01030a;
 
-  /* DevTools deck and event dock: steps of the void, darkest to lightest. */
+  /* DevTools deck, event dock and HUD alias the two canvas steps: wells,
+     bars and floating strips sit on the void; panels sit on the surface. */
   --color-device-glass: #05060a;
-  --color-deck-well: #06080e;
-  --color-deck-bar: #080b12;
-  --color-dock: #090d15;
-  --color-hud: #0a0d14;
-  --color-deck: #0a1020;
-  --color-deck-head: #0c121e;
+  --color-deck-well: var(--color-void);
+  --color-deck-bar: var(--color-void);
+  --color-dock: var(--color-void);
+  --color-hud: var(--color-void);
+  --color-deck: var(--color-surface);
+  --color-deck-head: var(--color-surface);
 
   /* Device hardware: the aluminium band and keys. */
   --color-metal-lo: #1a1e28;
@@ -98,9 +99,9 @@
     0 30px 60px -20px rgb(0 0 0 / 0.9), 0 18px 36px -18px rgb(0 0 0 / 0.7);
   --shadow-live-sm: 0 0 6px #10b981;
   --shadow-live: 0 0 8px #10b981;
-  --shadow-glow-xs: 0 0 8px #1cc3ec;
+  --shadow-glow-xs: 0 0 8px var(--color-signal);
   --shadow-glow-sm: 0 0 10px rgb(56 217 255 / 0.25);
-  --shadow-glow: 0 0 15px #1cc3ec;
+  --shadow-glow: 0 0 15px var(--color-signal);
   --shadow-glow-soft: 0 0 15px rgb(56 217 255 / 0.15);
   --shadow-glow-md: 0 0 20px rgb(56 217 255 / 0.2);
   --shadow-glow-lg: 0 0 20px rgb(56 217 255 / 0.35);

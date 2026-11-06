@@ -112,17 +112,20 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 ### Secondary
 
-- **Electric Cyan** (`#38d9ff`, `signal`): Motion and live state only — hover and focus states, pulsing indicators, the active chapter dot, the scroll progress bar and the section-transition trace.
+- **Electric Cyan** (`#38d9ff`, `signal`): Motion and live state only — hover and focus states, pulsing indicators (including the DevTools dock heartbeat), the active chapter dot, every progress fill (scroll bar, story rail, beat rail and beat stepper) and the section-transition trace. A control that is blue at rest turns cyan as a whole on hover: text, border and tint together.
 
 ### Tertiary
 
-- **Telemetry Emerald** (`#10b981`): Status heartbeat for live availability and "Open for Roles" signaling.
+- **Telemetry Emerald** (`#10b981`): Availability status only — the "Open for Roles" pills in the hero and contact. It does not mark live streams, metrics or outcomes.
+- **Rose**: Form validation errors and failed actions only (the contact form, a failed copy). Destructive controls stay neutral.
+- **Categories** (e.g. the case study analysis cards) are told apart by label, icon and position, never by extra hues; there is no per-project accent color.
 
 ### Neutral
 
 - **Void** (`#070b14`, `void`): Global canvas.
 - **Surface** (`#0d1424`, `surface`): Sections and cards; glass cards use it at 80% with 20px blur.
 - **Surface Raised** (`#131c30`): Popovers, modals, drawers, nested elements.
+- **Deck aliases**: `deck` and `deck-head` alias `surface`; `deck-bar`, `deck-well`, `dock` and `hud` alias `void`. They exist as names only, so the canvas keeps three steps (void, surface, surface-raised) plus translucent white overlays. `device-glass` (`#05060a`) belongs to the device hardware.
 - **Ink** (`#f3f6fc`, `ink`): Headlines and primary text.
 - **Secondary Text** (`#b9c3d4`, `zinc-300`): Supporting narrative copy.
 - **Muted** (`#8b97ad`, `muted` / `zinc-400`): Descriptions and secondary data.
@@ -133,7 +136,7 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 **The 80 / 15 / 5 Rule.** Roughly 80% dark canvas and space, 15% surfaces and gray text, 5% blue and cyan. Accent color that spreads past that loses its pull.
 **The Blue Acts, Cyan Moves Rule.** Blue marks what is important or clickable at rest; cyan appears only when something moves, is hovered, or is live. Never set long body copy in either.
 **The Reserved Glow Rule.** Glow and gradient belong to the hero accent line, key numbers, and section transitions. Cards and buttons at rest carry no glow.
-**The Telemetry Heartbeat Rule.** Emerald (`#10b981`) is reserved for live, active, or verified real-world indicators, never decorative text.
+**The Telemetry Heartbeat Rule.** Emerald (`#10b981`) is reserved for the availability status, never decorative text, metrics or live streams (those are cyan).
 **The Zero-Shift Bilingual Rule.** All text containers supporting Thai and English apply balanced line-heights, flex alignment, and explicit min-heights so toggling languages causes no layout shift.
 **The Sticky Viewport Budget Rule.** Pinned demonstration viewports never exceed `calc(100vh - 6rem)`.
 
@@ -218,7 +221,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 ### Chapter Atmosphere (`Atmosphere`)
 
 - **Layers:** Fixed behind the content: a `surface`-tone lift layer and two 80vmax radial glows (`atmosphere-glow-blue` at 26% Primary Blue, `atmosphere-glow-cyan` at 18% Electric Cyan). The gradients are painted once; only transform and opacity change.
-- **Per-chapter looks:** Intro lit from the top right; Approach swings left and lifts the void; Selected Work raises cyan beside the device; Capabilities lights low from the right; Experience dims under the timeline; Contact gathers both lights low and centred. Each look holds through its chapter and blends across the boundary (±0.2 chapter).
+- **Per-chapter looks:** Intro lit from the top right; Approach swings left and lifts the void; Selected Work raises cyan beside the device; Capabilities turns cool, with cyan leading low on the right; Experience switches to a deeper blue key from the upper left with cyan almost out and the void darker; Contact gathers both lights low and centred. Each look holds through its chapter and blends across the boundary (±0.2 chapter).
 - **Restraint:** The lift tops out near `surface` (`#0d1424`), and the glows stay faint enough to keep the 80 / 15 / 5 rule. Reduced motion holds the intro look.
 
 ### Chapter Bridge (`ChapterBridge`)

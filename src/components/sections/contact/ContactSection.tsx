@@ -153,7 +153,7 @@ export const ContactSection: React.FC = () => {
           className="lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-8"
         >
           {/* Availability Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 font-mono text-xs min-h-[1.75rem]">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-mono text-xs min-h-[1.75rem]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span className="tracking-wide">
               {lang === "th"
@@ -211,16 +211,16 @@ export const ContactSection: React.FC = () => {
                         "Copy email address to clipboard",
                       )
                 }
-                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-primary/10 hover:bg-signal/20 text-primary border border-primary/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
               >
                 {copied ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-primary" />
+                    <Check className="w-3.5 h-3.5" />
                     <span>{t("คัดลอกสำเร็จ!", "COPIED!")}</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5 text-primary" />
+                    <Copy className="w-3.5 h-3.5" />
                     <span>{t("คัดลอกอีเมล", "COPY EMAIL")}</span>
                   </>
                 )}

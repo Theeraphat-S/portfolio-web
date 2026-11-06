@@ -27,8 +27,8 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 pb-2 border-b border-line text-xs">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-live-sm" />
+            <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-signal opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-signal shadow-glow-xs" />
           </span>
           <span className="text-zinc-300 font-semibold tracking-wider uppercase flex items-center gap-1.5 whitespace-nowrap">
             <TerminalBoxIcon className="w-3.5 h-3.5 text-primary" />
@@ -58,7 +58,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onFocus={onPrefetchDrawer}
             data-cursor-text="DART"
             aria-label={t("ดูโค้ด Flutter/Dart", "View Dart Source Code")}
-            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/20 text-primary border border-primary/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <Code2 className="w-2.5 h-2.5" />
             <span>DART CODE</span>

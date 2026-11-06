@@ -85,7 +85,7 @@ export const Projects: React.FC = () => {
                   scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
                 }}
                 data-cursor-text="JUMP"
-                className="inline-flex items-center px-3 min-h-9 rounded-full border border-transparent text-zinc-400 hover:text-white hover:border-primary/30 hover:bg-primary/10 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                className="inline-flex items-center px-3 min-h-9 rounded-full border border-transparent text-zinc-400 hover:text-signal hover:border-signal/30 hover:bg-signal/[0.06] transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
               >
                 {project.shortName ?? project.titleEn}
               </a>

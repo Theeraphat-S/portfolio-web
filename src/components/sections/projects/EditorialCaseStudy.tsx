@@ -295,7 +295,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 {segments.map((segment, sIdx) => (
                   <span key={sIdx} className="h-px flex-1 bg-line">
                     <m.span
-                      className="block h-full origin-left bg-primary"
+                      className="block h-full origin-left bg-signal"
                       style={{ scaleX: segment }}
                     />
                   </span>
@@ -490,7 +490,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 )}
                 <m.span
                   aria-hidden="true"
-                  className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-primary/60"
+                  className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-signal/70"
                   style={{ scaleX: segments[bIdx] }}
                 />
               </button>
@@ -576,11 +576,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             data-cursor-text="ANALYZE"
             className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
-            <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-primary transition-colors" />
+            <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
             <span className="font-semibold tracking-wider">
               {t("อ่าน case study", "VIEW CASE STUDY")}
             </span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-300" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-300" />
           </button>
         </div>
       </div>

@@ -66,12 +66,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             className="relative w-full max-w-3xl rounded-3xl bg-surface/95 border border-line p-6 sm:p-8 shadow-modal overflow-hidden max-h-[90vh] flex flex-col my-auto backdrop-blur-2xl outline-none"
           >
             {/* Top Decorative Border Highlight */}
-            <div
-              className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
-              style={{
-                backgroundImage: `linear-gradient(to right, ${project.color}, var(--color-signal), transparent)`,
-              }}
-            />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-signal to-transparent" />
 
             {/* Modal Header */}
             <ProjectModalHeader project={project} onClose={onClose} />
