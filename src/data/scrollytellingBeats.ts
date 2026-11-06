@@ -184,7 +184,7 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       titleTh: "ขายต่อได้เมื่อเน็ตหลุด ด้วยคิวใน SQLite",
       titleEn: "Offline Checkout with a SQLite Queue",
       subtitleTh: "หน้าเคาน์เตอร์ไม่ต้องหยุดรอเครือข่าย",
-      subtitleEn: "The counter never waits on the network",
+      subtitleEn: "The counter keeps selling when the network drops",
       descriptionTh:
         "เมื่อการเชื่อมต่อขาด ธุรกรรมจะถูกบันทึกลงคิวใน SQLite บนเครื่องก่อน แคชเชียร์จึงคิดเงินต่อได้ตามปกติ",
       descriptionEn:

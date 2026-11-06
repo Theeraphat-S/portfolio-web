@@ -24,6 +24,9 @@ export const personalData: PersonalInfo = {
   githubUsername: "Theeraphat-S",
   locationTh: "อ.แม่อาย จ.เชียงใหม่ (ยินดีทำงาน Onsite/Hybrid/Remote)",
   locationEn: "Chiang Mai, Thailand (Open to Onsite/Hybrid/Remote)",
+  heroLocationTh: "เชียงใหม่ ประเทศไทย ยินดีทำงาน Onsite / Hybrid / Remote",
+  heroLocationEn:
+    "Chiang Mai, Thailand, open to Onsite, Hybrid, or Remote roles",
   education: {
     degreeTh: "ปริญญาตรี สาขาเทคโนโลยีสารสนเทศ (วท.บ.)",
     degreeEn: "B.Sc. in Information Technology, Faculty of Science",

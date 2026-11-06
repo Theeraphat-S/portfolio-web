@@ -120,12 +120,15 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
   const { count: cartCount, total: cartTotal } = cartSummary(cart);
 
   // Adjust state when the screen changes: returning to the menu starts
-  // from the demo cart again; reaching the profile applies today's streak.
+  // from the demo cart again; the streak screen starts unclaimed (day 7),
+  // matching its log line; reaching the profile applies today's streak.
   const [prevState, setPrevState] = useState(currentState);
   if (currentState !== prevState) {
     setPrevState(currentState);
     if (currentState === "webview") {
       setCart(menu.startingCart);
+    } else if (currentState === "streak") {
+      setIsStreaked(false);
     } else if (currentState === "profile") {
       setIsStreaked(true);
     }

@@ -262,10 +262,7 @@ export const Hero: React.FC = () => {
           />
           <span className="flex min-w-0 flex-wrap gap-x-4 gap-y-1">
             <span>
-              {t(
-                "เชียงใหม่ ประเทศไทย ยินดีทำงาน Onsite / Hybrid / Remote",
-                "Chiang Mai, Thailand, open to Onsite, Hybrid, or Remote roles",
-              )}
+              {t(personalData.heroLocationTh, personalData.heroLocationEn)}
             </span>
             <a
               href={`tel:${personalData.phone.replace(/-/g, "")}`}

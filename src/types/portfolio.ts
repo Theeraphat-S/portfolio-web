@@ -129,6 +129,9 @@ export interface PersonalInfo {
   resumeLinkLabel: BilingualText;
   locationTh: string;
   locationEn: string;
+  /** Shorter location line for the hero meta row. */
+  heroLocationTh: string;
+  heroLocationEn: string;
   education: EducationInfo;
   reference?: ReferenceInfo;
 }
