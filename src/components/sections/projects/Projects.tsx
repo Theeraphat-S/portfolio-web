@@ -17,7 +17,7 @@ export const Projects: React.FC = () => {
     useState<ProjectItem | null>(null);
 
   return (
-    <section id="work" className="relative py-16 sm:py-24 border-b border-line">
+    <section id="work" className="relative py-12 sm:py-24 border-b border-line">
       {/* Anchor Alias for backwards compatibility */}
       <div id="projects" className="absolute -top-24 pointer-events-none" />
 
@@ -27,7 +27,7 @@ export const Projects: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-        className="space-y-6 mb-16"
+        className="space-y-6 mb-10 sm:mb-16"
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-line">
           <ChapterEyebrow id="work" />
@@ -76,7 +76,7 @@ export const Projects: React.FC = () => {
       </m.div>
 
       {/* Editorial Case Studies Stream */}
-      <div className="space-y-16 sm:space-y-24">
+      <div className="space-y-12 sm:space-y-24">
         {portfolioData.projects.map((project: ProjectItem, index: number) => (
           <EditorialCaseStudy
             key={project.id}

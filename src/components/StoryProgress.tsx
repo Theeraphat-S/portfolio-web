@@ -10,6 +10,10 @@ export const StoryProgress: React.FC = () => {
   const { lang, t, toggleLang } = useLanguage();
   const { activeIndex, position } = useStoryScroll();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // The capsule floats over the reading column on phones and tablets, so
+  // it steps aside while the reader scrolls down and returns on any scroll
+  // up (or keyboard focus): it never sits on top of text being read.
+  const [isTucked, setIsTucked] = useState(false);
   const menuId = useId();
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -49,6 +53,21 @@ export const StoryProgress: React.FC = () => {
       document.removeEventListener("pointerdown", handlePointerDown);
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (Math.abs(delta) < 8) return;
+      setIsTucked(delta > 0);
+      lastY = y;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isPillHidden = isTucked && !isMenuOpen;
 
   const chapter = chapters[activeIndex];
   const activeChapter = chapter.id;
@@ -110,7 +129,14 @@ export const StoryProgress: React.FC = () => {
       </nav>
 
       {activeIndex > 0 && (
-        <div className="hide-when-dialog fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2 pb-[env(safe-area-inset-bottom)] 2xl:hidden">
+        <div
+          onFocus={() => setIsTucked(false)}
+          className={`hide-when-dialog fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2 pb-[env(safe-area-inset-bottom)] transition-[opacity,translate] duration-300 ease-(--ease-out-expo) 2xl:hidden ${
+            isPillHidden
+              ? "pointer-events-none translate-y-[calc(100%+1rem)] opacity-0 motion-reduce:translate-y-0"
+              : ""
+          }`}
+        >
           {isMenuOpen && (
             <div
               id={menuId}
@@ -187,7 +213,7 @@ export const StoryProgress: React.FC = () => {
               `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
               `Navigation menu (current: ${chapter.labelEn})`,
             )}
-            className="relative flex min-h-11 items-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             {isMenuOpen ? (
               <X className="h-4 w-4 text-zinc-400" aria-hidden />

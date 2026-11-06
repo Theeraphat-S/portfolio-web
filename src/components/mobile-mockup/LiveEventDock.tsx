@@ -40,7 +40,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onClick={() => onOpenDrawer("stream")}
             data-cursor-text="LOGS"
             aria-label={t("เปิดดูประวัติ Event Log", "Open Live Stream Logs")}
-            className="min-h-7 px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <Terminal className="w-2.5 h-2.5 text-primary" />
             <span>LOGS ({eventsCount})</span>
@@ -51,7 +51,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onClick={() => onOpenDrawer("code")}
             data-cursor-text="DART"
             aria-label={t("ดูโค้ด Flutter/Dart", "View Dart Source Code")}
-            className="min-h-7 px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/20 text-primary border border-primary/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/20 text-primary border border-primary/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <Code2 className="w-2.5 h-2.5" />
             <span>DART CODE</span>
@@ -77,11 +77,11 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               )}
               className="w-full text-left group cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal rounded-lg bg-black/40 hover:bg-black/60 p-1.5 sm:p-2 border border-white/[0.04] hover:border-white/[0.12] transition flex items-center justify-between gap-2 text-xs"
             >
-              <div className="flex items-center gap-2 min-w-0">
+              <div className="flex items-center gap-2 min-w-0 overflow-hidden">
                 <span className="px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-400 text-xs font-bold border border-sky-800/40 shrink-0">
                   {latestEvent.tag}
                 </span>
-                <span className="text-white font-medium shrink-0">
+                <span className="text-white font-medium truncate min-w-0">
                   {latestEvent.name}
                 </span>
                 {latestEvent.stateName && (

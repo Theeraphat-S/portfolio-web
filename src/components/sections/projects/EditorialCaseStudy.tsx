@@ -137,6 +137,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   // Pin the device only on desktop; small screens and reduced motion get
   // the stacked layout, where nothing is held in place while scrolling.
   const isPinned = isDesktop && !shouldReduceMotion;
+  // Below lg the stage selector sticks to the top of the viewport while
+  // the device scrolls past, so a stage change stays in view. It is a
+  // sticky label, not a pin: it adds no scroll distance, and reduced
+  // motion (where scroll no longer drives the stages) leaves it in flow.
+  const isStepperSticky = !isDesktop && !shouldReduceMotion;
 
   // Scale the pinned device down on short viewports so the whole stack
   // (screen + event dock) fits inside 100vh minus the sticky offset.
@@ -436,10 +441,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   // pin, so the selected stage's story comes first and the 3-step selector
   // sits flush against the top of the device. Each step fills as the
   // reader scrolls past the device.
-  const renderMobileStepper = () => {
+  const renderStageText = () => {
     const beat = beats[activeBeat];
     return (
-      <div className="space-y-4">
+      <>
         {beat && (
           // Every stage's text shares one grid cell, so switching stage or
           // language never changes the height above the device.
@@ -467,6 +472,19 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             ))}
           </div>
         )}
+      </>
+    );
+  };
+
+  const renderStepper = () => {
+    return (
+      <div
+        className={
+          isStepperSticky
+            ? "sticky top-3 z-30 -mx-2 -my-2 rounded-xl bg-deck/95 p-2 backdrop-blur-md"
+            : undefined
+        }
+      >
         <div
           role="group"
           aria-label={t("ขั้นตอนของโปรเจกต์", "Project stages")}
@@ -480,7 +498,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 type="button"
                 onClick={() => applyBeat(bIdx)}
                 aria-current={isActive ? "step" : undefined}
-                className={`relative overflow-hidden min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-xs leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
+                className={`relative overflow-hidden min-h-14 rounded-lg border px-1.5 sm:px-2 py-2 text-left font-mono text-xs leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
                   isActive
                     ? "border-primary/50 bg-primary/10 text-primary"
                     : "border-line text-zinc-400 hover:text-zinc-200"
@@ -574,7 +592,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onClick={() => onSelect(project)}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-primary transition-colors" />
             <span className="font-semibold tracking-wider">
@@ -636,10 +654,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             ref={(el) => {
               scrubTargetRef.current = el;
             }}
-            className="space-y-8 lg:col-span-5"
+            className="lg:col-span-5"
           >
-            {renderMobileStepper()}
-            <div className="flex justify-center">{renderDeviceMockup()}</div>
+            <div className="mb-4">{renderStageText()}</div>
+            {renderStepper()}
+            <div className="mt-6 sm:mt-8 flex justify-center">
+              {renderDeviceMockup()}
+            </div>
           </div>
         </div>
       )}

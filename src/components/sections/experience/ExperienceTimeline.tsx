@@ -76,7 +76,7 @@ export const ExperienceTimeline: React.FC = () => {
   return (
     <section
       id="timeline"
-      className="relative py-16 sm:py-24 border-b border-line"
+      className="relative py-12 sm:py-24 border-b border-line"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="experience" className="absolute -top-24 pointer-events-none" />
@@ -87,7 +87,7 @@ export const ExperienceTimeline: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={sectionFadeIn}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
+        className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
         <ChapterEyebrow id="timeline" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
@@ -101,7 +101,7 @@ export const ExperienceTimeline: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={sectionFadeIn}
-        className="space-y-4 mb-16 max-w-4xl"
+        className="space-y-4 mb-10 sm:mb-16 max-w-4xl"
       >
         <BilingualStack
           as="h2"
@@ -130,7 +130,7 @@ export const ExperienceTimeline: React.FC = () => {
           className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-signal/70 to-transparent origin-top pointer-events-none"
         />
 
-        <div className="space-y-12 md:space-y-16">
+        <div className="space-y-10 md:space-y-16">
           {experiences.map((exp: ExperienceItem, idx: number) => {
             const isActive = idx === 0;
             const isAcademic = exp.type === "ta" || exp.type === "academic";
@@ -147,7 +147,7 @@ export const ExperienceTimeline: React.FC = () => {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
                 variants={itemVariants}
-                className="relative group pb-12 md:pb-16 border-b border-line last:border-b-0 last:pb-0"
+                className="relative group pb-10 md:pb-16 border-b border-line last:border-b-0 last:pb-0"
               >
                 {/* Subtle Radial Blue Ambient Highlight on Hover */}
                 <div
@@ -175,12 +175,21 @@ export const ExperienceTimeline: React.FC = () => {
                     />
 
                     {/* Exact Time Period */}
-                    <BilingualStack
-                      as="span"
-                      className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
-                      th={exp.periodTh}
-                      en={exp.periodEn}
-                    />
+                    {/* Hidden on phones when it only repeats the year above. */}
+                    <div
+                      className={
+                        exp.periodEn === yearEn && exp.periodTh === yearTh
+                          ? "max-md:hidden"
+                          : undefined
+                      }
+                    >
+                      <BilingualStack
+                        as="span"
+                        className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
+                        th={exp.periodTh}
+                        en={exp.periodEn}
+                      />
+                    </div>
 
                     {/* Quiet Status Badge */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
@@ -196,12 +205,19 @@ export const ExperienceTimeline: React.FC = () => {
                     </div>
 
                     {/* Location */}
-                    <p className="text-xs text-zinc-400 font-mono flex items-center gap-1.5 pt-0.5">
-                      <MapPin className="w-3 h-3 text-zinc-400 shrink-0" />
-                      <span className="truncate">
-                        {lang === "th" ? exp.locationTh : exp.locationEn}
-                      </span>
-                    </p>
+                    {/* Wraps instead of truncating; both languages share
+                        one cell so a wrap never shifts the layout. */}
+                    <div className="text-xs text-zinc-400 font-mono flex items-start gap-1.5 pt-0.5">
+                      <MapPin className="w-3 h-3 mt-0.5 text-zinc-400 shrink-0" />
+                      <div className="min-w-0">
+                        <BilingualStack
+                          as="span"
+                          className="block break-words"
+                          th={exp.locationTh}
+                          en={exp.locationEn}
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Axis Node Indicator Marker */}
@@ -367,7 +383,7 @@ export const ExperienceTimeline: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={sectionFadeIn}
-          className="mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-line hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
+          className="mt-10 sm:mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-line hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           <div className="space-y-1">
             <BilingualStack

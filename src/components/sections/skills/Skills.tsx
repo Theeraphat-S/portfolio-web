@@ -48,7 +48,7 @@ export const Skills: React.FC = () => {
   return (
     <section
       id="capabilities"
-      className="relative py-16 sm:py-24 border-b border-line"
+      className="relative py-12 sm:py-24 border-b border-line"
     >
       {/* Anchor Alias for backwards compatibility */}
       <div id="skills" className="absolute -top-24 pointer-events-none" />
@@ -59,7 +59,7 @@ export const Skills: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={FADE_UP}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
+        className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
         <ChapterEyebrow id="capabilities" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
@@ -73,7 +73,7 @@ export const Skills: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={FADE_UP}
-        className="space-y-4 mb-16 max-w-4xl"
+        className="space-y-4 mb-10 sm:mb-16 max-w-4xl"
       >
         <BilingualStack
           as="h2"
@@ -88,7 +88,7 @@ export const Skills: React.FC = () => {
       </m.div>
 
       {/* Clean Monospace Tree Layout (2 Columns with Hairline Separation) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-12 lg:gap-y-14">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-10 sm:gap-y-12 lg:gap-y-14">
         {skillCategories.map((category: SkillCategory, catIdx: number) => {
           const meta = CATEGORY_META[catIdx] || {
             labelEn: "CAPABILITY",

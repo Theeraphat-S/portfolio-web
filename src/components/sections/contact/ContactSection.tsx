@@ -123,7 +123,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="pt-16 pb-12 sm:pt-24 sm:pb-16 border-b border-line"
+      className="pt-12 pb-12 sm:pt-24 sm:pb-16 border-b border-line"
     >
       {/* Section Eyebrow */}
       <m.div
@@ -131,7 +131,7 @@ export const ContactSection: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={FADE_UP}
-        className="flex items-center justify-between pb-6 mb-12 border-b border-line"
+        className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
         <ChapterEyebrow id="contact" />
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
@@ -140,7 +140,7 @@ export const ContactSection: React.FC = () => {
       </m.div>
 
       {/* Asymmetric 2-Column Editorial Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-14 items-start">
         {/* Left Column (Monumental Headline, Availability, Primary Email CTA & Coordinates) */}
         <m.div
           initial="hidden"
