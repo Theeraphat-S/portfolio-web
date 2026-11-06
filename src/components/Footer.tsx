@@ -3,31 +3,44 @@ import { ArrowUp, Github, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { portfolioData } from "../data/portfolioData";
 import { scrollToTop } from "../lib/lenis";
+import { BilingualStack } from "./BilingualStack";
 
 export const Footer: React.FC = () => {
-  const { lang } = useLanguage();
+  const { t } = useLanguage();
+  const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-line bg-void text-zinc-400 text-xs py-12 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Left: Author & Geographic status */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-center sm:text-left">
-          <span className="font-mono font-bold text-white tracking-tight min-w-[170px] inline-block">
-            &copy; {new Date().getFullYear()}{" "}
-            {lang === "th"
-              ? portfolioData.personal.nameTh
-              : portfolioData.personal.nameEn}
-          </span>
-          <span className="font-mono text-xs text-zinc-400 min-w-[180px]">
-            {lang === "th"
-              ? portfolioData.personal.locationTh
-              : portfolioData.personal.locationEn}
-          </span>
+          {/* Both languages share one cell, so the footer keeps the
+              taller height and toggling TH/EN never moves it. */}
+          <BilingualStack
+            as="span"
+            className="font-mono font-bold text-white tracking-tight min-w-[170px]"
+            th={
+              <>
+                &copy; {year} {portfolioData.personal.nameTh}
+              </>
+            }
+            en={
+              <>
+                &copy; {year} {portfolioData.personal.nameEn}
+              </>
+            }
+          />
+          <BilingualStack
+            as="span"
+            className="font-mono text-xs text-zinc-400 min-w-[180px]"
+            th={portfolioData.personal.locationTh}
+            en={portfolioData.personal.locationEn}
+          />
         </div>
 
         {/* Center: Engineering Stack */}
         <div className="font-mono text-xs text-zinc-400 text-center min-w-[220px]">
-          <span>{lang === "th" ? "สร้างด้วย " : "Built with "}</span>
+          <span>{t("สร้างด้วย ", "Built with ")}</span>
           <span className="text-zinc-300 font-medium">
             React, Vite & Tailwind CSS
           </span>
