@@ -31,7 +31,7 @@ export const ProjectModalHeader: React.FC<ProjectModalHeaderProps> = ({
         </div>
         <h3
           id="project-modal-title"
-          className="text-xl sm:text-2xl font-bold text-white tracking-tight"
+          className="text-xl sm:text-2xl font-semibold text-white tracking-tight"
         >
           {lang === "th" ? project.titleTh : project.titleEn}
         </h3>

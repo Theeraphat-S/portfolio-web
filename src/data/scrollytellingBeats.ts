@@ -4,10 +4,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
   "ncds-screening": [
     {
       id: "intake-validation",
-      badgeTh: "01 // FORM & BLoC INTAKE",
-      badgeEn: "01 // FORM & BLoC INTAKE",
+      badgeTh: "01 Form & BLoC intake",
+      badgeEn: "01 Form & BLoC intake",
       titleTh: "การรับข้อมูล Vitals & การตรวจสอบฝั่ง Client",
-      titleEn: "Client-side Vitals Intake & Validation",
+      titleEn: "Client-side vitals intake & validation",
       subtitleTh: "ตรวจค่าบนเครื่อง ไม่ต้องรอเครือข่าย",
       subtitleEn: "Validated on the device, no network wait",
       descriptionTh:
@@ -28,10 +28,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
     },
     {
       id: "scoring-algorithm",
-      badgeTh: "02 // RISK ALGORITHM",
-      badgeEn: "02 // RISK ALGORITHM",
+      badgeTh: "02 Risk algorithm",
+      badgeEn: "02 Risk algorithm",
       titleTh: "คำนวณความเสี่ยงโรคเรื้อรังอัตโนมัติ",
-      titleEn: "Automatic Risk Scoring",
+      titleEn: "Automatic risk scoring",
       subtitleTh: "ใส่ค่าเดิม ได้คะแนนเดิมทุกครั้ง",
       subtitleEn: "Same inputs, same score, every time",
       descriptionTh:
@@ -57,10 +57,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
     },
     {
       id: "record-submission",
-      badgeTh: "03 // PERSISTENCE & REPORT",
-      badgeEn: "03 // PERSISTENCE & REPORT",
+      badgeTh: "03 Persistence & report",
+      badgeEn: "03 Persistence & report",
       titleTh: "บันทึกผลผ่าน REST API & ออกรายงาน",
-      titleEn: "REST API Record Submission & Report Export",
+      titleEn: "REST API record submission & report export",
       subtitleTh: "ข้อมูลผู้ป่วยรวมศูนย์ใน MySQL",
       subtitleEn: "Patient records kept centrally in MySQL",
       descriptionTh:
@@ -84,10 +84,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
   "pinto-app": [
     {
       id: "webview-menu",
-      badgeTh: "01 // HYBRID WEBVIEW MENU",
-      badgeEn: "01 // HYBRID WEBVIEW MENU",
+      badgeTh: "01 Hybrid WebView menu",
+      badgeEn: "01 Hybrid WebView menu",
       titleTh: "เมนู WebView ภายในแอป Flutter",
-      titleEn: "Hybrid WebView Menu in a Native Shell",
+      titleEn: "Hybrid WebView menu in a native shell",
       subtitleTh: "อัปเดตเมนูจากฝั่ง Server ได้โดยไม่ต้องออกเวอร์ชันใหม่",
       subtitleEn: "Server-driven menus without app releases",
       descriptionTh:
@@ -107,8 +107,8 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
     },
     {
       id: "chat-streaks",
-      badgeTh: "02 // GAMIFIED RETENTION",
-      badgeEn: "02 // GAMIFIED RETENTION",
+      badgeTh: "02 Gamified retention",
+      badgeEn: "02 Gamified retention",
       titleTh: "ระบบสะสมแต้มแชทต่อเนื่อง (Chat Streaks)",
       titleEn: "Gamified Chat Streaks",
       subtitleTh: "กระตุ้นให้ผู้ใช้กลับมาใช้งานทุกวัน",
@@ -129,10 +129,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
     },
     {
       id: "profile-sync",
-      badgeTh: "03 // PROFILE API SYNC",
-      badgeEn: "03 // PROFILE API SYNC",
+      badgeTh: "03 Profile API sync",
+      badgeEn: "03 Profile API sync",
       titleTh: "ซิงค์แต้มและสถานะผ่าน Profile API",
-      titleEn: "Profile API Sync & State Bridge",
+      titleEn: "Profile API sync & state bridge",
       subtitleTh: "ยอดเดียวกันทั้งหน้า Native และ WebView",
       subtitleEn: "One balance across native and web screens",
       descriptionTh:
@@ -154,10 +154,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
   "pos-system": [
     {
       id: "cart-state-machine",
-      badgeTh: "01 // REACTIVE CART",
-      badgeEn: "01 // REACTIVE CART",
+      badgeTh: "01 Reactive cart",
+      badgeEn: "01 Reactive cart",
       titleTh: "ตะกร้าสินค้าแบบ Reactive",
-      titleEn: "Reactive Cart State",
+      titleEn: "Reactive cart state",
       subtitleTh: "ยอดรวมอัปเดตทันทีทุกครั้งที่สแกน",
       subtitleEn: "Totals update on every scan",
       descriptionTh:
@@ -179,10 +179,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
     },
     {
       id: "offline-queue",
-      badgeTh: "02 // OFFLINE QUEUE",
-      badgeEn: "02 // OFFLINE QUEUE",
+      badgeTh: "02 Offline queue",
+      badgeEn: "02 Offline queue",
       titleTh: "ขายต่อได้เมื่อเน็ตหลุด ด้วยคิวใน SQLite",
-      titleEn: "Offline Checkout with a SQLite Queue",
+      titleEn: "Offline checkout with a SQLite queue",
       subtitleTh: "หน้าเคาน์เตอร์ไม่ต้องหยุดรอเครือข่าย",
       subtitleEn: "The counter keeps selling when the network drops",
       descriptionTh:
@@ -201,10 +201,10 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
     },
     {
       id: "idempotent-sync",
-      badgeTh: "03 // IDEMPOTENT SYNC",
-      badgeEn: "03 // IDEMPOTENT SYNC",
+      badgeTh: "03 Idempotent sync",
+      badgeEn: "03 Idempotent sync",
       titleTh: "ส่งคิวซ้ำอย่างปลอดภัยด้วย Idempotency Key",
-      titleEn: "Idempotent Retry on Reconnect",
+      titleEn: "Idempotent retry on reconnect",
       subtitleTh: "ไม่มีการคิดเงินซ้ำ แม้ส่งคำขอซ้ำ",
       subtitleEn: "Retries never double-charge",
       descriptionTh:

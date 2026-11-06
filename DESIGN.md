@@ -16,13 +16,13 @@ typography:
   display:
     fontFamily: "Outfit, IBM Plex Sans Thai, -apple-system, BlinkMacSystemFont, sans-serif"
     fontSize: "clamp(2.5rem, 7vw, 6.5rem)"
-    fontWeight: 800
+    fontWeight: 600
     lineHeight: 0.92
     letterSpacing: "-0.035em"
   headline:
     fontFamily: "Outfit, IBM Plex Sans Thai, -apple-system, BlinkMacSystemFont, sans-serif"
     fontSize: "clamp(1.5rem, 4vw, 2.65rem)"
-    fontWeight: 700
+    fontWeight: 600
     lineHeight: 1.15
     letterSpacing: "-0.025em"
   title:
@@ -34,15 +34,15 @@ typography:
   body:
     fontFamily: "Outfit, IBM Plex Sans Thai, -apple-system, BlinkMacSystemFont, sans-serif"
     fontSize: "1rem"
-    fontWeight: 300
+    fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
   label:
     fontFamily: "JetBrains Mono, monospace"
     fontSize: "0.75rem"
-    fontWeight: 600
+    fontWeight: 500
     lineHeight: 1.4
-    letterSpacing: "0.22em"
+    letterSpacing: "0.02em"
 rounded:
   sm: "4px"
   md: "8px"
@@ -61,22 +61,22 @@ components:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.bg-void}"
     rounded: "{rounded.full}"
-    padding: "13px 26px"
+    padding: "12px 24px"
   button-primary-hover:
     backgroundColor: "{colors.signal}"
     textColor: "{colors.bg-void}"
     rounded: "{rounded.full}"
-    padding: "13px 26px"
+    padding: "12px 24px"
   button-outline:
     backgroundColor: "transparent"
     textColor: "{colors.text-primary}"
     rounded: "{rounded.full}"
-    padding: "13px 26px"
+    padding: "12px 24px"
   button-outline-hover:
     backgroundColor: "rgba(56, 217, 255, 0.05)"
     textColor: "{colors.signal}"
     rounded: "{rounded.full}"
-    padding: "13px 26px"
+    padding: "12px 24px"
   card-editorial:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.text-primary}"
@@ -100,7 +100,7 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 - **Scroll-Led Story Progression**: Continuous narrative journey where technical depth unfolds naturally through scroll-linked sticky runways and live BLoC stream mutations.
 - **Laser-Etched Precision**: Restrained 1px borders with subtle linear gradient transitions that outline containers without visual weight.
 - **Instrument Telemetry**: Monospace timestamps, sub-millisecond ping metrics, and status pulse indicators that ground claims in living system truth.
-- **Tactile Magnetic Interactions**: Fluid pill-shaped controls with subtle cyan glow and smooth hover transitions.
+- **Tactile Interactions**: Pill-shaped controls that answer hover with a color step, never a glow.
 
 ## Colors
 
@@ -135,7 +135,7 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 **The 80 / 15 / 5 Rule.** Roughly 80% dark canvas and space, 15% surfaces and gray text, 5% blue and cyan. Accent color that spreads past that loses its pull.
 **The Blue Acts, Cyan Moves Rule.** Blue marks what is important or clickable at rest; cyan appears only when something moves, is hovered, or is live. Never set long body copy in either.
-**The Reserved Glow Rule.** Glow and gradient belong to the hero accent line, key numbers, and the case-study beat commit. Cards and buttons at rest carry no glow.
+**The No Glow Rule.** Nothing glows: no text-shadow, colored box-shadow or colored drop-shadow on headlines, buttons, dots or cards. Depth comes from the void, surface and surface-raised steps plus hairlines. The case-study beat commit is the one lit moment, and it lights with opacity, not a halo.
 **The Telemetry Heartbeat Rule.** Emerald (`#10b981`) is reserved for the availability status, never decorative text, metrics or live streams (those are cyan).
 **The Zero-Shift Bilingual Rule.** All text containers supporting Thai and English apply balanced line-heights, flex alignment, and explicit min-heights so toggling languages causes no layout shift.
 **The Sticky Viewport Budget Rule.** Pinned demonstration viewports never exceed `calc(100vh - 6rem)`.
@@ -150,15 +150,17 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 ### Hierarchy
 
-- **Display** (800 Extrabold, `clamp(2.5rem, 7vw, 6.5rem)`, line-height `0.92`, letter-spacing `-0.035em`): Monumental hero statement and headline anchors.
-- **Headline** (700 Bold, `clamp(1.5rem, 4vw, 2.65rem)`, line-height `1.15`, letter-spacing `-0.025em`): Section titles and philosophical declarations.
+- **Display** (600 SemiBold, sentence case, no trailing period, `clamp(2.5rem, 7vw, 6.5rem)`, line-height `0.92`, letter-spacing `-0.035em`): Monumental hero statement and headline anchors.
+- **Headline** (600 SemiBold, sentence case, `clamp(1.5rem, 4vw, 2.65rem)`, line-height `1.15`, letter-spacing `-0.025em`): Section titles and philosophical declarations.
 - **Title** (600 SemiBold, `1.125rem` / `18px`, line-height `1.3`, letter-spacing `-0.015em`): Card titles, project titles, and modal headers.
-- **Body** (300 Light to 400 Regular, `1rem` / `16px`, line-height `1.6`, letter-spacing `normal`, max-width `65-75ch`): Narrative descriptions, case study explanations, and career history.
-- **Label** (600 SemiBold, `0.75rem` / `12px`, letter-spacing `0.22em`, uppercase): Section eyebrows, system specs, telemetry labels, and code tokens.
+- **Body** (400 Regular, `1rem` / `16px`, line-height `1.6`, letter-spacing `normal`, max-width `65-75ch`): Narrative descriptions, case study explanations, and career history.
+- **Label** (500 Medium mono, `0.75rem`–`0.8125rem`, letter-spacing `0.02em`, sentence case): Section eyebrows, system specs and telemetry labels. Only literal code tokens (BLoC event names such as `FORM_VALIDATED`) stay in capitals.
+
+Weights stop at 600. Hierarchy comes from size and color, not from heavier weights or capitals.
 
 ### Named Rules
 
-**The Technical Eyebrow Rule.** Every chapter after the hero begins with an uppercase monospace eyebrow (`02 // APPROACH` … `06 // CONTACT`) rendered by `ChapterEyebrow`, which takes both number and label from `src/data/chapters.ts` so they match the StoryProgress tracker (Intro is 01). Sub-headings inside a chapter carry no `NN //` prefix; only the 3 scrollytelling beats keep their numbers, because the sequence is the story.  
+**The Technical Eyebrow Rule.** Every chapter after the hero begins with a sentence-case monospace eyebrow, a muted number then the label in Primary Blue (`02 Approach` … `06 Contact`), rendered by `ChapterEyebrow`, which takes both number and label from `src/data/chapters.ts` so they match the StoryProgress tracker (Intro is 01). Sub-headings inside a chapter carry no number; only the 3 scrollytelling beats keep theirs (`01 Form & BLoC intake`), because the sequence is the story.  
 **The Dual-Script Baseline Rule.** Thai and Latin typefaces must share proportional leading and word-break rules (`overflow-wrap: break-word`, `word-break: break-word`) to prevent jagged layout shifts when switching languages.
 
 ## Layout & Spatial System
@@ -176,14 +178,13 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Shadow Vocabulary
 
-- **Ambient Cyan Glow** (`0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 12px 30px -12px rgba(56, 217, 255, 0.1)`): Reserved for floating overlays; cards no longer take it on hover (they change border only).
-- **Button Energy Shadow** (`0 4px 20px -4px rgba(77, 124, 254, 0.35)`): Soft, directional glow beneath primary interactive buttons.
+- **Overlay Shadow** (`--shadow-modal`, `--shadow-drawer`): Neutral black only, for the modal and the DevTools drawer that float above the page.
 - **Dock Elevation** (`0 12px 32px rgba(0, 0, 0, 0.65)`): Deep shadow applied to floating telemetry and chapter indicators.
 
 ### Named Rules
 
 **The Glass Before Blur Rule.** Transparent containers must always combine translucent dark backgrounds (`rgba(13, 20, 36, 0.8)` or `void/85` for compact floating pills) with `backdrop-filter: blur(16px–20px)` and a `1px` `line` (`#26324a`) border. Blur without border definition is prohibited.  
-**The Restrained Luminescence Rule.** Glow effects are strictly reactive: they appear during hover or active states, never idling as high-intensity persistent backgrounds.
+**The Neutral Shadow Rule.** Shadows are black and only lift things that float. Buttons and cards at rest or on hover take no shadow.
 
 ## Shapes
 
@@ -196,8 +197,8 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 ### Buttons
 
 - **Shape:** Pill silhouette (`rounded-full`, 9999px).
-- **Primary:** Background `#4d7cfe`, text `#070b14`, font `JetBrains Mono` 600 (`13px`), padding `13px 26px`, uppercase with `0.06em` letter spacing.
-- **Hover / Focus:** Shifts background to Electric Cyan `#38d9ff`, transforms `translateY(-1px)`, with a cyan shadow (`0 6px 24px -4px rgba(56, 217, 255, 0.4)`).
+- **Primary:** Background `#4d7cfe`, text `#070b14`, font `Outfit` 500 (`14px`), padding `12px 24px`, sentence case (`Explore work`).
+- **Hover / Focus:** Shifts background to Electric Cyan `#38d9ff`; nothing moves or glows.
 - **Outline / Ghost:** Background `transparent`, border `1px solid #26324a`, text `#f3f6fc`. On hover, border shifts to `rgba(56, 217, 255, 0.45)` and text shifts to `#38d9ff`.
 
 ### Cards & Containers
@@ -226,17 +227,17 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 - **Desktop (2XL+):** Fixed vertical tracking rail at `fixed left-8 top-1/2 -translate-y-1/2 z-30`. Features vertical connecting rail (`story-progress-line`) and 6 illuminated progress dots (`story-progress-dot`):
   - Inactive state: 6px muted zinc ring.
   - Passed state (`is-passed`): illuminated cyan core.
-  - Active state (`is-active`): still cyan beacon, scaled 1.45× with a halo glow. It does not pulse; the dot eases between states on `--dur-fast`.
-  - Telemetry label readout: `01 / 06` chapter index and uppercase monospace title (`INTRO`, `APPROACH`, `SELECTED WORK`, `CAPABILITIES`, `EXPERIENCE`, `CONTACT`).
+  - Active state (`is-active`): still cyan beacon, scaled 1.45×, no halo. It does not pulse; the dot eases between states on `--dur-fast`.
+  - Telemetry label readout: `01 / 06` chapter index and sentence-case monospace title (`Intro`, `Approach`, `Selected work`, `Capabilities`, `Experience`, `Contact`).
 - **Rail fill:** A `story-progress-fill` line over the rail fills one segment per chapter (dot to dot, with an end cap after the last), so it reads as chapter progress rather than a second whole-page bar.
 - **Top bar (<2XL only):** A 1px `signal/70` line across the top tracks the whole page with no spring, since below 2XL the pill shows only the current chapter. At 2XL+ it is hidden because the rail already covers the whole story.
 - **Mobile & Tablet (<2XL):** Floating pill capsule at `fixed bottom-4 right-4 z-30` with `bg-void/90`, `backdrop-blur`, and border `line`, hidden on the intro. It opens the chapter menu and carries a 1px signal line along its bottom that fills with the current chapter's progress.
 
 ### Chapter Atmosphere (`Atmosphere`)
 
-- **Layers:** Fixed behind the content: a `surface`-tone lift layer and two 80vmax radial glows (`atmosphere-glow-blue` at 26% Primary Blue, `atmosphere-glow-cyan` at 18% Electric Cyan). The gradients are painted once; only transform and opacity change.
-- **Per-chapter looks:** Intro lit from the top right; Approach swings left and lifts the void; Selected Work raises cyan beside the device; Capabilities turns cool, with cyan leading low on the right; Experience switches to a deeper blue key from the upper left with cyan almost out and the void darker; Contact gathers both lights low and centred. Each look holds through its chapter and blends across the boundary (±0.2 chapter).
-- **Restraint:** The lift tops out near `surface` (`#0d1424`), and the glows stay faint enough to keep the 80 / 15 / 5 rule. Reduced motion holds the intro look.
+- **Layer:** Fixed behind the content: one `surface`-tone lift layer whose opacity changes. No colored light: radial blue or cyan washes behind content are not used.
+- **Per-chapter lift:** Intro stays on the void; Approach lifts to 45%; Selected work 20%; Capabilities 50%; Experience 22%; Contact 75%. Each value holds through its chapter and blends across the boundary (±0.2 chapter).
+- **Restraint:** The lift tops out near `surface` (`#0d1424`), a tone step inside one neutral. Reduced motion holds the intro value.
 
 ### Chapter Bridge (`ChapterBridge`)
 

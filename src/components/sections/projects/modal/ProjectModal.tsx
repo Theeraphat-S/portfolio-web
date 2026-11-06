@@ -63,7 +63,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 28, stiffness: 320 }}
+            transition={{ type: "spring", damping: 36, stiffness: 320 }}
             className="bezel [--bezel-radius:1.5rem] relative w-full max-w-3xl shadow-modal max-h-[90vh] flex flex-col my-auto backdrop-blur-2xl outline-none"
           >
             <div className="bezel-core relative flex min-h-0 flex-1 flex-col overflow-hidden bg-surface/95 border border-line p-[1.0625rem] sm:p-[1.5625rem]">

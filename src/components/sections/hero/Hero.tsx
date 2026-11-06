@@ -74,7 +74,7 @@ export const Hero: React.FC = () => {
               type="button"
               onClick={toggleLang}
               aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-              className="btn-press min-h-11 px-3 text-xs font-mono tracking-wider text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition shrink-0"
+              className="btn-press min-h-11 px-3 text-xs font-mono text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition shrink-0"
             >
               <span className={lang === "th" ? "text-primary" : ""}>TH</span>
               <span className="px-1.5 text-zinc-600">/</span>
@@ -82,7 +82,7 @@ export const Hero: React.FC = () => {
             </button>
             <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>{t("เปิดรับตำแหน่งงาน", "OPEN FOR ROLES")}</span>
+              <span>{t("เปิดรับตำแหน่งงาน", "Open for roles")}</span>
             </span>
           </div>
         </m.div>
@@ -99,18 +99,15 @@ export const Hero: React.FC = () => {
             }
             className="lg:col-span-8 @container flex flex-col justify-end"
           >
-            <p className="text-[clamp(1.75rem,9.4cqi,4.85rem)] font-extrabold tracking-[-0.035em] leading-[1.05] text-white whitespace-nowrap">
+            <p className="text-[clamp(1.75rem,9.4cqi,4.85rem)] font-semibold tracking-[-0.035em] leading-[1.05] text-white whitespace-nowrap">
               <m.span variants={FADE_UP} className="block text-zinc-300">
-                {lang === "th" ? "สร้างโมบายแอป" : "BUILDING"}
+                {lang === "th" ? "สร้างโมบายแอป" : "Building"}
               </m.span>
               <m.span variants={FADE_UP} className="block text-white">
-                {lang === "th" ? "ที่ใช้งานได้จริง" : "MOBILE APPS"}
+                {lang === "th" ? "ที่ใช้งานได้จริง" : "mobile apps"}
               </m.span>
-              <m.span
-                variants={FADE_UP}
-                className="block text-primary [text-shadow:0_0_48px_color-mix(in_oklab,var(--color-primary)_35%,transparent)]"
-              >
-                {lang === "th" ? "ด้วย FLUTTER." : "WITH FLUTTER."}
+              <m.span variants={FADE_UP} className="block text-primary">
+                {lang === "th" ? "ด้วย Flutter" : "with Flutter"}
               </m.span>
             </p>
           </m.div>
@@ -126,7 +123,7 @@ export const Hero: React.FC = () => {
               <div className="bezel-core p-2.5 sm:p-3.5 bg-surface/80 border border-line">
                 <BilingualStack
                   as="span"
-                  className="block font-mono text-xs uppercase tracking-wider text-zinc-400"
+                  className="block font-mono text-xs text-zinc-400"
                   th="ผลงานที่ทำ"
                   en="What I built"
                 />
@@ -174,7 +171,7 @@ export const Hero: React.FC = () => {
             <p
               lang="th"
               aria-hidden={lang !== "th"}
-              className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-light leading-relaxed ${lang === "th" ? "" : "invisible"}`}
+              className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed ${lang === "th" ? "" : "invisible"}`}
             >
               บัณฑิต IT มหาวิทยาลัยแม่โจ้ นักพัฒนาโมบายระดับ Junior ที่ใช้{" "}
               <strong className="text-white font-medium underline decoration-primary/40 decoration-1 underline-offset-4">
@@ -186,7 +183,7 @@ export const Hero: React.FC = () => {
             <p
               lang="en"
               aria-hidden={lang !== "en"}
-              className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-light leading-relaxed ${lang === "en" ? "" : "invisible"}`}
+              className={`col-start-1 row-start-1 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed ${lang === "en" ? "" : "invisible"}`}
             >
               Maejo University IT graduate and junior mobile developer working
               with{" "}
@@ -210,7 +207,7 @@ export const Hero: React.FC = () => {
               data-cursor-text="EXPLORE"
               className="btn-editorial btn-editorial-primary group h-12 pl-3.5 pr-1.5 max-sm:gap-1.5 sm:pl-4 sm:pr-2 sm:w-48 justify-center whitespace-nowrap"
             >
-              <span>{t("ดูผลงาน", "EXPLORE WORK")}</span>
+              <span>{t("ดูผลงาน", "Explore work")}</span>
               <span
                 aria-hidden="true"
                 className="cta-icon cta-icon-down bg-void/15"
@@ -227,7 +224,7 @@ export const Hero: React.FC = () => {
               className="btn-editorial btn-editorial-outline group h-12 px-4 sm:pr-2 sm:w-48 justify-center whitespace-nowrap"
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-signal transition-colors" />
-              <span>{t("เปิด CV", "RESUME / CV")}</span>
+              <span>{t("เปิด CV", "Resume / CV")}</span>
               {/* No room for the circle beside the icon in the 2-up phone row. */}
               <span
                 aria-hidden="true"

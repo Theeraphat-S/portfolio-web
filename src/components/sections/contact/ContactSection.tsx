@@ -23,10 +23,9 @@ import { telHref } from "../../../lib/utils";
 // label and value together are the link's accessible name.
 const CONTACT_TILE =
   "group block min-h-11 p-3.5 rounded-xl bg-white/[0.015] border border-line hover:border-signal/30 hover:bg-signal/[0.04] space-y-1 transition-colors";
-const TILE_LABEL =
-  "flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase";
+const TILE_LABEL = "flex items-center gap-1.5 text-xs font-mono text-zinc-400 ";
 const TILE_VALUE =
-  "flex items-center gap-1 text-sm font-mono font-bold text-zinc-200 group-hover:text-signal transition-colors";
+  "flex items-center gap-1 text-sm font-mono font-semibold text-zinc-200 group-hover:text-signal transition-colors";
 const TILE_ARROW =
   "w-3 h-3 text-zinc-400 group-hover:text-signal transition-colors";
 
@@ -149,8 +148,8 @@ export const ContactSection: React.FC = () => {
         className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
         <ChapterEyebrow id="contact" />
-        <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          {t("ช่องทางติดต่อ", "GET IN TOUCH")}
+        <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
+          {t("ช่องทางติดต่อ", "Get in touch")}
         </span>
       </m.div>
 
@@ -167,24 +166,24 @@ export const ContactSection: React.FC = () => {
           {/* Availability Status Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-mono text-xs min-h-[1.75rem]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="tracking-wide">
+            <span className="">
               {lang === "th"
-                ? "เปิดรับตำแหน่ง JUNIOR MOBILE"
-                : "OPEN FOR JUNIOR MOBILE ROLES"}
+                ? "เปิดรับตำแหน่ง Junior Mobile"
+                : "Open for junior mobile roles"}
             </span>
           </div>
 
           {/* Monumental Headline */}
           <div className="space-y-1">
-            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tighter [word-spacing:0.12em] leading-[0.95] text-white min-h-[120px] sm:min-h-[180px] xl:min-h-[210px] flex flex-col justify-end">
+            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-semibold tracking-tight leading-[0.95] text-white min-h-[120px] sm:min-h-[180px] xl:min-h-[210px] flex flex-col justify-end">
               <span className="block text-zinc-400">
-                {lang === "th" ? "กำลังมองหา" : "LOOKING FOR"}
+                {lang === "th" ? "กำลังมองหา" : "Looking for"}
               </span>{" "}
               <span className="block text-white">
-                {lang === "th" ? "ตำแหน่ง JUNIOR" : "A JUNIOR"}
+                {lang === "th" ? "ตำแหน่ง Junior" : "a junior"}
               </span>{" "}
               <span className="block text-primary">
-                {lang === "th" ? "FLUTTER DEV." : "FLUTTER ROLE."}
+                {lang === "th" ? "Flutter dev" : "Flutter role"}
               </span>
             </h2>
           </div>
@@ -192,19 +191,19 @@ export const ContactSection: React.FC = () => {
           {/* Value Proposition Narrative */}
           <ChapterBridge
             bridge={bridgeFor("contact")}
-            className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl"
+            className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl"
           />
 
           {/* Prominent Primary Email CTA Card */}
           <div className="bezel">
             <div className="bezel-core p-3.5 sm:p-[1.125rem] bg-surface/80 border border-line hover:border-signal/30 transition space-y-3">
-              <div className="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-widest">
+              <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
                 <span>{t("อีเมล", "Email")}</span>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
                 <a
                   href={`mailto:${personal.email}`}
-                  className="inline-flex items-center min-h-11 lg:min-h-0 text-base sm:text-xl font-mono font-bold text-white hover:text-signal transition-colors break-all"
+                  className="inline-flex items-center min-h-11 lg:min-h-0 text-base sm:text-xl font-mono font-semibold text-white hover:text-signal transition-colors break-all"
                 >
                   {personal.email}
                 </a>
@@ -229,12 +228,12 @@ export const ContactSection: React.FC = () => {
                   {copied ? (
                     <>
                       <Check className="w-3.5 h-3.5" />
-                      <span>{t("คัดลอกสำเร็จ!", "COPIED!")}</span>
+                      <span>{t("คัดลอกแล้ว", "Copied")}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5" />
-                      <span>{t("คัดลอกอีเมล", "COPY EMAIL")}</span>
+                      <span>{t("คัดลอกอีเมล", "Copy email")}</span>
                     </>
                   )}
                 </button>
@@ -291,7 +290,7 @@ export const ContactSection: React.FC = () => {
             </a>
 
             <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
                 <MapPin className="w-3 h-3 text-primary" />
                 <span>
                   {t("ที่ตั้งและรูปแบบงาน", "Location & availability")}
@@ -320,7 +319,7 @@ export const ContactSection: React.FC = () => {
               <div className="space-y-1 pb-3 border-b border-line">
                 <BilingualStack
                   as="h3"
-                  className="text-lg sm:text-xl font-bold text-white tracking-tight"
+                  className="text-lg sm:text-xl font-semibold text-white tracking-tight"
                   th={"เขียนอีเมลถึงผม"}
                   en={"Write an email"}
                 />
@@ -339,7 +338,7 @@ export const ContactSection: React.FC = () => {
                 <div className="space-y-1.5">
                   <label
                     htmlFor="contact-name"
-                    className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
+                    className="text-xs font-mono text-zinc-400 block"
                   >
                     {lang === "th" ? "ชื่อ / บริษัท" : "Name / Company"}
                   </label>
@@ -375,7 +374,7 @@ export const ContactSection: React.FC = () => {
                 <div className="space-y-1.5">
                   <label
                     htmlFor="contact-message"
-                    className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
+                    className="text-xs font-mono text-zinc-400 block"
                   >
                     {lang === "th" ? "ข้อความ" : "Message"}
                   </label>
@@ -428,7 +427,7 @@ export const ContactSection: React.FC = () => {
                     aria-live="polite"
                     className="p-4 rounded-xl bg-primary/10 border border-primary/30 text-center space-y-2"
                   >
-                    <span className="text-xs font-mono font-bold text-primary block">
+                    <span className="text-xs font-mono font-semibold text-primary block">
                       {lang === "th"
                         ? "พร้อมเปิดร่างอีเมล"
                         : "Email draft requested"}
@@ -445,7 +444,7 @@ export const ContactSection: React.FC = () => {
                         className="px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-mono text-white transition cursor-pointer border border-white/[0.1]"
                       >
                         {copied
-                          ? t("คัดลอกแล้ว!", "Copied!")
+                          ? t("คัดลอกแล้ว", "Copied")
                           : t("คัดลอกอีเมล", "Copy email address")}
                       </button>
                       <button
@@ -463,7 +462,7 @@ export const ContactSection: React.FC = () => {
                   <button
                     type="submit"
                     data-cursor-text="DISPATCH"
-                    className="relative w-full min-h-11 py-3 px-12 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition btn-lift flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover"
+                    className="relative w-full min-h-11 py-3 px-12 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-semibold transition btn-lift flex items-center justify-center gap-2 cursor-pointer  "
                   >
                     <span>
                       {lang === "th"

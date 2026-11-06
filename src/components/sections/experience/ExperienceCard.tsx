@@ -57,7 +57,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
       <m.div
         whileHover={{ scale: 1.25 }}
         transition={{ type: "spring", stiffness: 350, damping: 20 }}
-        className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center shadow-glow z-10 cursor-pointer"
+        className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center  z-10 cursor-pointer"
       >
         {getTypeIcon(experience.type)}
       </m.div>
@@ -80,7 +80,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
           </div>
 
           {/* Role & Company */}
-          <h3 className="text-xl font-bold text-white tracking-tight">
+          <h3 className="text-xl font-semibold text-white tracking-tight">
             {lang === "th" ? experience.roleTh : experience.roleEn}
           </h3>
           <p className="text-xs sm:text-sm font-semibold font-mono text-cyan-400 mt-0.5">

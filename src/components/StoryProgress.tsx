@@ -127,7 +127,7 @@ export const StoryProgress: React.FC = () => {
             </span>
           </div>
           <p
-            className="min-w-28 font-mono text-xs tracking-[0.12em] text-zinc-300"
+            className="min-w-28 font-mono text-xs text-zinc-300"
             aria-hidden="true"
           >
             {labelOf(chapter)}
@@ -156,7 +156,7 @@ export const StoryProgress: React.FC = () => {
               `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
               `Navigation menu (current: ${chapter.labelEn})`,
             )}
-            className="btn-press relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] transition cursor-pointer hover:border-white/[0.16]"
+            className="btn-press relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs text-zinc-200 shadow-pill backdrop-blur-[20px] transition cursor-pointer hover:border-white/[0.16]"
           >
             {isMenuOpen ? (
               <X className="h-4 w-4 text-zinc-400" aria-hidden />

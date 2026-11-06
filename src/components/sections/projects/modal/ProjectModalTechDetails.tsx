@@ -16,7 +16,7 @@ export const ProjectModalTechDetails: React.FC<
     <>
       {/* Overview Description */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-primary mb-2 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono text-primary mb-2 flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5" />
           {t("ภาพรวมโครงการ", "Project Overview")}
         </h4>
@@ -27,7 +27,7 @@ export const ProjectModalTechDetails: React.FC<
 
       {/* Key Technical Highlights */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-primary mb-3 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono text-primary mb-3 flex items-center gap-1.5">
           <CheckCircle2 className="w-3.5 h-3.5" />
           {t(
             "ฟีเจอร์หลักและการพัฒนาเชิงลึก",
@@ -51,7 +51,7 @@ export const ProjectModalTechDetails: React.FC<
 
       {/* System Architecture */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-primary mb-2 flex items-center gap-1.5">
+        <h4 className="text-xs font-mono text-primary mb-2 flex items-center gap-1.5">
           <Layers className="w-3.5 h-3.5" />
           {t("สถาปัตยกรรมระบบ (Architecture)", "System Architecture")}
         </h4>
@@ -62,7 +62,7 @@ export const ProjectModalTechDetails: React.FC<
 
       {/* Tech Stack Badges */}
       <div>
-        <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+        <h4 className="text-xs font-mono text-zinc-400 mb-2">
           {t("เทคโนโลยีและเครื่องมือที่ใช้", "Technologies & Tools")}
         </h4>
         <div className="flex flex-wrap gap-2">

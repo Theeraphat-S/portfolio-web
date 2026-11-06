@@ -6,7 +6,7 @@ export const projectsData: ProjectItem[] = [
     titleTh: "แอปพลิเคชันคัดกรองความเสี่ยงโรคไม่ติดต่อเรื้อรัง (NCDs)",
     titleEn: "NCDs Risk Screening Mobile Application",
     subtitleTh: "โปรเจกต์จบปีสุดท้าย มหาวิทยาลัยแม่โจ้",
-    subtitleEn: "Final-year Capstone Project at Maejo University",
+    subtitleEn: "Final-year capstone project at Maejo University",
     category: "mobile",
     year: "2568",
     yearTh: "2568",
@@ -65,19 +65,19 @@ export const projectsData: ProjectItem[] = [
     metrics: [
       {
         labelTh: "เวลาคัดกรอง",
-        labelEn: "Screening Time",
+        labelEn: "Screening time",
         value: "< 3-5 min",
         valueTh: "< 3-5 นาที",
         valueEn: "< 3-5 min",
       },
       {
         labelTh: "ความแม่นยำคะแนน",
-        labelEn: "Scoring Accuracy",
+        labelEn: "Scoring accuracy",
         value: "100% (Zero Error)",
       },
       {
         labelTh: "โรคที่รองรับ",
-        labelEn: "Diseases Covered",
+        labelEn: "Diseases covered",
         value: "4 disease groups",
         valueTh: "4 กลุ่มโรค",
         valueEn: "4 disease groups",
@@ -238,7 +238,7 @@ export const projectsData: ProjectItem[] = [
     metrics: [
       {
         labelTh: "โหมดออฟไลน์",
-        labelEn: "Offline Mode",
+        labelEn: "Offline mode",
         value: "SQLite queue",
         valueTh: "คิว SQLite",
         valueEn: "SQLite queue",
@@ -250,7 +250,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         labelTh: "พัฒนาที่",
-        labelEn: "Built At",
+        labelEn: "Built at",
         value: "Fakduay internship",
         valueTh: "ฝึกงานที่ฝากด้วย",
         valueEn: "Fakduay internship",

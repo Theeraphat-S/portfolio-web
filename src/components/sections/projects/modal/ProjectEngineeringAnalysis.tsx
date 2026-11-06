@@ -56,7 +56,7 @@ export const ProjectEngineeringAnalysis: React.FC<
   return (
     <div className="space-y-3 pt-2">
       <div className="flex items-center justify-between">
-        <h4 className="text-xs font-mono uppercase tracking-wider text-primary flex items-center gap-1.5">
+        <h4 className="text-xs font-mono text-primary flex items-center gap-1.5">
           <Cpu className="w-3.5 h-3.5" />
           {t(
             "การตัดสินใจเชิงวิศวกรรม & ผลกระทบ",

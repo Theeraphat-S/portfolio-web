@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
               taller height and toggling TH/EN never moves it. */}
           <BilingualStack
             as="span"
-            className="font-mono font-bold text-white tracking-tight min-w-[170px]"
+            className="font-mono font-semibold text-white tracking-tight min-w-[170px]"
             th={
               <>
                 &copy; {year} {portfolioData.personal.nameTh}

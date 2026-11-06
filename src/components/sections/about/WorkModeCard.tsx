@@ -16,11 +16,11 @@ export const WorkModeCard: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-blue-400 mb-2">
             <Briefcase className="w-4 h-4" />
-            <span className="text-xs font-mono uppercase tracking-wider font-semibold">
+            <span className="text-xs font-mono font-semibold">
               {t("รูปแบบการทำงาน", "Work Mode")}
             </span>
           </div>
-          <h4 className="text-sm font-bold text-white">
+          <h4 className="text-sm font-semibold text-white">
             {t("Onsite / Hybrid / Remote", "Onsite / Hybrid / Remote")}
           </h4>
           <p className="text-xs text-zinc-400 mt-1">

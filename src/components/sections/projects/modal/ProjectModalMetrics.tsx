@@ -24,7 +24,7 @@ export const ProjectModalMetrics: React.FC<ProjectModalMetricsProps> = ({
           <span className="text-xs text-zinc-400 block mb-0.5 font-medium">
             {lang === "th" ? m.labelTh : m.labelEn}
           </span>
-          <span className="text-sm sm:text-base font-bold font-mono text-primary">
+          <span className="text-sm sm:text-base font-semibold font-mono text-primary">
             {getMetricValue(m, lang)}
           </span>
         </div>

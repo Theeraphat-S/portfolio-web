@@ -53,7 +53,7 @@ src/
 │   │   ├── skills/               # Interactive competency matrix
 │   │   ├── experience/           # Work history, internships, and TA credentials
 │   │   └── contact/              # Direct contact reach-out with canvas confetti
-│   ├── Atmosphere.tsx            # Per-chapter lighting driven by story position
+│   ├── Atmosphere.tsx            # Per-chapter backdrop tone driven by story position
 │   ├── ChapterBridge.tsx         # Chapter lead line lit word by word on scroll
 │   ├── StoryProgress.tsx         # Fixed vertical avionics chapter tracker
 │   ├── ScrollProgressBar.tsx     # Top reading progress bar (hidden at 2xl, where StoryProgress shows)

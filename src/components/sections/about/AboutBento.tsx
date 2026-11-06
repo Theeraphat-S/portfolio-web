@@ -38,13 +38,13 @@ export const AboutBento: React.FC = () => {
           <div className="space-y-4 lg:col-span-7">
             <BilingualStack
               as="h2"
-              className="text-2xl sm:text-3xl lg:text-[2rem] font-bold tracking-tight text-white leading-[1.2]"
+              className="text-2xl sm:text-3xl lg:text-[2rem] font-semibold tracking-tight text-white leading-[1.2]"
               th={<Headline copy={about.headlineTh} />}
               en={<Headline copy={about.headlineEn} />}
             />
             <ChapterBridge
               bridge={bridgeFor("about")}
-              className="text-base text-zinc-300 font-light leading-relaxed max-w-[65ch]"
+              className="text-base text-zinc-300 font-normal leading-relaxed max-w-[65ch]"
             />
             <BilingualStack
               className="text-sm text-zinc-400 leading-relaxed max-w-[65ch]"
@@ -65,7 +65,7 @@ export const AboutBento: React.FC = () => {
                 <dt className="flex items-baseline justify-between gap-3 font-mono text-xs text-zinc-400">
                   <BilingualStack
                     as="span"
-                    className="uppercase tracking-wider"
+                    className=""
                     th={item.labelTh}
                     en={item.labelEn}
                   />

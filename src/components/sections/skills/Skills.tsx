@@ -10,7 +10,7 @@ import { ChapterEyebrow } from "../../ChapterEyebrow";
 
 const CATEGORY_META = [
   {
-    labelEn: "MOBILE",
+    labelEn: "Mobile",
     labelTh: "โมบาย",
     taglineEn:
       "Cross-platform apps with Flutter, state management, and reactive UI.",
@@ -18,13 +18,13 @@ const CATEGORY_META = [
       "แอปข้ามแพลตฟอร์มด้วย Flutter การจัดการ State และ UI แบบ Reactive",
   },
   {
-    labelEn: "LANGUAGES & WEB",
+    labelEn: "Languages & web",
     labelTh: "ภาษาและเว็บ",
     taglineEn: "Programming languages, web basics, and REST API backends.",
     taglineTh: "ภาษาโปรแกรม พื้นฐานเว็บ และ REST API ฝั่ง Backend",
   },
   {
-    labelEn: "DATA & TOOLING",
+    labelEn: "Data & tooling",
     labelTh: "ข้อมูลและเครื่องมือ",
     taglineEn:
       "Relational persistence, API testing tools, version control, and development workflows.",
@@ -32,7 +32,7 @@ const CATEGORY_META = [
       "ฐานข้อมูลเชิงสัมพันธ์ เครื่องมือทดสอบ API ระบบ Version Control และกระบวนการพัฒนา",
   },
   {
-    labelEn: "TEAMWORK & TEACHING",
+    labelEn: "Teamwork & teaching",
     labelTh: "การทำงานเป็นทีมและการสอน",
     taglineEn:
       "Teaching assistant work, helping students, and working in Agile sprints.",
@@ -62,8 +62,8 @@ export const Skills: React.FC = () => {
         className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
         <ChapterEyebrow id="capabilities" />
-        <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-          {t("ทักษะแยกตามหมวด", "SKILLS BY DOMAIN")}
+        <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
+          {t("ทักษะแยกตามหมวด", "Skills by domain")}
         </span>
       </m.div>
 
@@ -77,13 +77,13 @@ export const Skills: React.FC = () => {
       >
         <BilingualStack
           as="h2"
-          className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight"
+          className="text-3xl sm:text-5xl font-semibold tracking-tight text-white leading-tight"
           th={"ทักษะและเครื่องมือ"}
           en={"Skills & Tools"}
         />
         <ChapterBridge
           bridge={bridgeFor("capabilities")}
-          className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed"
+          className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed"
         />
       </m.div>
 
@@ -91,7 +91,7 @@ export const Skills: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-10 sm:gap-y-12 lg:gap-y-14">
         {skillCategories.map((category: SkillCategory, catIdx: number) => {
           const meta = CATEGORY_META[catIdx] || {
-            labelEn: "CAPABILITY",
+            labelEn: "Capability",
             labelTh: "ความสามารถ",
             taglineEn: "",
             taglineTh: "",
@@ -109,10 +109,10 @@ export const Skills: React.FC = () => {
               {/* Category Tree Root Header */}
               <div className="pb-3 border-b border-line space-y-1">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-mono text-primary font-semibold tracking-wider">
+                  <div className="flex items-center gap-2 text-xs font-mono text-primary font-semibold">
                     <span>{lang === "th" ? meta.labelTh : meta.labelEn}</span>
                   </div>
-                  <span className="text-xs font-mono text-zinc-400 uppercase">
+                  <span className="text-xs font-mono text-zinc-400">
                     {t(
                       `${category.skills.length} ทักษะ`,
                       `${category.skills.length} SKILLS`,
@@ -121,7 +121,7 @@ export const Skills: React.FC = () => {
                 </div>
                 <BilingualStack
                   as="h3"
-                  className="text-xl font-bold text-white tracking-tight"
+                  className="text-xl font-semibold text-white tracking-tight"
                   th={category.nameTh}
                   en={category.nameEn}
                 />
@@ -148,7 +148,7 @@ export const Skills: React.FC = () => {
                       <div className="flex items-start gap-2.5 min-w-0">
                         <span
                           aria-hidden="true"
-                          className="text-zinc-600 select-none font-bold group-hover/node:text-primary transition-colors shrink-0"
+                          className="text-zinc-600 select-none font-semibold group-hover/node:text-primary transition-colors shrink-0"
                         >
                           {connector}
                         </span>
@@ -158,7 +158,7 @@ export const Skills: React.FC = () => {
                           </span>
                           <BilingualStack
                             as="span"
-                            className="text-xs text-zinc-400 font-sans font-light block leading-normal"
+                            className="text-xs text-zinc-400 font-sans font-normal block leading-normal"
                             th={skill.descTh}
                             en={skill.descEn}
                           />

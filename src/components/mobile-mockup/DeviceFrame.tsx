@@ -65,7 +65,7 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
           <m.span
             key={`edge-${signal.key}`}
             aria-hidden="true"
-            className="pointer-events-none absolute -inset-px rounded-[47px] ring-1 ring-signal/70 shadow-glow-md"
+            className="pointer-events-none absolute -inset-px rounded-[47px] ring-1 ring-signal/70 "
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 1, 0] }}
             transition={{ ...BEAT_COMMIT, times: [0, 0.3, 1] }}

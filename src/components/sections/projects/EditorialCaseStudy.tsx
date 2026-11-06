@@ -262,7 +262,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const activeBeatData = beats[activeBeat];
   const activeBeatLabel = activeBeatData
     ? (lang === "th" ? activeBeatData.badgeTh : activeBeatData.badgeEn).replace(
-        /^\d+\s*\/\/\s*/,
+        /^\d+\s*/,
         "",
       )
     : "";
@@ -279,7 +279,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
-                <span className="text-primary font-semibold tracking-wider truncate">
+                <span className="text-primary font-semibold truncate">
                   {activeBeatLabel}
                 </span>
               </div>
@@ -288,7 +288,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 aria-live="polite"
               >
                 <span className="sr-only">{t("ขั้นตอน", "Step")}</span>
-                <span className="text-primary font-bold">
+                <span className="text-primary font-semibold">
                   {String(activeBeat + 1).padStart(2, "0")}
                 </span>
                 <span className="text-zinc-600">/</span>
@@ -414,7 +414,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   className="absolute inset-0 z-10 cursor-pointer outline-none"
                 />
                 <p
-                  className={`font-mono text-xs tracking-wider font-semibold ${
+                  className={`font-mono text-xs  font-semibold ${
                     isActive ? "text-primary" : "text-zinc-400"
                   }`}
                 >
@@ -423,14 +423,14 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 <div className="mt-2">
                   <BilingualStack
                     as="h4"
-                    className="text-lg font-bold text-white tracking-tight"
+                    className="text-lg font-semibold text-white tracking-tight"
                     th={beat.titleTh}
                     en={beat.titleEn}
                   />
                 </div>
                 <div className="mt-2">
                   <BilingualStack
-                    className="text-sm text-zinc-300 font-light leading-relaxed max-w-prose"
+                    className="text-sm text-zinc-300 font-normal leading-relaxed max-w-prose"
                     th={beat.descriptionTh}
                     en={beat.descriptionEn}
                   />
@@ -467,13 +467,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 {/* Only the shown stage is a heading in the outline. */}
                 <BilingualStack
                   as={bIdx === activeBeat ? "h4" : "div"}
-                  className="text-base font-bold text-white tracking-tight"
+                  className="text-base font-semibold text-white tracking-tight"
                   th={b.titleTh}
                   en={b.titleEn}
                 />
                 <div className="mt-1.5">
                   <BilingualStack
-                    className="text-sm text-zinc-300 font-light leading-relaxed"
+                    className="text-sm text-zinc-300 font-normal leading-relaxed"
                     th={b.descriptionTh}
                     en={b.descriptionEn}
                   />
@@ -537,7 +537,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           </p>
           <BilingualStack
             as="h3"
-            className="text-3xl xl:text-4xl font-bold tracking-tight text-white leading-tight"
+            className="text-3xl xl:text-4xl font-semibold tracking-tight text-white leading-tight"
             th={titleTh}
             en={titleEn}
           />
@@ -549,7 +549,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             />
           )}
           <BilingualStack
-            className="text-xs font-mono text-zinc-400 tracking-wide"
+            className="text-xs font-mono text-zinc-400"
             th={project.subtitleTh}
             en={project.subtitleEn}
           />
@@ -557,7 +557,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
         {/* Description */}
         <BilingualStack
-          className="text-sm xl:text-base text-zinc-300/90 font-light leading-relaxed max-w-xl"
+          className="text-sm xl:text-base text-zinc-300/90 font-normal leading-relaxed max-w-xl"
           th={highlightTerms(project.descriptionTh)}
           en={highlightTerms(project.descriptionEn)}
         />
@@ -574,7 +574,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               >
                 <BilingualStack
                   as="span"
-                  className="text-xs font-mono tracking-widest text-zinc-400 uppercase block break-words"
+                  className="text-xs font-mono text-zinc-400 block break-words"
                   th={metric.labelTh}
                   en={metric.labelEn}
                 />
@@ -598,11 +598,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onFocus={onPrefetch}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 pl-5 pr-1.5 py-1 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition shadow-chip hover:shadow-glow-cta cursor-pointer"
+            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 pl-5 pr-1.5 py-1 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono transition shadow-chip  cursor-pointer"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
-            <span className="font-semibold tracking-wider">
-              {t("อ่าน case study", "VIEW CASE STUDY")}
+            <span className="font-semibold">
+              {t("อ่าน case study", "View case study")}
             </span>
             <span aria-hidden="true" className="cta-icon bg-white/[0.06]">
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
