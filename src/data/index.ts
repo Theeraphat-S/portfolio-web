@@ -20,6 +20,7 @@ export {
   skillCategoriesData,
   experiencesData,
 };
+export { aboutData } from "./about";
 export { BEATS_BY_PROJECT } from "./scrollytellingBeats";
 export { STORY_CHAPTERS, bridgeFor } from "./chapters";
 export * from "../types";

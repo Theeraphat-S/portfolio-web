@@ -132,6 +132,39 @@ export interface PersonalInfo {
   reference?: ReferenceInfo;
 }
 
+/** A headline split so one phrase can carry the accent colour. */
+export interface AboutHeadline {
+  lead: string;
+  highlight: string;
+  rest: string;
+}
+
+/** One line of the Approach chapter's credentials list. */
+export interface AboutCredential {
+  id: string;
+  labelTh: string;
+  labelEn: string;
+  valueTh: string;
+  valueEn: string;
+  detailTh: string;
+  detailEn: string;
+  periodTh: string;
+  periodEn: string;
+}
+
+/** Copy for the Approach (About) chapter. */
+export interface AboutContent {
+  eyebrowTh: string;
+  eyebrowEn: string;
+  headlineTh: AboutHeadline;
+  headlineEn: AboutHeadline;
+  practiceTh: string;
+  practiceEn: string;
+  credentialsLabelTh: string;
+  credentialsLabelEn: string;
+  credentials: AboutCredential[];
+}
+
 export interface StatItem {
   value: string;
   labelTh: string;
