@@ -38,18 +38,18 @@ export const projectsData: ProjectItem[] = [
     evidenceEn:
       "Usability field tests with healthcare workers and VHVs revealed confusion around technical lab thresholds. We redesigned inputs into visual range sliders with color-coded risk bands and automatic unit conversions.",
     outcomeTh:
-      "ลดเวลาคัดกรองต่อคนลงเหลือ < 3-5 นาที (จากเดิม 10-15 นาทีในกระบวนการบันทึกด้วยมือ), ขจัดความผิดพลาดในการคำนวณคะแนนความเสี่ยง (100% computational integrity ตามเกณฑ์ประเมินทางการแพทย์), พร้อมออกรายงานสรุปผลการตรวจได้ทันที",
+      "ลดเวลาคัดกรองต่อคนลงเหลือ < 3-5 นาที จากเดิม 10-15 นาทีตอนบันทึกด้วยมือ คะแนนความเสี่ยงที่คำนวณได้ตรงกับเกณฑ์ประเมินทางการแพทย์ทุกครั้ง (แม่นยำ 100%) และออกรายงานสรุปผลได้ทันทีหลังคัดกรอง",
     outcomeEn:
-      "Reduced screening time per patient to < 3-5 mins (down from 10-15 mins in manual workflows), achieved 100% calculation integrity matching clinical guidelines, and enabled instant summary report generation.",
+      "Screening now takes < 3-5 mins per patient, down from 10-15 mins on paper. Risk scores match the clinical scoring criteria every time (100% accuracy), and the summary report is ready as soon as screening ends.",
     highlightsTh: [
       "พัฒนา Front-end ด้วย Flutter & Dart โดยใช้ BLoC จัดการ State",
-      "จัดการฐานข้อมูลด้วย MySQL สำหรับบันทึกและประมวลผลข้อมูลผู้ป่วยอย่างรัดกุม ปลอดภัยตามมาตรฐานข้อมูลสุขภาพ",
+      "จัดการฐานข้อมูล MySQL ที่เก็บผลคัดกรองของผู้ป่วย",
       "พัฒนาระบบคำนวณและประเมินคะแนนความเสี่ยง (Risk Score Algorithm) พร้อมออกรายงานสรุปผลการคัดกรองอัตโนมัติ",
       "ทดสอบการใช้งานจริง (Field Testing) ร่วมกับบุคลากรทางการแพทย์และเจ้าหน้าที่ อสม. ในพื้นที่จริงเพื่อปรับปรุง UI/UX ให้ใช้งานง่ายที่สุด",
     ],
     highlightsEn: [
       "Built the Flutter & Dart front end, using BLoC for state management.",
-      "Structured MySQL database management for secure, accurate patient health records.",
+      "Managed the MySQL database that stores patient screening records.",
       "Built the automated risk-scoring logic and summary report generation.",
       "Conducted real-world usability testing with healthcare professionals and Village Health Volunteers (VHVs).",
     ],
@@ -90,7 +90,7 @@ export const projectsData: ProjectItem[] = [
     githubUrl: "https://github.com/Theeraphat-S",
     repositoryType: "private",
     repositoryNoticeTh: "ซอร์สโค้ดวิจัยและสาธารณสุขชุมชน (Private Codebase)",
-    repositoryNoticeEn: "Community Healthcare Research · Private Codebase",
+    repositoryNoticeEn: "Community healthcare research, private codebase",
   },
   {
     id: "pinto-app",
@@ -114,9 +114,9 @@ export const projectsData: ProjectItem[] = [
     descriptionEn:
       "Built and shipped features on the production Pinto app: state management for the hybrid WebView menus, and a gamified Chat Streaks system synced with the user Profile API.",
     problemTh:
-      "ต้องการเพิ่ม Daily Active Users (DAU) และ User Engagement ภายในแอป โดยผสานหน้าเว็บ WebView ที่มีอยู่เดิมเข้ากับ Native Experience โดยไม่ทำให้ประสิทธิภาพและความลื่นไหลของแอปลดลง",
+      "เป้าหมายคือให้ผู้ใช้กลับมาเปิดแอปทุกวันมากขึ้น (Daily Active Users) โจทย์คือนำหน้าเมนูเว็บที่มีอยู่เดิมมาแสดงในแอป Flutter ผ่าน WebView โดยที่แอปไม่ช้าลง",
     problemEn:
-      "Needed to boost Daily Active Users (DAU) and engagement by bringing the existing WebView menus into the native Flutter app without slowing it down.",
+      "The goal was more daily active users (DAU). The task: bring the existing web menus into the native Flutter app through a WebView without slowing it down.",
     decisionRationaleTh:
       "ออกแบบ State Bridge Controller เพื่อซิงค์ข้อมูลระหว่าง Flutter Native กับ WebView และสร้างระบบ Chat Streaks Gamification เชื่อมต่อกับ Profile API",
     decisionRationaleEn:
@@ -130,9 +130,9 @@ export const projectsData: ProjectItem[] = [
     evidenceEn:
       "Reloading the WebView menu on every visit felt slow, so I added caching and optimistic UI updates between menus to keep the screen from stalling.",
     outcomeTh:
-      "ร่วมส่งมอบฟีเจอร์เมนู WebView และระบบ Gamification Chat Streaks สู่ Production พร้อมเชื่อมต่อ Profile API อย่างเสถียร รองรับการขยายตัวของผู้ใช้งานตามเป้าหมายของทีม",
+      "ร่วมส่งเมนู WebView และ Chat Streaks ขึ้นแอป Pinto เวอร์ชัน Production โดยแต้มสะสมบันทึกผ่าน Profile API",
     outcomeEn:
-      "Successfully shipped hybrid WebView menus and gamified Chat Streaks features to production, integrating with Profile API and meeting team sprint delivery targets.",
+      "The WebView menus and Chat Streaks are live in the production Pinto app, with streak points saved through the Profile API.",
     highlightsTh: [
       "พัฒนาและปรับปรุงฟีเจอร์ด้วย Flutter & Dart รองรับการสลับเมนูแบบ Hybrid WebView",
       "สร้างระบบ Gamification สะสมแต้มต่อเนื่อง (Chat Streaks) เพื่อกระตุ้นการมีส่วนร่วม (Engagement) ของผู้ใช้งาน",
@@ -142,7 +142,7 @@ export const projectsData: ProjectItem[] = [
     highlightsEn: [
       "Built Flutter & Dart modules connecting native screens with the WebView menus.",
       "Implemented the Chat Streaks logic, designed to encourage users to chat daily.",
-      "Integrated Profile API for real-time loyalty point updates and reward redemption.",
+      "Wrote streak points to the user's profile through the Profile API.",
       "Collaborated in Agile sprints with Git/GitHub version control meeting project release timelines.",
     ],
     technologies: [
@@ -167,7 +167,7 @@ export const projectsData: ProjectItem[] = [
     repositoryType: "commercial",
     repositoryNoticeTh:
       "ซอร์สโค้ดเชิงพาณิชย์ของบริษัทภายใต้ข้อตกลงรักษาความลับ (Proprietary NDA)",
-    repositoryNoticeEn: "Commercial Production · Proprietary Codebase (NDA)",
+    repositoryNoticeEn: "Commercial production, proprietary codebase (NDA)",
   },
   {
     id: "pos-system",
@@ -191,9 +191,9 @@ export const projectsData: ProjectItem[] = [
     descriptionEn:
       "Designed and developed retail Point of Sale (POS) store management modules. Integrated Rest APIs between client and backend to keep inventory data in sync and transactions reliable.",
     problemTh:
-      "ระบบแคชเชียร์และจัดการสต็อกแบบเดิมทำงานช้า ไม่รองรับการเชื่อมต่อขัดข้องชั่วคราว ทำให้แถวคิดเงินติดขัดและเสี่ยงต่อข้อมูลสต็อกไม่ตรงกัน (Race Condition)",
+      "การคิดเงินต้องทำต่อได้ตอนเน็ตหลุดชั่วคราว โดยแถวคิดเงินไม่ติดขัด และข้อมูลสต็อกไม่เพี้ยนจากการส่งข้อมูลชนกัน (Race Condition)",
     problemEn:
-      "Legacy POS and stock tracking suffered from checkout bottlenecks and risk of data inconsistencies (race conditions) during intermittent network disconnections.",
+      "Checkout had to keep running through short network drops, without stalling the line or letting stock data drift out of sync (race conditions).",
     decisionRationaleTh:
       "ออกแบบ Client-side Cart & Order State ที่มี Optimistic Updates และระบบคิวส่ง Request ซ้ำอัตโนมัติ (Retry Mechanism with Idempotency Key) เมื่อต่อเน็ตได้",
     decisionRationaleEn:
@@ -258,7 +258,7 @@ export const projectsData: ProjectItem[] = [
       "Modular Client Architecture with Optimistic UI updates and resilient API request retry logic",
     githubUrl: "https://github.com/Theeraphat-S",
     repositoryType: "commercial",
-    repositoryNoticeTh: "งานช่วงฝึกงาน · ซอร์สโค้ดของบริษัท (Private)",
-    repositoryNoticeEn: "Internship work · Company private codebase",
+    repositoryNoticeTh: "งานช่วงฝึกงาน ซอร์สโค้ดของบริษัท (Private)",
+    repositoryNoticeEn: "Internship work, company private codebase",
   },
 ];

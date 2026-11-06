@@ -27,8 +27,8 @@ export const STORY_CHAPTERS: StoryChapter[] = [
     labelTh: "ความสามารถ",
     labelEn: "CAPABILITIES",
     bridge: {
-      th: "เบื้องหลังโปรเจกต์เหล่านั้นคือชุดเครื่องมือนี้ Flutter และ Dart เป็นเครื่องมือหลัก พร้อมประสบการณ์ด้านเว็บ Backend และฐานข้อมูลจากการเรียนและการฝึกงาน รวมถึงการเป็นผู้ช่วยสอน 3 ภาคการศึกษา",
-      en: "Behind those projects is this toolkit. Flutter and Dart are my main tools, with hands-on web, backend and database work from university and my internship, plus three semesters as a teaching assistant.",
+      th: "เบื้องหลังโปรเจกต์เหล่านั้นคือชุดเครื่องมือนี้ Flutter และ Dart เป็นเครื่องมือหลัก พร้อมประสบการณ์ด้านเว็บ Backend และฐานข้อมูลจากการเรียนและการฝึกงาน",
+      en: "Behind those projects is this toolkit. Flutter and Dart are my main tools, with hands-on web, backend and database work from university and my internship.",
     },
   },
   {

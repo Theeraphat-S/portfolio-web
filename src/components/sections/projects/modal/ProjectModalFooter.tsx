@@ -48,7 +48,7 @@ export const ProjectModalFooter: React.FC<ProjectModalFooterProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="px-6 py-2 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold uppercase tracking-wider transition duration-200 cursor-pointer shadow-[0_4px_20px_-4px_rgba(77,124,254,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(77,124,254,0.4)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal"
+          className="px-6 py-2 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold uppercase tracking-wider transition duration-200 cursor-pointer shadow-button hover:shadow-button-hover hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal"
         >
           {t("ปิดหน้าต่าง", "Close")}
         </button>

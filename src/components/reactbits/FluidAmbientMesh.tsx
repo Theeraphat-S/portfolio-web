@@ -46,7 +46,7 @@ export const FluidAmbientMesh: React.FC<FluidAmbientMeshProps> = ({
         style={{
           transform: "translate(-20%, -20%)",
         }}
-        className={`absolute top-0 left-1/4 w-[450px] h-[450px] rounded-full ${primaryBg} blur-[90px] mix-blend-screen animate-pulse-subtle transition-all motion-reduce:animate-none ${getDuration()}`}
+        className={`absolute top-0 left-1/4 w-[450px] h-[450px] rounded-full ${primaryBg} blur-[90px] mix-blend-screen animate-pulse-subtle transition-[opacity,transform] motion-reduce:animate-none ${getDuration()}`}
       />
 
       {/* Orb 2: Secondary Drift */}
@@ -54,7 +54,7 @@ export const FluidAmbientMesh: React.FC<FluidAmbientMeshProps> = ({
         style={{
           transform: "translate(20%, 20%)",
         }}
-        className={`absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full ${secondaryBg} blur-[100px] mix-blend-screen animate-pulse transition-all motion-reduce:animate-none ${getDuration()}`}
+        className={`absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full ${secondaryBg} blur-[100px] mix-blend-screen animate-pulse transition-[opacity,transform] motion-reduce:animate-none ${getDuration()}`}
       />
 
       {/* Orb 3: Accent Sheen */}

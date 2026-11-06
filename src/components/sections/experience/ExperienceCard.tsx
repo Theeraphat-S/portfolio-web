@@ -57,7 +57,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
       <m.div
         whileHover={{ scale: 1.25 }}
         transition={{ type: "spring", stiffness: 350, damping: 20 }}
-        className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_#06b6d4] z-10 cursor-pointer"
+        className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-950 border-2 border-cyan-400 flex items-center justify-center shadow-glow z-10 cursor-pointer"
       >
         {getTypeIcon(experience.type)}
       </m.div>

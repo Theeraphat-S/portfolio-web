@@ -3,3 +3,6 @@ dist/
 .agents/
 .claude/
 .codex/
+
+# Hallmark audit records and screenshots
+.hallmark/

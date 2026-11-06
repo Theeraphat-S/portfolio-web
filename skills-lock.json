@@ -79,6 +79,12 @@
       "skillPath": "skills/soft-skill/SKILL.md",
       "computedHash": "f730e4132775f13eea19e3dc39afc6bb453cfc0498872b127ad8f0d47cfd802d"
     },
+    "humanize-skills": {
+      "source": "gencharitaci/humanize-skills",
+      "sourceType": "github",
+      "skillPath": "skills/humanize-skills/SKILL.md",
+      "computedHash": "1059ca4ee070178e4e4363f1ed585cc3deacf21e48c80245914e5db8efc6d7aa"
+    },
     "imagegen-frontend-web": {
       "source": "Leonxlnx/taste-skill",
       "sourceType": "github",

@@ -18,7 +18,6 @@ export const Footer: React.FC = () => {
               ? portfolioData.personal.nameTh
               : portfolioData.personal.nameEn}
           </span>
-          <span className="hidden sm:inline text-zinc-600">&bull;</span>
           <span className="font-mono text-[11px] text-zinc-400 min-w-[180px]">
             {lang === "th"
               ? portfolioData.personal.locationTh

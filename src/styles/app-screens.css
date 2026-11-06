@@ -1,0 +1,105 @@
+/* Palettes of the simulated Flutter apps inside the device frame.
+   These are the apps' own colours, not the site theme: NCDs runs on
+   Material 3's baseline purple, Pinto and the POS on their brand greens. */
+@theme {
+  --shadow-app-bar: 0 1px 0 rgb(0 0 0 / 0.06);
+  --shadow-app-card: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-app-nav: 0 -1px 0 rgb(0 0 0 / 0.06);
+
+  /* Shared Android snackbar */
+  --color-snackbar: #303033;
+  --color-snackbar-text: #f2f0f4;
+  --color-snackbar-success: #8fe0ad;
+
+  /* NCDs Screening: Material 3 baseline */
+  --color-m3-primary: #6750a4;
+  --color-m3-primary-container: #eaddff;
+  --color-m3-secondary: #625b71;
+  --color-m3-secondary-container: #e8def8;
+  --color-m3-surface: #f7f2fa;
+  --color-m3-surface-container: #f3edf7;
+  --color-m3-outline-variant: #f1ecf4;
+  --color-m3-on-surface: #1d1b20;
+  --color-m3-on-surface-variant: #49454f;
+
+  /* Pinto */
+  --color-pinto-surface: #f2f4f3;
+  --color-pinto-outline: #e6e9e7;
+  --color-pinto-outline-soft: #eaf1ec;
+  --color-pinto-track: #e3efe7;
+  --color-pinto-muted: #8a918c;
+  --color-pinto-muted-green: #8a9a90;
+  --color-pinto-chevron: #a3b0a8;
+  --color-pinto-on-surface-variant: #5c6660;
+  --color-pinto-like: #e0245e;
+  --color-pinto-mint: #e3f7f3;
+  --color-pinto-green-wash: #e5efe8;
+  --color-pinto-green-50: #e9f7ee;
+  --color-pinto-green-100: #c8efd6;
+  --color-pinto-green-200: #a8dcbb;
+  --color-pinto-green-300: #9fd3b2;
+  --color-pinto-green-800: #17703e;
+  --color-pinto-amber-50: #fff1cc;
+  --shadow-pinto-fab: 0 4px 10px -3px rgb(35 177 77 / 0.6);
+
+  /* Retail POS */
+  --color-pos-surface: #f4f8f6;
+  --color-pos-outline: #d3e3da;
+  --color-pos-outline-soft: #e6efea;
+  --color-pos-mint: #dff3ea;
+  --color-pos-green-50: #e1f3e7;
+  --color-pos-green-100: #c4eed8;
+  --color-pos-amber-50: #fff4dc;
+  --color-pos-error: #ba1a1a;
+  --color-pos-on-surface: #191d1b;
+  --color-pos-on-surface-variant: #57615b;
+
+  /* Risk tiers, category chips and photo tiles, by screen */
+  --color-m3-primary-hover: #523d8f;
+  --color-m3-on-primary-container: #21005d;
+  --color-m3-ok-text: #1b6b3a;
+  --color-m3-ok-container: #e3f4e8;
+  --color-m3-ok-chip: #d3eedb;
+  --color-m3-ok: #2e8b57;
+  --color-m3-warn-text: #8a5300;
+  --color-m3-warn-container: #fff1d6;
+  --color-m3-warn-chip: #ffe6b3;
+  --color-m3-warn-on-chip: #7a4900;
+  --color-m3-warn: #c77800;
+  --color-m3-error: #b3261e;
+  --color-m3-error-container: #fde7e5;
+  --color-m3-error-chip: #f9d3cf;
+  --color-m3-error-on-chip: #a1231b;
+  --color-pinto-on-surface: #191d1a;
+  --color-pinto-icon: #404943;
+  --color-pinto-chip-outline: #9aa19c;
+  --color-pinto-travel-outline: #9fe0d6;
+  --color-pinto-travel: #1b9a87;
+  --color-pinto-fashion-outline: #f7b7cc;
+  --color-pinto-fashion-container: #fde6ee;
+  --color-pinto-fashion: #d4457a;
+  --color-pinto-food-outline: #f8d39a;
+  --color-pinto-food-container: #fff2dc;
+  --color-pinto-food: #b86e00;
+  --color-pinto-amber-text: #7a5600;
+  --color-pinto-tile-cat-from: #3b3f4a;
+  --color-pinto-tile-cat-to: #1e2129;
+  --color-pinto-tile-cat-ink: #f2c38f;
+  --color-pinto-tile-laptop-from: #c9d6ea;
+  --color-pinto-tile-laptop-to: #8fa6c9;
+  --color-pinto-tile-laptop-ink: #23324d;
+  --color-pinto-tile-coffee-from: #dfe7f5;
+  --color-pinto-tile-coffee-to: #b9c9e6;
+  --color-pinto-tile-coffee-ink: #3b4f7a;
+  --color-pinto-tile-mountain-from: #ffd9a8;
+  --color-pinto-tile-mountain-to: #e98d5a;
+  --color-pinto-tile-mountain-ink: #5a2a10;
+  --color-pos-outline-hover: #9fd8bd;
+  --color-pos-on-green-container: #002114;
+  --color-pos-green: #006c4c;
+  --color-pos-green-text: #17663a;
+  --color-pos-icon: #404943;
+  --color-pos-amber-chip: #fff0d1;
+  --color-pos-amber-on-chip: #7a4b00;
+  --color-pos-amber-text: #5c3a00;
+}

@@ -140,7 +140,7 @@ export const experiencesData: ExperienceItem[] = [
     descriptionTh:
       "ได้รับเชิญเป็นวิทยากรบรรยายและจัดเวิร์กช็อปให้แก่นักเรียน ม.4 ห้อง Gifted Computer โรงเรียนจักรคำคณาทร ในหัวข้อการประยุกต์ใช้ AI เพื่อการเรียนรู้และการเขียนโปรแกรมอย่างมีจริยธรรม",
     descriptionEn:
-      "Invited speaker leading a practical workshop for M.4 Gifted Computer students at Jakkhumkhanathorn School on leveraging generative AI and ethical programming practices.",
+      "Invited speaker leading a practical workshop for M.4 Gifted Computer students at Jakkhumkhanathorn School on using generative AI for learning and on ethical programming.",
     contributions: [
       {
         labelEn: "AI Tools",
@@ -156,7 +156,7 @@ export const experiencesData: ExperienceItem[] = [
         descEn:
           "Demonstrated prompt writing and using AI to work through coding exercises step by step.",
         descTh:
-          "สาธิต Prompt Engineering และการใช้ AI ช่วยแก้โจทย์ Coding อย่างมีประสิทธิภาพและถูกต้องตามหลักวิชาการ",
+          "สาธิตการเขียน Prompt และการใช้ AI ช่วยแก้โจทย์ Coding ทีละขั้น",
       },
       {
         labelEn: "Developer Pathways",
@@ -169,12 +169,12 @@ export const experiencesData: ExperienceItem[] = [
     ],
     bulletsTh: [
       "บรรยายแนวคิดและหลักการทำงานของ Modern AI Tools ในงาน Software Development และการศึกษา",
-      "สาธิต Prompt Engineering และการใช้ AI ช่วยแก้โจทย์ Coding อย่างมีประสิทธิภาพและถูกต้องตามหลักวิชาการ",
+      "สาธิตการเขียน Prompt และการใช้ AI ช่วยแก้โจทย์ Coding ทีละขั้น",
       "ถ่ายทอดแรงบันดาลใจและเส้นทางสู่สายอาชีพนักพัฒนาซอฟต์แวร์ (Developer Roadmap)",
     ],
     bulletsEn: [
       "Explained how modern AI tools are used in software development and education.",
-      "Demonstrated effective Prompt Engineering and practical AI-assisted problem solving.",
+      "Demonstrated prompt writing and using AI to work through coding exercises step by step.",
       "Shared paths into software development careers.",
     ],
     skills: [

@@ -18,10 +18,10 @@ export const AppSnackbar: React.FC<{ message: string | null }> = ({
         exit={{ opacity: 0, y: 8 }}
         transition={{ duration: 0.2 }}
         role="status"
-        className="absolute inset-x-3 bottom-full mb-2 flex items-center gap-2 rounded-lg bg-[#303033] px-3 py-2.5 text-[12px] text-[#f2f0f4] shadow-lg"
+        className="absolute inset-x-3 bottom-full mb-2 flex items-center gap-2 rounded-lg bg-snackbar px-3 py-2.5 text-[12px] text-snackbar-text shadow-lg"
       >
         <CheckCircle2
-          className="h-4 w-4 shrink-0 text-[#8fe0ad]"
+          className="h-4 w-4 shrink-0 text-snackbar-success"
           aria-hidden="true"
         />
         {message}

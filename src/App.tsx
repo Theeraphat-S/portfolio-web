@@ -29,7 +29,7 @@ export const App: React.FC = () => {
           </a>
 
           {/* Global Avionics Scroll Progress Indicator */}
-          <ScrollProgressBar className="h-[2px] bg-gradient-to-r from-signal via-primary to-primary" />
+          <ScrollProgressBar className="h-[2px] bg-signal" />
 
           <div className="min-h-[100dvh] relative bg-void text-ink selection:bg-primary selection:text-void flex flex-col font-sans overflow-x-clip">
             {/* Chapter lighting that shifts as the story scrolls */}

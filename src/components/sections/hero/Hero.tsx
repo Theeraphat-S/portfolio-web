@@ -252,17 +252,14 @@ export const Hero: React.FC = () => {
         {/* Location & Modality Notice */}
         <m.p
           variants={itemVariants}
-          className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
+          className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem] [&>a]:ml-4"
         >
           <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           <span>
             {t(
-              "เชียงใหม่ ประเทศไทย • ยินดีทำงาน Onsite / Hybrid / Remote",
-              "Chiang Mai, Thailand • Open to Onsite, Hybrid, or Remote roles",
+              "เชียงใหม่ ประเทศไทย ยินดีทำงาน Onsite / Hybrid / Remote",
+              "Chiang Mai, Thailand, open to Onsite, Hybrid, or Remote roles",
             )}
-          </span>
-          <span className="text-zinc-600" aria-hidden="true">
-            •
           </span>
           <a
             href={`tel:${personalData.phone.replace(/-/g, "")}`}

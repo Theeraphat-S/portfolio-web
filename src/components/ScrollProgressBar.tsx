@@ -6,7 +6,7 @@ interface ScrollProgressBarProps {
 }
 
 export const ScrollProgressBar: React.FC<ScrollProgressBarProps> = ({
-  className = "h-[2px] bg-gradient-to-r from-cyan-500 via-sky-400 to-blue-600",
+  className = "h-[2px] bg-signal",
 }) => {
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
