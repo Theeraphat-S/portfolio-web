@@ -386,7 +386,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 }}
                 aria-current={isActive ? "step" : undefined}
                 style={{ opacity: beatOpacity[bIdx] }}
-                className={`relative min-h-[50vh] border-t py-7 text-left transition-[border-color] duration-(--dur-base) has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-signal ${
+                className={`relative min-h-[50vh] border-t py-7 text-left transition-[border-color] duration-(--dur-base) has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal ${
                   isActive ? "border-primary/60" : "border-line"
                 }`}
               >
@@ -502,7 +502,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 type="button"
                 onClick={() => applyBeat(bIdx)}
                 aria-current={isActive ? "step" : undefined}
-                className={`relative overflow-hidden min-h-14 rounded-lg border px-1.5 sm:px-2 py-2 text-left font-mono text-xs leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
+                className={`relative overflow-hidden min-h-14 rounded-lg border px-1.5 sm:px-2 py-2 text-left font-mono text-xs leading-tight transition-colors cursor-pointer ${
                   isActive
                     ? "border-primary/50 bg-primary/10 text-primary"
                     : "border-line text-zinc-400 hover:text-zinc-200"
@@ -598,7 +598,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onFocus={onPrefetch}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition shadow-chip hover:shadow-glow-cta cursor-pointer"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
             <span className="font-semibold tracking-wider">

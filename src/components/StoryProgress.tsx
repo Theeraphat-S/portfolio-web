@@ -110,7 +110,7 @@ export const StoryProgress: React.FC = () => {
                     aria-current={
                       c.id === activeChapter ? "location" : undefined
                     }
-                    className="group flex h-6 w-6 items-center justify-center rounded-full cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                    className="group flex h-6 w-6 items-center justify-center rounded-full cursor-pointer"
                   >
                     <span
                       className={`story-progress-dot group-hover:border-signal ${index <= activeIndex ? "is-passed" : ""} ${c.id === activeChapter ? "is-active" : ""}`}
@@ -156,7 +156,7 @@ export const StoryProgress: React.FC = () => {
               `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
               `Navigation menu (current: ${chapter.labelEn})`,
             )}
-            className="btn-press relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] transition cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="btn-press relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] transition cursor-pointer hover:border-white/[0.16]"
           >
             {isMenuOpen ? (
               <X className="h-4 w-4 text-zinc-400" aria-hidden />
@@ -188,7 +188,7 @@ export const StoryProgress: React.FC = () => {
                         aria-current={
                           c.id === activeChapter ? "location" : undefined
                         }
-                        className={`flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
+                        className={`flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm transition-colors cursor-pointer ${
                           c.id === activeChapter
                             ? "bg-primary/10 text-primary"
                             : "text-zinc-300 hover:bg-white/[0.04] hover:text-white"
@@ -205,14 +205,14 @@ export const StoryProgress: React.FC = () => {
                   href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex min-h-11 items-center gap-2.5 rounded-lg px-3 text-sm text-zinc-200 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                  className="flex min-h-11 items-center gap-2.5 rounded-lg px-3 text-sm text-zinc-200 hover:bg-white/[0.04] hover:text-white"
                 >
                   <FileText className="h-4 w-4 text-zinc-400" aria-hidden />
                   {t("เปิด CV", "Resume / CV")}
                 </a>
                 <a
                   href={`mailto:${personalData.email}`}
-                  className="flex min-h-11 items-center gap-2.5 rounded-lg px-3 text-sm text-zinc-200 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                  className="flex min-h-11 items-center gap-2.5 rounded-lg px-3 text-sm text-zinc-200 hover:bg-white/[0.04] hover:text-white"
                 >
                   <Mail className="h-4 w-4 text-zinc-400" aria-hidden />
                   {t("ส่งอีเมล", "Email me")}
@@ -221,7 +221,7 @@ export const StoryProgress: React.FC = () => {
                   type="button"
                   onClick={toggleLang}
                   aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-                  className="flex min-h-11 items-center gap-2.5 rounded-lg px-3 text-sm text-zinc-200 hover:bg-white/[0.04] hover:text-white cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                  className="flex min-h-11 items-center gap-2.5 rounded-lg px-3 text-sm text-zinc-200 hover:bg-white/[0.04] hover:text-white cursor-pointer"
                 >
                   <Languages className="h-4 w-4 text-zinc-400" aria-hidden />
                   <span className={lang === "th" ? "text-primary" : ""}>

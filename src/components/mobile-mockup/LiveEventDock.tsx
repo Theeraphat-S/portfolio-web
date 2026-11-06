@@ -49,7 +49,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onFocus={onPrefetchDrawer}
             data-cursor-text="LOGS"
             aria-label={t("เปิดดูประวัติ Event Log", "Open Live Stream Logs")}
-            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer"
           >
             <Terminal className="w-2.5 h-2.5 text-primary" />
             <span>LOGS ({eventsCount})</span>
@@ -62,7 +62,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
             onFocus={onPrefetchDrawer}
             data-cursor-text="DART"
             aria-label={t("ดูโค้ด Flutter/Dart", "View Dart Source Code")}
-            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer"
           >
             <Code2 className="w-2.5 h-2.5" />
             <span>DART CODE</span>
@@ -99,7 +99,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               `เปิด Event Log: ${latestEvent.name}`,
               `Open event log: ${latestEvent.name}`,
             )}
-            className="w-full text-left group cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal rounded-lg bg-black/40 hover:bg-black/60 p-1.5 sm:p-2 relative border border-white/[0.04] hover:border-white/[0.12] transition-colors flex items-center justify-between gap-2 text-xs"
+            className="w-full min-h-11 lg:min-h-0 text-left group cursor-pointer rounded-lg bg-black/40 hover:bg-black/60 p-1.5 sm:p-2 relative border border-white/[0.04] hover:border-white/[0.12] transition-colors flex items-center justify-between gap-2 text-xs"
           >
             {animateEntry && (
               <m.span

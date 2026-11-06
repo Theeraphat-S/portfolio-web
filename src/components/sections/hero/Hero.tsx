@@ -6,6 +6,7 @@ import { useLanguage } from "../../../context/LanguageContext";
 import { CHAPTER_OFFSET, scrollToElement } from "../../../lib/lenis";
 import { personalData, portfolioData } from "../../../data";
 import { BilingualStack } from "../../BilingualStack";
+import { telHref } from "../../../lib/utils";
 
 export const Hero: React.FC = () => {
   const { lang, t, toggleLang } = useLanguage();
@@ -73,7 +74,7 @@ export const Hero: React.FC = () => {
               type="button"
               onClick={toggleLang}
               aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-              className="btn-press min-h-11 px-3 text-xs font-mono tracking-wider text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal shrink-0"
+              className="btn-press min-h-11 px-3 text-xs font-mono tracking-wider text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition shrink-0"
             >
               <span className={lang === "th" ? "text-primary" : ""}>TH</span>
               <span className="px-1.5 text-zinc-600">/</span>
@@ -137,7 +138,7 @@ export const Hero: React.FC = () => {
                         e.preventDefault();
                         scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
                       }}
-                      className="group block rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                      className="group block rounded"
                     >
                       <span className="block font-mono text-xs font-semibold text-white group-hover:text-signal transition-colors">
                         {project.shortName ?? project.titleEn}
@@ -245,8 +246,8 @@ export const Hero: React.FC = () => {
               {t(personalData.heroLocationTh, personalData.heroLocationEn)}
             </span>
             <a
-              href={`tel:${personalData.phone.replace(/-/g, "")}`}
-              className="hover:text-signal underline-offset-4 hover:underline transition-colors"
+              href={telHref(personalData.phone)}
+              className="inline-flex items-center min-h-11 -my-3.5 sm:min-h-0 sm:my-0 hover:text-signal underline-offset-4 hover:underline transition-colors"
             >
               {personalData.phone}
             </a>
