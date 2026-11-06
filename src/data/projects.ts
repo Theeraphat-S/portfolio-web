@@ -22,13 +22,13 @@ export const projectsData: ProjectItem[] = [
     descriptionEn:
       "Mobile application designed for risk screening and assessment of Non-Communicable Diseases (NCDs) including Diabetes, Hypertension, Heart Disease, and Obesity. UI designed for healthcare workers, village health volunteers (VHVs), and patients.",
     problemTh:
-      "กระบวนการคัดกรองโรค NCDs ในชุมชนเดิมใช้กระดาษที่มีแบบสอบถามและตัวแปรคำนวณซับซ้อน มักเกิด Human Error ในการคิดคะแนนความเสี่ยง และมีอุปสรรคสำคัญคือพื้นที่ปฏิบัติงานของ อสม. มักเป็นจุดอับสัญญาณอินเทอร์เน็ต",
+      "กระบวนการคัดกรองโรค NCDs ในชุมชนเดิมใช้กระดาษที่มีแบบสอบถามและตัวแปรคำนวณซับซ้อน มักเกิด Human Error ในการคิดคะแนนความเสี่ยง และพื้นที่ที่ อสม. ลงทำงานมักเป็นจุดอับสัญญาณอินเทอร์เน็ต",
     problemEn:
-      "Traditional community NCDs screening relied on paper forms with multi-variable risk scoring, prone to human calculation errors. Moreover, village health volunteers (VHVs) frequently operate in remote areas with unstable or no internet connectivity.",
+      "Traditional community NCDs screening relied on paper forms with multi-variable risk scoring, prone to human calculation errors. Village health volunteers (VHVs) also often work in areas with patchy or no internet signal.",
     decisionRationaleTh:
-      "ย้าย Business Logic ในการประเมิน Risk Scoring และ State Validation ทั้งหมดมาทำงานบน Client-side (Flutter & BLoC) เพื่อให้สามารถคำนวณคะแนนและแสดงผลประเมินความเสี่ยงได้ทันทีแบบ Real-time แม้ไม่มีสัญญาณอินเทอร์เน็ต",
+      "ย้าย Business Logic ในการประเมิน Risk Scoring และ State Validation ทั้งหมดมาทำงานบน Client-side (Flutter & BLoC) จึงคำนวณคะแนนและแสดงผลความเสี่ยงได้ทันที แม้ไม่มีสัญญาณอินเทอร์เน็ต",
     decisionRationaleEn:
-      "Migrated all risk scoring business logic and form state validation to client-side (Flutter & BLoC). This allows risk evaluation without a network request.",
+      "Moved all risk-scoring logic and form state validation to the client (Flutter & BLoC), so a risk score never waits on a network request.",
     tradeOffsTh:
       "ยอมแลกความซับซ้อนของ BLoC State Machines และ Domain Validation Rules บน Client ที่สูงขึ้น เพื่อให้คำนวณคะแนนได้โดยไม่ต้องรอเครือข่าย และตรวจสอบข้อมูลก่อนประมวลผล",
     tradeOffsEn:
@@ -45,13 +45,13 @@ export const projectsData: ProjectItem[] = [
       "พัฒนา Front-end ด้วย Flutter & Dart โดยใช้ BLoC จัดการ State",
       "จัดการฐานข้อมูล MySQL ที่เก็บผลคัดกรองของผู้ป่วย",
       "พัฒนาระบบคำนวณและประเมินคะแนนความเสี่ยง (Risk Score Algorithm) พร้อมออกรายงานสรุปผลการคัดกรองอัตโนมัติ",
-      "ทดสอบการใช้งานจริง (Field Testing) ร่วมกับบุคลากรทางการแพทย์และเจ้าหน้าที่ อสม. ในพื้นที่จริงเพื่อปรับปรุง UI/UX ให้ใช้งานง่ายที่สุด",
+      "ทดสอบการใช้งานจริง (Field Testing) ร่วมกับบุคลากรทางการแพทย์และเจ้าหน้าที่ อสม. ในพื้นที่ แล้วนำผลมาปรับ UI/UX",
     ],
     highlightsEn: [
       "Built the Flutter & Dart front end, using BLoC for state management.",
       "Managed the MySQL database that stores patient screening records.",
       "Built the automated risk-scoring logic and summary report generation.",
-      "Conducted real-world usability testing with healthcare professionals and Village Health Volunteers (VHVs).",
+      "Ran usability tests in the field with healthcare professionals and Village Health Volunteers (VHVs), then reworked the UI from what we saw.",
     ],
     technologies: [
       "Flutter",
@@ -122,9 +122,9 @@ export const projectsData: ProjectItem[] = [
     decisionRationaleEn:
       "Built a state bridge controller to keep native Flutter and the WebView in sync, and a gamified Chat Streaks feature connected to the user Profile API.",
     tradeOffsTh:
-      "จัดการ Memory Overhead และ Lifecycle ของ Hybrid WebView เพื่อแลกกับความยืดหยุ่นในการอัปเดตเมนูโปรโมชั่นฝั่ง Server โดยไม่ต้อง Release App Store ใหม่",
+      "รับภาระ Memory Overhead และ Lifecycle ของ Hybrid WebView ไว้ เพื่อให้อัปเดตเมนูโปรโมชั่นจากฝั่ง Server ได้โดยไม่ต้องออกเวอร์ชันใหม่บน App Store",
     tradeOffsEn:
-      "Balanced hybrid WebView memory overhead against business agility, allowing instant server-side menu updates without requiring App Store release cycles.",
+      "Took on the WebView's memory overhead and lifecycle handling so menus can be updated from the server without a new App Store release.",
     evidenceTh:
       "หน้าเมนู WebView ที่โหลดซ้ำทุกครั้งทำให้รู้สึกช้า จึงเพิ่ม Caching และ Optimistic UI ระหว่างสลับเมนู ให้หน้าจอไม่ค้างรอโหลด",
     evidenceEn:
@@ -136,14 +136,14 @@ export const projectsData: ProjectItem[] = [
     highlightsTh: [
       "พัฒนาและปรับปรุงฟีเจอร์ด้วย Flutter & Dart รองรับการสลับเมนูแบบ Hybrid WebView",
       "สร้างระบบ Gamification สะสมแต้มต่อเนื่อง (Chat Streaks) เพื่อกระตุ้นการมีส่วนร่วม (Engagement) ของผู้ใช้งาน",
-      "เชื่อมต่อระบบคะแนนและข้อมูลผู้ใช้งานผ่าน Profile API ได้อย่างแม่นยำและปลอดภัย",
-      "ทำงานร่วมกับทีมผ่านกระบวนการ Agile / Scrum และควบคุมเวอร์ชันโค้ดด้วย Git / GitHub ตาม Timeline",
+      "บันทึกแต้มสะสมและข้อมูลผู้ใช้งานลงโปรไฟล์ผ่าน Profile API",
+      "ทำงานกับทีมแบบ Agile / Scrum ใช้ Git / GitHub คุมเวอร์ชันโค้ด และส่งงานตาม Timeline",
     ],
     highlightsEn: [
       "Built Flutter & Dart modules connecting native screens with the WebView menus.",
       "Implemented the Chat Streaks logic, designed to encourage users to chat daily.",
       "Wrote streak points to the user's profile through the Profile API.",
-      "Collaborated in Agile sprints with Git/GitHub version control meeting project release timelines.",
+      "Worked in Agile sprints with Git/GitHub for version control, and kept to the project's release timeline.",
     ],
     technologies: [
       "Flutter",
@@ -203,7 +203,7 @@ export const projectsData: ProjectItem[] = [
     decisionRationaleEn:
       "Implemented optimistic cart updates and an idempotent retry queue so cashiers can keep working when the network drops.",
     tradeOffsTh:
-      "ยอมรับภาระการทำ Local Queue Reconciliation และ Conflict Resolution เพื่อแลกกับความเร็วในการสแกนคิดเงินหน้าเคาน์เตอร์ที่ไม่มีทางสะดุด",
+      "ยอมรับภาระการทำ Local Queue Reconciliation และ Conflict Resolution เพื่อให้การสแกนคิดเงินหน้าเคาน์เตอร์ไม่ต้องหยุดรอเครือข่าย",
     tradeOffsEn:
       "Accepted the extra work of reconciling a local queue so checkout never has to wait on the network.",
     evidenceTh:
@@ -215,13 +215,13 @@ export const projectsData: ProjectItem[] = [
     outcomeEn:
       "Checkout keeps working through network drops by holding transactions in a local SQLite queue, and client-generated UUIDs prevent double-charging when the queue retries.",
     highlightsTh: [
-      "ออกแบบระบบจัดการสินค้าคงคลัง (Inventory) และระบบตะกร้าสินค้าที่คิดคำนวณราคาและภาษีอัตโนมัติ",
+      "ออกแบบระบบจัดการสินค้าคงคลัง (Inventory) และระบบตะกร้าสินค้าที่คำนวณราคาและภาษีให้อัตโนมัติ",
       "เชื่อมต่อ RESTful API ระหว่างหน้าบ้านและระบบหลังบ้าน พร้อมกลไกป้องกันข้อมูลซ้ำซ้อน",
       "เก็บธุรกรรมลงคิว SQLite บนเครื่องเมื่อออฟไลน์ แล้วส่งซ้ำแบบ Idempotent เมื่อกลับมาออนไลน์",
-      "ระบบออกแบบให้ทำงานได้อย่างต่อเนื่องแม้ในสภาวะการเชื่อมต่อที่ไม่เสถียร (Offline-tolerant UI)",
+      "เพิ่ม Error Handling ให้ขั้นตอนคิดเงินของแคชเชียร์ทำงานต่อได้เมื่อเน็ตหลุดช่วงสั้น ๆ",
     ],
     highlightsEn: [
-      "Designed real-time inventory tracking and dynamic checkout calculation logic.",
+      "Designed real-time inventory tracking and cart logic that works out prices and tax automatically.",
       "Integrated REST APIs between client and backend with duplicate-safe request handling.",
       "Queued transactions in local SQLite during outages and replayed them with idempotency keys on reconnect.",
       "Added error handling so the cashier flow keeps working through short outages.",

@@ -74,15 +74,15 @@ export const experiencesData: ExperienceItem[] = [
     badgeTh: "ประสบการณ์วิชาการ",
     badgeEn: "Academic Mentorship",
     descriptionTh:
-      "ได้รับคัดเลือกให้เป็นผู้ช่วยสอน (TA) ถ่ายทอดความรู้และให้คำปรึกษาแก่นักศึกษารุ่นน้องใน 3 รายวิชาหลักของภาควิชา IT รวม 4 ภาคการศึกษา",
+      "ได้รับคัดเลือกให้เป็นผู้ช่วยสอน (TA) สอนเสริมและตอบคำถามให้นักศึกษารุ่นน้องใน 3 รายวิชาหลักของภาควิชา IT รวม 4 ภาคการศึกษา",
     descriptionEn:
-      "Selected as Teaching Assistant to mentor and guide junior undergraduate students across 3 core Computer Science & IT courses over 4 semesters.",
+      "Selected as Teaching Assistant, helping junior undergraduates through 3 core Computer Science & IT courses over 4 semesters.",
     contributions: [
       {
         labelEn: "Client-Side Web Programming",
         labelTh: "การโปรแกรมฝั่งไคลเอนต์",
         descEn:
-          "Mentored students in modern HTML5, CSS3, JavaScript ES6+, DOM manipulation, and responsive frontend foundations (Term 2/2025).",
+          "Helped students with HTML5, CSS3, JavaScript ES6+, DOM manipulation, and responsive frontend foundations (Term 2/2025).",
         descTh:
           "ดูแลและให้คำปรึกษานักศึกษาในรายวิชาการโปรแกรมฝั่งไคลเอนต์ เทอม 2/2568 (HTML5, CSS3, JS, Frontend Frameworks)",
       },
@@ -150,7 +150,7 @@ export const experiencesData: ExperienceItem[] = [
           "บรรยายแนวคิดและหลักการทำงานของ Modern AI Tools ในงาน Software Development และการศึกษา",
       },
       {
-        labelEn: "Prompt Engineering & Synthesis",
+        labelEn: "Prompting & Coding with AI",
         labelTh: "การสั่งการและการเขียนโค้ดร่วมกับ AI",
         descEn:
           "Demonstrated prompt writing and using AI to work through coding exercises step by step.",
@@ -163,13 +163,13 @@ export const experiencesData: ExperienceItem[] = [
         descEn:
           "Shared paths into software development, continuous learning, and ethical coding.",
         descTh:
-          "ถ่ายทอดแรงบันดาลใจและเส้นทางสู่สายอาชีพนักพัฒนาซอฟต์แวร์ (Developer Roadmap) พร้อมหลักจริยธรรม",
+          "เล่าเส้นทางสู่สายอาชีพนักพัฒนาซอฟต์แวร์ (Developer Roadmap) การเรียนรู้ต่อเนื่อง และหลักจริยธรรม",
       },
     ],
     bulletsTh: [
       "บรรยายแนวคิดและหลักการทำงานของ Modern AI Tools ในงาน Software Development และการศึกษา",
       "สาธิตการเขียน Prompt และการใช้ AI ช่วยแก้โจทย์ Coding ทีละขั้น",
-      "ถ่ายทอดแรงบันดาลใจและเส้นทางสู่สายอาชีพนักพัฒนาซอฟต์แวร์ (Developer Roadmap)",
+      "เล่าเส้นทางสู่สายอาชีพนักพัฒนาซอฟต์แวร์ (Developer Roadmap)",
     ],
     bulletsEn: [
       "Explained how modern AI tools are used in software development and education.",

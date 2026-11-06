@@ -11,7 +11,7 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       subtitleTh: "ตรวจค่าบนเครื่อง ไม่ต้องรอเครือข่าย",
       subtitleEn: "Validated on the device, no network wait",
       descriptionTh:
-        "Presentation Layer ขับเคลื่อนด้วย BLoC รับข้อมูล Vitals (ระดับน้ำตาล, ความดัน) และตรวจสอบความถูกต้องแบบ Real-time โดยไม่พึ่งพาเครือข่าย",
+        "Presentation Layer ที่ใช้ BLoC รับค่า Vitals (ระดับน้ำตาล, ความดัน) และตรวจความถูกต้องตามเกณฑ์ทันทีที่กรอก โดยไม่ต้องเรียกเครือข่าย",
       descriptionEn:
         "BLoC Presentation Layer receives vitals (glucose, blood pressure) and checks them against clinical thresholds as they are entered, without a network call.",
       streamTag: "FORM_VALIDATED",
@@ -47,7 +47,7 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       titleTh: "บันทึกผลผ่าน REST API & ออกรายงาน",
       titleEn: "REST API Record Submission & Report Export",
       subtitleTh: "ข้อมูลผู้ป่วยรวมศูนย์ใน MySQL",
-      subtitleEn: "Centralized MySQL Patient Records",
+      subtitleEn: "Patient records kept centrally in MySQL",
       descriptionTh:
         "เมื่อประเมินเสร็จ ผลคัดกรองที่ผ่านการตรวจสอบแล้วจะถูกส่งผ่าน REST API ไปเก็บในฐานข้อมูล MySQL ส่วนกลาง พร้อมออกรายงานผลการตรวจ PDF ให้ผู้รับการคัดกรองได้ทันที",
       descriptionEn:

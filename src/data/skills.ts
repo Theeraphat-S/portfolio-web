@@ -25,7 +25,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Provider",
         level: "Proficient",
-        desc: "Lightweight reactive state architecture",
+        desc: "Lightweight reactive state management",
       },
       {
         name: "Android Studio",
@@ -58,7 +58,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "HTML5 & CSS3",
         level: "Proficient",
-        desc: "Semantic layouts, Responsive modern design",
+        desc: "Semantic markup, Responsive layouts",
       },
       {
         name: "Go (Golang)",
@@ -101,7 +101,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "VS Code & Eclipse",
         level: "Advanced",
-        desc: "Primary IDEs with optimized extensions",
+        desc: "Primary IDEs, set up with extensions",
       },
       {
         name: "REST API & Postman",
