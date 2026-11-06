@@ -58,19 +58,19 @@ const POST_VISUAL: Record<PintoPostVisual, { icon: LucideIcon; tile: string }> =
   {
     cat: {
       icon: Cat,
-      tile: "bg-gradient-to-b from-[#3b3f4a] to-[#1e2129] text-[#f2c38f]",
+      tile: "bg-gradient-to-b from-pinto-tile-cat-from to-pinto-tile-cat-to text-pinto-tile-cat-ink",
     },
     laptop: {
       icon: Laptop,
-      tile: "bg-gradient-to-b from-[#c9d6ea] to-[#8fa6c9] text-[#23324d]",
+      tile: "bg-gradient-to-b from-pinto-tile-laptop-from to-pinto-tile-laptop-to text-pinto-tile-laptop-ink",
     },
     coffee: {
       icon: Coffee,
-      tile: "bg-gradient-to-b from-[#dfe7f5] to-[#b9c9e6] text-[#3b4f7a]",
+      tile: "bg-gradient-to-b from-pinto-tile-coffee-from to-pinto-tile-coffee-to text-pinto-tile-coffee-ink",
     },
     mountain: {
       icon: Mountain,
-      tile: "bg-gradient-to-b from-[#ffd9a8] to-[#e98d5a] text-[#5a2a10]",
+      tile: "bg-gradient-to-b from-pinto-tile-mountain-from to-pinto-tile-mountain-to text-pinto-tile-mountain-ink",
     },
   };
 
@@ -199,33 +199,33 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
   };
 
   const iconButton =
-    "grid h-9 w-9 place-items-center rounded-full text-[#404943] cursor-pointer hover:bg-black/5";
+    "grid h-9 w-9 place-items-center rounded-full text-pinto-icon cursor-pointer hover:bg-black/5";
 
   const { categories } = pintoDemo;
   const chips: { label: string; icon?: LucideIcon; cls: string }[] = [
     {
       label: t(categories.all.th, categories.all.en),
-      cls: "border-[#9aa19c] text-[#404943] bg-white",
+      cls: "border-pinto-chip-outline text-pinto-icon bg-white",
     },
     {
       label: t(categories.travel.th, categories.travel.en),
       icon: Plane,
-      cls: "border-[#9fe0d6] bg-[#e3f7f3] text-[#1b9a87]",
+      cls: "border-pinto-travel-outline bg-pinto-mint text-pinto-travel",
     },
     {
       label: t(categories.fashion.th, categories.fashion.en),
       icon: Shirt,
-      cls: "border-[#f7b7cc] bg-[#fde6ee] text-[#d4457a]",
+      cls: "border-pinto-fashion-outline bg-pinto-fashion-container text-pinto-fashion",
     },
     {
       label: t(categories.food.th, categories.food.en),
       icon: Soup,
-      cls: "border-[#f8d39a] bg-[#fff2dc] text-[#b86e00]",
+      cls: "border-pinto-food-outline bg-pinto-food-container text-pinto-food",
     },
   ];
 
   return (
-    <div className="absolute inset-0 flex flex-col bg-[#f2f4f3] text-[#191d1a] font-sans select-none">
+    <div className="absolute inset-0 flex flex-col bg-pinto-surface text-pinto-on-surface font-sans select-none">
       {/* App bar */}
       <header className={`${SAFE_TOP} bg-white`}>
         {currentState === "webview" ? (
@@ -252,8 +252,8 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
             </div>
 
             {/* Following / For-you tabs */}
-            <div className="grid grid-cols-2 border-b border-[#e6e9e7] text-[13px]">
-              <span className="grid h-9 place-items-center text-[#8a918c]">
+            <div className="grid grid-cols-2 border-b border-pinto-outline text-[13px]">
+              <span className="grid h-9 place-items-center text-pinto-muted">
                 <UserCheck className="h-[18px] w-[18px]" aria-hidden="true" />
               </span>
               <span
@@ -282,14 +282,14 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   </span>
                 ))}
               </div>
-              <span className="flex shrink-0 items-center gap-1 border-l border-[#e6e9e7] pl-2 text-[11px] text-[#5c6660]">
+              <span className="flex shrink-0 items-center gap-1 border-l border-pinto-outline pl-2 text-[11px] text-pinto-on-surface-variant">
                 {t("กำลังมาแรง", "Trending")}
                 <ListFilter className="h-3 w-3" aria-hidden="true" />
               </span>
             </div>
           </>
         ) : (
-          <div className="flex h-12 items-center gap-2 border-b border-[#e6e9e7] pl-4 pr-1.5">
+          <div className="flex h-12 items-center gap-2 border-b border-pinto-outline pl-4 pr-1.5">
             <p className="min-w-0 flex-1 truncate text-[16px] font-semibold">
               {currentState === "streak"
                 ? t("แชท", "Chats")
@@ -343,7 +343,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                             style={{
                               backgroundColor: post.official
                                 ? PINTO_GREEN
-                                : "#8a9a90",
+                                : "var(--color-pinto-muted-green)",
                             }}
                           >
                             {post.author.charAt(0)}
@@ -363,11 +363,11 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                             onClick={() => toggleLike(post)}
                             aria-pressed={isLiked}
                             aria-label={`${t("ถูกใจ", "Like")} ${post.author}`}
-                            className="flex cursor-pointer items-center gap-0.5 text-[10px] text-[#8a918c]"
+                            className="flex cursor-pointer items-center gap-0.5 text-[10px] text-pinto-muted"
                           >
                             <Heart
-                              className={`h-3.5 w-3.5 ${isLiked ? "text-[#e0245e]" : "text-[#5c6660]"}`}
-                              fill={isLiked ? "#e0245e" : "none"}
+                              className={`h-3.5 w-3.5 ${isLiked ? "text-pinto-like" : "text-pinto-on-surface-variant"}`}
+                              fill={isLiked ? "currentColor" : "none"}
                               aria-hidden="true"
                             />
                             <span className="tabular-nums">
@@ -399,7 +399,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                     );
                   })}
                   {ci === 0 && (
-                    <div className="grid aspect-square place-items-center rounded-lg bg-[#e3f7f3] text-[#1b9a87]">
+                    <div className="grid aspect-square place-items-center rounded-lg bg-pinto-mint text-pinto-travel">
                       <Palmtree
                         className="h-8 w-8 opacity-70"
                         aria-hidden="true"
@@ -420,10 +420,10 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
               transition={{ duration: 0.18 }}
               className="space-y-3 p-3"
             >
-              <div className="rounded-3xl bg-gradient-to-b from-[#e9f7ee] to-white p-4 text-center shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+              <div className="rounded-3xl bg-gradient-to-b from-pinto-green-50 to-white p-4 text-center shadow-app-card">
                 <span
                   className="mx-auto grid h-14 w-14 place-items-center rounded-full"
-                  style={{ backgroundColor: "#c8efd6" }}
+                  style={{ backgroundColor: "var(--color-pinto-green-100)" }}
                 >
                   <Flame
                     className="h-8 w-8"
@@ -435,7 +435,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 <p className="mt-2 text-[28px] font-bold leading-none tabular-nums">
                   {streakCount}
                 </p>
-                <p className="mt-1 text-[13px] text-[#5c6660]">
+                <p className="mt-1 text-[13px] text-pinto-on-surface-variant">
                   {t("วันที่แชทติดต่อกัน", "days chatting in a row")}
                 </p>
 
@@ -448,7 +448,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                           className={`grid h-7 w-7 place-items-center rounded-full ${
                             done
                               ? "text-white"
-                              : "border border-dashed border-[#9fd3b2]"
+                              : "border border-dashed border-pinto-green-300"
                           }`}
                           style={
                             done ? { backgroundColor: PINTO_GREEN } : undefined
@@ -458,7 +458,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                             <Check className="h-3.5 w-3.5" aria-hidden="true" />
                           )}
                         </span>
-                        <span className="text-[10px] text-[#5c6660]">
+                        <span className="text-[10px] text-pinto-on-surface-variant">
                           {day}
                         </span>
                       </div>
@@ -473,7 +473,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   disabled={isStreaked}
                   className={`mt-4 h-11 w-full rounded-full text-[14px] font-semibold transition-colors ${
                     isStreaked
-                      ? "cursor-default bg-[#e5efe8] text-[#5c6660]"
+                      ? "cursor-default bg-pinto-green-wash text-pinto-on-surface-variant"
                       : "cursor-pointer text-white"
                   }`}
                   style={
@@ -490,8 +490,8 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
               </div>
 
               {/* Reward voucher */}
-              <div className="flex items-center gap-3 rounded-2xl border border-dashed border-[#a8dcbb] bg-white p-3">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#e9f7ee]">
+              <div className="flex items-center gap-3 rounded-2xl border border-dashed border-pinto-green-200 bg-white p-3">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-pinto-green-50">
                   <Ticket
                     className="h-5 w-5"
                     style={{ color: PINTO_GREEN }}
@@ -502,13 +502,13 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                   <p className="text-[13px] font-semibold">
                     {t(pintoDemo.voucher.title.th, pintoDemo.voucher.title.en)}
                   </p>
-                  <p className="text-[11px] text-[#5c6660]">
+                  <p className="text-[11px] text-pinto-on-surface-variant">
                     {t(pintoDemo.voucher.note.th, pintoDemo.voucher.note.en)}
                   </p>
                 </div>
                 <span
                   className="text-[12px] font-semibold"
-                  style={{ color: "#17703e" }}
+                  style={{ color: "var(--color-pinto-green-800)" }}
                 >
                   {t("ใช้เลย", "Use")}
                 </span>
@@ -525,7 +525,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
               transition={{ duration: 0.18 }}
               className="space-y-3 p-3"
             >
-              <div className="rounded-3xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+              <div className="rounded-3xl bg-white p-4 shadow-app-card">
                 <div className="flex items-center gap-3">
                   <span
                     className="grid h-12 w-12 place-items-center rounded-full text-[15px] font-semibold text-white"
@@ -537,7 +537,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                     <p className="text-[15px] font-semibold">
                       {t("สมาชิก Pinto", "Pinto member")}
                     </p>
-                    <span className="mt-0.5 inline-block rounded-full bg-[#fff1cc] px-2 py-0.5 text-[11px] font-semibold text-[#7a5600]">
+                    <span className="mt-0.5 inline-block rounded-full bg-pinto-amber-50 px-2 py-0.5 text-[11px] font-semibold text-pinto-amber-text">
                       {pintoDemo.tierName}
                     </span>
                   </div>
@@ -545,21 +545,21 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
 
                 <div className="mt-4 flex items-end justify-between">
                   <div>
-                    <p className="text-[11px] text-[#5c6660]">
+                    <p className="text-[11px] text-pinto-on-surface-variant">
                       {t("แต้มสะสม", "Points")}
                     </p>
                     <p className="text-[24px] font-bold leading-tight tabular-nums">
                       {points.toLocaleString()}
                     </p>
                   </div>
-                  <p className="text-[11px] text-[#5c6660] tabular-nums">
+                  <p className="text-[11px] text-pinto-on-surface-variant tabular-nums">
                     {t(
                       `อีก ${pintoDemo.nextTierPoints - points} แต้มถึง ${pintoDemo.nextTierName}`,
                       `${pintoDemo.nextTierPoints - points} pts to ${pintoDemo.nextTierName}`,
                     )}
                   </p>
                 </div>
-                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#e3efe7]">
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-pinto-track">
                   <div
                     className="h-full w-full origin-left rounded-full transition-transform duration-500"
                     style={{
@@ -570,7 +570,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 </div>
               </div>
 
-              <ul className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+              <ul className="overflow-hidden rounded-2xl bg-white shadow-app-card">
                 {[
                   { icon: Coins, label: t("ประวัติแต้ม", "Points history") },
                   { icon: Ticket, label: t("คูปองของฉัน", "My vouchers") },
@@ -579,15 +579,15 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 ].map(({ icon: Icon, label }) => (
                   <li
                     key={label}
-                    className="flex items-center gap-3 border-t border-[#eaf1ec] px-4 py-3 first:border-t-0"
+                    className="flex items-center gap-3 border-t border-pinto-outline-soft px-4 py-3 first:border-t-0"
                   >
                     <Icon
-                      className="h-[18px] w-[18px] text-[#5c6660]"
+                      className="h-[18px] w-[18px] text-pinto-on-surface-variant"
                       aria-hidden="true"
                     />
                     <span className="flex-1 text-[13px]">{label}</span>
                     <ChevronRight
-                      className="h-4 w-4 text-[#a3b0a8]"
+                      className="h-4 w-4 text-pinto-chevron"
                       aria-hidden="true"
                     />
                   </li>
@@ -601,7 +601,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
       {/* Bottom bar: home, clips, create, chats, profile */}
       <nav
         aria-label={t("เมนูแอป", "App navigation")}
-        className={`${SAFE_BOTTOM} grid grid-cols-5 items-center bg-white pt-1.5 shadow-[0_-1px_0_rgba(0,0,0,0.06)]`}
+        className={`${SAFE_BOTTOM} grid grid-cols-5 items-center bg-white pt-1.5 shadow-app-nav`}
       >
         <NavIcon
           icon={House}
@@ -612,7 +612,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
         <NavIcon icon={Clapperboard} label={t("คลิป", "Clips")} />
         <span className="grid place-items-center">
           <span
-            className="grid h-11 w-11 place-items-center rounded-full text-white shadow-[0_4px_10px_-3px_rgba(35,177,77,0.6)]"
+            className="grid h-11 w-11 place-items-center rounded-full text-white shadow-pinto-fab"
             style={{ backgroundColor: PINTO_GREEN }}
             aria-hidden="true"
           >
@@ -645,7 +645,9 @@ const NavIcon: React.FC<{
   const iconEl = (
     <Icon
       className="h-[22px] w-[22px]"
-      style={{ color: active ? PINTO_GREEN : "#5c6660" }}
+      style={{
+        color: active ? PINTO_GREEN : "var(--color-pinto-on-surface-variant)",
+      }}
       fill={active ? "rgba(35,177,77,0.15)" : "none"}
       aria-hidden="true"
     />

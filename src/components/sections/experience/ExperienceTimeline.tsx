@@ -128,7 +128,7 @@ export const ExperienceTimeline: React.FC = () => {
         <m.div
           aria-hidden="true"
           style={{ scaleY: shouldReduceMotion ? 1 : smoothScaleY }}
-          className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-signal/70 via-primary/30 to-transparent origin-top pointer-events-none"
+          className="absolute left-4 md:left-[24%] top-3 bottom-6 w-px bg-gradient-to-b from-signal/70 to-transparent origin-top pointer-events-none"
         />
 
         <div className="space-y-12 md:space-y-16">
@@ -207,7 +207,7 @@ export const ExperienceTimeline: React.FC = () => {
                     aria-hidden="true"
                     className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-void flex items-center justify-center transition duration-300 ${
                       isActive
-                        ? "border border-primary/60 shadow-[0_0_10px_rgba(56,217,255,0.25)]"
+                        ? "border border-primary/60 shadow-glow-sm"
                         : "border border-white/10 group-hover:border-signal/40 group-hover:scale-105"
                     }`}
                   >
@@ -338,21 +338,17 @@ export const ExperienceTimeline: React.FC = () => {
 
                     {/* 6. Minimal Technical Stack Inline Row */}
                     <div className="pt-2 border-t border-white/[0.04]">
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono tracking-wider text-zinc-400">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono tracking-wider text-zinc-400">
                         <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mr-0.5">
                           SPECS:
                         </span>
-                        {exp.skills.map((skill, sIdx) => (
-                          <React.Fragment key={skill}>
-                            {sIdx > 0 && (
-                              <span className="text-zinc-600 select-none">
-                                &bull;
-                              </span>
-                            )}
-                            <span className="hover:text-signal transition-colors uppercase font-medium">
-                              {skill}
-                            </span>
-                          </React.Fragment>
+                        {exp.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="hover:text-signal transition-colors uppercase font-medium"
+                          >
+                            {skill}
+                          </span>
                         ))}
                       </div>
                     </div>

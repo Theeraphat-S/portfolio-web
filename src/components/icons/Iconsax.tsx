@@ -23,6 +23,7 @@ export const HeartPulseIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -58,6 +59,7 @@ export const BloodGlucoseIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -92,6 +94,7 @@ export const BloodPressureIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -135,6 +138,7 @@ export const RoutingIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -187,6 +191,7 @@ export const FlameStreakIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -225,6 +230,7 @@ export const CodeBridgeIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -267,6 +273,7 @@ export const ShoppingBagIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -314,6 +321,7 @@ export const PosRegisterIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -357,6 +365,7 @@ export const ReceiptTextIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -398,6 +407,7 @@ export const DatabaseSyncIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -451,6 +461,7 @@ export const WifiOfflineIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -499,6 +510,7 @@ export const TerminalBoxIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"

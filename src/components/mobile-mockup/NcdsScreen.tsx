@@ -45,31 +45,31 @@ const LEVEL_STYLE: Record<
 > = {
   low: {
     tier: "LOW RISK",
-    text: "text-[#1b6b3a]",
-    container: "bg-[#e3f4e8]",
-    chip: "bg-[#d3eedb] text-[#1b6b3a]",
-    bar: "bg-[#2e8b57]",
-    icon: "text-[#2e8b57]",
+    text: "text-m3-ok-text",
+    container: "bg-m3-ok-container",
+    chip: "bg-m3-ok-chip text-m3-ok-text",
+    bar: "bg-m3-ok",
+    icon: "text-m3-ok",
     headline: { th: "ความเสี่ยงต่ำ", en: "Low risk" },
     label: { th: "ปกติ", en: "Normal" },
   },
   moderate: {
     tier: "MODERATE",
-    text: "text-[#8a5300]",
-    container: "bg-[#fff1d6]",
-    chip: "bg-[#ffe6b3] text-[#7a4900]",
-    bar: "bg-[#c77800]",
-    icon: "text-[#c77800]",
+    text: "text-m3-warn-text",
+    container: "bg-m3-warn-container",
+    chip: "bg-m3-warn-chip text-m3-warn-on-chip",
+    bar: "bg-m3-warn",
+    icon: "text-m3-warn",
     headline: { th: "ความเสี่ยงปานกลาง", en: "Moderate risk" },
     label: { th: "เฝ้าระวัง", en: "Watch" },
   },
   high: {
     tier: "HIGH RISK",
-    text: "text-[#b3261e]",
-    container: "bg-[#fde7e5]",
-    chip: "bg-[#f9d3cf] text-[#a1231b]",
-    bar: "bg-[#b3261e]",
-    icon: "text-[#b3261e]",
+    text: "text-m3-error",
+    container: "bg-m3-error-container",
+    chip: "bg-m3-error-chip text-m3-error-on-chip",
+    bar: "bg-m3-error",
+    icon: "text-m3-error",
     headline: { th: "ความเสี่ยงสูง", en: "High risk" },
     label: { th: "เสี่ยงสูง", en: "High" },
   },
@@ -208,24 +208,22 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
   const style = LEVEL_STYLE[risk.level];
 
   return (
-    <div className="absolute inset-0 flex flex-col bg-[#f7f2fa] text-[#1d1b20] font-sans select-none">
+    <div className="absolute inset-0 flex flex-col bg-m3-surface text-m3-on-surface font-sans select-none">
       {/* App bar */}
-      <header
-        className={`${SAFE_TOP} bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]`}
-      >
+      <header className={`${SAFE_TOP} bg-white shadow-app-bar`}>
         <div className="flex h-12 items-center gap-2 px-2">
-          <span className="grid h-9 w-9 place-items-center rounded-full text-[#49454f]">
+          <span className="grid h-9 w-9 place-items-center rounded-full text-m3-on-surface-variant">
             <ArrowLeft className="h-[18px] w-[18px]" aria-hidden="true" />
           </span>
           <div className="min-w-0 flex-1 leading-tight">
             <p className="truncate text-[15px] font-semibold">
               {t("คัดกรองความเสี่ยง", "Risk screening")}
             </p>
-            <p className="truncate text-[11px] text-[#625b71]">
+            <p className="truncate text-[11px] text-m3-secondary">
               {tr(t, ncdsDemo.clientLabel)}
             </p>
           </div>
-          <span className="grid h-9 w-9 place-items-center rounded-full text-[#49454f]">
+          <span className="grid h-9 w-9 place-items-center rounded-full text-m3-on-surface-variant">
             <MoreVertical className="h-[18px] w-[18px]" aria-hidden="true" />
           </span>
         </div>
@@ -241,7 +239,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
           className={`rounded-2xl p-4 transition-colors duration-300 ${style.container}`}
           aria-live="polite"
         >
-          <p className="text-[11px] font-medium text-[#49454f]">
+          <p className="text-[11px] font-medium text-m3-on-surface-variant">
             {t("ผลประเมินรวม", "Overall result")}
           </p>
           <div className="mt-1 flex items-end justify-between gap-2">
@@ -264,19 +262,19 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
         </div>
 
         {/* Vitals */}
-        <section className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+        <section className="rounded-2xl bg-white p-4 shadow-app-card">
           <h4 className="text-[13px] font-semibold tracking-normal">
             {t("สัญญาณชีพ", "Vital signs")}
           </h4>
 
           <label className="mt-3 block">
             <span className="flex items-baseline justify-between">
-              <span className="text-[12px] text-[#625b71]">
+              <span className="text-[12px] text-m3-secondary">
                 {t("น้ำตาลในเลือด (อดอาหาร)", "Fasting glucose")}
               </span>
               <span className="text-[15px] font-semibold tabular-nums">
                 {glucose}
-                <span className="ml-1 text-[11px] font-normal text-[#625b71]">
+                <span className="ml-1 text-[11px] font-normal text-m3-secondary">
                   mg/dL
                 </span>
               </span>
@@ -291,18 +289,18 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                 handleVitalsChange(Number(e.target.value), systolic)
               }
               aria-label="Fasting blood glucose level"
-              className="mt-2 h-1 w-full cursor-pointer appearance-none rounded-full bg-[#e8def8] accent-[#6750a4]"
+              className="mt-2 h-1 w-full cursor-pointer appearance-none rounded-full bg-m3-secondary-container accent-m3-primary"
             />
           </label>
 
           <label className="mt-4 block">
             <span className="flex items-baseline justify-between">
-              <span className="text-[12px] text-[#625b71]">
+              <span className="text-[12px] text-m3-secondary">
                 {t("ความดันโลหิต", "Blood pressure")}
               </span>
               <span className="text-[15px] font-semibold tabular-nums">
                 {systolic}/80
-                <span className="ml-1 text-[11px] font-normal text-[#625b71]">
+                <span className="ml-1 text-[11px] font-normal text-m3-secondary">
                   mmHg
                 </span>
               </span>
@@ -317,13 +315,13 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                 handleVitalsChange(glucose, Number(e.target.value))
               }
               aria-label="Systolic blood pressure level"
-              className="mt-2 h-1 w-full cursor-pointer appearance-none rounded-full bg-[#e8def8] accent-[#6750a4]"
+              className="mt-2 h-1 w-full cursor-pointer appearance-none rounded-full bg-m3-secondary-container accent-m3-primary"
             />
           </label>
         </section>
 
         {/* Per-disease results */}
-        <section className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+        <section className="overflow-hidden rounded-2xl bg-white shadow-app-card">
           <h4 className="px-4 pt-3 pb-1 text-[13px] font-semibold tracking-normal">
             {t("ผลแยกรายโรค", "By condition")}
           </h4>
@@ -331,7 +329,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
             {diseases.map((d) => (
               <li
                 key={d.id}
-                className="flex items-center gap-3 border-t border-[#f1ecf4] px-4 py-2.5 first:border-t-0"
+                className="flex items-center gap-3 border-t border-m3-outline-variant px-4 py-2.5 first:border-t-0"
               >
                 {d.level === "high" ? (
                   <AlertTriangle
@@ -357,7 +355,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
       </div>
 
       {/* Primary action */}
-      <div className="relative bg-[#f7f2fa] px-3 pb-2 pt-1">
+      <div className="relative bg-m3-surface px-3 pb-2 pt-1">
         <AppSnackbar
           message={
             isExported
@@ -369,7 +367,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
           type="button"
           whileTap={{ scale: 0.98 }}
           onClick={handleExportPdf}
-          className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#6750a4] text-[14px] font-semibold text-white transition-colors hover:bg-[#523d8f]"
+          className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-m3-primary text-[14px] font-semibold text-white transition-colors hover:bg-m3-primary-hover"
         >
           <FileText className="h-4 w-4" aria-hidden="true" />
           {t("บันทึกและออกรายงาน PDF", "Save & export PDF")}
@@ -379,7 +377,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
       {/* Navigation bar */}
       <nav
         aria-label={t("เมนูแอป", "App navigation")}
-        className={`${SAFE_BOTTOM} grid grid-cols-3 bg-[#f3edf7] pt-2`}
+        className={`${SAFE_BOTTOM} grid grid-cols-3 bg-m3-surface-container pt-2`}
       >
         {[
           { id: "home", icon: House, label: t("หน้าหลัก", "Home") },
@@ -394,14 +392,18 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
             >
               <span
                 className={`grid h-7 w-14 place-items-center rounded-full ${
-                  active ? "bg-[#eaddff] text-[#21005d]" : "text-[#49454f]"
+                  active
+                    ? "bg-m3-primary-container text-m3-on-primary-container"
+                    : "text-m3-on-surface-variant"
                 }`}
               >
                 <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
               </span>
               <span
                 className={
-                  active ? "font-semibold text-[#1d1b20]" : "text-[#49454f]"
+                  active
+                    ? "font-semibold text-m3-on-surface"
+                    : "text-m3-on-surface-variant"
                 }
               >
                 {label}

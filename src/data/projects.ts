@@ -90,7 +90,7 @@ export const projectsData: ProjectItem[] = [
     githubUrl: "https://github.com/Theeraphat-S",
     repositoryType: "private",
     repositoryNoticeTh: "ซอร์สโค้ดวิจัยและสาธารณสุขชุมชน (Private Codebase)",
-    repositoryNoticeEn: "Community Healthcare Research · Private Codebase",
+    repositoryNoticeEn: "Community healthcare research, private codebase",
   },
   {
     id: "pinto-app",
@@ -167,7 +167,7 @@ export const projectsData: ProjectItem[] = [
     repositoryType: "commercial",
     repositoryNoticeTh:
       "ซอร์สโค้ดเชิงพาณิชย์ของบริษัทภายใต้ข้อตกลงรักษาความลับ (Proprietary NDA)",
-    repositoryNoticeEn: "Commercial Production · Proprietary Codebase (NDA)",
+    repositoryNoticeEn: "Commercial production, proprietary codebase (NDA)",
   },
   {
     id: "pos-system",
@@ -258,7 +258,7 @@ export const projectsData: ProjectItem[] = [
       "Modular Client Architecture with Optimistic UI updates and resilient API request retry logic",
     githubUrl: "https://github.com/Theeraphat-S",
     repositoryType: "commercial",
-    repositoryNoticeTh: "งานช่วงฝึกงาน · ซอร์สโค้ดของบริษัท (Private)",
-    repositoryNoticeEn: "Internship work · Company private codebase",
+    repositoryNoticeTh: "งานช่วงฝึกงาน ซอร์สโค้ดของบริษัท (Private)",
+    repositoryNoticeEn: "Internship work, company private codebase",
   },
 ];

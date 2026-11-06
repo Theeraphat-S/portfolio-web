@@ -19,13 +19,13 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
   const { t } = useLanguage();
 
   return (
-    <div className="w-full mt-3 rounded-2xl bg-[#090d15]/95 border border-line hover:border-signal/30 p-2.5 sm:p-3 shadow-lg backdrop-blur-md transition font-mono">
+    <div className="w-full mt-3 rounded-2xl bg-dock/95 border border-line hover:border-signal/30 p-2.5 sm:p-3 shadow-lg backdrop-blur-md transition font-mono">
       {/* Top Header: Live Status + Action Buttons */}
       <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 pb-2 border-b border-line text-[10px]">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_6px_#10b981]" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-live-sm" />
           </span>
           <span className="text-zinc-300 font-semibold tracking-wider uppercase flex items-center gap-1.5 whitespace-nowrap">
             <TerminalBoxIcon className="w-3.5 h-3.5 text-primary" />

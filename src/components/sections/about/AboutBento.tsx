@@ -230,8 +230,8 @@ export const AboutBento: React.FC = () => {
             <BilingualStack
               as="span"
               className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]"
-              th="โปรเจกต์จบ 1 · ฝึกงาน 2"
-              en="1 capstone · 2 internship"
+              th="โปรเจกต์จบ 1, ฝึกงาน 2"
+              en="1 capstone, 2 internship"
             />
           </div>
         </div>
@@ -263,8 +263,8 @@ export const AboutBento: React.FC = () => {
             />
             <BilingualStack
               className="text-xs text-zinc-400 font-mono"
-              th={"มหาวิทยาลัยแม่โจ้ • วิศวกรรมซอฟต์แวร์และระบบโมบาย"}
-              en={"Maejo University • Software Engineering & Mobile Systems"}
+              th={"มหาวิทยาลัยแม่โจ้ วิศวกรรมซอฟต์แวร์และระบบโมบาย"}
+              en={"Maejo University, Software Engineering & Mobile Systems"}
             />
           </div>
         </div>

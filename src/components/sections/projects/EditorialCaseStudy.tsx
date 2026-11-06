@@ -281,7 +281,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         {/* Active stage HUD (pinned runway only; the stacked layout uses
             the stepper above). The rail fills as the reader scrolls. */}
         {isPinned && (
-          <div className="w-full px-3.5 py-1.5 rounded-lg bg-[#0a0d14]/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
+          <div className="w-full px-3.5 py-1.5 rounded-lg bg-hud/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
@@ -422,9 +422,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                   />
                 </div>
                 <p className="mt-3 font-mono text-xs text-zinc-400">
-                  <span className="text-primary" aria-hidden="true">
-                    →{" "}
-                  </span>
                   {beat.streamState}
                 </p>
               </m.li>
@@ -512,8 +509,9 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       <div className="space-y-6">
         {/* Title block; tag and year sit in one quiet meta line */}
         <div className="space-y-1.5">
-          <p className="font-mono text-xs text-zinc-400">
-            {project.tag} · {displayYear}
+          <p className="flex gap-3 font-mono text-xs text-zinc-400">
+            <span>{project.tag}</span>
+            <span>{displayYear}</span>
           </p>
           <BilingualStack
             as="h3"
@@ -576,7 +574,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onClick={() => onSelect(project)}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] px-5 py-2.5 rounded-full bg-[#0d1424] border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(56,217,255,0.15)] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-primary transition-colors" />
             <span className="font-semibold tracking-wider">
@@ -603,7 +601,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-      className="relative rounded-3xl bg-[#0a1020]/90 border border-line hover:border-signal/30 transition duration-500 p-6 sm:p-10 lg:p-12 backdrop-blur-md"
+      className="relative rounded-3xl bg-deck/90 border border-line hover:border-signal/30 transition duration-500 p-6 sm:p-10 lg:p-12 backdrop-blur-md"
     >
       {/* Render exactly one layout tree: duplicated hidden markup would
           steal the beat refs from the visible runway and duplicate ids. */}

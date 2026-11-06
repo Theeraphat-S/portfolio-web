@@ -115,7 +115,7 @@ export const StoryProgress: React.FC = () => {
             <div
               id={menuId}
               ref={menuRef}
-              className="w-56 rounded-2xl border border-line bg-surface/90 p-2 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)] backdrop-blur-[20px]"
+              className="w-56 rounded-2xl border border-line bg-surface/90 p-2 shadow-pop backdrop-blur-[20px]"
             >
               <nav aria-label={t("บทของหน้า", "Page chapters")}>
                 <ul className="flex flex-col">
@@ -187,7 +187,7 @@ export const StoryProgress: React.FC = () => {
               `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
               `Navigation menu (current: ${chapter.labelEn})`,
             )}
-            className="relative flex min-h-11 items-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-[11px] tracking-wider text-zinc-200 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.9)] backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="relative flex min-h-11 items-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-[11px] tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             {isMenuOpen ? (
               <X className="h-4 w-4 text-zinc-400" aria-hidden />

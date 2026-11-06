@@ -462,7 +462,7 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   data-cursor-text="DISPATCH"
-                  className="w-full py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_-4px_rgba(77,124,254,0.28)] hover:shadow-[0_6px_24px_-4px_rgba(77,124,254,0.4)] hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal"
+                  className="w-full py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal"
                 >
                   <span>
                     {lang === "th" ? "เปิดร่างในแอปอีเมล" : "Open email draft"}

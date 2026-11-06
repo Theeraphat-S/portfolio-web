@@ -10,7 +10,7 @@ export const TelemetryDeck: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 py-3 px-5 rounded-2xl bg-white/[0.02] border border-line">
         {/* Left: Node Identity */}
         <div className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-live" />
           <span className="text-xs font-mono font-bold tracking-widest text-zinc-300 uppercase">
             CHIANG MAI NODE (GMT+7)
           </span>

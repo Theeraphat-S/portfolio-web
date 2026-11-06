@@ -150,6 +150,7 @@ export const Particles: React.FC<ParticlesProps> = ({
 
   return (
     <canvas
+      aria-hidden="true"
       ref={canvasRef}
       className={`fixed inset-0 pointer-events-none z-0 transform-gpu ${className}`}
     />

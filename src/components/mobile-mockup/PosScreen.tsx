@@ -268,17 +268,15 @@ export const PosScreen: React.FC<PosScreenProps> = ({
     snackbar && snackbar !== dismissedSnackbar ? snackbar : null;
 
   return (
-    <div className="absolute inset-0 flex flex-col bg-[#f4f8f6] text-[#191d1b] font-sans select-none">
+    <div className="absolute inset-0 flex flex-col bg-pos-surface text-pos-on-surface font-sans select-none">
       {/* App bar */}
-      <header
-        className={`${SAFE_TOP} bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]`}
-      >
+      <header className={`${SAFE_TOP} bg-white shadow-app-bar`}>
         <div className="flex h-12 items-center gap-2 pl-4 pr-2">
           <div className="min-w-0 flex-1 leading-tight">
             <p className="truncate text-[15px] font-semibold">
               {t("ขายหน้าร้าน", "Checkout")}
             </p>
-            <p className="truncate text-[11px] text-[#57615b]">
+            <p className="truncate text-[11px] text-pos-on-surface-variant">
               {t(posDemo.tillLabel.th, posDemo.tillLabel.en)}
             </p>
           </div>
@@ -292,8 +290,8 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             title={t("แตะเพื่อจำลองออฟไลน์", "Tap to simulate offline")}
             className={`flex h-8 cursor-pointer items-center gap-1.5 rounded-full px-3 text-[11px] font-semibold transition-colors ${
               isOnline
-                ? "bg-[#e1f3e7] text-[#17663a]"
-                : "bg-[#fff0d1] text-[#7a4b00]"
+                ? "bg-pos-green-50 text-pos-green-text"
+                : "bg-pos-amber-chip text-pos-amber-on-chip"
             }`}
           >
             {isOnline ? (
@@ -314,7 +312,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex items-start gap-2 bg-[#fff4dc] px-4 py-2 text-[11px] leading-snug text-[#5c3a00]"
+            className="flex items-start gap-2 bg-pos-amber-50 px-4 py-2 text-[11px] leading-snug text-pos-amber-text"
           >
             <CloudOff
               className="mt-0.5 h-3.5 w-3.5 shrink-0"
@@ -347,7 +345,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         <button
           type="button"
           onClick={handleAddSampleItem}
-          className="flex h-11 w-full cursor-pointer items-center gap-2 rounded-xl border border-[#d3e3da] bg-white px-3 text-[13px] text-[#57615b] hover:border-[#9fd8bd]"
+          className="flex h-11 w-full cursor-pointer items-center gap-2 rounded-xl border border-pos-outline bg-white px-3 text-[13px] text-pos-on-surface-variant hover:border-pos-outline-hover"
         >
           <ScanLine
             className="h-[18px] w-[18px]"
@@ -358,18 +356,18 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         </button>
 
         {/* Cart */}
-        <ul className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+        <ul className="overflow-hidden rounded-2xl bg-white shadow-app-card">
           {cartItems.length === 0 && (
-            <li className="px-4 py-6 text-center text-[12px] text-[#57615b]">
+            <li className="px-4 py-6 text-center text-[12px] text-pos-on-surface-variant">
               {t("ยังไม่มีสินค้าในตะกร้า", "Cart is empty")}
             </li>
           )}
           {cartItems.map((item) => (
             <li
               key={item.id}
-              className="flex items-center gap-3 border-t border-[#e6efea] px-3 py-2.5 first:border-t-0"
+              className="flex items-center gap-3 border-t border-pos-outline-soft px-3 py-2.5 first:border-t-0"
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[#dff3ea] text-[#006c4c]">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-pos-mint text-pos-green">
                 {item.sku.startsWith("COF") ? (
                   <Coffee className="h-5 w-5" aria-hidden="true" />
                 ) : (
@@ -378,7 +376,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
               </span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[13px] font-medium">{item.name}</p>
-                <p className="text-[11px] tabular-nums text-[#57615b]">
+                <p className="text-[11px] tabular-nums text-pos-on-surface-variant">
                   ฿{item.price} × {item.qty}
                 </p>
               </div>
@@ -391,7 +389,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                     type="button"
                     onClick={() => updateItemQty(item.id, -1)}
                     aria-label={`Decrease quantity of ${item.name}`}
-                    className="grid h-6 w-6 cursor-pointer place-items-center rounded-full border border-[#d3e3da] text-[#404943]"
+                    className="grid h-6 w-6 cursor-pointer place-items-center rounded-full border border-pos-outline text-pos-icon"
                   >
                     <Minus className="h-3 w-3" aria-hidden="true" />
                   </button>
@@ -399,7 +397,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                     type="button"
                     onClick={() => updateItemQty(item.id, 1)}
                     aria-label={`Increase quantity of ${item.name}`}
-                    className="grid h-6 w-6 cursor-pointer place-items-center rounded-full border border-[#d3e3da] text-[#404943]"
+                    className="grid h-6 w-6 cursor-pointer place-items-center rounded-full border border-pos-outline text-pos-icon"
                   >
                     <Plus className="h-3 w-3" aria-hidden="true" />
                   </button>
@@ -410,8 +408,8 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         </ul>
 
         {/* Summary */}
-        <div className="rounded-2xl bg-white px-4 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
-          <div className="flex justify-between text-[12px] text-[#57615b]">
+        <div className="rounded-2xl bg-white px-4 py-3 shadow-app-card">
+          <div className="flex justify-between text-[12px] text-pos-on-surface-variant">
             <span>{t(`สินค้า ${itemTotal} ชิ้น`, `${itemTotal} items`)}</span>
             <span className="tabular-nums">฿{totalAmount}.00</span>
           </div>
@@ -452,7 +450,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
       {/* Navigation bar */}
       <nav
         aria-label={t("เมนูแอป", "App navigation")}
-        className={`${SAFE_BOTTOM} grid grid-cols-3 border-t border-[#e6efea] bg-white pt-2`}
+        className={`${SAFE_BOTTOM} grid grid-cols-3 border-t border-pos-outline-soft bg-white pt-2`}
       >
         {[
           { id: "sell", icon: ShoppingCart, label: t("ขาย", "Sell") },
@@ -467,19 +465,23 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             >
               <span
                 className={`relative grid h-7 w-14 place-items-center rounded-full ${
-                  active ? "bg-[#c4eed8] text-[#002114]" : "text-[#57615b]"
+                  active
+                    ? "bg-pos-green-100 text-pos-on-green-container"
+                    : "text-pos-on-surface-variant"
                 }`}
               >
                 <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
                 {id === "orders" && pendingSyncCount > 0 && (
-                  <span className="absolute right-2.5 top-0 grid h-4 min-w-4 place-items-center rounded-full bg-[#ba1a1a] px-1 text-[9px] font-bold text-white">
+                  <span className="absolute right-2.5 top-0 grid h-4 min-w-4 place-items-center rounded-full bg-pos-error px-1 text-[9px] font-bold text-white">
                     {pendingSyncCount}
                   </span>
                 )}
               </span>
               <span
                 className={
-                  active ? "font-semibold text-[#191d1b]" : "text-[#57615b]"
+                  active
+                    ? "font-semibold text-pos-on-surface"
+                    : "text-pos-on-surface-variant"
                 }
               >
                 {label}

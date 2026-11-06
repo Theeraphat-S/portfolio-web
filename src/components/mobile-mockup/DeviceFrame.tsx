@@ -27,22 +27,25 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
   label,
   screenId,
 }) => {
-  const ink = tone === "dark" ? "#1b1f27" : "#f7f8fa";
+  const ink =
+    tone === "dark"
+      ? "var(--color-status-ink-dark)"
+      : "var(--color-status-ink-light)";
 
   return (
     <div className="relative w-full max-w-[318px] mx-auto">
       {/* Hardware keys sit on the right edge, like a Pixel. */}
       <span
         aria-hidden="true"
-        className="absolute -right-[3px] top-[19%] h-[9%] w-[3px] rounded-r-sm bg-gradient-to-b from-[#3a4253] via-[#596377] to-[#3a4253]"
+        className="absolute -right-[3px] top-[19%] h-[9%] w-[3px] rounded-r-sm bg-gradient-to-b from-device-key via-device-key-hi to-device-key"
       />
       <span
         aria-hidden="true"
-        className="absolute -right-[3px] top-[32%] h-[15%] w-[3px] rounded-r-sm bg-gradient-to-b from-[#3a4253] via-[#596377] to-[#3a4253]"
+        className="absolute -right-[3px] top-[32%] h-[15%] w-[3px] rounded-r-sm bg-gradient-to-b from-device-key via-device-key-hi to-device-key"
       />
 
       {/* Aluminium band, then the black glass bezel. */}
-      <div className="relative rounded-[46px] p-[3px] bg-[linear-gradient(145deg,#5b6476_0%,#2b3140_22%,#1a1e28_50%,#2b3140_78%,#5b6476_100%)] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9),0_18px_36px_-18px_rgba(0,0,0,0.7)]">
+      <div className="relative rounded-[46px] p-[3px] bg-[linear-gradient(145deg,var(--color-metal-hi)_0%,var(--color-metal)_22%,var(--color-metal-lo)_50%,var(--color-metal)_78%,var(--color-metal-hi)_100%)] shadow-device">
         <div className="relative rounded-[43px] bg-black p-[9px]">
           <div
             id={screenId}
@@ -50,7 +53,11 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
             aria-label={label}
             className="relative isolate aspect-[9/19.5] w-full overflow-hidden rounded-[34px] bg-white"
             // The site theme tints `white`; app screens need true white.
-            style={{ "--color-white": "#ffffff" } as React.CSSProperties}
+            style={
+              {
+                "--color-white": "var(--color-true-white)",
+              } as React.CSSProperties
+            }
           >
             {children}
 
@@ -62,20 +69,20 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
             >
               <span className="font-sans">9:41</span>
               <span className="flex items-center gap-1">
-                <SignalGlyph color={ink} />
+                <SignalGlyph color="currentColor" />
                 {offline ? (
-                  <WifiOffGlyph color={ink} />
+                  <WifiOffGlyph color="currentColor" />
                 ) : (
-                  <WifiGlyph color={ink} />
+                  <WifiGlyph color="currentColor" />
                 )}
-                <BatteryGlyph color={ink} />
+                <BatteryGlyph color="currentColor" />
               </span>
             </div>
 
             {/* Punch-hole camera */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-[9px] z-30 h-[13px] w-[13px] -translate-x-1/2 rounded-full bg-[#05060a] ring-1 ring-white/10"
+              className="pointer-events-none absolute left-1/2 top-[9px] z-30 h-[13px] w-[13px] -translate-x-1/2 rounded-full bg-device-glass ring-1 ring-white/10"
             />
 
             {/* Gesture navigation pill */}
@@ -88,7 +95,7 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
             {/* Faint glass reflection */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-40 rounded-[34px] bg-[linear-gradient(115deg,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0)_32%)]"
+              className="pointer-events-none absolute inset-0 z-40 rounded-[34px] bg-[linear-gradient(115deg,color-mix(in_oklab,var(--color-true-white)_7%,transparent)_0%,transparent_32%)]"
             />
           </div>
         </div>

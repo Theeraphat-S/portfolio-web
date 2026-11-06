@@ -55,7 +55,7 @@ export const ProjectModalTechDetails: React.FC<
           <Layers className="w-3.5 h-3.5" />
           {t("สถาปัตยกรรมระบบ (Architecture)", "System Architecture")}
         </h4>
-        <div className="p-3.5 rounded-xl bg-[#070b14] border border-line text-xs font-mono text-zinc-300">
+        <div className="p-3.5 rounded-xl bg-void border border-line text-xs font-mono text-zinc-300">
           {lang === "th" ? project.architectureTh : project.architectureEn}
         </div>
       </div>

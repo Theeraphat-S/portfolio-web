@@ -89,10 +89,10 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
             role="dialog"
             aria-modal="true"
             aria-label="Flutter & BLoC DevTools Inspector"
-            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-3xl bg-[#0a1020] border border-white/[0.12] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_30px_rgba(56,217,255,0.12)] overflow-hidden font-mono z-10 outline-none"
+            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-3xl bg-deck border border-white/[0.12] shadow-drawer overflow-hidden font-mono z-10 outline-none"
           >
             {/* Header Strip */}
-            <div className="px-5 py-4 border-b border-line flex items-center justify-between bg-[#0c121e]">
+            <div className="px-5 py-4 border-b border-line flex items-center justify-between bg-deck-head">
               <div className="flex items-center gap-3">
                 <span className="w-2.5 h-2.5 rounded-full bg-signal shadow-[0_0_8px_var(--color-signal)]" />
                 <div>
@@ -120,7 +120,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
             </div>
 
             {/* Navigation Tabs */}
-            <div className="px-5 pt-3 pb-2 border-b border-line bg-[#080b12] flex items-center justify-between gap-4">
+            <div className="px-5 pt-3 pb-2 border-b border-line bg-deck-bar flex items-center justify-between gap-4">
               <div className="flex items-center gap-1.5 text-xs">
                 <button
                   type="button"
@@ -290,7 +290,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   </div>
 
                   {/* Code Block with line numbering */}
-                  <div className="p-4 rounded-2xl bg-[#06080e] border border-line overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
+                  <div className="p-4 rounded-2xl bg-deck-well border border-line overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
                     <pre>
                       <code>{snippet.code}</code>
                     </pre>
@@ -339,7 +339,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#0d1424] border border-line space-y-2 text-xs">
+                  <div className="p-4 rounded-xl bg-surface border border-line space-y-2 text-xs">
                     <h4 className="text-white font-bold flex items-center gap-2">
                       <Activity className="w-4 h-4 text-primary" />
                       <span>

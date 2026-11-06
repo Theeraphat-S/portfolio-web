@@ -25,7 +25,7 @@ export const BlueprintScreen: React.FC<BlueprintScreenProps> = ({
         className="absolute inset-0 opacity-20 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #06b6d4 1px, transparent 1px), linear-gradient(to bottom, #06b6d4 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-cyan-500) 1px, transparent 1px), linear-gradient(to bottom, var(--color-cyan-500) 1px, transparent 1px)",
           backgroundSize: "16px 16px",
         }}
       />
