@@ -396,21 +396,20 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 ref={(el) => {
                   beatRefs.current[bIdx] = el;
                 }}
-                onClick={() => scrollToBeat(bIdx)}
-                tabIndex={0}
-                role="button"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    scrollToBeat(bIdx);
-                  }
-                }}
                 aria-current={isActive ? "step" : undefined}
                 style={{ opacity: beatOpacity[bIdx] }}
-                className={`min-h-[50vh] border-t py-7 text-left cursor-pointer outline-none transition-[border-color] duration-300 focus-visible:ring-1 focus-visible:ring-signal ${
+                className={`relative min-h-[50vh] border-t py-7 text-left transition-[border-color] duration-300 has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-signal ${
                   isActive ? "border-primary/60" : "border-line"
                 }`}
               >
+                {/* One real button covers the whole step, so the step stays
+                    clickable while its heading and text keep their semantics. */}
+                <button
+                  type="button"
+                  onClick={() => scrollToBeat(bIdx)}
+                  aria-label={`${lang === "th" ? beat.badgeTh : beat.badgeEn}: ${lang === "th" ? beat.titleTh : beat.titleEn}`}
+                  className="absolute inset-0 z-10 cursor-pointer outline-none"
+                />
                 <p
                   className={`font-mono text-xs tracking-wider font-semibold ${
                     isActive ? "text-primary" : "text-zinc-400"

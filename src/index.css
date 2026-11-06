@@ -459,59 +459,67 @@ section[id] {
   }
 }
 
-/* Editorial Button with Magnetic feel */
-.btn-editorial {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  padding: 0.8125rem 1.625rem;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  /* Fixed line box so the Thai fallback face cannot grow the button. */
-  line-height: 1.25rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border-radius: 9999px;
-  transition-property:
-    color, background-color, border-color, box-shadow, transform;
-  transition-duration: 0.25s;
-  transition-timing-function: var(--ease-out-expo);
-  overflow: hidden;
-}
+/* In the components layer so per-button utilities (px-4, h-12) win. */
+@layer components {
+  /* Editorial Button with Magnetic feel */
+  .btn-editorial {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.8125rem 1.625rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    /* Fixed line box so the Thai fallback face cannot grow the button. */
+    line-height: 1.25rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    transition-property:
+      color, background-color, border-color, box-shadow, transform;
+    transition-duration: 0.25s;
+    transition-timing-function: var(--ease-out-expo);
+    overflow: hidden;
+  }
 
-.btn-editorial-primary {
-  background: var(--color-primary);
-  color: var(--color-void);
-  box-shadow: 0 4px 20px -4px
-    color-mix(in oklab, var(--color-primary) 35%, transparent);
-}
+  /* Icons keep their size when a narrow button squeezes the label. */
+  .btn-editorial > svg {
+    flex-shrink: 0;
+  }
 
-.btn-editorial-primary:hover {
-  background: var(--color-signal);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px -4px
-    color-mix(in oklab, var(--color-signal) 40%, transparent);
-}
+  .btn-editorial-primary {
+    background: var(--color-primary);
+    color: var(--color-void);
+    box-shadow: 0 4px 20px -4px
+      color-mix(in oklab, var(--color-primary) 35%, transparent);
+  }
 
-.btn-editorial-outline {
-  background: transparent;
-  color: var(--color-ink);
-  border: 1px solid var(--color-line);
-}
+  .btn-editorial-primary:hover {
+    background: var(--color-signal);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px -4px
+      color-mix(in oklab, var(--color-signal) 40%, transparent);
+  }
 
-.btn-editorial-outline:hover {
-  border-color: color-mix(in oklab, var(--color-signal) 45%, transparent);
-  color: var(--color-signal);
-  background: color-mix(in oklab, var(--color-signal) 5%, transparent);
-  transform: translateY(-1px);
-}
+  .btn-editorial-outline {
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-line);
+  }
 
-/* Pressed: settle back to the baseline the hover lifted from. */
-.btn-editorial:active {
-  transform: translateY(0) scale(0.98);
+  .btn-editorial-outline:hover {
+    border-color: color-mix(in oklab, var(--color-signal) 45%, transparent);
+    color: var(--color-signal);
+    background: color-mix(in oklab, var(--color-signal) 5%, transparent);
+    transform: translateY(-1px);
+  }
+
+  /* Pressed: settle back to the baseline the hover lifted from. */
+  .btn-editorial:active {
+    transform: translateY(0) scale(0.98);
+  }
 }
 
 /* Subtle Shimmer highlight */

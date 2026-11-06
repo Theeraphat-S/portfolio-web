@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-void text-zinc-400 text-xs py-12 transition-colors">
+    <footer className="relative z-10 border-t border-line bg-void text-zinc-400 text-xs py-12 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Left: Author & Geographic status */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-center sm:text-left">

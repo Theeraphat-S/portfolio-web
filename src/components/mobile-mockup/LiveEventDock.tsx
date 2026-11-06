@@ -71,6 +71,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               exit={{ opacity: 0, y: -3 }}
               transition={{ duration: 0.2 }}
               onClick={() => onOpenDrawer("stream")}
+              title={latestEvent.details}
               aria-label={t(
                 `เปิด Event Log: ${latestEvent.name}`,
                 `Open event log: ${latestEvent.name}`,
@@ -92,10 +93,6 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
                     </span>
                   </>
                 )}
-                <span className="text-zinc-500 shrink-0">&bull;</span>
-                <span className="text-zinc-400 text-xs truncate min-w-0">
-                  {latestEvent.details}
-                </span>
               </div>
 
               <div className="flex items-center gap-2 shrink-0 text-xs font-mono text-zinc-500">
