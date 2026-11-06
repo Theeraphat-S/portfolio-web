@@ -360,7 +360,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.email && (
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition"
+                className="flex items-center gap-2 min-h-11 lg:min-h-0 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition"
               >
                 <Mail className="w-3.5 h-3.5 text-primary" />
                 <span>{personal.reference.email}</span>

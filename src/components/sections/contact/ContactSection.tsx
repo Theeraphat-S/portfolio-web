@@ -203,7 +203,7 @@ export const ContactSection: React.FC = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
               <a
                 href={`mailto:${personal.email}`}
-                className="text-base sm:text-xl font-mono font-bold text-white hover:text-signal transition-colors break-all"
+                className="inline-flex items-center min-h-11 lg:min-h-0 text-base sm:text-xl font-mono font-bold text-white hover:text-signal transition-colors break-all"
               >
                 {personal.email}
               </a>
@@ -454,7 +454,7 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   data-cursor-text="DISPATCH"
-                  className="w-full py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition btn-lift flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover"
+                  className="w-full min-h-11 py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition btn-lift flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover"
                 >
                   <span>
                     {lang === "th" ? "เปิดร่างในแอปอีเมล" : "Open email draft"}
