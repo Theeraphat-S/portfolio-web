@@ -1,26 +1,21 @@
 import React from "react";
-import { m, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { m, useScroll } from "motion/react";
 
 interface ScrollProgressBarProps {
   className?: string;
 }
 
 export const ScrollProgressBar: React.FC<ScrollProgressBarProps> = ({
-  className = "h-[2px] bg-signal",
+  className = "h-px bg-signal/70",
 }) => {
-  const shouldReduceMotion = useReducedMotion();
+  // Tracks the scroll directly, like the story rail and chapter pill:
+  // Lenis already smooths the scroll, so a spring would only add lag.
   const { scrollYProgress } = useScroll();
-
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
 
   return (
     <m.div
       style={{
-        scaleX: shouldReduceMotion ? scrollYProgress : scaleX,
+        scaleX: scrollYProgress,
         transformOrigin: "0%",
       }}
       className={`fixed top-0 left-0 right-0 z-[999] pointer-events-none ${className}`}
