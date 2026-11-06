@@ -213,8 +213,8 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   <div className="p-3 rounded-xl bg-white/[0.02] border border-line text-xs text-zinc-400 flex items-center justify-between">
                     <span>
                       {lang === "th"
-                        ? "บันทึก Real-time Event Stream จากการตอบสนองบนหน้าจอด้านนอก"
-                        : "Real-time reactive event stream recorded directly from user interactions."}
+                        ? "Event Stream ที่เกิดจากการเลื่อนอ่านเรื่องและการแตะหน้าจอจำลอง"
+                        : "Events from scrolling the story and tapping the device."}
                     </span>
                     <span className="text-primary font-bold">
                       Unidirectional BLoC

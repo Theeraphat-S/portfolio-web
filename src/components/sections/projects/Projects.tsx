@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
@@ -9,10 +9,12 @@ import { portfolioData, bridgeFor } from "../../../data";
 import { ProjectItem } from "../../../types";
 import { EditorialCaseStudy } from "./EditorialCaseStudy";
 import { ChapterEyebrow } from "../../ChapterEyebrow";
+import { ChunkBoundary } from "../../ChunkBoundary";
+import { createChunk } from "../../../lib/lazyChunk";
 
 // The modal is only needed after a "View case study" click, so it ships in
-// its own chunk and loads on first open.
-const ProjectModal = lazy(() => import("./modal/ProjectModal"));
+// its own chunk; hovering or focusing the button starts the download.
+const modalChunk = createChunk(() => import("./modal/ProjectModal"));
 
 export const Projects: React.FC = () => {
   const { t } = useLanguage();
@@ -20,6 +22,14 @@ export const Projects: React.FC = () => {
     useState<ProjectItem | null>(null);
   // Stays mounted after the first open so the exit animation can run.
   const [modalLoaded, setModalLoaded] = useState(false);
+  // A failed chunk unmounts the modal; the next click retries with a
+  // fresh lazy component.
+  const [ProjectModal, setProjectModal] = useState(modalChunk.create);
+  const handleModalError = () => {
+    setModalLoaded(false);
+    setSelectedModalProject(null);
+    setProjectModal(modalChunk.create);
+  };
   const openModal = (project: ProjectItem) => {
     setModalLoaded(true);
     setSelectedModalProject(project);
@@ -92,18 +102,21 @@ export const Projects: React.FC = () => {
             project={project}
             index={index}
             onSelect={openModal}
+            onPrefetch={modalChunk.prefetch}
           />
         ))}
       </div>
 
       {/* Deep Architectural Modal */}
       {modalLoaded && (
-        <Suspense fallback={null}>
-          <ProjectModal
-            project={selectedModalProject}
-            onClose={() => setSelectedModalProject(null)}
-          />
-        </Suspense>
+        <ChunkBoundary onError={handleModalError}>
+          <Suspense fallback={null}>
+            <ProjectModal
+              project={selectedModalProject}
+              onClose={() => setSelectedModalProject(null)}
+            />
+          </Suspense>
+        </ChunkBoundary>
       )}
     </section>
   );

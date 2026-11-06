@@ -9,12 +9,15 @@ interface LiveEventDockProps {
   latestEvent: BLoCStreamEvent | null;
   eventsCount: number;
   onOpenDrawer: (initialTab: "stream" | "code" | "telemetry") => void;
+  /** Starts loading the DevTools drawer on hover or focus. */
+  onPrefetchDrawer?: () => void;
 }
 
 export const LiveEventDock: React.FC<LiveEventDockProps> = ({
   latestEvent,
   eventsCount,
   onOpenDrawer,
+  onPrefetchDrawer,
 }) => {
   const { t } = useLanguage();
 
@@ -38,6 +41,8 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
           <button
             type="button"
             onClick={() => onOpenDrawer("stream")}
+            onPointerEnter={onPrefetchDrawer}
+            onFocus={onPrefetchDrawer}
             data-cursor-text="LOGS"
             aria-label={t("เปิดดูประวัติ Event Log", "Open Live Stream Logs")}
             className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-white/[0.04] hover:bg-signal/10 text-zinc-300 hover:text-signal border border-line hover:border-signal/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
@@ -49,6 +54,8 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
           <button
             type="button"
             onClick={() => onOpenDrawer("code")}
+            onPointerEnter={onPrefetchDrawer}
+            onFocus={onPrefetchDrawer}
             data-cursor-text="DART"
             aria-label={t("ดูโค้ด Flutter/Dart", "View Dart Source Code")}
             className="min-h-11 lg:min-h-7 pointer-coarse:min-h-11 px-2.5 lg:px-2 rounded-md whitespace-nowrap bg-primary/10 hover:bg-signal/20 text-primary border border-primary/30 text-xs font-bold tracking-wider transition flex items-center gap-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
@@ -71,6 +78,8 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               exit={{ opacity: 0, y: -3 }}
               transition={{ duration: 0.2 }}
               onClick={() => onOpenDrawer("stream")}
+              onPointerEnter={onPrefetchDrawer}
+              onFocus={onPrefetchDrawer}
               title={latestEvent.details}
               aria-label={t(
                 `เปิด Event Log: ${latestEvent.name}`,

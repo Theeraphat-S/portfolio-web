@@ -16,7 +16,14 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "BLoC Presentation Layer receives vitals (glucose, blood pressure) and checks them against clinical thresholds as they are entered, without a network call.",
       streamTag: "FORM_VALIDATED",
       streamState: "UpdateVitalsEvent",
-      streamDetails: "Glucose: 108 mg/dL, BP: 122/80 mmHg ➔ Normal Range",
+      streamDetails:
+        "Glucose 98 mg/dL, BP 118/80 mmHg ➔ in range, not evaluated yet",
+      streamPayload: {
+        glucose: 98,
+        systolic: 118,
+        diastolic: 80,
+        evaluated: false,
+      },
       highlightSpecs: ["Flutter 3.x", "BLoC Pattern", "Form Validation"],
     },
     {
@@ -33,7 +40,15 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "Domain layer evaluates Diabetes, Hypertension, Cardiac, and Obesity risk tiers instantly on-device, so no one adds up the score by hand.",
       streamTag: "BLoC::State",
       streamState: "RiskEvaluatedState",
-      streamDetails: "Score: 4/15 (MODERATE Tier Verified)",
+      streamDetails: "Glucose 108 mg/dL, BP 122/80 mmHg ➔ score 4/15, Moderate",
+      streamPayload: {
+        glucose: 108,
+        systolic: 122,
+        diastolic: 80,
+        totalScore: 4,
+        tier: "MODERATE",
+        evaluatedOn: "client",
+      },
       highlightSpecs: [
         "Risk Scoring Engine",
         "Clean Architecture",
@@ -55,7 +70,14 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       streamTag: "REST_SUBMIT",
       streamState: "RecordSubmittedState",
       streamDetails:
-        "POST /assessments ➔ MySQL record saved & PDF export ready",
+        "POST /assessments ➔ record saved (4/15), PDF report ready",
+      streamPayload: {
+        patientRef: "HN 0941",
+        totalScore: 4,
+        tier: "MODERATE",
+        saved: true,
+        pdfReady: true,
+      },
       highlightSpecs: ["REST API", "MySQL", "PDF Export Engine"],
     },
   ],
@@ -74,7 +96,13 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "Embedded the existing web menus in a WebView inside the Flutter app, with state management keeping the native cart in step with the web menu.",
       streamTag: "WEBVIEW_MESSAGE",
       streamState: "WebViewMenuLoadedState",
-      streamDetails: "Hybrid menu loaded in native shell ➔ cart bridge ready",
+      streamDetails: "Web menu loaded in WebView ➔ native cart: 2 items · ฿109",
+      streamPayload: {
+        bridge: "JavaScriptChannel",
+        path: "/menu/nimman-kitchen",
+        cartItems: 2,
+        cartTotal: 109,
+      },
       highlightSpecs: ["WebView", "State Management", "Native Cart"],
     },
     {
@@ -91,7 +119,12 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "Streak logic that counts consecutive chat days and unlocks rewards on check-in, giving users a daily reason to return.",
       streamTag: "STREAK_UPDATED",
       streamState: "StreakCountState",
-      streamDetails: "Day 8 claimed ➔ +50 pts, voucher unlocked",
+      streamDetails: "7-day streak ➔ today's check-in open (+50 pts)",
+      streamPayload: {
+        streakDays: 7,
+        checkedInToday: false,
+        rewardPoints: 50,
+      },
       highlightSpecs: ["Gamification", "BLoC", "Rewards"],
     },
     {
@@ -108,7 +141,13 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "Streak points are written through the Profile API, and a state bridge passes user data between Flutter and the WebView so every screen shows the same profile.",
       streamTag: "PROFILE_API",
       streamState: "ProfileSyncedState",
-      streamDetails: "GET /profile ➔ points & tier refreshed",
+      streamDetails: "GET /profile ➔ 1,500 pts, Gold, 8-day streak",
+      streamPayload: {
+        points: 1500,
+        tier: "Gold",
+        streakDays: 8,
+        pointsToNextTier: 500,
+      },
       highlightSpecs: ["Profile API", "REST", "State Bridge"],
     },
   ],
@@ -127,7 +166,15 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "Cart state recalculates totals, tax and item counts the moment an item is added or removed, without waiting on the server.",
       streamTag: "CART_MUTATION",
       streamState: "CartUpdatedState",
-      streamDetails: "Register #04 Ready ➔ 2 SKUs in Cart, Net: ฿420.00",
+      streamDetails:
+        "Till 04 online ➔ 2 items, total ฿420.00 (VAT ฿27.48 incl.)",
+      streamPayload: {
+        till: "04",
+        itemCount: 2,
+        total: 420,
+        vatIncluded: 27.48,
+        online: true,
+      },
       highlightSpecs: ["Reactive Cart", "Optimistic UI", "BLoC"],
     },
     {
@@ -144,7 +191,12 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "When the connection drops, transactions are written to a local SQLite queue first, so the cashier keeps checking out as normal.",
       streamTag: "QUEUE_ENQUEUED",
       streamState: "OfflineModeActiveState",
-      streamDetails: "Network disconnected ➔ TxID #TX-9042 queued in SQLite",
+      streamDetails: "Connection lost ➔ 1 order queued in SQLite",
+      streamPayload: {
+        online: false,
+        queuedOrders: 1,
+        storage: "sqlite",
+      },
       highlightSpecs: ["SQLite", "Offline Queue", "Optimistic UI"],
     },
     {
@@ -161,7 +213,14 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
         "Back online, the queue replays to the REST API. Each transaction carries a client-generated UUID, so the server can drop duplicates.",
       streamTag: "QUEUE_FLUSHED",
       streamState: "TransactionsSyncedState",
-      streamDetails: "Reconnected ➔ #TX-9042 synced, duplicate retry ignored",
+      streamDetails:
+        "Back online ➔ 1 queued order replayed, server drops duplicate UUIDs",
+      streamPayload: {
+        online: true,
+        replayedOrders: 1,
+        queuedOrders: 0,
+        dedupeKey: "clientUuid",
+      },
       highlightSpecs: ["Idempotency UUID", "Retry Queue", "REST API"],
     },
   ],

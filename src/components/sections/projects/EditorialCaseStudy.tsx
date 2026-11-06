@@ -1,6 +1,5 @@
 import React, {
   Suspense,
-  lazy,
   useState,
   useEffect,
   useRef,
@@ -13,7 +12,7 @@ import { scrollToElement } from "../../../lib/lenis";
 import { ArrowUpRight, Terminal } from "lucide-react";
 import { getMetricValue } from "../../../lib/utils";
 import { useLanguage } from "../../../context/LanguageContext";
-import { ProjectItem } from "../../../types";
+import { ProjectItem, StoryBeat } from "../../../types";
 import { BEATS_BY_PROJECT } from "../../../data";
 import { PintoScreen, PintoState } from "../../mobile-mockup/PintoScreen";
 import { NcdsScreen } from "../../mobile-mockup/NcdsScreen";
@@ -24,14 +23,21 @@ import { BLoCStreamEvent } from "../../../types/stream";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useBeatScrub } from "../../../hooks/useBeatScrub";
 import { BilingualStack } from "../../BilingualStack";
+import { ChunkBoundary } from "../../ChunkBoundary";
+import { createChunk } from "../../../lib/lazyChunk";
 
-// The drawer carries the Dart snippets; load it on first open.
-const DevToolsDrawer = lazy(() => import("../../mobile-mockup/DevToolsDrawer"));
+// The drawer carries the Dart snippets; it loads on first open, and
+// hovering or focusing a dock button starts the download.
+const drawerChunk = createChunk(
+  () => import("../../mobile-mockup/DevToolsDrawer"),
+);
 
 interface EditorialCaseStudyProps {
   project: ProjectItem;
   index: number;
   onSelect: (project: ProjectItem) => void;
+  /** Starts loading the case-study modal before the click. */
+  onPrefetch?: () => void;
 }
 
 // "Product — Feature" titles render as a title plus a feature subtitle.
@@ -73,64 +79,37 @@ const highlightTerms = (text: string): React.ReactNode[] =>
     ),
   );
 
-const getInitialEvent = (id: string): BLoCStreamEvent => {
-  if (id === "ncds-screening") {
-    return {
-      id: "init-ncds",
-      timestamp: "09:41:00.012",
-      projectId: "ncds-screening",
-      source: "NcdsScreen",
-      type: "bloc_state",
-      tag: "BLoC::State",
-      name: "RiskEvaluatedState",
-      details: "Glucose 108 mg/dL, BP 122/80 ➔ Score: 4/15 (MODERATE)",
-      payload: {
-        glucose: 108,
-        systolic: 122,
-        totalScore: 4,
-        tier: "MODERATE",
-        evaluatedOn: "client",
-      },
-    };
-  }
-  if (id === "pinto-app") {
-    return {
-      id: "init-pinto",
-      timestamp: "09:41:00.045",
-      projectId: "pinto-app",
-      source: "PintoScreen",
-      type: "bloc_state",
-      tag: "WEBVIEW_MESSAGE",
-      name: "WebViewMenuLoadedState",
-      details: "Hybrid menu loaded in native shell ➔ cart bridge ready",
-      payload: {
-        bridge: "JavaScriptChannel",
-        cartItems: 2,
-      },
-    };
-  }
-  return {
-    id: "init-pos",
-    timestamp: "09:41:00.088",
-    projectId: "pos-system",
-    source: "PosScreen",
-    type: "bloc_state",
-    tag: "CART_INIT",
-    name: "CartInitializedState",
-    details: "Register #04 Ready ➔ 2 SKUs in Cart, Net: ฿420.00, Sync: Online",
-    payload: {
-      register: "#04",
-      itemCount: 2,
-      totalAmount: 420.0,
-      offlineQueueReady: true,
-    },
-  };
+const SOURCE_BY_PROJECT: Record<string, string> = {
+  "ncds-screening": "NcdsScreen",
+  "pinto-app": "PintoScreen",
+  "pos-system": "PosScreen",
 };
+
+// The event a beat emits carries that beat's on-screen state, so the
+// dock and DevTools log read the same values as the device.
+const beatEvent = (
+  projectId: string,
+  beat: StoryBeat,
+  bIdx: number,
+  timestamp: string,
+): BLoCStreamEvent => ({
+  id: `beat-${projectId}-${bIdx}-${timestamp}`,
+  timestamp,
+  projectId,
+  source: SOURCE_BY_PROJECT[projectId] ?? "ScrollytellingEngine",
+  type: bIdx === 0 ? "bloc_event" : bIdx === 1 ? "bloc_state" : "telemetry",
+  tag: beat.streamTag,
+  name: beat.streamState,
+  details: beat.streamDetails,
+  payload: beat.streamPayload,
+  latencyMs: 0.4,
+});
 
 export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   project,
   index,
   onSelect,
+  onPrefetch,
 }) => {
   const { lang, t } = useLanguage();
   const [activeBeat, setActiveBeat] = useState<number>(0);
@@ -141,11 +120,6 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   // Pin the device only on desktop; small screens and reduced motion get
   // the stacked layout, where nothing is held in place while scrolling.
   const isPinned = isDesktop && !shouldReduceMotion;
-  // Below lg the stage selector sticks to the top of the viewport while
-  // the device scrolls past, so a stage change stays in view. It is a
-  // sticky label, not a pin: it adds no scroll distance, and reduced
-  // motion (where scroll no longer drives the stages) leaves it in flow.
-  const isStepperSticky = !isDesktop && !shouldReduceMotion;
 
   // Scale the pinned device down on short viewports so the whole stack
   // (screen + event dock) fits inside 100vh minus the sticky offset.
@@ -174,18 +148,30 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   // Alternating Layout Rhythm (Project 1 Left, Project 2 Right, Project 3 Left)
   const isReversed = index % 2 === 1;
 
-  // Live BLoC Stream Events and DevTools Drawer
-  const [streamEvents, setStreamEvents] = useState<BLoCStreamEvent[]>([
-    getInitialEvent(project.id),
-  ]);
+  const beats = useMemo(() => BEATS_BY_PROJECT[project.id] || [], [project.id]);
+
+  // Live BLoC Stream Events and DevTools Drawer. The log opens on the
+  // first beat's state, which is what the device shows on load.
+  const [streamEvents, setStreamEvents] = useState<BLoCStreamEvent[]>(() =>
+    beats[0] ? [beatEvent(project.id, beats[0], 0, "09:41:00.012")] : [],
+  );
+  // The beat whose event was last emitted. The first scrub into the
+  // opening beat is not a change, so it emits nothing.
+  const emittedBeatRef = useRef(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // Stays mounted after the first open so the exit animation can run.
   const [drawerLoaded, setDrawerLoaded] = useState(false);
+  // A failed chunk unmounts the drawer; the next click retries with a
+  // fresh lazy component.
+  const [DevToolsDrawer, setDevToolsDrawer] = useState(drawerChunk.create);
+  const handleDrawerError = () => {
+    setIsDrawerOpen(false);
+    setDrawerLoaded(false);
+    setDevToolsDrawer(drawerChunk.create);
+  };
   const [drawerTab, setDrawerTab] = useState<"stream" | "code" | "telemetry">(
     "stream",
   );
-
-  const beats = useMemo(() => BEATS_BY_PROJECT[project.id] || [], [project.id]);
 
   const beatRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -205,30 +191,16 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         setPintoActiveTab(tabs[bIdx] || "webview");
       }
 
+      if (bIdx === emittedBeatRef.current) return;
+      emittedBeatRef.current = bIdx;
+
       const now = new Date();
       const timeStr =
         now.toTimeString().split(" ")[0] +
         "." +
         String(now.getMilliseconds()).padStart(3, "0");
 
-      handleDispatchEvent({
-        id: `beat-${project.id}-${bIdx}-${Date.now()}`,
-        timestamp: timeStr,
-        projectId: project.id,
-        source: "ScrollytellingEngine",
-        type:
-          bIdx === 0 ? "bloc_event" : bIdx === 1 ? "bloc_state" : "telemetry",
-        tag: beat.streamTag,
-        name: beat.streamState,
-        details: beat.streamDetails,
-        payload: {
-          beatIndex: bIdx + 1,
-          totalBeats: beats.length,
-          beatId: beat.id,
-          specs: beat.highlightSpecs,
-        },
-        latencyMs: 0.4,
-      });
+      handleDispatchEvent(beatEvent(project.id, beat, bIdx, timeStr));
     },
     [beats, project.id],
   );
@@ -266,6 +238,9 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     setPintoActiveTab(tab);
     const tabIdx = tab === "webview" ? 0 : tab === "streak" ? 1 : 2;
     setActiveBeat(tabIdx);
+    // The screen emits its own tap event; a later scroll back to the
+    // previous beat is then a change again.
+    emittedBeatRef.current = tabIdx;
   };
 
   const displayYear =
@@ -289,9 +264,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const renderDeviceMockup = () => {
     return (
       <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px] flex flex-col items-center gap-3">
-        {/* Active stage HUD (pinned runway only; the stacked layout uses
-            the stepper above). The rail fills as the reader scrolls. */}
-        {isPinned && (
+        {/* Active stage label, in flow directly above the device so a
+            stage change shows next to the screen it changes. The rail
+            fills as the reader scrolls (not under reduced motion). */}
+        {
           <div className="w-full px-3.5 py-1.5 rounded-lg bg-hud/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -314,18 +290,20 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 </span>
               </div>
             </div>
-            <div aria-hidden="true" className="mt-1.5 mb-0.5 flex gap-1">
-              {segments.map((segment, sIdx) => (
-                <span key={sIdx} className="h-px flex-1 bg-line">
-                  <m.span
-                    className="block h-full origin-left bg-primary"
-                    style={{ scaleX: segment }}
-                  />
-                </span>
-              ))}
-            </div>
+            {!shouldReduceMotion && (
+              <div aria-hidden="true" className="mt-1.5 mb-0.5 flex gap-1">
+                {segments.map((segment, sIdx) => (
+                  <span key={sIdx} className="h-px flex-1 bg-line">
+                    <m.span
+                      className="block h-full origin-left bg-primary"
+                      style={{ scaleX: segment }}
+                    />
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        }
 
         <DeviceFrame
           screenId={`screen-panel-${project.id}`}
@@ -356,6 +334,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         <LiveEventDock
           latestEvent={streamEvents[0] || null}
           eventsCount={streamEvents.length}
+          onPrefetchDrawer={drawerChunk.prefetch}
           onOpenDrawer={(tab) => {
             setDrawerTab(tab);
             setDrawerLoaded(true);
@@ -461,8 +440,9 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 aria-hidden={bIdx !== activeBeat}
                 className={`col-start-1 row-start-1 ${bIdx === activeBeat ? "" : "invisible"}`}
               >
+                {/* Only the shown stage is a heading in the outline. */}
                 <BilingualStack
-                  as="h4"
+                  as={bIdx === activeBeat ? "h4" : "div"}
                   className="text-base font-bold text-white tracking-tight"
                   th={b.titleTh}
                   en={b.titleEn}
@@ -484,13 +464,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
   const renderStepper = () => {
     return (
-      <div
-        className={
-          isStepperSticky
-            ? "sticky top-3 z-30 -mx-2 -my-2 rounded-xl bg-deck/95 p-2 backdrop-blur-md"
-            : undefined
-        }
-      >
+      <div>
         <div
           role="group"
           aria-label={t("ขั้นตอนของโปรเจกต์", "Project stages")}
@@ -596,6 +570,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           <button
             type="button"
             onClick={() => onSelect(project)}
+            onPointerEnter={onPrefetch}
+            onFocus={onPrefetch}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
             className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
@@ -673,16 +649,18 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
 
       {/* Flutter & BLoC DevTools Drawer */}
       {drawerLoaded && (
-        <Suspense fallback={null}>
-          <DevToolsDrawer
-            isOpen={isDrawerOpen}
-            onClose={() => setIsDrawerOpen(false)}
-            initialTab={drawerTab}
-            projectId={project.id}
-            events={streamEvents}
-            onClearEvents={() => setStreamEvents([])}
-          />
-        </Suspense>
+        <ChunkBoundary onError={handleDrawerError}>
+          <Suspense fallback={null}>
+            <DevToolsDrawer
+              isOpen={isDrawerOpen}
+              onClose={() => setIsDrawerOpen(false)}
+              initialTab={drawerTab}
+              projectId={project.id}
+              events={streamEvents}
+              onClearEvents={() => setStreamEvents([])}
+            />
+          </Suspense>
+        </ChunkBoundary>
       )}
     </m.article>
   );

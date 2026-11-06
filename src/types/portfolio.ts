@@ -196,6 +196,8 @@ export interface StoryBeat {
   streamTag: string;
   streamState: string;
   streamDetails: string;
+  /** State the device shows at this beat, sent as the event payload. */
+  streamPayload: Record<string, unknown>;
   highlightSpecs: string[];
 }
 
