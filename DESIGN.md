@@ -92,7 +92,7 @@ components:
 
 The visual language of Theeraphat Srimontha's portfolio functions as an advanced flight deck for high-reliability mobile engineering, organized as a **scroll-led narrative journey**. Rather than treating software as abstract styling, the interface mirrors the precision, predictability, and tactile certainty of avionics instrumentation: deep blue-black backgrounds (`#070b14`), layered midnight surfaces (`#0d1424`/80%), 1px laser-etched borders, and razor-sharp typographic telemetry. Every element conveys intentional control—deterministic states, measured frame budgets, and zero unnecessary visual noise.
 
-Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38d9ff`) is the signal color for motion and live state across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and magnetic buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
+Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38d9ff`) is the signal color for motion and live state across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and pill buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
 
 **Key Characteristics:**
 
@@ -112,17 +112,20 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 ### Secondary
 
-- **Electric Cyan** (`#38d9ff`, `signal`): Motion and live state only — hover and focus states, pulsing indicators, the active chapter dot, the scroll progress bar and the section-transition trace.
+- **Electric Cyan** (`#38d9ff`, `signal`): Motion and live state only — hover and focus states, pulsing indicators (including the DevTools dock heartbeat), the active chapter dot, every progress fill (scroll bar, story rail, beat rail and beat stepper) and the beat-commit light in the case-study runway. A control that is blue at rest turns cyan as a whole on hover: text, border and tint together.
 
 ### Tertiary
 
-- **Telemetry Emerald** (`#10b981`): Status heartbeat for live availability and "Open for Roles" signaling.
+- **Telemetry Emerald** (`#10b981`): Availability status only — the "Open for Roles" pills in the hero and contact. It does not mark live streams, metrics or outcomes.
+- **Rose**: Form validation errors and failed actions only (the contact form, a failed copy). Destructive controls stay neutral.
+- **Categories** (e.g. the case study analysis cards) are told apart by label, icon and position, never by extra hues; there is no per-project accent color.
 
 ### Neutral
 
 - **Void** (`#070b14`, `void`): Global canvas.
 - **Surface** (`#0d1424`, `surface`): Sections and cards; glass cards use it at 80% with 20px blur.
 - **Surface Raised** (`#131c30`): Popovers, modals, drawers, nested elements.
+- **Deck aliases**: `deck` and `deck-head` alias `surface`; `deck-bar`, `deck-well`, `dock` and `hud` alias `void`. They exist as names only, so the canvas keeps three steps (void, surface, surface-raised) plus translucent white overlays. `device-glass` (`#05060a`) belongs to the device hardware.
 - **Ink** (`#f3f6fc`, `ink`): Headlines and primary text.
 - **Secondary Text** (`#b9c3d4`, `zinc-300`): Supporting narrative copy.
 - **Muted** (`#8b97ad`, `muted` / `zinc-400`): Descriptions and secondary data.
@@ -132,8 +135,8 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 **The 80 / 15 / 5 Rule.** Roughly 80% dark canvas and space, 15% surfaces and gray text, 5% blue and cyan. Accent color that spreads past that loses its pull.
 **The Blue Acts, Cyan Moves Rule.** Blue marks what is important or clickable at rest; cyan appears only when something moves, is hovered, or is live. Never set long body copy in either.
-**The Reserved Glow Rule.** Glow and gradient belong to the hero accent line, key numbers, and section transitions. Cards and buttons at rest carry no glow.
-**The Telemetry Heartbeat Rule.** Emerald (`#10b981`) is reserved for live, active, or verified real-world indicators, never decorative text.
+**The Reserved Glow Rule.** Glow and gradient belong to the hero accent line, key numbers, and the case-study beat commit. Cards and buttons at rest carry no glow.
+**The Telemetry Heartbeat Rule.** Emerald (`#10b981`) is reserved for the availability status, never decorative text, metrics or live streams (those are cyan).
 **The Zero-Shift Bilingual Rule.** All text containers supporting Thai and English apply balanced line-heights, flex alignment, and explicit min-heights so toggling languages causes no layout shift.
 **The Sticky Viewport Budget Rule.** Pinned demonstration viewports never exceed `calc(100vh - 6rem)`.
 
@@ -164,7 +167,7 @@ The spatial model employs an asymmetric 12-column responsive grid framed within 
 
 - **Maximum Content Width:** `max-w-5xl` (1024px) for reading sections, navigation, and bento grids; `max-w-6xl` (1152px) for the main application shell; `max-w-7xl` (1280px) for wide telemetry decks and editorial hero headers.
 - **Section Spacing Rhythm:** Standard vertical rhythm is `py-16` (64px) on mobile scaling to `py-24` (96px) on desktop viewports.
-- **Dividing Boundaries:** Sections are demarcated by `border-b border-line`. As each chapter scrolls out, a single cyan trace runs along its bottom rule (CSS scroll-driven `circuit-trace`, hidden under reduced motion).
+- **Dividing Boundaries:** Sections are demarcated by a still `border-b border-line`.
 - **Grid Background:** Ultra-subtle 56px technical grid lines (`rgba(77, 124, 254, 0.05)`) provide depth behind transparent containers.
 
 ## Elevation & Depth
@@ -173,7 +176,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Shadow Vocabulary
 
-- **Ambient Cyan Glow** (`0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 12px 30px -12px rgba(56, 217, 255, 0.1)`): Applied on card hover to create a diffused electromagnetic aura.
+- **Ambient Cyan Glow** (`0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 12px 30px -12px rgba(56, 217, 255, 0.1)`): Reserved for floating overlays; cards no longer take it on hover (they change border only).
 - **Button Energy Shadow** (`0 4px 20px -4px rgba(77, 124, 254, 0.35)`): Soft, directional glow beneath primary interactive buttons.
 - **Dock Elevation** (`0 12px 32px rgba(0, 0, 0, 0.65)`): Deep shadow applied to floating telemetry and chapter indicators.
 
@@ -202,7 +205,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 - **Corner Style:** Rounded 12px (`rounded-xl`) or 16px (`rounded-2xl`).
 - **Background:** `rgba(13, 20, 36, 0.8)` with `backdrop-blur(20px)`.
 - **Border:** `1px solid #26324a`.
-- **Hover Treatment:** Border shifts to `rgba(56, 217, 255, 0.35)` with a soft offset cyan shadow.
+- **Hover Treatment:** Border shifts to `rgba(56, 217, 255, 0.35)`; nothing moves or glows.
 - **Internal Padding:** `p-5 sm:p-6` for bento cards; `p-6 sm:p-8` for flagship case study containers.
 
 ### Avionics Story Progress Indicator (`StoryProgress`)
@@ -210,15 +213,16 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 - **Desktop (2XL+):** Fixed vertical tracking rail at `fixed left-8 top-1/2 -translate-y-1/2 z-30`. Features vertical connecting rail (`story-progress-line`) and 6 illuminated progress dots (`story-progress-dot`):
   - Inactive state: 6px muted zinc ring.
   - Passed state (`is-passed`): illuminated cyan core.
-  - Active state (`is-active`): animated pulsing cyan beacon with halo glow.
+  - Active state (`is-active`): still cyan beacon, scaled 1.45× with a halo glow. It does not pulse; the dot eases between states on `--dur-fast`.
   - Telemetry label readout: `01 / 06` chapter index and uppercase monospace title (`INTRO`, `APPROACH`, `SELECTED WORK`, `CAPABILITIES`, `EXPERIENCE`, `CONTACT`).
 - **Rail fill:** A `story-progress-fill` line over the rail fills one segment per chapter (dot to dot, with an end cap after the last), so it reads as chapter progress rather than a second whole-page bar.
+- **Top bar (<2XL only):** A 1px `signal/70` line across the top tracks the whole page with no spring, since below 2XL the pill shows only the current chapter. At 2XL+ it is hidden because the rail already covers the whole story.
 - **Mobile & Tablet (<2XL):** Floating pill capsule at `fixed bottom-4 right-4 z-30` with `bg-void/90`, `backdrop-blur`, and border `line`, hidden on the intro. It opens the chapter menu and carries a 1px signal line along its bottom that fills with the current chapter's progress.
 
 ### Chapter Atmosphere (`Atmosphere`)
 
 - **Layers:** Fixed behind the content: a `surface`-tone lift layer and two 80vmax radial glows (`atmosphere-glow-blue` at 26% Primary Blue, `atmosphere-glow-cyan` at 18% Electric Cyan). The gradients are painted once; only transform and opacity change.
-- **Per-chapter looks:** Intro lit from the top right; Approach swings left and lifts the void; Selected Work raises cyan beside the device; Capabilities lights low from the right; Experience dims under the timeline; Contact gathers both lights low and centred. Each look holds through its chapter and blends across the boundary (±0.2 chapter).
+- **Per-chapter looks:** Intro lit from the top right; Approach swings left and lifts the void; Selected Work raises cyan beside the device; Capabilities turns cool, with cyan leading low on the right; Experience switches to a deeper blue key from the upper left with cyan almost out and the void darker; Contact gathers both lights low and centred. Each look holds through its chapter and blends across the boundary (±0.2 chapter).
 - **Restraint:** The lift tops out near `surface` (`#0d1424`), and the glows stay faint enough to keep the 80 / 15 / 5 rule. Reduced motion holds the intro look.
 
 ### Chapter Bridge (`ChapterBridge`)
@@ -235,8 +239,9 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Signature Component: Sticky Scrollytelling Runway & DevTools Dock
 
-- **Sticky Viewport:** High-fidelity smartphone shell pinned at `sticky top-16` on desktop (`lg+`, motion allowed), scaled down to fit short viewports and drifting ±12px across the runway.
+- **Sticky Viewport:** High-fidelity smartphone shell pinned at `sticky top-16` on desktop (`lg+`, motion allowed), scaled down to fit short viewports. It holds still: the beat commit is its only motion.
 - **Scrub:** `useBeatScrub` maps the beat list to scroll. The HUD above the device carries a three-segment rail that fills continuously; beat cards ease from 55% to full opacity under the reading line (50% of the viewport); the device screen changes only after the reading line clears a beat boundary by 32px. Clicking a beat scrolls to it.
+- **Beat Commit (the authored moment):** Each emitted beat change plays one coordinated 520ms sequence on `EASE_OUT_EXPO` (`BEAT_COMMIT` in `src/lib/motion.ts`): the aluminium band catches a cyan edge light (opacity), a single signal line crosses the screen in the scroll's direction (down for a later beat, up for an earlier one; one translate, clipped by the screen), a signal hairline draws across the new beat's top rule and cools to blue, and the dock's new event row streams in left to right (clip-path) with a cyan edge that fades out. It runs in the pinned and stacked layouts. Under reduced motion none of it renders: the state changes instantly.
 - **Stacked Runway:** Below `lg`, and with reduced motion, nothing pins: the stage text and a 3-step stepper sit above the device. Each step carries a bottom fill that tracks the scroll (reading line at 60%), and the steps advance as the device scrolls past unless motion is reduced.
 - **Jump Nav:** The Selected Work header links to each case study (`NCDs Screening`, `Pinto App`, `Retail POS`) in place of a filter, so the page length under the runways never changes.
 - **Device Shell:** Laser-beveled smartphone frame with acoustic speaker, dynamic island pill, and simulated mobile OS status bar.
@@ -259,6 +264,14 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
     - _Beat 1 (Presentation & Intake)_: `PosScreen` cart mutation and tax/total calculation (`CartUpdatedState`).
     - _Beat 2 (Deterministic Engine)_: Network disconnection simulation writing transactions to a local SQLite queue (`OfflineModeActiveState`).
     - _Beat 3 (Persistence & Infrastructure)_: Reconnect replays the queue with idempotency keys (`TransactionsSyncedState`).
+
+## Motion
+
+- **Tokens:** One curve, `--ease-out-expo` (`cubic-bezier(0.16, 1, 0.3, 1)`, `EASE_OUT_EXPO` in JS). Three durations: `--dur-fast` 160ms (hover, press, feedback), `--dur-base` 250ms (screen swaps, snackbars, routine state), `--dur-slow` 500ms (section entrances). Tailwind's bare `transition` utilities default to 160ms on the same curve; longer ones use `duration-(--dur-base)` / `duration-(--dur-slow)`. Exits run faster than entrances (`EXIT_FADE`).
+- **Entrances:** Every section uses `FADE_UP` with `IN_VIEW` (`once`, `-60px`), and the hero's load sequence uses `STAGGER` around it. `FADE_UP` starts at 20% opacity and 18px down, so a fast jump never lands on a blank chapter. No scroll-linked entrances.
+- **Scroll layers, in order of voice:** the case-study runway (beat scrub, beat commit) leads; Atmosphere (chapter light) and ChapterBridge (word lighting) stay quiet underneath; progress belongs to one family: the story rail at 2XL+, the chapter pill and the 1px top bar below it. Nothing else moves with the scroll.
+- **Hover and press:** Buttons lift 1px on hover and settle with `scale(0.98)` when pressed (`.btn-editorial`, `btn-lift` for custom pills, `btn-press` for toggles that do not lift). Arrow icons nudge only on link CTAs. Cards change their border only. Other controls dim to 80% while pressed.
+- **Reduced motion:** No travel, no pinning, no beat commit, no scrub; states change instantly and meaningful colour/opacity changes remain.
 
 ## Do's and Don'ts
 

@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { aboutData, bridgeFor } from "../../../data";
 import type { AboutHeadline } from "../../../types";
-import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { m } from "motion/react";
+import { FADE_UP, IN_VIEW } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { ChapterEyebrow } from "../../ChapterEyebrow";
 
@@ -19,28 +20,17 @@ const Headline: React.FC<{ copy: AboutHeadline }> = ({ copy }) => (
  * credentials behind it, kept short so the work arrives sooner. */
 export const AboutBento: React.FC = () => {
   const { t } = useLanguage();
-  const shouldReduceMotion = useReducedMotion();
   const about = aboutData;
-
-  // The opening of the chapter rises with the scroll as the Hero headline
-  // lifts away, settling once its top is 60% down the viewport.
-  const openingRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: openingRef,
-    offset: ["start end", "start 60%"],
-  });
-  const openingOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const openingY = useTransform(scrollYProgress, [0, 1], [32, 0]);
 
   return (
     <section id="about" className="py-12 border-b border-line">
+      {/* Same in-view entrance as every chapter: it starts legible and
+          settles once, so a fast jump never lands on a blank opening. */}
       <m.div
-        ref={openingRef}
-        style={
-          shouldReduceMotion
-            ? undefined
-            : { opacity: openingOpacity, y: openingY }
-        }
+        initial="hidden"
+        whileInView="visible"
+        viewport={IN_VIEW}
+        variants={FADE_UP}
       >
         <ChapterEyebrow id="about" className="mb-6" />
 

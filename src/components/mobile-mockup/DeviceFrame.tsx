@@ -1,6 +1,15 @@
 import React from "react";
+import { m } from "motion/react";
+import { BEAT_COMMIT } from "../../lib/motion";
 
 export type StatusBarTone = "dark" | "light";
+
+/** One beat commit: `key` changes per commit, `direction` follows the
+ * scroll (1 = to a later beat, -1 = back to an earlier one). */
+export interface BeatSignal {
+  key: number;
+  direction: 1 | -1;
+}
 
 interface DeviceFrameProps {
   children: React.ReactNode;
@@ -12,6 +21,9 @@ interface DeviceFrameProps {
   label: string;
   /** id of the screen region, referenced by the project tabs. */
   screenId?: string;
+  /** Plays the beat-commit sweep; null (or reduced motion upstream)
+   * leaves the frame still. */
+  signal?: BeatSignal | null;
 }
 
 /**
@@ -26,6 +38,7 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
   offline = false,
   label,
   screenId,
+  signal = null,
 }) => {
   const ink =
     tone === "dark"
@@ -46,6 +59,18 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
 
       {/* Aluminium band, then the black glass bezel. */}
       <div className="relative rounded-[46px] p-[3px] bg-[linear-gradient(145deg,var(--color-metal-hi)_0%,var(--color-metal)_22%,var(--color-metal-lo)_50%,var(--color-metal)_78%,var(--color-metal-hi)_100%)] shadow-device">
+        {/* Beat commit, part 1: the band catches a cyan edge light that
+            rises and fades on the commit clock. Opacity only. */}
+        {signal && (
+          <m.span
+            key={`edge-${signal.key}`}
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-px rounded-[47px] ring-1 ring-signal/70 shadow-glow-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ ...BEAT_COMMIT, times: [0, 0.3, 1] }}
+          />
+        )}
         <div className="relative rounded-[43px] bg-black p-[9px]">
           <div
             id={screenId}
@@ -60,6 +85,31 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
             }
           >
             {children}
+
+            {/* Beat commit, part 2: one signal line crosses the screen in
+                the scroll's direction, drawing the new state in. The band
+                is screen-sized with the line on its leading edge, so the
+                move is a single translate the screen clips. */}
+            {signal && (
+              <m.span
+                key={`sweep-${signal.key}`}
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-0 z-30 ${
+                  signal.direction === 1
+                    ? "bg-[linear-gradient(to_bottom,transparent_78%,color-mix(in_oklab,var(--color-signal)_22%,transparent)_99%,var(--color-signal)_100%)]"
+                    : "bg-[linear-gradient(to_top,transparent_78%,color-mix(in_oklab,var(--color-signal)_22%,transparent)_99%,var(--color-signal)_100%)]"
+                }`}
+                initial={{
+                  y: signal.direction === 1 ? "-100%" : "100%",
+                  opacity: 1,
+                }}
+                animate={{ y: "0%", opacity: [1, 1, 0] }}
+                transition={{
+                  y: BEAT_COMMIT,
+                  opacity: { ...BEAT_COMMIT, times: [0, 0.75, 1] },
+                }}
+              />
+            )}
 
             {/* System status bar */}
             <div

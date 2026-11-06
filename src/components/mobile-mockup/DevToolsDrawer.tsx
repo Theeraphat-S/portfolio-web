@@ -169,7 +169,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                 <button
                   type="button"
                   onClick={onClearEvents}
-                  className="px-2 py-1 min-h-11 lg:min-h-0 pointer-coarse:min-h-11 rounded text-xs text-zinc-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors flex items-center gap-1 cursor-pointer"
+                  className="px-2 py-1 min-h-11 lg:min-h-0 pointer-coarse:min-h-11 rounded text-xs text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center gap-1 cursor-pointer"
                 >
                   <Trash2 className="w-3 h-3" />
                   <span>{t("ล้าง Log", "Clear Logs")}</span>
@@ -306,7 +306,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       <span className="text-xs text-zinc-400 uppercase tracking-wider block">
                         FRAME BUDGET
                       </span>
-                      <span className="text-xl font-bold text-emerald-400 block font-mono">
+                      <span className="text-xl font-bold text-primary block font-mono">
                         16.6ms / 60 FPS
                       </span>
                       <span className="text-xs text-zinc-500 block">
@@ -330,7 +330,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       <span className="text-xs text-zinc-400 uppercase tracking-wider block">
                         DATA PERSISTENCE
                       </span>
-                      <span className="text-xl font-bold text-sky-400 block font-mono">
+                      <span className="text-xl font-bold text-primary block font-mono">
                         {snippet.persistence.label}
                       </span>
                       <span className="text-xs text-zinc-500 block">

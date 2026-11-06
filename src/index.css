@@ -64,14 +64,15 @@
   /* Near-black tinted toward the void, used only mixed down for shadows. */
   --color-shade: #01030a;
 
-  /* DevTools deck and event dock: steps of the void, darkest to lightest. */
+  /* DevTools deck, event dock and HUD alias the two canvas steps: wells,
+     bars and floating strips sit on the void; panels sit on the surface. */
   --color-device-glass: #05060a;
-  --color-deck-well: #06080e;
-  --color-deck-bar: #080b12;
-  --color-dock: #090d15;
-  --color-hud: #0a0d14;
-  --color-deck: #0a1020;
-  --color-deck-head: #0c121e;
+  --color-deck-well: var(--color-void);
+  --color-deck-bar: var(--color-void);
+  --color-dock: var(--color-void);
+  --color-hud: var(--color-void);
+  --color-deck: var(--color-surface);
+  --color-deck-head: var(--color-surface);
 
   /* Device hardware: the aluminium band and keys. */
   --color-metal-lo: #1a1e28;
@@ -98,13 +99,19 @@
     0 30px 60px -20px rgb(0 0 0 / 0.9), 0 18px 36px -18px rgb(0 0 0 / 0.7);
   --shadow-live-sm: 0 0 6px #10b981;
   --shadow-live: 0 0 8px #10b981;
-  --shadow-glow-xs: 0 0 8px #1cc3ec;
+  --shadow-glow-xs: 0 0 8px var(--color-signal);
   --shadow-glow-sm: 0 0 10px rgb(56 217 255 / 0.25);
-  --shadow-glow: 0 0 15px #1cc3ec;
+  --shadow-glow: 0 0 15px var(--color-signal);
   --shadow-glow-soft: 0 0 15px rgb(56 217 255 / 0.15);
   --shadow-glow-md: 0 0 20px rgb(56 217 255 / 0.2);
   --shadow-glow-lg: 0 0 20px rgb(56 217 255 / 0.35);
   --shadow-glow-xl: 0 0 25px rgb(56 217 255 / 0.4);
+
+  /* Motion tokens (mirrored in src/lib/motion.ts). One curve for every
+     arrival; three durations: feedback, routine change, authored moment.
+     The defaults retune Tailwind's bare `transition` utilities to them. */
+  --default-transition-duration: 160ms;
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
@@ -113,8 +120,11 @@
       "Outfit", "IBM Plex Sans Thai", -apple-system, BlinkMacSystemFont,
       sans-serif;
     --font-mono: "JetBrains Mono", monospace;
-    /* Mirrors EASE_OUT_EXPO in src/lib/motion.ts */
+    /* Mirror EASE_OUT_EXPO and DURATION in src/lib/motion.ts. */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-fast: 160ms;
+    --dur-base: 250ms;
+    --dur-slow: 500ms;
   }
 
   html.lenis,
@@ -289,16 +299,12 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-line);
-  transition:
-    border-color 0.4s var(--ease-out-expo),
-    box-shadow 0.4s var(--ease-out-expo);
+  transition: border-color var(--dur-base) var(--ease-out-expo);
 }
 
+/* Cards answer hover with their border only. */
 .editorial-card:hover {
   border-color: color-mix(in oklab, var(--color-signal) 35%, transparent);
-  box-shadow:
-    0 20px 40px -15px color-mix(in oklab, var(--color-shade) 80%, transparent),
-    0 12px 30px -12px color-mix(in oklab, var(--color-signal) 10%, transparent);
 }
 
 /* Browser surfaces carry the palette too. */
@@ -344,57 +350,8 @@
   }
 }
 
-/* Section transition: a single cyan pulse runs along each chapter's bottom
-   rule as it scrolls through the viewport. Scroll-driven, so it costs no JS;
-   browsers without view timelines keep the static rule. */
 #main-content > section {
   position: relative;
-}
-
-@supports (animation-timeline: view()) {
-  #main-content > section::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 18%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-signal),
-      transparent
-    );
-    filter: drop-shadow(
-      0 0 4px color-mix(in oklab, var(--color-signal) 70%, transparent)
-    );
-    pointer-events: none;
-    opacity: 0;
-    animation: circuit-trace linear both;
-    animation-timeline: view();
-    animation-range: exit -20% exit 60%;
-  }
-}
-
-@keyframes circuit-trace {
-  0% {
-    transform: translateX(0);
-    opacity: 0;
-  }
-  15%,
-  85% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(455%);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #main-content > section::after {
-    display: none;
-  }
 }
 
 /* Keep chapter anchors clear without reserving space for a fixed navbar. */
@@ -434,10 +391,9 @@ section[id] {
   border: 1px solid var(--color-muted);
   border-radius: 50%;
   background: var(--color-void);
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
+  transition-property: background-color, border-color, transform;
+  transition-duration: var(--dur-fast);
+  transition-timing-function: var(--ease-out-expo);
 }
 
 .story-progress-dot.is-passed {
@@ -479,7 +435,7 @@ section[id] {
     border-radius: 9999px;
     transition-property:
       color, background-color, border-color, box-shadow, transform;
-    transition-duration: 0.25s;
+    transition-duration: var(--dur-fast);
     transition-timing-function: var(--ease-out-expo);
     overflow: hidden;
   }
@@ -522,37 +478,24 @@ section[id] {
   }
 }
 
-/* Subtle Shimmer highlight */
-.subtle-sheen {
-  position: relative;
-  overflow: hidden;
+/* One lift for custom pill buttons, matching .btn-editorial: up 1px on
+   hover, settle and shrink slightly while pressed. Uses the individual
+   translate/scale properties, which the bare `transition` utility covers. */
+@utility btn-lift {
+  &:hover:not(:disabled) {
+    translate: 0 -1px;
+  }
+  &:active:not(:disabled) {
+    translate: 0 0;
+    scale: 0.98;
+  }
 }
 
-.subtle-sheen::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in oklab, var(--color-white) 4%, transparent) 50%,
-    transparent 100%
-  );
-  transition: transform 0.8s ease;
-  pointer-events: none;
-}
-
-.subtle-sheen:hover::after {
-  transform: translateX(100%);
-}
-
-/* Custom fluid transition easing */
-.ease-editorial {
-  transition-timing-function: var(--ease-out-expo);
+/* Press only, for pills that should not lift (toggles, the chapter pill). */
+@utility btn-press {
+  &:active:not(:disabled) {
+    scale: 0.98;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

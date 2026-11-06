@@ -28,8 +28,9 @@ export const App: React.FC = () => {
             Skip to content / ข้ามไปยังเนื้อหา
           </a>
 
-          {/* Global Avionics Scroll Progress Indicator */}
-          <ScrollProgressBar className="h-[2px] bg-signal" />
+          {/* Whole-page progress below 2xl, where the chapter pill only
+              tracks the current chapter; at 2xl the story rail takes over. */}
+          <ScrollProgressBar className="h-px bg-signal/70 2xl:hidden" />
 
           <div className="min-h-[100dvh] relative bg-void text-ink selection:bg-primary selection:text-void flex flex-col font-sans overflow-x-clip">
             {/* Chapter lighting that shifts as the story scrolls */}

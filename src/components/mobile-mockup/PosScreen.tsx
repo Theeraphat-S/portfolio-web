@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { m, AnimatePresence } from "motion/react";
+import { TRANSITION_BASE } from "../../lib/motion";
 import {
   Plus,
   Minus,
@@ -313,7 +314,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={TRANSITION_BASE}
             className="flex items-start gap-2 bg-pos-amber-50 px-4 py-2 text-[11px] leading-snug text-pos-amber-text"
           >
             <CloudOff

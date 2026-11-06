@@ -2,7 +2,7 @@ import React, { Suspense, useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
-import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { FADE_UP, IN_VIEW } from "../../../lib/motion";
 import { CHAPTER_OFFSET, scrollToElement } from "../../../lib/lenis";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
@@ -42,10 +42,10 @@ export const Projects: React.FC = () => {
 
       {/* Section Eyebrow & Headline */}
       <m.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={IN_VIEW}
+        variants={FADE_UP}
         className="space-y-6 mb-10 sm:mb-16"
       >
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-line">
@@ -85,7 +85,7 @@ export const Projects: React.FC = () => {
                   scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
                 }}
                 data-cursor-text="JUMP"
-                className="inline-flex items-center px-3 min-h-9 rounded-full border border-transparent text-zinc-400 hover:text-white hover:border-primary/30 hover:bg-primary/10 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                className="inline-flex items-center px-3 min-h-9 rounded-full border border-transparent text-zinc-400 hover:text-signal hover:border-signal/30 hover:bg-signal/[0.06] transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
               >
                 {project.shortName ?? project.titleEn}
               </a>

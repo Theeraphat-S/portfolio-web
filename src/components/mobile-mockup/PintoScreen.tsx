@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { m, AnimatePresence, useReducedMotion } from "motion/react";
+import { EXIT_FADE, TRANSITION_BASE } from "../../lib/motion";
 import {
   Check,
   RotateCw,
@@ -288,8 +289,8 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
               key="webview"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
+              exit={EXIT_FADE}
+              transition={TRANSITION_BASE}
               className="min-h-full bg-white px-4 pb-3 pt-3"
             >
               {/* Web content inside the WebView: the store's existing menu */}
@@ -348,8 +349,8 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
               key="streak"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
+              exit={EXIT_FADE}
+              transition={TRANSITION_BASE}
               className="space-y-3 p-3"
             >
               <div className="rounded-3xl bg-gradient-to-b from-pinto-green-50 to-white p-4 text-center shadow-app-card">
@@ -453,8 +454,8 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
               key="profile"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
+              exit={EXIT_FADE}
+              transition={TRANSITION_BASE}
               className="space-y-3 p-3"
             >
               <div className="rounded-3xl bg-white p-4 shadow-app-card">
@@ -493,7 +494,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
                 </div>
                 <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-pinto-track">
                   <div
-                    className="h-full w-full origin-left rounded-full transition-transform duration-500"
+                    className="h-full w-full origin-left rounded-full transition-transform duration-(--dur-slow)"
                     style={{
                       backgroundColor: PINTO_GREEN,
                       transform: `scaleX(${points / pintoDemo.nextTierPoints})`,

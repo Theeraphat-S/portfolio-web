@@ -52,25 +52,26 @@ const LOOKS: ChapterLook[] = [
     cyanOpacity: 0.24,
     lift: 0.2,
   },
-  // Capabilities: low light from the right.
+  // Capabilities: a cool, cyan-led light low on the right.
   {
     blueX: 34,
-    blueY: 22,
-    blueOpacity: 0.32,
-    cyanX: -30,
-    cyanY: 30,
-    cyanOpacity: 0.1,
-    lift: 0.55,
+    blueY: 26,
+    blueOpacity: 0.22,
+    cyanX: 28,
+    cyanY: 20,
+    cyanOpacity: 0.2,
+    lift: 0.5,
   },
-  // Experience: dimmer, from the left, under the timeline.
+  // Experience: a deeper blue key from the upper left, cyan almost out,
+  // the void darker under the timeline.
   {
-    blueX: -34,
-    blueY: 14,
-    blueOpacity: 0.24,
-    cyanX: 10,
-    cyanY: -30,
-    cyanOpacity: 0.12,
-    lift: 0.3,
+    blueX: -36,
+    blueY: -10,
+    blueOpacity: 0.34,
+    cyanX: 20,
+    cyanY: 30,
+    cyanOpacity: 0.05,
+    lift: 0.22,
   },
   // Contact: both lights gather low and centred.
   {
