@@ -90,7 +90,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
                 </span>
               </div>
               <p className="text-xs text-zinc-400 leading-normal pl-3">
-                {skill.desc}
+                {t(skill.descTh, skill.descEn)}
               </p>
             </div>
           ))}

@@ -156,9 +156,12 @@ export const Skills: React.FC = () => {
                           <span className="font-medium text-zinc-200 group-hover/node:text-white transition-colors block truncate">
                             {skill.name}
                           </span>
-                          <span className="text-xs text-zinc-400 font-sans font-light block">
-                            {skill.desc}
-                          </span>
+                          <BilingualStack
+                            as="span"
+                            className="text-xs text-zinc-400 font-sans font-light block leading-normal"
+                            th={skill.descTh}
+                            en={skill.descEn}
+                          />
                         </div>
                       </div>
                     </div>
