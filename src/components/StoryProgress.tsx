@@ -77,6 +77,13 @@ export const StoryProgress: React.FC = () => {
   const jumpTo = (id: string) => {
     setIsMenuOpen(false);
     scrollToElement(id, CHAPTER_OFFSET);
+    // Move focus with the scroll, so the next Tab continues inside the
+    // chapter instead of from the menu item that just unmounted.
+    const target = document.getElementById(id);
+    if (target) {
+      if (!target.hasAttribute("tabindex")) target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    }
   };
 
   return (
@@ -131,12 +138,40 @@ export const StoryProgress: React.FC = () => {
       {activeIndex > 0 && (
         <div
           onFocus={() => setIsTucked(false)}
-          className={`hide-when-dialog fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2 pb-[env(safe-area-inset-bottom)] transition-[opacity,translate] duration-300 ease-(--ease-out-expo) 2xl:hidden ${
+          className={`hide-when-dialog fixed bottom-4 right-4 z-30 flex flex-col-reverse items-end gap-2 pb-[env(safe-area-inset-bottom)] transition-[opacity,translate] duration-300 ease-(--ease-out-expo) 2xl:hidden ${
             isPillHidden
               ? "pointer-events-none translate-y-[calc(100%+1rem)] opacity-0 motion-reduce:translate-y-0"
               : ""
           }`}
         >
+          {/* The toggle comes first in the DOM so Tab moves from it into
+              the open menu; column-reverse keeps the menu drawn above. */}
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-expanded={isMenuOpen}
+            aria-controls={menuId}
+            aria-label={t(
+              `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
+              `Navigation menu (current: ${chapter.labelEn})`,
+            )}
+            className="relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+          >
+            {isMenuOpen ? (
+              <X className="h-4 w-4 text-zinc-400" aria-hidden />
+            ) : (
+              <Menu className="h-4 w-4 text-zinc-400" aria-hidden />
+            )}
+            <span aria-hidden="true" className="hidden sm:inline">
+              {labelOf(chapter)}
+            </span>
+            <m.span
+              aria-hidden="true"
+              className="absolute inset-x-4 bottom-1.5 h-px origin-left bg-signal/70"
+              style={{ scaleX: chapterFill }}
+            />
+          </button>
           {isMenuOpen && (
             <div
               id={menuId}
@@ -202,33 +237,6 @@ export const StoryProgress: React.FC = () => {
               </div>
             </div>
           )}
-
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={() => setIsMenuOpen((open) => !open)}
-            aria-expanded={isMenuOpen}
-            aria-controls={menuId}
-            aria-label={t(
-              `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
-              `Navigation menu (current: ${chapter.labelEn})`,
-            )}
-            className="relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
-          >
-            {isMenuOpen ? (
-              <X className="h-4 w-4 text-zinc-400" aria-hidden />
-            ) : (
-              <Menu className="h-4 w-4 text-zinc-400" aria-hidden />
-            )}
-            <span aria-hidden="true" className="hidden sm:inline">
-              {labelOf(chapter)}
-            </span>
-            <m.span
-              aria-hidden="true"
-              className="absolute inset-x-4 bottom-1.5 h-px origin-left bg-signal/70"
-              style={{ scaleX: chapterFill }}
-            />
-          </button>
         </div>
       )}
     </>

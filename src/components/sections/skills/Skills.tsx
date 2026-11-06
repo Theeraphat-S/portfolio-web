@@ -146,7 +146,10 @@ export const Skills: React.FC = () => {
                     >
                       {/* Left: Monospace Connector + Name + Short Desc */}
                       <div className="flex items-start gap-2.5 min-w-0">
-                        <span className="text-zinc-600 select-none font-bold group-hover/node:text-primary transition-colors shrink-0">
+                        <span
+                          aria-hidden="true"
+                          className="text-zinc-600 select-none font-bold group-hover/node:text-primary transition-colors shrink-0"
+                        >
                           {connector}
                         </span>
                         <div className="space-y-0.5 min-w-0">

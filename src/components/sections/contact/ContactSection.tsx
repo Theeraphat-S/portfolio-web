@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { flushSync } from "react-dom";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
@@ -103,7 +104,9 @@ export const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const found = findErrors(formData);
-    setErrors(found);
+    // Render the error text before moving focus, so the field is announced
+    // together with the message its aria-describedby now points at.
+    flushSync(() => setErrors(found));
     const firstInvalid = (["name", "message"] as Field[]).find(
       (field) => found[field],
     );

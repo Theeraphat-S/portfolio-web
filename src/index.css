@@ -307,6 +307,43 @@
   color: var(--color-ink);
 }
 
+@layer base {
+  html {
+    scrollbar-color: var(--color-line) transparent;
+    scrollbar-width: thin;
+  }
+
+  input,
+  textarea {
+    caret-color: var(--color-signal);
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  /* One keyboard focus ring for every control that does not draw its own
+     (an explicit outline-none or focus-visible:ring utility wins). */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+
+  /* Chapters take focus when jumped to from the chapter menu; the scroll
+     already shows where the reader landed. */
+  section[tabindex="-1"]:focus {
+    outline: none;
+  }
+
+  /* Inside the white app screens cyan washes out; the screen clips, so the
+     ring sits just inside the control. */
+  [id^="screen-panel-"] :focus-visible {
+    outline-color: var(--color-sky-600);
+    outline-offset: -2px;
+  }
+}
+
 /* Section transition: a single cyan pulse runs along each chapter's bottom
    rule as it scrolls through the viewport. Scroll-driven, so it costs no JS;
    browsers without view timelines keep the static rule. */
