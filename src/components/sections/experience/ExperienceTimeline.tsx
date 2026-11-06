@@ -16,6 +16,7 @@ import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
 import { ExperienceItem } from "../../../types";
 import { ChapterEyebrow } from "../../ChapterEyebrow";
+import { telHref } from "../../../lib/utils";
 
 export const ExperienceTimeline: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -349,8 +350,8 @@ export const ExperienceTimeline: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
             {personal.reference.phone && (
               <a
-                href={`tel:${personal.reference.phone}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                href={telHref(personal.reference.phone)}
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition"
               >
                 <Phone className="w-3.5 h-3.5 text-primary" />
                 <span>{personal.reference.phone}</span>
@@ -359,7 +360,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.email && (
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                className="flex items-center gap-2 min-h-11 lg:min-h-0 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition"
               >
                 <Mail className="w-3.5 h-3.5 text-primary" />
                 <span>{personal.reference.email}</span>

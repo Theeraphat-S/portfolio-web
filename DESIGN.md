@@ -208,6 +208,19 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 - **Hover Treatment:** Border shifts to `rgba(56, 217, 255, 0.35)`; nothing moves or glows.
 - **Internal Padding:** `p-5 sm:p-6` for bento cards; `p-6 sm:p-8` for flagship case study containers.
 
+### Bezel Container (`.bezel` / `.bezel-core`)
+
+- **Use:** Key containers only: the hero "What I built" card, the contact email card and form panel, each case-study card and the project modal. Never a bezel inside a bezel, and never on ordinary bento cards or tiles.
+- **Structure:** The tray (`.bezel`) is a 1px `white/6%` hairline over a `white/2%` fill with 6px padding; the card inside (`.bezel-core`) keeps its `surface` fill and `line` border and adds a `white/6%` inset top highlight. Set the tray radius with `[--bezel-radius:1.5rem]` (default 1.25rem); the core radius follows it (tray minus 7px), so the curves stay concentric.
+- **Size:** The tray adds 7px per side, so trim the core's padding by about 6px to keep the container's footprint and the page length unchanged.
+
+### Nested CTA Icon (`.cta-icon`)
+
+- **Use:** The trailing arrow of a primary CTA (hero Explore work and Resume, View case study, Open email draft). Leading icons stay bare.
+- **Structure:** A 28px circle wrapping the icon (`aria-hidden`), `bg-void/15` on filled buttons and `bg-white/[0.06]` on outline ones, flush with a reduced right padding (`pr-1.5`–`pr-2`). On a full-width button it sits absolutely at `right-2` so the label stays centred.
+- **Motion:** On hover or keyboard focus the circle nudges toward its arrow (2px right, 1px up; `.cta-icon-down` moves 2px down) and scales to 1.05 on `--dur-fast` / `--ease-out-expo`, on top of the button's own lift. Under reduced motion it holds still.
+- **Strokes:** Lucide icons in the site chrome draw at 1.5 (1.75 for 12–14px icons) from one rule in `src/index.css`; icons inside `[data-app-screen]` (the in-phone apps) keep Lucide's default.
+
 ### Avionics Story Progress Indicator (`StoryProgress`)
 
 - **Desktop (2XL+):** Fixed vertical tracking rail at `fixed left-8 top-1/2 -translate-y-1/2 z-30`. Features vertical connecting rail (`story-progress-line`) and 6 illuminated progress dots (`story-progress-dot`):

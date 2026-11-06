@@ -74,6 +74,7 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
         <div className="relative rounded-[43px] bg-black p-[9px]">
           <div
             id={screenId}
+            data-app-screen
             role="region"
             aria-label={label}
             className="relative isolate aspect-[9/19.5] w-full overflow-hidden rounded-[34px] bg-white"

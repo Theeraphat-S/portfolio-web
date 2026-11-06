@@ -386,7 +386,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 }}
                 aria-current={isActive ? "step" : undefined}
                 style={{ opacity: beatOpacity[bIdx] }}
-                className={`relative min-h-[50vh] border-t py-7 text-left transition-[border-color] duration-(--dur-base) has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-signal ${
+                className={`relative min-h-[50vh] border-t py-7 text-left transition-[border-color] duration-(--dur-base) has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal ${
                   isActive ? "border-primary/60" : "border-line"
                 }`}
               >
@@ -502,7 +502,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 type="button"
                 onClick={() => applyBeat(bIdx)}
                 aria-current={isActive ? "step" : undefined}
-                className={`relative overflow-hidden min-h-14 rounded-lg border px-1.5 sm:px-2 py-2 text-left font-mono text-xs leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
+                className={`relative overflow-hidden min-h-14 rounded-lg border px-1.5 sm:px-2 py-2 text-left font-mono text-xs leading-tight transition-colors cursor-pointer ${
                   isActive
                     ? "border-primary/50 bg-primary/10 text-primary"
                     : "border-line text-zinc-400 hover:text-zinc-200"
@@ -598,13 +598,15 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onFocus={onPrefetch}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 pl-5 pr-1.5 py-1 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition shadow-chip hover:shadow-glow-cta cursor-pointer"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
             <span className="font-semibold tracking-wider">
               {t("อ่าน case study", "VIEW CASE STUDY")}
             </span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
+            <span aria-hidden="true" className="cta-icon bg-white/[0.06]">
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
+            </span>
           </button>
         </div>
       </div>
@@ -625,51 +627,53 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       whileInView="visible"
       viewport={IN_VIEW}
       variants={FADE_UP}
-      className="relative rounded-3xl bg-deck/90 border border-line hover:border-signal/30 transition-[border-color] duration-(--dur-slow) p-6 sm:p-10 lg:p-12 backdrop-blur-md"
+      className="bezel [--bezel-radius:1.5rem] relative backdrop-blur-md"
     >
-      {/* Render exactly one layout tree: duplicated hidden markup would
+      <div className="bezel-core bg-deck/90 border border-line hover:border-signal/30 transition-[border-color] duration-(--dur-slow) p-[1.125rem] sm:p-[2.125rem] lg:p-[2.625rem]">
+        {/* Render exactly one layout tree: duplicated hidden markup would
           steal the beat refs from the visible runway and duplicate ids. */}
-      {isPinned ? (
-        <div className="grid grid-cols-12 gap-10 xl:gap-14 items-start">
-          {/* DOM order follows visual order so keyboard focus matches the
+        {isPinned ? (
+          <div className="grid grid-cols-12 gap-10 xl:gap-14 items-start">
+            {/* DOM order follows visual order so keyboard focus matches the
               alternating rhythm (device left on even, right on odd). */}
-          {isReversed && storyColumn}
-          <div className="col-span-5 self-start sticky top-16">
-            {/* Held still while pinned: the beat commit is the device's
+            {isReversed && storyColumn}
+            <div className="col-span-5 self-start sticky top-16">
+              {/* Held still while pinned: the beat commit is the device's
                 only motion, so nothing drifts under it. */}
+              <div
+                ref={deviceRef}
+                style={{
+                  transform: `scale(${deviceFit.scale})`,
+                  transformOrigin: "top center",
+                  // Reclaim the layout space the scale-down frees up.
+                  marginBottom: deviceFit.height * (deviceFit.scale - 1),
+                }}
+              >
+                {renderDeviceMockup()}
+              </div>
+            </div>
+            {!isReversed && storyColumn}
+          </div>
+        ) : (
+          // One column on small screens; with reduced motion on desktop the
+          // stepper and device sit beside the header instead of pinning.
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 lg:items-start">
+            <div className="lg:col-span-7">{renderProjectHeader()}</div>
             <div
-              ref={deviceRef}
-              style={{
-                transform: `scale(${deviceFit.scale})`,
-                transformOrigin: "top center",
-                // Reclaim the layout space the scale-down frees up.
-                marginBottom: deviceFit.height * (deviceFit.scale - 1),
+              ref={(el) => {
+                scrubTargetRef.current = el;
               }}
+              className="lg:col-span-5"
             >
-              {renderDeviceMockup()}
+              <div className="mb-4">{renderStageText()}</div>
+              {renderStepper()}
+              <div className="mt-6 sm:mt-8 flex justify-center">
+                {renderDeviceMockup()}
+              </div>
             </div>
           </div>
-          {!isReversed && storyColumn}
-        </div>
-      ) : (
-        // One column on small screens; with reduced motion on desktop the
-        // stepper and device sit beside the header instead of pinning.
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 lg:items-start">
-          <div className="lg:col-span-7">{renderProjectHeader()}</div>
-          <div
-            ref={(el) => {
-              scrubTargetRef.current = el;
-            }}
-            className="lg:col-span-5"
-          >
-            <div className="mb-4">{renderStageText()}</div>
-            {renderStepper()}
-            <div className="mt-6 sm:mt-8 flex justify-center">
-              {renderDeviceMockup()}
-            </div>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Flutter & BLoC DevTools Drawer */}
       {drawerLoaded && (

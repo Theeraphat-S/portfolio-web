@@ -21,6 +21,7 @@ export {
   experiencesData,
 };
 export { aboutData } from "./about";
+export { footerLabels } from "./uiLabels";
 export { BEATS_BY_PROJECT } from "./scrollytellingBeats";
 export {
   STORY_CHAPTERS,

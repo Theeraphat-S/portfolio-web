@@ -11,3 +11,8 @@ export function cn(...inputs: ClassValue[]) {
 export function getMetricValue(metric: ProjectMetric, lang: Language): string {
   return (lang === "th" ? metric.valueTh : metric.valueEn) ?? metric.value;
 }
+
+/** `tel:` href with digits only, so every phone link dials the same way. */
+export function telHref(phone: string): string {
+  return `tel:${phone.replace(/\D/g, "")}`;
+}

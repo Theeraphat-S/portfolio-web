@@ -476,6 +476,67 @@ section[id] {
   .btn-editorial:active {
     transform: translateY(0) scale(0.98);
   }
+
+  /* Double bezel: a machined tray (.bezel) holding the card (.bezel-core).
+     Set --bezel-radius on the tray; the core radius stays concentric
+     (tray radius minus 1px hairline and 6px padding). Key containers only,
+     and never a bezel inside a bezel. */
+  .bezel {
+    --bezel-radius: 1.25rem;
+    padding: 0.375rem;
+    border-radius: var(--bezel-radius);
+    border: 1px solid color-mix(in oklab, var(--color-white) 6%, transparent);
+    background: color-mix(in oklab, var(--color-white) 2%, transparent);
+  }
+
+  .bezel-core {
+    border-radius: calc(var(--bezel-radius) - 0.375rem - 1px);
+    box-shadow: inset 0 1px 0
+      color-mix(in oklab, var(--color-white) 6%, transparent);
+  }
+
+  /* Button-in-button: the trailing icon of a primary CTA sits in its own
+     circle, flush with the button's right padding. It nudges toward the
+     arrow on hover or keyboard focus; never under reduced motion. */
+  .cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    transition-property: translate, scale, background-color;
+    transition-duration: var(--dur-fast);
+    transition-timing-function: var(--ease-out-expo);
+  }
+
+  :is(:hover, :focus-visible) > .cta-icon {
+    translate: 2px -1px;
+    scale: 1.05;
+  }
+
+  :is(:hover, :focus-visible) > .cta-icon-down {
+    translate: 0 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :is(:hover, :focus-visible) > .cta-icon {
+      translate: none;
+      scale: none;
+    }
+  }
+}
+
+/* Lighter Lucide strokes for the site chrome. The in-phone app screens
+   keep Lucide's default so they still read like the real apps. Icons of
+   14px and under keep a little more weight so the line stays visible. */
+.lucide:not([data-app-screen] *) {
+  stroke-width: 1.5;
+}
+
+.lucide:is(.w-3, .w-3\.5, .size-3, .size-3\.5):not([data-app-screen] *) {
+  stroke-width: 1.75;
 }
 
 /* One lift for custom pill buttons, matching .btn-editorial: up 1px on

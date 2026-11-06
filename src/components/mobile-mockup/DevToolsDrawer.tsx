@@ -181,7 +181,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   type="button"
                   onClick={handleCopyCode}
                   aria-live="polite"
-                  className="px-2.5 py-1 min-h-11 lg:min-h-0 pointer-coarse:min-h-11 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-line text-xs transition flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                  className="px-2.5 py-1 min-h-11 lg:min-h-0 pointer-coarse:min-h-11 rounded bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-line text-xs transition flex items-center gap-1.5 cursor-pointer"
                 >
                   {isCopied ? (
                     <>

@@ -176,7 +176,8 @@ export interface StatItem {
 export interface SkillDetail {
   name: string;
   level: string;
-  desc: string;
+  descTh: string;
+  descEn: string;
 }
 
 export interface SkillCategory {

@@ -43,7 +43,7 @@ export const ProjectModalHeader: React.FC<ProjectModalHeaderProps> = ({
       <button
         type="button"
         onClick={onClose}
-        className="p-2 rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-line hover:border-signal/40 text-zinc-400 hover:text-white transition shrink-0 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+        className="p-2 rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-line hover:border-signal/40 text-zinc-400 hover:text-white transition shrink-0 cursor-pointer"
         aria-label={t("ปิดหน้าต่าง", "Close modal")}
       >
         <X className="w-5 h-5" />

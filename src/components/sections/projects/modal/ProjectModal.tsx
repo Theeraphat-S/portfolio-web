@@ -64,26 +64,28 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 28, stiffness: 320 }}
-            className="relative w-full max-w-3xl rounded-3xl bg-surface/95 border border-line p-6 sm:p-8 shadow-modal overflow-hidden max-h-[90vh] flex flex-col my-auto backdrop-blur-2xl outline-none"
+            className="bezel [--bezel-radius:1.5rem] relative w-full max-w-3xl shadow-modal max-h-[90vh] flex flex-col my-auto backdrop-blur-2xl outline-none"
           >
-            {/* Top Decorative Border Highlight */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-signal to-transparent" />
+            <div className="bezel-core relative flex min-h-0 flex-1 flex-col overflow-hidden bg-surface/95 border border-line p-[1.0625rem] sm:p-[1.5625rem]">
+              {/* Top Decorative Border Highlight */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-signal to-transparent" />
 
-            {/* Modal Header */}
-            <ProjectModalHeader project={project} onClose={onClose} />
+              {/* Modal Header */}
+              <ProjectModalHeader project={project} onClose={onClose} />
 
-            {/* Modal Scrollable Content */}
-            <div
-              data-lenis-prevent
-              className="flex-1 overflow-y-auto overscroll-contain py-6 space-y-6 pr-1 custom-scrollbar"
-            >
-              <ProjectModalTechDetails project={project} />
-              <ProjectModalMetrics metrics={project.metrics} />
-              <ProjectEngineeringAnalysis project={project} />
+              {/* Modal Scrollable Content */}
+              <div
+                data-lenis-prevent
+                className="flex-1 overflow-y-auto overscroll-contain py-6 space-y-6 pr-1 custom-scrollbar"
+              >
+                <ProjectModalTechDetails project={project} />
+                <ProjectModalMetrics metrics={project.metrics} />
+                <ProjectEngineeringAnalysis project={project} />
+              </div>
+
+              {/* Modal Footer Actions */}
+              <ProjectModalFooter project={project} onClose={onClose} />
             </div>
-
-            {/* Modal Footer Actions */}
-            <ProjectModalFooter project={project} onClose={onClose} />
           </m.div>
         </m.div>
       )}
