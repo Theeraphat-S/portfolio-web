@@ -133,12 +133,9 @@ export const ExperienceTimeline: React.FC = () => {
         <div className="space-y-10 md:space-y-16">
           {experiences.map((exp: ExperienceItem, idx: number) => {
             const isActive = idx === 0;
-            const isAcademic = exp.type === "ta" || exp.type === "academic";
 
             const yearTh = exp.yearTh || exp.year;
             const yearEn = exp.yearEn || exp.year;
-            // Semester note for the multi-term TA entry.
-            const isMultiTerm = Boolean(exp.subBadgeEn);
 
             return (
               <m.article
@@ -158,38 +155,21 @@ export const ExperienceTimeline: React.FC = () => {
                 <div className="flex flex-col md:flex-row items-start">
                   {/* Left Column: Chronology (~24% Desktop) */}
                   <div className="md:w-[24%] pl-12 md:pl-0 md:pr-8 shrink-0 mb-4 md:mb-0 space-y-1.5">
-                    {/* Downsized, balanced year typography */}
+                    {/* Year or year range: one format for every role */}
                     <BilingualStack
                       as="span"
-                      className={`text-lg sm:text-xl font-bold font-mono tracking-tight block ${
-                        isActive
-                          ? "text-primary"
-                          : "text-zinc-200 group-hover:text-white"
-                      } transition-colors`}
-                      th={
-                        isMultiTerm ? `${yearTh} / ${exp.subBadgeTh}` : yearTh
-                      }
-                      en={
-                        isMultiTerm ? `${yearEn} / ${exp.subBadgeEn}` : yearEn
-                      }
+                      className="text-lg sm:text-xl font-bold font-mono tracking-tight block text-zinc-200"
+                      th={yearTh}
+                      en={yearEn}
                     />
 
-                    {/* Exact Time Period */}
-                    {/* Hidden on phones when it only repeats the year above. */}
-                    <div
-                      className={
-                        exp.periodEn === yearEn && exp.periodTh === yearTh
-                          ? "max-md:hidden"
-                          : undefined
-                      }
-                    >
-                      <BilingualStack
-                        as="span"
-                        className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
-                        th={exp.periodTh}
-                        en={exp.periodEn}
-                      />
-                    </div>
+                    {/* Months or semesters on the meta line */}
+                    <BilingualStack
+                      as="span"
+                      className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
+                      th={exp.periodTh}
+                      en={exp.periodEn}
+                    />
 
                     {/* Quiet Status Badge */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
@@ -242,18 +222,6 @@ export const ExperienceTimeline: React.FC = () => {
                       6. Tech Stack
                   */}
                   <div className="md:w-[76%] pl-12 md:pl-10 flex-1 space-y-4">
-                    {/* Academic Distinguisher Eyebrow */}
-                    {isAcademic && (
-                      <div className="text-xs font-mono tracking-wider text-sky-400 uppercase font-semibold flex items-center gap-1.5">
-                        <GraduationCap className="w-3.5 h-3.5" />
-                        <BilingualStack
-                          as="span"
-                          th="บทบาททางวิชาการและผู้ช่วยสอน"
-                          en="ACADEMIC LEADERSHIP // UNIVERSITY MENTORSHIP"
-                        />
-                      </div>
-                    )}
-
                     {/* 1. Role & 2. Company */}
                     <div className="space-y-0.5">
                       <BilingualStack

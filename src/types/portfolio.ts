@@ -77,8 +77,6 @@ export interface ExperienceItem {
   type: ExperienceType;
   badgeTh: string;
   badgeEn: string;
-  subBadgeTh?: string;
-  subBadgeEn?: string;
   descriptionTh: string;
   descriptionEn: string;
   contributions?: ExperienceContribution[];

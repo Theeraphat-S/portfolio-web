@@ -252,21 +252,28 @@ export const Hero: React.FC = () => {
         {/* Location & Modality Notice */}
         <m.p
           variants={itemVariants}
-          className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem] [&>a]:ml-4"
+          className="flex items-start gap-2 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
         >
-          <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-          <span>
-            {t(
-              "เชียงใหม่ ประเทศไทย ยินดีทำงาน Onsite / Hybrid / Remote",
-              "Chiang Mai, Thailand, open to Onsite, Hybrid, or Remote roles",
-            )}
+          {/* The pin stays on the first line; text and phone wrap together
+              beside it, so the phone lines up under the text. */}
+          <MapPin
+            className="w-3.5 h-3.5 shrink-0 mt-[0.2em] sm:mt-[0.25em]"
+            aria-hidden="true"
+          />
+          <span className="flex min-w-0 flex-wrap gap-x-4 gap-y-1">
+            <span>
+              {t(
+                "เชียงใหม่ ประเทศไทย ยินดีทำงาน Onsite / Hybrid / Remote",
+                "Chiang Mai, Thailand, open to Onsite, Hybrid, or Remote roles",
+              )}
+            </span>
+            <a
+              href={`tel:${personalData.phone.replace(/-/g, "")}`}
+              className="hover:text-signal underline-offset-4 hover:underline transition-colors"
+            >
+              {personalData.phone}
+            </a>
           </span>
-          <a
-            href={`tel:${personalData.phone.replace(/-/g, "")}`}
-            className="hover:text-signal underline-offset-4 hover:underline transition-colors"
-          >
-            {personalData.phone}
-          </a>
         </m.p>
       </m.div>
     </section>

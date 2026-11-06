@@ -60,10 +60,8 @@ export const experiencesData: ExperienceItem[] = [
     year: "2023 — 2025",
     yearTh: "2566 — 2568",
     yearEn: "2023 — 2025",
-    periodTh: "2566 — 2568",
-    periodEn: "2023 — 2025",
-    subBadgeTh: "4 เทอมการศึกษา",
-    subBadgeEn: "4 Semesters",
+    periodTh: "4 ภาคการศึกษา",
+    periodEn: "4 semesters",
     roleTh: "ผู้ช่วยสอนประจำภาควิชา (Teaching Assistant - TA)",
     roleEn: "Undergraduate Teaching Assistant (TA)",
     companyTh: "สาขาวิชาเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้",
@@ -71,8 +69,8 @@ export const experiencesData: ExperienceItem[] = [
     locationTh: "เชียงใหม่, ประเทศไทย",
     locationEn: "Chiang Mai, Thailand",
     type: "ta",
-    badgeTh: "ประสบการณ์วิชาการ",
-    badgeEn: "Academic Mentorship",
+    badgeTh: "ผู้ช่วยสอน",
+    badgeEn: "Teaching assistant",
     descriptionTh:
       "ได้รับคัดเลือกให้เป็นผู้ช่วยสอน (TA) สอนเสริมและตอบคำถามให้นักศึกษารุ่นน้องใน 3 รายวิชาหลักของภาควิชา IT รวม 4 ภาคการศึกษา",
     descriptionEn:
