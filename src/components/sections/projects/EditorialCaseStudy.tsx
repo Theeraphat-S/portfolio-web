@@ -6,8 +6,8 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { m, useReducedMotion, useTransform } from "motion/react";
-import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { m, useReducedMotion } from "motion/react";
+import { BEAT_COMMIT, FADE_UP, IN_VIEW } from "../../../lib/motion";
 import { scrollToElement } from "../../../lib/lenis";
 import { ArrowUpRight, Terminal } from "lucide-react";
 import { getMetricValue } from "../../../lib/utils";
@@ -18,7 +18,7 @@ import { PintoScreen, PintoState } from "../../mobile-mockup/PintoScreen";
 import { NcdsScreen } from "../../mobile-mockup/NcdsScreen";
 import { PosScreen } from "../../mobile-mockup/PosScreen";
 import { LiveEventDock } from "../../mobile-mockup/LiveEventDock";
-import { DeviceFrame } from "../../mobile-mockup/DeviceFrame";
+import { BeatSignal, DeviceFrame } from "../../mobile-mockup/DeviceFrame";
 import { BLoCStreamEvent } from "../../../types/stream";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useBeatScrub } from "../../../hooks/useBeatScrub";
@@ -158,6 +158,10 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   // The beat whose event was last emitted. The first scrub into the
   // opening beat is not a change, so it emits nothing.
   const emittedBeatRef = useRef(0);
+  // The runway's one authored moment: each emitted beat change plays a
+  // single coordinated commit (frame edge light, screen sweep, beat rule,
+  // dock row) keyed to this. Null until the first real change.
+  const [beatSignal, setBeatSignal] = useState<BeatSignal | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // Stays mounted after the first open so the exit animation can run.
   const [drawerLoaded, setDrawerLoaded] = useState(false);
@@ -192,7 +196,9 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       }
 
       if (bIdx === emittedBeatRef.current) return;
+      const direction = bIdx > emittedBeatRef.current ? 1 : -1;
       emittedBeatRef.current = bIdx;
+      setBeatSignal((prev) => ({ key: (prev?.key ?? 0) + 1, direction }));
 
       const now = new Date();
       const timeStr =
@@ -209,7 +215,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   // the stacked layout across the stepper and device. Anything the reader
   // taps on the device holds until the scroll crosses into another beat.
   const scrubTargetRef = useRef<HTMLElement | null>(null);
-  const { progress, segments, beatOpacity } = useBeatScrub({
+  const { segments, beatOpacity } = useBeatScrub({
     targetRef: scrubTargetRef,
     beatCount: beats.length,
     getBoundaries: isPinned
@@ -226,7 +232,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     enabled: !shouldReduceMotion,
     onBeat: applyBeat,
   });
-  const deviceDrift = useTransform(progress, [0, 1], [12, -12]);
+  // Reduced motion gets the state change alone, instantly.
+  const commitSignal = shouldReduceMotion ? null : beatSignal;
 
   // Land a beat just past the reading line so the scrub selects it.
   const scrollToBeat = (bIdx: number) => {
@@ -309,6 +316,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           screenId={`screen-panel-${project.id}`}
           label={`${primaryTitle} interactive demonstration`}
           offline={project.id === "pos-system" && !posOnline}
+          signal={commitSignal}
         >
           {project.id === "pinto-app" ? (
             <PintoScreen
@@ -333,6 +341,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         {/* Live Reactive BLoC Event Dock directly under Chassis */}
         <LiveEventDock
           latestEvent={streamEvents[0] || null}
+          animateEntry={!shouldReduceMotion}
           eventsCount={streamEvents.length}
           onPrefetchDrawer={drawerChunk.prefetch}
           onOpenDrawer={(tab) => {
@@ -377,10 +386,25 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 }}
                 aria-current={isActive ? "step" : undefined}
                 style={{ opacity: beatOpacity[bIdx] }}
-                className={`relative min-h-[50vh] border-t py-7 text-left transition-[border-color] duration-300 has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-signal ${
+                className={`relative min-h-[50vh] border-t py-7 text-left transition-[border-color] duration-(--dur-base) has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-signal ${
                   isActive ? "border-primary/60" : "border-line"
                 }`}
               >
+                {/* Beat commit, part 3: a signal line draws across the
+                    newly active beat's rule, then hands it to blue. */}
+                {isActive && commitSignal && (
+                  <m.span
+                    key={commitSignal.key}
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 -top-px h-px origin-left bg-signal"
+                    initial={{ scaleX: 0, opacity: 1 }}
+                    animate={{ scaleX: 1, opacity: [1, 1, 0] }}
+                    transition={{
+                      scaleX: BEAT_COMMIT,
+                      opacity: { ...BEAT_COMMIT, times: [0, 0.7, 1] },
+                    }}
+                  />
+                )}
                 {/* One real button covers the whole step, so the step stays
                     clickable while its heading and text keep their semantics. */}
                 <button
@@ -574,13 +598,13 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onFocus={onPrefetch}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition duration-300 shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 px-5 py-2.5 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono tracking-wider uppercase transition shadow-chip hover:shadow-glow-cta cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
             <span className="font-semibold tracking-wider">
               {t("อ่าน case study", "VIEW CASE STUDY")}
             </span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-300" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
           </button>
         </div>
       </div>
@@ -597,11 +621,11 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   return (
     <m.article
       id={`case-${project.id}`}
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-      className="relative rounded-3xl bg-deck/90 border border-line hover:border-signal/30 transition duration-500 p-6 sm:p-10 lg:p-12 backdrop-blur-md"
+      initial="hidden"
+      whileInView="visible"
+      viewport={IN_VIEW}
+      variants={FADE_UP}
+      className="relative rounded-3xl bg-deck/90 border border-line hover:border-signal/30 transition-[border-color] duration-(--dur-slow) p-6 sm:p-10 lg:p-12 backdrop-blur-md"
     >
       {/* Render exactly one layout tree: duplicated hidden markup would
           steal the beat refs from the visible runway and duplicate ids. */}
@@ -611,19 +635,19 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
               alternating rhythm (device left on even, right on odd). */}
           {isReversed && storyColumn}
           <div className="col-span-5 self-start sticky top-16">
-            <m.div style={{ y: deviceDrift }}>
-              <div
-                ref={deviceRef}
-                style={{
-                  transform: `scale(${deviceFit.scale})`,
-                  transformOrigin: "top center",
-                  // Reclaim the layout space the scale-down frees up.
-                  marginBottom: deviceFit.height * (deviceFit.scale - 1),
-                }}
-              >
-                {renderDeviceMockup()}
-              </div>
-            </m.div>
+            {/* Held still while pinned: the beat commit is the device's
+                only motion, so nothing drifts under it. */}
+            <div
+              ref={deviceRef}
+              style={{
+                transform: `scale(${deviceFit.scale})`,
+                transformOrigin: "top center",
+                // Reclaim the layout space the scale-down frees up.
+                marginBottom: deviceFit.height * (deviceFit.scale - 1),
+              }}
+            >
+              {renderDeviceMockup()}
+            </div>
           </div>
           {!isReversed && storyColumn}
         </div>
