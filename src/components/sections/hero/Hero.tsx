@@ -122,37 +122,42 @@ export const Hero: React.FC = () => {
             style={{ y: shouldReduceMotion ? 0 : cardParallax }}
             className="lg:col-span-4 flex flex-col justify-end"
           >
-            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-line backdrop-blur-[20px]">
-              <BilingualStack
-                as="span"
-                className="block font-mono text-xs uppercase tracking-wider text-zinc-400"
-                th="ผลงานที่ทำ"
-                en="What I built"
-              />
-              <ul className="mt-3 divide-y divide-line">
-                {portfolioData.projects.map((project) => (
-                  <li key={project.id} className="py-2.5 first:pt-0 last:pb-0">
-                    <a
-                      href={`#case-${project.id}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
-                      }}
-                      className="group block rounded"
+            <div className="bezel backdrop-blur-[20px]">
+              <div className="bezel-core p-2.5 sm:p-3.5 bg-surface/80 border border-line">
+                <BilingualStack
+                  as="span"
+                  className="block font-mono text-xs uppercase tracking-wider text-zinc-400"
+                  th="ผลงานที่ทำ"
+                  en="What I built"
+                />
+                <ul className="mt-3 divide-y divide-line">
+                  {portfolioData.projects.map((project) => (
+                    <li
+                      key={project.id}
+                      className="py-2.5 first:pt-0 last:pb-0"
                     >
-                      <span className="block font-mono text-xs font-semibold text-white group-hover:text-signal transition-colors">
-                        {project.shortName ?? project.titleEn}
-                      </span>
-                      <BilingualStack
-                        as="span"
-                        className="mt-0.5 block text-sm leading-snug text-zinc-300"
-                        th={project.proofTh ?? project.descriptionTh}
-                        en={project.proofEn ?? project.descriptionEn}
-                      />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+                      <a
+                        href={`#case-${project.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
+                        }}
+                        className="group block rounded"
+                      >
+                        <span className="block font-mono text-xs font-semibold text-white group-hover:text-signal transition-colors">
+                          {project.shortName ?? project.titleEn}
+                        </span>
+                        <BilingualStack
+                          as="span"
+                          className="mt-0.5 block text-sm leading-snug text-zinc-300"
+                          th={project.proofTh ?? project.descriptionTh}
+                          en={project.proofEn ?? project.descriptionEn}
+                        />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </m.div>
         </div>
@@ -203,10 +208,15 @@ export const Hero: React.FC = () => {
                 scrollToElement("work", CHAPTER_OFFSET);
               }}
               data-cursor-text="EXPLORE"
-              className="btn-editorial btn-editorial-primary group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"
+              className="btn-editorial btn-editorial-primary group h-12 pl-3.5 pr-1.5 max-sm:gap-1.5 sm:pl-4 sm:pr-2 sm:w-48 justify-center whitespace-nowrap"
             >
               <span>{t("ดูผลงาน", "EXPLORE WORK")}</span>
-              <ArrowDown className="w-4 h-4 text-void group-hover:translate-y-0.5 transition-transform" />
+              <span
+                aria-hidden="true"
+                className="cta-icon cta-icon-down bg-void/15"
+              >
+                <ArrowDown className="w-4 h-4 text-void" />
+              </span>
             </a>
 
             <a
@@ -214,11 +224,17 @@ export const Hero: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-text="RESUME"
-              className="btn-editorial btn-editorial-outline group h-12 px-4 sm:w-48 justify-center whitespace-nowrap"
+              className="btn-editorial btn-editorial-outline group h-12 px-4 sm:pr-2 sm:w-48 justify-center whitespace-nowrap"
             >
               <FileText className="w-4 h-4 text-zinc-400 group-hover:text-signal transition-colors" />
               <span>{t("เปิด CV", "RESUME / CV")}</span>
-              <ArrowUpRight className="hidden sm:block w-3.5 h-3.5 text-zinc-500 group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+              {/* No room for the circle beside the icon in the 2-up phone row. */}
+              <span
+                aria-hidden="true"
+                className="cta-icon max-sm:hidden bg-white/[0.06]"
+              >
+                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-signal transition-colors" />
+              </span>
             </a>
 
             <a

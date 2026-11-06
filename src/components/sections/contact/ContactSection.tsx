@@ -196,47 +196,49 @@ export const ContactSection: React.FC = () => {
           />
 
           {/* Prominent Primary Email CTA Card */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-line hover:border-signal/30 transition space-y-3">
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-widest">
-              <span>{t("อีเมล", "Email")}</span>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-              <a
-                href={`mailto:${personal.email}`}
-                className="inline-flex items-center min-h-11 lg:min-h-0 text-base sm:text-xl font-mono font-bold text-white hover:text-signal transition-colors break-all"
-              >
-                {personal.email}
-              </a>
-              <button
-                type="button"
-                onClick={copyEmail}
-                data-cursor-text="COPY"
-                aria-live="polite"
-                aria-label={
-                  copied
-                    ? t(
-                        "คัดลอกอีเมลเรียบร้อยแล้ว",
-                        "Email address copied to clipboard",
-                      )
-                    : t(
-                        "คัดลอกที่อยู่อีเมลลงคลิปบอร์ด",
-                        "Copy email address to clipboard",
-                      )
-                }
-                className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span>{t("คัดลอกสำเร็จ!", "COPIED!")}</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>{t("คัดลอกอีเมล", "COPY EMAIL")}</span>
-                  </>
-                )}
-              </button>
+          <div className="bezel">
+            <div className="bezel-core p-3.5 sm:p-[1.125rem] bg-surface/80 border border-line hover:border-signal/30 transition space-y-3">
+              <div className="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-widest">
+                <span>{t("อีเมล", "Email")}</span>
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+                <a
+                  href={`mailto:${personal.email}`}
+                  className="inline-flex items-center min-h-11 lg:min-h-0 text-base sm:text-xl font-mono font-bold text-white hover:text-signal transition-colors break-all"
+                >
+                  {personal.email}
+                </a>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  data-cursor-text="COPY"
+                  aria-live="polite"
+                  aria-label={
+                    copied
+                      ? t(
+                          "คัดลอกอีเมลเรียบร้อยแล้ว",
+                          "Email address copied to clipboard",
+                        )
+                      : t(
+                          "คัดลอกที่อยู่อีเมลลงคลิปบอร์ด",
+                          "Copy email address to clipboard",
+                        )
+                  }
+                  className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>{t("คัดลอกสำเร็จ!", "COPIED!")}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>{t("คัดลอกอีเมล", "COPY EMAIL")}</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -310,159 +312,171 @@ export const ContactSection: React.FC = () => {
           variants={FADE_UP}
           className="lg:col-span-6 xl:col-span-5"
         >
-          <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.015] border border-line backdrop-blur-sm space-y-5">
-            <div className="space-y-1 pb-3 border-b border-line">
-              <BilingualStack
-                as="h3"
-                className="text-lg sm:text-xl font-bold text-white tracking-tight"
-                th={"เขียนอีเมลถึงผม"}
-                en={"Write an email"}
-              />
-              <BilingualStack
-                className="text-xs font-mono text-zinc-400"
-                th={
-                  "แบบฟอร์มนี้จะเปิดร่างในแอปอีเมลของคุณ กรุณากดส่งจากแอปนั้น"
-                }
-                en={
-                  "This opens a draft in your email app. Send it there to complete your inquiry."
-                }
-              />
-            </div>
-
-            <form onSubmit={handleSubmit} noValidate className="space-y-4">
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-name"
-                  className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
-                >
-                  {lang === "th" ? "ชื่อ / บริษัท" : "Name / Company"}
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  maxLength={LIMITS.name}
-                  aria-invalid={errors.name ? true : undefined}
-                  aria-describedby={
-                    errors.name ? "contact-name-error" : undefined
-                  }
-                  value={formData.name}
-                  onChange={(e) => updateField("name", e.target.value)}
-                  placeholder={
-                    lang === "th"
-                      ? "เช่น สมชาย, บริษัท เอบีซี จำกัด"
-                      : "e.g. Jane Lee, Acme Studio"
-                  }
-                  className={inputClass(!!errors.name)}
+          <div className="bezel backdrop-blur-sm">
+            <div className="bezel-core p-[1.125rem] sm:p-[1.625rem] bg-surface/80 border border-line space-y-5">
+              <div className="space-y-1 pb-3 border-b border-line">
+                <BilingualStack
+                  as="h3"
+                  className="text-lg sm:text-xl font-bold text-white tracking-tight"
+                  th={"เขียนอีเมลถึงผม"}
+                  en={"Write an email"}
                 />
-                {errors.name && (
-                  <p id="contact-name-error" className="text-xs text-rose-300">
-                    {t(ERROR_TEXT.name.th, ERROR_TEXT.name.en)}
-                  </p>
-                )}
+                <BilingualStack
+                  className="text-xs font-mono text-zinc-400"
+                  th={
+                    "แบบฟอร์มนี้จะเปิดร่างในแอปอีเมลของคุณ กรุณากดส่งจากแอปนั้น"
+                  }
+                  en={
+                    "This opens a draft in your email app. Send it there to complete your inquiry."
+                  }
+                />
               </div>
 
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-message"
-                  className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
-                >
-                  {lang === "th" ? "ข้อความ" : "Message"}
-                </label>
-                <textarea
-                  id="contact-message"
-                  rows={4}
-                  required
-                  maxLength={LIMITS.message}
-                  aria-invalid={errors.message ? true : undefined}
-                  aria-describedby={`contact-message-count${
-                    errors.message ? " contact-message-error" : ""
-                  }`}
-                  value={formData.message}
-                  onChange={(e) => updateField("message", e.target.value)}
-                  placeholder={
-                    lang === "th"
-                      ? "ตำแหน่งงาน ทีม หรือโปรเจกต์ที่อยากคุยด้วย"
-                      : "The role, team, or project you have in mind"
-                  }
-                  className={`${inputClass(!!errors.message)} resize-none`}
-                />
-                <div className="flex items-start justify-between gap-3">
-                  {errors.message ? (
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="contact-name"
+                    className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
+                  >
+                    {lang === "th" ? "ชื่อ / บริษัท" : "Name / Company"}
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    maxLength={LIMITS.name}
+                    aria-invalid={errors.name ? true : undefined}
+                    aria-describedby={
+                      errors.name ? "contact-name-error" : undefined
+                    }
+                    value={formData.name}
+                    onChange={(e) => updateField("name", e.target.value)}
+                    placeholder={
+                      lang === "th"
+                        ? "เช่น สมชาย, บริษัท เอบีซี จำกัด"
+                        : "e.g. Jane Lee, Acme Studio"
+                    }
+                    className={inputClass(!!errors.name)}
+                  />
+                  {errors.name && (
                     <p
-                      id="contact-message-error"
+                      id="contact-name-error"
                       className="text-xs text-rose-300"
                     >
-                      {t(ERROR_TEXT.message.th, ERROR_TEXT.message.en)}
+                      {t(ERROR_TEXT.name.th, ERROR_TEXT.name.en)}
                     </p>
-                  ) : (
-                    <span />
                   )}
-                  <span
-                    id="contact-message-count"
-                    className={`text-xs font-mono tabular-nums shrink-0 ${
-                      formData.message.length >= LIMITS.message
-                        ? "text-rose-300"
-                        : "text-zinc-500"
-                    }`}
-                  >
-                    {formData.message.length.toLocaleString()} /{" "}
-                    {LIMITS.message.toLocaleString()}
-                  </span>
                 </div>
-              </div>
 
-              {draftOpened ? (
-                <div
-                  role="status"
-                  aria-live="polite"
-                  className="p-4 rounded-xl bg-primary/10 border border-primary/30 text-center space-y-2"
-                >
-                  <span className="text-xs font-mono font-bold text-primary block">
-                    {lang === "th"
-                      ? "พร้อมเปิดร่างอีเมล"
-                      : "Email draft requested"}
-                  </span>
-                  <span className="text-xs text-zinc-300 block">
-                    {lang === "th"
-                      ? "หากแอปอีเมลเปิดขึ้น กรุณากดส่งจากแอปนั้น หากไม่เปิด ให้คัดลอกที่อยู่อีเมลบนหน้านี้ไปเขียนข้อความเอง"
-                      : "If your email app opened, send the draft there. If it did not, copy my email address and compose your message manually."}
-                  </span>
-                  <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
-                    <button
-                      type="button"
-                      onClick={copyEmail}
-                      className="px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-mono text-white transition cursor-pointer border border-white/[0.1]"
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="contact-message"
+                    className="text-xs font-mono text-zinc-400 uppercase tracking-wider block"
+                  >
+                    {lang === "th" ? "ข้อความ" : "Message"}
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    rows={4}
+                    required
+                    maxLength={LIMITS.message}
+                    aria-invalid={errors.message ? true : undefined}
+                    aria-describedby={`contact-message-count${
+                      errors.message ? " contact-message-error" : ""
+                    }`}
+                    value={formData.message}
+                    onChange={(e) => updateField("message", e.target.value)}
+                    placeholder={
+                      lang === "th"
+                        ? "ตำแหน่งงาน ทีม หรือโปรเจกต์ที่อยากคุยด้วย"
+                        : "The role, team, or project you have in mind"
+                    }
+                    className={`${inputClass(!!errors.message)} resize-none`}
+                  />
+                  <div className="flex items-start justify-between gap-3">
+                    {errors.message ? (
+                      <p
+                        id="contact-message-error"
+                        className="text-xs text-rose-300"
+                      >
+                        {t(ERROR_TEXT.message.th, ERROR_TEXT.message.en)}
+                      </p>
+                    ) : (
+                      <span />
+                    )}
+                    <span
+                      id="contact-message-count"
+                      className={`text-xs font-mono tabular-nums shrink-0 ${
+                        formData.message.length >= LIMITS.message
+                          ? "text-rose-300"
+                          : "text-zinc-500"
+                      }`}
                     >
-                      {copied
-                        ? t("คัดลอกแล้ว!", "Copied!")
-                        : t("คัดลอกอีเมล", "Copy email address")}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setDraftOpened(false);
-                      }}
-                      className="text-xs font-mono text-primary hover:underline cursor-pointer"
-                    >
-                      {lang === "th" ? "แก้ไขข้อความ" : "Edit message"}
-                    </button>
+                      {formData.message.length.toLocaleString()} /{" "}
+                      {LIMITS.message.toLocaleString()}
+                    </span>
                   </div>
                 </div>
-              ) : (
-                <button
-                  type="submit"
-                  data-cursor-text="DISPATCH"
-                  className="w-full min-h-11 py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition btn-lift flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover"
-                >
-                  <span>
-                    {lang === "th" ? "เปิดร่างในแอปอีเมล" : "Open email draft"}
-                  </span>
-                  <Send className="w-3.5 h-3.5 text-void" />
-                </button>
-              )}
-            </form>
+
+                {draftOpened ? (
+                  <div
+                    role="status"
+                    aria-live="polite"
+                    className="p-4 rounded-xl bg-primary/10 border border-primary/30 text-center space-y-2"
+                  >
+                    <span className="text-xs font-mono font-bold text-primary block">
+                      {lang === "th"
+                        ? "พร้อมเปิดร่างอีเมล"
+                        : "Email draft requested"}
+                    </span>
+                    <span className="text-xs text-zinc-300 block">
+                      {lang === "th"
+                        ? "หากแอปอีเมลเปิดขึ้น กรุณากดส่งจากแอปนั้น หากไม่เปิด ให้คัดลอกที่อยู่อีเมลบนหน้านี้ไปเขียนข้อความเอง"
+                        : "If your email app opened, send the draft there. If it did not, copy my email address and compose your message manually."}
+                    </span>
+                    <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+                      <button
+                        type="button"
+                        onClick={copyEmail}
+                        className="px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-mono text-white transition cursor-pointer border border-white/[0.1]"
+                      >
+                        {copied
+                          ? t("คัดลอกแล้ว!", "Copied!")
+                          : t("คัดลอกอีเมล", "Copy email address")}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setDraftOpened(false);
+                        }}
+                        className="text-xs font-mono text-primary hover:underline cursor-pointer"
+                      >
+                        {lang === "th" ? "แก้ไขข้อความ" : "Edit message"}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    type="submit"
+                    data-cursor-text="DISPATCH"
+                    className="relative w-full min-h-11 py-3 px-12 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition btn-lift flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover"
+                  >
+                    <span>
+                      {lang === "th"
+                        ? "เปิดร่างในแอปอีเมล"
+                        : "Open email draft"}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="cta-icon absolute right-2 inset-y-0 my-auto bg-void/15"
+                    >
+                      <Send className="w-3.5 h-3.5 text-void" />
+                    </span>
+                  </button>
+                )}
+              </form>
+            </div>
           </div>
         </m.div>
       </div>
