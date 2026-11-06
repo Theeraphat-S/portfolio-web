@@ -7,3 +7,6 @@ dist/
 test-results/
 playwright-report/
 .impeccable/
+
+# Hallmark audit records and screenshots
+.hallmark/
