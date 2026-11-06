@@ -13,7 +13,7 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       descriptionTh:
         "Presentation Layer ขับเคลื่อนด้วย BLoC รับข้อมูล Vitals (ระดับน้ำตาล, ความดัน) และตรวจสอบความถูกต้องแบบ Real-time โดยไม่พึ่งพาเครือข่าย",
       descriptionEn:
-        "BLoC Presentation Layer receives vitals (glucose, blood pressure) and validates clinical thresholds in real-time with zero network latency.",
+        "BLoC Presentation Layer receives vitals (glucose, blood pressure) and checks them against clinical thresholds as they are entered, without a network call.",
       streamTag: "FORM_VALIDATED",
       streamState: "UpdateVitalsEvent",
       streamDetails: "Glucose: 108 mg/dL, BP: 122/80 mmHg ➔ Normal Range",
@@ -28,9 +28,9 @@ export const BEATS_BY_PROJECT: Record<string, StoryBeat[]> = {
       subtitleTh: "ใส่ค่าเดิม ได้คะแนนเดิมทุกครั้ง",
       subtitleEn: "Same inputs, same score, every time",
       descriptionTh:
-        "Business Logic ประเมินความเสี่ยงโรคเบาหวาน ความดันโลหิต หัวใจ และโรคอ้วน แยก Tier (Low, Moderate, High) ทันทีบนอุปกรณ์ ขจัด Human Calculation Error 100%",
+        "Business Logic ประเมินความเสี่ยงโรคเบาหวาน ความดันโลหิต หัวใจ และโรคอ้วน แยก Tier (Low, Moderate, High) ทันทีบนอุปกรณ์ ไม่มีขั้นตอนที่คนต้องคิดคะแนนเอง",
       descriptionEn:
-        "Domain layer evaluates Diabetes, Hypertension, Cardiac, and Obesity risk tiers instantly on-device, eliminating human calculation error by 100%.",
+        "Domain layer evaluates Diabetes, Hypertension, Cardiac, and Obesity risk tiers instantly on-device, so no one adds up the score by hand.",
       streamTag: "BLoC::State",
       streamState: "RiskEvaluatedState",
       streamDetails: "Score: 4/15 (MODERATE Tier Verified)",

@@ -119,7 +119,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Cross-Functional Collaboration",
         level: "Expert",
-        desc: "Working smoothly with designers, PMs, and doctors",
+        desc: "Working with designers, PMs, and healthcare workers",
       },
       {
         name: "Technical Communication & TA",
