@@ -245,7 +245,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
       >
         {/* Result */}
         <div
-          className={`rounded-2xl p-4 transition-colors duration-300 ${
+          className={`rounded-2xl p-4 transition-colors duration-(--dur-base) ${
             isEvaluated ? style.container : "bg-white shadow-app-card"
           }`}
           aria-live="polite"
@@ -274,7 +274,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/70">
             <div
-              className={`h-full w-full origin-left rounded-full transition-transform duration-500 ${style.bar}`}
+              className={`h-full w-full origin-left rounded-full transition-transform duration-(--dur-slow) ${style.bar}`}
               style={{
                 transform: `scaleX(${isEvaluated ? risk.score / 15 : 0})`,
               }}

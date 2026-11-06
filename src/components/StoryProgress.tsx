@@ -138,7 +138,7 @@ export const StoryProgress: React.FC = () => {
       {activeIndex > 0 && (
         <div
           onFocus={() => setIsTucked(false)}
-          className={`hide-when-dialog fixed bottom-4 right-4 z-30 flex flex-col-reverse items-end gap-2 pb-[env(safe-area-inset-bottom)] transition-[opacity,translate] duration-300 ease-(--ease-out-expo) 2xl:hidden ${
+          className={`hide-when-dialog fixed bottom-4 right-4 z-30 flex flex-col-reverse items-end gap-2 pb-[env(safe-area-inset-bottom)] transition-[opacity,translate] duration-(--dur-base) ease-(--ease-out-expo) 2xl:hidden ${
             isPillHidden
               ? "pointer-events-none translate-y-[calc(100%+1rem)] opacity-0 motion-reduce:translate-y-0"
               : ""
@@ -156,7 +156,7 @@ export const StoryProgress: React.FC = () => {
               `เมนูนำทาง (ตอนนี้: ${chapter.labelTh})`,
               `Navigation menu (current: ${chapter.labelEn})`,
             )}
-            className="relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="btn-press relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-void/90 px-3 sm:pr-4 font-mono text-xs tracking-wider text-zinc-200 shadow-pill backdrop-blur-[20px] transition cursor-pointer hover:border-white/[0.16] focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
           >
             {isMenuOpen ? (
               <X className="h-4 w-4 text-zinc-400" aria-hidden />

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m, useScroll, useSpring, useReducedMotion } from "motion/react";
-import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { FADE_UP, IN_VIEW } from "../../../lib/motion";
 import {
   Phone,
   Mail,
@@ -34,27 +34,6 @@ export const ExperienceTimeline: React.FC = () => {
     restDelta: 0.001,
   });
 
-  const sectionFadeIn = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: EASE_OUT_EXPO,
-      },
-    },
-  };
-
   const getCategoryIcon = (type: string, isActive: boolean) => {
     const iconClass = `w-3.5 h-3.5 ${
       isActive ? "text-primary" : "text-zinc-400 group-hover:text-signal"
@@ -85,8 +64,8 @@ export const ExperienceTimeline: React.FC = () => {
       <m.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
-        variants={sectionFadeIn}
+        viewport={IN_VIEW}
+        variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
         <ChapterEyebrow id="timeline" />
@@ -99,8 +78,8 @@ export const ExperienceTimeline: React.FC = () => {
       <m.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
-        variants={sectionFadeIn}
+        viewport={IN_VIEW}
+        variants={FADE_UP}
         className="space-y-4 mb-10 sm:mb-16 max-w-4xl"
       >
         <BilingualStack
@@ -142,16 +121,10 @@ export const ExperienceTimeline: React.FC = () => {
                 key={idx}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-                variants={itemVariants}
+                viewport={IN_VIEW}
+                variants={FADE_UP}
                 className="relative group pb-10 md:pb-16 border-b border-line last:border-b-0 last:pb-0"
               >
-                {/* Subtle Radial Blue Ambient Highlight on Hover */}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 -mx-3 sm:-mx-6 px-3 sm:px-6 rounded-2xl bg-gradient-to-r from-signal/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"
-                />
-
                 <div className="flex flex-col md:flex-row items-start">
                   {/* Left Column: Chronology (~24% Desktop) */}
                   <div className="md:w-[24%] pl-12 md:pl-0 md:pr-8 shrink-0 mb-4 md:mb-0 space-y-1.5">
@@ -203,10 +176,10 @@ export const ExperienceTimeline: React.FC = () => {
                   {/* Axis Node Indicator Marker */}
                   <div
                     aria-hidden="true"
-                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-void flex items-center justify-center transition duration-300 ${
+                    className={`absolute left-4 md:left-[24%] -translate-x-1/2 top-1.5 md:top-1 z-10 w-7 h-7 rounded-full bg-void flex items-center justify-center transition-colors duration-(--dur-base) ${
                       isActive
                         ? "border border-primary/60 shadow-glow-sm"
-                        : "border border-white/10 group-hover:border-signal/40 group-hover:scale-105"
+                        : "border border-white/10 group-hover:border-signal/40"
                     }`}
                   >
                     {getCategoryIcon(exp.type, isActive)}
@@ -349,8 +322,8 @@ export const ExperienceTimeline: React.FC = () => {
         <m.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionFadeIn}
+          viewport={IN_VIEW}
+          variants={FADE_UP}
           className="mt-10 sm:mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-line hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           <div className="space-y-1">

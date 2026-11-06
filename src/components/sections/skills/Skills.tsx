@@ -2,7 +2,7 @@ import React from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
-import { FADE_UP } from "../../../lib/motion";
+import { FADE_UP, IN_VIEW } from "../../../lib/motion";
 import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
 import { SkillCategory } from "../../../types";
@@ -57,7 +57,7 @@ export const Skills: React.FC = () => {
       <m.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={IN_VIEW}
         variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
@@ -71,7 +71,7 @@ export const Skills: React.FC = () => {
       <m.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={IN_VIEW}
         variants={FADE_UP}
         className="space-y-4 mb-10 sm:mb-16 max-w-4xl"
       >
@@ -102,7 +102,7 @@ export const Skills: React.FC = () => {
               key={catIdx}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={IN_VIEW}
               variants={FADE_UP}
               className="space-y-5"
             >

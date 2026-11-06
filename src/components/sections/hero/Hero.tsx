@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { EASE_OUT_EXPO } from "../../../lib/motion";
+import { FADE_UP, STAGGER } from "../../../lib/motion";
 import { ArrowUpRight, FileText, ArrowDown, MapPin } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { CHAPTER_OFFSET, scrollToElement } from "../../../lib/lenis";
@@ -26,26 +26,6 @@ export const Hero: React.FC = () => {
   );
   const headlineY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: EASE_OUT_EXPO },
-    },
-  };
-
   return (
     <section
       id="intro"
@@ -53,14 +33,14 @@ export const Hero: React.FC = () => {
       className="relative pt-4 sm:pt-6 pb-12 sm:pb-16 border-b border-line"
     >
       <m.div
-        variants={containerVariants}
+        variants={STAGGER}
         initial="hidden"
         animate="visible"
         className="space-y-6 sm:space-y-8"
       >
         {/* Identity & Status Row: who this is and what role, before anything else */}
         <m.div
-          variants={itemVariants}
+          variants={FADE_UP}
           className="flex flex-wrap items-center justify-between gap-3"
         >
           <div className="flex items-center gap-3 min-w-0">
@@ -93,7 +73,7 @@ export const Hero: React.FC = () => {
               type="button"
               onClick={toggleLang}
               aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-              className="min-h-11 px-3 text-xs font-mono tracking-wider text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-signal shrink-0"
+              className="btn-press min-h-11 px-3 text-xs font-mono tracking-wider text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition focus:outline-none focus-visible:ring-1 focus-visible:ring-signal shrink-0"
             >
               <span className={lang === "th" ? "text-primary" : ""}>TH</span>
               <span className="px-1.5 text-zinc-600">/</span>
@@ -119,14 +99,14 @@ export const Hero: React.FC = () => {
             className="lg:col-span-8 @container flex flex-col justify-end"
           >
             <p className="text-[clamp(1.75rem,9.4cqi,4.85rem)] font-extrabold tracking-[-0.035em] leading-[1.05] text-white whitespace-nowrap">
-              <m.span variants={itemVariants} className="block text-zinc-300">
+              <m.span variants={FADE_UP} className="block text-zinc-300">
                 {lang === "th" ? "สร้างโมบายแอป" : "BUILDING"}
               </m.span>
-              <m.span variants={itemVariants} className="block text-white">
+              <m.span variants={FADE_UP} className="block text-white">
                 {lang === "th" ? "ที่ใช้งานได้จริง" : "MOBILE APPS"}
               </m.span>
               <m.span
-                variants={itemVariants}
+                variants={FADE_UP}
                 className="block text-primary [text-shadow:0_0_48px_color-mix(in_oklab,var(--color-primary)_35%,transparent)]"
               >
                 {lang === "th" ? "ด้วย FLUTTER." : "WITH FLUTTER."}
@@ -137,7 +117,7 @@ export const Hero: React.FC = () => {
           {/* One verified outcome per project, so a recruiter
               sees proof in the first viewport instead of a spec list. */}
           <m.div
-            variants={itemVariants}
+            variants={FADE_UP}
             style={{ y: shouldReduceMotion ? 0 : cardParallax }}
             className="lg:col-span-4 flex flex-col justify-end"
           >
@@ -178,7 +158,7 @@ export const Hero: React.FC = () => {
 
         {/* Narrative & Action CTAs - Placed above the fold */}
         <m.div
-          variants={itemVariants}
+          variants={FADE_UP}
           className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-1"
         >
           {/* Both languages occupy the same grid cell; the inactive one is
@@ -251,7 +231,7 @@ export const Hero: React.FC = () => {
 
         {/* Location & Modality Notice */}
         <m.p
-          variants={itemVariants}
+          variants={FADE_UP}
           className="flex items-start gap-2 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
         >
           {/* The pin stays on the first line; text and phone wrap together

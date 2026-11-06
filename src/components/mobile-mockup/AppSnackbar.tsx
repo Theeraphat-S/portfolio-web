@@ -1,5 +1,6 @@
 import React from "react";
 import { m, AnimatePresence } from "motion/react";
+import { TRANSITION_BASE } from "../../lib/motion";
 import { CheckCircle2 } from "lucide-react";
 
 /**
@@ -16,7 +17,7 @@ export const AppSnackbar: React.FC<{ message: string | null }> = ({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 8 }}
-        transition={{ duration: 0.2 }}
+        transition={TRANSITION_BASE}
         role="status"
         className="absolute inset-x-3 bottom-full mb-2 flex items-center gap-2 rounded-lg bg-snackbar px-3 py-2.5 text-[12px] text-snackbar-text shadow-lg"
       >

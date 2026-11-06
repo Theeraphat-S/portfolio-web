@@ -3,7 +3,7 @@ import { flushSync } from "react-dom";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
-import { FADE_UP } from "../../../lib/motion";
+import { FADE_UP, IN_VIEW } from "../../../lib/motion";
 import {
   Github,
   Phone,
@@ -132,7 +132,7 @@ export const ContactSection: React.FC = () => {
       <m.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={IN_VIEW}
         variants={FADE_UP}
         className="flex items-center justify-between pb-6 mb-8 sm:mb-12 border-b border-line"
       >
@@ -148,7 +148,7 @@ export const ContactSection: React.FC = () => {
         <m.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={IN_VIEW}
           variants={FADE_UP}
           className="lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-8"
         >
@@ -299,7 +299,7 @@ export const ContactSection: React.FC = () => {
         <m.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={IN_VIEW}
           variants={FADE_UP}
           className="lg:col-span-6 xl:col-span-5"
         >
@@ -447,12 +447,12 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   data-cursor-text="DISPATCH"
-                  className="w-full py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover hover:-translate-y-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal"
+                  className="w-full py-3 px-6 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-bold tracking-wider uppercase transition btn-lift flex items-center justify-center gap-2 cursor-pointer shadow-button hover:shadow-button-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal"
                 >
                   <span>
                     {lang === "th" ? "เปิดร่างในแอปอีเมล" : "Open email draft"}
                   </span>
-                  <Send className="w-3.5 h-3.5 text-void group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <Send className="w-3.5 h-3.5 text-void" />
                 </button>
               )}
             </form>

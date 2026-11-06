@@ -1,6 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { m, AnimatePresence } from "motion/react";
+import { TRANSITION_BASE } from "../../../../lib/motion";
 import { ProjectItem } from "../../../../types";
 import { ProjectModalHeader } from "./ProjectModalHeader";
 import { ProjectModalMetrics } from "./ProjectModalMetrics";
@@ -31,7 +32,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={TRANSITION_BASE}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               onClose();
