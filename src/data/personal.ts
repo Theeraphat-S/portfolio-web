@@ -19,6 +19,8 @@ export const personalData: PersonalInfo = {
   addressEn: "60 Moo 14, Tha Ton, Mae Ai, Chiang Mai 50280",
   github: "https://github.com/Theeraphat-S",
   resumeUrl: "/resume.pdf",
+  resumeLabel: { th: "เรซูเม่", en: "Resume" },
+  resumeLinkLabel: { th: "เปิด CV (PDF)", en: "Open CV (PDF)" },
   githubUsername: "Theeraphat-S",
   locationTh: "อ.แม่อาย จ.เชียงใหม่ (ยินดีทำงาน Onsite/Hybrid/Remote)",
   locationEn: "Chiang Mai, Thailand (Open to Onsite/Hybrid/Remote)",

@@ -126,6 +126,9 @@ export interface PersonalInfo {
   githubUsername: string;
   /** Public path of the PDF resume. */
   resumeUrl: string;
+  /** Label of the résumé card and its link text. */
+  resumeLabel: BilingualText;
+  resumeLinkLabel: BilingualText;
   locationTh: string;
   locationEn: string;
   education: EducationInfo;

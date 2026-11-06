@@ -30,7 +30,7 @@ It highlights architectural reasoning (BLoC state machines, clean architecture, 
 
 - **Recruiter Evaluation Flow**: Evaluated on desktop laptops (wide displays) during initial screening and on mobile phones (via shared links, LinkedIn, or resume QR codes) on the go.
 - **Language Requirements**: Bilingual audience (Thai domestic market and English international tech hubs/remote teams), requiring fluid zero-layout-shift language switching across all technical copy.
-- **Recruiter Fast Path**: Immediate access in the Hero section to direct email, phone, GitHub profile, LinkedIn, and PDF Resume download, followed by an avionics chapter tracker keeping orientation across the 6 story chapters (`Intro`, `Approach`, `Selected Work`, `Capabilities`, `Experience`, `Contact`).
+- **Recruiter Fast Path**: Immediate access in the Hero section to direct email, phone, GitHub profile, and PDF Resume download, followed by an avionics chapter tracker keeping orientation across the 6 story chapters (`Intro`, `Approach`, `Selected Work`, `Capabilities`, `Experience`, `Contact`).
 
 ## Capabilities and Constraints
 

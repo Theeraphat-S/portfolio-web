@@ -263,7 +263,9 @@ export const ContactSection: React.FC = () => {
             <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 uppercase">
                 <FileText className="w-3 h-3 text-primary" />
-                <span>{t("เรซูเม่", "Resume")}</span>
+                <span>
+                  {t(personal.resumeLabel.th, personal.resumeLabel.en)}
+                </span>
               </div>
               <a
                 href={personal.resumeUrl}
@@ -272,7 +274,9 @@ export const ContactSection: React.FC = () => {
                 data-cursor-text="RESUME"
                 className="text-xs sm:text-sm font-mono font-bold text-zinc-200 hover:text-signal transition-colors flex items-center gap-1"
               >
-                <span>{t("เปิด CV (PDF)", "Open CV (PDF)")}</span>
+                <span>
+                  {t(personal.resumeLinkLabel.th, personal.resumeLinkLabel.en)}
+                </span>
                 <ArrowUpRight className="w-3 h-3 text-zinc-400" />
               </a>
             </div>

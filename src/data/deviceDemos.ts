@@ -15,6 +15,8 @@ export const pintoDemo = {
   menu: {
     store: { th: "ครัวนิมมาน", en: "Nimman Kitchen" } satisfies BilingualText,
     path: "/menu/nimman-kitchen",
+    /** Badge on the browser chrome marking where the web content starts. */
+    chromeLabel: "WebView",
     sections: {
       popular: { th: "เมนูแนะนำ", en: "Popular" },
     } satisfies Record<string, BilingualText>,

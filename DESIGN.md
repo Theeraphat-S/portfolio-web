@@ -264,11 +264,11 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Do:
 
-- **Do** anchor every claim with verified metrics (e.g. `100% Accuracy`, `60-120 FPS`, `3 Consecutive Terms`).
+- **Do** anchor every claim with verified metrics (e.g. `100% Accuracy`, `60-120 FPS`, `4 Semesters`).
 - **Do** wrap code terms, architecture patterns, and technical keywords in monospace styling (`font-mono`).
 - **Do** respect `prefers-reduced-motion` across all spring physics, particle systems, and 3D tilts.
 - **Do** maintain bilingual typography balance, ensuring line wraps and heights look natural in both Thai and English.
-- **Do** synchronize sticky mobile device states with active scroll beats.
+- **Do** keep the device stage label in step with the active scroll beat (in flow, never sticky below `lg`).
 
 ### Don't:
 

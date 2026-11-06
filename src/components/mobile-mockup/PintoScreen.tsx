@@ -169,17 +169,21 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
     const y = e ? e.clientY / window.innerHeight : 0.5;
 
     // Loaded on the first claim, not with the page.
-    void import("canvas-confetti").then(({ default: confetti }) =>
-      confetti({
-        particleCount: 36,
-        spread: 60,
-        origin: { x, y },
-        colors: [PINTO_GREEN, "#ffc84a", "#bfeccf", "#2e9d5b"],
-        disableForReducedMotion: true,
-        zIndex: 2000,
-        scalar: 0.85,
-      }),
-    );
+    void import("canvas-confetti")
+      .then(({ default: confetti }) =>
+        confetti({
+          particleCount: 36,
+          spread: 60,
+          origin: { x, y },
+          colors: [PINTO_GREEN, "#ffc84a", "#bfeccf", "#2e9d5b"],
+          disableForReducedMotion: true,
+          zIndex: 2000,
+          scalar: 0.85,
+        }),
+      )
+      .catch(() => {
+        // Confetti is decoration; a failed chunk just skips it.
+      });
 
     onDispatchEvent?.(
       createStreamEvent({
@@ -241,7 +245,7 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
             <div className="flex h-7 items-center gap-1.5 border-y border-pinto-outline bg-pinto-surface px-3 text-[10px] text-pinto-on-surface-variant">
               <span className="flex shrink-0 items-center gap-1 rounded-full bg-white px-1.5 py-px font-semibold text-pinto-icon">
                 <Globe className="h-3 w-3" aria-hidden="true" />
-                WebView
+                {menu.chromeLabel}
               </span>
               <Lock className="h-2.5 w-2.5 shrink-0" aria-hidden="true" />
               <span className="min-w-0 truncate font-mono">{menu.path}</span>

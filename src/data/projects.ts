@@ -26,9 +26,9 @@ export const projectsData: ProjectItem[] = [
     problemEn:
       "Traditional community NCDs screening relied on paper forms with multi-variable risk scoring, prone to human calculation errors. Village health volunteers (VHVs) also often work in areas with patchy or no internet signal.",
     decisionRationaleTh:
-      "ย้าย Business Logic ในการประเมิน Risk Scoring และ State Validation ทั้งหมดมาทำงานบน Client-side (Flutter & BLoC) จึงคำนวณคะแนนและแสดงผลความเสี่ยงได้ทันที แม้ไม่มีสัญญาณอินเทอร์เน็ต",
+      "ย้าย Business Logic ในการประเมิน Risk Scoring และ State Validation ทั้งหมดมาทำงานบน Client-side (Flutter & BLoC) จึงคำนวณคะแนนและแสดงผลความเสี่ยงได้โดยไม่ต้องรอการเรียกเครือข่าย",
     decisionRationaleEn:
-      "Moved all risk-scoring logic and form state validation to the client (Flutter & BLoC), so a risk score never waits on a network request.",
+      "Moved all risk-scoring logic and form state validation to the client (Flutter & BLoC), so scoring doesn't wait on a network request.",
     tradeOffsTh:
       "ยอมแลกความซับซ้อนของ BLoC State Machines และ Domain Validation Rules บน Client ที่สูงขึ้น เพื่อให้คำนวณคะแนนได้โดยไม่ต้องรอเครือข่าย และตรวจสอบข้อมูลก่อนประมวลผล",
     tradeOffsEn:
@@ -191,9 +191,9 @@ export const projectsData: ProjectItem[] = [
     proofEn: "Checkout keeps working offline, with no double charges on retry",
     color: "#3b82f6",
     descriptionTh:
-      "พัฒนาฟีเจอร์ชำระเงินของโมดูลระบบ ณ จุดขาย (POS) และเชื่อมต่อกับ REST API เพื่อให้ข้อมูลสินค้าและรายการขายตรงกับระบบหลังบ้าน",
+      "พัฒนาฟีเจอร์ชำระเงินของโมดูลระบบ ณ จุดขาย (POS) และเชื่อมต่อกับ REST API เพื่อให้รายการขายตรงกับระบบหลังบ้าน",
     descriptionEn:
-      "Built checkout features for a retail Point of Sale (POS) module and connected them to the REST API, so inventory and transactions stay in sync with the backend.",
+      "Built checkout features for a retail Point of Sale (POS) module and connected them to the REST API, so transactions stay in sync with the backend.",
     problemTh:
       "การคิดเงินต้องทำต่อได้ตอนเน็ตหลุดชั่วคราว โดยแถวคิดเงินไม่ติดขัด และข้อมูลสต็อกไม่เพี้ยนจากการส่งข้อมูลชนกัน (Race Condition)",
     problemEn:
@@ -215,13 +215,13 @@ export const projectsData: ProjectItem[] = [
     outcomeEn:
       "Checkout keeps working through network drops by holding transactions in a local SQLite queue, and client-generated UUIDs prevent double-charging when the queue retries.",
     highlightsTh: [
-      "ออกแบบระบบจัดการสินค้าคงคลัง (Inventory) และระบบตะกร้าสินค้าที่คำนวณราคาและภาษีให้อัตโนมัติ",
+      "ทำตะกร้าสินค้าแบบ Reactive ที่คำนวณยอดรวม ภาษี และจำนวนชิ้นใหม่ทันที โดยไม่ต้องรอ Server",
       "เชื่อมต่อ RESTful API ระหว่างหน้าบ้านและระบบหลังบ้าน พร้อมกลไกป้องกันข้อมูลซ้ำซ้อน",
       "เก็บธุรกรรมลงคิว SQLite บนเครื่องเมื่อออฟไลน์ แล้วส่งซ้ำแบบ Idempotent เมื่อกลับมาออนไลน์",
       "เพิ่ม Error Handling ให้ขั้นตอนคิดเงินของแคชเชียร์ทำงานต่อได้เมื่อเน็ตหลุดช่วงสั้น ๆ",
     ],
     highlightsEn: [
-      "Designed real-time inventory tracking and cart logic that works out prices and tax automatically.",
+      "Built a reactive cart that recalculates totals, tax and item counts without waiting on the server.",
       "Integrated REST APIs between client and backend with duplicate-safe request handling.",
       "Queued transactions in local SQLite during outages and replayed them with idempotency keys on reconnect.",
       "Added error handling so the cashier flow keeps working through short outages.",
