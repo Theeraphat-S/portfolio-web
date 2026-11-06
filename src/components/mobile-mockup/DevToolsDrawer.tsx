@@ -365,3 +365,5 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
     document.body,
   );
 };
+
+export default DevToolsDrawer;

@@ -1,4 +1,6 @@
 import React, {
+  Suspense,
+  lazy,
   useState,
   useEffect,
   useRef,
@@ -18,11 +20,13 @@ import { NcdsScreen } from "../../mobile-mockup/NcdsScreen";
 import { PosScreen } from "../../mobile-mockup/PosScreen";
 import { LiveEventDock } from "../../mobile-mockup/LiveEventDock";
 import { DeviceFrame } from "../../mobile-mockup/DeviceFrame";
-import { DevToolsDrawer } from "../../mobile-mockup/DevToolsDrawer";
 import { BLoCStreamEvent } from "../../../types/stream";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useBeatScrub } from "../../../hooks/useBeatScrub";
 import { BilingualStack } from "../../BilingualStack";
+
+// The drawer carries the Dart snippets; load it on first open.
+const DevToolsDrawer = lazy(() => import("../../mobile-mockup/DevToolsDrawer"));
 
 interface EditorialCaseStudyProps {
   project: ProjectItem;
@@ -175,6 +179,8 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
     getInitialEvent(project.id),
   ]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  // Stays mounted after the first open so the exit animation can run.
+  const [drawerLoaded, setDrawerLoaded] = useState(false);
   const [drawerTab, setDrawerTab] = useState<"stream" | "code" | "telemetry">(
     "stream",
   );
@@ -352,6 +358,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           eventsCount={streamEvents.length}
           onOpenDrawer={(tab) => {
             setDrawerTab(tab);
+            setDrawerLoaded(true);
             setIsDrawerOpen(true);
           }}
         />
@@ -666,14 +673,18 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       )}
 
       {/* Flutter & BLoC DevTools Drawer */}
-      <DevToolsDrawer
-        isOpen={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-        initialTab={drawerTab}
-        projectId={project.id}
-        events={streamEvents}
-        onClearEvents={() => setStreamEvents([])}
-      />
+      {drawerLoaded && (
+        <Suspense fallback={null}>
+          <DevToolsDrawer
+            isOpen={isDrawerOpen}
+            onClose={() => setIsDrawerOpen(false)}
+            initialTab={drawerTab}
+            projectId={project.id}
+            events={streamEvents}
+            onClearEvents={() => setStreamEvents([])}
+          />
+        </Suspense>
+      )}
     </m.article>
   );
 };

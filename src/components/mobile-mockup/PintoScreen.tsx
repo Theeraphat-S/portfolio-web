@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { m, AnimatePresence, useReducedMotion } from "motion/react";
-import confetti from "canvas-confetti";
 import {
   Check,
   RotateCw,
@@ -169,15 +168,18 @@ export const PintoScreen: React.FC<PintoScreenProps> = ({
     const x = e ? e.clientX / window.innerWidth : 0.5;
     const y = e ? e.clientY / window.innerHeight : 0.5;
 
-    confetti({
-      particleCount: 36,
-      spread: 60,
-      origin: { x, y },
-      colors: [PINTO_GREEN, "#ffc84a", "#bfeccf", "#2e9d5b"],
-      disableForReducedMotion: true,
-      zIndex: 2000,
-      scalar: 0.85,
-    });
+    // Loaded on the first claim, not with the page.
+    void import("canvas-confetti").then(({ default: confetti }) =>
+      confetti({
+        particleCount: 36,
+        spread: 60,
+        origin: { x, y },
+        colors: [PINTO_GREEN, "#ffc84a", "#bfeccf", "#2e9d5b"],
+        disableForReducedMotion: true,
+        zIndex: 2000,
+        scalar: 0.85,
+      }),
+    );
 
     onDispatchEvent?.(
       createStreamEvent({

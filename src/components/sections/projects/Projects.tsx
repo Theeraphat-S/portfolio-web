@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { BilingualStack } from "../../BilingualStack";
 import { ChapterBridge } from "../../ChapterBridge";
 import { m } from "motion/react";
@@ -8,13 +8,22 @@ import { useLanguage } from "../../../context/LanguageContext";
 import { portfolioData, bridgeFor } from "../../../data";
 import { ProjectItem } from "../../../types";
 import { EditorialCaseStudy } from "./EditorialCaseStudy";
-import { ProjectModal } from "./modal/ProjectModal";
 import { ChapterEyebrow } from "../../ChapterEyebrow";
+
+// The modal is only needed after a "View case study" click, so it ships in
+// its own chunk and loads on first open.
+const ProjectModal = lazy(() => import("./modal/ProjectModal"));
 
 export const Projects: React.FC = () => {
   const { t } = useLanguage();
   const [selectedModalProject, setSelectedModalProject] =
     useState<ProjectItem | null>(null);
+  // Stays mounted after the first open so the exit animation can run.
+  const [modalLoaded, setModalLoaded] = useState(false);
+  const openModal = (project: ProjectItem) => {
+    setModalLoaded(true);
+    setSelectedModalProject(project);
+  };
 
   return (
     <section id="work" className="relative py-12 sm:py-24 border-b border-line">
@@ -82,16 +91,20 @@ export const Projects: React.FC = () => {
             key={project.id}
             project={project}
             index={index}
-            onSelect={setSelectedModalProject}
+            onSelect={openModal}
           />
         ))}
       </div>
 
       {/* Deep Architectural Modal */}
-      <ProjectModal
-        project={selectedModalProject}
-        onClose={() => setSelectedModalProject(null)}
-      />
+      {modalLoaded && (
+        <Suspense fallback={null}>
+          <ProjectModal
+            project={selectedModalProject}
+            onClose={() => setSelectedModalProject(null)}
+          />
+        </Suspense>
+      )}
     </section>
   );
 };
