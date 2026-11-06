@@ -64,7 +64,7 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
             {/* System status bar */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-8 items-center justify-between px-6 text-[11px] font-medium tabular-nums"
+              className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-8 items-center justify-between px-6 text-xs font-medium tabular-nums"
               style={{ color: ink }}
             >
               <span className="font-sans">9:41</span>

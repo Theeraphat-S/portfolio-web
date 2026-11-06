@@ -157,7 +157,11 @@ export const projectsData: ProjectItem[] = [
     metrics: [
       { labelTh: "บทบาท", labelEn: "Role", value: "Mobile Intern" },
       { labelTh: "กระบวนการ", labelEn: "Methodology", value: "Agile / Scrum" },
-      { labelTh: "การทำงาน", labelEn: "Execution", value: "Production-ready" },
+      {
+        labelTh: "การทำงาน",
+        labelEn: "Execution",
+        value: "Shipped to production",
+      },
     ],
     architectureTh:
       "Feature-Driven Flutter Architecture with Modular State Management and WebView Bridge Controller",
@@ -187,9 +191,9 @@ export const projectsData: ProjectItem[] = [
     proofEn: "Checkout keeps working offline, with no double charges on retry",
     color: "#3b82f6",
     descriptionTh:
-      "ออกแบบและพัฒนาโมดูลฝั่งระบบจัดการร้านค้า ณ จุดขาย (POS) เชื่อมต่อ Rest API ระหว่างหน้าบ้านและระบบหลังบ้านเพื่อจัดการข้อมูลสินค้า ออเดอร์ และการรับชำระเงินให้มีความถูกต้อง เสถียร และปลอดภัย",
+      "พัฒนาฟีเจอร์ชำระเงินของโมดูลระบบ ณ จุดขาย (POS) และเชื่อมต่อกับ REST API เพื่อให้ข้อมูลสินค้าและรายการขายตรงกับระบบหลังบ้าน",
     descriptionEn:
-      "Designed and developed retail Point of Sale (POS) store management modules. Integrated Rest APIs between client and backend to keep inventory data in sync and transactions reliable.",
+      "Built checkout features for a retail Point of Sale (POS) module and connected them to the REST API, so inventory and transactions stay in sync with the backend.",
     problemTh:
       "การคิดเงินต้องทำต่อได้ตอนเน็ตหลุดชั่วคราว โดยแถวคิดเงินไม่ติดขัด และข้อมูลสต็อกไม่เพี้ยนจากการส่งข้อมูลชนกัน (Race Condition)",
     problemEn:

@@ -207,13 +207,13 @@ export const AboutBento: React.FC = () => {
               en="TEACHING TERMS"
             />
             <span className="text-2xl sm:text-3xl font-mono font-bold text-primary block">
-              3
+              4
             </span>
             <BilingualStack
               as="span"
               className="text-xs font-mono text-zinc-400 block min-h-[1.25rem]"
-              th="3 ภาคการศึกษาต่อเนื่อง"
-              en="Consecutive terms"
+              th="ภาคการศึกษา 2566 – 2568"
+              en="Terms, 2023 – 2025"
             />
           </div>
 
@@ -225,7 +225,7 @@ export const AboutBento: React.FC = () => {
               en="PROJECTS"
             />
             <span className="text-2xl sm:text-3xl font-mono font-bold text-primary block">
-              3
+              4
             </span>
             <BilingualStack
               as="span"
@@ -277,7 +277,7 @@ export const AboutBento: React.FC = () => {
                 {t("การสอนและการให้คำปรึกษา", "TEACHING & MENTORING")}
               </span>
               <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400 border border-line">
-                {t("3 เทอมการศึกษา", "3 SEMESTERS")}
+                {t("4 เทอมการศึกษา", "4 SEMESTERS")}
               </span>
             </div>
             <BilingualStack

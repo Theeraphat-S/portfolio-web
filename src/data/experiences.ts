@@ -32,9 +32,8 @@ export const experiencesData: ExperienceItem[] = [
       {
         labelEn: "POS Modules",
         labelTh: "โมดูล POS",
-        descEn:
-          "Developed POS store-management modules connected to REST APIs.",
-        descTh: "พัฒนาโมดูลระบบจัดการร้านค้า POS และเชื่อมต่อกับ REST API",
+        descEn: "Built POS checkout features connected to REST APIs.",
+        descTh: "พัฒนาฟีเจอร์ชำระเงินของระบบ POS และเชื่อมต่อกับ REST API",
       },
       {
         labelEn: "Collaboration & Delivery",
@@ -47,24 +46,24 @@ export const experiencesData: ExperienceItem[] = [
     ],
     bulletsTh: [
       "พัฒนาโครงสร้าง State Management สำหรับเมนู WebView และฟังก์ชัน Chat Streaks บน Pinto App",
-      "พัฒนาโมดูลระบบจัดการร้านค้า POS และเชื่อมต่อกับ REST API",
+      "พัฒนาฟีเจอร์ชำระเงินของระบบ POS และเชื่อมต่อกับ REST API",
       "ทำงานร่วมกับทีมผ่านกระบวนการ Agile/Scrum และจัดการเวอร์ชันซอร์สโค้ดด้วย Git/GitHub",
     ],
     bulletsEn: [
       "Built state management for the hybrid WebView menus and the Chat Streaks feature in the Pinto app.",
-      "Developed POS store-management modules connected to REST APIs.",
+      "Built POS checkout features connected to REST APIs.",
       "Collaborated in Agile sprints and managed code versions through Git/GitHub.",
     ],
     skills: ["Flutter", "Dart", "State Management", "REST API", "Git", "Agile"],
   },
   {
-    year: "2024 — 2025",
-    yearTh: "2567 — 2568",
-    yearEn: "2024 — 2025",
-    periodTh: "2567 — 2568",
-    periodEn: "2024 — 2025",
-    subBadgeTh: "3 เทอมการศึกษา",
-    subBadgeEn: "3 Semesters",
+    year: "2023 — 2025",
+    yearTh: "2566 — 2568",
+    yearEn: "2023 — 2025",
+    periodTh: "2566 — 2568",
+    periodEn: "2023 — 2025",
+    subBadgeTh: "4 เทอมการศึกษา",
+    subBadgeEn: "4 Semesters",
     roleTh: "ผู้ช่วยสอนประจำภาควิชา (Teaching Assistant - TA)",
     roleEn: "Undergraduate Teaching Assistant (TA)",
     companyTh: "สาขาวิชาเทคโนโลยีสารสนเทศ มหาวิทยาลัยแม่โจ้",
@@ -75,9 +74,9 @@ export const experiencesData: ExperienceItem[] = [
     badgeTh: "ประสบการณ์วิชาการ",
     badgeEn: "Academic Mentorship",
     descriptionTh:
-      "ได้รับคัดเลือกให้เป็นผู้ช่วยสอน (TA) ถ่ายทอดความรู้และให้คำปรึกษาแก่นักศึกษารุ่นน้องใน 3 รายวิชาหลักของภาควิชา IT อย่างต่อเนื่อง 3 ภาคการศึกษา",
+      "ได้รับคัดเลือกให้เป็นผู้ช่วยสอน (TA) ถ่ายทอดความรู้และให้คำปรึกษาแก่นักศึกษารุ่นน้องใน 3 รายวิชาหลักของภาควิชา IT รวม 4 ภาคการศึกษา",
     descriptionEn:
-      "Selected as Teaching Assistant to mentor and guide junior undergraduate students across 3 core Computer Science & IT courses over 3 consecutive semesters.",
+      "Selected as Teaching Assistant to mentor and guide junior undergraduate students across 3 core Computer Science & IT courses over 4 semesters.",
     contributions: [
       {
         labelEn: "Client-Side Web Programming",

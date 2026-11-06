@@ -24,7 +24,7 @@ Unlike generic entry-level portfolios filled with static screenshots or tutorial
 - **Pinto Logistics App** (Fakduay internship): Hybrid WebView menus in a Flutter shell, gamified Chat Streaks, and Profile API sync.
 - **Retail POS Module** (Fakduay internship): Checkout that keeps working offline via a local SQLite queue, replayed with idempotent retries on reconnect.
 
-It highlights architectural reasoning (BLoC state machines, clean architecture, real usability field testing) backed by academic mentorship (TA for 3 semesters) and community tech leadership.
+It highlights architectural reasoning (BLoC state machines, clean architecture, real usability field testing) backed by academic mentorship (TA for 4 semesters) and community tech leadership.
 
 ## Operating Context
 
@@ -75,7 +75,7 @@ Every flagship project is structured around 3 canonical architectural beats that
 ### Work & Leadership History
 
 - **Mobile Developer Intern** at Fakduay Logistics & Digital Platform Co., Ltd.
-- **Undergraduate Teaching Assistant (TA)** for 3 consecutive semesters (Client-side Web, Database Systems, Logic & Programming).
+- **Undergraduate Teaching Assistant (TA)** for 4 semesters, 2023–2025 (Client-side Web, Database Systems, Logic & Programming).
 - **Keynote Instructor** for "Smart AI for Education & Ethical Programming" workshop at Jakkhumkhanathorn School.
 - **Verified Academic Reference**: Dr. Jakkrit Techo (`src/data/personal.ts`).
 

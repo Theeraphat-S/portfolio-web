@@ -84,23 +84,31 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
 }) => {
   const { t } = useLanguage();
 
-  const [glucose, setGlucose] = useState<number>(108); // mg/dL
-  const [systolic, setSystolic] = useState<number>(122); // mmHg
+  // Beat 0 is intake (vitals entered, not yet evaluated), beat 1 shows
+  // the evaluated risk tier, beat 2 the submitted record.
+  const vitalsForBeat = (beat: number | undefined) =>
+    beat === 0
+      ? { glucose: 98, systolic: 118 }
+      : { glucose: 108, systolic: 122 };
+
+  const initial = vitalsForBeat(activeBeat);
+  const [glucose, setGlucose] = useState<number>(initial.glucose); // mg/dL
+  const [systolic, setSystolic] = useState<number>(initial.systolic); // mmHg
+  const [isEvaluated, setIsEvaluated] = useState(activeBeat !== 0);
   const [isExported, flashExported, setIsExported] = useTransientFlag(2400);
 
   // Adjust state when activeBeat prop changes
   const [prevBeat, setPrevBeat] = useState(activeBeat);
   if (activeBeat !== prevBeat) {
     setPrevBeat(activeBeat);
-    if (activeBeat === 0) {
-      setGlucose(98);
-      setSystolic(118);
-      setIsExported(false);
-    } else if (activeBeat === 1) {
-      setGlucose(108);
-      setSystolic(122);
+    if (activeBeat === 0 || activeBeat === 1) {
+      const next = vitalsForBeat(activeBeat);
+      setGlucose(next.glucose);
+      setSystolic(next.systolic);
+      setIsEvaluated(activeBeat === 1);
       setIsExported(false);
     } else if (activeBeat === 2) {
+      setIsEvaluated(true);
       setIsExported(true);
     }
   }
@@ -141,6 +149,7 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
   const handleVitalsChange = (newGlucose: number, newSystolic: number) => {
     setGlucose(newGlucose);
     setSystolic(newSystolic);
+    setIsEvaluated(true);
     const computed = calculateRisk(newGlucose, newSystolic);
 
     onDispatchEvent?.(
@@ -236,36 +245,48 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
       >
         {/* Result */}
         <div
-          className={`rounded-2xl p-4 transition-colors duration-300 ${style.container}`}
+          className={`rounded-2xl p-4 transition-colors duration-300 ${
+            isEvaluated ? style.container : "bg-white shadow-app-card"
+          }`}
           aria-live="polite"
         >
           <p className="text-[11px] font-medium text-m3-on-surface-variant">
             {t("ผลประเมินรวม", "Overall result")}
           </p>
           <div className="mt-1 flex items-end justify-between gap-2">
-            <p className={`text-[20px] font-bold leading-tight ${style.text}`}>
-              {tr(t, style.headline)}
+            <p
+              className={`text-[20px] font-bold leading-tight ${
+                isEvaluated ? style.text : "text-m3-secondary"
+              }`}
+            >
+              {isEvaluated
+                ? tr(t, style.headline)
+                : t("รอประเมินผล", "Awaiting evaluation")}
             </p>
             <p
-              className={`shrink-0 whitespace-nowrap text-[13px] font-semibold tabular-nums ${style.text}`}
+              className={`shrink-0 whitespace-nowrap text-[13px] font-semibold tabular-nums ${
+                isEvaluated ? style.text : "text-m3-secondary"
+              }`}
             >
-              {risk.score}
+              {isEvaluated ? risk.score : "–"}
               <span className="font-normal opacity-70"> / 15</span>
             </p>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/70">
             <div
               className={`h-full w-full origin-left rounded-full transition-transform duration-500 ${style.bar}`}
-              style={{ transform: `scaleX(${risk.score / 15})` }}
+              style={{
+                transform: `scaleX(${isEvaluated ? risk.score / 15 : 0})`,
+              }}
             />
           </div>
         </div>
 
         {/* Vitals */}
         <section className="rounded-2xl bg-white p-4 shadow-app-card">
-          <h4 className="text-[13px] font-semibold tracking-normal">
+          <h3 className="text-[13px] font-semibold tracking-normal">
             {t("สัญญาณชีพ", "Vital signs")}
-          </h4>
+          </h3>
 
           <label className="mt-3 block">
             <span className="flex items-baseline justify-between">
@@ -322,16 +343,21 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
 
         {/* Per-disease results */}
         <section className="overflow-hidden rounded-2xl bg-white shadow-app-card">
-          <h4 className="px-4 pt-3 pb-1 text-[13px] font-semibold tracking-normal">
+          <h3 className="px-4 pt-3 pb-1 text-[13px] font-semibold tracking-normal">
             {t("ผลแยกรายโรค", "By condition")}
-          </h4>
+          </h3>
           <ul>
             {diseases.map((d) => (
               <li
                 key={d.id}
                 className="flex items-center gap-3 border-t border-m3-outline-variant px-4 py-2.5 first:border-t-0"
               >
-                {d.level === "high" ? (
+                {!isEvaluated ? (
+                  <span
+                    className="h-4 w-4 shrink-0 rounded-full border-2 border-m3-outline-variant"
+                    aria-hidden="true"
+                  />
+                ) : d.level === "high" ? (
                   <AlertTriangle
                     className={`h-4 w-4 shrink-0 ${LEVEL_STYLE.high.icon}`}
                     aria-hidden="true"
@@ -344,9 +370,15 @@ export const NcdsScreen: React.FC<NcdsScreenProps> = ({
                 )}
                 <span className="flex-1 text-[13px]">{d.title}</span>
                 <span
-                  className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${LEVEL_STYLE[d.level].chip}`}
+                  className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
+                    isEvaluated
+                      ? LEVEL_STYLE[d.level].chip
+                      : "bg-m3-secondary-container text-m3-secondary"
+                  }`}
                 >
-                  {tr(t, LEVEL_STYLE[d.level].label)}
+                  {isEvaluated
+                    ? tr(t, LEVEL_STYLE[d.level].label)
+                    : t("รอผล", "Pending")}
                 </span>
               </li>
             ))}

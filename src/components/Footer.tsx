@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
               ? portfolioData.personal.nameTh
               : portfolioData.personal.nameEn}
           </span>
-          <span className="font-mono text-[11px] text-zinc-400 min-w-[180px]">
+          <span className="font-mono text-xs text-zinc-400 min-w-[180px]">
             {lang === "th"
               ? portfolioData.personal.locationTh
               : portfolioData.personal.locationEn}
@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Center: Engineering Stack */}
-        <div className="font-mono text-[11px] text-zinc-400 text-center min-w-[220px]">
+        <div className="font-mono text-xs text-zinc-400 text-center min-w-[220px]">
           <span>{lang === "th" ? "สร้างด้วย " : "Built with "}</span>
           <span className="text-zinc-300 font-medium">
             React, Vite & Tailwind CSS
@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
             type="button"
             onClick={scrollToTop}
             data-cursor-text="TOP"
-            className="inline-flex items-center gap-1.5 px-3.5 min-h-9 text-[11px] font-mono font-medium text-zinc-400 hover:text-signal bg-white/[0.03] hover:bg-signal/10 border border-line hover:border-signal/30 rounded-full transition cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+            className="inline-flex items-center gap-1.5 px-3.5 min-h-9 text-xs font-mono font-medium text-zinc-400 hover:text-signal bg-white/[0.03] hover:bg-signal/10 border border-line hover:border-signal/30 rounded-full transition cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-signal"
             aria-label="Scroll back to top"
           >
             <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />

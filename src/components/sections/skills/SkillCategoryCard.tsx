@@ -85,7 +85,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   {skill.name}
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-800/90 text-emerald-300 border border-zinc-700">
+                <span className="text-xs font-mono px-2 py-0.5 rounded-md bg-zinc-800/90 text-emerald-300 border border-zinc-700">
                   {skill.level}
                 </span>
               </div>

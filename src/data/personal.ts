@@ -18,6 +18,7 @@ export const personalData: PersonalInfo = {
   addressTh: "60 หมู่ 14 ต.ท่าตอน อ.แม่อาย จ.เชียงใหม่ 50280",
   addressEn: "60 Moo 14, Tha Ton, Mae Ai, Chiang Mai 50280",
   github: "https://github.com/Theeraphat-S",
+  resumeUrl: "/resume.pdf",
   githubUsername: "Theeraphat-S",
   locationTh: "อ.แม่อาย จ.เชียงใหม่ (ยินดีทำงาน Onsite/Hybrid/Remote)",
   locationEn: "Chiang Mai, Thailand (Open to Onsite/Hybrid/Remote)",
@@ -36,7 +37,6 @@ export const personalData: PersonalInfo = {
       "อาจารย์ประจำสาขาวิชาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้",
     roleEn:
       "Faculty Member, Department of Information Technology, Maejo University",
-    phone: "088-267-2285",
     email: "jakkrit@gmaejo.mju.ac.th",
   },
 };

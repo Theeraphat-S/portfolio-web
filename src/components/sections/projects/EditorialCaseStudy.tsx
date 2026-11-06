@@ -281,7 +281,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
         {/* Active stage HUD (pinned runway only; the stacked layout uses
             the stepper above). The rail fills as the reader scrolls. */}
         {isPinned && (
-          <div className="w-full px-3.5 py-1.5 rounded-lg bg-hud/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-[11px]">
+          <div className="w-full px-3.5 py-1.5 rounded-lg bg-hud/90 border border-primary/25 backdrop-blur-md shadow-sm font-mono text-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
@@ -351,7 +351,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           }}
         />
         <BilingualStack
-          className="w-full text-center font-mono text-[11px] text-zinc-500"
+          className="w-full text-center font-mono text-xs text-zinc-500"
           th="จำลองการทำงานของแอป Flutter ในเบราว์เซอร์ · ตัวเลขเป็นตัวอย่าง"
           en="In-browser simulation of the Flutter app · figures are illustrative"
         />
@@ -364,7 +364,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const renderStoryBeats = () => {
     return (
       <div className="pt-2">
-        <p className="pb-3 font-mono text-[11px] text-zinc-400">
+        <p className="pb-3 font-mono text-xs text-zinc-400">
           {t(
             "เลื่อนลงเพื่อดูแต่ละขั้นบนหน้าจอจำลอง",
             "Scroll to step through each stage on the device",
@@ -480,7 +480,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 type="button"
                 onClick={() => applyBeat(bIdx)}
                 aria-current={isActive ? "step" : undefined}
-                className={`relative overflow-hidden min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-[11px] leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
+                className={`relative overflow-hidden min-h-14 rounded-lg border px-2 py-2 text-left font-mono text-xs leading-tight transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-signal ${
                   isActive
                     ? "border-primary/50 bg-primary/10 text-primary"
                     : "border-line text-zinc-400 hover:text-zinc-200"

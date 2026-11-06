@@ -101,7 +101,8 @@ export interface ReferenceInfo {
   nameEn: string;
   roleTh: string;
   roleEn: string;
-  phone: string;
+  /** Publish only with the referee's consent. */
+  phone?: string;
   email: string;
 }
 
@@ -123,6 +124,8 @@ export interface PersonalInfo {
   addressEn?: string;
   github: string;
   githubUsername: string;
+  /** Public path of the PDF resume. */
+  resumeUrl: string;
   locationTh: string;
   locationEn: string;
   education: EducationInfo;

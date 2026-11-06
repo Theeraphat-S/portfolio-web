@@ -139,8 +139,7 @@ export const ExperienceTimeline: React.FC = () => {
             const yearTh = exp.yearTh || exp.year;
             const yearEn = exp.yearEn || exp.year;
             // Semester note for the multi-term TA entry.
-            const isMultiTerm =
-              Boolean(exp.subBadgeEn) && exp.year.includes("2024");
+            const isMultiTerm = Boolean(exp.subBadgeEn);
 
             return (
               <m.article
@@ -168,8 +167,12 @@ export const ExperienceTimeline: React.FC = () => {
                           ? "text-primary"
                           : "text-zinc-200 group-hover:text-white"
                       } transition-colors`}
-                      th={isMultiTerm ? `${yearTh} / 3 เทอมการศึกษา` : yearTh}
-                      en={isMultiTerm ? `${yearEn} / 3 SEMESTERS` : yearEn}
+                      th={
+                        isMultiTerm ? `${yearTh} / ${exp.subBadgeTh}` : yearTh
+                      }
+                      en={
+                        isMultiTerm ? `${yearEn} / ${exp.subBadgeEn}` : yearEn
+                      }
                     />
 
                     {/* Exact Time Period */}
@@ -183,7 +186,7 @@ export const ExperienceTimeline: React.FC = () => {
                     {/* Quiet Status Badge */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono tracking-wider uppercase whitespace-nowrap ${
+                        className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-mono tracking-wider uppercase whitespace-nowrap ${
                           isActive
                             ? "bg-primary/10 text-primary border border-primary/25"
                             : "bg-white/[0.03] text-zinc-400 border border-line"
@@ -226,7 +229,7 @@ export const ExperienceTimeline: React.FC = () => {
                   <div className="md:w-[76%] pl-12 md:pl-10 flex-1 space-y-4">
                     {/* Academic Distinguisher Eyebrow */}
                     {isAcademic && (
-                      <div className="text-[10px] font-mono tracking-wider text-sky-400 uppercase font-semibold flex items-center gap-1.5">
+                      <div className="text-xs font-mono tracking-wider text-sky-400 uppercase font-semibold flex items-center gap-1.5">
                         <GraduationCap className="w-3.5 h-3.5" />
                         <BilingualStack
                           as="span"
@@ -258,7 +261,7 @@ export const ExperienceTimeline: React.FC = () => {
                     {/* 3. Key Contributions & Engineering Impact */}
                     <div className="space-y-2.5 pt-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-semibold flex items-center gap-1.5">
+                        <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-semibold flex items-center gap-1.5">
                           <Sparkles
                             className={`w-3 h-3 ${
                               isActive
@@ -339,7 +342,7 @@ export const ExperienceTimeline: React.FC = () => {
                     {/* 6. Minimal Technical Stack Inline Row */}
                     <div className="pt-2 border-t border-white/[0.04]">
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono tracking-wider text-zinc-400">
-                        <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mr-0.5">
+                        <span className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mr-0.5">
                           SPECS:
                         </span>
                         {exp.skills.map((skill) => (
@@ -372,7 +375,7 @@ export const ExperienceTimeline: React.FC = () => {
           <div className="space-y-1">
             <BilingualStack
               as="span"
-              className="text-[10px] font-mono text-primary uppercase tracking-widest block font-medium"
+              className="text-xs font-mono text-primary uppercase tracking-widest block font-medium"
               th="04.1 // การรับรองทางวิชาการ (ACADEMIC VERIFICATION)"
               en="04.1 // ACADEMIC VERIFICATION & REFERENCE"
             />

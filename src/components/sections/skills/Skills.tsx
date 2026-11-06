@@ -119,7 +119,7 @@ export const Skills: React.FC = () => {
                     <span>{meta.index} //</span>
                     <span>{lang === "th" ? meta.labelTh : meta.labelEn}</span>
                   </div>
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase">
+                  <span className="text-xs font-mono text-zinc-400 uppercase">
                     {t(
                       `${category.skills.length} ทักษะ`,
                       `${category.skills.length} SKILLS`,

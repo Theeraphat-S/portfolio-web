@@ -134,7 +134,7 @@ export const skillCategoriesData: SkillCategory[] = [
       {
         name: "Adaptive Learning",
         level: "Advanced",
-        desc: "Rapidly mastering emerging tech & AI tools",
+        desc: "Picking up new tools by building with them",
       },
       {
         name: "Agile / Scrum Mindset",
