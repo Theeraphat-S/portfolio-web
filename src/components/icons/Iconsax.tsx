@@ -446,7 +446,7 @@ export const DatabaseSyncIcon: React.FC<IconProps> = ({
           cx="17"
           cy="18"
           r="1.5"
-          fill="#38d9ff"
+          fill="#40dcff"
         />
       )}
     </svg>

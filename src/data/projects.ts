@@ -16,7 +16,7 @@ export const projectsData: ProjectItem[] = [
     origin: "capstone",
     proofTh: "ลดเวลาคัดกรองจาก 10–15 เหลือ 3–5 นาที ทดสอบภาคสนามกับ อสม.",
     proofEn: "Screening cut from 10–15 to 3–5 min, field-tested with VHVs",
-    color: "#4d7cfe",
+    color: "#5a86ff",
     descriptionTh:
       "แอปพลิเคชันมือถือสำหรับตรวจคัดกรองและประเมินความเสี่ยงโรคไม่ติดต่อเรื้อรัง (NCDs) ได้แก่ โรคเบาหวาน, ความดันโลหิตสูง, โรคหัวใจ และโรคอ้วน ออกแบบ UI/UX ให้ใช้งานง่ายและตอบโจทย์ทั้งบุคลากรทางการแพทย์ เจ้าหน้าที่ อสม. และประชาชนทั่วไป",
     descriptionEn:
@@ -108,7 +108,7 @@ export const projectsData: ProjectItem[] = [
     origin: "internship",
     proofTh: "ส่งมอบเมนู WebView และ Chat Streaks ขึ้นแอปที่ใช้งานจริง",
     proofEn: "WebView menus and Chat Streaks shipped to the production app",
-    color: "#4d7cfe",
+    color: "#5a86ff",
     descriptionTh:
       "ร่วมพัฒนาและอัปเดตฟีเจอร์บนแอปพลิเคชัน Pinto ที่ใช้งานจริง ดูแล State Management เพื่อรองรับการแสดงผลเมนู WebView และพัฒนาระบบสะสมแต้มแชท (Chat Streaks) พร้อมเชื่อมต่อ Profile API",
     descriptionEn:
@@ -189,7 +189,7 @@ export const projectsData: ProjectItem[] = [
     origin: "internship",
     proofTh: "คิดเงินต่อได้แม้เน็ตหลุด และไม่คิดเงินซ้ำเมื่อส่งคำขอซ้ำ",
     proofEn: "Checkout keeps working offline, with no double charges on retry",
-    color: "#4d7cfe",
+    color: "#5a86ff",
     descriptionTh:
       "พัฒนาฟีเจอร์ชำระเงินของโมดูลระบบ ณ จุดขาย (POS) และเชื่อมต่อกับ REST API เพื่อให้รายการขายตรงกับระบบหลังบ้าน",
     descriptionEn:

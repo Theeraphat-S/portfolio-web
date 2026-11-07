@@ -38,8 +38,8 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
   };
 
   const getSpotlightColor = (type: string) => {
-    if (type === "internship") return "rgba(56,217,255, 0.15)";
-    if (type === "ta") return "rgba(77,124,254, 0.15)";
+    if (type === "internship") return "rgba(64,220,255, 0.15)";
+    if (type === "ta") return "rgba(90,134,255, 0.15)";
     return "rgba(245, 158, 11, 0.15)";
   };
 

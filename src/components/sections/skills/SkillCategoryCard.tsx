@@ -36,7 +36,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({
     switch (color) {
       case "emerald":
       case "cyan":
-        return "rgba(56,217,255, 0.15)";
+        return "rgba(64,220,255, 0.15)";
       case "blue":
         return "rgba(59, 130, 246, 0.15)";
       default:
