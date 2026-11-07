@@ -2,16 +2,16 @@
 name: Theeraphat Srimontha Portfolio
 description: High-performance mobile systems engineering showcase
 colors:
-  primary: "#4d7cfe"
-  signal: "#38d9ff"
+  primary: "#5a86ff"
+  signal: "#40dcff"
   status-emerald: "#10b981"
-  bg-void: "#070b14"
-  surface: "#0d1424"
-  surface-raised: "#131c30"
+  bg-void: "#060a12"
+  surface: "#0f192c"
+  surface-raised: "#17233b"
   text-primary: "#f3f6fc"
-  text-secondary: "#b9c3d4"
-  text-muted: "#8b97ad"
-  border-line: "#26324a"
+  text-secondary: "#bdc7d8"
+  text-muted: "#94a1b9"
+  border-line: "#2d3b57"
 typography:
   display:
     fontFamily: "Outfit, IBM Plex Sans Thai, -apple-system, BlinkMacSystemFont, sans-serif"
@@ -73,7 +73,7 @@ components:
     rounded: "{rounded.full}"
     padding: "12px 24px"
   button-outline-hover:
-    backgroundColor: "rgba(56, 217, 255, 0.05)"
+    backgroundColor: "rgba(64, 220, 255, 0.05)"
     textColor: "{colors.signal}"
     rounded: "{rounded.full}"
     padding: "12px 24px"
@@ -90,13 +90,13 @@ components:
 
 **Creative North Star: "The Avionics Instrument Deck"**
 
-The visual language of Theeraphat Srimontha's portfolio functions as an advanced flight deck for high-reliability mobile engineering, organized as a **scroll-led narrative journey**. Rather than treating software as abstract styling, the interface mirrors the precision, predictability, and tactile certainty of avionics instrumentation: deep blue-black backgrounds (`#070b14`), layered midnight surfaces (`#0d1424`/80%), 1px laser-etched borders, and razor-sharp typographic telemetry. Every element conveys intentional control—deterministic states, measured frame budgets, and zero unnecessary visual noise.
+The visual language of Theeraphat Srimontha's portfolio functions as an advanced flight deck for high-reliability mobile engineering, organized as a **scroll-led narrative journey**. Rather than treating software as abstract styling, the interface mirrors the precision, predictability, and tactile certainty of avionics instrumentation: deep blue-black backgrounds (`#060a12`), layered midnight surfaces (`#0f192c`/80%), 1px laser-etched borders, and razor-sharp typographic telemetry. Every element conveys intentional control—deterministic states, measured frame budgets, and zero unnecessary visual noise.
 
-Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38d9ff`) is the signal color for motion and live state across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and pill buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
+Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40dcff`) is the signal color for motion and live state across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and pill buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
 
 **Key Characteristics:**
 
-- **Obsidian Dark Void**: Total immersion in deep slate-black surfaces (`#070b14` to `#131c30`) that direct immediate focus to project artifacts.
+- **Obsidian Dark Void**: Total immersion in deep slate-black surfaces (`#060a12` to `#17233b`) that direct immediate focus to project artifacts.
 - **Scroll-Led Story Progression**: Continuous narrative journey where technical depth unfolds naturally through scroll-linked sticky runways and live BLoC stream mutations.
 - **Laser-Etched Precision**: Restrained 1px borders with subtle linear gradient transitions that outline containers without visual weight.
 - **Instrument Telemetry**: Monospace timestamps, sub-millisecond ping metrics, and status pulse indicators that ground claims in living system truth.
@@ -108,11 +108,11 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 ### Primary
 
-- **Primary Blue** (`#4d7cfe`, `primary`): Primary buttons, links, section eyebrows, key metric values and the hero accent line. Buttons use `void` text on blue (≈5:1).
+- **Primary Blue** (`#5a86ff`, `primary`): Primary buttons, links, section eyebrows, key metric values and the hero accent line. Buttons use `void` text on blue (≈5:1).
 
 ### Secondary
 
-- **Electric Cyan** (`#38d9ff`, `signal`): Motion and live state only — hover and focus states, pulsing indicators (including the DevTools dock heartbeat), the active chapter dot, every progress fill (scroll bar, story rail, beat rail and beat stepper) and the beat-commit light in the case-study runway. A control that is blue at rest turns cyan as a whole on hover: text, border and tint together.
+- **Electric Cyan** (`#40dcff`, `signal`): Motion and live state only — hover and focus states, pulsing indicators (including the DevTools dock heartbeat), the active chapter dot, every progress fill (scroll bar, story rail, beat rail and beat stepper) and the beat-commit light in the case-study runway. A control that is blue at rest turns cyan as a whole on hover: text, border and tint together.
 
 ### Tertiary
 
@@ -122,14 +122,14 @@ Primary Blue (`#4d7cfe`) carries actions and key text, while Electric Cyan (`#38
 
 ### Neutral
 
-- **Void** (`#070b14`, `void`): Global canvas.
-- **Surface** (`#0d1424`, `surface`): Sections and cards; glass cards use it at 80% with 20px blur.
-- **Surface Raised** (`#131c30`): Popovers, modals, drawers, nested elements.
+- **Void** (`#060a12`, `void`): Global canvas.
+- **Surface** (`#0f192c`, `surface`): Sections and cards; glass cards use it at 80% with 20px blur.
+- **Surface Raised** (`#17233b`): Popovers, modals, drawers, nested elements.
 - **Deck aliases**: `deck` and `deck-head` alias `surface`; `deck-bar`, `deck-well`, `dock` and `hud` alias `void`. They exist as names only, so the canvas keeps three steps (void, surface, surface-raised) plus translucent white overlays. `device-glass` (`#05060a`) belongs to the device hardware.
 - **Ink** (`#f3f6fc`, `ink`): Headlines and primary text.
-- **Secondary Text** (`#b9c3d4`, `zinc-300`): Supporting narrative copy.
-- **Muted** (`#8b97ad`, `muted` / `zinc-400`): Descriptions and secondary data.
-- **Line** (`#26324a`, `line`): Card borders and section dividers.
+- **Secondary Text** (`#bdc7d8`, `zinc-300`): Supporting narrative copy.
+- **Muted** (`#94a1b9`, `muted` / `zinc-400`): Descriptions and secondary data.
+- **Line** (`#2d3b57`, `line`): Card borders and section dividers.
 
 ### Named Rules
 
@@ -170,7 +170,7 @@ The spatial model employs an asymmetric 12-column responsive grid framed within 
 - **Maximum Content Width:** `max-w-5xl` (1024px) for reading sections, navigation, and bento grids; `max-w-6xl` (1152px) for the main application shell; `max-w-7xl` (1280px) for wide telemetry decks and editorial hero headers.
 - **Section Spacing Rhythm:** Standard vertical rhythm is `py-16` (64px) on mobile scaling to `py-24` (96px) on desktop viewports.
 - **Dividing Boundaries:** Sections are demarcated by a still `border-b border-line`.
-- **Grid Background:** Ultra-subtle 56px technical grid lines (`rgba(77, 124, 254, 0.05)`) provide depth behind transparent containers.
+- **Grid Background:** Ultra-subtle 56px technical grid lines (`rgba(90, 134, 255, 0.05)`) provide depth behind transparent containers.
 
 ## Elevation & Depth
 
@@ -183,7 +183,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Named Rules
 
-**The Glass Before Blur Rule.** Transparent containers must always combine translucent dark backgrounds (`rgba(13, 20, 36, 0.8)` or `void/85` for compact floating pills) with `backdrop-filter: blur(16px–20px)` and a `1px` `line` (`#26324a`) border. Blur without border definition is prohibited.  
+**The Glass Before Blur Rule.** Transparent containers must always combine translucent dark backgrounds (`rgba(15, 25, 44, 0.8)` or `void/85` for compact floating pills) with `backdrop-filter: blur(16px–20px)` and a `1px` `line` (`#2d3b57`) border. Blur without border definition is prohibited.  
 **The Neutral Shadow Rule.** Shadows are black and only lift things that float. Buttons and cards at rest or on hover take no shadow.
 
 ## Shapes
@@ -197,16 +197,18 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 ### Buttons
 
 - **Shape:** Pill silhouette (`rounded-full`, 9999px).
-- **Primary:** Background `#4d7cfe`, text `#070b14`, font `Outfit` 500 (`14px`), padding `12px 24px`, sentence case (`Explore work`).
-- **Hover / Focus:** Shifts background to Electric Cyan `#38d9ff`; nothing moves or glows.
-- **Outline / Ghost:** Background `transparent`, border `1px solid #26324a`, text `#f3f6fc`. On hover, border shifts to `rgba(56, 217, 255, 0.45)` and text shifts to `#38d9ff`.
+- **Primary:** Background `#5a86ff`, text `#060a12`, font `Outfit` 500 (`14px`), padding `12px 24px`, sentence case (`Explore work`).
+- **Hover / Focus:** Shifts background to Electric Cyan `#40dcff`; nothing moves or glows.
+- **Outline / Ghost:** Background `transparent`, border `1px solid #2d3b57`, text `#f3f6fc`. On hover, border shifts to `rgba(64, 220, 255, 0.45)` and text shifts to `#40dcff`.
+- **Tonal:** Background `#17233b` (surface-raised), border `1px solid #2d3b57`, text `#f3f6fc`; hover turns border and text cyan. For secondary actions inside a card (Copy email).
+- **Sizes & state:** `btn-sm` (13px label, 44px minimum height) for footers and inline actions; a disabled button drops to 50% opacity and does not lift or press.
 
 ### Cards & Containers
 
 - **Corner Style:** Rounded 12px (`rounded-xl`) or 16px (`rounded-2xl`).
-- **Background:** `rgba(13, 20, 36, 0.8)` with `backdrop-blur(20px)`.
-- **Border:** `1px solid #26324a`.
-- **Hover Treatment:** Border shifts to `rgba(56, 217, 255, 0.35)`; nothing moves or glows.
+- **Background:** `rgba(15, 25, 44, 0.8)` with `backdrop-blur(20px)`.
+- **Border:** `1px solid #2d3b57`.
+- **Hover Treatment:** Border shifts to `rgba(64, 220, 255, 0.35)`; nothing moves or glows.
 - **Internal Padding:** `p-5 sm:p-6` for bento cards; `p-6 sm:p-8` for flagship case study containers.
 
 ### Bezel Container (`.bezel` / `.bezel-core`)
@@ -237,7 +239,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 - **Layer:** Fixed behind the content: one `surface`-tone lift layer whose opacity changes. No colored light: radial blue or cyan washes behind content are not used.
 - **Per-chapter lift:** Intro stays on the void; Approach lifts to 45%; Selected work 20%; Capabilities 50%; Experience 22%; Contact 75%. Each value holds through its chapter and blends across the boundary (±0.2 chapter).
-- **Restraint:** The lift tops out near `surface` (`#0d1424`), a tone step inside one neutral. Reduced motion holds the intro value.
+- **Restraint:** The lift tops out near `surface` (`#0f192c`), a tone step inside one neutral. Reduced motion holds the intro value.
 
 ### Chapter Bridge (`ChapterBridge`)
 
@@ -299,8 +301,8 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Don't:
 
-- **Don't** use solid high-contrast borders (e.g., solid `#ffffff` or solid `#38d9ff`); borders use the `line` token (`#26324a`).
-- **Don't** flood screen backgrounds with bright or neon fills; background canvas remains Midnight void (`#070b14`).
+- **Don't** use solid high-contrast borders (e.g., solid `#ffffff` or solid `#40dcff`); borders use the `line` token (`#2d3b57`).
+- **Don't** flood screen backgrounds with bright or neon fills; background canvas remains Midnight void (`#060a12`).
 - **Don't** apply cyan color to long body copy; reserve it exclusively for accents, active states, and key data.
 - **Don't** introduce layout shifts when toggling languages or switching between scrollytelling beats.
 - **Don't** resurrect obsolete navigation patterns (top floating navbar dock or preloader splash screen) in active components.
