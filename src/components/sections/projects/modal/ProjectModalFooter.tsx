@@ -39,7 +39,7 @@ export const ProjectModalFooter: React.FC<ProjectModalFooterProps> = ({
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-full bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 hover:text-white text-xs font-mono font-medium flex items-center gap-1.5 transition border border-line hover:border-white/20"
+            className="btn-editorial btn-editorial-outline btn-sm cursor-pointer"
           >
             <Github className="w-3.5 h-3.5" />
             <span>{t("โปรไฟล์ GitHub", "GitHub profile")}</span>
@@ -48,7 +48,7 @@ export const ProjectModalFooter: React.FC<ProjectModalFooterProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="px-6 py-2 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-semibold transition btn-lift cursor-pointer  "
+          className="btn-editorial btn-editorial-primary btn-sm px-6 cursor-pointer"
         >
           {t("ปิดหน้าต่าง", "Close")}
         </button>

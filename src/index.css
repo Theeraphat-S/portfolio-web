@@ -433,8 +433,36 @@ section[id] {
     transform: translateY(-1px);
   }
 
+  /* Tonal: a raised fill for secondary actions that sit inside a card. */
+  .btn-editorial-tonal {
+    background: var(--color-surface-raised);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line);
+  }
+
+  .btn-editorial-tonal:hover {
+    border-color: color-mix(in oklab, var(--color-signal) 45%, transparent);
+    color: var(--color-signal);
+    transform: translateY(-1px);
+  }
+
+  /* Compact size for footers and inline actions; keeps the 44px target. */
+  .btn-sm {
+    gap: 0.375rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+
+  .btn-editorial:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
   /* Pressed: settle back to the baseline the hover lifted from. */
-  .btn-editorial:active {
+  .btn-editorial:active:not(:disabled) {
     transform: translateY(0) scale(0.98);
   }
 

@@ -441,7 +441,7 @@ export const ContactSection: React.FC = () => {
                       <button
                         type="button"
                         onClick={copyEmail}
-                        className="px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-mono text-white transition cursor-pointer border border-white/[0.1]"
+                        className="btn-editorial btn-editorial-tonal btn-sm cursor-pointer"
                       >
                         {copied
                           ? t("คัดลอกแล้ว", "Copied")
@@ -462,7 +462,7 @@ export const ContactSection: React.FC = () => {
                   <button
                     type="submit"
                     data-cursor-text="DISPATCH"
-                    className="relative w-full min-h-11 py-3 px-12 rounded-full bg-primary hover:bg-signal text-void font-mono text-xs font-semibold transition btn-lift flex items-center justify-center gap-2 cursor-pointer  "
+                    className="btn-editorial btn-editorial-primary w-full min-h-11 px-12 cursor-pointer"
                   >
                     <span>
                       {lang === "th"
