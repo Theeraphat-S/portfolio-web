@@ -74,13 +74,13 @@ export const Hero: React.FC = () => {
               type="button"
               onClick={toggleLang}
               aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-              className="btn-press min-h-11 px-3 text-xs font-mono text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition shrink-0"
+              className="brut-lift min-h-11 px-3 text-xs font-mono text-zinc-300 hover:text-white bg-surface border-2 border-edge rounded-[0.625rem] shadow-brut-ink hover:shadow-brut-ink-lg transition shrink-0"
             >
               <span className={lang === "th" ? "text-primary" : ""}>TH</span>
               <span className="px-1.5 text-zinc-600">/</span>
               <span className={lang === "en" ? "text-primary" : ""}>EN</span>
             </button>
-            <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
+            <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-[0.625rem] bg-emerald-500/10 border-2 border-emerald-400/70 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span>{t("เปิดรับตำแหน่งงาน", "Open for roles")}</span>
             </span>
@@ -119,8 +119,8 @@ export const Hero: React.FC = () => {
             style={{ y: shouldReduceMotion ? 0 : cardParallax }}
             className="lg:col-span-4 flex flex-col justify-end"
           >
-            <div className="bezel backdrop-blur-[20px]">
-              <div className="bezel-core p-2.5 sm:p-3.5 bg-surface/80 border border-line">
+            <div className="bezel">
+              <div className="bezel-core p-2.5 sm:p-3.5 bg-surface border-2 border-edge">
                 <BilingualStack
                   as="span"
                   className="block font-mono text-xs text-zinc-400"

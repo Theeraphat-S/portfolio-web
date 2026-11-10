@@ -196,7 +196,7 @@ export const ContactSection: React.FC = () => {
 
           {/* Prominent Primary Email CTA Card */}
           <div className="bezel">
-            <div className="bezel-core p-3.5 sm:p-[1.125rem] bg-surface/80 border border-line hover:border-signal/30 transition space-y-3">
+            <div className="bezel-core p-3.5 sm:p-[1.125rem] bg-surface border-2 border-edge space-y-3">
               <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
                 <span>{t("อีเมล", "Email")}</span>
               </div>
@@ -314,8 +314,8 @@ export const ContactSection: React.FC = () => {
           variants={FADE_UP}
           className="lg:col-span-6 xl:col-span-5"
         >
-          <div className="bezel backdrop-blur-sm">
-            <div className="bezel-core p-[1.125rem] sm:p-[1.625rem] bg-surface/80 border border-line space-y-5">
+          <div className="bezel">
+            <div className="bezel-core p-[1.125rem] sm:p-[1.625rem] bg-surface border-2 border-edge space-y-5">
               <div className="space-y-1 pb-3 border-b border-line">
                 <BilingualStack
                   as="h3"

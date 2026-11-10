@@ -598,7 +598,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             onFocus={onPrefetch}
             aria-haspopup="dialog"
             data-cursor-text="ANALYZE"
-            className="group/cta btn-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 pl-5 pr-1.5 py-1 rounded-full bg-surface border border-white/[0.12] hover:border-signal/50 hover:bg-signal/[0.05] text-zinc-200 hover:text-white text-xs font-mono transition shadow-chip  cursor-pointer"
+            className="group/cta brut-lift relative inline-flex items-center justify-center gap-2.5 min-w-[170px] max-lg:min-h-11 pointer-coarse:min-h-11 pl-5 pr-1.5 py-1 rounded-[0.625rem] bg-surface border-2 border-edge text-zinc-200 hover:text-white text-xs font-mono transition shadow-brut-sm hover:shadow-brut cursor-pointer"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400 group-hover/cta:text-signal transition-colors" />
             <span className="font-semibold">
@@ -627,9 +627,9 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
       whileInView="visible"
       viewport={IN_VIEW}
       variants={FADE_UP}
-      className="bezel [--bezel-radius:1.5rem] relative backdrop-blur-md"
+      className="bezel [--bezel-radius:1rem] relative"
     >
-      <div className="bezel-core bg-deck/90 border border-line hover:border-signal/30 transition-[border-color] duration-(--dur-slow) p-[1.125rem] sm:p-[2.125rem] lg:p-[2.625rem]">
+      <div className="bezel-core bg-deck border-2 border-edge p-[1.125rem] sm:p-[2.125rem] lg:p-[2.625rem]">
         {/* Render exactly one layout tree: duplicated hidden markup would
           steal the beat refs from the visible runway and duplicate ids. */}
         {isPinned ? (
