@@ -12,6 +12,9 @@ colors:
   text-secondary: "#bdc7d8"
   text-muted: "#94a1b9"
   border-line: "#2d3b57"
+  edge: "#bdc7d8"
+  brut: "#5a86ff"
+  brut-ink: "#36435d"
 typography:
   display:
     fontFamily: "Outfit, IBM Plex Sans Thai, -apple-system, BlinkMacSystemFont, sans-serif"
@@ -60,27 +63,27 @@ components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.bg-void}"
-    rounded: "{rounded.full}"
+    rounded: "10px"
     padding: "12px 24px"
   button-primary-hover:
     backgroundColor: "{colors.signal}"
     textColor: "{colors.bg-void}"
-    rounded: "{rounded.full}"
+    rounded: "10px"
     padding: "12px 24px"
   button-outline:
-    backgroundColor: "transparent"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.text-primary}"
-    rounded: "{rounded.full}"
+    rounded: "10px"
     padding: "12px 24px"
   button-outline-hover:
-    backgroundColor: "rgba(64, 220, 255, 0.05)"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.signal}"
-    rounded: "{rounded.full}"
+    rounded: "10px"
     padding: "12px 24px"
   card-editorial:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.text-primary}"
-    rounded: "{rounded.xl}"
+    rounded: "14px"
     padding: "20px 24px"
 ---
 
@@ -92,7 +95,7 @@ components:
 
 The visual language of Theeraphat Srimontha's portfolio functions as an advanced flight deck for high-reliability mobile engineering, organized as a **scroll-led narrative journey**. Rather than treating software as abstract styling, the interface mirrors the precision, predictability, and tactile certainty of avionics instrumentation: deep blue-black backgrounds (`#060a12`), layered midnight surfaces (`#0f192c`/80%), 1px laser-etched borders, and razor-sharp typographic telemetry. Every element conveys intentional control—deterministic states, measured frame budgets, and zero unnecessary visual noise.
 
-Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40dcff`) is the signal color for motion and live state across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and pill buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
+Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40dcff`) is the signal color for motion and live state across the dark expanse, highlighting system vitals, active state channels, and verified metrics. Typography balances geometric authority with technical clarity: bold, monumental display headlines (`Outfit`) paired seamlessly with Thai humanism (`IBM Plex Sans Thai`) and unyielding monospace data streams (`JetBrains Mono`). Micro-interactions—from Lenis smooth scrolling and neo-brutalist press buttons to sticky multi-beat mobile simulations with live DevTools—are engineered with custom cubic-bezier easing (`0.16, 1, 0.3, 1`) to deliver a true 60–120 FPS feel.
 
 **Key Characteristics:**
 
@@ -100,7 +103,7 @@ Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40
 - **Scroll-Led Story Progression**: Continuous narrative journey where technical depth unfolds naturally through scroll-linked sticky runways and live BLoC stream mutations.
 - **Laser-Etched Precision**: Restrained 1px borders with subtle linear gradient transitions that outline containers without visual weight.
 - **Instrument Telemetry**: Monospace timestamps, sub-millisecond ping metrics, and status pulse indicators that ground claims in living system truth.
-- **Tactile Interactions**: Pill-shaped controls that answer hover with a color step, never a glow.
+- **Tactile Interactions**: Dark Neo-Brutalist controls with a 2px edge and a hard offset shadow that lift on hover and land on their shadow when pressed, never a glow.
 
 ## Colors
 
@@ -135,7 +138,7 @@ Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40
 
 **The 80 / 15 / 5 Rule.** Roughly 80% dark canvas and space, 15% surfaces and gray text, 5% blue and cyan. Accent color that spreads past that loses its pull.
 **The Blue Acts, Cyan Moves Rule.** Blue marks what is important or clickable at rest; cyan appears only when something moves, is hovered, or is live. Never set long body copy in either.
-**The No Glow Rule.** Nothing glows: no text-shadow, colored box-shadow or colored drop-shadow on headlines, buttons, dots or cards. Depth comes from the void, surface and surface-raised steps plus hairlines. The case-study beat commit is the one lit moment, and it lights with opacity, not a halo.
+**The No Glow Rule.** Nothing glows: no text-shadow, blurred colored box-shadow or colored drop-shadow on headlines, buttons, dots or cards. The only colored shadow is the hard, unblurred Neo-Brutalist offset (see Elevation & Depth); it reads as a solid slab, not light. The case-study beat commit is the one lit moment, and it lights with opacity, not a halo.
 **The Telemetry Heartbeat Rule.** Emerald (`#10b981`) is reserved for the availability status, never decorative text, metrics or live streams (those are cyan).
 **The Zero-Shift Bilingual Rule.** All text containers supporting Thai and English apply balanced line-heights, flex alignment, and explicit min-heights so toggling languages causes no layout shift.
 **The Sticky Viewport Budget Rule.** Pinned demonstration viewports never exceed `calc(100vh - 6rem)`.
@@ -174,33 +177,35 @@ The spatial model employs an asymmetric 12-column responsive grid framed within 
 
 ## Elevation & Depth
 
-Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-shadows. Surfaces feel laser-machined from tinted dark quartz.
+**Dark Neo-Brutalism.** Key surfaces and controls are solid slabs: an opaque `surface` fill, a 2px light `edge` (`#bdc7d8`) border and a hard offset shadow with zero blur, so they read as cut-out panels sitting on the void. Accent shadows use `brut` (Primary Blue); quiet controls use the neutral `brut-ink` (`#36435d`). Changing `--color-brut` re-tints the whole system.
 
 ### Shadow Vocabulary
 
+- **Brut Shadows** (`shadow-brut-sm` 3px, `shadow-brut` 5px, `shadow-brut-lg` 7px, all `--color-brut`; `shadow-brut-ink` 4px and `shadow-brut-ink-lg` 6px in `brut-ink`): Offset down-right, no blur, no spread. Key containers and buttons only.
+- **Brut Press:** On hover a control lifts 2px up-left off its shadow and the shadow grows by 2px; while pressed it moves 2px down-right and the shadow drops to zero, so it lands on its own shadow. Buttons get this from `.btn-editorial`; custom pills add the `brut-lift` utility next to a `shadow-brut-*` / `hover:shadow-brut-*` pair.
 - **Overlay Shadow** (`--shadow-modal`, `--shadow-drawer`): Neutral black only, for the modal and the DevTools drawer that float above the page.
 - **Dock Elevation** (`0 12px 32px rgba(0, 0, 0, 0.65)`): Deep shadow applied to floating telemetry and chapter indicators.
 
 ### Named Rules
 
-**The Glass Before Blur Rule.** Transparent containers must always combine translucent dark backgrounds (`rgba(15, 25, 44, 0.8)` or `void/85` for compact floating pills) with `backdrop-filter: blur(16px–20px)` and a `1px` `line` (`#2d3b57`) border. Blur without border definition is prohibited.  
-**The Neutral Shadow Rule.** Shadows are black and only lift things that float. Buttons and cards at rest or on hover take no shadow.
+**The Solid Slab Rule.** Neo-Brutalist surfaces are opaque: no `backdrop-filter`, no translucent fill under a 2px edge. Glass (`void/90` + blur + 1px `line`) stays only on fixed floating chrome that sits over moving content (the StoryProgress pill and menu, the live event dock).  
+**The Hard Shadow Rule.** Shadows on page surfaces are hard offsets from the Brut vocabulary, never blurred. Blurred black shadows are kept for overlays that float above the page (the DevTools drawer, floating chrome). Hairline-only cards, list rows and tiles take no shadow; a page holds a few slabs, not dozens.
 
 ## Shapes
 
-- **Interactive Controls:** Rounded pill silhouette (`rounded-full` / `9999px`) for action buttons, filter chips, badge containers, and status pills.
-- **Structural Containers:** Smooth rounded rectangle (`rounded-xl` / `12px` to `rounded-2xl` / `16px`) for case study cards, telemetry decks, and modal sheets.
+- **Interactive Controls:** Soft-square silhouette (`rounded-[0.625rem]` / `10px`) for action buttons, the language toggle, status pills and the project jump nav (12px tray, 8px items). Round avatars and dots stay round.
+- **Structural Containers:** `14px` (`.bezel` default) to `16px` for the hero, contact, case study and modal slabs; `rounded-xl` / `rounded-2xl` for ordinary tiles and telemetry decks.
 - **Micro Badges:** Subtle `rounded` (4px to 6px) for metric tags, architecture chips, and date markers.
 
 ## Components
 
 ### Buttons
 
-- **Shape:** Pill silhouette (`rounded-full`, 9999px).
-- **Primary:** Background `#5a86ff`, text `#060a12`, font `Outfit` 500 (`14px`), padding `12px 24px`, sentence case (`Explore work`).
-- **Hover / Focus:** Shifts background to Electric Cyan `#40dcff`; nothing moves or glows.
-- **Outline / Ghost:** Background `transparent`, border `1px solid #2d3b57`, text `#f3f6fc`. On hover, border shifts to `rgba(64, 220, 255, 0.45)` and text shifts to `#40dcff`.
-- **Tonal:** Background `#17233b` (surface-raised), border `1px solid #2d3b57`, text `#f3f6fc`; hover turns border and text cyan. For secondary actions inside a card (Copy email).
+- **Shape:** Soft square (`10px`) with a `2px` border; every variant does the Brut Press.
+- **Primary:** Background `#5a86ff`, text `#060a12`, border and 4px hard shadow in `ink` (`#f3f6fc`), font `Outfit` 600 (`14px`), padding `12px 24px`, sentence case (`Explore work`).
+- **Hover / Focus:** Background shifts to Electric Cyan `#40dcff` and the shadow grows to 6px.
+- **Outline:** Background `surface`, border `2px edge`, text `#f3f6fc`, `shadow-brut-sm` growing to `shadow-brut`; hover turns the text cyan.
+- **Tonal:** Background `#17233b` (surface-raised), border `2px edge`, neutral `shadow-brut-ink`; hover turns the text cyan. For secondary actions inside a card (Copy email).
 - **Sizes & state:** `btn-sm` (13px label, 44px minimum height) for footers and inline actions; a disabled button drops to 50% opacity and does not lift or press.
 
 ### Cards & Containers
@@ -211,11 +216,11 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 - **Hover Treatment:** Border shifts to `rgba(64, 220, 255, 0.35)`; nothing moves or glows.
 - **Internal Padding:** `p-5 sm:p-6` for bento cards; `p-6 sm:p-8` for flagship case study containers.
 
-### Bezel Container (`.bezel` / `.bezel-core`)
+### Brut Slab (`.bezel` / `.bezel-core`)
 
-- **Use:** Key containers only: the hero "What I built" card, the contact email card and form panel, each case-study card and the project modal. Never a bezel inside a bezel, and never on ordinary bento cards or tiles.
-- **Structure:** The tray (`.bezel`) is a 1px `white/6%` hairline over a `white/2%` fill with 6px padding; the card inside (`.bezel-core`) keeps its `surface` fill and `line` border and adds a `white/6%` inset top highlight. Set the tray radius with `[--bezel-radius:1.5rem]` (default 1.25rem); the core radius follows it (tray minus 7px), so the curves stay concentric.
-- **Size:** The tray adds 7px per side, so trim the core's padding by about 6px to keep the container's footprint and the page length unchanged.
+- **Use:** Key containers only: the hero "What I built" card, the contact email card and form panel, each case-study card and the project modal. Never a slab inside a slab, and never on ordinary bento cards or tiles.
+- **Structure:** The outer `.bezel` carries the radius and the hard `shadow-brut`; the inner `.bezel-core` is the slab, with an opaque fill (`surface`, or `deck` for case studies) and `border-2 border-edge`. Set the radius with `[--bezel-radius:1rem]` on `.bezel` (default 0.875rem); the core uses the same value. The modal takes `shadow-brut-lg`.
+- **Size:** No padding between the two layers, so the slab's footprint is the core's own.
 
 ### Nested CTA Icon (`.cta-icon`)
 
