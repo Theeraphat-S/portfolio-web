@@ -325,7 +325,7 @@ export const ExperienceTimeline: React.FC = () => {
           whileInView="visible"
           viewport={IN_VIEW}
           variants={FADE_UP}
-          className="mt-10 sm:mt-14 p-6 sm:p-7 rounded-2xl bg-white/[0.015] border border-line hover:border-white/[0.15] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
+          className="mt-10 sm:mt-14 p-6 sm:p-7 rounded-xl bg-surface border-[1.5px] border-edge shadow-hard flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           <div className="space-y-1">
             <BilingualStack
@@ -351,7 +351,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.phone && (
               <a
                 href={telHref(personal.reference.phone)}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition"
+                className="flex items-center min-h-11 lg:min-h-0 px-3.5 py-1.5 chip btn-lift gap-2 text-zinc-300 hover:text-signal hover:border-signal transition"
               >
                 <Phone className="w-3.5 h-3.5 text-primary" />
                 <span>{personal.reference.phone}</span>
@@ -360,7 +360,7 @@ export const ExperienceTimeline: React.FC = () => {
             {personal.reference.email && (
               <a
                 href={`mailto:${personal.reference.email}`}
-                className="flex items-center gap-2 min-h-11 lg:min-h-0 px-3.5 py-1.5 rounded-full bg-white/[0.02] text-zinc-300 hover:text-signal hover:bg-signal/10 border border-line hover:border-signal/30 transition"
+                className="flex items-center min-h-11 lg:min-h-0 px-3.5 py-1.5 chip btn-lift gap-2 text-zinc-300 hover:text-signal hover:border-signal transition"
               >
                 <Mail className="w-3.5 h-3.5 text-primary" />
                 <span>{personal.reference.email}</span>

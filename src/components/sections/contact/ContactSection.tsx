@@ -22,7 +22,7 @@ import { telHref } from "../../../lib/utils";
 // Each coordinate tile is one link: the whole card is the target, and its
 // label and value together are the link's accessible name.
 const CONTACT_TILE =
-  "group block min-h-11 p-3.5 rounded-xl bg-white/[0.015] border border-line hover:border-signal/30 hover:bg-signal/[0.04] space-y-1 transition-colors";
+  "group block min-h-11 p-3.5 rounded-lg bg-surface border-[1.5px] border-edge shadow-hard-sm hover:border-signal btn-lift space-y-1 transition";
 const TILE_LABEL = "flex items-center gap-1.5 text-xs font-mono text-zinc-400 ";
 const TILE_VALUE =
   "flex items-center gap-1 text-sm font-mono font-semibold text-zinc-200 group-hover:text-signal transition-colors";
@@ -53,11 +53,11 @@ const ERROR_TEXT: Record<Field, { th: string; en: string }> = {
 
 // 16px text on phones: iOS Safari zooms the page when a smaller input gets focus.
 const inputClass = (invalid: boolean) =>
-  `w-full px-3.5 py-2.5 rounded-lg bg-white/[0.02] border ${
+  `w-full px-3.5 py-2.5 rounded-lg bg-void border-[1.5px] ${
     invalid
-      ? "border-rose-400/60 focus:border-rose-400 focus-visible:outline-rose-400"
-      : "border-line focus:border-signal/60"
-  } text-base sm:text-sm text-white placeholder-zinc-400 transition-colors font-mono`;
+      ? "border-rose-400 focus-visible:outline-rose-400"
+      : "border-edge focus:border-signal"
+  } shadow-[inset_2px_2px_0_var(--color-slab)] text-base sm:text-sm text-white placeholder-zinc-400 transition-colors font-mono`;
 
 export const ContactSection: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -164,8 +164,8 @@ export const ContactSection: React.FC = () => {
           className="lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-8"
         >
           {/* Availability Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-mono text-xs min-h-[1.75rem]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <div className="badge-live px-3 py-1 min-h-[1.75rem]">
+            <span className="w-1.5 h-1.5 rounded-full bg-void" />
             <span className="">
               {lang === "th"
                 ? "เปิดรับตำแหน่ง Junior Mobile"
@@ -223,7 +223,7 @@ export const ContactSection: React.FC = () => {
                           "Copy email address to clipboard",
                         )
                   }
-                  className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full bg-primary/10 hover:bg-signal/10 text-primary hover:text-signal border border-primary/30 hover:border-signal/30 font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0"
+                  className="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-lg bg-surface text-primary hover:text-signal border-[1.5px] border-primary hover:border-signal shadow-hard-xs btn-lift font-mono text-xs font-semibold cursor-pointer transition self-start sm:self-auto shrink-0"
                 >
                   {copied ? (
                     <>
@@ -289,7 +289,7 @@ export const ContactSection: React.FC = () => {
               </span>
             </a>
 
-            <div className="p-3.5 rounded-xl bg-white/[0.015] border border-line space-y-1">
+            <div className="p-3.5 rounded-lg bg-surface border-[1.5px] border-edge shadow-hard-sm space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
                 <MapPin className="w-3 h-3 text-primary" />
                 <span>

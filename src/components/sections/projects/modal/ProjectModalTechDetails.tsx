@@ -20,7 +20,7 @@ export const ProjectModalTechDetails: React.FC<
           <Sparkles className="w-3.5 h-3.5" />
           {t("ภาพรวมโครงการ", "Project Overview")}
         </h4>
-        <p className="text-sm text-zinc-200 leading-relaxed bg-white/[0.02] p-4 rounded-2xl border border-line">
+        <p className="text-sm text-zinc-200 leading-relaxed bg-void p-4 rounded-lg border-[1.5px] border-edge">
           {lang === "th" ? project.descriptionTh : project.descriptionEn}
         </p>
       </div>
@@ -39,7 +39,7 @@ export const ProjectModalTechDetails: React.FC<
             (hl, idx) => (
               <div
                 key={idx}
-                className="flex items-start gap-2.5 p-3 rounded-xl bg-white/[0.015] border border-line text-xs sm:text-sm text-zinc-300"
+                className="flex items-start gap-2.5 p-3 rounded-lg bg-void border-[1.5px] border-edge text-xs sm:text-sm text-zinc-300"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                 <span>{hl}</span>
@@ -55,7 +55,7 @@ export const ProjectModalTechDetails: React.FC<
           <Layers className="w-3.5 h-3.5" />
           {t("สถาปัตยกรรมระบบ (Architecture)", "System Architecture")}
         </h4>
-        <div className="p-3.5 rounded-xl bg-void border border-line text-xs font-mono text-zinc-300">
+        <div className="p-3.5 rounded-lg bg-void border-[1.5px] border-edge text-xs font-mono text-zinc-300">
           {lang === "th" ? project.architectureTh : project.architectureEn}
         </div>
       </div>

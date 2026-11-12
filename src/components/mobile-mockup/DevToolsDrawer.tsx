@@ -89,7 +89,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
             role="dialog"
             aria-modal="true"
             aria-label="Flutter & BLoC DevTools Inspector"
-            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-3xl bg-deck border border-white/[0.12] shadow-drawer overflow-hidden font-mono z-10 outline-none"
+            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-xl bg-deck border-[1.5px] border-edge shadow-hard-lg overflow-hidden font-mono z-10 outline-none"
           >
             {/* Header Strip */}
             <div className="px-4 sm:px-5 py-4 border-b border-line flex items-center justify-between gap-3 bg-deck-head">
@@ -127,8 +127,8 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   onClick={() => setTabOverride("stream")}
                   className={`px-3 py-1.5 min-h-11 lg:min-h-0 pointer-coarse:min-h-11 rounded-lg whitespace-nowrap transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "stream"
-                      ? "bg-primary/15 text-primary border border-primary/30 font-semibold"
-                      : "text-zinc-400 hover:text-zinc-200"
+                      ? "bg-primary/15 text-primary border-[1.5px] border-primary shadow-hard-xs font-semibold"
+                      : "border-[1.5px] border-transparent text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
                   <Terminal className="w-3.5 h-3.5 shrink-0" />
@@ -142,8 +142,8 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   onClick={() => setTabOverride("code")}
                   className={`px-3 py-1.5 min-h-11 lg:min-h-0 pointer-coarse:min-h-11 rounded-lg whitespace-nowrap transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "code"
-                      ? "bg-primary/15 text-primary border border-primary/30 font-semibold"
-                      : "text-zinc-400 hover:text-zinc-200"
+                      ? "bg-primary/15 text-primary border-[1.5px] border-primary shadow-hard-xs font-semibold"
+                      : "border-[1.5px] border-transparent text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
                   <Code2 className="w-3.5 h-3.5 shrink-0" />
@@ -155,8 +155,8 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   onClick={() => setTabOverride("telemetry")}
                   className={`px-3 py-1.5 min-h-11 lg:min-h-0 pointer-coarse:min-h-11 rounded-lg whitespace-nowrap transition flex items-center gap-1.5 cursor-pointer ${
                     activeTab === "telemetry"
-                      ? "bg-primary/15 text-primary border border-primary/30 font-semibold"
-                      : "text-zinc-400 hover:text-zinc-200"
+                      ? "bg-primary/15 text-primary border-[1.5px] border-primary shadow-hard-xs font-semibold"
+                      : "border-[1.5px] border-transparent text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
                   <Activity className="w-3.5 h-3.5 shrink-0" />
@@ -290,7 +290,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   </div>
 
                   {/* Code Block with line numbering */}
-                  <div className="p-4 rounded-2xl bg-deck-well border border-line overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
+                  <div className="p-4 rounded-lg bg-deck-well border-[1.5px] border-edge overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
                     <pre>
                       <code>{snippet.code}</code>
                     </pre>

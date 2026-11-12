@@ -100,7 +100,7 @@ Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40
 - **Scroll-Led Story Progression**: Continuous narrative journey where technical depth unfolds naturally through scroll-linked sticky runways and live BLoC stream mutations.
 - **Laser-Etched Precision**: Restrained 1px borders with subtle linear gradient transitions that outline containers without visual weight.
 - **Instrument Telemetry**: Monospace timestamps, sub-millisecond ping metrics, and status pulse indicators that ground claims in living system truth.
-- **Tactile Interactions**: Pill-shaped controls that answer hover with a color step, never a glow.
+- **Slab Rule**: Cards, buttons, chips and fields have a drawn 1.5px `edge` outline (`#5a6d96`, 3:1 or better on void, surface and raised) and sit on a solid offset block in `slab` (`#2b4275`, `--shadow-hard-*`, no blur). Controls use an 8px radius, not pills. Hover lifts the control off its slab by 1–2px, and press sinks it into the slab (`translate(2px, 2px)`, shadow removed). Neither moves under reduced motion. Use `.chip` for toggles, tags and jump links, and `.badge-live` (filled emerald) for availability status. The structure is borrowed from neo-brutalist UI, but the colors stay Midnight Circuit.
 
 ## Colors
 

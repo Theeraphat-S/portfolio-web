@@ -87,8 +87,8 @@ export const Skills: React.FC = () => {
         />
       </m.div>
 
-      {/* Clean Monospace Tree Layout (2 Columns with Hairline Separation) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-16 gap-y-10 sm:gap-y-12 lg:gap-y-14">
+      {/* One slab card per domain; its skills tile inside. */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
         {skillCategories.map((category: SkillCategory, catIdx: number) => {
           const meta = CATEGORY_META[catIdx] || {
             labelEn: "Capability",
@@ -104,7 +104,7 @@ export const Skills: React.FC = () => {
               whileInView="visible"
               viewport={IN_VIEW}
               variants={FADE_UP}
-              className="space-y-5"
+              className="rounded-xl bg-surface border-[1.5px] border-edge shadow-hard p-5 sm:p-6 space-y-5"
             >
               {/* Category Tree Root Header */}
               <div className="pb-3 border-b border-line space-y-1">
@@ -132,42 +132,26 @@ export const Skills: React.FC = () => {
                 />
               </div>
 
-              {/* Monospace Tree Branches */}
-              <div className="font-mono text-xs space-y-2.5 pl-1 sm:pl-2">
-                {category.skills.map((skill, sIdx) => {
-                  const isLast = sIdx === category.skills.length - 1;
-                  const connector = isLast ? "└─" : "├─";
-
-                  return (
-                    <div
-                      key={sIdx}
-                      data-cursor-text="SKILL"
-                      className="group/node flex items-start justify-between gap-3 py-1.5 px-2 rounded-lg hover:bg-white/[0.02] transition-colors cursor-default"
-                    >
-                      {/* Left: Monospace Connector + Name + Short Desc */}
-                      <div className="flex items-start gap-2.5 min-w-0">
-                        <span
-                          aria-hidden="true"
-                          className="text-zinc-600 select-none font-semibold group-hover/node:text-primary transition-colors shrink-0"
-                        >
-                          {connector}
-                        </span>
-                        <div className="space-y-0.5 min-w-0">
-                          <span className="font-medium text-zinc-200 group-hover/node:text-white transition-colors block truncate">
-                            {skill.name}
-                          </span>
-                          <BilingualStack
-                            as="span"
-                            className="text-xs text-zinc-400 font-sans font-normal block leading-normal"
-                            th={skill.descTh}
-                            en={skill.descEn}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              {/* Skill tiles: outlined, no slab, since they are not controls. */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
+                {category.skills.map((skill, sIdx) => (
+                  <li
+                    key={sIdx}
+                    data-cursor-text="SKILL"
+                    className="rounded-lg bg-void border-[1.5px] border-edge px-3 py-2.5 space-y-0.5 min-w-0"
+                  >
+                    <span className="font-semibold text-zinc-100 block">
+                      {skill.name}
+                    </span>
+                    <BilingualStack
+                      as="span"
+                      className="text-xs text-zinc-400 font-sans font-normal block leading-normal"
+                      th={skill.descTh}
+                      en={skill.descEn}
+                    />
+                  </li>
+                ))}
+              </ul>
             </m.div>
           );
         })}

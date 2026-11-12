@@ -22,7 +22,7 @@ export const ProjectModalHeader: React.FC<ProjectModalHeaderProps> = ({
     <div className="flex items-start justify-between gap-4 pb-4 border-b border-line shrink-0">
       <div>
         <div className="flex items-center gap-2 flex-wrap mb-1.5">
-          <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/25">
+          <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-md bg-primary text-void border-[1.5px] border-sky-300">
             {project.tag}
           </span>
           <span className="text-xs font-mono text-zinc-400">
@@ -43,7 +43,7 @@ export const ProjectModalHeader: React.FC<ProjectModalHeaderProps> = ({
       <button
         type="button"
         onClick={onClose}
-        className="p-2 rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-line hover:border-signal/40 text-zinc-400 hover:text-white transition shrink-0 cursor-pointer"
+        className="chip btn-lift justify-center p-2 text-zinc-400 hover:text-white hover:border-signal transition shrink-0 cursor-pointer"
         aria-label={t("ปิดหน้าต่าง", "Close modal")}
       >
         <X className="w-5 h-5" />

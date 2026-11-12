@@ -73,7 +73,7 @@ export const Footer: React.FC = () => {
             type="button"
             onClick={scrollToTop}
             data-cursor-text="TOP"
-            className="inline-flex items-center gap-1.5 px-4 min-h-11 text-xs font-mono font-medium text-zinc-400 hover:text-signal bg-white/[0.03] hover:bg-signal/10 border border-line hover:border-signal/30 rounded-full transition cursor-pointer group"
+            className="inline-flex items-center gap-1.5 px-4 min-h-11 text-xs font-mono font-medium text-zinc-400 hover:text-signal chip btn-lift hover:border-signal transition cursor-pointer group"
             aria-label={t(footerLabels.backToTop.th, footerLabels.backToTop.en)}
           >
             <ArrowUp

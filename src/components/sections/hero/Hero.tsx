@@ -74,14 +74,14 @@ export const Hero: React.FC = () => {
               type="button"
               onClick={toggleLang}
               aria-label={`Switch language. Current language is ${lang.toUpperCase()}`}
-              className="btn-press min-h-11 px-3 text-xs font-mono text-zinc-400 hover:text-white border border-line hover:border-white/20 rounded-full transition shrink-0"
+              className="chip btn-press min-h-11 px-3 text-xs font-mono font-semibold text-zinc-400 hover:text-white hover:border-primary transition shrink-0"
             >
               <span className={lang === "th" ? "text-primary" : ""}>TH</span>
               <span className="px-1.5 text-zinc-600">/</span>
               <span className={lang === "en" ? "text-primary" : ""}>EN</span>
             </button>
-            <span className="inline-flex items-center justify-center gap-2 min-w-[170px] rounded-full bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 text-xs font-mono text-emerald-300 shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="badge-live justify-center min-w-[170px] px-3 py-1 shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-void" />
               <span>{t("เปิดรับตำแหน่งงาน", "Open for roles")}</span>
             </span>
           </div>

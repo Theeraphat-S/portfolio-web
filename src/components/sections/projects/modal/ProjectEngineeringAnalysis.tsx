@@ -63,7 +63,7 @@ export const ProjectEngineeringAnalysis: React.FC<
             "Engineering Decisions & Impact Analysis",
           )}
         </h4>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-white/[0.04] text-zinc-300 border border-line">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded-md bg-void text-zinc-300 border-[1.5px] border-edge">
           Product Sense
         </span>
       </div>
@@ -75,7 +75,7 @@ export const ProjectEngineeringAnalysis: React.FC<
             return (
               <div
                 key={card.id}
-                className="p-3.5 rounded-2xl bg-white/[0.015] border border-line space-y-1.5"
+                className="p-3.5 rounded-lg bg-void border-[1.5px] border-edge space-y-1.5"
               >
                 <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-zinc-100">
                   <Icon className="w-3.5 h-3.5 shrink-0 text-primary" />
@@ -92,7 +92,7 @@ export const ProjectEngineeringAnalysis: React.FC<
 
       {/* 5. Measured Outcome & Business Impact */}
       {outcomeText && (
-        <div className="p-3.5 rounded-2xl bg-primary/[0.06] border border-primary/30 space-y-1.5">
+        <div className="p-3.5 rounded-lg bg-primary/[0.08] border-[1.5px] border-primary shadow-hard-sm space-y-1.5">
           <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-primary">
             <TrendingUp className="w-3.5 h-3.5 shrink-0" />
             <span>

@@ -19,7 +19,7 @@ export const ProjectModalMetrics: React.FC<ProjectModalMetricsProps> = ({
       {metrics.map((m, idx) => (
         <div
           key={idx}
-          className="p-3 rounded-xl bg-white/[0.02] border border-line text-center"
+          className="p-3 rounded-lg bg-void border-[1.5px] border-edge text-center"
         >
           <span className="text-xs text-zinc-400 block mb-0.5 font-medium">
             {lang === "th" ? m.labelTh : m.labelEn}

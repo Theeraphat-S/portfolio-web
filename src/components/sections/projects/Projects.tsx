@@ -74,7 +74,7 @@ export const Projects: React.FC = () => {
               on the page. Product names read the same in TH and EN. */}
           <nav
             aria-label={t("ข้ามไปยังโปรเจกต์", "Jump to a project")}
-            className="flex flex-wrap items-center gap-1 p-1 bg-white/[0.02] border border-line rounded-full self-start md:self-auto font-mono text-xs shrink-0"
+            className="flex flex-wrap items-center gap-2 self-start md:self-auto font-mono text-xs shrink-0"
           >
             {portfolioData.projects.map((project: ProjectItem) => (
               <a
@@ -85,7 +85,7 @@ export const Projects: React.FC = () => {
                   scrollToElement(`case-${project.id}`, CHAPTER_OFFSET);
                 }}
                 data-cursor-text="JUMP"
-                className="inline-flex items-center px-3 min-h-11 lg:min-h-9 rounded-full border border-transparent text-zinc-400 hover:text-signal hover:border-signal/30 hover:bg-signal/[0.06] transition"
+                className="chip btn-lift px-3 min-h-11 lg:min-h-9 font-semibold text-zinc-300 hover:text-signal hover:border-signal transition"
               >
                 {project.shortName ?? project.titleEn}
               </a>
