@@ -67,8 +67,8 @@ export const aboutData: AboutContent = {
       valueEn: "Mobile Developer Intern",
       detailTh: "ฝากด้วย โลจิสติกส์ แอนด์ ดิจิทัล แพลตฟอร์ม",
       detailEn: "Fakduay Logistics & Digital Platform",
-      periodTh: "2568 – 2569",
-      periodEn: "2025 – 2026",
+      periodTh: "2569",
+      periodEn: "2026",
     },
   ],
 };
