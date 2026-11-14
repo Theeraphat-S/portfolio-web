@@ -222,7 +222,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   </div>
 
                   {events.length === 0 ? (
-                    <div className="py-16 text-center text-zinc-500 space-y-2">
+                    <div className="py-16 text-center text-zinc-400 space-y-2">
                       <Terminal className="w-8 h-8 mx-auto text-zinc-600 opacity-60" />
                       <p>
                         {t(
@@ -240,7 +240,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                         >
                           <div className="flex items-center justify-between text-xs">
                             <div className="flex items-center gap-2">
-                              <span className="text-zinc-500 text-xs">
+                              <span className="text-zinc-400 text-xs">
                                 #{String(events.length - idx).padStart(2, "0")}
                               </span>
                               <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-semibold border border-primary/20 text-xs">
@@ -250,7 +250,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                                 {evt.name}
                               </span>
                             </div>
-                            <span className="text-zinc-500 text-xs">
+                            <span className="text-zinc-400 text-xs">
                               {evt.timestamp}
                             </span>
                           </div>
@@ -309,7 +309,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       <span className="text-xl font-semibold text-primary block font-mono">
                         16.6ms / 60 FPS
                       </span>
-                      <span className="text-xs text-zinc-500 block">
+                      <span className="text-xs text-zinc-400 block">
                         Zero Jank & Isolated Rebuilds
                       </span>
                     </div>
@@ -321,7 +321,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       <span className="text-xl font-semibold text-primary block font-mono">
                         BLoC / Equatable
                       </span>
-                      <span className="text-xs text-zinc-500 block">
+                      <span className="text-xs text-zinc-400 block">
                         Deterministic Event-to-State
                       </span>
                     </div>
@@ -333,7 +333,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                       <span className="text-xl font-semibold text-primary block font-mono">
                         {snippet.persistence.label}
                       </span>
-                      <span className="text-xs text-zinc-500 block">
+                      <span className="text-xs text-zinc-400 block">
                         {snippet.persistence.detail}
                       </span>
                     </div>

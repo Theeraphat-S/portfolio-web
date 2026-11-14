@@ -122,7 +122,7 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`h-10 w-10 rounded-full transition-[transform,background-color,border-color,box-shadow] duration-300 border ${
               isHovered
-                ? "scale-100 border-cyan-400/80 bg-cyan-400/10 shadow-glow-lg"
+                ? "scale-100 border-cyan-400/80 bg-cyan-400/10"
                 : "scale-70 border-white/20 dark:border-white/15 bg-white/5"
             }`}
           />
@@ -143,7 +143,7 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`rounded-full transition-[background-color,box-shadow] duration-200 ${
               isHovered
-                ? "w-1.5 h-1.5 bg-signal shadow-[0_0_8px_var(--color-signal)]"
+                ? "w-1.5 h-1.5 bg-signal"
                 : "w-1.5 h-1.5 bg-white dark:bg-white"
             }`}
           />

@@ -100,10 +100,6 @@
   --shadow-drawer: 0 25px 70px rgb(0 0 0 / 0.9);
   --shadow-device:
     0 30px 60px -20px rgb(0 0 0 / 0.9), 0 18px 36px -18px rgb(0 0 0 / 0.7);
-  --shadow-glow-xs: 0 0 8px var(--color-signal);
-  --shadow-glow-soft: 0 0 15px rgb(64 220 255 / 0.15);
-  --shadow-glow-lg: 0 0 20px rgb(64 220 255 / 0.35);
-  --shadow-glow-xl: 0 0 25px rgb(64 220 255 / 0.4);
 
   /* Motion tokens (mirrored in src/lib/motion.ts). One curve for every
      arrival; three durations: feedback, routine change, authored moment.
@@ -510,14 +506,9 @@ section[id] {
     align-items: center;
     gap: 0.5rem;
     border-radius: 0.375rem;
-    border: 1px solid
-      color-mix(in oklab, var(--color-emerald-400) 55%, transparent);
-    background: color-mix(
-      in oklab,
-      var(--color-emerald-400) 10%,
-      var(--color-void)
-    );
-    color: var(--color-emerald-300);
+    border: 1px solid color-mix(in oklab, var(--color-live) 55%, transparent);
+    background: color-mix(in oklab, var(--color-live) 10%, var(--color-void));
+    color: color-mix(in oklab, var(--color-live) 60%, var(--color-ink));
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 600;

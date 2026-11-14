@@ -119,7 +119,7 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               </span>
               {latestEvent.stateName && (
                 <>
-                  <span className="text-zinc-500 shrink-0">➔</span>
+                  <span className="text-zinc-400 shrink-0">➔</span>
                   <span className="text-primary font-medium text-xs truncate min-w-0 bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
                     {latestEvent.stateName}
                   </span>
@@ -127,14 +127,14 @@ export const LiveEventDock: React.FC<LiveEventDockProps> = ({
               )}
             </div>
 
-            <div className="flex items-center gap-2 shrink-0 text-xs font-mono text-zinc-500">
+            <div className="flex items-center gap-2 shrink-0 text-xs font-mono text-zinc-400">
               <span className="hidden sm:inline">
                 {latestEvent.timestamp.split(" ")[0]}
               </span>
             </div>
           </m.button>
         ) : (
-          <div className="py-1 px-2 text-zinc-500 text-xs text-center italic">
+          <div className="py-1 px-2 text-zinc-400 text-xs text-center italic">
             {t(
               "กำลังรอ Event จากการกดเล่นบนหน้าจอด้านบน...",
               "Ready. Interact with the phone screen above to stream live events.",

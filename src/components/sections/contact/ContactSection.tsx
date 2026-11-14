@@ -412,7 +412,7 @@ export const ContactSection: React.FC = () => {
                       className={`text-xs font-mono tabular-nums shrink-0 ${
                         formData.message.length >= LIMITS.message
                           ? "text-rose-300"
-                          : "text-zinc-500"
+                          : "text-zinc-400"
                       }`}
                     >
                       {formData.message.length.toLocaleString()} /{" "}
