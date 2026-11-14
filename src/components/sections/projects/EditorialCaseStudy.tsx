@@ -351,7 +351,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
           }}
         />
         <BilingualStack
-          className="w-full text-center font-mono text-xs text-zinc-500"
+          className="w-full text-center text-xs text-zinc-400"
           th="จำลองการทำงานของแอป Flutter ในเบราว์เซอร์ · ตัวเลขเป็นตัวอย่าง"
           en="In-browser simulation of the Flutter app · figures are illustrative"
         />
@@ -364,7 +364,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
   const renderStoryBeats = () => {
     return (
       <div className="pt-2">
-        <p className="pb-3 font-mono text-xs text-zinc-400">
+        <p className="pb-3 text-xs text-zinc-400">
           {t(
             "เลื่อนลงเพื่อดูแต่ละขั้นบนหน้าจอจำลอง",
             "Scroll to step through each stage on the device",
@@ -438,6 +438,16 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
                 <p className="mt-3 font-mono text-xs text-zinc-400">
                   {beat.streamState}
                 </p>
+                {/* The event this beat emits, so the step shows what the
+                    dock will log instead of leaving the column empty. */}
+                <pre
+                  aria-hidden="true"
+                  className={`mt-2 whitespace-pre-wrap break-words rounded-lg border bg-void px-3 py-2.5 font-mono text-xs leading-relaxed text-zinc-300 transition-[border-color] duration-(--dur-base) ${
+                    isActive ? "border-primary/40" : "border-line"
+                  }`}
+                >
+                  {JSON.stringify(beat.streamPayload, null, 2)}
+                </pre>
               </m.li>
             );
           })}
@@ -549,7 +559,7 @@ export const EditorialCaseStudy: React.FC<EditorialCaseStudyProps> = ({
             />
           )}
           <BilingualStack
-            className="text-xs font-mono text-zinc-400"
+            className="text-sm text-zinc-400"
             th={project.subtitleTh}
             en={project.subtitleEn}
           />
