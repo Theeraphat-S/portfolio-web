@@ -89,7 +89,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
             role="dialog"
             aria-modal="true"
             aria-label="Flutter & BLoC DevTools Inspector"
-            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-xl bg-deck border-[1.5px] border-edge shadow-hard-lg overflow-hidden font-mono z-10 outline-none"
+            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-xl bg-deck border border-line shadow-drawer overflow-hidden font-mono z-10 outline-none"
           >
             {/* Header Strip */}
             <div className="px-4 sm:px-5 py-4 border-b border-line flex items-center justify-between gap-3 bg-deck-head">
@@ -290,7 +290,7 @@ export const DevToolsDrawer: React.FC<DevToolsDrawerProps> = ({
                   </div>
 
                   {/* Code Block with line numbering */}
-                  <div className="p-4 rounded-lg bg-deck-well border-[1.5px] border-edge overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
+                  <div className="p-4 rounded-lg bg-deck-well border border-line overflow-x-auto text-[11.5px] leading-relaxed font-mono text-zinc-300">
                     <pre>
                       <code>{snippet.code}</code>
                     </pre>

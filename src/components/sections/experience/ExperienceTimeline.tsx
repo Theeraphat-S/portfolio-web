@@ -325,7 +325,7 @@ export const ExperienceTimeline: React.FC = () => {
           whileInView="visible"
           viewport={IN_VIEW}
           variants={FADE_UP}
-          className="mt-10 sm:mt-14 p-6 sm:p-7 rounded-xl bg-surface border-[1.5px] border-edge shadow-hard flex flex-col md:flex-row md:items-center justify-between gap-6"
+          className="mt-10 sm:mt-14 p-6 sm:p-7 rounded-xl bg-surface border border-line flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           <div className="space-y-1">
             <BilingualStack
@@ -341,7 +341,7 @@ export const ExperienceTimeline: React.FC = () => {
               en={personal.reference.nameEn}
             />
             <BilingualStack
-              className="text-xs text-zinc-400 font-mono"
+              className="text-xs text-zinc-400"
               th={personal.reference.roleTh}
               en={personal.reference.roleEn}
             />

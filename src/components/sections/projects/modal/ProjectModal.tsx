@@ -64,9 +64,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 36, stiffness: 320 }}
-            className="bezel relative w-full max-w-3xl shadow-hard-lg max-h-[90vh] flex flex-col my-auto outline-none"
+            className="bezel relative w-full max-w-3xl shadow-modal max-h-[90vh] flex flex-col my-auto outline-none"
           >
-            <div className="bezel-core relative flex min-h-0 flex-1 flex-col overflow-hidden bg-surface border-[1.5px] border-edge p-[1.0625rem] sm:p-[1.5625rem]">
+            <div className="bezel-core relative flex min-h-0 flex-1 flex-col overflow-hidden bg-surface border border-line p-[1.0625rem] sm:p-[1.5625rem]">
               {/* Top Decorative Border Highlight */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-signal to-transparent" />
 
