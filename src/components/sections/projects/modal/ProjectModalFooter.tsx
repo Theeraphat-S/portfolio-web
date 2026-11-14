@@ -16,7 +16,7 @@ export const ProjectModalFooter: React.FC<ProjectModalFooterProps> = ({
 
   return (
     <div className="pt-4 border-t border-line flex flex-wrap items-center justify-between gap-4 shrink-0">
-      <div className="text-xs text-zinc-400 font-mono">
+      <div className="text-xs text-zinc-400">
         {project.repositoryNoticeEn ? (
           <span>
             {lang === "th"

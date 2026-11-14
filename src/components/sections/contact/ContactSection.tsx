@@ -57,7 +57,7 @@ const inputClass = (invalid: boolean) =>
     invalid
       ? "border-rose-400 focus-visible:outline-rose-400"
       : "border-edge focus:border-signal"
-  } shadow-[inset_2px_2px_0_var(--color-slab)] text-base sm:text-sm text-white placeholder-zinc-400 transition-colors font-mono`;
+  } shadow-[inset_2px_2px_0_var(--color-slab)] text-base sm:text-sm text-white placeholder-zinc-400 transition-colors`;
 
 export const ContactSection: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -165,7 +165,7 @@ export const ContactSection: React.FC = () => {
         >
           {/* Availability Status Badge */}
           <div className="badge-live px-3 py-1 min-h-[1.75rem]">
-            <span className="w-1.5 h-1.5 rounded-full bg-void" />
+            <span className="w-1.5 h-1.5 rounded-full bg-live" />
             <span className="">
               {lang === "th"
                 ? "เปิดรับตำแหน่ง Junior Mobile"
@@ -175,8 +175,8 @@ export const ContactSection: React.FC = () => {
 
           {/* Monumental Headline */}
           <div className="space-y-1">
-            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-semibold tracking-tight leading-[0.95] text-white min-h-[120px] sm:min-h-[180px] xl:min-h-[210px] flex flex-col justify-end">
-              <span className="block text-zinc-400">
+            <h2 className="text-4xl sm:text-6xl xl:text-7xl font-semibold tracking-tight leading-[1.2] text-white min-h-[3.6em] flex flex-col justify-end">
+              <span className="block text-white">
                 {lang === "th" ? "กำลังมองหา" : "Looking for"}
               </span>{" "}
               <span className="block text-white">
@@ -289,7 +289,7 @@ export const ContactSection: React.FC = () => {
               </span>
             </a>
 
-            <div className="p-3.5 rounded-lg bg-surface border-[1.5px] border-edge shadow-hard-sm space-y-1">
+            <div className="p-3.5 rounded-lg bg-surface border border-line space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
                 <MapPin className="w-3 h-3 text-primary" />
                 <span>
@@ -298,7 +298,7 @@ export const ContactSection: React.FC = () => {
               </div>
               <BilingualStack
                 as="span"
-                className="text-xs font-mono text-zinc-300 block"
+                className="text-xs text-zinc-300 block"
                 th={personal.locationTh}
                 en={personal.locationEn}
               />
@@ -324,7 +324,7 @@ export const ContactSection: React.FC = () => {
                   en={"Write an email"}
                 />
                 <BilingualStack
-                  className="text-xs font-mono text-zinc-400"
+                  className="text-xs text-zinc-400"
                   th={
                     "แบบฟอร์มนี้จะเปิดร่างในแอปอีเมลของคุณ กรุณากดส่งจากแอปนั้น"
                   }

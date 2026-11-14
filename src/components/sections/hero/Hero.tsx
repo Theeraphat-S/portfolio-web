@@ -81,7 +81,7 @@ export const Hero: React.FC = () => {
               <span className={lang === "en" ? "text-primary" : ""}>EN</span>
             </button>
             <span className="badge-live justify-center min-w-[170px] px-3 py-1 shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-void" />
+              <span className="w-1.5 h-1.5 rounded-full bg-live" />
               <span>{t("เปิดรับตำแหน่งงาน", "Open for roles")}</span>
             </span>
           </div>
@@ -89,7 +89,8 @@ export const Hero: React.FC = () => {
 
         {/* Monumental Editorial Display Headline + Specs Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
-          {/* Each line is nowrap and sized to its container, so EN and TH
+          {/* Each line is nowrap and sized to its container (14cqi below lg, where
+              the card stacks and the lines have room; 9.4cqi beside it), so EN and TH
               always set as exactly three lines and the toggle never shifts layout. */}
           <m.div
             style={
@@ -99,8 +100,8 @@ export const Hero: React.FC = () => {
             }
             className="lg:col-span-8 @container flex flex-col justify-end"
           >
-            <p className="text-[clamp(1.75rem,9.4cqi,4.85rem)] font-semibold tracking-[-0.035em] leading-[1.05] text-white whitespace-nowrap">
-              <m.span variants={FADE_UP} className="block text-zinc-300">
+            <p className="text-[clamp(2.5rem,14cqi,4.85rem)] lg:text-[clamp(1.75rem,9.4cqi,4.85rem)] font-semibold tracking-[-0.035em] leading-[1.2] text-white whitespace-nowrap">
+              <m.span variants={FADE_UP} className="block text-white">
                 {lang === "th" ? "สร้างโมบายแอป" : "Building"}
               </m.span>
               <m.span variants={FADE_UP} className="block text-white">
@@ -246,7 +247,7 @@ export const Hero: React.FC = () => {
         {/* Location & Modality Notice */}
         <m.p
           variants={FADE_UP}
-          className="flex items-start gap-2 text-xs sm:text-sm font-mono text-zinc-400 pt-1 min-h-[1.5rem]"
+          className="flex items-start gap-2 text-xs sm:text-sm text-zinc-400 pt-1 min-h-[1.5rem]"
         >
           {/* The pin stays on the first line; text and phone wrap together
               beside it, so the phone lines up under the text. */}
