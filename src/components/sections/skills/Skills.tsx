@@ -8,42 +8,17 @@ import { portfolioData, bridgeFor } from "../../../data";
 import { SkillCategory } from "../../../types";
 import { ChapterEyebrow } from "../../ChapterEyebrow";
 
-const CATEGORY_META = [
-  {
-    labelEn: "Mobile",
-    labelTh: "โมบาย",
-    taglineEn:
-      "Cross-platform apps with Flutter, state management, and reactive UI.",
-    taglineTh:
-      "แอปข้ามแพลตฟอร์มด้วย Flutter การจัดการ State และ UI แบบ Reactive",
-  },
-  {
-    labelEn: "Languages & web",
-    labelTh: "ภาษาและเว็บ",
-    taglineEn: "Programming languages, web basics, and REST API backends.",
-    taglineTh: "ภาษาโปรแกรม พื้นฐานเว็บ และ REST API ฝั่ง Backend",
-  },
-  {
-    labelEn: "Data & tooling",
-    labelTh: "ข้อมูลและเครื่องมือ",
-    taglineEn:
-      "Relational persistence, API testing tools, version control, and development workflows.",
-    taglineTh:
-      "ฐานข้อมูลเชิงสัมพันธ์ เครื่องมือทดสอบ API ระบบ Version Control และกระบวนการพัฒนา",
-  },
-  {
-    labelEn: "Teamwork & teaching",
-    labelTh: "การทำงานเป็นทีมและการสอน",
-    taglineEn:
-      "Teaching assistant work, helping students, and working in Agile sprints.",
-    taglineTh:
-      "การเป็นผู้ช่วยสอนประจำภาควิชา ให้คำปรึกษานักศึกษารุ่นน้อง และการทำงานแบบ Agile",
-  },
-];
+const LEAD_META = {
+  labelEn: "Mobile",
+  labelTh: "โมบาย",
+  taglineEn:
+    "Cross-platform apps with Flutter, state management, and reactive UI.",
+  taglineTh: "แอปข้ามแพลตฟอร์มด้วย Flutter การจัดการ State และ UI แบบ Reactive",
+};
 
 export const Skills: React.FC = () => {
-  const { lang, t } = useLanguage();
-  const { skillCategories } = portfolioData;
+  const { t } = useLanguage();
+  const [lead, ...rest] = portfolioData.skillCategories;
 
   return (
     <section
@@ -87,74 +62,105 @@ export const Skills: React.FC = () => {
         />
       </m.div>
 
-      {/* One slab card per domain; its skills tile inside. */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
-        {skillCategories.map((category: SkillCategory, catIdx: number) => {
-          const meta = CATEGORY_META[catIdx] || {
-            labelEn: "Capability",
-            labelTh: "ความสามารถ",
-            taglineEn: "",
-            taglineTh: "",
-          };
+      {/* Mobile leads: it is the work this portfolio is for. The other
+          domains are plain lists, since a wall of equal boxes has no entry. */}
+      {lead && (
+        <m.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={IN_VIEW}
+          variants={FADE_UP}
+          className="rounded-xl bg-surface border border-line p-5 sm:p-6 lg:p-8 space-y-6"
+        >
+          <div className="pb-4 border-b border-line space-y-1.5">
+            <div className="flex items-center justify-between text-xs font-mono">
+              <span className="text-primary font-semibold">
+                {t(LEAD_META.labelTh, LEAD_META.labelEn)}
+              </span>
+              <span className="text-zinc-400">
+                {t(
+                  `${lead.skills.length} ทักษะ`,
+                  `${lead.skills.length} skills`,
+                )}
+              </span>
+            </div>
+            <BilingualStack
+              as="h3"
+              className="text-2xl sm:text-3xl font-semibold text-white tracking-tight"
+              th={lead.nameTh}
+              en={lead.nameEn}
+            />
+            <BilingualStack
+              className="text-sm text-zinc-400 leading-normal"
+              th={LEAD_META.taglineTh}
+              en={LEAD_META.taglineEn}
+            />
+          </div>
 
-          return (
-            <m.div
-              key={catIdx}
-              initial="hidden"
-              whileInView="visible"
-              viewport={IN_VIEW}
-              variants={FADE_UP}
-              className="rounded-xl bg-surface border-[1.5px] border-edge shadow-hard p-5 sm:p-6 space-y-5"
-            >
-              {/* Category Tree Root Header */}
-              <div className="pb-3 border-b border-line space-y-1">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-mono text-primary font-semibold">
-                    <span>{lang === "th" ? meta.labelTh : meta.labelEn}</span>
-                  </div>
-                  <span className="text-xs font-mono text-zinc-400">
-                    {t(
-                      `${category.skills.length} ทักษะ`,
-                      `${category.skills.length} SKILLS`,
-                    )}
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            {lead.skills.map((skill) => (
+              <li
+                key={skill.name}
+                data-cursor-text="SKILL"
+                className="rounded-lg bg-void border border-line px-4 py-3.5 space-y-1 min-w-0"
+              >
+                <span className="font-mono text-sm font-semibold text-zinc-100 block">
+                  {skill.name}
+                </span>
+                <BilingualStack
+                  as="span"
+                  className="text-xs text-zinc-400 font-normal block leading-normal"
+                  th={skill.descTh}
+                  en={skill.descEn}
+                />
+              </li>
+            ))}
+          </ul>
+        </m.div>
+      )}
+
+      <div className="mt-10 sm:mt-14 grid grid-cols-1 lg:grid-cols-3 gap-x-10 gap-y-10">
+        {rest.map((category: SkillCategory) => (
+          <m.div
+            key={category.nameEn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={IN_VIEW}
+            variants={FADE_UP}
+            className="min-w-0"
+          >
+            <div className="flex items-baseline justify-between gap-3 pb-3 border-b border-line">
+              <BilingualStack
+                as="h3"
+                className="text-lg font-semibold text-white tracking-tight"
+                th={category.nameTh}
+                en={category.nameEn}
+              />
+              <span className="shrink-0 text-xs font-mono text-zinc-400">
+                {category.skills.length}
+              </span>
+            </div>
+            <ul className="divide-y divide-line">
+              {category.skills.map((skill) => (
+                <li
+                  key={skill.name}
+                  data-cursor-text="SKILL"
+                  className="py-3 space-y-0.5"
+                >
+                  <span className="font-mono text-xs font-semibold text-zinc-100 block">
+                    {skill.name}
                   </span>
-                </div>
-                <BilingualStack
-                  as="h3"
-                  className="text-xl font-semibold text-white tracking-tight"
-                  th={category.nameTh}
-                  en={category.nameEn}
-                />
-                <BilingualStack
-                  className="text-xs font-mono text-zinc-400 leading-normal md:min-h-[2lh]"
-                  th={meta.taglineTh}
-                  en={meta.taglineEn}
-                />
-              </div>
-
-              {/* Skill tiles: outlined, no slab, since they are not controls. */}
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
-                {category.skills.map((skill, sIdx) => (
-                  <li
-                    key={sIdx}
-                    data-cursor-text="SKILL"
-                    className="rounded-lg bg-void border-[1.5px] border-edge px-3 py-2.5 space-y-0.5 min-w-0"
-                  >
-                    <span className="font-semibold text-zinc-100 block">
-                      {skill.name}
-                    </span>
-                    <BilingualStack
-                      as="span"
-                      className="text-xs text-zinc-400 font-sans font-normal block leading-normal"
-                      th={skill.descTh}
-                      en={skill.descEn}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </m.div>
-          );
-        })}
+                  <BilingualStack
+                    as="span"
+                    className="text-xs text-zinc-400 font-normal block leading-normal"
+                    th={skill.descTh}
+                    en={skill.descEn}
+                  />
+                </li>
+              ))}
+            </ul>
+          </m.div>
+        ))}
       </div>
     </section>
   );

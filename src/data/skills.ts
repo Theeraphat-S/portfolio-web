@@ -146,18 +146,6 @@ export const skillCategoriesData: SkillCategory[] = [
         descEn: "Mentoring 100+ university students in coding",
       },
       {
-        name: "Logical Problem Solving",
-        level: "Advanced",
-        descTh: "ดีบักและแตกปัญหาออกเป็นขั้นตอน",
-        descEn: "Debugging and breaking problems into steps",
-      },
-      {
-        name: "Adaptive Learning",
-        level: "Advanced",
-        descTh: "เรียนรู้เครื่องมือใหม่ด้วยการลงมือสร้างงานจริง",
-        descEn: "Picking up new tools by building with them",
-      },
-      {
         name: "Agile / Scrum Mindset",
         level: "Proficient",
         descTh: "วางแผนสปรินต์, Standup, ส่งมอบงานแบบวนรอบ",
