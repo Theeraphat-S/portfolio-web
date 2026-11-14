@@ -60,22 +60,22 @@ components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.bg-void}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.md}"
     padding: "12px 24px"
   button-primary-hover:
     backgroundColor: "{colors.signal}"
     textColor: "{colors.bg-void}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.md}"
     padding: "12px 24px"
   button-outline:
     backgroundColor: "transparent"
     textColor: "{colors.text-primary}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.md}"
     padding: "12px 24px"
   button-outline-hover:
     backgroundColor: "rgba(64, 220, 255, 0.05)"
     textColor: "{colors.signal}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.md}"
     padding: "12px 24px"
   card-editorial:
     backgroundColor: "{colors.surface}"
@@ -100,7 +100,7 @@ Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40
 - **Scroll-Led Story Progression**: Continuous narrative journey where technical depth unfolds naturally through scroll-linked sticky runways and live BLoC stream mutations.
 - **Laser-Etched Precision**: Restrained 1px borders with subtle linear gradient transitions that outline containers without visual weight.
 - **Instrument Telemetry**: Monospace timestamps, sub-millisecond ping metrics, and status pulse indicators that ground claims in living system truth.
-- **Slab Rule**: Cards, buttons, chips and fields have a drawn 1.5px `edge` outline (`#5a6d96`, 3:1 or better on void, surface and raised) and sit on a solid offset block in `slab` (`#2b4275`, `--shadow-hard-*`, no blur). Controls use an 8px radius, not pills. Hover lifts the control off its slab by 1–2px, and press sinks it into the slab (`translate(2px, 2px)`, shadow removed). Neither moves under reduced motion. Use `.chip` for toggles, tags and jump links, and `.badge-live` (filled emerald) for availability status. The structure is borrowed from neo-brutalist UI, but the colors stay Midnight Circuit.
+- **Slab Rule**: The slab means "you can press this". Only controls (buttons, chips, jump links, form fields, linked contact tiles) have a drawn 1.5px `edge` outline (`#5a6d96`, 3:1 or better on void, surface and raised) and sit on a solid offset block in `slab` (`#2b4275`, `--shadow-hard-*`, no blur). Controls use an 8px radius, not pills. Hover lifts the control off its slab by 1–2px, and press sinks it into the slab (`translate(2px, 2px)`, shadow removed). Neither moves under reduced motion. Content containers (cards, tiles, panels, the case-study bezel) never carry a slab: they are a 1px `line` hairline on `surface`, so a block that casts a shadow is always clickable. Use `.chip` for toggles, tags and jump links, and `.badge-live` (emerald outline on a faintly tinted fill, no slab) for availability status. The structure is borrowed from neo-brutalist UI, but the colors stay Midnight Circuit.
 
 ## Colors
 
@@ -150,7 +150,7 @@ Primary Blue (`#5a86ff`) carries actions and key text, while Electric Cyan (`#40
 
 ### Hierarchy
 
-- **Display** (600 SemiBold, sentence case, no trailing period, `clamp(2.5rem, 7vw, 6.5rem)`, line-height `0.92`, letter-spacing `-0.035em`): Monumental hero statement and headline anchors.
+- **Display** (600 SemiBold, sentence case, no trailing period, `clamp(2.5rem, 7vw, 6.5rem)`, line-height `1.2`, letter-spacing `-0.035em`): Monumental hero statement and headline anchors. The leading is set for Thai (stacked vowels and tone marks need it) and used for both languages, so toggling never changes the headline's height.
 - **Headline** (600 SemiBold, sentence case, `clamp(1.5rem, 4vw, 2.65rem)`, line-height `1.15`, letter-spacing `-0.025em`): Section titles and philosophical declarations.
 - **Title** (600 SemiBold, `1.125rem` / `18px`, line-height `1.3`, letter-spacing `-0.015em`): Card titles, project titles, and modal headers.
 - **Body** (400 Regular, `1rem` / `16px`, line-height `1.6`, letter-spacing `normal`, max-width `65-75ch`): Narrative descriptions, case study explanations, and career history.
@@ -161,6 +161,7 @@ Weights stop at 600. Hierarchy comes from size and color, not from heavier weigh
 ### Named Rules
 
 **The Technical Eyebrow Rule.** Every chapter after the hero begins with a sentence-case monospace eyebrow, a muted number then the label in Primary Blue (`02 Approach` … `06 Contact`), rendered by `ChapterEyebrow`, which takes both number and label from `src/data/chapters.ts` so they match the StoryProgress tracker (Intro is 01). Sub-headings inside a chapter carry no number; only the 3 scrollytelling beats keep theirs (`01 Form & BLoC intake`), because the sequence is the story.  
+**The Mono Is For Data Rule.** JetBrains Mono sets short tokens: eyebrows, labels, numbers, dates, code and event names, and form values such as the email address. Anything with a verb (descriptions, notices, helper text, subtitles) is set in Outfit, so mono keeps meaning "this came from the system".  
 **The Dual-Script Baseline Rule.** Thai and Latin typefaces must share proportional leading and word-break rules (`overflow-wrap: break-word`, `word-break: break-word`) to prevent jagged layout shifts when switching languages.
 
 ## Layout & Spatial System
@@ -184,11 +185,11 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 ### Named Rules
 
 **The Glass Before Blur Rule.** Transparent containers must always combine translucent dark backgrounds (`rgba(15, 25, 44, 0.8)` or `void/85` for compact floating pills) with `backdrop-filter: blur(16px–20px)` and a `1px` `line` (`#2d3b57`) border. Blur without border definition is prohibited.  
-**The Neutral Shadow Rule.** Shadows are black and only lift things that float. Buttons and cards at rest or on hover take no shadow.
+**The Neutral Shadow Rule.** Floating things (modal, drawer, dock) take a black shadow. Content cards take none. The only other shadow is a control's slab, which is a solid block, not a blur.
 
 ## Shapes
 
-- **Interactive Controls:** Rounded pill silhouette (`rounded-full` / `9999px`) for action buttons, filter chips, badge containers, and status pills.
+- **Interactive Controls:** 8px radius (`rounded-lg`) slab for action buttons, chips and jump links; status badges use 6px. No pills.
 - **Structural Containers:** Smooth rounded rectangle (`rounded-xl` / `12px` to `rounded-2xl` / `16px`) for case study cards, telemetry decks, and modal sheets.
 - **Micro Badges:** Subtle `rounded` (4px to 6px) for metric tags, architecture chips, and date markers.
 
@@ -196,9 +197,9 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 
 ### Buttons
 
-- **Shape:** Pill silhouette (`rounded-full`, 9999px).
+- **Shape:** 8px radius slab (see the Slab Rule), not a pill.
 - **Primary:** Background `#5a86ff`, text `#060a12`, font `Outfit` 500 (`14px`), padding `12px 24px`, sentence case (`Explore work`).
-- **Hover / Focus:** Shifts background to Electric Cyan `#40dcff`; nothing moves or glows.
+- **Hover / Focus:** Shifts background to Electric Cyan `#40dcff` and lifts 1px off its slab; nothing glows.
 - **Outline / Ghost:** Background `transparent`, border `1px solid #2d3b57`, text `#f3f6fc`. On hover, border shifts to `rgba(64, 220, 255, 0.45)` and text shifts to `#40dcff`.
 - **Tonal:** Background `#17233b` (surface-raised), border `1px solid #2d3b57`, text `#f3f6fc`; hover turns border and text cyan. For secondary actions inside a card (Copy email).
 - **Sizes & state:** `btn-sm` (13px label, 44px minimum height) for footers and inline actions; a disabled button drops to 50% opacity and does not lift or press.
@@ -208,7 +209,7 @@ Surfaces rely on glassmorphism and edge reflection rather than deep opaque drop-
 - **Corner Style:** Rounded 12px (`rounded-xl`) or 16px (`rounded-2xl`).
 - **Background:** `rgba(15, 25, 44, 0.8)` with `backdrop-blur(20px)`.
 - **Border:** `1px solid #2d3b57`.
-- **Hover Treatment:** Border shifts to `rgba(64, 220, 255, 0.35)`; nothing moves or glows.
+- **Hover Treatment:** Border shifts to `rgba(64, 220, 255, 0.35)`; nothing moves or glows. A card that is itself a link is the exception and becomes a control (Slab Rule).
 - **Internal Padding:** `p-5 sm:p-6` for bento cards; `p-6 sm:p-8` for flagship case study containers.
 
 ### Bezel Container (`.bezel` / `.bezel-core`)
